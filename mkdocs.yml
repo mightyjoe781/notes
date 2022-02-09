@@ -1,0 +1,5 @@
+site_name: smk's notes
+site_url : https://books.minetest.in/
+nav :
+    - Home : index.md
+    - About : about.md
