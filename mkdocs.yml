@@ -1,5 +1,17 @@
 site_name: smk's notes
-site_url : https://books.minetest.in/
-nav :
+site_description: smk's notes
+site_url: https://books.minetest.in/
+repo_url: https://github.com/mightyjoe781/notes
+repo_name: Github
+edit_uri: edit/main/docs/
+extra_javascript:
+  - custom.js
+markdown_extensions:
+site_author: smk
+copyright: smk
+theme:
+  name: flatly
+  custom_dir: overrides
+nav:
     - Home : index.md
     - About : about.md

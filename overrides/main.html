@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+
+
+{% block repo %}
+{% if page and page.edit_url %}
+<li class="nav-item">
+    <a href="{{ page.edit_url }}" class="nav-link">
+        {% if config.repo_name == 'GitHub' %}
+            <i class="fa fa-github"></i> {% trans repo_name=config.repo_name %} {{ repo_name }}{% endtrans %}
+        {% elif config.repo_name == 'Bitbucket' %}
+            <i class="fa fa-bitbucket"></i> {% trans repo_name=config.repo_name %} {{ repo_name }}{% endtrans %}
+        {% elif config.repo_name == 'GitLab' %}
+            <i class="fa fa-gitlab"></i> {% trans repo_name=config.repo_name %} {{ repo_name }}{% endtrans %}
+        {% else %}
+        {% trans repo_name=config.repo_name%} {{ repo_name }}{% endtrans %}
+        {% endif %}
+    </a>
+</li>
+{% elif config.repo_url %}
+<li class="nav-item">
+    <a href="{{ config.repo_url }}" class="nav-link">
+        {% if config.repo_name == 'GitHub' %}
+            <i class="fa fa-github"></i> {{ config.repo_name }}
+        {% elif config.repo_name == 'Bitbucket' %}
+            <i class="fa fa-bitbucket"></i> {{ config.repo_name }}
+        {% elif config.repo_name == 'GitLab' %}
+            <i class="fa fa-gitlab"></i> {{ config.repo_name }}
+        {% else %}
+        {{ config.repo_name }}
+        {% endif %}
+    </a>
+</li>
+{% endif %}
+{% endblock %}
+
+{% block footer %}
+<hr>
+{% if config.copyright %}
+    <p>{{ config.copyright }}</p>
+{% endif %}
+{% endblock %}
+
