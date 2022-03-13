@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
+<!-- Removed search button -->
+{% block search_button %}
+{% endblock %}
 
+<!-- Removed next and back button -->
+{% block next_prev %}
+{% endblock %}
 
+<!-- Redefine Github Page Link -->
+<!-- Note icon not visible, need to fix it -->
 {% block repo %}
 {% if page and page.edit_url %}
 <li class="nav-item">
@@ -33,6 +41,7 @@
 </li>
 {% endif %}
 {% endblock %}
+
 
 {% block footer %}
 <hr>
