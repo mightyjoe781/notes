@@ -1,17 +1,14 @@
-# Welcome to MkDocs
+## **smk’s notes**
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This website documents resources for various books in form of notes.
 
-## Commands
+### TOC
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+See [Table of Contents](./toc.md)
 
-## Project layout
+### Style Reference
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+See [FreeBSD Writing Style](https://docs.freebsd.org/en/books/fdp-primer/writing-style/)
+
+
+
