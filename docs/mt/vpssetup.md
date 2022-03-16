@@ -34,8 +34,6 @@ cmake . -DRUN_IN_PLACE=1 -DBUILD_SERVER=1 -DBUILD_CLIENT=0\
 make -j$(nproc)
 ````
 
-Note : For Postgresql Support in server, it required to be installed in the VPS beforehand.
-
 #### Configuration
 
 This is a good configuration settings for starting up a public server. Make changes accordingly.

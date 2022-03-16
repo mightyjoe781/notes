@@ -10,4 +10,5 @@
 | [FreeBSD](freebsd/index.md) | Active | Started  |
 | [Minetest](mt/index.md)     | Active | Started  |
 | [OS](os/index.md)           | Active | Started  |
+| [Server](server/index.md)   | Active | Started  |
 
