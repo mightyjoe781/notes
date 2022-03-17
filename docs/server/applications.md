@@ -7,7 +7,7 @@
 mkdir -p /opt/
 cd       /opt/
 rm -fr go golang
-GOBALL=go1.14.linux-amd64.tar.gz
+GOBALL=go1.18.linux-amd64.tar.gz
 
 wget -c https://dl.google.com/go/$GOBALL
 tar zxf $GOBALL

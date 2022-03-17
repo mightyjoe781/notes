@@ -222,7 +222,7 @@ Create a text file `/etc/profile.d/smkbin.sh` containing :
 NOTE : Don’t use `#!/bin/bash -e` here.
 
 ````bash
-for dir \
+for dir in \
 	/opt/minetest/mtbin \
 	/opt/minetest/smkbin \
 	/opt/smkbin
@@ -236,7 +236,7 @@ This file needs to be readable, but it doesn’t need to be executable.
 ##### Edit `secure_path` setting in `etc/sudoers` to prepend directories from preceding scripts which exists.
 
 ```
-secure_path="/opt/minebest/mtbin:/opt/rjkbin:/usr/local/sbin:..."
+secure_path="/opt/minebest/mtbin:/opt/smkbin:/usr/local/sbin:..."
 ```
 
 Log-out and back in.
@@ -279,7 +279,7 @@ if [ \! -L /bin/bzip2 ]; then
 fi
 ````
 
-These tow special version are faster for new files, but not neccessarily for existing files.
+These two special version are faster for new files, but not neccessarily for existing files.
 
 #### Adding a ordinary user
 
