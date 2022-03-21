@@ -154,15 +154,14 @@ Note : If `dropbear` seems to be accepting connections but produces error messag
 **NOTE : This step is only for physical boxes and/or dedis. Skip it for VPSes.**
 
 1. Replace default for root filesystem with : `noatime,errors=remount=ro`
-
 2. Execute:
 
-   ````bash
-   #!/bin/bash -e
-   cd /etc
-   cp -ai fstab fstab.000
-   nano   fstab
-   ````
+````bash
+#!/bin/bash -e
+cd /etc
+cp -ai fstab fstab.000
+nano   fstab
+````
 
 #### Setup `dnsmasq`
 

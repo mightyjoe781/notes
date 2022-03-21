@@ -25,6 +25,11 @@ theme:
   name: mkdocs
   custom_dir: overrides
   navigation_depth: 4 
+extra:
+  analytics:
+    provider: google
+    property: G-FSJPS15JWH
 nav:
   - About: about.md
   - TOC: toc.md
+
