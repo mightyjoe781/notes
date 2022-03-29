@@ -2,7 +2,7 @@
 
 ### Notes
 
-- Absolute FreeBSD
+- [Absolute FreeBSD](absfreebsd/index.md)
 
 ### Books
 
