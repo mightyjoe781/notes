@@ -114,3 +114,194 @@ The FTP daemon won’t allow a user to login via FTP if his shell isn’t listed
 
 ### root, Groups, an Management
 
+#### The root Password
+
+Certain actions require absolute control of the system, including manipulating core system files such as the kernel, device drivers, and authentication systems. Such activities are designed to be performed by root.
+
+To use the root password, you can either login as root at console login prompt or, if you’re a member of group wheel, log in as yourself and use the switch user command `su(1)`. It logs who uses it and can be used on a remote system.
+
+One of the simplest ways to reduce the need for root access is the proper use of the groups.
+
+#### Groups of Users
+
+- A *group* is a way to classify users with similar administrative functions.
+- A *sysadmin* can define a group *webmasters*, and add accounts of people with privilages to edit web-related files or create a group *email* and add email administrators to that group.
+- To check your group type `id` on a console.
+
+**/etc/group**
+
+- The file `/etc/group` contains all group information except for the user’s primary group (which is defined with user account in `/etc/master.passwd`).
+
+- Each line is four colon-delimited fields : the group name, group password, the group ID number, and a list of members.
+
+  Example entry : `wheel:*:0:root,mwlucas,xistence`
+
+- Second field group password, turned out to be a big nightmare. Modern Unix-like systems don’t do anything with group password, but field remains because old program expect to find something in this space. Asterisk is just a placeholder.
+
+**Changing group Memberships**
+
+- Just simply add user’s name into the list of member in `/etc/group` of respective group you want to add user to.
+
+**Creating Group**
+
+- For creating you only need a name for the group and a group ID. Technically, you don’t need a member for the group; some programs run as members of a group, and FreeBSD uses group permissions to control those programs similar to users.
+- GIDs are generally assigned as next number in list but can be arbitrary number between 0 and 65535.
+
+#### Using Groups to Avoid Root
+
+#### System Accounts
+
+- FreeBSD reserves some user account names for integrated programs. e.g. nameserver runs under the user account bind and group bind. If an intruter compromises the nameserver, she can access the system only with privileges of the user bind.
+- Don’t have user log in as these users. They are not setup as interactive accounts by design.
+- Create a separate user and group to own program files. That way, our hypothetical intruder can’t even edit the files used by DNS server, minimizing potential damage.
+- Similarly database should not be allowed to edit its own config files.
+
+#### Administrative Group Creation
+
+Simplest way to create a group that owns files is to employ `adduser` to make a user that owns them and then to utilize that user’s primary group as the group for the files. Because we already have a user called `bind`, we will create an administrative user `dns`. Username isn’t important, but you can choose a name that everyone will recognise.
+
+Give you administrative user a shell of `nologin`, which sets a shell of `/sbin/nologin`. This prevents anyone from actually loggin in as the administrative user.
+
+Do not add this administrative user to any other groups. Under no circumstances add this user to a privileged group, such as wheel !
+
+Every user needs a home directory. For an administrative user, a home directory of `/nonexistent` works well. This user’s files are elsewhere in the system, after all.
+
+Lastly, let `adduser(8)` disable the account. While the shell prevents logins, an extra layer of defense won’t hurt.
+
+To change the file’s owner and group, use `chown(1)`
+
+`chown dns:dns rndc.key`
+
+#### Interesting Default Groups
+
+````
+audit  : Users who can access audit(8) information
+authpf : Users who can authenticate to the PF packet filter
+bin 	 : Group owner of general system programs
+bind   : Group for the BIND DNS server software
+daemon : Used by various system services, such as the printing system
+_dhcp  : DHCP client operations
+dialer : Users who can access serial ports; useful for modems and tip(1)
+games  : Owner of game files
+guest  : System guests (almost never used)
+hast   : Files used by hastd(8)
+kmem   : Programs that can access kernel memory, such as fstat(1), netstat(1), and so on
+mail   : Owner of the mail system
+mailnull:Default group for sendmail(8) or other mail server
+man    : Owner of uncompressed man pages
+network: Owner of network programs like ppp(8)
+news   :Owner of the Usenet News software (probably not installed)
+nobody : Primary group for unprivileged user nobody, intended for use by NFS
+nogroup: Group with no privileges, intended for use by NFS
+operator:Users that can access drives, generally for backup purposes
+_pflogd: Group for PF logging
+proxy  : Group for FTP proxy in PF packet filter
+smmsp  : Group for Sendmail submissions
+sshd   : Owner of the SSH server (see Chapter 20)
+staff  : System administrators (from BSD’s college roots, when users were
+staff, faculty, or students)
+sys    : Another system group
+tty    : Programs that can write to terminals, like wall(1)
+unbound: Files and programs related to the unbound(8) DNS server
+uucp   : Group for programs related to the Unix-to-Unix Copy Protocol
+video  : Group that can access DRM and DRI video devices
+wheel  : Users who may use the root password
+www Web: server programs (not files)
+_ypldap: Files needed by the LDAP-backed YP server ypldap(8)
+````
+
+### Tweaking User Security
+
+#### Restricting Login Ability
+
+FreeBSD checks `/etc/login.access` for rules that forbid logins from users. This file has no rules by default, meaning everyone who provides valid password and username has no restrictions.
+
+The `/etc/login.access` has three colon-delimited fields.
+
+- (+) grants or (-) denies the right to login
+- list of users or groups
+- list of connection sources
+
+Usage of `ALL` or `ALL EXCEPT` is allowed to make simple but expressive rules.
+
+For example, to allow only members of wheel group to login from system console.
+
+```
++:wheel:console
+```
+
+NOTE : There is a problem with this rule, although it allows wheel users to login from console, but if there is a user named Bert who is no wheel, but if he tries to login, no rule denies him access.
+
+Correct Rule should be.
+
+````
++:wheel:console
+-:ALL :consoles
+````
+
+or similar rule using `ALL EXCEPT`
+
+```
+-:ALL EXCEPT wheel: console
+```
+
+Change the default from “allow access” to “deny access” by adding a final rule.
+
+```
+-:ALL:ALL
+```
+
+**Hostnames**
+
+```
+-:ALL EXCEPT WHEEL:fileserver.mycompany.com
+```
+
+Users in the wheel group can login from the fileserver, but nobody else can.
+
+**Host Addresses and Networks**
+
+Host addresses work like hostnames except they are immune to DNS failures or spoofing.
+
+```
+-:ALL EXCEPT wheel : 203.0.11.345
+```
+
+A network number is truncated IP Address, like this : 
+
+```
+-:ALL EXCEPT wheel : 203.0.113.
+```
+
+**LOCAL**
+
+Anyone who owns a block of IP addresses can give their addresses any desired reverse DNS. The `LOCAL` restriction is best avoided.
+
+**ALL and ALL EXCEPT**
+
+```
+-:ALL EXCEPT wheel: ALL EXCEPT 203.0.113.128 203.0.113.44
+```
+
+**Tie It All Together**
+
+The point of these rules is to build a login policy that matches your real-world policies. If you provide generic services but only allow your sysadmin to log on remotely, a one-line `login.access` prevents any other users from loggin in.
+
+Generally this configuration is quite used at several ISPs
+
+````
+-:ALL EXCEPT wheel: console
+-:ALL EXCEPT wheel dns webmasters: ALL
+````
+
+This allows sysadmins to login via console and allow web teams and DNS teams to login remotely.
+
+#### Restricting System Usage
+
+You can provide more specific controls with login classes `/etc/login.conf`.
+
+**Class Definitions**
+
+The default `login.conf` starts with the default class, the class used by accounts without any class and gives unlimited access to system resources.
+
+Each class definition consists 
