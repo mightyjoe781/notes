@@ -2,14 +2,21 @@
 
 ### Shortcuts
 
+[Algorithms](algo/index.md) - [C++](cpp/index.md) - [Data Analysis](dataanalysis/index.md) - [FreeBSD](freebsd/index.md) - [Minetest](mt/index.md) - [Finance](fin/index.md) - [Go](go/index.md) - [OS](os/index.md) - [Server](server/index.md)
+
 ### Contents
 
-| Name                                                 | Status | Progress |
-| ---------------------------------------------------- | ------ | -------- |
-| [Algorithms](algo/index.md)                          | Active | Started  |
-| [FreeBSD](freebsd/index.md)                          | Active | Started  |
-| [Minetest](mt/index.md)                              | Active | Started  |
-| [OS](os/index.md)                                    | Active | Started  |
-| [Server](server/index.md)                            | Active | Started  |
-| [Python for Data Analysis](python/dataanal/index.md) | Active | Started  |
+| Name                                   |
+| -------------------------------------- |
+| [Algorithms](algo/index.md)            |
+| [C++](cpp/index.md)                    |
+| [Data Analysis](dataanalysis/index.md) |
+| [FreeBSD](freebsd/index.md)            |
+| [Minetest](mt/index.md)                |
+| [Finance](fin/index.md)                |
+| [Go](go/index.md)                      |
+| [OS](os/index.md)                      |
+| [Server](server/index.md)              |
+|                                        |
+|                                        |
 
