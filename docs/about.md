@@ -6,7 +6,7 @@ Major parts of this websites revolves around making notes of books, presenting s
 
 A separate site for blogs has been made which will mainly focus on small fragments  of information and blogs made by me. [link](https://algo.minetes.in/)
 
-To report or correct information within this website you can directly open a issue on github or mail on [email](sudhanshumohan781@gmail.com).
+To report or correct information within this website you can directly open a issue on github or mail me directly.
 
 
 
@@ -14,4 +14,6 @@ Author : Sudhanshu Mohan Kashyap (smk)
 
 Github : [https://github.com/mightyjoe781/](https://github.com/mightyjoe781)
 
-Blogs : [algo.minetest.in](https://algo.minetest.in/)
+Blog : [algo.minetest.in](https://algo.minetest.in/)
+
+Mail : sudhanshumohan781@gmail.com
