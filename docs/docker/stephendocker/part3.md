@@ -312,7 +312,11 @@ after_success:
 
 NOTE : Docker running on 64 bit Amazon Linux will work only till July, 2022. So for Amazon Linux 2 Steps are dramatically different.
 
-We will focus  only on Amazon Linux 2
+We will focus  only on Amazon Linux 2.
+
+Also notice we won’t be having our normal redis and postgresql containers because we are going to use services offered by Amazon, AWS Elastic Cache and AWS Relational Database Service.
+
+A Big reason use those is they are better configured, more secure, automatically scalable, (RDS) automated backups and rollbacks, logging + maintenance and Easy to migrated off the EB.
 
 #### EBS Application Creation (If using Multi-Container Docker Platform)
 
