@@ -15,4 +15,3 @@ See [Table of Contents](./toc.md)
 
 See [FreeBSD Writing Style](https://docs.freebsd.org/en/books/fdp-primer/writing-style/)
 
-
