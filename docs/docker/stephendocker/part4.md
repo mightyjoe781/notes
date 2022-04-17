@@ -192,3 +192,122 @@ Declarative Deployments : Our container setup should look like this make it happ
 
 Which one should you choose ? This certainly depends on what your use cases are, there are lots of blogs, tutorials which will say you should choose this and that, in the end it depends on how much clear understanding of the kubernetes you have and how well you understand what you need.
 
+### Section 13: Maintaining Sets of Containers with Deployments
+
+#### Updating Existing Objects
+
+Goal : Update our existing pod to use muti-worker image.
+
+Imperative Approach : Run a command to list out current running pods -> Run a command to update the current pod to use a new image.
+
+Declarative Approach : Update our config file that originally created the pod -> Throw the updated config file into `kubectl`.
+
+Every config file has 2 parameters (*name*, *kind*) which help **master** uniquely identify objects inside of cluster. By using name: *client-pod*,  kind :*pod* and image as `multi-worker` (changed), Master is able to uniquely identify that this is a pod that exists and we want a new image up there.
+
+After making appropriate changed in yaml config file, execute `kubectl apply -f <config_file>`.
+
+To inspect already running objects use `kubectl describe <object_type> [Object_name]`.
+
+````
+kubectl describe pods
+````
+
+````bash
+kubectl describe pod multi-worker
+````
+
+Note we can only update few things about pod only, you check this out by changing port and rerunning and you will see the error message print out.
+
+So we will make use a new object, **Deployment** maintains a set of identical pods ensuring that they have the correct config and that the right number exists.
+
+Generally we use pods in development environment only, while we use Deployment is used in production. Note : So we don’t actually doesn’t use pod, but remember Deployment is just a pod with more abilities and allows editing config files.
+
+#### Deployment Configuration Files
+
+Create a file `client-deployment.yaml` with contents
+
+````yaml
+apiVersion: app/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: client
+          image: stephengrider/multi-client
+          ports:
+            - containerPort: 3000
+````
+
+Inside of template section is all information about the every pod created by this deployment.
+
+Replicas is number of differnet pods this *Deployment* will create. Deployments itself doesn’t create the pod, instead the Deployment using kubernetes API calls out to master and the *selector* acts as a handle for the pods that master will create.
+
+##### Deleting an existing object
+
+````
+kubectl delete -f <config_file>
+````
+
+Remove the old pod running and create the new *Deployment*.
+
+#### Why Use Services
+
+Execute :
+
+````bash
+kubectl get pods -o wide
+````
+
+Every pod is assigned a internal IP address. If pod get deleted or updated then its quite possible that pod gets new IP address. Service watches pods with *selector* and direct traffic to correct pod.
+
+If you make changes to deployment files, lets say ports then what Deployment does is that it entirely deletes the existing pod and recreates a new one, which can be inferred using `kubectl get pods` to get the age of the pod.
+
+#### Updating Deployment Images
+
+1. Change deployments to use multi-client again.
+2. Update the multi-client image, push to Docker Hub.
+3. Get the deployment to recreate our pods with the latest version of multi-client.
+
+Note : Step-3 is very challanging.
+
+Visit this discussion [LINK](https://github.com/kubernetes/kubernetes/issues/33664).
+
+In order to pull the latest image there is no system present to detect this, since there is no changes to the file and if we use `kubectl apply` it will not update the pods.
+
+Workarounds to the problem
+
+- Manually delete pods to get the deployment to recreate them with the latest version : (Issues : we could end up deleting very important pods, or maybe we may be having downtime of few minutes which may be catastrophe in real life situation)
+- Tag images with a real-version numbers, certainly this is an actionable change to config file and deployment will certainly update the pods. (Adds in an extra step in deployments)
+-  Use an imperative command to update the image version the deployment should use. (Uses an imperative command).
+
+Certainly first method is very very bad. Mehod 2 seems good but it becomes painful to change files too much, so method 3 kind of becomes reasonable solution but its not best one.
+
+#### Imperatively Updating a Deployment’s Image
+
+Push updates to the docker hub with tags.
+
+Then execute the following command.
+
+````bash
+kubectl set <property> <object_type>/<object_name> <container_name> = <new_property>
+````
+
+````bash
+kubectl set image <obj_type>/<obj_name> <container_name> = <new Image>
+````
+
+````bash
+kubectl set image deployment/client-deployment client=stephengrider/multi-client:v5
+````
+
