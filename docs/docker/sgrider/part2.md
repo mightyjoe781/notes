@@ -1,6 +1,4 @@
-## Notes : Docker and Kubernetes
-
-These notes are based on famous course on Docker and Kubernetes by Stephen Grinder.
+## Notes : Docker
 
 ### Section 6 : Creating a Production - Grade Workflow
 

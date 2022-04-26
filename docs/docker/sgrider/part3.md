@@ -1,6 +1,4 @@
-## Notes : Docker and Kubernetes
-
-These notes are based on famous course on Docker and Kubernetes by Stephen Grinder.
+## Notes : Docker
 
 ### Section 8 : Building a Multi-Container Application
 
