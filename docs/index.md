@@ -1,6 +1,6 @@
 ## **smk’s notes**
 
-This website documents resources for various books in form of notes.
+This website documents resources for various topics in form of notes.
 
 ### Search
 
