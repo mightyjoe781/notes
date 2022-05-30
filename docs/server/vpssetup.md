@@ -1,6 +1,6 @@
 ## Developer VPS Box Setup
 
-Credits : Robert Kiraly (OldCoder)
+Credits : Robert Kiraly
 
 #### Overview
 

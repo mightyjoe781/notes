@@ -8,6 +8,8 @@ Go is a statically typed, compiled programming language designed at Google by Ro
 
 
 
+- [Notes](notes/index.md)
+
 ### Resources :
 
 - [Official Documentation](https://go.dev/doc/)

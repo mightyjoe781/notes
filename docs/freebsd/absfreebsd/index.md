@@ -11,7 +11,7 @@
 - [Chapter 9. Securing you System](ch9.md)
 - Chapter 10. Disks, Partitions, and GEOM
 - Chapter 11. The UNIX File System
-- Chapter 12. The Z File System
+- [Chapter 12. The Z File System](ch12.md)
 - Chapter 13. Foreign File System
 - Chapter 14. Exploring /etc
 - Chapter 15. Making your System Useful
