@@ -18,13 +18,14 @@ markdown_extensions:
   toc :
     permalink: true
     separator: "_"
+  mdx_truly_sane_lists:
 plugins:
 site_author: smk
 copyright: smk
 theme:
   name: mkdocs
   custom_dir: overrides
-  navigation_depth: 4 
+  navigation_depth: 4
 extra:
   analytics:
     provider: google

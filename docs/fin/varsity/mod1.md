@@ -31,7 +31,7 @@ Stock Markets are made up by Stock Exchanges. They are Bombay Stock Exchange and
 
 **Remember Irrespective of the category of Market Participant, Everyone’s agenda is to make MONEY :P**
 
-When money is involved, human emotion run high in form of greed, fear, persuation and scams :P. One can easily fall pray to such practices and to ensure the rights of everyone we have SEBI.
+When money is involved, human emotion run high in form of greed, fear, persuation and scams. One can easily fall pray to such practices and to ensure the rights of everyone we have SEBI.
 
 **Security and Exchange Board of India** (SEBI), ensure :
 
