@@ -4,6 +4,7 @@
 - [Application Setup](applications.md)
 - [Bootup Scripts](boottime.md)
 - [Nginx](nginx.md)
+- [Nginx Static Site](nginx2.md)
 - [Serving node.js apps](nodejs.md)
 - [squid](squid.md) proxy
 - [Podman Installation](podman.md)
