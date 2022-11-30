@@ -11,4 +11,6 @@
 - [Host sortable download Links](mypaste.md)
 - [CPAN Modules](cpan.md) (for perl developers)
 - [ZNC Setup](znc.md) 
+- [Setting up Rclone](rclone.md)
+- [Backup VPS with Pcloud](bkp.md)
 - [A general talk with OldCoder](guide.md)
