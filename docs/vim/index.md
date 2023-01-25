@@ -20,7 +20,7 @@ Vim (a contraction of Vi IMproved) is a free and open-source, screen-based text 
 
 [Good Vimrc](https://github.com/nelstrom/dotfiles)
 
-#### Other Editors
+#### Other Command Line Editors
 
 - Joe
 - neovim
