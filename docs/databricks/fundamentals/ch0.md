@@ -16,7 +16,7 @@ Why Databricks ?
 2. All firms require consolidated data security policy which should be government recognised like GDPR, HIPPA.
 3. reduce redundancy of same data available for different use cases, makes difficult to enforce pt-2 ^
 
-<img src="ch0.assets/image-20230125125256655.png" alt="image-20230125125256655" style="zoom:50%;" />
+![image-databricks-intro](ch0.assets/image-20230125125256655.png)
 
 ### The Lakehouse Platform
 
@@ -71,7 +71,7 @@ Quality of Data
 - Bronze : Raw ingestion and history
 - Silver : Filtered, Cleaned, Augmented
 
-<img src="ch0.assets/image-20230125134216348.png" alt="image-20230125134216348" style="zoom: 50%;" />
+![image-databricks-mlflow](ch0.assets/image-20230125134216348.png)
 
 ### Databricks Platform Security
 

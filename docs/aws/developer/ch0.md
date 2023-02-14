@@ -69,3 +69,4 @@ Skipped question = Incorrect questions. There is no penality for guessing.
 
 
 Next : [Compute](ch1.md)
+

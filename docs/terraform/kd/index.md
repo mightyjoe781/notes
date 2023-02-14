@@ -6,6 +6,5 @@ Github : [Link](https://github.com/KSD-26/Terraform)
 
 Contents
 
-1. [Intro](ch0)
-2. [Files in Terraform](ch1)
-3. [Terraform State](ch2)
+- [Part - 1](part1.md)
+- [Part - 2](part2.md)
