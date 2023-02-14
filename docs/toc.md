@@ -12,9 +12,9 @@
 | [AWS](aws/index.md)                     |
 | [Competitive Coding](cc/index.md)       |
 | [C++](cpp/index.md)                     |
-| [CloudAcademy](cloudacademy/index.md)   |
 | [Data Analysis](dataanalysis/index.md)  |
 | [Databases](databases/index.md)         |
+| [Databricks](databricks/index.md)       |
 | [Docker](docker/index.md)               |
 | [FreeBSD](freebsd/index.md)             |
 | [Finance](fin/index.md)                 |
@@ -29,4 +29,5 @@
 | [Terraform](terraform/index.md)         |
 | [Vim](vim/index.md)                     |
 | [WebDev](webdev/index.md)               |
+|                                         |
 

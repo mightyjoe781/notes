@@ -2,10 +2,10 @@
 
 
 
-1. [Developer Associate Introduction](associate/developer/index.md)
-2. [Compute](associate/developer/ch1.md)
-3. [Storage](associate/developer/ch2.md)
-4. [Database](associate/developer/ch3.md)
+1. [Developer Associate Introduction](ch0.md)
+2. [Compute](ch1.md)
+3. [Storage](ch2.md)
+4. [Database](ch3.md)
 5. Network & Content Delivery
 6. Analytics
 7. Management & Governance

@@ -4,4 +4,4 @@
 
 
 
-- [Databricks Lakehouse Fundamentals](fundamentals/index.md)
+- [Databricks Lakehouse Fundamentals Notes](fundamentals/index.md)
