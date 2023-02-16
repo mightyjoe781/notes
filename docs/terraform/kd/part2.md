@@ -5,103 +5,110 @@
 - should be used apringly, better alternatives for configuration management(chef,puppet,ansible)
 - are inside resource block
 
-    ex:
-        resource "aws_instance" "my_instance"{
-            ami=data.aws_ami.app_ami.id
-            instance_type=var.instance_type
 
-            provisioner "local-exec"{
-                command="echo ${aws_instance.my_instance.private_ip} >> private_ips.txt"
-            }
-        } 
+````
+resource "aws_instance" "my_instance"{
+    ami=data.aws_ami.app_ami.id
+    instance_type=var.instance_type
+    provisioner "local-exec"{
+    		command="echo ${aws_instance.my_instance.private_ip} >> private_ips.txt"
+    }
+} 
+````
 
 - local-exec provisioner
-    - invokes a local executable after the resource is created
-    - invokes a process on machine running terraform NOT the target resource **IMPORTANT**
+  - invokes a local executable after the resource is created
+  - invokes a process on machine running terraform NOT the target resource **IMPORTANT**
 
-    ex:
-       resource "aws_instance" "my_instance"{
-            ami=data.aws_ami.app_ami.id
-            instance_type=var.instance_type
-
-            provisioner "local-exec"{
-                command="echo ${aws_instance.my_instance.private_ip} >> private_ips.txt"
-            }
-        } 
+````
+resource "aws_instance" "my_instance"{
+    ami=data.aws_ami.app_ami.id
+    instance_type=var.instance_type
+    provisioner "local-exec"{
+    		command="echo ${aws_instance.my_instance.private_ip} >> private_ips.txt"
+    }
+} 
+````
 
 - remote-exec provisioner
-    - invokes a script on a remote resource after it is created
-    - supports:
-        - winrm - Windows Remote Management (WinRM)
-        - ssh - Secure shell
+  - invokes a script on a remote resource after it is created
+  - supports:
+      - winrm - Windows Remote Management (WinRM)
+      - ssh - Secure shell
 
-    ex :
-        resource "aws_instance" "myec2"{
-            ami="ami-1234qwerty"
-            instance_type="t2.micro"
-            key_name"terraform-key-name"
-            vpc_security_group_ids=[aws_security_group.allow_ssh.id]
-        
-            provisioner "remote-exec"{
-                inline=[
-                    "sudo amazon-linux-extras install -y nginx1.12",
-                    "sudo systemctl start nginx"
-                ]
-        
-                connection{
-                    type="ssh"
-                    user"ec2-user"
-                    private_key=file("~/terraform.pem")
-                    host=self.public_ip
-                }
-            }
+````
+resource "aws_instance" "myec2"{
+    ami="ami-1234qwerty"
+    instance_type="t2.micro"
+    key_name"terraform-key-name"
+    vpc_security_group_ids=[aws_security_group.allow_ssh.id]
+    provisioner "remote-exec"{
+        inline=[
+        "sudo amazon-linux-extras install -y nginx1.12",
+        "sudo systemctl start nginx"
+        ]
+
+        connection{
+            type="ssh"
+            user"ec2-user"
+            private_key=file("~/terraform.pem")
+            host=self.public_ip
         }
-        
-        ## NOTE - Adding a new security group resource to allow the terraform provisioner from laptop to connect to ec2 instance via SSH 
-        resource "aws_security_group" "allow_ssh"{
-            name="allow_ssh"
-        
-            ingress{
-                from_port=22
-                to_port=22
-                protocol="tcp"
-                cidr_blocks=["0.0.0.0/0"]
-            }
-            egress{
-                from_port=0
-                to_port=65535
-                protocol="tcp"
-                cidr_blocks=["0.0.0.0/0"]
-            }
-        }
+    }
+}
+````
+
+```
+## NOTE - Adding a new security group resource to allow the terraform provisioner from laptop to connect to ec2 instance via SSH 
+resource "aws_security_group" "allow_ssh"{
+    name="allow_ssh"
+
+    ingress{
+        from_port=22
+        to_port=22
+        protocol="tcp"
+        cidr_blocks=["0.0.0.0/0"]
+    }
+    egress{
+        from_port=0
+        to_port=65535
+        protocol="tcp"
+        cidr_blocks=["0.0.0.0/0"]
+    }
+}
+```
 
 **Types of Provisioners**
-chef/puppet/connection/file/habitat/local-exec/null_resource/remote-exec/salt-masterless
+`chef/puppet/connection/file/habitat/local-exec/null_resource/remote-exec/salt-masterless`
 
 **Types of Temporal Provisioners**
 
-1. Creation-Time provisioner
-    - only run during Creation
-    - if fails the resource is marked as tainted
+Creation-Time provisioner
 
-2. Destroy-Time provisioner
-    - only run during before a resource is destroyed
-      ex:
-        resource "aws_instance" "my_instance"{
-            ami=data.aws_ami.app_ami.id
-            instance_type=var.instance_type
+1. only run during Creation
 
-            provisioner "local-exec"{
-                when=detroy
-                command="echo ${aws_instance.my_instance.private_ip} >> private_ips.txt"
-            }
-        } 
+2. if fails the resource is marked as tainted
+
+
+Destroy-Time provisioner
+- only run during before a resource is destroyed
+  
+      resource "aws_instance" "my_instance"{
+          ami=data.aws_ami.app_ami.id
+          instance_type=var.instance_type
+          provisioner "local-exec"{
+              when=detroy
+              command="echo ${aws_instance.my_instance.private_ip} >> private_ips.txt"
+          }
+      }
 
 **Failure Behavior of Provisioners**
 
-on_failure
-    - continue :: ignore error and continue creation or destruction
-    - fail :: default behaviour, raise an error and stop, mark resource as tainted.
+- on_failure
+
+  - continue :: ignore error and continue creation or destruction
+
+  - fail :: default behaviour, raise an error and stop, mark resource as tainted.
 
 
 ----------------------------------------------------------
@@ -109,13 +116,14 @@ on_failure
 ### 12. Output Values
 
 - shows a piece of data after terraform successfully completes
-- are useful as they echo values from terraform to the command line after the completeion
+- are useful as they echo values from terraform to the command line after the completion
 - can be used as input between modules
 
-    ex:
-        output "instance_ip_addr"{
-            value=aws_instance.server.private_ip
-        }
+````
+output "instance_ip_addr"{
+		value=aws_instance.server.private_ip
+}
+````
 
 ----------------------------------------------------------
 
@@ -151,73 +159,89 @@ on_failure
 - ROOT module consists of the resources defined in the .tf files in the main working directory
 - a module can call other modules which allows you to include the child modules resources
 - a module can include a module block that is the calling module of the child module
-    ex:
-        module "servers"{ #module servers = root module
-            source="./app-cluster" #app-cluster = child module
-            servers=5
-        }
+
+````
+module "servers"{ #module servers = root module
+    source="./app-cluster" #app-cluster = child module
+    servers=5
+}
+````
 
 **Module Outputs**
 
 - Resource defined in a module are encapsulated, so calling module cannot access their attributes directly
 - a child module can declare OUTPUT values to selectively export certain values to be accessed by the calling module
-    ex:
-        output "instance_ip_addr"{
-            value=aws_instance.server.private_ip
-        }
+
+````
+output "instance_ip_addr"{
+		value=aws_instance.server.private_ip
+}
+````
 
 `Module - sensitive=true`
 
 - output can be marked as containing SENSITIVE material
 - sensitive=true prevents Terraformfrom showing value in list of outputs at the end of terraform apply
 - Sensitive output values are STILL RECORDED in terraform.tfstate and visible to anyone with access terraform.tfstate
-    ex:
-        output "db_password"{
-            value=aws_db_instance.db.password
-            sensitive=true
-        }
+
+````
+output "db_password"{
+  value=aws_db_instance.db.password
+  sensitive=true
+}
+````
 
 **module - versions**
 
 - it is NOT mandatory to include module version argument when pulling code from terraform Registry
 - explicitly constrain version numbers for external modules to avoid unwated changes
 - version constraints are supported for modules installed from:
-    - Terraform Registry :: Reference <NAMESPACE>/<NAME>/<PROVIDER>
-    - Private Registry :: Reference <HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>
-    - specifying a VERSION is mandatory when fetching a module
+  - Terraform Registry :: `Reference <NAMESPACE>/<NAME>/<PROVIDER>`
+  - Private Registry :: `Reference <HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>`
 
-    ex:
-        #public Registry
-        module "consul"{
-            source="hashicorp/consul/aws"
-            version="0.0.5"
-            servers=3
-        }
+specifying a VERSION is mandatory when fetching a module
 
-        #private Registry
-        module "vpc"{
-            source="app.terraform.io/example-corp/vpc/aws"
-            version="0.9.3"
-        }
+````
+#public Registry
+module "consul"{
+    source="hashicorp/consul/aws"
+    version="0.0.5"
+    servers=3
+}
+````
+
+```
+#private Registry
+module "vpc"{
+    source="app.terraform.io/example-corp/vpc/aws"
+    version="0.9.3"
+}
+```
 
 **Create your own module**
 
 - Create module for S3
-    variable "s3_name"{}
 
-    resource "aws_s3_bucket" "my_bucket"{
-        name=var.s3_name
-    }
+````
+variable "s3_name"{}
 
-    output "bucket_id"{
-        value=aws_s3_bucket.bucket.id
-    }
+resource "aws_s3_bucket" "my_bucket"{
+    name=var.s3_name
+}
+
+output "bucket_id"{
+    value=aws_s3_bucket.bucket.id
+}
+````
 
 - Use S3 module
-    module "my_sample_bucket"{
-        s3_name="sample_bucket"
-        source="<path to module folder>"
-    }
+
+````
+module "my_sample_bucket"{
+    s3_name="sample_bucket"
+    source="<path to module folder>"
+}
+````
 
 -----------------------------------------------------------------------------------------------
 
@@ -244,13 +268,15 @@ on_failure
 
 ### 15. Organizations
 
-​                            --------------- Development Organizations
+````
+                            --------------- Development Organizations
 ​                            |
 ​                            |
 Terraform Enterprise ---------------------- Testing Organizations
 ​                            |
 ​                            |
 ​                            --------------- Production Organizations
+````
 
 
 - are shared spaces for teams to collaborate on workspaces
@@ -258,14 +284,16 @@ Terraform Enterprise ---------------------- Testing Organizations
 - to delgate provisioning work the organization can grant workspace permissions to specific teams
 - teams can only have permissions on workspaces within their organization, although any user in a team can belong to other teams in other organization
 
-    example hierarchy:
-        - Development Organization
-            - Networking workspace :: VPC and S3
-            - Persistence workspace :: S3 and Databases
-            - compute workspace :: EKS and ASG
-            - Shared Services workspace :: SNS and SQS and Lambda
-        - Testing Organization
-        - Production Organization
+
+example hierarchy:
+
+- Development Organization
+  - Networking workspace :: VPC and S3
+  - Persistence workspace :: S3 and Databases
+  - compute workspace :: EKS and ASG
+  - Shared Services workspace :: SNS and SQS and Lambda
+- Testing Organization
+- Production Organization
 
 --------------------------------------------------------------------------
 
@@ -291,6 +319,7 @@ Terraform Enterprise ---------------------- Testing Organizations
 ### 17. Terraform - Flavours
 
 Terraform comes in five Flavours:
+
 1. open source - the binary you download and run at home 
 2. cloud free
 3. cloud team
@@ -298,96 +327,96 @@ Terraform comes in five Flavours:
 5. self hosted Enterprise (ex: tfe)
 
 Terraform offerings
+
 - Terraform Cloud
-    - free
-    - Team
-    - business
-        - SSO 
-        - auditing
-        - self-hosted terraformcloud agents
-            - terraform cloud agents allow terraform cloud to communicate with isolated, private or on-premises infrastructure
-            - terraform cloud agents can establish a simple connection between your environment and terraform cloud which allows for provisioning operations and management
-        - private data center Networking
-        - clustering
+  - free
+  - Team
+  - business
+    - SSO 
+    - auditing
+    - self-hosted terraformcloud agents
+      - terraform cloud agents allow terraform cloud to communicate with isolated, private or on-premises infrastructure
+      - terraform cloud agents can establish a simple connection between your environment and terraform cloud which allows for provisioning operations and management
+    - private data center Networking
+    - clustering
+
+
 
 - Terraform Self-Hosted Enterprise (ex: TFE)
-    - internally hosted product to run terraform at scale
-    - terraform plan and terraform apply happens on the TFE servers
-    - state is stored on TFE and TFE provides state locking
-    - TFE also supports the Sentinel Policy Engine
+  - internally hosted product to run terraform at scale
+  - terraform plan and terraform apply happens on the TFE servers
+  - state is stored on TFE and TFE provides state locking
+  - TFE also supports the Sentinel Policy Engine
 
 Enterprise offerings
+
 - Sentinel
-    - Sentinel is an embedded Policy as Code framework
-    - Sentinel enables fine grained logic based control policy decisions
-    - Sentinel is an embedded proactive policy as code framework
-    - Sentinel use cases:
-        - verify if ec2 instaces have tags
-        - verify if the S3 buckets have encryption enabled
-    - Sentinel execution sequence:
-        - terraform plan
-        - Sentinel checks
-        - terraform apply
+  - Sentinel is an embedded Policy as Code framework
+  - Sentinel enables fine grained logic based control policy decisions
+  - Sentinel is an embedded proactive policy as code framework
+  - Sentinel use cases:
+    - verify if ec2 instaces have tags
+    - verify if the S3 buckets have encryption enabled
+  - Sentinel execution sequence:
+    - terraform plan
+    - Sentinel checks
+    - terraform apply
 
 - Enterprise state security
-    - treat terraform.tfstate as sensitive
-    - Encrypt terraform.tfstate at rest
-    - encrypt terraform.tfstate in transit with TLS 
-    - Perform audit on State access and operations
-    - S3 backend supports encryption at rest 
+  - treat terraform.tfstate as sensitive
+  - Encrypt terraform.tfstate at rest
+  - encrypt terraform.tfstate in transit with TLS 
+  - Perform audit on State access and operations
+  - S3 backend supports encryption at rest 
 
 - Remote Backend 
-    - remote backend stores terraform.tfstate and supports running operations on terraform cloud
-    - full remote operations include:
-        - executing terraform plan remotely on terraform cloud environment
-        - executing terraform apply remotely on terraform cloud environment
-        - with log streaming to back to a local terminal
+  - remote backend stores terraform.tfstate and supports running operations on terraform cloud
+  - full remote operations include:
+    - executing terraform plan remotely on terraform cloud environment
+    - executing terraform apply remotely on terraform cloud environment
+    - with log streaming to back to a local terminal
 
 ------------------------------------------------------------------------------------
 
 ### 18. Conditional logic
 
--Creating conditional logic within Terraform configurations allows for creating a more dynamic configuration. 
+Creating conditional logic within Terraform configurations allows for creating a more dynamic configuration. 
 
 - This allows for greater abstraction and logic flow in the code. 
 - It's essential to understand the logical conditions that can be created within the HCL (HashiCorp Configuration Language) language as it provides even more reusability.
 - condition ? true : false
-  
-    ex:
-    
-    ````
-    terraform {
-      required_providers {
+
+````
+terraform {
+    required_providers {
         aws = {
         source  = "hashicorp/aws"
         version = ">=3.7.0"
-      	}
-      }
+        }
     }
-    data "aws_ami" "default" {
-      most_recent = "true"
-      filter {
-      name   = "name"
-      values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
+}
+data "aws_ami" "default" {
+    most_recent = "true"
+    filter {
+        name   = "name"
+        values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
     }
     filter {
-      name   = "virtualization-type"
-      values = ["hvm"]
+        name   = "virtualization-type"
+        values = ["hvm"]
     }
     owners = ["099720109477"]
+}
+resource "aws_instance" "server" {
+    ami           = var.ami != "" ? var.ami : data.aws_ami.default.image_id
+    instance_type = var.instance_size
+    tags = {
+    		Name = "calabvm"
     }
-    resource "aws_instance" "server" {
-      ami           = var.ami != "" ? var.ami : data.aws_ami.default.image_id
-      instance_type = var.instance_size
-      tags = {
-      	Name = "calabvm"
-      }
-    }
-    ````
-    
-    
-    
-    The condition is if the variable AMI does not contain an empty string. If it is true, then set the AMI to the value of var.ami. If it is false, set the value of the AMI to the ID of data.aws_ami.default[0].image_id which is the AMI ID that was collected in the data block. This strategy gives the module the ability to take in AMI ID input or find an AMI on its own and makes the module more dynamic
+}
+````
+
+The condition is if the variable AMI does not contain an empty string. If it is true, then set the AMI to the value of var.ami. If it is false, set the value of the AMI to the ID of data.aws_ami.default[0].image_id which is the AMI ID that was collected in the data block. This strategy gives the module the ability to take in AMI ID input or find an AMI on its own and makes the module more dynamic
 
 ---------------------------------------------------------------------------------------------
 
@@ -397,12 +426,13 @@ Enterprise offerings
 - Loops also allow for resources to scale efficiently. 
 
     ex:
-    ##foreach
-        resource "aws_instance" "server" {
-            ami           = "ami-0528a5175983e7f28"
+    
+    
+        ##foreach
+            resource "aws_instance" "server" {
+                ami           = "ami-0528a5175983e7f28"
             instance_type = "t2.micro"
-            associate_public_ip_address = var.associate_public_ip_address
-
+                associate_public_ip_address = var.associate_public_ip_address    
             #dynamic block with for_each loop
             dynamic "ebs_block_device" {
                 for_each = var.ebs_block_device
@@ -422,22 +452,22 @@ Enterprise offerings
                 Name = "${var.servername}"
             }
         }
-        
 
 - Dynamic blocks can be used for resources that contain repeatable configuration blocks. Instead of repeating several ebs_block_device blocks, a dynamic block is used to simplify the code. This is done by combining the dynamic block with a for_each loop inside. The first line inside the dynamic block is the for_each loop. The loop is iterating through the list of the ebs_block_device variable, which is a list of maps. In the content block, each value of the map is referenced using the lookup function. The logic here is to look for a value in the map variable and if it's not there, set the value to null. The dynamic block will iterate through each map in the list
 
 - **count**
 
-    ````
-    #public IP address with Count Conditional Expression
-    resource "aws_eip" "pip" {
-      count             = var.associate_public_ip_address ? 1 : 0
-      network_interface = aws_instance.server.primary_network_interface_id
-      vpc               = true
-    }
-    ````
 
-    Count allows for creating multiple instances of a resource block. Almost all resource blocks can use the count attribute. It is simply the number of times to create the resource block. It can also be used as conditional logic. In this case, the value of count is a conditional expression. If var.associate_public_ip_address is true set the count value to 1, if false set it to 0. This allows resource blocks to be created conditionally. In this example, a public IP address is not created if var.associate_public_ip_address is set to false.
+````
+#public IP address with Count Conditional Expression
+resource "aws_eip" "pip" {
+  count             = var.associate_public_ip_address ? 1 : 0
+  network_interface = aws_instance.server.primary_network_interface_id
+  vpc               = true
+}
+````
+
+Count allows for creating multiple instances of a resource block. Almost all resource blocks can use the count attribute. It is simply the number of times to create the resource block. It can also be used as conditional logic. In this case, the value of count is a conditional expression. If var.associate_public_ip_address is true set the count value to 1, if false set it to 0. This allows resource blocks to be created conditionally. In this example, a public IP address is not created if var.associate_public_ip_address is set to false.
 
 **count and count index**
 
@@ -447,12 +477,17 @@ Enterprise offerings
 - count.index value is incremented on each loop
 
     ex:
-        resource "aws_instance" "server"{
-            count=4
-            ami="ami-a1b2c3d4"
-            tags={
-                name="Server ${count.index}"
-            }
-        } 
+
+````
+resource "aws_instance" "server"{
+    count=4
+    ami="ami-a1b2c3d4"
+    tags={
+    		name="Server ${count.index}"
+    }
+} 
+````
+
+
 
 ---------------------------------------------------------------------------------------

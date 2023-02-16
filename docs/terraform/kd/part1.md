@@ -26,6 +26,7 @@ files:
 - outputs.tf :: outputs from provisioning
 
 <hr>
+
 ### 3. Terraform State
 
 NOTE: terraform.tfstate :: state according to terraform
@@ -52,18 +53,20 @@ ex: virtual network, compute instances, dns record
     + given name "my_instance"
 
 ex:
-    ```
-    resource "aws_instance" "my_instance"{
-            ami = "ami-1234qwerty"
-            instance_type = "t2.micro"
-        }
-    ```
+
+````
+resource "aws_instance" "my_instance"{
+    ami = "ami-1234qwerty"
+    instance_type = "t2.micro"
+}
+````
 
 where::
     1. resource type  = aws_instance
     2. local resource name = my_instance
-    3. argument name = ami, instance_type
-    4. argument value =  ami-1234qwerty,t2.micro
+
+3. argument name = ami, instance_type
+4. argument value =  ami-1234qwerty,t2.micro
 
 **Implicit dependency in Resource Block**
 
@@ -117,15 +120,17 @@ resource "aws_s3_bucket" "example"{
 - presist logging output with `TF_LOG_PATH`
 
 Values:
-TF_LOG=TRACE :: Highest verbosity
-TF_LOG=DEBUG
-TF_LOG=INFO
-TF_LOG=WARN
-TF_LOG=ERROR :: lowest verbosity
+
+- TF_LOG=TRACE :: Highest verbosity
+- TF_LOG=DEBUG
+- TF_LOG=INFO
+- TF_LOG=WARN
+- TF_LOG=ERROR :: lowest verbosity
 
 ex:
-    export TF_LOG=TRACE
-    export TF_LOG_PATH=/logs/terraform.log
+
+- ​    export TF_LOG=TRACE
+- ​    export TF_LOG_PATH=/logs/terraform.log
 
 
 ------------------------
@@ -136,25 +141,27 @@ ex:
 - allows data to be fetched or computed from elsewhere in terraform configuration
 
 ex:
-    data "aws_ami" "example"{
-        executable_users = ["self"]
-        most_recent = true
-        name_regex = "^myami-\\d{3}"
-        owners = ["self"]
 
-        filter {
-            name="name"
-            values = ["myami-*"]
-        }
-        filter {
-            name="root-device-type"
-            values=["ebs"]
-        }
-        filter {
-            name="virtualization-type"
-            values=["hvm"]
-        }
+````
+data "aws_ami" "example"{
+    executable_users = ["self"]
+    most_recent = true
+    name_regex = "^myami-\\d{3}"
+    owners = ["self"]
+    filter {
+        name="name"
+        values = ["myami-*"]
     }
+    filter {
+        name="root-device-type"
+        values=["ebs"]
+    }
+    filter {
+        name="virtualization-type"
+        values=["hvm"]
+    }
+}
+````
 
 ------------------------------
 
@@ -162,12 +169,12 @@ ex:
 
 - something set at runtime
 - allows you to vary what terraform will do when passing in or using a dynamic value
-- variable with undefined values will not directly result in ERROR
-    NOTE: Terraform will ask you to supply a value **IMPORTANT** 
-    ex:
-        variable custom_var {}
-- In version 0.12>=  :: var.instance_type declaration
-- In version 0.11<=  :: ${var.instance_type} declaration
+- variable with *undefined* values will not directly result in ERROR
+    - NOTE: Terraform will ask you to supply a value **IMPORTANT** 
+        ex: `variable custom_var {}`
+    
+- In version 0.12>=  :: `var.instance_type` declaration
+- In version 0.11<=  :: `${var.instance_type}` declaration
 
 **3 types of variable types**
 
@@ -176,19 +183,20 @@ ex:
     - Number
     - boolean
 
-    ex:
-        variable "aws_region"{
-            type=string #type enforcement
-            default="us-west-2"
-        }
-        variable "instance_count"{
-            type=Number
-            default=2
-        }
-        variable "enable_vpn_gateway"{
-            type=bool
-            default=false
-        }
+    ````
+    variable "aws_region"{
+        type=string #type enforcement
+        default="us-west-2"
+    }
+    variable "instance_count"{
+        type=Number
+        default=2
+    }
+    variable "enable_vpn_gateway"{
+        type=bool
+        default=false
+    }
+    ````
 
 
 2. Collection Variable types (NOTE: all values of same type)
@@ -197,15 +205,18 @@ ex:
     - set :: an unordered collection of unique Values
 
     ex:
-        variable "private_subnet_cidr_blocks"{
-            type = list(string)
-            default=[
-                "10.0.101.0/24",
-                "10.0.102.0/24",
-                "10.0.103.0/24"
-            ]
-        }
-
+    
+    ````
+    variable "private_subnet_cidr_blocks"{
+      type = list(string)
+      default=[
+        "10.0.101.0/24",
+        "10.0.102.0/24",
+        "10.0.103.0/24"
+      ]
+    }
+    ````
+    
         variable "resouce_tags"{
             type=map(string)
             default={
@@ -216,36 +227,42 @@ ex:
 
 
 3. Structure Variable types
-    - tuple :: ficed-length sequence of values of specified types - ["a",15,true]
+    - tuple :: fixed-length sequence of values of specified types - ["a",15,true]
     - object - A lookup table, matching a fixed set of keys to values of specified types
 
 **Variable Precendence Order (Highest to lowest)**
 
 1. -var or -var-file on command line
-    ex:
-        terraform apply -auto-approve \
+
+    ````bash
+    terraform apply -auto-approve \
         -var "aws_access_key=<KEY>" \
         -var "aws_secret_key="<KEY>"
+    ````
 
-2. *.auto.tfvars or *.auto.tfvars.json
+2. `*.auto.tfvars` or `*.auto.tfvars.json`
 
 3. terraform.tfvars
-    ex:
-        instance_type="t2.large"
+    ex: `instance_type="t2.large"`
 
 4. variables.tf
-    ex:
-        variable "instance_type"{
-            default="t2.micro"
-        }
+
+    ````
+    variable "instance_type"{
+    		default="t2.micro"
+    }
+    ````
 
 5. environment variables
     - can be used to set a variable
+
     - must be in format TF_VAR_name
-      ex:
-        .bashrc
-        export TF_VAR_instance_type=t2.micro
-        export TF_VAR_ami=ami-12345abc
+      
+    - ````
+      .bashrc
+      export TF_VAR_instance_type=t2.micro
+      export TF_VAR_ami=ami-12345abc
+      ````
 
 -----------------------------
 
@@ -264,48 +281,52 @@ ex:
     }
     ````
     
-        output "arns"{
-            value=aws_iam_user.lb[*].arn
-        }
+    ````
+    output "arns"{
+        value=aws_iam_user.lb[*].arn
+    }
+    ````
 
 --------------------------------
 
 ### 10. Functions in Terraform
 
 Built-in functions
-1. Numeric
-    abs/ceil/floor/log/max/min/parseint/pow/signum
+1. Numeric Functions : 
+    `abs/ceil/floor/log/max/min/parseint/pow/signum`
 
 2. String
-    chomp/format/formatlist/indent/join/lower/regex/regexall/replace/split/strrev/substr/title/trim/trimprefix/trimsuffix/trimspace/upper
+    `chomp/format/formatlist/indent/join/lower/regex/regexall/replace/split/strrev/substr/title/trim/trimprefix/trimsuffix/trimspace/upper`
 
 3. Collection 
-    alltrue/anytrue/chunklist/coalesce/coalescelist/compact/concat/contains/distinct/element/flatten/index/keys/length/list/lookup/map/matchkeys/merge/one/range/reverse/setintersection/setproduct/setsubtract/setunion/slice/sort/sum/transpose/values/zipmap
+    `alltrue/anytrue/chunklist/coalesce/coalescelist/compact/concat/contains/distinct/element/flatten/index/keys/length/list/lookup/map/matchkeys/merge/one/range/reverse/setintersection/setproduct/setsubtract/setunion/slice/sort/sum/transpose/values/zipmap`
 
 4. Encoding
-    base64decode/base64encode/base64gzip/csvdecode/jsondecode/jsonencode/textdecodebase64/textencodebase64/urlencode/yamldecode/yamlencode
+    `base64decode/base64encode/base64gzip/csvdecode/jsondecode/jsonencode/textdecodebase64/textencodebase64/urlencode/yamldecode/yamlencode`
 
 5. Filesystem
-    abspath/dirname/pathexpand/basename/file/fileexists/fileset/filebase64/templatefile
+    `abspath/dirname/pathexpand/basename/file/fileexists/fileset/filebase64/templatefile`
 
 6. Date and Time 
-    formatdate/timeadd/timestamp
+    `formatdate/timeadd/timestamp`
 
-7.Hash and crypto
-    base64sha256/base64sha512/bcrypt/filebase64sha256/filebase64sha512/filemd5/filesha1/filesha256/filesha512/md5/rsadecrypt/sha1/sha256/sha512/uuid/uuidv5
+7. Hash and crypto
+     `base64sha256/base64sha512/bcrypt/filebase64sha256/filebase64sha512/filemd5/filesha1/filesha256/filesha512/md5/rsadecrypt/sha1/sha256/sha512/uuid/uuidv5`
 
 8. IP network
-    cidrhost/cidrnetmask/cidrsubnet/cidrsubnets
+    `cidrhost/cidrnetmask/cidrsubnet/cidrsubnets`
 
 9. Type Conversion
-    can/defaults/nonsensitive/sensitive/tobool/tolist/tomap/tonumber/toset/tostring/try/type
+    `can/defaults/nonsensitive/sensitive/tobool/tolist/tomap/tonumber/toset/tostring/try/type`
 
 ex:
-    - join :: produces a string by concatenating together all elements of a given list of strings with given delimeter
-    - chomp :: removes newline characters at the end of a string
-    - split :: produces a list by dividing string at all occurences of a given separator
-    - max :: takes one ore more numbers and returns the greatest number from the set
-    - slice :: extracts some consecutive elements from within a list
+
+- join :: produces a string by concatenating together all elements of a given list of strings with given delimeter
+
+- chomp :: removes newline characters at the end of a string
+- split :: produces a list by dividing string at all occurences of a given separator
+- max :: takes one or more numbers and returns the greatest number from the set
+- slice :: extracts some consecutive elements from within a list
 
 NOTE: User defined functions are not supported
 NOTE: **IMPORTANT**
