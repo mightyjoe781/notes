@@ -1,130 +1,186 @@
-## Storage 
+## Compute
 
-### Amazon S3
+#### What is Compute ?
 
-#### Overview
+Physical Server within a data center would be considered as Compute resource as it may have multiple CPUs/GBs of RAM.
 
-- Amazon S3 is a fully manage object based storage service that is highly available, highly durable, cost effective and widely accessible.
-- Smallest Size : 0KB, Largest Size : 5TB
-- Each object uploaded does not conform to file structure level heirarchy like OS, instead its storage as object with flat address space and located by unique url.
-- Its a regional service. [Resource](https://cloudacademy.com/blog/aws-global-infrastructure)
-- To locate a specific file within the bucket we use keys and to access that object via internet we use object url. Bucket url and object key makes up the object url.
+[Resource Link](https://aws.amazon.com/products/compute)
 
-#### Storage Classes
+### Amazon EC2
 
-1. S3 Standard : 
-2. S3 INT (Intelligent Tiering) : for both frequent and infrequent access (use when frequency is not known)
-3. S3 S-IA (Standard Infrequent Access) :
-4. S3 Z-IA (One zone and Infrequent Access) :
-5. S3 Glacier : Long term archival storage solution
-6. S3 G-DA (Glacier Deep Archive) : same as S3 Glacier with min 12 hours retrieval time.
+EC2 allows you to deploy virtual servers within your AWS environment.
 
-All 4 above services offer **High Throughput**, **low latency**, **SSL to encrypt data during transit**, **lifecycle rules to automate data storage management**.
+Components
 
-S3 has Highest availability of 99.99% and Eleven 9s durability. S3 INT, S3 S-IA have similar availability and durability. S3 Z-IA have such durability and availability only for a region.
+- Amazon Machine Images (AMIs)
+  - templates of pre-configured EC2 Instance for quick setup
+  - you can create your own AMIs for deployments
+  - AWS Marketplace : market to buy from AMIs from trusted vendors like Citrix,etc
+  - Community AMIs
+  - Instances : Micro (small) , General Purpose, Compute Optimized, GPU, FPGA (genomics, financial), Memory Optimised Instances
+- Instance Purchasing Options : 
+  - On-Demand : Launched at any time, usually short-term uses
+  - Reserved : set period of time purchase for reduced cost
+  - Scheduled : similar to reserved instance but recurring/ fixed schedule
+  - Spot : Bid for a unused EC2 compute resources, fluctuating price
+  - On-Demand Capacity Reservations : Reserve capacity based on platform, tenancy and area availability
+- Tenancy
+  - Shared Tenancy : EC2 is launched on any available host with required host, same host may be used by multiple customers.
+  - Dedicated Instances : hosted on hardware that no other customer can access
+  - Dedicated Hosts : Additional visibility and control on physical host
 
-**Lifecycle Rules** : You are able to set and configure specific criteria which can automatically move your data from one storage class to another or delete it. (to save cost we can move around data not in use to other cheaper classes).
+- User Data : allows to enter commands that will run during the first boot cycle of instance.
+- Storage Options : Purely varying option as per need
+  - Persistent Storage : Available by attaching EBS volume (network attached devices served by AWS network)
+  - Ephemeral Storage : Created by EC2 instances using local storage : Physically attached to underlying host. All data gets terminated if you stop or terminate the instance, while during reboots data remains intact.
 
-Intelligent Tiering is based on principle : *more frequently accessed data is more faster to access*. Within the same class there are two tiers : Frequent Access and Infrequent Access, thoughout the life cycle data keeps moving around according to its demand.
-
-Glacier Services do not offer graphical user interface and its a two step process to setup to move data into glacier.
-
-1. Create your valut as a container for your archives
-2. Move your data into the Glacier vault using the available APIs or SDKs
-
-Access to data is costly depending on how urgently you need the data : expedited (under 250mb available in 5 minutes) , standard (any size, 3-5 hours) and bulk (PB of data, 5-12 hours) options.
+- Security
+  - Security Group : Creates a security network rules which govern ingress/egress traffic.
+  - Public Key/ Private Key
 
 
+#### EC2 Autoscaling
 
-### S3 Management Features
+We can setup scaling up and down based on CPU Utilization and helps size of EC2 fleet be cost effective.
 
-#### Versioning
+- Automation
+- Greater Customer Satisfication
+- Cost reduction
 
-- Versioning is maintained automatically completely by AWS if enabled (not enabled by default) but once enabled can’t be disabled only paused/suspended.
-- Version ID is used to maintain versions. Deleted versioned files can be seen when show/hide is toggled with version called *Delete Marker*.
-- If you enable versioning on an existing bucket in Amazon S3, how are the unmodified objects already in them labeled? : Null
+Components of EC2 Auto Scaling
 
-#### Server Access Logging
+1. Create a Launch Configuration/Template
+2. Create a Auto Scaling Group
 
-- Logs are collected every hour and there is no hard and fast rule that every request is logged, sometimes specific logs may not be available.
-- You will need to configure Target bucket (used to store the logs, should be same zone as source bucket) and target prefix for management. You can also configure this while bucket creation.
-- If you using AWS Console then Log Delievery Groups are automatically added to Access Control List of the target bucket. But if you are utilizing some API/SDK you will need to manually add access to ACL.
-- Log Naming Standard : \<Target Prefix\>YYYY-MM-DD-HH-MM-SS-UniqueString/
-- Entries in logs are as : BucketOwner Bucket TimeStamp RemoteIPAddress Requester Operation Key RequestURI HTTPStatus ErrorCode ByteSent ObjectSize TotalTime(ms) TurnAroundTime Referer User-Agent VersionID HostID Cipher Suite AuthHeader TLS Version
+### AWS Elastic Beanstalk
 
-#### Object Level Logging
+*AWS Elastic Beanstalk is an AWS managed service that automatically provisions and deploys resources required to run web application based on uploaded source code.*
 
-- Closely related to AWS Cloudtrail and logs DeleteObject, GetObject, PutObject requests. It also logs Identity of the caller, timestamp and source IP address.
-- Can be configured at Bucket level or AWS Cloudtrail Console.
+Resources : AWS services and features such as EC2, Route 53, Auto Scaling, Health-Monitoring and ELB (Elastic Load Balancing)
 
-#### Transfer Acceleration
+AWS Elastic Beanstalk can operate with different platforms and lanaguages : Packer Builder, Single Container Docker, MultiContainer Docker, Preconfigured Docker, Go, Java SE, JAVA with Tomcat, .NET on Windows Server with IIS, Node.js, PHP, Python, Ruby.
 
-- Amazon Front is a CDN (Content Delievery Network) greatly increased transfer speeds between client to S3 or vice-versa.
-- There is a cost associated with Transfer Acceleration per GB according to Edge region.
-- NOTE : your bucket name always should be DNS complaint and should not contain any periods to utlize this feature.
-- Trasfer Acceleration doesn’t Support GET Server, PUT bucket, DELETE Bucket and Cross-region copies using PUT Object Copy
+**Note: AWS Elastic Beanstalk is free, only the resources that are created will cost money according to their charges. **
 
-### Amazon S3 Security
+- Application Version : A specific version/section of code
+- Environment : refers to application version taht has been deployed on AWS, comprised of all the resouces created by ECB
+- Environment Configuration : Collection of parameters and settings that control environment
+- Environmnet Tier : how Elastic Beanstalk provisions resources based on the application
+- Configuration Template : provides baseline for creating a new, unique, environment configuration
+- Platform : combination of components on which we build our Application like OS, Language etc.
+- Application : collection of different elements like environment, environment configuration, etc.
 
-#### Using Policies to Control Access
+#### Environment Tiers
 
-- Identity Based Policies : Attached to IAM identity requiring access, using IAM permission policies, either in-line or managed.
-  - Assoiciated to a User or role or group
-  - We can control access with **conditions** [Resource](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html)
-- Resource Based Policy : policy is associated with a resource
-  - Forms : Access Control Lists and Bucket Policies
-  - Need to define who will be allowed/denied access
-  - Written in JSON or use AWS policy generator
-  - permissions are controlled with **principals**
-- IAM Policies are desired in case to centrally manage access and you have several roles to assign rather than 1 bucket/policy, Can control access for more than one service at a time. (max allowed policy size : 2Kb is size for users, 5Kb for groups, 10Kb for roles)
-- Bucket Policies : controls S3 buckets and its objects, Used to maintain security policies within S3 alone. Can grant cross-account access without having to create and assume roles using IAM (max allowed policy size : 20Kb)
+Reflects on how Elastic Beanstalk provisions resources based on what the application is designed to do.
 
-Both are not mutually exclusive and used together. In case of information conlict : principal of Least-Priviledged is utilised : if there is even single deny, any authorized request will be denied.
+- HTTP Requests ---> Web Server Environment
+- SQS Queue ---> Worker Environment
 
-#### S3 Access Control List
+##### Web Server Tier
 
-- ACLs allows control of access to bucket, and specific objects within a bucket by groupings and AWS accounts
-- can set different permissions per object
-- ACLs do not follow same JSON format as the policies defined by IAM and bucket policies
-- More Granular Control, can be applied at Bucket Level or Object Level.
+- Typically used for standard web application serving requests over **port 80**
+- This tier typically uses following services and features : **Route 53**, **Elastic Load Balancer**, **Auto Scaling**, **EC2** Instances and **Security Groups**.
 
-- Permissions : LIST, WRITE, BUCKET ACL READ, BUCKET ACL WRITE
+- A host manager is installed on every EC2 Instance
+- **Host manager** responsibilities includes
+  - Aid in deployment of application
+  - Collecting different metrices and different events from EC2 instances which can be reviewed from within the console, or vial AWS CLI or API
+  - It generates instance level events
+  - It monitors both the application log files and application server itself
+  - It can be used to patch instance components
+  - manages log files allowing them to be published to S3
 
-#### Cross Origin Resource Sharing (CORS) with S3
+##### Worker Tier
 
-CORS allows specific resouces on a web page to be requested from a different domain than its own.
+- Used by application that will have a backend processing task, interacting with AWS SQS
+- This tier typically uses the following AWS resources in the environment : **SQS Queue**, **IAM service roles**, **Auto Scaling** and **EC2** Instances
 
-This allows to build client-side web application and then, if required, you can utilise CORS support to access resouce stored in S3.
+- A minimum of one EC2 instance is used and is attached to auto scaling groups
+- Each EC2 instance in the environment will read from the same SQS Queue
+- A **daemon** is installed on every EC2 instance to pull request from the SQS queue
+- You can develop and add your **own** Elastic Beanstalk configuration files withing your application **source code**. These file need to be save as `.config` file extension and stored withinn `.ebextensions` folder of source code.
 
-Policy(JSON) is evaluated on three fold rules
+![image-20220727165713696](ch2.assets/image-20220727165713696.png)
 
-1. Requestors *Origin* header matches and entry made in *Allowed Origins* element
-2. The method used in request is matched in Allowed methods
-3. The headers used in Access-Control Request Headers within a preflight request matches a value in the *Allowed Header* element.
+#### Deployment Options
 
-### Amazon S3 Encryption
+- All at once (Default Option) : Abruptly resources deploy the application
+- Rolling : minimise disruption and deploys in batches (2 versions of application up at a time)
+- Rolling with Additional Batch : updated in batched until all resources have the new update, added batch ensures application availability
+- Immutable : create an entirely new set of instances and serve through a temporary autoscaling group behind your ELB
 
-- SSE-S3 (Server Side Encryption with S3 managed keys)
-  - minimal configuration, upload all data and S3 will manage everything
-  - AWS will manage all encryption keys
-- SSE-KMS (Server Side Encryption with KMS managed keys)
-  - allows S3 to use Key Management Service to generate data encryption keys
-  - gives greater flexibility of key diabled, rotate and apply access controls.
-- SSE-C (Server Side Encryption with customer provided keys)
-  - provide you master keys
-  - S3 will manage encryption
-- CSE-KMS (Client Side Encryption with KMS managed keys)
-  - uses key management service to generate data encryption keys
-  - KMS is called upon viathe client, not S3
-  - encryption happends on client side and encrypted data send to S3
-- CSE-C (Client Side Encryption with customer managed keys)
-  - utlise your keys
-  - use an AWS SDK client to encrypt data before sending to AWS for storage
+#### Health Monitoring
 
-### Best Techniques to Optimize S3 Performance
+- Basic Health Reporting
 
-1. TCP Window Scaling
-2. TCP Selective Acknowledgement
-3. Scaling S3 Request Rates
-4. Integration of Amazon CloudFront
+  - High level overview of how environment is performing
+  - resources will send metrices to Amazon CloudWatch in 5 minutes interval
+  - 4 colors within AWS Elastic Beanstalk dashboard that show the health status
+  - Every 10s ELB will send a health check request to every instance in the auto scaling group and wait for response to confirm health status
+
+  - For single instance environments the health of instance is determined by its EC2 instance status check
+  - Elastic Beanstalk will ensure that in a web environment, an autoscaling group has a min of 1 instance running that is healthy
+  - Check to ensure the CNAME in Route 53 is redirected to correct ELB
+  - Check the security groups for EC2 instances that allows port 80 inbound
+  - In worker environments, check to ensure SQS queue being used is being polled every 3 minutes at a minimum.
+
+- Advanced Health Reporting
+
+  - Enhanced health monitoring display additional information to that over basic
+  - AMIs used for EC2 instances have a health agent installed and running
+  - Health Agent Captures additional Information about system metrices & logs
+  - Metrices can be sent to AWS CloudWatch as custom metrices, for additional cost
+
+### AWS Lambda
+
+It is serverless compute service that allows you to run your application code without having to maange EC2 instances.
+
+Responsibility to maintain and administer the EC2 instances is passed over to AWS to manage for you.
+
+Only pay for compute power when Lambda is in use via Lambda Functions. AWS Lambda charges compute power per 100ms of use only when your code is running, in addition to the number of times your code runs.
+
+Four Steps to Operation
+
+- Write/Upload source code to Lambda
+- Configure your Lambda functions to execute upon specific triggers from supported event sources (like file upload on s3 bucket)
+- Once triggered, Lambda will run code using required compute power
+- AWS records the compute time in milliseconds and the quantity of Lambda functions run to ascertain the cost of service.
+
+Components for AWS Lambda
+
+- Lambda Function : parts of our own code that want Lambda to invoke
+- Event Sources : AWS services that can be used to trigger Lambda Function
+- Downstream Resources : resources that are required during the execution of your Lambda function
+- Log Streams : helps to identify issues and troubleshoot issues with your Lambda functions
+
+*Always use 644 permissions on zip file uploaded to Lambda*
+
+#### Event Sources
+
+An event source is an AWS service that produces the events that your Lambda function responds to by invoking it
+
+- Push Based Services : BucketS3, CloudWatch, etc.
+- Poll Based Services : Amazon Kinesis, Amazon SQS, Amazon DynamoDB, etc.
+
+Event Source Mapping : configuration that links events source to Lambda function
+
+- Push-based service : mapping is maintained within event source
+  - requires specific access to allow your event source to invoke the function
+- poll-based service : configuration mapping is held within lambda function
+  - Permission is required in the execution role policy
+
+Synchronous Invocation :
+
+- It enables you to access the result before moving onto the next operation required
+- Controls the flow of invocations
+- Poll Based event sources are always synchronous while push based events it varies with service.
+
+![image-20220728224401128](ch2.assets/image-20220728224401128.png)
+
+#### Monitoring and Troubleshooting
+
+Monitoring statistics related to Lambda function with Amazon CloudWatch is by default already configured. This also includes monitoring your function as they are running.
+
+Mertices : Invocations, Errors, Dead Letter Errors (SQS Queues drop), Duration, Throttles, Iterator Age, Concurrent Executions, Unreserved Concurrent Execution.
 
