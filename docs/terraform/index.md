@@ -6,4 +6,5 @@ Terraform is an open-source infrastructure-as-code software tool created by Hash
 
 Resources : 
 
+- [Cloudacademy Notes](cloudacademy/ch1.md)
 - [KDsouza’s Notes](kd/index.md) : Recommended for Terraform Certificates

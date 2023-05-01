@@ -19,7 +19,14 @@ markdown_extensions:
     permalink: true
     separator: "_"
   mdx_truly_sane_lists:
+  # Tables
+  tables:
+  # Lists
+  def_list:
+  pymdownx.tasklist:
+      custom_checkbox: true
 plugins:
+  - glightbox
 site_author: smk
 copyright: smk
 theme:
