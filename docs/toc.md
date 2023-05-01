@@ -11,6 +11,7 @@
 | [Algorithms](algo/index.md)             |
 | [AWS](aws/index.md)                     |
 | [Competitive Coding](cc/index.md)       |
+| [Cooking](cooking/index.md)             |
 | [C++](cpp/index.md)                     |
 | [Data Analysis](dataanalysis/index.md)  |
 | [Databases](databases/index.md)         |
@@ -23,11 +24,12 @@
 | [Kubernetes](kubernetes/index.md)       |
 | [Microservices](microservices/index.md) |
 | [Minetest](mt/index.md)                 |
+| [Music](music/index.md)                 |
 | [OS](os/index.md)                       |
+| [Photography](photography/index.md)     |
 | [Server](server/index.md)               |
 | [tmux](tmux/index.md)                   |
 | [Terraform](terraform/index.md)         |
 | [Vim](vim/index.md)                     |
 | [WebDev](webdev/index.md)               |
-|                                         |
 
