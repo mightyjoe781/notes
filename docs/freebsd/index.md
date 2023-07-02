@@ -5,6 +5,10 @@
 - [Absolute FreeBSD](absfreebsd/index.md)
 - [Design and Implementation of FreeBSD 4.4](implement/index.md)
 
+### GSoC
+
+- [GSoC Journey](gsoc/index.md)
+
 ### Books
 
 - Absolute FreeBSD
