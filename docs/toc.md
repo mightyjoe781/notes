@@ -27,6 +27,7 @@
 | [Music](music/index.md)                 |
 | [OS](os/index.md)                       |
 | [Photography](photography/index.md)     |
+| [Regex](regex/index.md)                 |
 | [Server](server/index.md)               |
 | [tmux](tmux/index.md)                   |
 | [Terraform](terraform/index.md)         |

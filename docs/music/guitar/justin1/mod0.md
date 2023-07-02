@@ -41,5 +41,5 @@
 
 #### How to Strum Without Pick
 
-- 
+ 
 
