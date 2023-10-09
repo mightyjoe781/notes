@@ -4,16 +4,16 @@
 
 - Poly-tuner or Snark
 - GuitarTuna app
-- Tuner/Apps only work if guitar is roughly out of tune or else we might need to replace strings.
+- Tuner/Apps only work if guitar is roughly out of tune or else we might need to listen to sound and tunes while replacing strings.
 - Learn how to use your ear to tune a guitar
-- Always use one-string at a time ! Look up Rest Stroking.
+- Always use one-string at a time ! Look up Rest Stroking in Classical Guitar.
 
 #### How to Hold Your Guitar
 
 - put the guitar on right leg as a beginner, experts use left leg to easy access to higher notes
 - use your right rest on the guitar, in case of electric guitar rest the wrist
 - guitar is held in place by right hand and leg and back straight
-- don’t lean over the guitar ! don’t look at strings
+- don’t lean over the guitar ! don’t look at strings.
 
 #### Positive Finger Placement
 
