@@ -4,10 +4,11 @@
 
 - [Absolute FreeBSD](absfreebsd/index.md)
 - [Design and Implementation of FreeBSD 4.4](implement/index.md)
+- [FreeBSD Development Environment on M1](freebsd_m1)
 
 ### GSoC
 
-- [GSoC Journey](gsoc/index.md)
+- [GSoC Journey](gsoc/index.md) [To Document :)]
 
 ### Books
 

@@ -12,7 +12,7 @@
 
 ### Guitar 🎸 
 
-[Source](https://www.justinguitar.com/guitar-lessons/) : Its free 😃  . Thanks Justin.
+[Source](https://www.justinguitar.com/guitar-lessons/) : Justin Guitar
 
 - [Grade 1](guitar/justin1/index.md)
   - [Module-0](guitar/justin1/mod0.md)
