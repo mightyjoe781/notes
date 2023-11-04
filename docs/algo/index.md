@@ -1,20 +1,62 @@
 # Algorithms
 
-**[Data Structures](ds/index.md)**
+1. **[Data Structures](ds/index.md)**
 
-**[Sorting](sort/index.md)**
+   - Elementary Data Structures
 
-**[Searching](search/index.md)**
+   - Abstract Data Structures
 
-**[Graph Algorithms](graph/index.md)**
+   - Recursion & Trees
 
-- [Graph Search](graph/search.md)
+2. **[Sorting](sort/index.md)**
 
-- [Digraphs and DAGs](graph/digraph.md)
-- [MSTs](graph/mst.md)
-- [Shortest Paths](graph/shortestpath.md)
-- [Network Flows](graph/flows.md)
+   - Elementary Sorting Strategies
+
+   - Quicksort
+
+   - Mergesort
+
+   - Priority Queues & Heapsort
+
+   - Radix Sort
+
+3. **[Searching](search/index.md)**
+
+   - Binary Search
+
+   - BSTs
+
+   - Hashing
+
+   - Radix Search
+
+4. **[Graph Algorithms](graph/index.md)**
+
+   - [Graph Search](graph/search.md)
 
 
+   - [Digraphs and DAGs](graph/digraph.md)
+
+   - [MSTs](graph/mst.md)
+
+   - [Shortest Paths](graph/shortestpath.md)
+
+   - [Network Flows](graph/flows.md)
+
+
+5. **Problem Solving Paradigm**
+
+   - [Complete Search]()
+
+   - [Divide & Conquer]()
+
+   - [Greedy]()
+
+   - [Dynamic Programming]()
 
 [Problems](problems/index.md)
+
+// ---> main page content is theory to learn everything
+
+// ---> Notes from classes
+
