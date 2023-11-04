@@ -4,6 +4,7 @@ site_url: https://books.minetest.in/
 repo_url: https://github.com/mightyjoe781/notes
 repo_name: Github
 edit_uri: blob/main/docs/
+use_directory_urls: True
 extra_javascript:
   - src/js/custom.js
   - https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML

@@ -6,6 +6,8 @@ Docker is a set of platform as a service (PaaS) products that use OS-level virtu
 
 [Docker : The Complete Guide - Notes](sgrider/index.md)
 
+[Docker In Depth](docker_in_depth/index.md)
+
 [Development Environment Examples](dev_env.md)
 
 #### Resources :
