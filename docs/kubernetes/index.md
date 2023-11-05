@@ -8,6 +8,8 @@
 
 [Helm](helm/index.md)
 
+[Kubernetes Patterns for Application Developers](k8s_app_dev/index.md)
+
 [Kubernetes: The Complete Guide - Notes](sgrider/index.md)
 
 #### Resources :
