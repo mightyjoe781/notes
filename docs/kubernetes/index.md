@@ -4,8 +4,17 @@
 
 #### Notes :
 
+[Introduction to Kubernetes Notes](cloudacademy/index.md)
+
+[Helm](helm/index.md)
+
 [Kubernetes: The Complete Guide - Notes](sgrider/index.md)
 
 #### Resources :
 
 [Official Docs](https://kubernetes.io/docs/home/)
+
+
+
+### CKAD Guide
+
