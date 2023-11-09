@@ -2,6 +2,10 @@
 
 This page documents the GSoC journey for the project that I will be doing with Warner Losh.
 
+[Debug Notes](debug.md)
+
+[Setup Notes](setup.md)
+
 ### Short Description
 
 FreeBSD supports multiple architectures, file systems, and  disk-partitioning schemes. Currently, there is a script named  full-test.sh located in src/tools/boot/ that creates several of these  environments but does not test all of them. The proposed idea is to  rewrite the script in a language such as Python or Lua, which would  allow for testing of all the architecture combinations supported in the  first and second-tier support, and provide a report on any broken  combinations and expected functionality. Additionally, providing Linux  Boot support using Linux EFI shim(EDK) II for amd64 and arm64. If time  permits, further exploration could be done to integrate the script into  the existing build infrastructure (either Jenkins or Github Actions) to  generate a comprehensive summary of the test results.
