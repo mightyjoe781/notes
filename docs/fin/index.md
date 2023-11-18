@@ -6,9 +6,25 @@
 - Cryptocurrency
 - Portfolio Management
 
+### Topics
+
+- [Fundamental Analysis](fundamental_analysis.md)
+- Sectorial Portfolio
+- Reading Charts
+
+### Trading
+
+- App features (Zerodha)
+- Types of Trades
+- Chart Functions
+
+### Investment Strategies
+
+- 
+
 ### Resources :
 
-[Zerodha Varsity](https://zerodha.com/varsity/)
+[Zerodha Varsity](https://zerodha.com/varsity/modules/) : This is all you need!
 
 [Zerodha Varsity Notes](varsity/index.md)
 
