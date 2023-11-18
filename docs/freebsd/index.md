@@ -5,6 +5,7 @@
 - [Absolute FreeBSD](absfreebsd/index.md)
 - [Design and Implementation of FreeBSD 4.4](implement/index.md)
 - [FreeBSD Development Environment on M1](freebsd_m1)
+- [FreeBSD Development Environment on M1 - VSCode Remote Extension](freebsd_m1_vscode)
 
 ### GSoC
 

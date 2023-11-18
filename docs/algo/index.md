@@ -60,3 +60,19 @@
 
 // ---> Notes from classes
 
+## Advanced Algorithms
+
+- GeoHash
+- Quadtree
+- Consistent Hashing
+- Token Bucket
+- Trie
+- Rsync
+- Raft/Paxos
+- Bloomfilter
+- Merkle Tree
+- HyperLogLog
+- Count-min Sketch
+- Hiearchical timing wheels
+- Operational Transformation
+

@@ -56,7 +56,7 @@ How do we get all the files ?
 xz -k FreeBSD-13.2-RELEASE-arm-armv7-GENERICSD.img.xz
 
 # then create a virtual device with this uncompressed image
-mdconfig -a -t vnode -f ~/cache/FreeBSD-13.2-RELEASE-arm-armv7-GENERICSD.img -u 0
+mdconfig -a -t vnode -f FreeBSD-13.2-RELEASE-arm-armv7-GENERICSD.img -u 0
 # this should mount the virtual device as md0 & confirm it as
 mdconfig -l
 ls /dev/md0*		# output should be md0, md0s1, md0s2, md0s2a
@@ -85,7 +85,12 @@ Creating ISO
 pkg install sysutils/cdrtools
 
 # in qemu cd-writer needs to configured so rather let's write the folder into iso
-mkisofs -o FreeBSD-13.2-RELEASE-arm-armv7-GENERICSD.iso /dev/md0s2a
+# method-1 directly make iso from /mnt/armv7
+mkisofs -o FreeBSD-13.2-RELEASE-arm-armv7-bootonly.iso /mnt/armv7
+
+# method-2 cause big image :(
+cp -r /mnt/armv7 ~/data_src/armv7
+mkisofs -o FreeBSD-13.2-RELEASE-arm-armv7-bootonly.iso ~/data_src/armv7
 
 # if not in qemu
 cdrecord dev=md0 imagefile.iso
@@ -93,7 +98,20 @@ cdrecord dev=md0 imagefile.iso
 # reference : https://docs.freebsd.org/en/books/handbook/disks/#creating-cds
 ````
 
+````bash
+# armv7 requires
+pkg install sysutils/u-boot-qemu-arm
+````
+
+
+
 ## notes on powerpc64
+
+adalava, dbaio, jhibbits on efnet:#powerpc64
+
+- There is no `loader.efi`, freebsd-doesn’t support efi boot
+
+
 
 ## notes on CI process
 
