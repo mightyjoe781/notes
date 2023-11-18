@@ -56,20 +56,20 @@ dd if=QEMU_VARS.fd of=pflash1.img conv=notrunc
 #### Download FreeBSD arm64 image
 
 ````
-wget https://ftp2.uk.freebsd.org/pub/FreeBSD/releases/VM-IMAGES/13.1-RELEASE/aarch64/Latest/FreeBSD-13.1-RELEASE-arm64-aarch64.raw.xz
+wget https://ftp2.uk.freebsd.org/pub/FreeBSD/releases/VM-IMAGES/14.0-RELEASE/aarch64/Latest/FreeBSD-14.0-RC3-arm64-aarch64.raw.xz
 ````
 
 #### Decompress VM image
 
 ````bash
-mv ~/Downloads/FreeBSD-13.2-RELEASE-arm64-aarch64.raw.xz .
-unxz -k FreeBSD-13.2-RELEASE-arm64-aarch64.raw.xz
+mv ~/Downloads/FreeBSD-14.0-RC3-arm64-aarch64.raw.xz .
+unxz -k FreeBSD-14.0-RC3-arm64-aarch64.raw.xz
 ````
 
 #### Grow Image Size
 
 ````bash
-qemu-img resize -f raw FreeBSD-13.1-RELEASE-arm64-aarch64.raw +60G
+qemu-img resize -f raw FreeBSD-14.0-RC3-arm64-aarch64.raw +60G
 ````
 
 #### Run QEMU using this script
@@ -91,7 +91,7 @@ qemu-system-aarch64 \
   -device usb-tablet \
   -device intel-hda \
   -device hda-duplex \
-  -drive file=FreeBSD-13.2-RELEASE-arm64-aarch64.raw,format=raw,if=virtio,cache=writethrough \
+  -drive file=FreeBSD-14.0-RC3-arm64-aarch64.raw,format=raw,if=virtio,cache=writethrough \
   -serial mon:stdio \
   -audiodev none,id=hdac \
   -nic vmnet-shared \

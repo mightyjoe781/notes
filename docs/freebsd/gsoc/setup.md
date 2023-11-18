@@ -22,6 +22,8 @@ luarocks54 install posix luacheck
 # clone the freebsd-src repo
 git clone https://github.com/mightyjoe781/freebsd-src && cd freebsd-src
 
+# own object and src dir
+chown smk:wheel /usr/src /usr/obj
 # make buildworld buildkernel
 make -j `sysctl -n hw.ncpu` -DWITHOUT_SYSTEM_COMPILER buildworld buildkernel
 make -j `sysctl -n hw.ncpu` TARGET=amd64 TARGET_ARCH=amd64 toolchain
