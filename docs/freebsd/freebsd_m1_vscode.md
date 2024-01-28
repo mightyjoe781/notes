@@ -4,7 +4,20 @@ This method assumes you have working QEMU machine running on M1. Following steps
 
 NOTE : this doesn’t work for ssh to root because vscode assumes its in linuxulator root
 
+**NOTE : This setup can’t run `make buildworld buildkernel` becuase while changing `.profile` we change priority of many binaries. To run buildworld or buildkernel disable path export in `.profile`**
+
+NOTE : its possible you are connecting to wrong host, as it might very on system restarts. Use `ifconfig` to check ip to ssh.
+
 NOTE : try to attach to debugger over network and nfsd
+
+NOTE : Sometimes dhcp doesn’t work properly on m1 host, usually due to system upgrades and reboots. execute this if your qemu machine doesn’t get an ipv4 address on host. since we run vm in host mode, bootpd offers the DHCP lease
+
+````bash
+# add bootpd to firewall
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --add /usr/libexec/bootpd
+# allow bootpd to run thru firewall
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --unblock /usr/libexec/bootpd
+````
 
 [Resource](https://gist.github.com/mateuszkwiatkowski/ce486d692b4cb18afc2c8c68dcfe8602)
 
@@ -88,6 +101,7 @@ reboot
 export PATH="/compat/linux/usr/sbin:/compat/linux/usr/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin"
 
 # note on next login make sure .profile is loaded and echo $PATH is same as what you set
+# only login shells load .profile so its possible it may not be set when ssh freebsd-vm is used, check this is loaded on vscode terminal
 ````
 
 ### SSH Config Block
@@ -96,7 +110,7 @@ export PATH="/compat/linux/usr/sbin:/compat/linux/usr/bin:/sbin:/bin:/usr/sbin:/
 Host freebsd-vm
     HostName 192.168.64.5
     Port 22
-    User root
+    User smk
     IdentityFile /Users/smk/.ssh/id_ed25519
     RemoteCommand /compat/linux/usr/bin/bash
     RequestTTY force
@@ -116,3 +130,8 @@ Host freebsd-vm
 }
 ````
 
+- Reconnect to host and you got a shell yay
+
+
+
+ping on discord or connect via smk@freebsd.org | smk@minetest.in if you face any trouble

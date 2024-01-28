@@ -7,7 +7,7 @@
 mkdir -p /opt/
 cd       /opt/
 rm -fr go golang
-GOBALL=go1.18.linux-amd64.tar.gz
+GOBALL=go1.21.6.linux-amd64.tar.gz
 
 wget -c https://dl.google.com/go/$GOBALL
 tar zxf $GOBALL
@@ -162,7 +162,7 @@ mv dhparam.pem /etc/ssl/certs/
 ````bash
 #!/bin/bash -e
 apt-get install curl software-properties-common
-curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+curl -sL https://deb.nodesource.com/setup_21.x | sudo bash -
 apt-get update
 apt-get install gcc g++ make nodejs
 LINK="https://dl.yarnpkg.com/debian"
