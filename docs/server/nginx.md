@@ -28,7 +28,9 @@ If errors occur, do this:
 
 Review  the contents of `/tmp/nginx.err`.  If possible,  correct the indicated problems and try to start "nginx" again.
 
-#### Step: Set up automated SSL certs renewal.
+#### Step: Set up automated SSL certs renewal
+
+NOTE: requires lego to be installed from [here](applications.md)
 
 Create  a text file  named "/etc/cron.weekly/renew-letse"  with  the following contents:
 

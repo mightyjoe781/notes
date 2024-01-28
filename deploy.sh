@@ -1,3 +1,3 @@
 #!/bin/sh
-mkdocs build && rsync -avz --delete site/ smkroot:/var/www/books/
+mkdocs build && rsync -avz --delete site/ mtboxroot:/var/www/notes/
 exit 0

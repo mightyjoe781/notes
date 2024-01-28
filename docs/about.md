@@ -4,7 +4,7 @@ This website is supposed to capture all the necessary information that most of d
 
 Major parts of this websites revolves around making notes of books, presenting some  complete tutorials to various technologies, creating quick scripts for common tasks, some philosophical content as well.
 
-A separate site for blogs has been made which will mainly focus on small fragments  of information and blogs made by me. [link](https://algo.minetes.in/)
+A separate site for blogs has been made which will mainly focus on small fragments  of information and blogs made by me. [link](https://algo.minetest.in/)
 
 To report or correct information within this website you can directly open a issue on github or mail me directly.
 

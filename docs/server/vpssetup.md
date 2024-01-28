@@ -183,7 +183,7 @@ Note : Subsequently, you won’t be able to edit `/etc/resolv.conf` unless you r
 To confirm dnsmasq is working, execute this command ; 
 
 ```bash
-nslookup bacon.eggs`
+nslookup bacon.eggs
 ```
 
 `dnsmasq` is a caching DNS server. To flush the cache, restart the `dnsmasq` service.
@@ -334,5 +334,22 @@ If you have a domain and point it as indicated, set the hostname for the box as 
 DOMAIN=somedomain.com           # Replace with appropriate domain
 hostname $DOMAIN
 echo     $DOMAIN > /etc/hostname
+````
+
+#### Harden Security
+
+````bash
+# vi /etc/ssh/sshd_config
+
+# note these are important, as vps almost every few minutes gets attacked by botnets
+# changing port decreases attack surface
+# disabling password auth decreases risk of guessing password
+# note : you may not worry if you screw up your keys, you can always vnc into the vm from
+# cloud providers console and login and fix your box
+
+Port 23415
+PasswordAuthentication no
+
+# after that run service sshd restart
 ````
 

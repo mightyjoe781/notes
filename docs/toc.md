@@ -9,19 +9,19 @@
 |                                        |                                         |
 | :------------------------------------: | :-------------------------------------: |
 |      [Algorithms](algo/index.md)       |    [Kubernetes](kubernetes/index.md)    |
-|          [AWS](aws/index.md)           | [Microservices](microservices/index.md) |
-|       [Books](books/index.md)          |         [Minetest](mt/index.md)         |
-|   [Competitive Coding](cc/index.md)    |         [Music](music/index.md)         |
-|      [Cooking](cooking/index.md)       |            [OS](os/index.md)            |
-|          [C++](cpp/index.md)           |    [Philosophy](philosophy/index.md)    |
-| [Data Analysis](dataanalysis/index.md) |   [Photography](photography/index.md)   |
-|    [Databases](databases/index.md)     |         [Regex](regex/index.md)         |
-|   [Databricks](databricks/index.md)    |        [Server](server/index.md)        |
-|    [Dev Setup](dev_setup/index.md)     |          [tmux](tmux/index.md)          |
-|       [Docker](docker/index.md)        |     [Terraform](terraform/index.md)     |
-|      [FreeBSD](freebsd/index.md)       |           [Vim](vim/index.md)           |
-|        [Finance](fin/index.md)         |        [WebDev](webdev/index.md)        |
-|          [Git](git/index.md)           |                                         |
+|          [AWS](aws/index.md)           |         [MacOS](macos/index.md)         |
+|        [Books](books/index.md)         | [Microservices](microservices/index.md) |
+|   [Competitive Coding](cc/index.md)    |         [Minetest](mt/index.md)         |
+|      [Cooking](cooking/index.md)       |         [Music](music/index.md)         |
+|          [C++](cpp/index.md)           |            [OS](os/index.md)            |
+| [Data Analysis](dataanalysis/index.md) |    [Philosophy](philosophy/index.md)    |
+|    [Databases](databases/index.md)     |   [Photography](photography/index.md)   |
+|   [Databricks](databricks/index.md)    |         [Regex](regex/index.md)         |
+|    [Dev Setup](dev_setup/index.md)     |        [Server](server/index.md)        |
+|       [Docker](docker/index.md)        |          [tmux](tmux/index.md)          |
+|      [FreeBSD](freebsd/index.md)       |     [Terraform](terraform/index.md)     |
+|        [Finance](fin/index.md)         |           [Vim](vim/index.md)           |
+|          [Git](git/index.md)           |        [WebDev](webdev/index.md)        |
 |           [Go](go/index.md)            |                                         |
-|                                        |                                         |
+|       [Health](health/index.md)        |                                         |
 
