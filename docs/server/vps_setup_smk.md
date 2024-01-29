@@ -372,3 +372,116 @@ sudo chmod 644 /lib/systemd/system/reboot_ntf.service
 # To create a generic service
 # systemctl enable reboot_ntf.service
 ````
+
+## Create a Backup (rclone-pcloud Setup)
+
+#### Installing rclone
+
+````bash
+sudo apt-get install unzip -y
+curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+unzip rclone-current-linux-amd64.zip
+cd rclone-*-linux-amd64
+
+# copy the binary
+sudo cp rclone /opt/smkbin
+sudo chown root:root /opt/smkbin/rclone
+sudo chmod 755 /opt/smkbin/rclone
+
+# install man page
+sudo mkdir -p /usr/local/share/man/man1
+sudo cp rclone.1 /usr/local/share/man/man1/
+sudo mandb
+
+# configure rclone
+rclone config
+
+# remote config for headless server : https://rclone.org/remote_setup/
+# NOTE : choose advance config because pcloud has two regions
+# so pass all default except region select it correctly
+
+# testing if rclone works for remote name : pcloud
+rclone lsd pcloud:
+````
+
+#### Backup Script
+
+````bash
+#!/bin/bash
+# /*
+# * --------------------------------------------------------------------
+# * @file    pcloud-bkp
+# * @brief   A simple backup util for pcloud
+# * @author  smk (sudhanshumohan781@gmail.com)
+# * @version 20221129
+# * @license BSD3
+# * @bugs    No known bugs
+# * --------------------------------------------------------------------
+# */
+
+set -e
+set -o pipefail
+REMOTE_NAME="pcloud:vps_bkp/minetest.in"
+RCLONE_BIN="/opt/smkbin/rclone"
+
+WHOAMI=$(whoami)
+if [ "@$WHOAMI" != "@root" ]; then
+    echo "Error: Must be run as root"
+    exit 1
+fi
+
+# Check if required binaries exist
+check_binaries() {
+    for bin in "$@"; do
+        if ! command -v "$bin" &> /dev/null; then
+            echo "Error: $bin not found. Please install it."
+            exit 1
+        fi
+    done
+}
+
+check_binaries tar pv "$RCLONE_BIN"
+backup_dirs=("etc" "home" "root" "var/www" "opt")
+#backup_dirs=("etc" "home/smk" "root" "var/www" "usr/local/bin" "usr/local/sbin" "opt")
+bkp_dir="/tmp/bkp_$(date +"%Y%m%d")"
+mkdir -p "${bkp_dir}"
+pushd /
+for i in "${!backup_dirs[@]}"; do
+    # bkp_name=$(basename "${backup_dirs[i]}")
+    echo "$bkp_name"
+    echo "Starting tar of ${backup_dirs[$i]} ..."
+    tar czf "${bkp_dir}/${backup_dirs[$i]//\//_}.tgz" --directory="/" "${backup_dirs[$i]}"
+    # tar czf - "${backup_dirs[$i]//_//}" -P | pv -s $(du -sb "/${backup_dirs[$i]//_//}" | awk '{print $1}') | gzip > "${bkp_dir}/${backup_dirs[$i]}.tgz"
+    echo "Done tar of ${backup_dirs[$i]}"
+done
+popd
+
+echo "Created backups at : ${bkp_dir}"
+echo "----------------BKP------------------"
+du -sh "${bkp_dir}"/* | sort -h
+
+# Uncomment the following lines if you are ready to use rclone
+echo "--------------- RCLONE ---------------"
+bkp_name=$(basename ${bkp_dir})
+"${RCLONE_BIN}" copy "${bkp_dir}" "${REMOTE_NAME}/${bkp_name}" -P -v
+
+echo "--------------- Cleanup --------------"
+rm -rf ${bkp_dir}
+````
+
+### Create a cron job
+
+````bash
+# you could wrap above script in ntfy and then setup a cron job
+# open crontab file
+crontab -e
+
+# crontab for monthly execution
+#0 0 1 * * /opt/smkbin/pcloud-bkp or
+0 0 1 * * ntf -t MONTHLY_BACKUP done /opt/smkbin/pcloud-bkp
+````
+
+### Setting up ZNC
+
+### Setting up ngircd
+
