@@ -190,20 +190,3 @@ do
 done
 ````
 
-#### Add more PHP feature
-
-````bash
-#!/bin/bash -e
-apt-get install \
-    libmcrypt-dev  \
-    php-apcu       php-bcmath     php-cli        php-common     \
-    php-curl       php-dev        php-fpm        php-gd         \
-    php-imagick    php-intl       php-json       php-ldap       \
-    php-mbstring   php-mysql      php-pear       php-readline   \
-    php-redis      php-smbclient  php-soap       php-sqlite3    \
-    php-xml        php-xmlrpc     php-zip
-
-pecl channel-update    pecl.php.net
-pecl install channel://pecl.php.net/mcrypt-1.0.2
-````
-

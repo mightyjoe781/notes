@@ -88,6 +88,8 @@ Confirm : If your http is redirected to https and page loads correctly, ignore s
 
 #### Step 3: Generating certs for the above domain
 
+NOTE: nginx must be up for perl script solver to work
+
 Now if you have recieved bundle of scripts from this website then there should be a `runlets` perl script, Its basically a certificate solver and generates certificate for our domain.
 
 Add your new domain `prismo.minetest.in` and run the script. Wait for it to resolve and generate certificate.
@@ -104,8 +106,8 @@ Example npm build website.
 
 ````bash
 #!/bin/sh
-npm run build && rsync -avz --delete build/ smkroot:/var/www/prismo/
+npm run build && rsync -avz --delete build/ mtboxroot:/var/www/prismo/
 exit 0
 ````
 
-Note here `smkroot` is derived from the `.ssh/config` file.
+Note here `mtboxroot` is derived from the `.ssh/config` file.
