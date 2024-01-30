@@ -1,6 +1,9 @@
 ### Server Setup
 
+
+
 - [VPS Box](vpssetup.md) Basic Setup
+- [smk’s VPS Setup](vps_setup_smk.md)
 - [Application Setup](applications.md)
 - [Bootup Scripts](boottime.md)
 - [Nginx](nginx.md)
