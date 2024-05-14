@@ -80,6 +80,34 @@ service sshd restart
 
 This sets up our box in safe state to use. Disable RootLogin as well if you want extra security.
 
+### Setting up fail2ban
+
+````bash
+sudo apt install fail2ban sendmail-bin sendmail
+# you can edit this .local because it overrides the default conf
+cp /etc/fail2ban/fail2ban.conf /etc/fail2ban/fail2ban.local
+cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+
+# to view your chain traffic drop configuration
+iptables -L f2b-sshd -v -n --line-numbers
+# to delete a rule applied to an IP address
+iptables -D chain rulenum
+````
+
+````bash
+# some jail settings all things are pretty well documented and we care about these
+# https://www.linode.com/docs/guides/using-fail2ban-to-secure-your-server-a-tutorial/
+ignoreip = 127.0.0.1/8 123.45.67.89
+bantime  = 600
+findtime = 600
+maxretry = 3
+
+# to check status
+fail2ban-client status
+````
+
+
+
 <hr>
 
 
@@ -305,6 +333,22 @@ sudo apt-get update
 sudo apt-get install docker-ce
 ````
 
+````bash
+# managing docker as non root user
+$USER=smk
+sudo groupadd docker
+sudo usermod -aG docker $USER
+# refresh group
+newgrp docker
+# test docker run hello-world
+
+# NOTE : fix .docker dir due to previous root runs if you get config errors
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+sudo chmod g+rwx "$HOME/.docker" -R
+````
+
+
+
 ### Installing PHP
 
 ````bash
@@ -479,6 +523,141 @@ crontab -e
 # crontab for monthly execution
 #0 0 1 * * /opt/smkbin/pcloud-bkp or
 0 0 1 * * ntf -t MONTHLY_BACKUP done /opt/smkbin/pcloud-bkp
+````
+
+### Installing portainer & dockge
+
+````bash
+# using any one is fine
+sudo mkdir -p /home/docker/dockge
+sudo mkdir -p /home/docker/portainer
+````
+
+Create `compose.yml` in the portainer directory
+
+````yaml
+# be careful when setting up proxy_pass as it decides the uri_scheme traffic will be served on
+# use https://127.0.0.1:6789/ if that is mapped inside container to 9443
+
+version: "3.3"
+services:
+  portainer-ce:
+    ports:
+      - 8000:8000
+      # - 6789:9000 : Note use this for serving portainer on HTTP
+      - 9443:9443	# This is for HTTPS port
+    container_name: portainer
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    image: portainer/portainer-ce:latest
+volumes:
+  portainer_data: {}
+networks: {}
+````
+
+#### Setting up dockge
+
+````yaml
+version: "3.8"
+services:
+  dockge:
+    image: louislam/dockge:1
+    restart: unless-stopped
+    ports:
+      - 5678:5001
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/app/data
+      - /home/docker/dockge:/home/docker/dockge
+    environment:
+      # Tell Dockge where to find the stacks
+      - DOCKGE_STACKS_DIR=/home/docker/dockge
+````
+
+### Installing Postgresql & pg-admin
+
+````bash
+sudo apt-get update && sudo apt-get install postgresql postgresql-contrib
+
+# note by default postgres is not exposed to anyone outside localhost
+# and it should be left this way, don't use connection from outside the box
+# verify above by accessing /etc/postgresql/x.x/main/pg_hba.conf
+local all postgres peer local all all peer host all all 127.0.0.1/32 md5 host all all ::1/128 md5
+
+# neither root nor smk can access the psql (its good that way)
+sudo su - postgres
+psql
+# create user for yourself
+CREATE USER smk WITH PASSWORD 'your_password';
+CREATE DATABSE test_db;
+GRANT CONNECT ON DATABASE test_db TO smk;
+GRANT USAGE ON SCHEMA public TO smk;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO smk;
+# we granted everything to smk, but be careful to grant to other users
+\q # to quit
+
+# as user smk try to login
+psql -h localhost -U smk -d test_db
+````
+
+````yml
+# yaml for db
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: example-database
+    environment:
+      POSTGRES_DB: test_db
+      POSTGRES_USER: smk
+      POSTGRES_PASSWORD: example-database-password
+    ports:
+      - "5433:5432"
+    networks:
+      - pg-network
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./initdb/:/docker-entrypoint-initdb.d/
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pg-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: smk@minetest.in
+      PGADMIN_DEFAULT_PASSWORD: admin_password_probably
+    ports:
+      - "5678:80"
+    networks:
+      - pg-network
+
+networks:
+  pg-network:
+
+volumes:
+  pg-data:
+  
+# create a script initdb/init-user-db.sh
+#!/bin/bash
+set -e
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+  CREATE USER "$POSTGRES_USER" WITH PASSWORD '$POSTGRES_PASSWORD';
+  CREATE DATABASE "$POSTGRES_DB" WITH OWNER "$POSTGRES_USER";
+  GRANT ALL PRIVILEGES ON DATABASE "$POSTGRES_DB" TO "$POSTGRES_USER";
+EOSQL
+````
+
+### Installing JupyterHub
+
+````bash
+docker run -d -p 5678:8000 --name jupyterhub jupyterhub/jupyterhub jupyterhub
+# enter in container
+docker exec -it jupyterhub bash
+# then :
+adduser test
 ````
 
 ### Setting up ZNC

@@ -2,15 +2,16 @@
 
 ### Shortcuts
 
-[AWS](aws/index.md) - [Algorithms](algo/index.md) - [Competitive Coding](cc/index.md) - [C++](cpp/index.md) - [Data Analysis](dataanalysis/index.md) - [Databases](databases/index.md) - [Docker](docker/index.md) - [FreeBSD](freebsd/index.md) - [Minetest](mt/index.md) - [Microservices](microservices/index.md) - [Finance](fin/index.md) - [Git](git/index.md) - [Go](go/index.md) - [OS](os/index.md) - [Server](server/index.md) - [tmux](tmux/index.md) - [Terraform](terraform/index.md) - [Vim](vim/index.md) - [WebDev](webdev/index.md)
+[AWS](aws/index.md) - [Algorithms](algo/index.md) - [Competitive Coding](cc/index.md) - [C++](cpp/index.md) - [Data Analysis](dataanalysis/index.md) - [Databases](databases/index.md) - [Docker](docker/index.md) - [FreeBSD](freebsd/index.md) - [Minetest](mt/index.md) - [Microservices](microservices/index.md) - [Finance](fin/index.md) - [Git](git/index.md) - [Go](go/index.md) - [OS](os/index.md) - [Server](server/index.md) - [tmux](tmux/index.md) - [Terraform](terraform/index.md) - [Vim](vim/index.md) - [WebDev](webdev/index.md) - [Python](python/index.md)
 
 ### Contents
+
 
 |                                        |                                         |
 | :------------------------------------: | :-------------------------------------: |
 |      [Algorithms](algo/index.md)       |    [Kubernetes](kubernetes/index.md)    |
 |          [AWS](aws/index.md)           |         [MacOS](macos/index.md)         |
-|        [Books](books/index.md)         | [Microservices](microservices/index.md) |
+|               [Books]()                | [Microservices](microservices/index.md) |
 |   [Competitive Coding](cc/index.md)    |         [Minetest](mt/index.md)         |
 |      [Cooking](cooking/index.md)       |         [Music](music/index.md)         |
 |          [C++](cpp/index.md)           |            [OS](os/index.md)            |
@@ -22,6 +23,5 @@
 |      [FreeBSD](freebsd/index.md)       |     [Terraform](terraform/index.md)     |
 |        [Finance](fin/index.md)         |           [Vim](vim/index.md)           |
 |          [Git](git/index.md)           |        [WebDev](webdev/index.md)        |
-|           [Go](go/index.md)            |                                         |
+|           [Go](go/index.md)            |        [Python](python/index.md)        |
 |       [Health](health/index.md)        |                                         |
-
