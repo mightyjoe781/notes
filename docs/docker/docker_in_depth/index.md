@@ -1,6 +1,6 @@
 ## Notes : Docker in Depth
 
-1. [Introduction to Docker](part1)
+1. [Introduction to Docker](part1.md)
    - [What is Docker](part1.md)
    - The Docker Alternative
    - Installing Docker
@@ -27,7 +27,7 @@
    - Orchestration
    - Consistency
    - Security
-   - [Setting up a Swarm](part3b)
+   - [Setting up a Swarm](part3b.md)
    - Managing Nodes
    - Managing Services
    - Working with Stacks

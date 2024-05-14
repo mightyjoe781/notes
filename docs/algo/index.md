@@ -1,6 +1,6 @@
 # Algorithms
 
-1. **[Data Structures](ds/index.md)**
+1. **[Data Structures]()**
 
    - Elementary Data Structures
 
@@ -8,40 +8,37 @@
 
    - Recursion & Trees
 
-2. **[Sorting](sort/index.md)**
-
+2. **[Sorting]()**
    - Elementary Sorting Strategies
-
+   
    - Quicksort
-
+   
    - Mergesort
-
+   
    - Priority Queues & Heapsort
-
+   
    - Radix Sort
-
-3. **[Searching](search/index.md)**
-
+   
+3. **[Searching]()**
    - Binary Search
-
+   
    - BSTs
-
+   
    - Hashing
-
+   
    - Radix Search
-
+   
 4. **[Graph Algorithms](graph/index.md)**
+- [Graph Search]()
 
-   - [Graph Search](graph/search.md)
 
+   - [Digraphs and DAGs]()
 
-   - [Digraphs and DAGs](graph/digraph.md)
+   - [MSTs]()
 
-   - [MSTs](graph/mst.md)
+   - [Shortest Paths]()
 
-   - [Shortest Paths](graph/shortestpath.md)
-
-   - [Network Flows](graph/flows.md)
+   - [Network Flows]()
 
 
 5. **Problem Solving Paradigm**

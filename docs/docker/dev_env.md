@@ -76,8 +76,14 @@ services:
     build: ./buildenv/
     container_name: myos-buildenv-v2
     command: cat /etc/os-release
+    stdin_open: true
+    tty: true	# this attached to container if it set as early exit
     volumes:
       - .:/root/env/
 ````
 
-NOTE : setting command as `bash` doesn’t attach to container, so execute this to attach as well to same container we can execute  `docker-compose exec app sh`, useful if we have some live reload conf setup and want to enter a running container. Here since there is no running container involved, we just build and exit the container.
+There could be two types of container
+
+* Long running: for that execute `docker-compose up -d` to run it in background and then `docker-compose exec app sh `to get the shell in container.
+* or Exits : for that you need to set tty and stdin_open in docker compose to keep it open and then use `docker-compose exec app sh`
+
