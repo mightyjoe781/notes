@@ -42,3 +42,11 @@
 {% endif %}
 {% endblock %}
 
+
+{% block footer %}
+<hr>
+{% if config.copyright %}
+    <p>&#169; {{ config.copyright }}</p>
+{% endif %}
+{% endblock %}
+
