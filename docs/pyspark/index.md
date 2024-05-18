@@ -11,10 +11,10 @@ Credits : Following notes are learnings from *Spark: The Definitive Guide by Bil
    2. [Basic Structured Operations](notes/ch5.md)
    3. [Working With Different Types of Data](notes/ch6.md)
    4. [Aggregations](notes/ch7.md)
-   5. Joins
-   6. Data Sources
-   7. Spark SQL
-   8. Datasets
+   5. [Joins](notes/ch8.md)
+   6. [Data Sources](notes/ch9.md)
+   7. [Spark SQL](notes/ch10.md)
+   8. [Datasets](notes/ch11.md)
 3. Resilient Distributed Datasets
    1. Advanced RDDs
    2. Distributed Shared Variables
