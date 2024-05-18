@@ -1,3 +1,5 @@
+# Python
+
 Python is a high-level, general-purpose programming language. Its design philosophy emphasizes **code readability** with the use of significant indentation.
 
 NOTE: These notes are adaption from following books : *Fluent Python 2nd edition (comprehensive book on python)*

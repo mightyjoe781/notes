@@ -2,7 +2,7 @@ site_name: smk's notes
 site_description: smk's notes
 site_url: https://notes.minetest.in/
 repo_url: https://github.com/mightyjoe781/notes
-repo_name: Github
+repo_name: mightyjoe781/notes
 edit_uri: blob/main/docs/
 use_directory_urls: True
 extra_javascript:
@@ -13,11 +13,10 @@ extra_css:
   - src/css/friendly.css
   - src/css/theme.css
 markdown_extensions:
-  codehilite:
   mdx_math:
     enable_dollar_delimiter: True #for use of inline $..$
   toc :
-    permalink: true
+    permalink: '🔗'
     separator: "_"
   mdx_truly_sane_lists:
   # Tables
@@ -26,19 +25,56 @@ markdown_extensions:
   def_list:
   pymdownx.tasklist:
       custom_checkbox: true
+  pymdownx.highlight:
+    anchor_linenums: true
+    use_pygments: true
+    # line_spans: __span
+    pygments_lang_class: true
+  pymdownx.inlinehilite:
+  pymdownx.snippets:
+  pymdownx.superfences:
+  pymdownx.smartsymbols:
+  pymdownx.superfences:
 plugins:
   - glightbox
+  - search
+  - git-revision-date-localized:
+      type: timeago
+      enable_creation_date: true
 site_author: smk
 copyright: smk
 theme:
-  name: mkdocs
+  name: material
   custom_dir: overrides
   navigation_depth: 4
+  features:
+    - content.code.copy
+    - navigation.tabs
+    # - navigation.path
+    - navigation.top
+    # - navigation.sections
+    - search.suggest
+    - search.highlight
+    - announce.dismiss
+  icon:
+    repo: fontawesome/brands/github-alt
+    
+
 extra:
   analytics:
     provider: google
     property: G-FSJPS15JWH
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/mightyjoe781
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/sudomoon/
+    - icon: fontawesome/brands/discord
+      link: https://discordapp.com/users/sudomoon/
+  generator: false
 nav:
   - About: about.md
   - TOC: toc.md
+  - Blog(upcoming) : ...
 
+copyright: Copyright &copy; smk
