@@ -1,4 +1,9 @@
-## About
+---
+title: About
+hide:
+  - navigation
+  - toc
+---
 
 This website is supposed to capture all the necessary information that most of developers require as they embark on their journey in tech world.
 
@@ -16,4 +21,5 @@ Github : [https://github.com/mightyjoe781/](https://github.com/mightyjoe781)
 
 Blog : [algo.minetest.in](https://algo.minetest.in/)
 
-Mail : sudhanshumohan781@gmail.com
+Mail : smk@minetest.in
+
