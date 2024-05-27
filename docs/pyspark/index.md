@@ -19,18 +19,18 @@ Credits : Following notes are learnings from *Spark: The Definitive Guide by Bil
 Till this its probably enough to learn 80% of pyspark and people can head dive into the pyspark easily.
 
 - Low-Level APIs
-  1. Resilient Distributed Datasets
-  2. Advanced RDDs
-  3. Distributed Shared Variables
+  1. [Resilient Distributed Datasets](notes/ch12.md)
+  2. [Advanced RDDs](notes/ch13.md)
+  3. [Distributed Shared Variables](notes/ch14.md)
 
 This shoud be performed practically with a running spark cluster and probably book is best place to read this.
 
 - Production Applications
-  1. How Spark Runs on a Cluster
-  2. Developing Spark Applications
-  3. Deploying Spark
-  4. Monitoring and Debugging
-  5. Performance Tuning
+  1. [How Spark Runs on a Cluster](notes/ch15.md)
+  2. [Developing Spark Applications](notes/ch16.md)
+  3. [Deploying Spark](notes/ch17.md)
+  4. [Monitoring and Debugging](notes/ch18.md)
+  5. [Performance Tuning](notes/ch19.md)
 
 You should take a look at *Apache Flink* as well for Streaming Solutions.
 
@@ -43,17 +43,17 @@ You should take a look at *Apache Flink* as well for Streaming Solutions.
 For Running Machine Learning Workloads on Spark. There is a dedicate guide for ML on the site.
 
 - Advanced Analytics and Machine Learning
-  1. Advanced. Analytics and Machine Learning Overview
-  1. Preprocessing and Feature Engineering
-  1. Classification
-  1. Regression
-  1. Recommendation
-  1. Unsupervised Learning
-  1. Graph Analytics
-  1. Deep Learning
+  1. [Advanced. Analytics and Machine Learning Overview](notes/ch24.md)
+  1. [Preprocessing and Feature Engineering](notes/ch25.md)
+  1. [Classification](notes/ch26.md)
+  1. [Regression](notes/ch27.md)
+  1. [Recommendation](notes/ch28.md)
+  1. [Unsupervised Learning](notes/ch29.md)
+  1. [Graph Analytics](notes/ch30.md)
+  1. [Deep Learning](notes/ch31.md)
 - Ecosystem
-  1. Language Specifics: Python (pyspark) and R (SparkR and Sparklyr
-  1. Ecosystem and Community
+  1. [Language Specifics: Python (pyspark) and R (SparkR and Sparklyr)](notes/ch32.md)
+  1. [Ecosystem and Community](notes/ch33.md)
 
 ## Books
 
