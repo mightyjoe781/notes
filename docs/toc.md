@@ -12,22 +12,104 @@ hide:
 
 ### Contents
 
+<div class="grid cards" markdown>
 
-|                                        |                                         |
-| :------------------------------------: | :-------------------------------------: |
-|      [Algorithms](algo/index.md)       |    [Kubernetes](kubernetes/index.md)    |
-|          [AWS](aws/index.md)           |         [MacOS](macos/index.md)         |
-|               [Books]()                | [Microservices](microservices/index.md) |
-|   [Competitive Coding](cc/index.md)    |         [Minetest](mt/index.md)         |
-|      [Cooking](cooking/index.md)       |         [Music](music/index.md)         |
-|          [C++](cpp/index.md)           |            [OS](os/index.md)            |
-| [Data Analysis](dataanalysis/index.md) |    [Philosophy](philosophy/index.md)    |
-|    [Databases](databases/index.md)     |   [Photography](photography/index.md)   |
-|   [Databricks](databricks/index.md)    |         [Regex](regex/index.md)         |
-|    [Dev Setup](dev_setup/index.md)     |        [Server](server/index.md)        |
-|       [Docker](docker/index.md)        |          [tmux](tmux/index.md)          |
-|      [FreeBSD](freebsd/index.md)       |     [Terraform](terraform/index.md)     |
-|        [Finance](fin/index.md)         |           [Vim](vim/index.md)           |
-|          [Git](git/index.md)           |        [WebDev](webdev/index.md)        |
-|           [Go](go/index.md)            |        [Python](python/index.md)        |
-|       [Health](health/index.md)        |                                         |
+- __Programming Languages and Coding__
+
+  ---
+
+  :simple-thealgorithms:{ .lg .middle } [Algorithms](algo/index.md) [WIP]
+
+  :material-language-cpp:{ .lg .middle } C++ [Upcoming]
+
+  :material-trophy-outline:{ .lg .middle } [Competitive Coding](cc/index.md) [WIP]
+
+  :material-language-go:{ .lg .middle } Go
+
+  :material-language-python:{ .lg .middle } Python
+
+  :material-flash:{ .lg .middle } [Pyspark](pyspark/index.md)
+
+  :material-language-rust:{ .lg .middle } Rust [Planned]
+
+-   __Development Tools and Environment__
+
+    ---
+
+    :material-database:{ .lg .middle } [Databricks](databricks/index.md)
+
+    :material-laptop:{ .lg .middle } [Dev Setup](dev_setup/index.md)
+
+    :material-docker:{ .lg .middle } [Docker](docker/index.md)
+
+    :material-git:{ .lg .middle } [Git](git/index.md)
+
+    :material-kubernetes:{ .lg .middle } [Kubernetes](kubernetes/index.md)
+
+    :material-terraform:{ .lg .middle } [Terraform](terraform/index.md)
+
+    :material-window-maximize:{ .lg .middle } [tmux](tmux/index.md)
+
+    :simple-vim:{ .lg .middle } [Vim](vim/index.md)
+
+-   __Personal Interests__
+
+    ---
+
+    :material-pot:{ .lg .middle } [Cooking](cooking/index.md)
+
+    :material-currency-usd:{ .lg .middle } [Finance](fin/index.md)
+
+    :material-heart-pulse:{ .lg .middle } [Health](health/index.md)
+
+    :material-apple:{ .lg .middle } [MacOS](macos/index.md)
+
+    :material-gamepad-variant:{ .lg .middle } [Minetest](mt/index.md)
+
+    :material-music:{ .lg .middle } [Music](music/index.md)
+
+    :material-lightbulb:{ .lg .middle } [Philosophy](philosophy/index.md)
+
+    :material-camera:{ .lg .middle } [Photography](photography/index.md)
+
+    :material-regex:{ .lg .middle } [Regex](regex/index.md)
+
+-   __Systems and Servers__
+
+    ---
+
+    :material-freebsd:{ .lg .middle } [FreeBSD](freebsd/index.md)
+
+    :material-laptop:{ .lg .middle } [OS](os/index.md)
+
+    :material-server:{ .lg .middle } [Server](server/index.md)
+
+- __Technical Books__
+
+  ---
+
+  :material-book:{ .lg .middle } [Designing Data Intensive Applications]
+
+  :material-book:{ .lg .middle } [Pragmatic Programmer]
+  
+  [Full List](books/index.md) :octicons-arrow-right-24:{ .icon }
+
+- __Web and Microservices__
+
+  ---
+
+  :material-aws:{ .lg .middle } [AWS](aws/index.md)
+
+  :material-web:{ .lg .middle } [Microservices](microservices/index.md)
+
+  :material-web:{ .lg .middle } [WebDev](webdev/index.md)
+  
+- __Data and Databases__
+
+  ---
+
+  :material-chart-bar:{ .lg .middle } [Data Analysis](dataanalysis/index.md)
+
+  :material-database:{ .lg .middle } [Databases](databases/index.md)
+
+</div>
