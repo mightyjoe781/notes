@@ -18,7 +18,7 @@ hide:
 
   ---
 
-  :simple-thealgorithms:{ .lg .middle } [Algorithms](algo/index.md) [WIP]
+  :simple-thealgorithms:{ .lg .middle } [DSA](interviews/dsa/index.md) [WIP]
 
   :material-language-cpp:{ .lg .middle } C++ [Upcoming]
 
@@ -26,7 +26,7 @@ hide:
 
   :material-language-go:{ .lg .middle } Go
 
-  :material-language-python:{ .lg .middle } Python
+  :material-language-python:{ .lg .middle } [Python](python/index.md)
 
   :material-flash:{ .lg .middle } [Pyspark](pyspark/index.md)
 
@@ -55,8 +55,6 @@ hide:
 -   __Personal Interests__
 
     ---
-
-    :material-pot:{ .lg .middle } [Cooking](cooking/index.md)
 
     :material-currency-usd:{ .lg .middle } [Finance](fin/index.md)
 

@@ -295,7 +295,7 @@ chmod 700 $HOUSE
 mkdir -p  $HOUSE/.ssh
 chmod 700 $HOUSE/.ssh
 touch     $HOUSE/.ssh/authorized_keys
-chown -R  $THEM.$THEM $HOUSE
+chown -R  $THEM:$THEM $HOUSE
 ````
 
 When time permits, you (as admin) or each individual user should append  each individual user's public key to the following file.  Substitute the appropriate account name for "sally" in each case. `/home/sally/.ssh/authorized_keys`

@@ -6,9 +6,9 @@ Go is a statically typed, compiled programming language designed at Google by Ro
 
 [NOTE] : Generics finally arrive in 1.18 :)
 
+- [Learning Go (2nd Edition)](lego/index.md)
 
-
-- [Notes](notes/index.md)
+- [Notes: website tracker project](notes/index.md)
 
 ### Resources :
 
