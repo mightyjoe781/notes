@@ -21,13 +21,12 @@
    
 3. **[Searching]()**
    - Binary Search
-   
+
    - BSTs
-   
+
    - Hashing
-   
+
    - Radix Search
-   
 4. **[Graph Algorithms](graph/index.md)**
 - [Graph Search]()
 
