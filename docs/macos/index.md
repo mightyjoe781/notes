@@ -1,3 +1,23 @@
+### Installing yt-dlp
+
+````bash
+# install yt-dlp
+brew install yt-dlp ffmpeg fprobe
+
+# put all your youtube links in a file separated by new file
+echo "SOME_YT_URL" >> playlist.txt
+
+# get cookies.txt file, install cookies.txt mozilla extension
+# login into yt and run the extension to download the file or
+yt-dlp --cookies cookies.txt --cookies-from-browser firefox
+
+# downloading entire list of videos
+yt-dlp --cookies cookies.txt -a playlist.txt
+
+# downloading a playlist
+
+````
+
 ### Fixes
 
 Universal Clipboard not working correctly even when handoff is enabled and both iphone and macbook are on same network

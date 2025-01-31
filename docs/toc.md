@@ -32,25 +32,25 @@ hide:
 
   :material-language-rust:{ .lg .middle } Rust [Planned]
 
--   __Development Tools and Environment__
+- __Development Tools and Environment__
 
-    ---
+  ---
 
-    :material-database:{ .lg .middle } [Databricks](databricks/index.md)
+  
 
-    :material-laptop:{ .lg .middle } [Dev Setup](dev_setup/index.md)
+  :material-laptop:{ .lg .middle } [Dev Setup](dev_setup/index.md)
 
-    :material-docker:{ .lg .middle } [Docker](docker/index.md)
+  :material-docker:{ .lg .middle } [Docker](docker/index.md)
 
-    :material-git:{ .lg .middle } [Git](git/index.md)
+  :material-git:{ .lg .middle } [Git](git/index.md)
 
-    :material-kubernetes:{ .lg .middle } [Kubernetes](kubernetes/index.md)
+  :material-kubernetes:{ .lg .middle } [Kubernetes](kubernetes/index.md)
 
-    :material-terraform:{ .lg .middle } [Terraform](terraform/index.md)
+  :material-window-maximize:{ .lg .middle } [tmux](tmux/index.md)
 
-    :material-window-maximize:{ .lg .middle } [tmux](tmux/index.md)
+  :simple-vim:{ .lg .middle } [Vim](vim/index.md)
 
-    :simple-vim:{ .lg .middle } [Vim](vim/index.md)
+  :material-debian:{ .lg .middle } [Unix Tools](unix/index.md) :octicons-arrow-right-24:{ .icon }
 
 -   __Personal Interests__
 
@@ -59,8 +59,6 @@ hide:
     :material-currency-usd:{ .lg .middle } [Finance](fin/index.md)
 
     :material-heart-pulse:{ .lg .middle } [Health](health/index.md)
-
-    :material-apple:{ .lg .middle } [MacOS](macos/index.md)
 
     :material-gamepad-variant:{ .lg .middle } [Minetest](mt/index.md)
 
@@ -76,7 +74,11 @@ hide:
 
     ---
 
-    :material-freebsd:{ .lg .middle } [FreeBSD](freebsd/index.md)
+    :material-debian:{ .lg .middle } [Unix/Linux](linux/index.md)
+    
+    :material-freebsd:{ .lg .middle } [FreeBSD](freebsd/index.md)	    
+    
+    :material-apple:{ .lg .middle } [MacOS](macos/index.md)
 
     :material-laptop:{ .lg .middle } [OS](os/index.md)
 
@@ -98,8 +100,10 @@ hide:
 
   :material-aws:{ .lg .middle } [AWS](aws/index.md)
 
-  :material-web:{ .lg .middle } [Microservices](microservices/index.md)
+  :material-database:{ .lg .middle } [Databricks](databricks/index.md)
 
+  :material-web:{ .lg .middle } [Microservices](microservices/index.md)
+  
   :material-web:{ .lg .middle } [WebDev](webdev/index.md)
   
 - __Data and Databases__
