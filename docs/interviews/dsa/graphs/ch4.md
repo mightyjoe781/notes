@@ -1,4 +1,4 @@
-## Shortest Path
+# Shortest Path
 
 **Definition:** *A **shortest path** between two vertices s and t in a network(weighted digraphs) is a directed simple path from s to t with property that no other such path has a lower weight*.
 
@@ -171,7 +171,86 @@ vector<int> bellmanFord(int V, int E, vector<Edge>& edges, int source) {
 }
 ````
 
+### Other Applications
 
+#### Solving SSSP Problem on Small Weighted Graph
+
+If we have the APSP information we also know the SSSP information.
+
+Printing Shortest Path
+
+A common issue encountered by programmers who use four-liner Floyd Warshall’s without understanding how it works is when they are asked to print shortest paths too. In BFS/Dijkstra’s/ Bellman Ford’s algorithm we just need to remember the shortest paths spanning tree by using a 1D vector to store parent information for each vertex. In Floyd Warshall’s we need to store a 2D parent matrix. The modified code is as
+
+````c++
+for(int i = 0; i < V; i++)
+  for(int j = 0; j < V; j++)
+    p[i][j] = i; // initialize the parent matrix
+for(int k = 0; k < V; k++)
+  for(int i = 0; i < V; i++)
+    for(int j = 0; j < V; j++)
+      if(adj[i][k] + adj[k][j] < adj[i][j) {
+        adj[i][j] = adj[i][k] + adj[k][j];
+        p[i][j] = p[k][j];
+      }
+//------------------------------------------------------
+void printPath(int i, int j) {
+  if(i!=j) printPath(i,p[i][j]);
+  printf(" %d", j);
+}
+````
+
+#### Transitive Closure (Warshall’s Algorithm)
+
+Given a graph, determine if vertex i is connected to j, directly or indirectly. This variant uses bitwise operators which are much faster than arithmatic operators.
+
+Initially set entire adj to 1 if i connected to j otherwise 0.
+
+After running Floyd’s Algorithm we can check if any two vertices are connected by check adj matrix
+
+````c++
+for(int k = 0; k < V; k++)
+  for(int i = 0; i < V; i++)
+    for(int j = 0; j < V; j++)
+      adj[i][j] != (adj[i][k] & adj[k][j]);
+````
+
+#### Minimax and Maximin
+
+We have seen the minimax(and maximin) path problem earlier. The solution using Floyd Warshall’s is shown below. First intialize `adj[i][j]` to be the weight of edge (i,j). This is default minimax cost for two vertices that are directly connected. For pair i-j without any direct edge, set `adj[i][j] = INF`. Then we try all possible intermediate vertex k. The minimax cost `adj[i][j]` is minimum of either (itself) or (the maximum between `adj[i][k]] or adj[k][j]`) However this approach works only for  V $\le$ 400.
+
+````c++
+for (int k = 0; k < V; k++)
+	for(int i = 0; i < V; i++)
+		for(int j = 0; j < V; j++)
+			adj[i][j] = min(adj[i][j], max(adj[i][k],adj[k][j]))
+````
+
+#### Finding the Cheapest/Negative Cycle
+
+We know Bellman Ford will terminate after O(VE) steps regardless of the type of input graph, same is the case with Floyd Warshall it terminates in $O(V^3)$.
+
+To solve this problem, we intially set the main diagonal of the adj matrix to a very large value, i.e. `adj[i][i] = INF`, which now mean shortest cyclic paht weight strating from vertex i goes thru up to V-1 other intermediate vertices and return back to i. If `adj[i][i]` is no longer INF for any $i \in [0…V-1]$, then we have a cycle. The smallest non-negative `adj[i][j]` $\forall i \in [0…V-1]$ is the cheapest cycle.
+
+If `adj[i][j]` < 0 for any $i \in [0…V-1]$, then we have a negative cycle because if we take this cyclic path one more time, we will get even shorter `shortest` path.
+
+#### Finding the Diameter of a Graph
+
+The diameter is maximum shortest path distance between any pair, just find the i and j s.t. its maximum of the matrix adj.
+
+#### Finding the SCCs of a Directed Graph
+
+Tarjan’s algorithm can be used to identify SCCs of a digraph. However code is bit long. If input graph is small, we can also identify the SCCs of graph in $O(V^3)$ using Warshall’s transitive closure algorithm and then use the following check.
+
+ To find all the members of SCC that contains vertex i check all other vertices $V\in [0…V-1]$. If `adj[i][j] && adj[j][i]` is true, then vertex i and j belong to same SCC.
+
+## Summary
+
+| Algorithm      | Graph Type          | Complexity            | Special Features                         |
+| -------------- | ------------------- | --------------------- | ---------------------------------------- |
+| BFS            | Unweighted          | \(O(V + E)\)          | Layer-by-layer exploration               |
+| Dijkstra       | Weighted (Non-Neg.) | \(O((V + E) \log V)\) | Priority queue-based; greedy approach    |
+| Bellman-Ford   | Weighted (Neg.)     | \(O(V \times E)\)     | Handles negative weights; detects cycles |
+| Floyd-Warshall | Small Graphs/APSP   | \(O(V^3)\)            | Solves all-pairs shortest paths          |
 
 ## Problems
 
@@ -269,3 +348,4 @@ vector<int> bellmanFord(int V, int E, vector<Edge>& edges, int source) {
 10. https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1 Use bellman ford
 11. https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1 Use floyd warshal
 12. https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/description/ Use floyd warshall and do post processing on resulting matrix as per conditions presented.
+13. https://leetcode.com/problems/swim-in-rising-water/ Use dijkstra to solve and select a path which does not have max element present in it.

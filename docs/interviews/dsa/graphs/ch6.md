@@ -1,4 +1,4 @@
-## Other Algorithms
+# Other Algorithms
 
 ### Graph Edges Property Check via DFS Spanning Tree
 

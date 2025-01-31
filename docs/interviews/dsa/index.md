@@ -2,7 +2,10 @@
 
 **Data Structures**
 
-* 
+* Array
+  * [Two Pointer](array/ch1.md)
+  * [Sliding Window](array/ch2.md)
+
 
 **Sorting**
 
@@ -45,20 +48,13 @@
 
 **Strings**
 
-* Fundamentals
-  - String Hashing
-  - Rabin-Karp
-  - Prefix function - KMP
-  - Z function
-  - Suffix Array
-* Advanced
-  - Suffix Tree
-  - Suffix Automaton
-  - Lyndon factorization
-* Tasks
-  - Expression Parsing
-  - Manacher’s Algorithm - Finding all sub-palindromes in O(n)
-  - Finding repetitions
+* [Basic String Processing](strings/ch1.md)
+* [String Matching](strings/ch2.md)
+* Trie
+* String Processing with DP
+* Suffix Tree
+* String Tasks
+* Advanced Algorithms
 
 **Trees**
 
