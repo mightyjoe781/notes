@@ -24,7 +24,7 @@ hide:
 
   :material-trophy-outline:{ .lg .middle } [Competitive Coding](cc/index.md) [WIP]
 
-  :material-language-go:{ .lg .middle } Go
+  :material-language-go:{ .lg .middle } [Go](go/index.md)
 
   :material-language-python:{ .lg .middle } [Python](python/index.md)
 
