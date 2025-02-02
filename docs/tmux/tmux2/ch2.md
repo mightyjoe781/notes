@@ -1,4 +1,4 @@
-## Chapter 2 : Configuring Tmux
+# Chapter 2 : Configuring Tmux
 
 #### Introducing the `.tmux.conf` File
 

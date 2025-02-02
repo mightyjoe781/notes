@@ -1,4 +1,4 @@
-## Chapter 3 : Scripting Customized Tmux Environments
+# Chapter 3 : Scripting Customized Tmux Environments
 
 `-t` switch is very useful and can be utlised to streamline our setup of development environment.
 
