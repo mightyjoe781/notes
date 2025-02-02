@@ -1,4 +1,4 @@
-## Chapter 5 : Pair Programming with Tmux
+# Chapter 5 : Pair Programming with Tmux
 
 There are two ways to work with remote user
 

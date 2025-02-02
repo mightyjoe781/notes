@@ -1,4 +1,4 @@
-## Chapter 1 : Learning the Basics
+# Chapter 1 : Learning the Basics
 
 #### Installation
 

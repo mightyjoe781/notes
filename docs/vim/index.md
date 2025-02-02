@@ -4,21 +4,17 @@ Vim (a contraction of Vi IMproved) is a free and open-source, screen-based text 
 
 #### Resources : 
 
-[Notes](notes.md)
+- [Notes](notes.md)
+- [Summary Practical Vim](practical_vim/index.md)
 
-[Summary Practical Vim](practical_vim/index.md)
+- [Vimrc Examples](vimrc.md)
+- [Plugins](https://vimawesome.com/)
 
-[Vimrc Examples](vimrc.md)
+- [Vimways](https://vimways.org/2019/)
 
-[Official Website](https://www.vim.org/)
+- [vi-improved](https://www.vi-improved.org/recommendations/)
 
-[Plugins](https://vimawesome.com/)
-
-[Vimways](https://vimways.org/2019/)
-
-[vi-improved](https://www.vi-improved.org/recommendations/)
-
-[Good Vimrc](https://github.com/nelstrom/dotfiles)
+- [Good Vimrc](https://github.com/nelstrom/dotfiles)
 
 #### Other Command Line Editors
 

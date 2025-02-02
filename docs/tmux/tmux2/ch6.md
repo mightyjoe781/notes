@@ -1,4 +1,4 @@
-## Chapter 6 : Workflows
+# Chapter 6 : Workflows
 
 ### Working Effectively with Panes and Windows
 

@@ -1,4 +1,4 @@
-## Chapter 4 : Working with Text And Buffer
+# Chapter 4 : Working with Text And Buffer
 
 #### Scrolling Through Output with Copy Mode
 

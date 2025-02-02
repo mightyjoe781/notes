@@ -1,4 +1,4 @@
-## Summary of Practical Vim
+# Summary of Practical Vim
 
 TIP 1 : Meet the dot command ! Use `.` command as much as you can.
 

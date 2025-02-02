@@ -1,4 +1,4 @@
-## Vim Notes
+# Vim Notes
 
 Vim = VI + Improved
 
