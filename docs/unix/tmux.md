@@ -28,7 +28,7 @@ bind - split-window -v
 set -g status-bg cyan  
 ````
 
-* [Configuration Guide](../tmux/tmux2/ch2/)
+* [Configuration Guide](../tmux/tmux2/ch2.md)
 * [Example .conf](https://raw.githubusercontent.com/mightyjoe781/.dotfiles/refs/heads/master/tmux/.tmux.conf)
 
 Reload Config

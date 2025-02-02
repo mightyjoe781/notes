@@ -31,11 +31,11 @@ hide:
     
     :fontawesome-solid-terminal:{ .lg .middle } [Systemd](systemd.md)
 
-    :material-recycle-variant:{ .lg .middle } [Cron](cront.md)
+    :material-recycle-variant:{ .lg .middle } [Cron](cron.md)
 
-    :simple-htop:{ .lg .middle } [Htop/Glances/Btop](monitoring.md)
+    :simple-htop:{ .lg .middle } [Htop/Glances/Btop]
 
-    :octicons-log-16:{ .lg .middle } [Logrotate](logs.md)
+    :octicons-log-16:{ .lg .middle } [Logrotate]
 
     :material-sync:{ .lg .middle } [rsync](rsync.md)
   
@@ -43,7 +43,7 @@ hide:
 
     ---
     
-    :simple-nginx:{ .lg .middle } [Nginx/Apache](server.md)
+    :simple-nginx:{ .lg .middle } [Nginx](nginx.md)
 
     :material-router:{ .lg .middle } [UFW](ufw.md)
 
@@ -71,9 +71,7 @@ hide:
     
     :fontawesome-regular-face-dizzy:{ .lg .middle } [fzf](fzf.md)
 
-    :octicons-terminal-16:{ .lg .middle } [ripgrep(rg)](rg.md)
-
-    :octicons-terminal-16:{ .lg .middle } [jq/yq](jq.md)
+    :octicons-terminal-16:{ .lg .middle } [ripgrep(rg)](ripgrep.md)
 
     :material-zip-box:{ .lg .middle } [tar/gzip/zstd](compression.md)
 
@@ -81,13 +79,13 @@ hide:
 
     :material-information:{ .lg .middle } [tldr](tldr.md)
 
-    :material-git:{ .lg .middle } [lazygit](lazygit.md)
-  
+    :octicons-terminal-16:{ .lg .middle } [cheat.sh](cheat.md)
+
 - __Databases__
 
     ---
     
-    :simple-postgresql:{ .lg .middle } [PostgreSQL/MySQL](sql.md)
+    :simple-postgresql:{ .lg .middle } [PostgreSQL](postgresql.md)
 
     :simple-redis:{ .lg .middle } [Redis](redis.md)
 
@@ -97,12 +95,14 @@ hide:
 
     ---
     
-    :material-file-document:{ .lg .middle } [Pandoc](pandoc.md)
+    :material-file-document:{ .lg .middle } [Pandoc]
 
-    :material-image:{ .lg .middle } [ImageMagick](imagemagick.md)
+    :material-image:{ .lg .middle } [ImageMagick]
 
-    :simple-ffmpeg:{ .lg .middle } [FFmpeg](ffmpeg.md)
+    :simple-ffmpeg:{ .lg .middle } [FFmpeg]
 
-    :octicons-terminal-16:{ .lg .middle } [cheat.sh](cheatsh.md)
+    :material-git:{ .lg .middle } [lazygit]
+    
+    
 
 </div>

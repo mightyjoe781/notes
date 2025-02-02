@@ -60,7 +60,7 @@ ansible webservers -m ping
 
 ### Getting Started
 
-1. Create an Inventory File: Save this as `inventory.ini`
+* Create an Inventory File: Save this as `inventory.ini`
 
 ````ini
 [webservers]
@@ -71,13 +71,13 @@ ansible webservers -m ping
 192.168.1.20
 ````
 
-2. Test Connectivity
+* Test Connectivity
 
 ````bash
 ansible all -i inventory.ini -m ping
 ````
 
-3. Write Your First Playbook: Save as `webserver.yml`
+* Write Your First Playbook: Save as `webserver.yml`
 
 ````bash
 - hosts: webservers  
@@ -95,7 +95,7 @@ ansible all -i inventory.ini -m ping
         enabled: yes  
 ````
 
-4. Run the Playbook
+* Run the Playbook
 
 ````bash
 ansible-playbook -i inventory.ini webserver.yml

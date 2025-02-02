@@ -43,9 +43,9 @@ markdown_extensions:
 plugins:
   - glightbox
   - search
-  - git-revision-date-localized:
-      type: timeago
-      enable_creation_date: true
+  # - git-revision-date-localized:
+  #     type: timeago
+  #     enable_creation_date: true
 site_author: smk
 copyright: smk
 theme:
