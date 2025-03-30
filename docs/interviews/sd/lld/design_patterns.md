@@ -64,16 +64,19 @@ if __name__ == "__main__":
 * Why you don't want user to create objects directly ??
 	* Client codes should not be affected with changes in the code. Let's say your process to create object becomes complicated(db calls, using different configurations), then client has no need to know about object creations.
 	* Easier Dependency Injection & Testing
-		* If you create Car() directly, testing requires changing the entire class.
-		* With a factory, you can **inject dependencies**, making testing more modular.
+	  * If you create Car() directly, testing requires changing the entire class.
+	  * With a factory, you can **inject dependencies**, making testing more modular.
 ### Abstract Factory
 ### Builder ⭐
 * lets you construct complex objects step by step
 * The pattern allows you to produce different types and representations of an object using the same construction code.
-* Why Use Builder Pattern ?
-	* Better Readability – Instead of a constructor with too many parameters, we build the object step by step.
-	* Flexibility – Can construct different variations of an object (e.g., Car, SportsCar, SUV).
-	* Encapsulation – The construction logic is separate from the object representation.
+
+Why Use Builder PatternTest
+
+* Better Readability – Instead of a constructor with too many parameters, we build the object step by step.
+* Flexibility – Can construct different variations of an object (e.g., Car, SportsCar, SUV).
+* Encapsulation – The construction logic is separate from the object representation.
+
 ```python
 # without builder pattern
 class Car:
@@ -91,13 +94,15 @@ car = Car("Tesla", "Electric", 5, True)
 print(car)
 ```
 
-* Above Implementation has following issues
-	* Long Constructor
-	* Optional Parameter
-	* Hard to Extend
+Above Implementation has following issues
 
-```python
-# using builder pattern
+- Long Constructor
+- Optional Parameter
+- Hard to Extend
+
+
+````python
+#using builder pattern
 class Car:
     def __init__(self, brand=None, engine=None, seats=None, sunroof=None):
         self.brand = brand
@@ -134,18 +139,20 @@ class CarBuilder:
 # Using the builder pattern
 car = CarBuilder().set_brand("Tesla").set_engine("Electric").set_seats(5).set_sunroof(True).build()
 print(car)  # ✅ Car(Tesla, Electric, 5 seats, Sunroof: True)
-```
-* **Readable & Flexible**: No need to remember constructor parameters.
-* **Handles Optional Parameters**: Can omit sunroof, engine, etc.
-* **Method Chaining**: Allows easy, fluent object creation.
-* **Scalability**: Easily add new features without modifying existing code.
+````
+
+- **Readable & Flexible**: No need to remember constructor parameters.
+- **Handles Optional Parameters**: Can omit sunroof, engine, etc.
+- **Method Chaining**: Allows easy, fluent object creation.
+- **Scalability**: Easily add new features without modifying existing code.
+
 ### Prototype
 ### Singleton ⭐
 * lets you ensure that a class has only one instance, while providing a global access point to this instance
 * Advantages
-	* **Prevents multiple instances** of a resource-heavy class.
-	* **Centralized access** to a shared instance across the application.
-	* **Ensures consistency** when only one instance should exist (e.g., one DB connection)
+  * **Prevents multiple instances** of a resource-heavy class.
+  * **Centralized access** to a shared instance across the application.
+  * **Ensures consistency** when only one instance should exist (e.g., one DB connection)
 * Examples Use Cases are one-root logger or one spark context, because spark initialization is costly.
 ```python
 class Singleton:
@@ -217,8 +224,8 @@ print(db1 is db2)  # ✅ True (Same instance)
 ### Adapter ⭐
 * allows objects with incompatible interfaces to collaborate
 * usecases
-	* helps integrate 3rd-party library without modifying their code
-	* makes incompatible classes work together
+  * helps integrate 3rd-party library without modifying their code
+  * makes incompatible classes work together
 ```python
 # without adapter
 class MP3Player:
@@ -258,14 +265,14 @@ player.play("video.mp4")  # ✅ Plays after conversion
 ### Bridge
 * **decouples an abstraction from its implementation**, allowing them to evolve **independently**
 * When to Use
-	* **When you want to avoid a rigid class hierarchy** – Prevents class explosion due to multiple variations.
-	* **When you need to support multiple implementations** – Example: Different platforms (Windows, Linux, macOS).
-	* **When abstraction and implementation should vary independently** – Example: Devices and their remote controls.
+  * **When you want to avoid a rigid class hierarchy** – Prevents class explosion due to multiple variations.
+  * **When you need to support multiple implementations** – Example: Different platforms (Windows, Linux, macOS).
+  * **When abstraction and implementation should vary independently** – Example: Devices and their remote controls.
 * Key Components
-	* **Abstraction** – Defines a high-level interface (e.g., RemoteControl).
-	* **Refined Abstraction** – Extends abstraction with additional behavior.
-	* **Implementation Interface** – Defines the low-level details (e.g., Device).
-	* **Concrete Implementations** – Provide specific implementations.
+  * **Abstraction** – Defines a high-level interface (e.g., RemoteControl).
+  * **Refined Abstraction** – Extends abstraction with additional behavior.
+  * **Implementation Interface** – Defines the low-level details (e.g., Device).
+  * **Concrete Implementations** – Provide specific implementations.
 ```python
 from abc import ABC, abstractmethod
 
@@ -318,11 +325,11 @@ radio_remote.toggle_power() # 📻 Radio is now OFF
 ### Decorator ⭐
 * lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
 * Usage
-	* logging, security, caching & UI improvements
+  * logging, security, caching & UI improvements
 * why use it ?
-	* **Extends functionality** without modifying the original class.
-	* **Follows Open-Closed Principle** (open for extension, closed for modification).
-	* **Allows multiple decorators** to be combined flexibly.
+  * **Extends functionality** without modifying the original class.
+  * **Follows Open-Closed Principle** (open for extension, closed for modification).
+  * **Allows multiple decorators** to be combined flexibly.
 ```python
 # without Decorator, adding milk to coffee is cumbersome
 class Coffee:
@@ -391,20 +398,20 @@ coffee = SugarDecorator(coffee)
 print(coffee.description(), "->", coffee.cost())  # Basic Coffee + Milk + Sugar -> 8
 ```
 
-* Flexible & Scalable
-* Combinable - decorators can be combines
-* **Follows SOLID principles** – No unnecessary subclasses or modifications.
+- Flexible & Scalable
+- Combinable - decorators can be combines
+- **Follows SOLID principles** – No unnecessary subclasses or modifications.
 
 ### Facade
 ### Flyweight
 ### Proxy ⭐
 * lets you provide a substitute or placeholder for another object. A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.
 * Advantages
-	* Lazy Initialization - Virtual Proxy
-	* Access Proxy (Control) - Restriction to access original object
-	* Logging/monitoring Proxy - record requests for analytics and debugging
-	* Caching Proxy - store results to avoid recomputation
-	* Remote Proxy - Interface for calling methods on a remote object
+  * Lazy Initialization - Virtual Proxy
+  * Access Proxy (Control) - Restriction to access original object
+  * Logging/monitoring Proxy - record requests for analytics and debugging
+  * Caching Proxy - store results to avoid recomputation
+  * Remote Proxy - Interface for calling methods on a remote object
 * Virtual Proxy
 ```python
 class RealImage:
@@ -461,17 +468,17 @@ proxy.operation()
 ### Chain of Responsibility ⭐
 * lets you pass requests along a chain of handlers. Upon receiving a request,
 * Each handler decides
-	* ✅ **Process the request** OR
-	* ✅ **Forward it to the next handler**
+  * ✅ **Process the request** OR
+  * ✅ **Forward it to the next handler**
 * When to Use
-	* **Logging and Debugging** – Different loggers (file, console, database) handle messages.
-	* **Event Handling** – UI elements process events (buttons, forms, popups).
-	* **Request Validation** – Middleware authentication in web frameworks.
-	* **Customer Support System** – Requests escalate from agent → supervisor → manager.
+  * **Logging and Debugging** – Different loggers (file, console, database) handle messages.
+  * **Event Handling** – UI elements process events (buttons, forms, popups).
+  * **Request Validation** – Middleware authentication in web frameworks.
+  * **Customer Support System** – Requests escalate from agent → supervisor → manager.
 * Key Components
-	* Handler (abstract class) - Defines the method to handle requests.
-	* **Concrete Handlers** – Implement request processing & decide whether to pass it forward.
-	* **Client** – Sends requests to the first handler in the chain.
+  * Handler (abstract class) - Defines the method to handle requests.
+  * **Concrete Handlers** – Implement request processing & decide whether to pass it forward.
+  * **Client** – Sends requests to the first handler in the chain.
 ```python
 # logging System
 class Logger:
@@ -561,14 +568,14 @@ print(middleware_chain.handle(request3))  # Authentication Failed
 ### Command ⭐
 * encapsulates a request as an object, allowing for **delayed execution, undo/redo functionality, and queuing commands**.
 * When to Use
-	* **Undo/Redo functionality** – Text editors, Photoshop.
-	* **Job Scheduling** – Task execution in threads.
-	* **Remote Control Devices** – TV remote buttons, IoT devices.
+  * **Undo/Redo functionality** – Text editors, Photoshop.
+  * **Job Scheduling** – Task execution in threads.
+  * **Remote Control Devices** – TV remote buttons, IoT devices.
 * Key Components
-	* **Command Interface** – Declares an execution method.
-	* **Concrete Commands** – Implement specific actions.
-	* **Invoker** – Triggers commands.
-	* **Receiver** – Performs the actual work.
+  * **Command Interface** – Declares an execution method.
+  * **Concrete Commands** – Implement specific actions.
+  * **Invoker** – Triggers commands.
+  * **Receiver** – Performs the actual work.
 ```python
 # tv remote
 from abc import ABC, abstractmethod
@@ -633,13 +640,13 @@ remote.press_button()  # TV is OFF
 ### Memento
 * lets you save and restore the previous state of an object without revealing the details of its implementation
 * When to use
-	* *Undo/Redo operations** – Text editors, games, drawing applications.
-	* **State recovery** – Crash recovery in software.
-	* **Checkpointing** – Saving progress in a game.
+  * *Undo/Redo operations** – Text editors, games, drawing applications.
+  * **State recovery** – Crash recovery in software.
+  * **Checkpointing** – Saving progress in a game.
 * Key Components
-	* **Memento** – Stores the state of an object.
-	* **Originator** – Creates and restores mementos.
-	* **Caretaker** – Manages mementos and handles state restoration.
+  * **Memento** – Stores the state of an object.
+  * **Originator** – Creates and restores mementos.
+  * **Caretaker** – Manages mementos and handles state restoration.
 ```python
 class Memento:
     """Memento stores the state of an object."""
@@ -698,14 +705,14 @@ editor.show()  # Output: Current Text: Hello, World!
 ### Observer ⭐
 * The **Observer Pattern** allows multiple objects (**observers**) to listen to and react to changes in another object (**subject**). When the subject’s state changes, all registered observers are notified automatically.
 * When to Use
-	* **Event-driven programming** – UI elements react to user actions.
-	* **Publish-Subscribe systems** – Notification services, message brokers.
-	* **Data Binding** – React.js, Vue.js frameworks.
-	* **Stock Market Updates** – Multiple clients get real-time stock prices.
+  * **Event-driven programming** – UI elements react to user actions.
+  * **Publish-Subscribe systems** – Notification services, message brokers.
+  * **Data Binding** – React.js, Vue.js frameworks.
+  * **Stock Market Updates** – Multiple clients get real-time stock prices.
 * Key Components
-	* **Subject (Publisher)** – Maintains a list of observers and notifies them when state changes.
-	* **Observer (Subscriber)** – Listens for updates from the subject.
-	* **Concrete Subject** – Implements state changes and observer management.
+  * **Subject (Publisher)** – Maintains a list of observers and notifies them when state changes.
+  * **Observer (Subscriber)** – Listens for updates from the subject.
+  * **Concrete Subject** – Implements state changes and observer management.
 ```python
 class StockMarket:
     """Subject (Publisher)"""
@@ -749,13 +756,13 @@ market.set_price(120)  # Another update is sent
 ### Stage
 * models an **object’s behavior as a finite set of states**, with **each state defining its own behavior**.
 * When to Use
-	* When an object has different modes or stages** – Traffic lights, vending machines.
-	* **State-dependent behavior** – Objects act differently in different states.
-	* **Reducing complex if-else logic** – Avoids conditionals in methods.
+  * When an object has different modes or stages** – Traffic lights, vending machines.
+  * **State-dependent behavior** – Objects act differently in different states.
+  * **Reducing complex if-else logic** – Avoids conditionals in methods.
 * Key Components
-	* **State Interface** – Defines behavior for all states.
-	* **Concrete States** – Implement specific behavior for each state.
-	* **Context (Object)** – Maintains current state & delegates actions.
+  * **State Interface** – Defines behavior for all states.
+  * **Concrete States** – Implement specific behavior for each state.
+  * **Context (Object)** – Maintains current state & delegates actions.
 ```python
 from abc import ABC, abstractmethod
 
@@ -797,15 +804,15 @@ for _ in range(4):
     traffic_light.change()
 ```
 ### Strategy ⭐
- * **define a family of algorithms**, put them in separate classes, and make them **interchangeable** at runtime.
- * When to use
-	 * **Multiple algorithms for the same task** – Sorting, Compression.
-	 * **Reducing conditional logic (if-else/switch)** – Payment methods, Authentication.
-	 * **Behavior modification at runtime** – Game difficulty levels.
- * Key Components
-	 * **Context** – Maintains a reference to a strategy object.
-	 * **Strategy Interface** – Defines a common interface for all strategies.
-	 * **Concrete Strategies** – Implement different algorithms.
+* **define a family of algorithms**, put them in separate classes, and make them **interchangeable** at runtime.
+* When to use
+     * **Multiple algorithms for the same task** – Sorting, Compression.
+     * **Reducing conditional logic (if-else/switch)** – Payment methods, Authentication.
+     * **Behavior modification at runtime** – Game difficulty levels.
+* Key Components
+     * **Context** – Maintains a reference to a strategy object.
+     * **Strategy Interface** – Defines a common interface for all strategies.
+     * **Concrete Strategies** – Implement different algorithms.
 ```python
 # payment strategy
 from abc import ABC, abstractmethod
@@ -847,12 +854,12 @@ context.checkout(200)  # Paid using PayPal
 ### Template Method
 * defines the **skeleton** of an algorithm in a **base class**, allowing subclasses to **override specific steps** without modifying the structure of the algorithm.
 * When to Use
-	* **Common workflow with variations** – Report generation, data processing.
-	* **Code reuse** – Avoids duplicate code in similar processes.
-	* **Standardized behavior** – Ensures steps are executed in a defined order.
+  * **Common workflow with variations** – Report generation, data processing.
+  * **Code reuse** – Avoids duplicate code in similar processes.
+  * **Standardized behavior** – Ensures steps are executed in a defined order.
 * Key Components
-	* **Abstract Class (Template)** – Defines the algorithm structure.
-	* **Concrete Class** – Implements missing steps of the algorithm.
+  * **Abstract Class (Template)** – Defines the algorithm structure.
+  * **Concrete Class** – Implements missing steps of the algorithm.
 ```python
 from abc import ABC, abstractmethod
 
@@ -898,13 +905,13 @@ report.generate_report()
 ### Visitor
 * **add new behaviors to objects** **without modifying their structure**, by **separating the operation from the object itself**.
 * When to Use
-	* **Extending behavior without modifying existing classes** – Syntax tree traversal.
-	* **Applying different operations to a group of objects** – Compilers, AST manipulation
-	* **Avoiding clutter in existing classes** – Separates logic from data structures.
+  * **Extending behavior without modifying existing classes** – Syntax tree traversal.
+  * **Applying different operations to a group of objects** – Compilers, AST manipulation
+  * **Avoiding clutter in existing classes** – Separates logic from data structures.
 * Components
-	* **Visitor** – Defines new operations on elements.
-	* **Concrete Visitors** – Implement specific behavior.
-	* **Element** – Accepts a visitor and allows it to operate on itself.
+  * **Visitor** – Defines new operations on elements.
+  * **Concrete Visitors** – Implement specific behavior.
+  * **Element** – Accepts a visitor and allows it to operate on itself.
 ```python
 
 # We **separate operations (size calculation & compression)** from the **file structure**
