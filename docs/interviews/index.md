@@ -1,12 +1,10 @@
-Following Study materials tries organize interview preparation at one place.
 
+Following content is one-stop shop for all SDE interviews prep material.
 
-
-SDE Preperation
+SDE Preparation
 
 * [Data Structures and Algorithms](dsa/index.md)
-* [System Design](sys_design/index.md)
-
-* [Operating System]()
-* [Networks]()
-* [Databases]()
+* [System Design](./sd/index.md)
+* Operating System [wip]
+* Networks [wip]
+* Databases [wip]

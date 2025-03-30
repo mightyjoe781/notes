@@ -89,6 +89,8 @@ hide:
   ---
 
   :material-book:{ .lg .middle } [Designing Data Intensive Applications]
+  
+  :material-book:{ .lg .middle } [Domain-Driven Design]
 
   :material-book:{ .lg .middle } [Pragmatic Programmer]
   
