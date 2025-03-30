@@ -2,3 +2,4 @@ site/
 *.swp
 .DS_Store
 site/mkdocs/search_index.json
+docs/.obsidian
