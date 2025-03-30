@@ -19,7 +19,7 @@
 * Class Diagrams - Object-oriented structure
 * Database Schema - Tables, indexing, query optimization
 * API Design - REST, GraphQL, gRPC best practices
-* [Design Patterns](./lld/design_patterns) - Singleton, Factory, CQRS, Event-Driven
+* [Design Patterns](lld/design_patterns.md) - Singleton, Factory, CQRS, Event-Driven
 * Problem Implementations - Examples & Case Studies
 ## Further Reading
 * _Designing Data-Intensive Applications_ – Martin Kleppmann
