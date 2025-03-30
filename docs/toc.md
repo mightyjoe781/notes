@@ -24,11 +24,11 @@ hide:
 
   :material-trophy-outline:{ .lg .middle } [Competitive Coding](cc/index.md) [WIP]
 
-  :material-language-go:{ .lg .middle } [Go](go/index.md)
+  :material-language-go:{ .lg .middle } ✅ [Go](go/index.md)
 
-  :material-language-python:{ .lg .middle } [Python](python/index.md)
+  :material-language-python:{ .lg .middle } ✅ [Python](python/index.md)
 
-  :material-flash:{ .lg .middle } [Pyspark](pyspark/index.md)
+  :material-flash:{ .lg .middle } ✅  [Pyspark](pyspark/index.md) 
 
   :material-language-rust:{ .lg .middle } Rust [Planned]
 
