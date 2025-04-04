@@ -84,12 +84,117 @@ int floodfill(int r, int c, char c1, char c2) { // returns the size of CC
 NOTE: this direction traversal can be simple using `vector<vector<int>> dirs` to represent directions to traverse in.
 
 ## Cycle Detection
+Approach should be based on Graph Type:
 
-* Directed Graph (DFS)
+* Undirected Graph - *DFS with parent tracking*, *Union-Find*
+* Directed Graph - Kahn’s Algorithm, *DFS with recursion Stack*
 
-* Undirected Graph (DFS or BFS(Kahn’s Algorithm))
+### DFS on Undirected Graph
+
+**Key Idea**: During DFS, if you encounter a visited vertex that is not the parent of the current vertex (back-edge), a cycle exists.
+
+````c++
+bool dfs(int v, int parent, vector<vector<int>> &adj, vector<bool> &visited) {
+    visited[v] = true;
+    for (int neighbor : adj[v]) {
+        if (!visited[neighbor]) {
+            if (dfs(neighbor, v, adj, visited))
+                return true;
+        } else if (neighbor != parent) // not a back-edge
+            return true; // Cycle detected
+    }
+    return false;
+}
+
+bool hasCycleUndirected(vector<vector<int>> &adj, int n) {
+    vector<bool> visited(n, false);
+    for (int i = 0; i < n; ++i)
+        if (!visited[i])
+            if (dfs(i, -1, adj, visited))
+                return true;
+    return false;
+}
+````
+
+### UNION-FIND TO Detect CyCLES
+
+* NOTE: This is a simplified implementation of Union-Find. Refer [Better Union-Find](ch5.md#Union-Find (Fastest Implementation))
+
+````c++
+class UnionFind {
+    
+public:
+    vector<int> p;
+    UnionFind(int n) {
+        p.resize(n);
+        for(int i = 0; i < n; i++)
+            p[i] = i;
+    }
+    int find(int x) {
+        if(p[x] != x)
+            return p[x] = find(p[x]);	// path compression
+        return x;
+    }
+    bool unite(int x, int y) {
+        int px = find(x);
+        int py = find(y);
+        if(px == py)
+            return false;
+        p[px] = py;
+        return true;
+    }
+};
+
+// inside main function
+bool isCycle(int n, vector<vector<int>>& edges) {
+    UnionFind uf(n);
+    for(auto e: edges) {
+        if(!uf.unite(e[0], e[1]))
+            return true;
+    }
+    return false;
+}
+````
+
+
+
+### Kahn’s Algorithm
+
+* NOTE: Same algorithm with minor changes, can be used to give Topological Order.
+
+````c++
+bool hasCycleKahn(vector<vector<int>> &adj, int n) {
+    vector<int> inDegree(n, 0);
+
+    // Calculate in-degree
+    for (int i = 0; i < n; ++i)
+        for (int neighbor : adj[i])
+            inDegree[neighbor]++;
+
+  	// put zero-indegree nodes in on queue
+    queue<int> q;
+    for (int i = 0; i < n; ++i)
+        if (inDegree[i] == 0)
+            q.push(i);
+
+    int count = 0; // Number of processed nodes
+    while (!q.empty()) {
+        int v = q.front(); q.pop();
+        count++;
+
+        for (int neighbor : adj[v]) {
+            inDegree[neighbor]--;
+            if (inDegree[neighbor] == 0)
+                q.push(neighbor);
+        }
+    }
+    return count != n; // Cycle exists if not all vertices are processed
+}
+````
 
 ### DFS on Directed Graph
+
+* NOTE: This is little tricky implementation, its better to learn Kahn’s Algorithm for cycle detection in DFS Graphs.
 
 we need to keep track of path we used to come to a node. Without recStack, the algorithm cannot identify back edges properly, which are a key indicator of cycles in a directed graph.
 
@@ -128,65 +233,6 @@ bool hasCycleDirected(vector<vector<int>> &adj, int n) {
     for (int i = 0; i < n; ++i)			// check all nodes
         if (!visited[i])
             if (dfsDirected(i, adj, visited, recStack))
-                return true;
-    return false;
-}
-````
-
-### Kahn’s Algorithm
-
-````c++
-bool hasCycleKahn(vector<vector<int>> &adj, int n) {
-    vector<int> inDegree(n, 0);
-
-    // Calculate in-degree
-    for (int i = 0; i < n; ++i)
-        for (int neighbor : adj[i])
-            inDegree[neighbor]++;
-
-  	// put zero-indegree nodes in on queue
-    queue<int> q;
-    for (int i = 0; i < n; ++i)
-        if (inDegree[i] == 0)
-            q.push(i);
-
-    int count = 0; // Number of processed nodes
-    while (!q.empty()) {
-        int v = q.front(); q.pop();
-        count++;
-
-        for (int neighbor : adj[v]) {
-            inDegree[neighbor]--;
-            if (inDegree[neighbor] == 0)
-                q.push(neighbor);
-        }
-    }
-    return count != n; // Cycle exists if not all vertices are processed
-}
-````
-
-### DFS on Undirected Graph
-
-**Key Idea**: During DFS, if you encounter a visited vertex that is not the parent of the current vertex, a cycle exists.
-
-````c++
-bool dfs(int v, int parent, vector<vector<int>> &adj, vector<bool> &visited) {
-    visited[v] = true;
-    for (int neighbor : adj[v]) {
-        if (!visited[neighbor]) {
-            if (dfs(neighbor, v, adj, visited))
-                return true;
-        } else if (neighbor != parent)
-            return true; // Cycle detected
-    }
-    return false;
-}
-
-bool hasCycleUndirected(vector<vector<int>> &adj, int n) {
-    vector<bool> visited(n, false);
-    for (int i = 0; i < n; ++i)
-        if (!visited[i])
-            if (dfs(i, -1, adj, visited))
                 return true;
     return false;
 }
