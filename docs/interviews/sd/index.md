@@ -8,6 +8,8 @@
 * Maintainability
 * Cost-effectiveness
 
+ [General Software Engineering Principle Overview](principles.md)
+
 ## High Level Design (HLD) - Architecture & Strategy
 * System Architecture - APIs, Databases, Caching, Load Balancing
 * Technology Choices - SQL vs NoSQL, Monolith vs Microservices
@@ -25,3 +27,5 @@
 * _Designing Data-Intensive Applications_ – Martin Kleppmann
 * _System Design Interview Guide_ – Alex Xu
 * _The Art of Scalability_ – Abbott & Fisher
+* [Company Engineering Blogs/Content](company.md)
+
