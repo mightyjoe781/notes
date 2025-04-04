@@ -100,7 +100,7 @@ bool dfs(int v, int parent, vector<vector<int>> &adj, vector<bool> &visited) {
         if (!visited[neighbor]) {
             if (dfs(neighbor, v, adj, visited))
                 return true;
-        } else if (neighbor != parent) // not a back-edge
+        } else if (neighbor != parent) // back-edge
             return true; // Cycle detected
     }
     return false;
@@ -118,7 +118,7 @@ bool hasCycleUndirected(vector<vector<int>> &adj, int n) {
 
 ### UNION-FIND TO Detect CyCLES
 
-* NOTE: This is a simplified implementation of Union-Find. Refer [Better Union-Find](ch5.md#Union-Find (Fastest Implementation))
+* NOTE: This is a simplified implementation of Union-Find. Refer [Better Union-Find](ch5.md)
 
 ````c++
 class UnionFind {
@@ -194,8 +194,6 @@ bool hasCycleKahn(vector<vector<int>> &adj, int n) {
 
 ### DFS on Directed Graph
 
-* NOTE: This is little tricky implementation, its better to learn Kahn’s Algorithm for cycle detection in DFS Graphs.
-
 we need to keep track of path we used to come to a node. Without recStack, the algorithm cannot identify back edges properly, which are a key indicator of cycles in a directed graph.
 
 In a directed graph, a **back edge** points from a node to one of its ancestors in the current DFS path.
@@ -241,20 +239,35 @@ bool hasCycleDirected(vector<vector<int>> &adj, int n) {
 ### Bipartite(or 2/bi-colorable) Graph Check
 
 ````c++
-// inside int main()
-  queue<int> q; q.push(s);
-  vi color(V, INF); color[s] = 0;
-  bool isBipartite = true; // addition of one boolean flag, initially true
-  while (!q.empty() & isBipartite) { // similar to the original BFS routine
-    int u = q.front(); q.pop();
-    for (int j = 0; j < (int)AdjList[u].size(); j++) {
-      ii v = AdjList[u][j];
-      if (color[v.first] == INF) { // but, instead of recording distance,
-        color[v.first] = 1 - color[u]; // we just record two colors {0, 1}
-        q.push(v.first); }
-      else if (color[v.first] == color[u]) { // u & v.first has same color
-      	isBipartite = false; break; } } } // we have a coloring conflict
+bool isBipartite(vector<vector<pair<int, int>>>& adj, int s, int V) {
+    queue<int> q;
+    vector<int> color(V, -1); // -1 means unvisited
+    color[s] = 0; // Start coloring the first node
+    q.push(s);
+		bool isBipartite = true;
+  
+    while (!q.empty() && isBipartite) {
+        int u = q.front(); q.pop();
+        for (auto& v : adj[u]) {
+            int neighbor = v.first;
+            if (color[neighbor] == -1) { // Unvisited node
+                color[neighbor] = 1 - color[u]; // Alternate color
+                q.push(neighbor);
+            } else if (color[neighbor] == color[u]) {
+                isBipartite = false; // Conflict found
+                break;
+            }
+        }
+    }
+    return isBipartite; // Successfully colored
+}
 ````
+
+### K-Colorable Problem
+
+* general k-Colorable problem is difficult to solve
+* DFS/BFS ~ can work for 25 nodes at max
+* If a problem can be expressed as a **digital circuit or logic gates**, it can be expressed in **Boolean algebra**, which can be reduced to **SAT (Boolean satisfiability)**, and from there, can often be transformed into a **graph k-coloring** problem (could be come complex).
 
 ## Problems on DFS/BFS
 
