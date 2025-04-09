@@ -9,10 +9,10 @@
 
 **Sorting**
 
-* Elementary Sorting Strategies
-* Quicksort
+* [Elementary Sorting Strategies](sorting/ch1.md)
+* [Quicksort](sorting/ch2.md)
 
-* Mergesort
+* [Mergesort](sorting/ch3.md)
 
 * Priority Queues & Heapsort
 
