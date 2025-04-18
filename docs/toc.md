@@ -64,7 +64,7 @@ hide:
 
     :material-music:{ .lg .middle } [Music](music/index.md)
 
-    :material-lightbulb:{ .lg .middle } [Philosophy](philosophy/index.md)
+    :fontawesome-solid-person-swimming:{ .lg .middle } [Swimming](swimming/index.md)
 
     :material-camera:{ .lg .middle } [Photography](photography/index.md)
 

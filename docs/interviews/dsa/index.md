@@ -11,12 +11,9 @@
 
 * [Elementary Sorting Strategies](sorting/ch1.md)
 * [Quicksort](sorting/ch2.md)
-
 * [Mergesort](sorting/ch3.md)
-
-* Priority Queues & Heapsort
-
-* Radix Sort
+* [Priority Queues & Heapsort](sorting/ch4.md)
+* [Special Sorting Techniques](sorting/ch6.md)
 
 **Search**
 
@@ -50,7 +47,7 @@
 
 * [Basic String Processing](strings/ch1.md)
 * [String Matching](strings/ch2.md)
-* Trie
+* [Trie](strings/ch3.md)
 * String Processing with DP
 * Suffix Tree
 * String Tasks
