@@ -92,7 +92,7 @@ hide:
   
   :material-book:{ .lg .middle } [Domain-Driven Design]
 
-  :material-book:{ .lg .middle } [Pragmatic Programmer]
+  :material-book:{ .lg .middle } [Pragmatic Programmer](https://media.minetest.in/the_pragmatic_programmer_notes.pdf)
   
   [Full List](books/index.md) :octicons-arrow-right-24:{ .icon }
 
