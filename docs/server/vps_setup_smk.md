@@ -496,66 +496,36 @@ rclone lsd pcloud:
 
 #### Backup Script
 
+* [Backup using rclone](bkp.md)
+
 ````bash
 #!/bin/bash
-# /*
-# * --------------------------------------------------------------------
-# * @file    pcloud-bkp
-# * @brief   A simple backup util for pcloud
-# * @author  smk (sudhanshumohan781@gmail.com)
-# * @version 20221129
-# * @license BSD3
-# * @bugs    No known bugs
-# * --------------------------------------------------------------------
-# */
-
 set -e
 set -o pipefail
-REMOTE_NAME="pcloud:vps_bkp/minetest.in"
-RCLONE_BIN="/opt/smkbin/rclone"
 
-WHOAMI=$(whoami)
-if [ "@$WHOAMI" != "@root" ]; then
-    echo "Error: Must be run as root"
+SERVER=$(hostname -s)
+REMOTE="pcloud:vps_bkp/${SERVER}"
+RCLONE_BIN=/opt/smkbin/rclone
+
+MYDIR="/"
+FILTER="/root/.dotfiles/conf/filter.txt"
+VERBOSE=""	# Add verbose -v as needed
+LOG="/tmp/rclone_log.txt"
+
+WHOAMI=`whoami`
+if [ "@$WHOAMI" \!= "@root"    ]; then
+    echo Error: Must be run as root
     exit 1
 fi
 
-# Check if required binaries exist
-check_binaries() {
-    for bin in "$@"; do
-        if ! command -v "$bin" &> /dev/null; then
-            echo "Error: $bin not found. Please install it."
-            exit 1
-        fi
-    done
-}
+pushd ${MYDIR}
 
-check_binaries tar pv "$RCLONE_BIN"
-backup_dirs=("root" "home" "etc" "etc/nginx" "var/www" "var/letse/smk/certificates" "etc/ssl/certs/")
-bkp_dir="/tmp/bkp_$(date +"%Y%m%d")"
-mkdir -p "${bkp_dir}"
-pushd /
-for i in "${!backup_dirs[@]}"; do
-    # bkp_name=$(basename "${backup_dirs[i]}")
-    echo "$bkp_name"
-    echo "Starting tar of ${backup_dirs[$i]} ..."
-    tar czf "${bkp_dir}/${backup_dirs[$i]//\//_}.tgz" --directory="/" "${backup_dirs[$i]}"
-    # tar czf - "${backup_dirs[$i]//_//}" -P | pv -s $(du -sb "/${backup_dirs[$i]//_//}" | awk '{print $1}') | gzip > "${bkp_dir}/${backup_dirs[$i]}.tgz"
-    echo "Done tar of ${backup_dirs[$i]}"
-done
+echo "Performing Sync to ${REMOTE}"
+# Borg Handles Archiving VPS State, so just sync latest dir state
+nice ${RCLONE_BIN} sync / ${REMOTE}/latest --filter-from ${FILTER} ${VERBOSE} --skip-links --update --use-server-modtime &>> ${LOG}
+echo "Done"
+
 popd
-
-echo "Created backups at : ${bkp_dir}"
-echo "----------------BKP------------------"
-du -sh "${bkp_dir}"/* | sort -h
-
-# Uncomment the following lines if you are ready to use rclone
-echo "--------------- RCLONE ---------------"
-bkp_name=$(basename ${bkp_dir})
-"${RCLONE_BIN}" copy "${bkp_dir}" "${REMOTE_NAME}/${bkp_name}" -P -v
-
-echo "--------------- Cleanup --------------"
-rm -rf ${bkp_dir}
 ````
 
 ### Create a cron job
