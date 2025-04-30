@@ -11,11 +11,18 @@
  [General Software Engineering Principle Overview](principles.md)
 
 ## High Level Design (HLD) - Architecture & Strategy
+
+Topics
+
 * System Architecture - APIs, Databases, Caching, Load Balancing
 * Technology Choices - SQL vs NoSQL, Monolith vs Microservices
 * Data Flows - Request Handling, processing, storage flows
 * Scalability & Fault Tolerance - Replication, Sharding, Failover
 * Trade-offs & Bottlenecks - CAP Theorem, latency, cost
+
+Notes
+
+* [Notes on HLD](hld/index.md)
 
 ## Low-Level Design (LLD) - Implementation & Code
 * Class Diagrams - Object-oriented structure
