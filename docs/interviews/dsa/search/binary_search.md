@@ -1,11 +1,11 @@
 # Binary Search
 
-Binary Search is a powerful algorithm to find an element or solve optimization problems in a **search space** where the data satisfies specific properties. Below is an easy-to-follow summary and framework for applying Binary Search effectively:
+Binary search is a powerful algorithm for locating an element or solving optimization problems within a search space where the data meets specific criteria. The following is a concise summary and framework for applying binary search effectively:
 
 Key Concepts
 
 1. **Search Space:** 
-   * A set of elements (e.g., indices, numbers, or a conceptual range) that can be ordered or partitioned. Examples: Sorted arrays, monotonic functions, or intervals.
+   * A set of elements, such as indices, numbers, or a conceptual range, that can be ordered or partitioned. Examples include sorted arrays, monotonic functions, and intervals.
 
 2. **Predicate (p(x))**: 
    * A boolean function (true/false) applied to items in the search space.

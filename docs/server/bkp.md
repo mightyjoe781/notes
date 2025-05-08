@@ -1,8 +1,8 @@
 ## Backup VPS using rclone
 
-Cheap VPS Offers often do not include backups, so user are at their devices to take backups. A best solution for users which have cheap vps with no backup facilities is to buy cloud storage and create their own backup script that sends the backups to that vendor.
+Cheap VPS offers often do not include backups, so users must take backups on their devices. The best solution for users with cheap VPS plans lacking backup facilities is to purchase cloud storage and create a backup script that sends backups to the cloud vendor.
 
-So your cloud drive becomes like a take anywhere stick, where you keep regular backups of your VPS.
+This approach makes the cloud drive function like a portable storage device, where regular VPS backups are stored.
 
 ### Sync Script with pcloud
 
@@ -116,14 +116,14 @@ popd
 
 #### Further Steps
 
-- You could run this script montly using `crond` or a `systemd` scripts as suited backup frequency.
-- Example cron I use, which use `ntf` to send mobile notification directly.
+- Run this script monthly using crond or a systemd script according to the required backup frequency.
+- An example cron job I use sends mobile notifications directly using `ntf`.
 
 ````bash
 0 2 * * 6 /usr/local/bin/ntf -t WEEKLY_PCLOUD_SYNC done /root/bin/pcloud_sync.sh
 ````
 
-* [https://github.com/wolfv6/rclone_jobber/tree/master](https://github.com/wolfv6/rclone_jobber/tree/master) : `rclone_jobber` is a scripts for backup
+* [https://github.com/wolfv6/rclone_jobber/tree/master](https://github.com/wolfv6/rclone_jobber/tree/master) : `rclone_jobber` is a script for backup.
 
 ### Borg - Snapshots
 

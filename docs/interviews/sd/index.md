@@ -30,9 +30,15 @@ Notes
 * API Design - REST, GraphQL, gRPC best practices
 * [Design Patterns](lld/design_patterns.md) - Singleton, Factory, CQRS, Event-Driven
 * Problem Implementations - Examples & Case Studies
-## Further Reading
-* _Designing Data-Intensive Applications_ – Martin Kleppmann
-* _System Design Interview Guide_ – Alex Xu
-* _The Art of Scalability_ – Abbott & Fisher
-* [Company Engineering Blogs/Content](company.md)
+## Resources
 
+Required
+
+* _System Design Interview Guide_ 1 & 2 – Alex Xu
+* _Designing Data-Intensive Applications_ – Martin Kleppmann
+
+Other
+
+* _The Art of Scalability_ – Abbott & Fisher
+* [Arpit Bhayani YouTube Channel & Courses](https://www.youtube.com/c/ArpitBhayani)
+* [Company Engineering Blogs/Content](company.md)

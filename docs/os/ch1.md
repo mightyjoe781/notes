@@ -1,10 +1,10 @@
 # Introduction
 
-If application programmers had do to understand how every hardware attached to a modern computer works in detail and managing these components along with optimally using them, then no code would ever get written.
+If application programmers had to understand the detailed workings of every hardware component attached to a modern computer and manage these components while using them optimally, no code would ever be written.
 
-For this reason every computer is equipped with a layer of software called as Operating System which provides a much better, simpler, cleaner model of the computer and to handle managing all the resources.
+For this reason, every computer includes a layer of software called the operating system. It provides a simpler, cleaner model of the computer and manages all resources.
 
-The program that users interact with is called as shell when its text based and GUI when its graphical based. (Note : GUI is not part of OS even though it uses OS to get its work done).
+The program with which users interact is called the shell when it is text-based and the graphical user interface (GUI) when it is graphical. Note that the GUI is not part of the operating system, although it relies on the operating system to function.
 
 Operating System runs in two modes.
 
