@@ -6,7 +6,7 @@
   * API call to get profile information
   * reading specific line from a file
   * doing multiple table joins
-* frequently accessed data in a termporary storage location. API server will first check cache, if item is not present it will fetch from the actual DB, and store it in cache.
+* Frequently accessed data is stored in a temporary location. The API server first checks the cache. If the item is not present, it fetches it from the actual database and stores it in the cache.
 * Cache are faster and expensive. Cache is not a breaking point in a design, it helps improve the design.
 * Caches are just glorified hash tables
 * Examples

@@ -1,20 +1,39 @@
 # Sliding Window
 
-All problems of sliding window have similar basic idea: *Slide a sub-array(window) in a linear fashion from left to right over original array of n elements*.
+All sliding window problems share a basic concept: slide a sub-array (window) linearly from left to right over the original array of \(n\) elements.
 
-Types:
+## Common Problem Types
 
-1. find the smallest sub-array size(smallest window length) so that sum of the sub-array is greater or equal to a certain constant S in O(n).
-2. find the smallest sub-array size(smallest window length) os that elements inside the sub-array contains all integers in range [1..K].
-3. find the maximum sum of a certain sub-arry with static size K.
-4. find the minimum of each possible sub-array with static size K.
+1. **find the smallest sub-array size**(smallest window length) such that sum of the sub-array is greater or equal to a certain constant S in O(n).
+2. **find the smallest sub-array size**(smallest window length) such that elements inside the sub-array contains all integers in range [1..K].
+3. **find the maximum sum** of a certain sub-arry with static size K.
+4. **Find the minimum element** in every sub-array of size \(K\) — a classic problem solved efficiently using a deque.
 
-Solutions
+## Solutions
 
-1. we keep a window that keeps on growing, append the element on the back of window and add it to some running sum or keeps shrinking (remove from front) as long as some constraint is satisfied like running sum >= S
-2. we maintain a window that keeps growing if some constraint is not satisfied like [1..K] elements are not present otherwise keep shrinking it. We keep the smallest window thorhout the process and report the answer. To keep track of whether range [1..K] is covered or not, we can use some frequency counting. Its important to keep updating frequency is window grows or shrinks
-3. insert K integers in window and compute its sum, and then declare as current maximum. Then just slide window over to right by adding last element and removing element in front. Keep track of maxima while doing this
-4. this is challenging especially if n is quite large. To get O(n) solution use deque to model the window. this time we maintain that the window is sorted in ascending order, that is front element of deque is minimum. However this changes ordering of elements in the array. To keep track of whether an element is in window or not, we need to remember index of each element too. See example below
+1.  **Variable Size Window with Sum Constraint**
+   - Maintain a window that **grows** by adding elements at the back (right pointer) and **shrinks** by removing elements from the front (left pointer) as long as the running sum meets or exceeds the target \(S\).
+   - Continuously update the smallest window length satisfying the condition like `running sum >= S`
+
+2. **Variable Size Window with Frequency Constraints**
+   - Expand the window until it contains **all required elements** (e.g., all integers in \([1..K]\)).
+   - Use a frequency map to track counts of elements inside the window.
+   - Shrink the window from the left while maintaining the constraint to find the minimal window.
+
+3. **Fixed Size Window for Maximum Sum**
+   - Initialize the window with the first \(K\) elements and compute their sum.
+   - Slide the window forward by removing the element at the front and adding the next element at the back.
+   - Keep track of the maximum sum encountered.
+
+4. **Fixed Size Window for Minimum Element (Using Deque)**
+   - Use a **deque** to maintain elements in ascending order within the current window.
+   - For each new element:
+   - Pop elements from the back of the deque while they are larger than the current element to maintain sorting.
+   - Add the current element along with its index.
+   - Remove elements from the front if they fall outside the current window.
+   - The front of the deque always contains the minimum element for the current window.
+
+5. this is challenging especially if n is quite large. To get O(n) solution use deque to model the window. this time we maintain that the window is sorted in ascending order, that is front element of deque is minimum. However this changes ordering of elements in the array. To keep track of whether an element is in window or not, we need to remember index of each element too. See example below
 
 ````c++
 // Type-1
@@ -38,21 +57,31 @@ int subarraySum(vector<int>& nums, int k) {
 ````
 
 ````c++
-// Type-4
+// Type-4: Minimum in every subarray of size K using deque
 void SlidingWindow(int A[], int n, int K) {
-  // ii---or pair<int, int>---represents the pair (A[i], i)
-  deque<ii> window; // we maintain ‘window’ to be sorted in ascending order
-  
-  for (int i = 0; i < n; i++) { // this is O(n)
-    while (!window.empty() && window.back().first >= A[i])
-    	window.pop_back(); // this to keep ‘window’ always sorted
-    window.push_back(ii(A[i], i));
+    // pair<int,int> represents (value, index)
+    deque<pair<int, int>> window;  // maintain ascending order in window
     
-  // use the second field to see if this is part of the current window
-  while (window.front().second <= i - K) // lazy deletion
-  	window.pop_front();
-  if (i + 1 >= K) // from the first window of length K onwards
-  	printf("%d\n", window.front().first); // the answer for this window
-} }
+    for (int i = 0; i < n; i++) {
+        // Remove elements larger than current from the back
+        while (!window.empty() && window.back().first >= A[i])
+            window.pop_back();
+        
+        window.push_back({A[i], i});
+        
+        // Remove elements out of current window from front
+        while (window.front().second <= i - K)
+            window.pop_front();
+        
+        // Output minimum for windows starting from index K-1
+        if (i + 1 >= K)
+            printf("%d\\n", window.front().first);
+    }
+}
 ````
 
+## Problems
+
+* [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
+* [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
+* [76. Minimum Window Substring](https://leetcode.com/problems/minimum-window-substring/)

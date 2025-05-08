@@ -5,6 +5,29 @@
 * Array
   * [Two Pointer](array/ch1.md)
   * [Sliding Window](array/ch2.md)
+  * Prefix Sums & Difference Arrays
+  * Subarrays & Subsequences
+* Linked List
+  * Singly & Double Linked Lists
+  * Fast & Slow Pointer Techniques
+  * Recursive Linked List Problems
+  * Cycle Detection & List Manipulation
+
+* Stack & Queues
+  * Stack Operations & Applications
+  * Queue & Deque Implementations
+  * Expression Evaluation & Parsing
+  * Monotonic Stacks & Sliding Window Maximum
+
+* Hashing
+* Heaps & Priority Queues
+* Disjoint Set Union (DSU)
+* Trees
+  * Fenwick Trees
+  * Segment Trees
+  * Sqrt Decomposition
+  * Graphs
+
 
 
 **Sorting**
@@ -18,19 +41,19 @@
 **Search**
 
 * [Binary Search](search/binary_search.md)
-* BSTs
-* Hashing
-* Radix Search
+* Binary Search Trees (BSTs)
+* Hashing Based Search Methods
+* Radix Search & Other Specialized Searches
 
 **Problem Solving Paradigm**
 
-- Complete Search
+- Complete Search (Brute Force)
 
 - Divide & Conquer
 
-- Greedy
+- Greedy Algorithms & Strategies
 
-- Dynamic Programming
+- Dynamic Programming Patterns
 
 **Graph**
 
@@ -51,7 +74,16 @@
 * String Processing with DP
 * Suffix Tree
 * String Tasks
-* Advanced Algorithms
+* Advanced String Algorithms (Optional)
+
+**Additional Topics**
+
+* Mathematics & Number Theory
+* Bit Manipulation
+* Geometry
+* Miscellaneous Algorithms
+
+// to be removed and refactored topics
 
 **Trees**
 
