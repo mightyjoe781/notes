@@ -4,8 +4,6 @@
 
 When it comes to courses, especially video courses, I am very skeptical. This is probably one of the few no-nonsense courses available.
 
-Below are notes from Arpit Bhayani's courses, intended for reference and quick lookup. For more context, visit the courses at: [https://arpitbhayani.me/courses](https://arpitbhayani.me/courses)
-
 ## Basics
 
 - [Introduction to System Design](intro.md)
@@ -70,5 +68,3 @@ Below are notes from Arpit Bhayani's courses, intended for reference and quick l
   - Adhoc System Design
   - Algorithmic System Design - I
   - Algorithmic System Design - II
-
-## 
