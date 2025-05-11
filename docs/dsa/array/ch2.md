@@ -11,21 +11,21 @@ All sliding window problems share a basic concept: slide a sub-array (window) li
 
 ## Solutions
 
-1.  **Variable Size Window with Sum Constraint**
+- **Variable Size Window with Sum Constraint**
    - Maintain a window that **grows** by adding elements at the back (right pointer) and **shrinks** by removing elements from the front (left pointer) as long as the running sum meets or exceeds the target \(S\).
    - Continuously update the smallest window length satisfying the condition like `running sum >= S`
 
-2. **Variable Size Window with Frequency Constraints**
+- **Variable Size Window with Frequency Constraints**
    - Expand the window until it contains **all required elements** (e.g., all integers in \([1..K]\)).
    - Use a frequency map to track counts of elements inside the window.
    - Shrink the window from the left while maintaining the constraint to find the minimal window.
 
-3. **Fixed Size Window for Maximum Sum**
+- **Fixed Size Window for Maximum Sum**
    - Initialize the window with the first \(K\) elements and compute their sum.
    - Slide the window forward by removing the element at the front and adding the next element at the back.
    - Keep track of the maximum sum encountered.
 
-4. **Fixed Size Window for Minimum Element (Using Deque)**
+- **Fixed Size Window for Minimum Element (Using Deque)**
    - Use a **deque** to maintain elements in ascending order within the current window.
    - For each new element:
    - Pop elements from the back of the deque while they are larger than the current element to maintain sorting.
@@ -33,7 +33,7 @@ All sliding window problems share a basic concept: slide a sub-array (window) li
    - Remove elements from the front if they fall outside the current window.
    - The front of the deque always contains the minimum element for the current window.
 
-5. this is challenging especially if n is quite large. To get O(n) solution use deque to model the window. this time we maintain that the window is sorted in ascending order, that is front element of deque is minimum. However this changes ordering of elements in the array. To keep track of whether an element is in window or not, we need to remember index of each element too. See example below
+- this is challenging especially if n is quite large. To get O(n) solution use deque to model the window. this time we maintain that the window is sorted in ascending order, that is front element of deque is minimum. However this changes ordering of elements in the array. To keep track of whether an element is in window or not, we need to remember index of each element too. See example below
 
 ````c++
 // Type-1

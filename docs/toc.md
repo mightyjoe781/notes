@@ -18,19 +18,19 @@ hide:
 
   ---
 
-  :simple-thealgorithms:{ .lg .middle } [SDE](interviews/index.md) [WIP]
+  :simple-thealgorithms:{ .lg .middle } [DSA](dsa/index.md) [WIP]
+
+  :material-wrench:{ .lg .middle } [System Design](sd/index.md) [WIP]
+
+  :simple-openai:{ .lg .middle } LLM & Agents [Planned ‘26]
 
   :material-language-cpp:{ .lg .middle } C++ [Upcoming]
-
-  :material-trophy-outline:{ .lg .middle } [Competitive Coding](cc/index.md) [WIP]
 
   :material-language-go:{ .lg .middle }  [Go](go/index.md) ✅
 
   :material-language-python:{ .lg .middle }  [Python](python/index.md) ✅
 
   :material-flash:{ .lg .middle }  [Pyspark](pyspark/index.md) ✅
-
-  :material-language-rust:{ .lg .middle } Rust [Planned ‘26]
 
 - __Development Tools and Environment__
 

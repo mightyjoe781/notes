@@ -16,17 +16,18 @@
 - Determine if the two-pointer technique applies.
 
   - Is the array or string sorted? Can it be sorted without violating constraints?
-
   - Are pairs, triplets, or subarrays required?
-
   - Can two loops be replaced by two pointers? NOTE: Extra Information by sorted constraint allows us to skip every pair check.
+
 - Initialize the pointers
   - Usually, `l = 0` and `r = n-1` for pairs
   - For windows, `l` and `r` start at `0`
+
 - Pointer moving conditions
   - If `sum` or `constraint` is more, move `r` to reduce it
   - If `sum` or `constraint` is less, move `l` to reduce it
   - For partitioning problems, swap elements and move pointers accordingly
+
 - Stop Conditions : When pointers cross or meet, terminate
 
 ## Examples

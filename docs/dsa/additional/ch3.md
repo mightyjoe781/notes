@@ -1,6 +1,4 @@
-## Modular Arithmetic
-
-### Modular Arithmetic
+# Modular Arithmetic
 
 $$
 \frac{A}{B} = Q\text{ remainder }R
