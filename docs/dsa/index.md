@@ -10,25 +10,25 @@
 * Linked List
   * [Basics of Linked List](ll/ch1.md)
   * [Linked List Techniques](ll/ch2.md)
-  
+
 * Stack & Queues
-  * Stack Operations & Applications
-  * Queue & Deque Implementations
-  * Expression Evaluation & Parsing
-  * Monotonic Stacks & Sliding Window Maximum
+  * [Stack Operations & Applications](stknq/ch1.md)
+  * [Queue & Deque Implementations](stknq/ch2.md)
+  * [Expression Evaluation & Parsing](stknq/ch3.md)
+  * [Monotonic Stacks & Sliding Window Maximum](stknq/ch4.md)
+
+
+* Heaps & Priority Queues
+  * [Min-Heaps & Max-Heaps](sorting/ch4.md)
+  * Real-time Top-K Elements
+  * Median Maintenance
+  * Heap-based Sorting & Merging
 
 * Hashing
   * Hash Maps & Frequency Counting
   * Bucketing & Grouping Strategies
   * Ordered Maps & TreeMaps
   * Collision Handling & Hash Functions
-
-* Heaps & Priority Queues
-  * Min-Heaps & Max-Heaps
-  * Real-time Top-K Elements
-  * Median Maintenance
-  * Heap-based Sorting & Merging
-
 * Disjoint Set Union (DSU)
   * Union-Find Data Structure
   * Cycle Detection in Graphs

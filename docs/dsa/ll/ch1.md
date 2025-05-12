@@ -123,3 +123,4 @@ t->prev = x;
 * Remove Nth Node from End (19)
 * Remove Linked List Element (203)
 * Intersection of Two Linked List (160)
+* Josephus Problem (Linked List Variant)
