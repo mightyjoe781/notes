@@ -21,19 +21,32 @@
 ### Examples
 
 ```c++
+// Kadane's Algorithm
 int maxSubArray(vector<int>& nums) {
 	int n = nums.size(), i ,res = INT_MIN;
 	int prev = 0, curr;
-    for(i = 1; i <= n; i++){
-        curr = max(prev + nums[i-1], nums[i-1]);
-        res = max(res,curr);
-        prev = curr;
-    } 
+  for(i = 1; i <= n; i++){
+      curr = max(prev + nums[i-1], nums[i-1]);
+      res = max(res,curr);
+      prev = curr;
+  }
   return res; 
 }
+
+// Alternate Implementation
+int maxSubArray(vector<int>& nums) {
+	int n = nums.size(), i ,res = INT_MIN;
+	int sum = 0;
+  for(i = 0; i <= n; i++){
+		sum += nums[i];
+    res = max(res, sum);
+    if(sum < 0) sum = 0; // when sum drops negative we will not find better solution by adding more numbers, better to reset
+  }
+  return res; 
+}
+
+// NOTE: Both Implementation works regardless of negative numbers
 ```
-
-
 
 ## Subsequences
 
