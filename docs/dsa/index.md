@@ -1,4 +1,4 @@
-## Content
+# Content
 
 ### **Data Structures**
 
@@ -8,11 +8,9 @@
   * [Prefix Sums & Difference Arrays](array/ch3.md)
   * [Subarrays & Subsequences](array/ch4.md)
 * Linked List
-  * Singly & Double Linked Lists
-  * Fast & Slow Pointer Techniques
-  * Recursive Linked List Problems
-  * Cycle Detection & List Manipulation
-
+  * [Basics of Linked List](ll/ch1.md)
+  * [Linked List Techniques](ll/ch2.md)
+  
 * Stack & Queues
   * Stack Operations & Applications
   * Queue & Deque Implementations
