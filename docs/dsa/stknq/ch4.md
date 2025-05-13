@@ -9,6 +9,7 @@ Applications
 * Next Greater Element
 * Largest Rectangle in Histogram
 * Stock Span Problem
+* Daily Temperature
 
 ### Next Greater Element
 

@@ -48,3 +48,15 @@ dq.pop_back();
 
 * Queues : OS Scheduling, BFS traversal, Buffers
 * Deques: Sliding Window Problems, Palindrome Checks, Task Scheduler
+
+### Problems
+
+* Implement Queue Using Stacks (232) : Simulate a FIFO queue using two stacks
+* Implement Stack Using Queues : Simulate a LIFO stack using 2 queues
+* Circular Queue (622) : Implementation
+* Double-Ended Queue : Implementation
+* Reverse First K Elements of a Queue
+* Task Scheduler
+* Design Hit Counter
+* Rotten Oranges
+* LRU Cache

@@ -66,3 +66,9 @@ priority_queue<Task> pq;
 ````
 
 * use locks if needed for threading
+
+### Problems
+
+* Implement a Priority Queue using Heap
+* Heap Sort (Concept)
+* Build a Max Heap from an Array
