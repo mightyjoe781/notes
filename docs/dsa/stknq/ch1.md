@@ -51,3 +51,13 @@ C++ (`std::stack`)
 | Size          | s.size()     | Returns number of elements   |
 
 - To use a different container: `stack<int, vector<int>> s; or stack<int, deque<int>> s;`
+
+### Problems
+
+* Valid Parentheses (20)
+* Min Stack (155)
+* String Reversal
+* Basic Calculator
+* Longest Valid Parentheses
+* Decode String
+* Remove K Digits

@@ -74,6 +74,7 @@ Difference Array
 * **Car Pooling Problem** (1094) : Model pickups/drop-offs using difference arrays
 * **Corporate Flight Bookings** (1109) : Apply seat reservations to flight segments and output final seat counts. Difference arrays handle bulk updates efficiently
 * Range Addition (370)
+* Meeting Room II 
 
 Hybrid Problems
 
