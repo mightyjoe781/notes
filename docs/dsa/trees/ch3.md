@@ -5,6 +5,56 @@
 - Supports efficient prefix sums (range sum queries from index 1 to \(j\)) and point updates.
 - Internally stores cumulative frequencies in a vector ⁠ft.
 
+
+
+
+
+## Simple Implementation
+
+````c++
+#include <vector>
+using namespace std;
+
+class FenwickTree {
+private:
+    vector<long long> ft;
+
+    int LSOne(int s) { return s & -s; }
+
+public:
+    FenwickTree(int n) {
+        ft.assign(n + 1, 0); // 1-based indexing
+    }
+
+    // Point update: add v to index i
+    void update(int i, long long v) {
+        while (i < (int)ft.size()) {
+            ft[i] += v;
+            i += LSOne(i);
+        }
+    }
+
+    // Prefix sum query: sum[1..i]
+    long long rsq(int i) {
+        long long sum = 0;
+        while (i > 0) {
+            sum += ft[i];
+            i -= LSOne(i);
+        }
+        return sum;
+    }
+
+    // Range sum query: sum[i..j]
+    long long rsq(int i, int j) {
+        return rsq(j) - rsq(i - 1);
+    }
+};
+````
+
+
+
+## Complete Implementation 
+
 ```c++
 #include <bits/stdc++.h>
 using namespace std;
