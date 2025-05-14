@@ -65,14 +65,18 @@
 
 ## Trees
 
-* Binary Trees & Binary Search Trees (BST)
-* Tree Traversals (DFS, BFS, Morris)
+* [Binary Trees & Binary Search Trees (BST)](trees/ch1.md)
+* [Problems on Binary Trees](trees/ch2.md)
+* [Tries](strings/ch3.md)
+* [Suffix Trees](strings/ch4.md)
+* [Fenwick Trees (Binary Indexed Trees)](trees/ch3.md)
+* [Segment Trees & Lazy Propagation](trees/ch4.md)
 
 Optional Topics in Trees
 
-* [Fenwick Trees (Binary Indexed Trees)](trees/ch3.md)
-* [Segment Trees & Lazy Propagation](trees/ch4.md)
 * [Sqrt Decomposition Techniques](trees/ch5.md)
+
+* [Heap](trees/ch6.md)
 
 * Advanced Trees: AVL, Red-Black Trees, Tries
 
