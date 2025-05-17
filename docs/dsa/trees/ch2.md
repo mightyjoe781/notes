@@ -1,5 +1,12 @@
 ## Problems on Binary Trees & BST
 
+
+
+| Types                         | Pattern                                         | Examples                                         |
+| ----------------------------- | ----------------------------------------------- | ------------------------------------------------ |
+| **Recursion with Return**     | Return values from children, accumulate results | Path Sum in Tree, Sum of Subsets                 |
+| **Recursion with Parameters** | Track path, state                               | Subsequence with sum K, Combinations with k size |
+
 | Problem Type                       | Description                                         | Example Questions          |
 | ---------------------------------- | --------------------------------------------------- | -------------------------- |
 | **Basic Traversals**               | Implement preorder, inorder, postorder, level order | Leetcode 94, 144, 102      |

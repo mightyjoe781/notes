@@ -110,3 +110,7 @@ int firstF(int lo, int hi) {
 4. **Post-Loop Check**: Always verify the result before returning to avoid off-by-one errors.
 
 Binary Search simplifies problems when you clearly define the search space and the predicate.
+
+### Further Study
+
+[Divide & Conquer](paradigm/dnc.md)
