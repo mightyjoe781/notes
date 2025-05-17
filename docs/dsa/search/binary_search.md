@@ -113,4 +113,4 @@ Binary Search simplifies problems when you clearly define the search space and t
 
 ### Further Study
 
-[Divide & Conquer](paradigm/dnc.md)
+[Divide & Conquer](../paradigm/dnc.md)
