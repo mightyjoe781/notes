@@ -57,7 +57,7 @@
 
 * [Simple Recursion](recursion/ch1.md)
 
-* [Combinatorics & Permutations](ch2.md)
+* [Combinatorics & Permutations](recursion/ch2.md)
 
 
 * String Recursion

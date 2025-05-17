@@ -6,14 +6,14 @@
 
 * NOTE: Subsets don’t have any specific order
 * To solve this problems lets divide the solution set using some criteria where both solutions are
-  * Disjoint ($c_1 \and c_2 = \phi $)
-  * Universal ($c_1 \or c_2 = U$)
+  * Disjoint ($c_1 \text{ and } c_2 = \phi $)
+  * Universal ($c_1 \text{ or } c_2 = U$)
 * we can interpret solution set as : $c_1$ solution that includes first element in the subset, $c_2$ solution that doesn’t include the first element
 * Solution for `[2, 3, 5]` becomes
   * $c_1$ : number of subset of `[3, 5]`
   * $c_2$ : any subsets of `[3, 5]` and append `2` to it
 * Solution is based on Suffix Array
-* Recurrence : `f(arr, 0, n-1) = f(arr, 1, n-1)` $\or$ `f(arr, 1, n-1) + {arr[0]}`
+* Recurrence : `f(arr, 0, n-1) = f(arr, 1, n-1)` $\text{ or }$ `f(arr, 1, n-1) + {arr[0]}`
 * Base Case: `f(arr, n-1, n-1) = { {}, {arr[n-1]}}`
 
 ````c++
