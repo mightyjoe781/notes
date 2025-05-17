@@ -46,22 +46,44 @@
 ## Search
 
 * [Binary Search](search/binary_search.md)
-* Search in Rotated/Sorted Array
-* Binary Search Trees (BSTs) Operations
+* [Search in Rotated/Sorted Array](search/ch2.md)
+* [Binary Search Trees (BSTs) Operations](trees/ch1.md)
 * Hashing Based Search Methods
-* Radix Search & Trie-based Search
+* Radix Search & Trie-based Search (Optional)
+
+
+
+## Recursion
+
+* [Simple Recursion](recursion/ch1.md)
+
+* [Combinatorics & Permutations](ch2.md)
+
+
+* String Recursion
+
+* Backtracking
+
+  
 
 ## Problem Solving Paradigm
 
-- Complete Search (Brute Force)
-
-- Divide & Conquer
-
-- Greedy Algorithms & Strategies
-
+- [Complete Search (Brute Force)](paradigm/complete.md)
+- [Divide & Conquer](paradigm/dnc.md)
+- [Greedy Algorithms & Strategies](paradigm/greedy.md)
 - Dynamic Programming Patterns
-
-- Memoization & State Compression
+  - 1D DP
+  - 2 D DP
+  - Grid DP
+  - Subset DP
+  - Unbounded & Bounded (0/1) Knapsack
+  - Bitmask DP
+  - DP on Trees
+  - Interval DP
+  - Palindrome DP
+  - Digit DP
+  - Game DP
+  - Memoization & State Compression
 
 ## Trees
 
@@ -105,12 +127,13 @@ Optional Topics in Trees
 ## Additional Topics
 
 * Mathematics & Number Theory
-* Prime Numbers, GCD, LCM
+* [Prime Numbers, GCD, LCM](additional/ch2.md)
 * [Modular Arithmetic & Exponentiation](additional/ch3.md)
 * Combinatorics & Probability
 * Bit Manipulation
 * Bitwise Operators & Tricks
 * Subset Generation & Bitmask DP
+* Matrix Problems
 * Computational Geometry
 * Points, Lines, Polygons
 * Convex Hull & Line Intersection
