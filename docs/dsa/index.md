@@ -34,6 +34,8 @@
 
 * [Hash Maps & Frequency Counting](hash/ch1.md)
 
+
+
 ## Sorting
 
 * [Elementary Sorting Strategies](sorting/ch1.md)
@@ -42,6 +44,8 @@
 * [Priority Queues & Heapsort](heaps/ch1.md)
 * Counting Sort, Radix Sort & Bucket Sort
 * [Special Sorting Techniques](sorting/ch6.md)
+
+
 
 ## Search
 
@@ -59,31 +63,29 @@
 
 * [Combinatorics & Permutations](recursion/ch2.md)
 
+* [String Recursion](recursion/ch3.md)
 
-* String Recursion
+* [Backtracking](recursion/ch4.md)
 
-* Backtracking
 
-  
 
 ## Problem Solving Paradigm
 
 - [Complete Search (Brute Force)](paradigm/complete.md)
 - [Divide & Conquer](paradigm/dnc.md)
 - [Greedy Algorithms & Strategies](paradigm/greedy.md)
-- Dynamic Programming Patterns
-  - 1D DP
-  - 2 D DP
-  - Grid DP
-  - Subset DP
-  - Unbounded & Bounded (0/1) Knapsack
+- [Dynamic Programming Patterns](dp/intro.md)
+  - [1D DP](dp/ch1.md)
+  - [2D DP](dp/ch2.md)
+  - [Unbounded & Bounded (0/1) Knapsack](dp/ch3.md)
+  - [Grid & Palindrome DP](dp/ch4.md)
+  - [Game & Interval DP](dp/ch5.md)
+- Advanced DP Problems
   - Bitmask DP
   - DP on Trees
-  - Interval DP
-  - Palindrome DP
   - Digit DP
-  - Game DP
-  - Memoization & State Compression
+
+
 
 ## Trees
 
@@ -103,6 +105,8 @@ Optional Topics in Trees
 
 * Advanced Trees: AVL, Red-Black Trees, Tries
 
+
+
 ## Graph
 
 * [Graph Properties and their Types](graphs/ch1.md)
@@ -114,6 +118,8 @@ Optional Topics in Trees
 * [Other Algorithms](graphs/ch6.md) (SCC, Bridges, Articulation Points)
 * [Summary](graphs/summary.md)
 
+
+
 ## Strings
 
 * [Basic String Processing](strings/ch1.md)
@@ -123,6 +129,8 @@ Optional Topics in Trees
 * String Processing with DP
 * String Tasks
 * Compression & Encoding Techniques
+
+
 
 ## Additional Topics
 
