@@ -2,7 +2,7 @@
 
 ## Climbing Stairs
 
-[LeetCode Link](https://leetcode.com/problems/climbing-stairs/)
+[Problem Link](https://leetcode.com/problems/climbing-stairs/)
 
 * If a person stands at the bottom, he has choice of taking 1 or 2 steps, and he wants to reach to the top (`n th` stairs)
 * This problem can easily be modeled using following recursion: `f(n) = f(n-1) + f(n-2)` , which is coincidently fibonacci sequence.
@@ -57,6 +57,7 @@ Further Optimization can be done upon recognising that we are using only 2 varia
 
 ## House Robber
 
+- [Problem Link](https://leetcode.com/problems/house-robber/)
 - Notice how robber can’t rob two adjacent houses. Determing houses he will rob to get maximum money
 - Now problem is no longer enumeration (where we could do choice of picking/leaving elements). Here we are given optimization problem and answer is one final answer.
 - We can state the problem as, optimal solution either contains $x$ or it does not.
@@ -128,7 +129,7 @@ Solution of Climbing Stairs using this approach : http://p.ip.fi/a6qS
 
 ## Decode Ways
 
-[Leetcode Link](https://leetcode.com/problems/decode-ways/description/)
+[Problem Link](https://leetcode.com/problems/decode-ways/description/)
 
 * Clearly problem is a counting problem, and we don’t want to enumerate
 * DnC Criteria should make solution mutually exclusive and exhaustive
@@ -193,6 +194,8 @@ int numDecodings(string s) {
 
 ## Longest Increasing Subsequence (LIS)
 
+- [Problem Link](https://leetcode.com/problems/longest-increasing-subsequence/)
+
 Up until we have looked at subarrays, subsequences are different that subarray, they follow the order they appear in, but not necessarily contigous
 
 1. Modelling the Problem: We have to find $res = max\{s_i\}$, where $s_i$ : Length of LIS ending at $i$
@@ -218,9 +221,9 @@ int lengthOfLIS(vector<int>& nums) {
 
 * Solve Longest Arithmetic Subsequence After this problem
 
-
-
 ## Word Break
+
+- [Problem Link](https://leetcode.com/problems/word-break/)
 
 All possible splits can be calculated and some will be valid, and some will not be valid. We can have splits at `0, 1, 2, ..., n-1` giving $s_1, s_2, ..., s_n$
 
