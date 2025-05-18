@@ -47,6 +47,7 @@ int maxProfit(vector<int>& prices, int fee) {
 ## Longest Arithmetic Subsequence
 
 * Nested, 2D DP
+* [Problem Link](https://leetcode.com/problems/longest-arithmetic-subsequence/)
 
 1. Modelling the Problem: We have to find $res = max\{s_i\}$, where $s_i$ : length or largest Arithmetic Subsequence ending at $i$
 2. Now to find $s_i$ : Assume $j$ for every $j < i$ s.t. common difference `d = A[i] - A[j]` is same.
