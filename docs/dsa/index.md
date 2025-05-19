@@ -89,7 +89,7 @@
   - [Grid & Palindrome DP](dp/ch4.md)
   - [Game & Interval DP](dp/ch5.md)
 - Advanced DP Problems
-  - Bitmask DP
+  - [Bitmask DP](additional/bit2.md)
   - DP on Trees
   - Digit DP
 
@@ -146,9 +146,8 @@ Optional Topics in Trees
 * [Prime Numbers, GCD, LCM](additional/ch2.md)
 * [Modular Arithmetic & Exponentiation](additional/ch3.md)
 * Combinatorics & Probability
-* Bit Manipulation
-* Bitwise Operators & Tricks
-* Subset Generation & Bitmask DP
+* [Bit Manipulation](additional/bit1.md)
+* [Subset Generation & Bitmask DP](additional/bit2.md)
 * Matrix Problems
 * Computational Geometry
 * Points, Lines, Polygons
