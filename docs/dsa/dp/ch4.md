@@ -1,6 +1,6 @@
 # Grid DP
 
-## Minimum Path Sum
+### Minimum Path Sum
 
 * [Problem Link](https://leetcode.com/problems/minimum-path-sum/)
 * Direction Constraint : down, right only
@@ -42,7 +42,7 @@ int minPathSum(vector<vector<int>>& grid) {
 }
 ````
 
-## Dungeon Game
+### Dungeon Game
 
 * [Problem Link](https://leetcode.com/problems/dungeon-game/description/)
 * Find a path where the health of knight doesn’t go below zero, 
@@ -77,11 +77,11 @@ int calculateMinimumHP(vector<vector<int>>& dungeon) {
 }
 ````
 
-## Unique Paths
+### Unique Paths
 
 * https://leetcode.com/problems/unique-paths/description/
 
-## Frog Jump
+### Frog Jump
 
 * [Problem Link](https://leetcode.com/problems/frog-jump/)
 * Split Criteria: at each step we could jump to `k` , `k+1`, `k-1`
@@ -164,13 +164,16 @@ bool canCross(vector<int>& stones) {
 }
 ````
 
-# Palindrome DP
+## Palindrome DP
 
-## Longest Palindromic Subsequences
+### Longest Palindromic Subsequences
 
 * [Problem Link](https://leetcode.com/problems/longest-palindromic-subsequence/)
 * Check Stone Game Problem : [Link](ch5.md)
-* Hint : Recurrence : $P(0, n-1) = max\{P(1, n-1), P(0, n-2)\}$
+* Hint : Recurrence : 
+  * Equal : $P(0, n-1) = 2 + P(1, n-2)$
+  * Not Equal : $P(0, n-1) = max\{P(1, n-1), P(0, n-2)\}$
+
 
 ````c++
 int longestPalindromeSubseq(string s) {
@@ -193,6 +196,6 @@ int longestPalindromeSubseq(string s) {
 }
 ````
 
-## Min Cuts for Pal
+### Min Cuts for Pal
 
 * [Link](https://leetcode.com/problems/palindrome-partitioning-ii/description/)
