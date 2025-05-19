@@ -1,6 +1,6 @@
 # 1D DP
 
-## Climbing Stairs
+### Climbing Stairs
 
 [Problem Link](https://leetcode.com/problems/climbing-stairs/)
 
@@ -55,7 +55,7 @@ int climbStairs(int n) {
 
 Further Optimization can be done upon recognising that we are using only 2 variables to store states. (State Compression)
 
-## House Robber
+### House Robber
 
 - [Problem Link](https://leetcode.com/problems/house-robber/)
 - Notice how robber can’t rob two adjacent houses. Determing houses he will rob to get maximum money
@@ -127,7 +127,7 @@ Solution of Climbing Stairs using this approach : http://p.ip.fi/a6qS
 
 * [House Robber II](https://leetcode.com/problems/house-robber-ii/) : Try similar problem with constraint changed.
 
-## Decode Ways
+### Decode Ways
 
 [Problem Link](https://leetcode.com/problems/decode-ways/description/)
 
@@ -188,11 +188,11 @@ int numDecodings(string s) {
 }
 ````
 
-# Advanced 1D DP Problems
+## Advanced 1D DP Problems
 
 * These problems either have Nested Loops, or more than 1 degree of freedom but in a limited capacity (second dimension is small enough to enumerate) 
 
-## Longest Increasing Subsequence (LIS)
+### Longest Increasing Subsequence (LIS)
 
 - [Problem Link](https://leetcode.com/problems/longest-increasing-subsequence/)
 
@@ -221,7 +221,7 @@ int lengthOfLIS(vector<int>& nums) {
 
 * Solve Longest Arithmetic Subsequence After this problem
 
-## Word Break
+### Word Break
 
 - [Problem Link](https://leetcode.com/problems/word-break/)
 

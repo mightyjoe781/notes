@@ -2,35 +2,43 @@
 
 ## Data Structures
 
-### Array
+- Array
 
-* [Two Pointer](array/ch1.md)
-* [Sliding Window](array/ch2.md)
-* [Prefix Sums & Difference Arrays](array/ch3.md)
-* [Subarrays & Subsequences](array/ch4.md)
+  * [Two Pointer](array/ch1.md)
 
-### Linked List
+  * [Sliding Window](array/ch2.md)
 
-* [Basics of Linked List](ll/ch1.md)
-* [Linked List Techniques](ll/ch2.md)
+  * [Prefix Sums & Difference Arrays](array/ch3.md)
 
-### Stack & Queues
+  * [Subarrays & Subsequences](array/ch4.md)
 
-* [Stack Operations & Applications](stknq/ch1.md)
-* [Queue & Deque Implementations](stknq/ch2.md)
-* [Expression Evaluation & Parsing](stknq/ch3.md)
-* [Monotonic Stacks & Sliding Window Maximum](stknq/ch4.md)
 
-### Heaps & Priority Queues
+- Linked List
 
-* [Min-Heaps & Max-Heaps](heaps/ch1.md)
-* [Applications](heaps/ch2.md)
+  * [Basics of Linked List](ll/ch1.md)
 
-### Disjoint Set Union (DSU)
+  * [Linked List Techniques](ll/ch2.md)
 
-* [Union-Find Data Structure](dsu.md)
 
-### Hashing
+* Stack & Queues
+
+  * [Stack Operations & Applications](stknq/ch1.md)
+
+  * [Queue & Deque Implementations](stknq/ch2.md)
+
+  * [Expression Evaluation & Parsing](stknq/ch3.md)
+
+  * [Monotonic Stacks & Sliding Window Maximum](stknq/ch4.md)
+
+
+* Heaps & Priority Queues
+
+  * [Min-Heaps & Max-Heaps](heaps/ch1.md)
+
+  * [Applications](heaps/ch2.md)
+
+
+* [Disjoint Set Union (DSU)(Union-Find)](dsu.md)
 
 * [Hash Maps & Frequency Counting](hash/ch1.md)
 

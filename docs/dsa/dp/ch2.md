@@ -1,6 +1,6 @@
 # 2D DP
 
-## Best Time to Buy & Sell Stocks with Txn Fee
+### Best Time to Buy & Sell Stocks with Txn Fee
 
 * [Best Time to Buy and Sell Stocks with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/) : might look like above problems but its not because we can sell at will.
 * Cue to DP : Maximize profit (try DP!)
@@ -44,7 +44,7 @@ int maxProfit(vector<int>& prices, int fee) {
 }
 ````
 
-## Longest Arithmetic Subsequence
+### Longest Arithmetic Subsequence
 
 * Nested, 2D DP
 * [Problem Link](https://leetcode.com/problems/longest-arithmetic-subsequence/)
@@ -94,7 +94,7 @@ int longestArithSeqLength(vector<int>& A) {
 }
 ````
 
-## Target Sum
+### Target Sum
 
 * [Problem Link](https://leetcode.com/problems/target-sum/description/)
 * Subset DP, 2 D DP, Counting Problem
@@ -133,7 +133,7 @@ int findTargetSumWays(vector<int>& nums, int target) {
 
 * A further state space optimization is possible here by using a 2x(2001) size array
 
-## Edit Distance
+### Edit Distance
 
 * [Problem Link](https://leetcode.com/problems/edit-distance/)
 * Famous Problem Commonly Asked in Interviews
@@ -169,5 +169,5 @@ int minDistance(string word1, string word2) {
 
 
 
-## Distinct Subsequences
+### Distinct Subsequences
 
