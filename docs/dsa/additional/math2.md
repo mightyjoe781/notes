@@ -73,3 +73,17 @@ ll lcm(int a, int b) {
   * Scheduling problems
   * synchronizing cycles
   * counting common multiples
+
+To Update
+
+Prime Numbers, GCD, LCM
+
+Topics:
+	•	GCD & LCM Basics
+	•	Prime Factorization
+	•	Sieve of Eratosthenes
+	•	Segmented Sieve
+	•	Sieve for Smallest/Largest Prime Factors
+	•	Count & Sum of Divisors
+	•	Prime Number Theorems & Distribution
+	•	Applications of GCD (LCM-related problems, reduction techniques)

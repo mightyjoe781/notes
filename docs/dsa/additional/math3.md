@@ -133,3 +133,21 @@ int main() {
 #### Resources
 
 - [Khan Academy](https://www.khanacademy.org/computing/computer-science/cryptography#modarithmetic)
+
+To update
+
+Modular Arithmetic & Exponentiation
+
+Topics:
+	•	Modular Properties (add, subtract, multiply)
+	•	Modular Exponentiation (Binary Exponentiation)
+	•	Modular Inverse
+	•	Fermat’s Little Theorem
+	•	Extended Euclidean
+	•	Modular Combinatorics
+	•	Modular Division
+	•	Chinese Remainder Theorem
+	•	Euler’s Theorem
+	•	Wilson’s Theorem
+	•	Fast Power Techniques
+	•	Modular Arithmetic in Primes vs Non-Primes

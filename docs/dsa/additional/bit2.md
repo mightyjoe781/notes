@@ -53,6 +53,30 @@ for (int mask = 0; mask < (1 << N); ++mask) {
 - Recurrence: `dp[mask][i] = min(dp[mask][i], dp[mask ^ (1 << i)][j] + dist[j][i]) // for all j ≠ i`
 - Base case: `dp[1 << i][i] = cost from 0 to i`
 
+````c++
+n = 4
+INF = float('inf')
+dp = [[INF] * n for _ in range(1 << n)]
+dp[1][0] = 0  # Start at city 0
+
+for mask in range(1 << n):
+    for u in range(n):
+        if not (mask & (1 << u)):
+            continue
+        for v in range(n):
+            if mask & (1 << v):
+                continue
+            new_mask = mask | (1 << v)
+            dp[new_mask][v] = min(dp[new_mask][v], dp[mask][u] + cost[u][v])
+
+# Final answer: return to city 0
+res = INF
+for u in range(1, n):
+    res = min(res, dp[(1 << n) - 1][u] + cost[u][0])
+
+print(res)
+````
+
 ### Count Number of Ways to Partition into K Subsets
 
 - Problem: Partition a set of n elements into exactly k non-empty subsets

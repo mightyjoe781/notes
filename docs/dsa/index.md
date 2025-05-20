@@ -51,7 +51,7 @@
 * [Mergesort](sorting/ch3.md)
 * [Priority Queues & Heapsort](heaps/ch1.md)
 * Counting Sort, Radix Sort & Bucket Sort
-* [Special Sorting Techniques](sorting/ch6.md)
+* Special Sorting Techniques
 
 
 
@@ -90,8 +90,8 @@
   - [Game & Interval DP](dp/ch5.md)
 - Advanced DP Problems
   - [Bitmask DP](additional/bit2.md)
-  - DP on Trees
-  - Digit DP
+  - [DP on Trees](dp/ch6.md)
+  - [Digit DP](dp/ch7.md)
 
 
 
@@ -111,7 +111,7 @@ Optional Topics in Trees
 
 * [Heap](trees/ch6.md)
 
-* Advanced Trees: AVL, Red-Black Trees, Tries
+* Advanced Trees: AVL, Red-Black Trees
 
 
 
@@ -124,7 +124,6 @@ Optional Topics in Trees
 * [Minimum Spanning Trees](graphs/ch5.md) (Kruskal, Prim)
 * Network Flow Algorithm (Ford-Fulkerson, Edmond-Karp) (Optional)
 * [Other Algorithms](graphs/ch6.md) (SCC, Bridges, Articulation Points)
-* [Summary](graphs/summary.md)
 
 
 
@@ -134,25 +133,33 @@ Optional Topics in Trees
 * [String Matching](strings/ch2.md) (KMP, Rabin-Karp, Z-Algorithm)
 * [Trie Data Structures & Application](strings/ch3.md)
 * [Suffix Tree & Suffix Arrays](strings/ch4.md) (Optional)
-* String Processing with DP
-* String Tasks
-* Compression & Encoding Techniques
+* [String Processing with DP](strings/ch5.md)
+* [String Tasks](strings/ch6.md)
+* [Compression & Encoding Techniques](strings/ch7.md)
 
 
 
-## Additional Topics
+## Additional Topics (WIP)
 
-* Mathematics & Number Theory
-* [Prime Numbers, GCD, LCM](additional/ch2.md)
-* [Modular Arithmetic & Exponentiation](additional/ch3.md)
-* Combinatorics & Probability
-* [Bit Manipulation](additional/bit1.md)
-* [Subset Generation & Bitmask DP](additional/bit2.md)
-* Matrix Problems
-* Computational Geometry
-* Points, Lines, Polygons
-* Convex Hull & Line Intersection
-* Miscellaneous Algorithms & Patterns
-* Simulation & Randomized Algorithms
-* Meet-in-the-Middle Technique
-* Sparse Tables & Range Queries
+* Mathematics
+  * [Mathematics & Number Theory](addtional/math1.md)
+  * [Prime Numbers, GCD, LCM](additional/math2.md)
+  * [Modular Arithmetic & Exponentiation](additional/math3.md)
+  * [Combinatorics & Probability](additional/math4.md)
+
+* Binary Manipulation
+  * [Bit Manipulation](additional/bit1.md)
+  * [Subset Generation & Bitmask DP](additional/bit2.md)
+
+
+* [Matrix Problems](additional/matrix1.md)
+
+Optional (WIP)
+
+* Geometry
+  * [Computational Geometry](additional/geometry1.md)
+  * [Points, Lines, Polygons](additional/geometry2.md)
+  * [Convex Hull & Line Intersection](additional/geometry3.md)
+* [Simulation & Randomized Algorithms](additional/simulation.md)
+* [Meet-in-the-Middle Technique](additional/mitmt)
+* [Sparse Tables & Range Queries](additional/sparse1.md)
