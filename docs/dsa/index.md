@@ -141,7 +141,7 @@ Optional Topics in Trees
 
 ## Additional Topics (WIP)
 
-* Mathematics
+* Mathematics (WIP)
   * [Mathematics & Number Theory](addtional/math1.md)
   * [Prime Numbers, GCD, LCM](additional/math2.md)
   * [Modular Arithmetic & Exponentiation](additional/math3.md)
@@ -152,14 +152,14 @@ Optional Topics in Trees
   * [Subset Generation & Bitmask DP](additional/bit2.md)
 
 
-* [Matrix Problems](additional/matrix1.md)
+* [Matrix](additional/matrix1.md)
 
 Optional (WIP)
 
 * Geometry
-  * [Computational Geometry](additional/geometry1.md)
-  * [Points, Lines, Polygons](additional/geometry2.md)
-  * [Convex Hull & Line Intersection](additional/geometry3.md)
+  * Computational Geometry
+  * Points, Lines, Polygons
+  * Convex Hull & Line Intersection
 * [Simulation & Randomized Algorithms](additional/simulation.md)
-* [Meet-in-the-Middle Technique](additional/mitmt)
-* [Sparse Tables & Range Queries](additional/sparse1.md)
+* Meet-in-the-Middle Technique
+* Sparse Tables & Range Queries

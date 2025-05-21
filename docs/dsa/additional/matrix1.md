@@ -257,6 +257,109 @@ def astar(grid, start, goal):
 
 ## Matrix Exponentiation
 
+https://codeforces.com/blog/entry/67776
+
+- Powerful technique that can be used compute the terms of linear recurrence relations efficiently.
+- General Recurrence relation looks like : $f_n = \Sigma^{k}_{i=1} c_i * f_{n-i}$, where $c_i$ could be zero, implying no dependence on that term.
+- Let’s consider simple case of $f_n = \Sigma^{k}_{i=n} c_k * f_{n-k}$
+- Consider this matrix
+
+$$
+T = \begin{bmatrix}
+    0 & 1 & 0 & 0 & \dots  \\
+    0 & 0 & 1 & 0 & \dots \\
+    \vdots & \vdots & \vdots & \vdots & \vdots \\
+    c_{k} & c_{k-1} & c_{k-2} & \dots  & c_{1}
+\end{bmatrix}
+$$
 
 
-## Sliding Window on 2D Grids
+
+- And the $k * 1$ column vector $F$
+
+$$
+F = \begin{bmatrix}
+    f_0 \\
+    f_1 \\
+    f_2 \\
+    \vdots \\
+    f_{k-1}
+\end{bmatrix}
+$$
+
+$$
+C = T * F = \begin{bmatrix}
+    f_1 \\
+    f_2 \\
+    f_3 \\
+    \vdots \\
+    f_{k}
+\end{bmatrix}
+$$
+
+- Its straightforward to see first $k-1$ entries of $C = T * F$. The $k^{th}$ entry is just the calculation of recurrence relation using the past *k* values of the sequence.So, when we obtain $C=T*F$, the first entry gives $f_1$. It is easy to see that $f_n$ is the first entry of the vector: $C_n = T^n * F$(Here $T^n$ is the matrix multiplication of T with itself *n* times).
+- Example Matrix for Finbonacci sequence
+
+$$
+T = \begin{bmatrix}
+    0 & 1 \\
+    1 & 1 \\
+\end{bmatrix}
+$$
+
+- Main Crux of Problem is getting the $T$ matrix
+- Problem: Let’s write T, F matrix for $f_n = 2 * f_{i-1} + 3 * f_{i-2} + 4 * f_{i-3}$
+- Solution for $f_n = 2 * f_{i-1} + 3 * f_{i-2} + 5$
+
+$$
+C = T * F = \begin{bmatrix}
+    0 & 1 & 0 \\
+    3 & 2 & 5 \\
+    0 & 0 & 1
+\end{bmatrix} * \begin{bmatrix}
+    f_0 \\
+    f_1 \\
+    1
+\end{bmatrix}
+$$
+
+- $n^{th}$ term will still be first entry of $C = T^n * F$
+- To calculate $T^n$, use the concept of binary exponentiation to calculate it in $O(\log(n))$
+
+## Binary Exponentiation
+
+- This requires two function, one to multiply matrices, and second to perform exponentiation
+
+````python
+def mat_mult(A, B, mod=None):
+    n = len(A)
+    res = [[0] * n for _ in range(n)]
+    for i in range(n):
+        for j in range(n):
+            for k in range(n):
+                res[i][j] += A[i][k] * B[k][j]
+                if mod:
+                    res[i][j] %= mod
+    return res
+  
+def mat_pow(mat, power, mod=None):
+    n = len(mat)
+    result = [[1 if i == j else 0 for j in range(n)] for i in range(n)]  # Identity matrix
+    while power > 0:
+        if power % 2 == 1:
+            result = mat_mult(result, mat, mod)
+        mat = mat_mult(mat, mat, mod)
+        power //= 2
+    return result
+
+# finbonacci in O(log n)
+def fib(n):
+    if n == 0:
+        return 0
+    base = [
+        [1, 1],
+        [1, 0]
+    ]
+    res = mat_pow(base, n - 1)
+    return res[0][0]
+````
