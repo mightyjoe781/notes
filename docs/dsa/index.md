@@ -5,36 +5,28 @@
 - Array
 
   * [Two Pointer](array/ch1.md)
-
   * [Sliding Window](array/ch2.md)
-
   * [Prefix Sums & Difference Arrays](array/ch3.md)
-
   * [Subarrays & Subsequences](array/ch4.md)
 
 
 - Linked List
 
   * [Basics of Linked List](ll/ch1.md)
-
   * [Linked List Techniques](ll/ch2.md)
 
 
 * Stack & Queues
 
   * [Stack Operations & Applications](stknq/ch1.md)
-
   * [Queue & Deque Implementations](stknq/ch2.md)
-
   * [Expression Evaluation & Parsing](stknq/ch3.md)
-
   * [Monotonic Stacks & Sliding Window Maximum](stknq/ch4.md)
 
 
 * Heaps & Priority Queues
 
   * [Min-Heaps & Max-Heaps](heaps/ch1.md)
-
   * [Applications](heaps/ch2.md)
 
 
@@ -68,11 +60,8 @@
 ## Recursion
 
 * [Simple Recursion](recursion/ch1.md)
-
 * [Combinatorics & Permutations](recursion/ch2.md)
-
 * [String Recursion](recursion/ch3.md)
-
 * [Backtracking](recursion/ch4.md)
 
 
@@ -153,7 +142,6 @@ Optional Topics in Trees
 
 
 * [Matrix](additional/matrix1.md)
-
 * [Simulation & Randomized Algorithms](additional/simulation.md)
 * [Meet-in-the-Middle Technique](additional/mitmt.md)
 * [Sparse Tables & Range Queries](additional/sparse.md)
