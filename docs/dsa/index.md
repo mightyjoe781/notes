@@ -154,12 +154,11 @@ Optional Topics in Trees
 
 * [Matrix](additional/matrix1.md)
 
-Optional (WIP)
-
-* Geometry
-  * Computational Geometry
-  * Points, Lines, Polygons
-  * Convex Hull & Line Intersection
 * [Simulation & Randomized Algorithms](additional/simulation.md)
 * [Meet-in-the-Middle Technique](additional/mitmt.md)
 * [Sparse Tables & Range Queries](additional/sparse.md)
+* Geometry
+  * [Computational Geometry](additional/geometry1.md)
+  * [Points, Lines, Polygons](additional/geometry2.md)
+  * [Convex Hull & Line Intersection](additional/geometry3.md)
+  * [Advanced Geometry Algorithms](additional/geometry4.md)
