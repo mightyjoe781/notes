@@ -98,4 +98,30 @@ int maxCoins(vector<int>& nums) {
 }
 ````
 
+### Minimum Deletions to make Palindrome
+
+- Problem: Find the minimum number of deletions required to make string palindrome
+- Key Insight: The problem could be formulated as a range DP over substrings, where goal is to minimize deletions in the substring `s[i...j]`
+- Subproblem: `dp[i][j]` : represents the min deletions required to make substring `s[i...j]` a palindrome
+- Base Case
+  - If `i == j`, substring of lenght 1 is already a palindrome, return 0
+  - if `i > j`, empty substring, so shoudl be zero
+  - Transition : if `s[i] == s[j]` then problem is same as solving `dp[i+1][j-1]`
+- There are two possibilities to get answer, either delete left character or right character & get minimum
+
+````c++
+def minDeletions(s):
+    n = len(s)
+    dp = [[0]*n for _ in range(n)]
+
+    for i in range(n-1, -1, -1):
+        for j in range(i, n):
+            if s[i] == s[j]:
+                dp[i][j] = dp[i+1][j-1] if i+1 <= j-1 else 0
+            else:
+                dp[i][j] = 1 + min(dp[i+1][j], dp[i][j-1])
+
+    return dp[0][n-1]The question of whether machines can think is about as relevant as the question of whether submarines can swim" Edsger Dijkstra
+````
+
 ### Matrix Chain Multiplication
