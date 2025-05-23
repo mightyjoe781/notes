@@ -91,6 +91,7 @@
 * [Tries](strings/ch3.md)
 
 Optional Topics in Trees
+
 * [Suffix Trees](strings/ch4.md)
 * [Fenwick Trees (Binary Indexed Trees)](trees/ch3.md)
 * [Segment Trees & Lazy Propagation](trees/ch4.md)
