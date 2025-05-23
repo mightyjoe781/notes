@@ -1,4 +1,4 @@
-# Content
+# DSA
 
 ## Data Structures
 
@@ -91,17 +91,12 @@
 * [Tries](strings/ch3.md)
 
 Optional Topics in Trees
-
 * [Suffix Trees](strings/ch4.md)
 * [Fenwick Trees (Binary Indexed Trees)](trees/ch3.md)
 * [Segment Trees & Lazy Propagation](trees/ch4.md)
-
 * [Sqrt Decomposition Techniques](trees/ch5.md)
-
 * [Heap](trees/ch6.md)
-
 * Advanced Trees: AVL, Red-Black Trees
-
 
 
 ## Graph
@@ -128,14 +123,13 @@ Optional Topics in Trees
 
 
 
-## Additional Topics (WIP)
+## Additional Topics
 
 * Mathematics (WIP)
-  * Mathematics & Number Theory
-  * Prime Numbers, GCD, LCM
-  * Modular Arithmetic & Exponentiation
-  * [Combinatorics & Probability](additional/math4.md)
-
+  * [Mathematics & Number Theory](additional/ch1.md)
+  * [Modular Arithmetic & Exponentiation](additional/ch2.md)
+  * [Combinatorics & Probability](additional/math3.md)
+  * [Advanced Math Topics](additional/math4.md) (Optional)
 * Binary Manipulation
   * [Bit Manipulation](additional/bit1.md)
   * [Subset Generation & Bitmask DP](additional/bit2.md)

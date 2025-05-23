@@ -1,126 +1,95 @@
-# Combinatorics & Probability
+# Advanced Math Topics
 
-## Permutation & Combinations
+## Pell’s Equation (Basic Form)
 
-- Permutation (`nPr`) : Number of ways to arrange `r` objects out of `n` distinct objects, order matters.
-
+Form:
 $$
-nPr = \frac{n!}{(n-r)!}
-$$
-
-- Combination (nCr) : Number of ways to choose `r` objects out of `n` distinct objects, order doesn’t matter
-
-$$
-nCr = \frac{n!}{r!(n-r)!}
+x^2 - D y^2 = 1
 $$
 
-## Pascal’s Triangle
+- A special type of Diophantine Equation
+- Has integer solution only for non-square D
 
-- A triangular array where each number is sum of two directly above it
-- The `nth` row corresponds to coefficient of $(a+b)^n$
-- Properties
-  - $\binom{n}{r} = \binom{n-1}{r-1} + \binom{n-1}{r}$
-- Symmetry: $\binom{n}{r} = \binom{n}{n-r}$
+Approach:
 
-## Binomial Theorem
-
-- Expansion of $(a + b)^n$
+- Use a continued fraction to find its minimal solution
+- Once smalled solution $(x_1, y_1)$ is known rest can be generated using
 
 $$
-(a+b)^n = \Sigma^{n}_{r=0} \binom{n}{r} a^{n-r} b^r
+x_{k+1} + y_{k+1}\sqrt D = (x_1 + y_1\sqrt D)^{k+1}
 $$
 
-- Coefficient are binomial coefficient from Pascal’s Triangle
+- Used in Number theory problems, math olympiads etc.
 
-## Stars & Bars
+## Mobius Function & Inversion Principle
 
-- Technique to find the number of solution to : $x_1 + x_2 + ...+ x_k = n$, $x_i \ge 0$
-- Number of solution is : $\binom{n+k-1}{k-1}$
-- If $x_i > 0$, then number of solution is : $\binom{n-1}{k-1}$
+Definition: For integer $n$ define
+$$
+\mu(n) = \begin{cases}
+1 & \text{if } n = 1 \\
+(-1)^k & \text{if n is a product of k distinct prime} \\
+0 & \text{If n has squared prime factors}
+\end{cases}
+$$
+Properties:
 
-## Inclusion - Exclusion Principle
-
-- To find the size of the union of sets
-
-
-
-## Derangements
-
-- Permutation where no element appears in its original position
-- Number of derangements of n objects, denote as $!n$
+- Used in **inclusion-exclusion**, number-theoretic transforms.
+- Appears in **Dirichlet convolution**:
 
 $$
-!n = n!\Sigma^{n}_{k=0} \frac{(-1)^k}{k!}
+f(n) = \Sigma_{d|n} g(d) \implies g(n) = \Sigma_{d|n} \mu(d) f(\frac{n}{d})
 $$
 
-## Bell, Catalan, Stirling Numbers
+- **Use Case**: Inverting divisor sums, e.g., recovering $\phi(n)$ from sum over divisors.
 
-- Bell Numbers : Number of ways to partition a set of n elements
-- Catalan Number : Number of ways to correctly match parentheses, number of rooted binary trees, etc
+## Integer Partitions (Combinatorial DP)
 
-$$
-C_n = \frac{1}{n+1} \binom{2n}{n}
-$$
+Number of ways to write n as sum of positive numbers (order doesn’t matter)
 
-- Stirling Numbers of the Second Kind: Number of ways to partition $n$ elements into $k$ non-empty subsets
+$P(n)$ = partition function
 
-$$
-S(n, k)
-$$
+Example
 
-## Probabilities
+- 4 has 5 partition : 4, 3+1, 2+2, 2+1+1, 1+1+1+1
 
-### Conditional Probability
+````python
+def partition_count(n):
+    dp = [1] + [0] * n
+    for i in range(1, n+1):
+        for j in range(i, n+1):
+            dp[j] += dp[j - i]
+    return dp[n]
+````
 
-$$
-P(A|B) = \frac{P(A\cap B)}{P(B)} \text{ if P(B) > 0}
-$$
+- Used in: DP optimization, partition-related number theory problems.
 
+## Base Conversions & Number Representations
 
+- **Binary**: base 2
+- **Octal**: base 8
+- **Decimal**: base 10
+- **Hexadecimal**: base 16
 
-### Bayes’ Theorem
+Conversion Technique
 
-$$
-P(H|E) = \frac{P(H)P(E|H)}{P(E)} = \frac{P(H)P(E|H)}{P(H)P(E|H) + P(\overline H)P(E|\overline H)}
-$$
+- Decimal → base b: repeated division by b
+- Base b → decimal: weighted sum by powers of b
 
-- Bayes theorem plays a central role in probability. It improves probability estimates based on evidence.
-- Nice Video : [Link](https://www.youtube.com/watch?v=HZGCoVF3YvM)
+Two’s Complement: Signed binary representation
 
-|                                                              |
-| ------------------------------------------------------------ |
-| ![image-20250520101004237](./math4.assets/image-20250520101004237.png) |
-
-### Expected Value
-
-- For discrete random Variable $X$
+## Continued Fractions (Optional, for theory-heavy contests)
 
 $$
-E[X] = \Sigma x_i P(X=x_i)
+\text{Definition} = a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2 + \dots}}
 $$
 
+Used in :
 
+- Solving Pell’s Equation
+- Approximating Irrational with rational
+- Analyzing number properties (e.g. irrationality of $e, \pi$)
 
-### Linearity of Expectation
+Application
 
-- For any random variables $X, Y$:
-
-$$
-E[X+Y] = E[X] + E[Y]
-$$
-
-
-
-- Holds even if $X, Y$ are dependent
-
-## Radomized Techniques
-
-Discussed in more detail in simulation section
-
-* Monte Carlo Algorithms: Use randomness to get approximate solutions with some probability of error. 
-* Las Vegas Algorithms: Always give correct solutions but runtime is random.
-
-## Probabilistic DP & Sampling
-
-- Use probability distributions to handle states in dynamic programming.
-- Sampling methods (e.g., Markov Chain Monte Carlo) to estimate quantities when exact computation is hard.
+- Minimal Solution for Pell’s Equation
+- Rational Approximation of $\sqrt D, \pi, e$
