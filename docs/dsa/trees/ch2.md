@@ -20,6 +20,45 @@
 | **Trie Operations**                | Insert, search, prefix queries                      | Leetcode 208               |
 | **Fenwick & Segment Trees**        | Range queries and updates                           | Range sum, minimum queries |
 
+
+
+## Problems
+
+### Binary Tree Maximum Path Sum
+
+- [Problem Link](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
+- We have to find a path in the binary tree, that gives the max sum
+- Maximum at a node could be following
+  - Node’s value
+  - Node’s value + max. sum from left subtree
+  - Node’s value + max. sum from right subtree
+  - Node’s Value + max. sum including both subtree
+
+````c++
+int maxSum = INT_MIN;
+int solve(TreeNode* node) {
+    if(!node)
+        return 0;
+    int left = max(solve(node->left), 0);
+    int right = max(solve(node->right), 0);
+    int rooted = node->val + left + right;
+
+    maxSum = max(maxSum, rooted); // no need to check other 3 condition
+
+    return node->val + max(left, right);
+}
+int maxPathSum(TreeNode* root) {
+    solve(root);
+    return maxSum;
+}
+````
+
+
+
+
+
+
+
 **Most Commonly Asked Interview Questions**
 
 | Question Name                                     | Description                       | Difficulty |
