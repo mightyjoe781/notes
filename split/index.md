@@ -1,5 +1,5 @@
 # Markdown Notes Index
-Generated on: 2025-06-01 14:34:33
+Generated on: 2025-06-01 16:46:27
 Source directory: /Users/smk/dev/notes/docs
 Total topics: 36
 Total files: 386
