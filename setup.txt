@@ -7,3 +7,7 @@ pip install mkdocs
 pip install python-markdown-math mdx_truly_sane_lists pymdown-extensions mkdocs-glightbox
 pip install pygments
 pip install mkdocs-git-revision-date-localized-plugin
+
+
+# this is useful to put these notes as reference to llms to verify correctness
+python collect.py docs --max-size 0.5

@@ -1,5 +1,5 @@
 # Dsa Notes - Part 1
-Generated on: 2025-06-01 14:34:33
+Generated on: 2025-06-01 16:46:27
 Topic: dsa
 This is part 1 of 1 parts
 
@@ -17,7 +17,6 @@ XORs have 2 important property other than commutative & associativity
 
 - Identity Element: $A \oplus 0 = A$
 - Self - Inverse : $A \oplus A = 0$
-- XOR is monotonic in absolute difference between numbers
 
 [All about XOR](https://accu.org/journals/overload/20/109/lewin_1915/)
 
@@ -26,13 +25,13 @@ XORs have 2 important property other than commutative & associativity
 * Check if `ith` bit is set
 
 ````c++
-if (n * (1 << i)) {
+if (n & (1 << i)) {
   // i-th bit is set
 }
 ````
 
 - set the `ith` bit : `n |= (1 << i)`
-- clear the `ith` bit : `n |= ~(1 << i)`
+- clear the `ith` bit : `n &= ~(1 << i)`
 - toggle the `ith` bit : `n ^= (1 << i)`
 - Count total set Bits (Hamming Weight)
 
@@ -50,8 +49,16 @@ int countll = __builtin_popcountll(n);    // For long long
 - count trailing zeroes (rightmost 0s) : `int tz = __builtin_ctz(n);`
 - count leading zeroes : `int lz = __builtin_clz(n);`
 
-- Get Rightmost set bit : `int r = n & ~n`
+- Get Rightmost set bit :
   - Used for iterating over subsets
+
+````c++
+// bit manipulation
+int r = n & -n  // Two's complement trick
+// OR
+int r = n & (~n + 1)  // Explicit two's complement
+````
+
 - Remove Rightmost set bit : `n = n & (n-1)`
   - Useful for counter number of set bits : (Kernighan’s Algorithm)
 - Reverse Bits (Manually)
@@ -151,6 +158,18 @@ def count_leading_zeroes(x, bits=32):
 
 def is_power_of_two(x):
     return x > 0 and (x & (x - 1)) == 0
+````
+
+### Summary
+
+````c++
+// Correct bit manipulation operations
+bool checkBit(int n, int i) { return n & (1 << i); }
+int setBit(int n, int i) { return n | (1 << i); }
+int clearBit(int n, int i) { return n & ~(1 << i); }
+int toggleBit(int n, int i) { return n ^ (1 << i); }
+int getRightmostSetBit(int n) { return n & -n; }
+int clearRightmostSetBit(int n) { return n & (n - 1); }
 ````
 
 ## Problems on Bit Manipulation
@@ -7899,6 +7918,21 @@ int firstF(int lo, int hi) {
 
 Binary Search simplifies problems when you clearly define the search space and the predicate.
 
+### Overflow Safe Binary Search Template
+
+````c++
+int binarySearch(vector<int>& arr, int target) {
+    int left = 0, right = arr.size() - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;  // Overflow-safe
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+````
+
 ### Further Study
 
 [Divide & Conquer](../paradigm/dnc.md)
@@ -8704,6 +8738,11 @@ Algorithm
   * If the hashes match, verify the strings.
   * Recompute the hash for the next substring in O(1)
 * Complexity: O(N + M) on average.
+* Things to consider while implementation
+  * Always verify with string comparison after hash match
+  * Consider double hashing for critical applications
+  * Birthday Paradox - The **Birthday Paradox** refers to the counterintuitive probability result that in a group of just 23 people, there is about a 50% chance that at least two people share the same birthday. Shows the vulnerability of hash functions to collisions, leading to the "birthday attack" where finding two inputs that hash to the same output is easier than expected.
+
 
 ````c++
 bool rabin_karp(string text, string pattern) {
@@ -8718,6 +8757,8 @@ bool rabin_karp(string text, string pattern) {
     }
 
     for (int i = 0; i <= n - m; i++) {
+      
+      	// Always verify with string comparison after hash match (left as to-do)
         if (pattern_hash == text_hash && text.substr(i, m) == pattern)
             return true;
         if (i < n - m) {
@@ -8824,7 +8865,6 @@ int strStr(string haystack, string needle) {
     return -1; // Pattern not found
 }
 ````
-
 
 
 
@@ -9770,7 +9810,10 @@ public:
     }
 
     int query(int i, int j) { return query(1, 0, n-1, i, j); }
-    void update(int idx, int val) { update(1, 0, n-1, idx, val); }
+    void update(int idx, int val) { 
+      if (idx < 0 || idx >= n) return;  // Add this check
+      update(1, 0, n-1, idx, val); 
+		}
 };
 ````
 
