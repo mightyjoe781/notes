@@ -69,7 +69,10 @@ public:
     }
 
     int query(int i, int j) { return query(1, 0, n-1, i, j); }
-    void update(int idx, int val) { update(1, 0, n-1, idx, val); }
+    void update(int idx, int val) { 
+      if (idx < 0 || idx >= n) return;  // Add this check
+      update(1, 0, n-1, idx, val); 
+		}
 };
 ````
 

@@ -111,6 +111,21 @@ int firstF(int lo, int hi) {
 
 Binary Search simplifies problems when you clearly define the search space and the predicate.
 
+### Overflow Safe Binary Search Template
+
+````c++
+int binarySearch(vector<int>& arr, int target) {
+    int left = 0, right = arr.size() - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;  // Overflow-safe
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] < target) left = mid + 1;
+        else right = mid - 1;
+    }
+    return -1;
+}
+````
+
 ### Further Study
 
 [Divide & Conquer](../paradigm/dnc.md)

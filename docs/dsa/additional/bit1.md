@@ -8,7 +8,6 @@ XORs have 2 important property other than commutative & associativity
 
 - Identity Element: $A \oplus 0 = A$
 - Self - Inverse : $A \oplus A = 0$
-- XOR is monotonic in absolute difference between numbers
 
 [All about XOR](https://accu.org/journals/overload/20/109/lewin_1915/)
 
@@ -17,13 +16,13 @@ XORs have 2 important property other than commutative & associativity
 * Check if `ith` bit is set
 
 ````c++
-if (n * (1 << i)) {
+if (n & (1 << i)) {
   // i-th bit is set
 }
 ````
 
 - set the `ith` bit : `n |= (1 << i)`
-- clear the `ith` bit : `n |= ~(1 << i)`
+- clear the `ith` bit : `n &= ~(1 << i)`
 - toggle the `ith` bit : `n ^= (1 << i)`
 - Count total set Bits (Hamming Weight)
 
@@ -41,8 +40,16 @@ int countll = __builtin_popcountll(n);    // For long long
 - count trailing zeroes (rightmost 0s) : `int tz = __builtin_ctz(n);`
 - count leading zeroes : `int lz = __builtin_clz(n);`
 
-- Get Rightmost set bit : `int r = n & ~n`
+- Get Rightmost set bit :
   - Used for iterating over subsets
+
+````c++
+// bit manipulation
+int r = n & -n  // Two's complement trick
+// OR
+int r = n & (~n + 1)  // Explicit two's complement
+````
+
 - Remove Rightmost set bit : `n = n & (n-1)`
   - Useful for counter number of set bits : (Kernighan’s Algorithm)
 - Reverse Bits (Manually)
@@ -142,6 +149,18 @@ def count_leading_zeroes(x, bits=32):
 
 def is_power_of_two(x):
     return x > 0 and (x & (x - 1)) == 0
+````
+
+### Summary
+
+````c++
+// Correct bit manipulation operations
+bool checkBit(int n, int i) { return n & (1 << i); }
+int setBit(int n, int i) { return n | (1 << i); }
+int clearBit(int n, int i) { return n & ~(1 << i); }
+int toggleBit(int n, int i) { return n ^ (1 << i); }
+int getRightmostSetBit(int n) { return n & -n; }
+int clearRightmostSetBit(int n) { return n & (n - 1); }
 ````
 
 ## Problems on Bit Manipulation
