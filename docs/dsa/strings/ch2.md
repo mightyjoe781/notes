@@ -84,28 +84,38 @@ Algorithm
 ````c++
 bool rabin_karp(string text, string pattern) {
     int n = text.size(), m = pattern.size();
-    int base = 31, mod = 1e9 + 7;
+    if (m > n) return false;  // Pattern longer than text
+
+    int base = 31;
+    int mod = 1000000007;
     long long pattern_hash = 0, text_hash = 0, power = 1;
 
+    // Precompute power = base^(m-1) % mod
+    for (int i = 0; i < m - 1; i++) {
+        power = (power * base) % mod;
+    }
+
+    // Compute initial hashes for pattern and first window of text
     for (int i = 0; i < m; i++) {
         pattern_hash = (pattern_hash * base + (pattern[i] - 'a' + 1)) % mod;
         text_hash = (text_hash * base + (text[i] - 'a' + 1)) % mod;
-        if (i > 0) power = (power * base) % mod;
     }
 
     for (int i = 0; i <= n - m; i++) {
-      
-      	// Always verify with string comparison after hash match (left as to-do)
-        if (pattern_hash == text_hash && text.substr(i, m) == pattern)
+        // Check hash match and then verify substring to avoid false positives
+        if (pattern_hash == text_hash && text.substr(i, m) == pattern) {
             return true;
+        }
+
+        // Compute hash for next window (if any)
         if (i < n - m) {
-            text_hash = (text_hash - (text[i] - 'a' + 1) * power) % mod;
-            text_hash = (text_hash * base + (text[i + m] - 'a' + 1)) % mod;
-            if (text_hash < 0) text_hash += mod;
+            text_hash = (text_hash - ((text[i] - 'a' + 1) * power) % mod + mod) % mod;  // Remove leading char
+            text_hash = (text_hash * base + (text[i + m] - 'a' + 1)) % mod;            // Add trailing char
         }
     }
     return false;
 }
+
 ````
 
 ## Z-Function

@@ -2,7 +2,7 @@
 
 ## Matrix Traversal
 
-- SSince travel is possible from any (i, j) position in eight directions, use a direction vector to solve the problem of traversing the matrix efficiently.
+- SSince travel is possible from any (i, j) position in four/eight directions, use a direction vector to solve the problem of traversing the matrix efficiently.
 
 ### DFS
 

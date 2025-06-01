@@ -2,7 +2,7 @@
 
 Bit manipulation enables direct work with the binary representation of numbers. It optimizes performance and solves problems involving sets, parity, power-of-two checks, and other applications.
 
-## XOR
+### XOR Properties
 
 XORs have 2 important property other than commutative & associativity
 
@@ -11,47 +11,64 @@ XORs have 2 important property other than commutative & associativity
 
 [All about XOR](https://accu.org/journals/overload/20/109/lewin_1915/)
 
-## Basic Bit Operations
-
-* Check if `ith` bit is set
+### Basic Bit Operations
 
 ````c++
-if (n & (1 << i)) {
-  // i-th bit is set
-}
+// Correct bit manipulation operations
+bool checkBit(int n, int i) { return n & (1 << i); }
+int setBit(int n, int i) { return n | (1 << i); }
+int clearBit(int n, int i) { return n & ~(1 << i); }
+int toggleBit(int n, int i) { return n ^ (1 << i); }
+int getRightmostSetBit(int n) { return n & -n; } // used for subset iteration
+int clearRightmostSetBit(int n) { return n & (n - 1); }
 ````
 
-- set the `ith` bit : `n |= (1 << i)`
-- clear the `ith` bit : `n &= ~(1 << i)`
-- toggle the `ith` bit : `n ^= (1 << i)`
+### Counting Bits
+
 - Count total set Bits (Hamming Weight)
 
 ````c++
+// Loop method
 int count = 0;
 for (int i = 0; i < 32; ++i)
     if (n & (1 << i)) ++count;
+
+// Built-in (GCC/Clang) : NOTE these are invalid for n = 0
+int count = __builtin_popcount(n);
+int countll = __builtin_popcountll(n);  // For long long
 ````
 
-````c++
-int count = __builtin_popcount(n);        // GCC / Clang
-int countll = __builtin_popcountll(n);    // For long long
+- Count trailing zeroes (rightmost 0s)
+
+````cpp
+int tz = __builtin_ctz(n);	// Undefined if n == 0
 ````
 
-- count trailing zeroes (rightmost 0s) : `int tz = __builtin_ctz(n);`
-- count leading zeroes : `int lz = __builtin_clz(n);`
+- Count leading zeroes :
 
-- Get Rightmost set bit :
-  - Used for iterating over subsets
+
+````cpp
+int lz = __builtin_clz(n);  // Undefined if n == 0
+````
+
+### Bit Tricks
+
+- Get Rightmost set bit : Used for iterating over subsets
 
 ````c++
 // bit manipulation
-int r = n & -n  // Two's complement trick
+int r = n & -n  // Two's complement trick // doesn't work if n=0
 // OR
 int r = n & (~n + 1)  // Explicit two's complement
 ````
 
-- Remove Rightmost set bit : `n = n & (n-1)`
-  - Useful for counter number of set bits : (Kernighan’s Algorithm)
+- Remove Rightmost set bit :
+
+````cpp
+// Useful for counter number of set bits : (Kernighan’s Algorithm)
+n = n & (n-1)
+````
+
 - Reverse Bits (Manually)
 
 ````c++
@@ -73,7 +90,7 @@ for (int sub = mask; sub; sub = (sub - 1) & mask) {
 ````
 
 - XOR Trick : Detect Single Number
-  - Find the number that appears odd number of times
+  - Find the number that appears odd number of times, given there is only one such number.
 
 ````c++
 int xor_all = 0;
@@ -81,7 +98,7 @@ for (int a : arr) xor_all ^= a;
 ````
 
 - Swap without temporary variable
-  - avoid in production, not readable, not safe with references to same memory
+  - avoid in production, not readable, not safe with references to same memory if `a` and `b` refers to same memory location
 
 ````c++
 a ^= b;
@@ -101,6 +118,7 @@ bool isPowerOfTwo(int n) {
   - Efficiently calculates total XOR difference over all pairs
 
 ````c++
+// A - array of numbers
 long long total = 0;
 int n = A.size();
 for (int i = 0; i < 32; ++i) {
@@ -149,18 +167,6 @@ def count_leading_zeroes(x, bits=32):
 
 def is_power_of_two(x):
     return x > 0 and (x & (x - 1)) == 0
-````
-
-### Summary
-
-````c++
-// Correct bit manipulation operations
-bool checkBit(int n, int i) { return n & (1 << i); }
-int setBit(int n, int i) { return n | (1 << i); }
-int clearBit(int n, int i) { return n & ~(1 << i); }
-int toggleBit(int n, int i) { return n ^ (1 << i); }
-int getRightmostSetBit(int n) { return n & -n; }
-int clearRightmostSetBit(int n) { return n & (n - 1); }
 ````
 
 ## Problems on Bit Manipulation

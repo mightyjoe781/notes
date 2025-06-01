@@ -5,11 +5,9 @@
 - Supports efficient prefix sums (range sum queries from index 1 to \(j\)) and point updates.
 - Internally stores cumulative frequencies in a vector ⁠ft.
 
-
-
-
-
 ## Simple Implementation
+
+* Here we have assumed that `n` would be a perfect power of two, if thats not the case, then make it.
 
 ````c++
 #include <vector>
