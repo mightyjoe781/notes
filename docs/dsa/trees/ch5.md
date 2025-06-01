@@ -15,6 +15,7 @@ Range Minimum Query
 
 * If query range is within a single block, check elements directly.
 * Otherwise, check partial blocks at edges and use stored block minimum or lazy values for full blocks in between.
+* Using ⁠``INT_MAX` as sentinel for "no update" can cause problems if ⁠`INT_MAX` is a valid value.
 
 ````c++
 #include <bits/stdc++.h>

@@ -194,46 +194,55 @@ bool hasCycleKahn(vector<vector<int>> &adj, int n) {
 
 ### DFS on Directed Graph
 
-we need to keep track of path we used to come to a node. Without recStack, the algorithm cannot identify back edges properly, which are a key indicator of cycles in a directed graph.
+We need to keep track of the path used to reach a node during DFS. Without a recursion stack (⁠`recStack`), the algorithm cannot properly identify **back edges**, which are key indicators of cycles in a directed graph.
 
-In a directed graph, a **back edge** points from a node to one of its ancestors in the current DFS path.
+In a directed graph, a **back edge** is an edge that points from a node to one of its ancestors in the current DFS path.
 
-Here visited only keeps track of nodes that have been explored, for example if you again run dfs on different node but come across a node that is visited doesn’t mean it is forming a cycle but rec Stack keeps track of that.
+The ⁠visited array only keeps track of nodes that have been explored at any point. For example, if we run DFS starting from different nodes and come across a node that is already visited, it does **not** necessarily mean a cycle exists. The recursion stack (⁠recStack) keeps track of nodes currently in the call stack (the current path), allowing detection of back edges.
 
-````c++
+````txt
 1 → 2 → 3 → 4
     ↘   ↗
       5
-  
-// above graph lets say traverses straight from 1->2->3->4->5, marks everything visited.
-// when branching again happens at 2, we see wait 3 is marked visited, this should not happen there fore its important to keep track of current path.
+````
 
+* Suppose DFS traverses straight from 1 → 2 → 3 → 4 → 5, marking all nodes visited.
+* When DFS branches again from node 2, it encounters node 3 which is marked visited.
+* This does **not** imply a cycle unless node 3 is still in the current recursion stack.
+* Hence, tracking ⁠recStack is essential to detect cycles.
+
+````c++
 bool dfsDirected(int v, vector<vector<int>> &adj, vector<bool> &visited, vector<bool> &recStack) {
     visited[v] = true;
-    recStack[v] = true;
+    recStack[v] = true;  // Mark current node in recursion stack
 
     for (int neighbor : adj[v]) {
         if (!visited[neighbor]) {
             if (dfsDirected(neighbor, adj, visited, recStack))
-                return true;
+                return true;  // Cycle detected in DFS subtree
         } else if (recStack[neighbor]) {
-            return true; // Cycle detected
+            // Back edge found: neighbor is in current recursion stack
+            return true;  // Cycle detected
         }
     }
 
-    recStack[v] = false;
-    return false;
+    recStack[v] = false;  // Remove current node from recursion stack
+    return false;         // No cycle detected from this node
 }
 
 bool hasCycleDirected(vector<vector<int>> &adj, int n) {
     vector<bool> visited(n, false);
     vector<bool> recStack(n, false);
-    for (int i = 0; i < n; ++i)			// check all nodes
-        if (!visited[i])
+
+    for (int i = 0; i < n; ++i) {
+        if (!visited[i]) {
             if (dfsDirected(i, adj, visited, recStack))
-                return true;
-    return false;
+                return true;  // Cycle found
+        }
+    }
+    return false;  // No cycles in graph
 }
+
 ````
 
 ### Bipartite(or 2/bi-colorable) Graph Check

@@ -40,7 +40,7 @@ bool stoneGame(vector<int>& piles) {
     int n = piles.size(), i, j;
     vector<vector<int>> dp(n,vector<int>(n,0));
     // diagonal
-    for(i = 0; i <n ; i++) dp[i][j] = piles[i];
+    for(i = 0; i <n ; i++) dp[i][i] = piles[i];
 
     for(i = n-2; i >= 0; i--)
         for( j = i+1; j <n; j++)
