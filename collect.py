@@ -98,10 +98,6 @@ def split_and_save_topic(topic: str, sections: List[Tuple[str, str]],
     """
     max_size_bytes = int(max_size_mb * 1024 * 1024)
     
-    # Create topic directory
-    topic_dir = output_dir / topic
-    topic_dir.mkdir(parents=True, exist_ok=True)
-    
     current_content = []
     current_size = 0
     file_number = 1
@@ -122,9 +118,9 @@ def split_and_save_topic(topic: str, sections: List[Tuple[str, str]],
         
         # Check if adding this would exceed limit
         if current_size + section_size > max_size_bytes and current_content:
-            # Save current file
-            file_name = f"{topic}_{file_number}.md"
-            file_path = topic_dir / file_name
+            # Save current file directly in output_dir
+            file_name = f"{topic}{file_number}.md"
+            file_path = output_dir / file_name
             
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(create_header(file_number))
@@ -140,8 +136,8 @@ def split_and_save_topic(topic: str, sections: List[Tuple[str, str]],
     
     # Save last file
     if current_content:
-        file_name = f"{topic}_{file_number}.md"
-        file_path = topic_dir / file_name
+        file_name = f"{topic}{file_number}.md"
+        file_path = output_dir / file_name
         
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(create_header(file_number))
@@ -255,12 +251,11 @@ def collect_by_topics(docs_dir: Path, output_dir: Path,
             index_content.append(f"- Source files: {successful_files}\n")
             index_content.append(f"- Total size: {total_size / (1024 * 1024):.2f} MB\n")
             index_content.append(f"- Split into: {num_files} file(s)\n")
-            index_content.append(f"- Location: `{output_dir.name}/{topic}/`\n")
             
             if num_files == 1:
-                index_content.append(f"- File: `{topic}_{1}.md`\n")
+                index_content.append(f"- File: `{topic}1.md`\n")
             else:
-                index_content.append(f"- Files: `{topic}_1.md` to `{topic}_{num_files}.md`\n")
+                index_content.append(f"- Files: `{topic}1.md` to `{topic}{num_files}.md`\n")
     
     # Print summary
     print("\n" + "="*50)
@@ -274,11 +269,10 @@ def collect_by_topics(docs_dir: Path, output_dir: Path,
         print(f"   Split into: {stats['split_files']} file(s)")
         
         # List created files
-        topic_dir = output_dir / topic
         for i in range(1, stats['split_files'] + 1):
-            file_path = topic_dir / f"{topic}_{i}.md"
+            file_path = output_dir / f"{topic}{i}.md"
             size = file_path.stat().st_size / (1024 * 1024)
-            print(f"     - {topic}_{i}.md: {size:.2f} MB")
+            print(f"     - {topic}{i}.md: {size:.2f} MB")
     
     # Create index file if requested
     if create_index:
@@ -289,7 +283,6 @@ def collect_by_topics(docs_dir: Path, output_dir: Path,
         print(f"\n📄 Created index file: {index_file}")
     
     print(f"\n✅ All files saved to: {output_dir.absolute()}")
-    print("\n💡 You can now upload individual topic files to your Claude project!")
 
 
 def main():
