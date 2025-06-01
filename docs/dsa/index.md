@@ -126,7 +126,7 @@ Optional Topics in Trees
 
 ## Additional Topics
 
-* Mathematics (WIP)
+* Mathematics
   * [Mathematics & Number Theory](additional/ch1.md)
   * [Modular Arithmetic & Exponentiation](additional/ch2.md)
   * [Combinatorics & Probability](additional/math3.md)
