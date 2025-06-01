@@ -75,6 +75,11 @@ Algorithm
   * If the hashes match, verify the strings.
   * Recompute the hash for the next substring in O(1)
 * Complexity: O(N + M) on average.
+* Things to consider while implementation
+  * Always verify with string comparison after hash match
+  * Consider double hashing for critical applications
+  * Birthday Paradox - The **Birthday Paradox** refers to the counterintuitive probability result that in a group of just 23 people, there is about a 50% chance that at least two people share the same birthday. Shows the vulnerability of hash functions to collisions, leading to the "birthday attack" where finding two inputs that hash to the same output is easier than expected.
+
 
 ````c++
 bool rabin_karp(string text, string pattern) {
@@ -89,6 +94,8 @@ bool rabin_karp(string text, string pattern) {
     }
 
     for (int i = 0; i <= n - m; i++) {
+      
+      	// Always verify with string comparison after hash match (left as to-do)
         if (pattern_hash == text_hash && text.substr(i, m) == pattern)
             return true;
         if (i < n - m) {
@@ -195,5 +202,4 @@ int strStr(string haystack, string needle) {
     return -1; // Pattern not found
 }
 ````
-
 
