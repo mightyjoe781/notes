@@ -125,3 +125,4 @@
 - Awesome Scalability - https://github.com/binhnguyennus/awesome-scalability
 - The Algorithms - Python - https://github.com/TheAlgorithms/Python
 - Awesome Data Engineering - https://github.com/igorbarinov/awesome-data-engineering
+- Engineer Blogs - https://github.com/kilimchoi/engineering-blogs
