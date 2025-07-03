@@ -31,7 +31,7 @@
 
 #### Hash Based Routing
 
-* has of some attributes (ip, user id, url) determines which serve to pick
+* 
 
 ### Key Advantages of Load Balancers
 

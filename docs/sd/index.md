@@ -24,20 +24,8 @@ Notes
 ### Core System Components
 
 - [Load Balancers](core/load_balancers.md)
-  - Layer 4 vs Layer 7 Load Balancing
-  - Load Balancing Algorithms (Round Robin, Least Connections, Consistent Hashing)
-  - Active-Active vs Active-Passive
-  - Health Checks & Failover Mechanisms
-- Caching Systems
-  - Cache Levels (Browser, CDN, Reverse Proxy, Application, Database)
-  - Cache Patterns (Cache-Aside, Write-Through, Write-Behind, Refresh-Ahead)
-  - Cache Eviction Policies (LRU, LFU, FIFO, Random)
-  - Cache Invalidation Strategies
-- Databases & Storage
-  - SQL vs NoSQL Trade-offs
-  - Database Replication (Master-Slave, Master-Master)
-  - Database Partitioning & Sharding
-  - ACID vs BASE Properties
+- [Caching Systems](core/caching.md)
+- [Databases & Storage](core/databases.md)
 - Message Queues & Streaming
   - Point-to-Point vs Publish-Subscribe
   - Message Ordering & Durability
