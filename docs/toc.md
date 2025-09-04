@@ -18,11 +18,11 @@ hide:
 
   ---
 
-  :simple-thealgorithms:{ .lg .middle } [DSA](dsa/index.md) [WIP]
+  :simple-thealgorithms:{ .lg .middle } [DSA](dsa/index.md) ✅
 
-  :material-wrench:{ .lg .middle } [System Design](sd/index.md) [WIP]
+  :material-wrench:{ .lg .middle } [System Design](sd/index.md) ✅
 
-  :simple-openai:{ .lg .middle } LLM & Agents [Planned ‘26]
+  :simple-openai:{ .lg .middle } [LLM & Agents](llm/index.md) [WIP]
 
   :material-language-cpp:{ .lg .middle } C++ [Upcoming]
 

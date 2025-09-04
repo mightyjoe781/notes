@@ -16,260 +16,88 @@ Key Aspects
 Notes
 
 *  [General Software Engineering Principle Overview](principles.md)
+* [Notes on LLD](lld/index.md)
 * [Notes on HLD](hld/index.md)
-* [Design Patterns](lld/design_patterns.md)
 
-
-
-### Core System Components
+#### Core System Components
 
 - [Load Balancers](core/load_balancers.md)
 - [Caching Systems](core/caching.md)
 - [Databases & Storage](core/databases.md)
-- Message Queues & Streaming
-  - Point-to-Point vs Publish-Subscribe
-  - Message Ordering & Durability
-  - Dead Letter Queues & Retry Mechanisms
-  - Stream Processing vs Batch Processing
-- Content Delivery Networks (CDN)
-  - Push vs Pull CDN
-  - Edge Locations & Geographic Distribution
-  - CDN Optimization Strategies
+- [Message Queues & Streaming](core/queue_streaming.md)
 
-### Networking & Communication
+#### Networking & Communication
 
-- Network Protocols
-  - HTTP/HTTPS (1.0, 1.1, 2.0, 3.0)
-  - TCP vs UDP Trade-offs
-  - WebSockets vs Server-Sent Events vs Long-Polling
-- API Design Patterns
-  - REST vs GraphQL vs gRPC
-  - API Versioning Strategies
-  - Rate Limiting & Throttling
-  - Authentication & Authorization (OAuth, JWT)
-- Service Communication
-  - Synchronous vs Asynchronous Communication
-  - Service Discovery Mechanisms
-  - Circuit Breaker Pattern
-  - Request/Response vs Event-Driven
+- [Network Protocols](communication/network.md)
+- [API Design Patterns](communication/api.md)
+- [Service Communication](communication/service.md)
 
-### Scalability Patterns
+#### Scalability Patterns
 
-- Horizontal Scaling
-  - Stateless Application Design
-  - Session Management (Sticky Sessions vs Shared Storage)
-  - Auto-scaling Strategies
-- Vertical Scaling
-  - Resource Optimization
-  - Performance Tuning
-  - Scaling Limitations
-- Data Scaling
-  - Read Replicas
-  - Write Scaling Strategies
-  - Data Partitioning Techniques
+- [Scaling Patterns](core/scalability.md)
 
-### Reliability & Availability
 
-- Fault Tolerance
-  - Redundancy & Replication
-  - Graceful Degradation
-  - Bulkhead Isolation
-  - Timeout & Retry Mechanisms
-- High Availability Patterns
-  - Active-Passive vs Active-Active
-  - Geographic Distribution
-  - Disaster Recovery
-- Monitoring & Observability
-  - Logging Strategies
-  - Metrics & Alerting
-  - Distributed Tracing
-  - Health Checks
+#### Reliability & Availability
 
-### Design Paradigms
+- [Fault Tolerance](reliability/fault_tolerance.md)
+- [High Availability Patterns](reliability/availability_patterns.md)
+- [Monitoring & Observability](reliability/monitoring.md)
 
-- Monolithic Architecture
-  - Single Deployment Unit
-  - Shared Database
-  - Inter-module Communication
-- Microservices Architecture
-  - Service Decomposition Strategies
-  - Data Consistency Across Services
-  - Inter-service Communication Patterns
-  - Service Mesh Architecture
-- Serverless Architecture
-  - Function as a Service (FaaS)
-  - Event-Driven Design
-  - Cold Start Optimization
-- Event-Driven Architecture
-  - Event Sourcing
-  - CQRS (Command Query Responsibility Segregation)
-  - Saga Pattern for Distributed Transactions
+#### Design Paradigms
 
-### Consistency & Distributed Systems
+- [Monolithic Architecture](paradigms/monolith.md)
+- [Microservices Architecture](paradigms/microservices.md)
+- [Serverless Architecture](paradigms/serverless.md)
+- [Event-Driven Architecture](paradigms/event_driven.md)
 
-- CAP Theorem
-  - Consistency vs Availability Trade-offs
-  - Partition Tolerance Implications
-  - CP vs AP Systems in Practice
-- Consistency Models
-  - Strong Consistency
-  - Eventual Consistency
-  - Weak Consistency
-  - Session Consistency
-- Consensus Algorithms
-  - Leader Election
-  - Quorum-based Systems
-  - Distributed Locking
-- Conflict Resolution
-  - Last-Write-Wins
-  - Vector Clocks
-  - Conflict-free Replicated Data Types (CRDTs)
+#### Consistency & Distributed Systems
 
-### Performance Optimization
+- [CAP Theorem](consistency/cap.md)
+- [Consistency Models](consistency/consistency_models.md)
+- [Consensus Algorithms](consistency/consensus_algorithms.md)
+- [Conflict Resolution](consistency/conflict_resolution.md)
 
-- Latency Optimization
-  - Request Path Optimization
-  - Database Query Optimization
-  - Network Latency Reduction
-- Throughput Optimization
-  - Connection Pooling
-  - Batch Processing
-  - Parallel Processing
-- Resource Optimization
-  - Memory Management
-  - CPU Optimization
-  - I/O Optimization
-- Capacity Planning
-  - Back-of-envelope Calculations
-  - Performance Testing
-  - Resource Estimation
+#### Performance Optimization
 
-### Database Design Patterns
+- [Latency Optimization](performance_optimization/latency.md)
+- [Throughput Optimization](performance_optimization/throughput.md)
+- [Resource Optimization](performance_optimization/resource.md)
+- [Capacity Planning](performance_optimization/capacity.md)
 
-- Relational Database Patterns
-  - Normalization vs Denormalization
-  - Indexing Strategies
-  - Query Optimization
-  - Database Federation
-- NoSQL Patterns
-  - Key-Value Store Design (Redis, DynamoDB)
-  - Document Store Design (MongoDB, CouchDB)
-  - Wide-Column Store Design (Cassandra, HBase)
-  - Graph Database Design (Neo4j, Amazon Neptune)
-- Data Modeling
-  - Schema Design
-  - Data Access Patterns
-  - Hot Spotting Prevention
-- Advanced Database Topics
-  - Multi-version Concurrency Control (MVCC)
-  - Distributed Transactions
-  - Database Triggers & Stored Procedures
+#### Database Design Patterns
 
-### Security & Privacy
+- [Relational Database Patterns](database/relational.md)
+- [NoSQL Patterns](database/nosql.md)
+- [Data Modeling](database/data_modelling.md)
+- [Advanced Database Topics](database/advanced_models.md)
 
-- Authentication Patterns
-  - Single Sign-On (SSO)
-  - Multi-factor Authentication (MFA)
-  - Token-based Authentication
-- Authorization Patterns
-  - Role-based Access Control (RBAC)
-  - Attribute-based Access Control (ABAC)
-  - OAuth 2.0 Flow Patterns
-- Data Security
-  - Encryption at Rest & in Transit
-  - Key Management
-  - Data Anonymization & Masking
-- Network Security
-  - DDoS Protection
-  - API Security
-  - Zero-Trust Architecture
+#### Security & Privacy
 
-### System Design Patterns
+- [Authentication Patterns](security/authentication_patterns.md)
+- [Authorization Patterns](security/authorization_patterns.md)
+- [Data Security](security/data_security.md)
+- [Network Security](security/network_security.md)
 
-- Reliability Patterns
-  - Circuit Breaker
-  - Retry with Exponential Backoff
-  - Timeout Pattern
-  - Bulkhead Isolation
-- Performance Patterns
-  - Lazy Loading
-  - Connection Pooling
-  - Materialized Views
-  - Read-through & Write-through Caching
-- Scalability Patterns
-  - Auto-scaling
-  - Load Shedding
-  - Rate Limiting
-  - Database Connection Pooling
-- Data Patterns
-  - Event Sourcing
-  - CQRS
-  - Saga Pattern
-  - Database per Service
+#### System Design Patterns
 
-### Common System Architectures
+- [Reliability Patterns](patterns/reliability.md)
+- [Performance Patterns](patterns/performance.md)
+- [Scalability Patterns](patterns/scalability.md)
+- [Data Patterns](patterns/data.md)
 
-- Web Applications
-  - Three-tier Architecture
-  - MVC Pattern
-  - Progressive Web Apps (PWA)
-- Mobile Backend Systems
-  - Backend for Frontend (BFF)
-  - Mobile-specific Optimizations
-  - Offline-first Design
-- Real-time Systems
-  - WebSocket Architecture
-  - Server-Sent Events
-  - Real-time Data Processing
-- Batch Processing Systems
-  - ETL Pipeline Design
-  - Data Warehouse Architecture
-  - MapReduce Patterns
+#### Common System Architectures
 
-### Advanced Topics
+- [Web Applications](architecture/web_apps.md)
+- [Mobile Backend Systems](architecture/mobile_backend.md)
+- [Real-time Systems](architecture/real_time.md)
+- [Batch Processing Systems](architecture/batch_processing.md)
 
-- Specialized Data Structures
-  - Bloom Filters
-  - Consistent Hashing
-  - HyperLogLog
-  - Count-Min Sketch
-- Search & Indexing
-  - Full-text Search (Elasticsearch, Solr)
-  - Inverted Indexes
-  - Geospatial Indexing
-  - Search Ranking Algorithms
-- Machine Learning Systems
-  - ML Pipeline Architecture
-  - Model Serving Patterns
-  - A/B Testing Infrastructure
-  - Feature Store Design
-- Time-Series Systems
-  - Time-Series Database Design
-  - Data Retention Policies
-  - Aggregation Strategies
-  - Anomaly Detection
+#### System Design Interview Patterns (Summary)
 
-### System Design Interview Patterns
-
-- Problem Clarification
-  - Functional Requirements Gathering
-  - Non-functional Requirements (Scale, Performance, Reliability)
-  - Constraint Identification
-- High-Level Design
-  - Component Identification
-  - API Design
-  - Database Schema Design
-  - System Architecture Diagram
-- Detailed Design
-  - Deep-dive into Critical Components
-  - Algorithm Selection
-  - Data Flow Analysis
-  - Error Handling Strategies
-- Scale & Optimize
-  - Bottleneck Identification
-  - Scaling Strategies
-  - Performance Optimization
-  - Cost Optimization
+- [Problem Clarification](interview_patterns/problem_clarification.md)
+- [High-Level Design](interview_patterns/high_level.md)
+- [Detailed Design](interview_patterns/detailed_design.md)
+- [Scale & Optimize](interview_patterns/scale_and_optimize.md)
 
 ### Classic Interview Problems
 
@@ -300,85 +128,16 @@ Notes
   - Parking System
 - Utility Systems
   - URL Shortener (bit.ly)
+  - [Pastebin](problems/pastebin.md)
   - Web Crawler & Search Engine
   - Rate Limiter Design
   - Distributed Cache System
 
-### Optional Advanced Topics
-
-- Blockchain & Distributed Ledger
-  - Consensus Mechanisms
-  - Smart Contract Architecture
-  - Cryptocurrency System Design
-- IoT System Architecture
-  - Device Management
-  - Real-time Data Processing
-  - Edge Computing
-- Gaming System Architecture
-  - Real-time Multiplayer Games
-  - Leaderboard Systems
-  - Game State Synchronization
-- Financial Systems
-  - Trading System Architecture
-  - Payment Processing
-  - Risk Management Systems
-  - Fraud Detection Systems
-- Enterprise Patterns
-  - Enterprise Service Bus (ESB)
-  - API Management
-  - Legacy System Integration
-  - Master Data Management
-
-### Additional Topics
-
-- Cloud Architecture
-  - Multi-cloud Strategies
-  - Cloud-native Design Patterns
-  - Containerization & Orchestration (Docker, Kubernetes)
-  - Infrastructure as Code
-- DevOps & Deployment
-  - CI/CD Pipeline Design
-  - Blue-Green Deployments
-  - Canary Releases
-  - Feature Flags
-- Cost Optimization
-  - Resource Utilization Optimization
-  - Auto-scaling Economics
-  - Reserved vs On-demand Resources
-  - Cost Monitoring & Alerting
-- Compliance & Governance
-  - GDPR Compliance
-  - Data Governance
-  - Audit Logging
-  - Regulatory Requirements
-- Emerging Technologies
-  - Edge Computing
-  - 5G Network Implications
-  - Quantum Computing Impact
-  - Green Computing & Sustainability
-
 ### Appendices
 
-#### A. Reference Materials
+#### [A. Reference Materials](appendices/appendix_a.md)
 
-- Quick Reference Tables
-  - Latency numbers every programmer should know
-  - Powers of two for capacity estimation
-  - Common performance benchmarks
-- Comparison Charts
-  - Database comparison matrix
-  - Message queue feature comparison
-  - Load balancer capabilities
-
-#### B. Tools & Technologies
-
-- Development Tools
-  - System design diagramming tools
-  - Performance testing frameworks
-  - Monitoring and alerting systems
-- Cloud Services Overview
-  - AWS, GCP, Azure service mappings
-  - Managed service trade-offs
+#### [B. Tools & Technologies](appendices/appendix_b.md)
 
 #### C. Further Learning
 
