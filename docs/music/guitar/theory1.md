@@ -2,7 +2,7 @@
 
 ## A helpful message :)
 
-As a self-taught guitarist I think biggest issues you will face will be having a practice schedule and motivation to work on it. Later sections will talk about some techniques to help you with keep learning.
+As a self-taught guitarist I think biggest issues you will face will be having a practice schedule and motivation to work on it.
 
 In my early days of learning music, I regret that I appreciated music without developing a keen sense of what constitutes good or bad music. Perhaps I wasn't naturally gifted with a great sense of music, but I've come to realize that musical perception is relative and can be cultivated through practice. Over time, as I've practiced and listened to the same open chords repeatedly, my brain has instinctively started discerning nuances in those chords.
 
@@ -14,11 +14,36 @@ I've expressed this enough, but remember, one of the greatest motivations for pl
 
 ## Musical Alphabets
 
+* Broadly in western music there are 12 notes & 7 musical alphabets (Natural Notes).
 
+```
+A, B, C, D, E, F, G
+```
 
 ## Notes and Intervals
 
+* Each of these natural notes have few half notes in between of them referred to as `sharp` or `flat`
+* `x#` ~ read as `x sharp` or `yb` ~ read as `y flat`
+* All natural notes are notes without sharps or flats and are 2 semintones away from each other except `BC` and `EF`
 
+````
+A
+A# or Bb
+B
+C
+C# or Db
+D
+D# or Eb
+E
+F
+F# or Gb
+G
+G# or Ab
+````
+
+* Example `A` and `D` are 5 semintones away. (often referred to as Perfect 4th)
+* Example `G` and `D` are 7 semintones away. (Note: order is cyclic) (This interval is Perfect 5th)
+* Individual notes themselves doesn’t produce music, its the order of notes and interval between them or sometimes combination of notes which is responsible for music/emotion associated with them.
 
 ## Reading Sheet Music and Tablature
 

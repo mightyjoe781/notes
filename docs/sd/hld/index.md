@@ -2,25 +2,17 @@
 
 # Notes
 
-When it comes to courses, especially video courses, I am very skeptical. This is probably one of the few no-nonsense courses available.
 
 ## Basics
 
 - [Introduction to System Design](intro.md)
-  
 - [Databases and Scaling](db.md)
-  
 - [Caching and Optimization](cache.md)
-  
 - [Messaging and Streaming Systems](streaming.md)
-  
 - [Load Balancing and Fault Tolerance](load.md)
-  
 - [Communication and Protocols](communication.md)
-  
 - [Big Data and Applications](big_data.md)
   
-
 ## Real-world System Designs
 
 - Designing an E-commerce Product Listing
