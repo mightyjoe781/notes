@@ -55,9 +55,10 @@ player.play("video.mp4")  # ✅ Plays after conversion
   * **When you want to avoid a rigid class hierarchy** – Prevents class explosion due to multiple variations.
   * **When you need to support multiple implementations** – Example: Different platforms (Windows, Linux, macOS).
   * **When abstraction and implementation should vary independently** – Example: Devices and their remote controls.
+
 * Key Components
   * **Abstraction** – Defines a high-level interface (e.g., RemoteControl).
-  * **Refined Abstraction** – Extends abstraction with additional behavior.
+  * **Refined Abstraction** – Extends abstraction with additional behaviour.
   * **Implementation Interface** – Defines the low-level details (e.g., Device).
   * **Concrete Implementations** – Provide specific implementations.
 ```python
