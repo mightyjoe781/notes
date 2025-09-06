@@ -80,19 +80,19 @@ Which solution is best ? Ask several key question
 
 - Control vs Effort to Maintain
 - fully-managed solution free you from routine maintenance
-  - often lag the latest k8s release
-  - Examples : EKS, AKS (Azure), GKE (GCP)
-  - Full Control Examples : kubespray, kops, kubeadm
+    - often lag the latest k8s release
+    - Examples : EKS, AKS (Azure), GKE (GCP)
+    - Full Control Examples : kubespray, kops, kubeadm
 - Do you already have expertise with a particular cloud provider
 - Do you need enterprise support ?
-  - several vendors offer enterprise support and additional features on top of k8s
-  - Openshift by RedHat, Pivotal Container Service(PKS) and Rancher
+    - several vendors offer enterprise support and additional features on top of k8s
+    - Openshift by RedHat, Pivotal Container Service(PKS) and Rancher
 - Are you concerned about vendor lock-in ?
-  - use open source solution : kubespray or rancher
+    - use open source solution : kubespray or rancher
 - on-prem, in cloud or both ?
-  - All EKS, AKS, GKE allows on-prem servers
+    - All EKS, AKS, GKE allows on-prem servers
 - Linux, windows or both containers ?
-  - ensure similar nodes are in your cluster as per requirement
+    - ensure similar nodes are in your cluster as per requirement
 
 ## Kubernetes Architecture
 
@@ -120,8 +120,8 @@ Which solution is best ? Ask several key question
 #### Service
 
 - Services define networking rules for exposing groups of pods
-  - to other pods
-  - to public internet
+    - to other pods
+    - to public internet
 
 #### Kubernetes Deployments
 

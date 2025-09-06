@@ -52,9 +52,9 @@ func makePointer[T any](t T) *T {
 ## Don’t Fear the Pointers
 
 - Behaviour of function parameters in Java, Python, JS and Ruby
-  - If we pass instance of class to a function, and change a field the change is reflected in variable passed in
-  - If we try reassign that variable, change will not be reflected
-  - If we pass `nil/null/None` for a parameter value, setting the parameter itself to a new value doesn’t modify the variable in calling function
+    - If we pass instance of class to a function, and change a field the change is reflected in variable passed in
+    - If we try reassign that variable, change will not be reflected
+    - If we pass `nil/null/None` for a parameter value, setting the parameter itself to a new value doesn’t modify the variable in calling function
 
 ````python
 class Foo:
@@ -163,12 +163,12 @@ func MakeFoo() (Foo, error) {
 - Any modifications made to a map that’s passed to a function are reflected in original variable because maps are implemented as a pointer to a struct. Be careful on using maps for input parameters or return values especially on public APIs.
 
 - Passing a slice to a function has more complicated behaviour
-  - any modifications to the slice’s contents is reflected in original variable but using `append` to change the length isn’t reflected in the original variables, even if capacity greater than its length
-  - A slice is implemented as with three fields
-    - `int` : length
-    - `int` : capacity
-    - `pointer` : block of memory
-  - when slice is passed to function a copy of len, capacity is passed but when changes made to copy and some items are appended to the the copy array but those variables (capacity) are not reflected in original. But notice because of pointer values of original arrays get updated due to pointer.
+    - any modifications to the slice’s contents is reflected in original variable but using `append` to change the length isn’t reflected in the original variables, even if capacity greater than its length
+    - A slice is implemented as with three fields
+        - `int` : length
+        - `int` : capacity
+        - `pointer` : block of memory
+    - when slice is passed to function a copy of len, capacity is passed but when changes made to copy and some items are appended to the the copy array but those variables (capacity) are not reflected in original. But notice because of pointer values of original arrays get updated due to pointer.
 
 ## Slices as Buffer
 
@@ -216,8 +216,8 @@ for {
 - Data on the heap remains valid as long as it can be traced back to a pointer on the stack. Once no stack variables point to the data, it becomes *garbage*, and the garbage collector clears it.
 - Go's *escape analysis* isn't perfect; sometimes, data that could be on the stack escapes to the heap. The compiler errs on the side of caution to avoid memory corruption by not leaving potentially needed heap data on the stack. Newer Go releases improve escape analysis.
 - There are many garbage collection algorithms which can be broadly categorized as :
-  - those designed for higher throughput
-  - lower latency
+    - those designed for higher throughput
+    - lower latency
 - Computer hardware reads memory fastest sequentially. A slice of structs in Go has data laid out sequentially in memory, making it fast to load and process. In contrast, a slice of pointers to structs scatters data across RAM, making access much slower.
 - This approach of writing hardware-aware software is called mechanical sympathy. Martin Thompson applied this term to software development, emphasizing the importance of understanding hardware for optimal performance.
 - In Go, following best practices naturally aligns with mechanical sympathy. Unlike Go, Java stores objects as pointers, allocating data on the heap, which burdens the garbage collector. Java's List interface and sequential data types in Python, Ruby, and JavaScript also suffer from inefficient memory access due to pointer-based implementations.

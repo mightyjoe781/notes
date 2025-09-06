@@ -36,8 +36,8 @@ There are 2 possibilities
 
 * heapq is a **min-heap** → use **negative values** for max-heap behavior
 * No built-in support for 
-  * Updating/removing arbitrary elements (requires rebuild)
-  * Custom comparators (use Tuple Keys)
+    * Updating/removing arbitrary elements (requires rebuild)
+    * Custom comparators (use Tuple Keys)
 * Not thread-safe (`queue.PriorityQueue` is used for threading)
 
 ### C++ (std::priority_queue) — Max-Heap by Default

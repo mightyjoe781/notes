@@ -2,22 +2,22 @@
 
 - Amazon Kinesis was desinged to address complexity and costs of streaming data in AWS cloud
 - Data in Cloud is processed by Kinesis. (Event Logs, Social Media Data, Clickstream data, App Data, IOT Sensor Data)
-  - Connect
-  - Process
-  - Analyze
+    - Connect
+    - Process
+    - Analyze
 - Processes in real time or near real time.
 - Amazon Kinesis processes
-  - Video Streams (binary encoded)
-  - Data Streams (base64 encoded)
-  - Data Firehose (base64 encoded)
-  - Data Analytics (base64 encoded)
+    - Video Streams (binary encoded)
+    - Data Streams (base64 encoded)
+    - Data Firehose (base64 encoded)
+    - Data Analytics (base64 encoded)
 
 - Layers of Streaming
-  - Source
-  - Stream Ingestion (Kinesis Agent/Producer Library/ SDK)
-  - Stream Storage (Kinesis Data Streams) : Data here is *immutable*, Data only expires (24hrs-365days).
-  - Stream Processing (Kinesis Data Analytics/Data Firehose/Consumer Library)
-  - Destination
+    - Source
+    - Stream Ingestion (Kinesis Agent/Producer Library/ SDK)
+    - Stream Storage (Kinesis Data Streams) : Data here is *immutable*, Data only expires (24hrs-365days).
+    - Stream Processing (Kinesis Data Analytics/Data Firehose/Consumer Library)
+    - Destination
 
 #### Amazon Kinesis Video Streams
 
@@ -44,9 +44,9 @@ Consumer can consume data using two methods
 
 - fully managed data delievary service
 - Ingested data can dynamically
-  - tranformed
-  - scaled auto
-  - auto delivers
+    - tranformed
+    - scaled auto
+    - auto delivers
 - uses producers to load data streams in batches once inside the stream data is delieverd to a data store
 - There is no need for custom code or application to processes data in data streams
 - Buffer Size : 60-900s
@@ -59,7 +59,7 @@ Consumer can consume data using two methods
 
 - Ability to read from streams in real time and do aggregation and analysis on data while it is in motion
 - leverages SQL Queries (Firehose) or Apache Flink (Data Streams)
-  - Uses Java/Scala to do time series analytics, feed real time dashboard & metrices
+    - Uses Java/Scala to do time series analytics, feed real time dashboard & metrices
 - Use Cases ETL, generation of const metrices and doing real-time analytics
 - No free tiers
 
@@ -72,19 +72,19 @@ Consumer can consume data using two methods
 
 - regular interval depends on freq of data collection, relative `value`(*Central Idea of this concept*) of insight gained
 - Advantages
-  - Evenly Spaced
-  - Predictable
+    - Evenly Spaced
+    - Predictable
 - Disadvantages
-  - Has no intelligence. (session intermixing due to fixed batch size)
-  - Wait until specific amount of data is accumulated
+    - Has no intelligence. (session intermixing due to fixed batch size)
+    - Wait until specific amount of data is accumulated
 
 **Stream Processing** : solves latency, session boundaries and inconsistent loads
 
 - DataSources : Application, Networking devices, server log files, web activity, location
 - Events are recieved from stream which in turn can do any of of following
-  - Trigger an action
-  - update an aggregate or similar statistic
-  - cache the event for future reference
+    - Trigger an action
+    - update an aggregate or similar statistic
+    - cache the event for future reference
 
 **Consumers :** Application that process the data from stream, can create new streams too.
 
@@ -93,23 +93,23 @@ Consumer can consume data using two methods
   2. Data Stream
   3. Consumers
 - Benefits of Streaming Data
-  - Never ending streams of data
-  - best processed in flight (realtime)
-  - limited storage capacity (price)
-  - detect patterns, inspect results, intermix streams
-  - reaction in RealTime (no logs)
-  - Decouples architecture and improves operation efficiency
+    - Never ending streams of data
+    - best processed in flight (realtime)
+    - limited storage capacity (price)
+    - detect patterns, inspect results, intermix streams
+    - reaction in RealTime (no logs)
+    - Decouples architecture and improves operation efficiency
 - Benefits of Batch Application
-  - predictable in terms of pricing/cost
-  - response is not required to be *instant*
+    - predictable in terms of pricing/cost
+    - response is not required to be *instant*
 
 #### A Streaming Framework :
 
 - Common use cases of streaming data : Industrial Automation, Smart Home, log analytics, datalakes, IOT
 - Events : Search result, financial transactions, user activity, Telemetry data, log files, application metrices.
 - data is processed in motion
-  - MI/AI applications
-  - trigger other events
+    - MI/AI applications
+    - trigger other events
 - Data is immutable, consumer subscribe and create new stream out of it.
 - Stream matches real world application high velocity and volume data
 
@@ -152,25 +152,25 @@ Other important flags : `--describe-stream-summary`
 - Each shard has unique id, hash key range (unique) and doesn’t overlap
 - Capacity of each shard is limited to 1000 each shard
 - Concept of *Hot Shard* <-- lots of data records go into one shard. 
-  - ***Resharding*** is used to add more shards for increasing throughput limit of 1000 Records
+    - ***Resharding*** is used to add more shards for increasing throughput limit of 1000 Records
 - Data Retention Period : 365 days (earlier 24 days)
 - Data Stream Limitations
-  - Max Size of 1 MB (for Records)
-  - Shard can accept 1k records/s
-  - default retention : 24hrs
-  - size of data records cannot be increased but retention period can be extended upto 7 days for additional charge upto a year
+    - Max Size of 1 MB (for Records)
+    - Shard can accept 1k records/s
+    - default retention : 24hrs
+    - size of data records cannot be increased but retention period can be extended upto 7 days for additional charge upto a year
 - Producer(writes) ----> Shard
-  - limitation : 1MB/s per shard
-  - returns : `ProvisionedThroughputExceededException`
+    - limitation : 1MB/s per shard
+    - returns : `ProvisionedThroughputExceededException`
 - Consumers
-  - Classic Consumer : 2MB/s read
-    - Throttle if read more than 2 MB/s
-    - polls data
-  - Enhanced Fanout Consumer : 2MB/s read
-    - can’t pull data of shard
-    - keeps requesting subscribe to stream call
-    - uses HTTP/2
-    - utilised a push mechanism
+    - Classic Consumer : 2MB/s read
+        - Throttle if read more than 2 MB/s
+        - polls data
+    - Enhanced Fanout Consumer : 2MB/s read
+        - can’t pull data of shard
+        - keeps requesting subscribe to stream call
+        - uses HTTP/2
+        - utilised a push mechanism
 
 #### Shard Capacity and Scaling
 
@@ -215,8 +215,8 @@ default shard quota
 - A real time data ingestion service from AWS “Stream Storage Layer”
 - firehose (needs to be prefixed by lambda) easier to work with S3
 - Putting data in Kinesis Data Stream, requires 3 inputs : Stream Name, Partition Key, Data
-  - `putRecord()`
-  - `putRecords()` (preferred)
+    - `putRecord()`
+    - `putRecords()` (preferred)
 - 200ms min time consumers can request data
 - 5 locations to access shards from consumers
 - Data Stream Design
@@ -243,7 +243,7 @@ default shard quota
 
 - KPL has builtin retrying functionality
 - KCL has a checkpoint feature which keeps track of resume point in case of client failure.
-  - Amazon DynamoDB tracks subsequence, can be a throttle subsequence
+    - Amazon DynamoDB tracks subsequence, can be a throttle subsequence
 
 #### Kinesis Data Stream Security
 
@@ -256,9 +256,9 @@ Principle of Least Privilege is still very important.
 - Real about IAM, Access and Management
 - Defaults : deny (permissions)
 - Policy to grant acess
-  - Effect : allow/deny
-  - Action :
-  - Resource : ‘arn:aws....’
+    - Effect : allow/deny
+    - Action :
+    - Resource : ‘arn:aws....’
 
 IAM Best Practices through 4 policies
 

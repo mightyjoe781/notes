@@ -128,10 +128,10 @@ void floydWarshall(int V, vector<vector<int>>& edges) {
 - Used to find the shortest path from a source node to all other nodes in a **graph**, even if there are negative edge weights.
 
 * **Key Features**:
-  * Works for both **directed** and **undirected** graphs.
-  * Handles **negative edge weights**, unlike Dijkstra’s algorithm.
-  * Can also detect **negative weight cycles** in the graph.
-  * Time Complexity: $O(V \times E)$, where V is the number of vertices and E is the number of edges.
+    * Works for both **directed** and **undirected** graphs.
+    * Handles **negative edge weights**, unlike Dijkstra’s algorithm.
+    * Can also detect **negative weight cycles** in the graph.
+    * Time Complexity: $O(V \times E)$, where V is the number of vertices and E is the number of edges.
 
 ````c++
 vector<int> bellmanFord(int V, int E, vector<Edge>& edges, int source) {

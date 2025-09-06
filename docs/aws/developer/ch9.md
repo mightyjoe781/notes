@@ -6,8 +6,8 @@
 - All features of git are supported
 - Integration with Cloudwatch Events, SNS Subscription
 - IAM
-  - HTTPS git credentials
-  - SSH
+    - HTTPS git credentials
+    - SSH
 - Codecommit permissions
 
 ### CI/CD Pipeline
@@ -33,17 +33,17 @@
 
 - continous delievary system
 - features
-  - automation of build,test & release
-  - manual approvals
-  - pipelines history reports
-  - pipeline status visualisation
+    - automation of build,test & release
+    - manual approvals
+    - pipelines history reports
+    - pipeline status visualisation
 - very good integration with other code services
 - Pipeline Concepts : Pipeline, Stage, Action, Transition
 - Action Types : Approval, Source, Build, Test, Deploy, Invoke
 - Integration Options
-  - Pipeline Action Types
-  - CloudWatch Events
-  - Invoke Lambdas
+    - Pipeline Action Types
+    - CloudWatch Events
+    - Invoke Lambdas
 
 ### AWS Codestar
 

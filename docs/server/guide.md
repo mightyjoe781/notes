@@ -118,9 +118,9 @@ We'll discuss the three systems in greater detail further down.
 
   "Lighty's" claims to fame are as follows:
 
-  - It's both  venerable and maintained.  The program  dates back to
+- It's both  venerable and maintained.  The program  dates back to
     2003 but a new release was made in 2021.
-  * It's lightweight and quite fast.
+* It's lightweight and quite fast.
 
   "nginx" is  recommended for general use cases,  but "Lighty" is useful
   for some purposes.

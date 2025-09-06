@@ -10,13 +10,13 @@
 
 - Go literal is an explicitly defined number, character, or string
 - Types of literal
-  - Integer Literal is sequence of numbers. Defaults to base 10, but we can use prefixes for other bases. e.g. `0b` for binary, `0o` for octal, `0x` for hexadecimal.
-    - Go allows you to put `_` in integer literals to make reading longer integers easier. e.g. `1_234`
-  - floating-point literal has a decimal point to indicate the fractional portion of the value. We can also define exponents using `e` : `6.03e23`. We can use `_` to format these literals as well.
-  - A *rune* literal represents a character and is surrounded by single quotes. NOTE: Single and Double Quotes are not interchangeable.
-  - Rune Literals can be : Unicode Characters (`a`), 8-bit octal numbers (`\141`), 8-bit hexadecimal numbers `\x61`, 16-bit hexadecimal numbers (`u0061`), or 32-bit unicode.
-  - Two ways indicate string literals. Most of the time we use double quotes to create interpreted string literal. The only characters that cannot appear in an interpreted string literal are unescaped backslashes, unescaped  newlines, and unescaped double quotes.
-  - If you need to include backslashes, double quotes, or newlines in your string, using a *raw string literal* is easier. These are delimited with backquotes (```) and can contain any character except a backquote.
+    - Integer Literal is sequence of numbers. Defaults to base 10, but we can use prefixes for other bases. e.g. `0b` for binary, `0o` for octal, `0x` for hexadecimal.
+        - Go allows you to put `_` in integer literals to make reading longer integers easier. e.g. `1_234`
+    - floating-point literal has a decimal point to indicate the fractional portion of the value. We can also define exponents using `e` : `6.03e23`. We can use `_` to format these literals as well.
+    - A *rune* literal represents a character and is surrounded by single quotes. NOTE: Single and Double Quotes are not interchangeable.
+    - Rune Literals can be : Unicode Characters (`a`), 8-bit octal numbers (`\141`), 8-bit hexadecimal numbers `\x61`, 16-bit hexadecimal numbers (`u0061`), or 32-bit unicode.
+    - Two ways indicate string literals. Most of the time we use double quotes to create interpreted string literal. The only characters that cannot appear in an interpreted string literal are unescaped backslashes, unescaped  newlines, and unescaped double quotes.
+    - If you need to include backslashes, double quotes, or newlines in your string, using a *raw string literal* is easier. These are delimited with backquotes (```) and can contain any character except a backquote.
 
 ````go
 `Greetings and

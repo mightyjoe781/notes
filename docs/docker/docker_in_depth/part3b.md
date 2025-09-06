@@ -4,10 +4,10 @@
 
 - Single Node
 - Multi Node
-  - On-prem (bare metal or VMs)
-  - Universal Control Plane (UCP) (Enterprise Feature)
-  - Public Clouds
-    - Docker for Azure, Docker for AWS, Docker for IBM Cloud
+    - On-prem (bare metal or VMs)
+    - Universal Control Plane (UCP) (Enterprise Feature)
+    - Public Clouds
+        - Docker for Azure, Docker for AWS, Docker for IBM Cloud
 
 ### Demo
 

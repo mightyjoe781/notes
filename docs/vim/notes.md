@@ -140,25 +140,25 @@ To save and exit the file `:wq`
 - `@{register}` : Replay the macro stored in register.
 - `@@` : Repeats most recent macro.’
 - Best Practices while using macros
-  - Normalise the cursor position : 0, 
-  - Perform edits and operations
-  - position your cursor to enable easy replays : j
+    - Normalise the cursor position : 0, 
+    - Perform edits and operations
+    - position your cursor to enable easy replays : j
 - To execute macro on specific range of lines, `:15,20normal @a`
 - You can update macros any time : Its as simple as update register use capital letters for macros
 - Saving Macros
-  - viminfo files : `.viminfo` or `_viminfo`
-  - Stores history and non-empty registers
-  - read when vim starts
-  - can easily overwrite registers
-  - vimrc files : `let @d = 'dd'`
+    - viminfo files : `.viminfo` or `_viminfo`
+    - Stores history and non-empty registers
+    - read when vim starts
+    - can easily overwrite registers
+    - vimrc files : `let @d = 'dd'`
 
 ### Vim Visual Mode
 
 - `v` : characterwise visual mode, `V` : linewise visual mode, `ctrl-v` : blockwise visual mode
 - vim motions and text-objects can be used to expand the visual area
 - Commands that work in visual mode
-  - ~ : Switch Case, c : Change, d : Delete, y : Yank, r : Replace, x : Delete, I : Insert, A : Append, J : Join, u : Make lowercase, U : make Uppercase
-  - \> : shift right, \< : shift left (very important to tab things)
+    - ~ : Switch Case, c : Change, d : Delete, y : Yank, r : Replace, x : Delete, I : Insert, A : Append, J : Join, u : Make lowercase, U : make Uppercase
+    - \> : shift right, \< : shift left (very important to tab things)
 - Blocks mode : `O` toggles current boundry left and right `o` toggles up and down boundary
 - Block mode can be utilised to make changes to blocks of lines for example to append `end` to all lines in a block, select block `Aend` will add same word each line
 - Note : shiftab defines how much shift operator shifts the selected text
@@ -244,11 +244,11 @@ map <leader>w :w!<CR>
 ### Gvim and MacVim
 
 - Why use graphical version of vim
-  - leverage some features which are not available in command line version of vim
-  - scrolling, text selection using mouse and copy-paste, etc.
+    - leverage some features which are not available in command line version of vim
+    - scrolling, text selection using mouse and copy-paste, etc.
 - Vim usually maintains its own register systems for system clipboard, if you copy something in system, it can be accessed uses vims `“*` register and `“+` registers
 - To make vim share system clipboard rather than using its own system `:set clipboard=unnamedplus` (operates on `+` register, for only using `*` register use `:set clipboard=unnamed`
 - `commandKey+v` : works in MacVim because it behind the scenes pastes the `*` register using  `“*gP`
 - gvimrc file is used to apply some specific settings to gvim versions.
-  - `:set gfn=*` : font-selector for gvim
+    - `:set gfn=*` : font-selector for gvim
 

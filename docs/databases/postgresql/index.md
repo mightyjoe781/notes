@@ -24,9 +24,9 @@ After that download [PG Admin 4](https://www.pgadmin.org/download/) , a web base
 
 - Open Postgres.app connect/initialize a database
 - Open PGAdmin 4 and in server -> register
-  - set general name as localhost
-  - set connection address localhost
-  - set username as local mac username (for mac `whoami`)
+    - set general name as localhost
+    - set connection address localhost
+    - set username as local mac username (for mac `whoami`)
 
 #### PostgresSQL Complex Datatypes
 

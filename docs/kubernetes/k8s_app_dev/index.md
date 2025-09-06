@@ -19,8 +19,8 @@ Patterns
 - commonly used for logging, file syncing, watchers
 - benefit inlcude leaner main container, failure isolation, independent update cycles
 - File Sync Sidecar Example
-  - primary container : web-server, sidecar : content puller
-  - content puller & web-server share a single volume within pod, in which content puller fetches latest files from CMS and keeps both containers in sync via volume.
+    - primary container : web-server, sidecar : content puller
+    - content puller & web-server share a single volume within pod, in which content puller fetches latest files from CMS and keeps both containers in sync via volume.
 
 ### Ambassador Pattern
 
@@ -28,12 +28,12 @@ Patterns
 - commonly used for communicating with databases
 - streamlined development experience, potential to reuse ambassador across language
 - Database Ambassador Example:
-  - primary container : web-app
-  - ambassador : database-proxy
-  - web app handles request
-  - database requests are sent to database proxy over localhost
-  - database proxy then forwards the requests to appropriate database
-  - possibly sharding the request
+    - primary container : web-app
+    - ambassador : database-proxy
+    - web app handles request
+    - database requests are sent to database proxy over localhost
+    - database proxy then forwards the requests to appropriate database
+    - possibly sharding the request
 
 ### Adaptor Pattern
 
@@ -111,8 +111,8 @@ spec:
 - Similar to security groups controlling access to virtual machines
 - scoped to namespace
 - Caveat
-  - kubernetest network plugin must support network policy
-  - example : calico, canal, flannel etc.
+    - kubernetest network plugin must support network policy
+    - example : calico, canal, flannel etc.
 - Non-isolated pod : accepts traffic from anywhere
 - Isolated pods are non-isolated pods once selected by network policy
 

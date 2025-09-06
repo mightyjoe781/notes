@@ -7,10 +7,10 @@
 - Pod containers all share a container network
 - one IP address per Pod
 - since pod contains container, it includes all declarative properties for container
-  - container image
-  - container ports
-  - container restart policy
-  - resource limits
+    - container image
+    - container ports
+    - container restart policy
+    - resource limits
 - desired properties written in manifest files
 
 Example Manifest File
@@ -27,15 +27,15 @@ spec:
 ````
 
 - Manifests in Action
-  - kubectl create sends manifest to Kubernetes API Server
-  - API server does the following for Pod manifests
-    - select a node with sufficient resource
-    - schedule pod onto node
-    - node pulls pod’s container image
-    - starts pod’s container
+    - kubectl create sends manifest to Kubernetes API Server
+    - API server does the following for Pod manifests
+        - select a node with sufficient resource
+        - schedule pod onto node
+        - node pulls pod’s container image
+        - starts pod’s container
 - Manifests are useful
-  - can be checked into source control
-  - easy to share and work with
+    - can be checked into source control
+    - easy to share and work with
 
 ````bash
 # first start the docker daemon (check docker documents)

@@ -46,8 +46,8 @@ type error interface {
 ## Use Strings for Simple Errors
 
 - Go standard library has two ways to create error from string
-  - `errors.New` function takes string and returns `error`. String you provide will be returned when you call `Error` method on returned error instance. `fmt.Println` automatically calls `Error` method.
-  - `fmt.Errorf` function allows to include runtime information in the error message by using `fmt.Printf` verbs to format an error string.
+    - `errors.New` function takes string and returns `error`. String you provide will be returned when you call `Error` method on returned error instance. `fmt.Println` automatically calls `Error` method.
+    - `fmt.Errorf` function allows to include runtime information in the error message by using `fmt.Printf` verbs to format an error string.
 
 ## Sentinel Errors
 

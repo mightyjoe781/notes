@@ -284,7 +284,7 @@ type Integer interface {
 ```
 
 - Generic divAndRemainder Function
-	- Works for all integer types in Integer
+   	- Works for all integer types in Integer
 ````go
 func divAndRemainder[T Integer](num, denom T) (T, T, error) {
     if denom == 0 {
@@ -295,8 +295,8 @@ func divAndRemainder[T Integer](num, denom T) (T, T, error) {
 ````
 
 - **Handling User-Defined Types:**
-  - By default, divAndRemainder(MyInt, MyInt) fails because MyInt is a custom type.
-  - Fix this using ~ to allow underlying types:
+    - By default, divAndRemainder(MyInt, MyInt) fails because MyInt is a custom type.
+    - Fix this using ~ to allow underlying types:
 
 ````go
 type Integer interface {
@@ -305,7 +305,7 @@ type Integer interface {
 ````
 
 - Ordered Types for Comparisons: Define an Ordered interface for ==, !=, <, >, <=, >= operators:
-  - NOTE: Go 1.21 includes the `cmp` package, while provides built-in comparison functions
+    - NOTE: Go 1.21 includes the `cmp` package, while provides built-in comparison functions
 
 ````go
 type Ordered interface {
@@ -314,7 +314,7 @@ type Ordered interface {
 ````
 
 - **Mixing Type Terms & Methods**: 
-  - Example: Ensure a type has an int underlying type and a String() method:
+    - Example: Ensure a type has an int underlying type and a String() method:
 
 ````go
 type PrintableInt interface {
@@ -325,7 +325,7 @@ type PrintableInt interface {
 
 - Compiler Enforcement
 
-  - Declaring an impossible interface (e.g., int requiring a method) compiles but fails on use. Example.
+    - Declaring an impossible interface (e.g., int requiring a method) compiles but fails on use. Example.
 
     ````go
     type ImpossiblePrintableInt interface {
@@ -334,10 +334,10 @@ type PrintableInt interface {
     }
     ````
 
-  - This results in compile-time error when instantiated
+    - This results in compile-time error when instantiated
 
 - Beyond Primitives
-  - Type terms can also be **slices, maps, arrays, channels, structs, or functions** to enforce specific types and methods.
+    - Type terms can also be **slices, maps, arrays, channels, structs, or functions** to enforce specific types and methods.
 
 ## Type Inference and Generics
 
@@ -487,20 +487,20 @@ fmt.Println(t3.Contains(Person{"Fred", 25}))
 ```
 ## More on comparable
 * Comparable Interfaces in Go
-	- In Go, interfaces are comparable types.
-	- Be cautious when using `==` and `!=` with interface types.
-	- If an interface's underlying type is not comparable, it causes a runtime panic.
+   	- In Go, interfaces are comparable types.
+   	- Be cautious when using `==` and `!=` with interface types.
+   	- If an interface's underlying type is not comparable, it causes a runtime panic.
 - Comparable Interface with Generics
-	- Consider the example where `Thinger` is an interface with two implementations:
-	    - `ThingerInt` (comparable)
-	    - `ThingerSlice` (not comparable)
-	- A generic function `Comparer[T comparable]` is defined to compare values.
-	- Works fine with `int` and `ThingerInt`, but fails at compile-time with `ThingerSlice`.
-	- However, `ThingerSlice` assigned to `Thinger` compiles but panics at runtime
+   	- Consider the example where `Thinger` is an interface with two implementations:
+   	    - `ThingerInt` (comparable)
+   	    - `ThingerSlice` (not comparable)
+   	- A generic function `Comparer[T comparable]` is defined to compare values.
+   	- Works fine with `int` and `ThingerInt`, but fails at compile-time with `ThingerSlice`.
+   	- However, `ThingerSlice` assigned to `Thinger` compiles but panics at runtime
 - Why this Happens
-	- The compiler only enforces `comparable` constraints at compile-time.
-	- Once assigned to an interface, the underlying type’s comparability is not checked.
-	- Results in runtime panic when comparing non-comparable underlying types
+   	- The compiler only enforces `comparable` constraints at compile-time.
+   	- Once assigned to an interface, the underlying type’s comparability is not checked.
+   	- Results in runtime panic when comparing non-comparable underlying types
 ## Things that are left Out
 1. **Operator Overloading**
     - Unlike Python, Ruby, or C++, Go does not support operator overloading.

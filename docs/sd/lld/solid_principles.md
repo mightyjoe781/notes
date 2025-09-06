@@ -101,7 +101,7 @@ scheduler.schedule_delivery(order)
 * good idea is to depend (coupling) on abstract classes, rather than concrete classes.
 
 Example-1
- - Violates OCP
+- Violates OCP
 ```python
 class PaymentProcessor:
     def process(self, method, amount):

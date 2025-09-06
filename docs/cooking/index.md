@@ -3,16 +3,16 @@
 ### Ingredients
 
 - Ingredients
-  - Red Chilli Powder
-  - Turmeric Powder - imparts color & used for marinating meat/fish to kill bacteria
-  - Garam Masala (combination of multiple spices)
-  - Aafoetida/Hing - masks smell of any pungent flavour ingredient, used with cumin, turmeric powder, substitute for ginger garlic / onion
-  - jeera/cumin & mustard/rai - used for tadka
+    - Red Chilli Powder
+    - Turmeric Powder - imparts color & used for marinating meat/fish to kill bacteria
+    - Garam Masala (combination of multiple spices)
+    - Aafoetida/Hing - masks smell of any pungent flavour ingredient, used with cumin, turmeric powder, substitute for ginger garlic / onion
+    - jeera/cumin & mustard/rai - used for tadka
 - Souring Agents
-  - Lemons (large, slightly sweeter), lime (slight bitter)
-  - tamarind
-  - Kokum/garcinia indica - useful for acidity
-  - sugar & jaggery
+    - Lemons (large, slightly sweeter), lime (slight bitter)
+    - tamarind
+    - Kokum/garcinia indica - useful for acidity
+    - sugar & jaggery
 - Useful ingredients : potato, tomato, onions, coriander (garnishing), ginger, garlic, rice, tud daal(yellow), moong daal(yellow), flour, sunflower/mustard oil, ghee, grated coconut, eggs, meat/fish
 - whole spices : cloves, peppercorns, cinnamon sticks, bay leaves, coriander seeds, cardamons(elaichi)
 

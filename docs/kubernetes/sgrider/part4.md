@@ -99,15 +99,15 @@ Config file describes the containers we want and Kubernetes doesn’t actually m
 Pod usually runs the containers and service provides networking to container. And Each Api version actually defines different types of objects we can have.
 
 - apiVersion: v1
-  - componentStatus
-  - configMap
-  - Endpoints
-  - Events
-  - Namespace
-  - Pod
+    - componentStatus
+    - configMap
+    - Endpoints
+    - Events
+    - Namespace
+    - Pod
 - apiVersion: apps/v1
-  - Controller Revision
-  - StatefulSet
+    - Controller Revision
+    - StatefulSet
 
 #### Running Containers in Pods
 

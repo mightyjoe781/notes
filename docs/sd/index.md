@@ -102,36 +102,36 @@ Notes
 ### Classic Interview Problems
 
 - Social Media Platforms
-  - Twitter/X-like System
-  - Instagram-like System
-  - LinkedIn-like System
-  - TikTok-like System
+    - Twitter/X-like System
+    - Instagram-like System
+    - LinkedIn-like System
+    - TikTok-like System
 - E-commerce Systems
-  - Amazon-like System
-  - Shopping Cart Design
-  - Payment Processing System
-  - Inventory Management System
+    - Amazon-like System
+    - Shopping Cart Design
+    - Payment Processing System
+    - Inventory Management System
 - Communication Systems
-  - WhatsApp/Slack-like Chat
-  - Video Conferencing System
-  - Email System
-  - Notification System
+    - WhatsApp/Slack-like Chat
+    - Video Conferencing System
+    - Email System
+    - Notification System
 - Media & Content
-  - Netflix/YouTube-like Streaming
-  - Spotify-like Music Streaming
-  - Content Management System
-  - Live Streaming Platform
+    - Netflix/YouTube-like Streaming
+    - Spotify-like Music Streaming
+    - Content Management System
+    - Live Streaming Platform
 - Transportation & Location
-  - Uber/Lyft Ride-sharing
-  - Google Maps-like System
-  - Food Delivery System
-  - Parking System
+    - Uber/Lyft Ride-sharing
+    - Google Maps-like System
+    - Food Delivery System
+    - Parking System
 - Utility Systems
-  - URL Shortener (bit.ly)
-  - [Pastebin](problems/pastebin.md)
-  - Web Crawler & Search Engine
-  - Rate Limiter Design
-  - Distributed Cache System
+    - URL Shortener (bit.ly)
+    - [Pastebin](problems/pastebin.md)
+    - Web Crawler & Search Engine
+    - Rate Limiter Design
+    - Distributed Cache System
 
 ### Appendices
 
@@ -142,11 +142,11 @@ Notes
 #### C. Further Learning
 
 - Recommended Books
-  - System Design Interview Guide (Alex Xu)
-  - Designing Data-Intensive Applications (Martin Kleppmann)
-  - Building Microservices (Sam Newman)
-  - _The Art of Scalability_ – Abbott & Fisher
+    - System Design Interview Guide (Alex Xu)
+    - Designing Data-Intensive Applications (Martin Kleppmann)
+    - Building Microservices (Sam Newman)
+    - _The Art of Scalability_ – Abbott & Fisher
 - Online Resources
-  - [Engineering blogs](company.md) and case studies
-  - Open source system architectures
-  - Conference talks and presentations
+    - [Engineering blogs](company.md) and case studies
+    - Open source system architectures
+    - Conference talks and presentations

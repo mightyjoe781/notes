@@ -32,16 +32,16 @@ You don’t need to manage infrastructure and its cost effective as you pay for 
 How does requests come into the API ? API Endpoints
 
 - Edge-Optimized API Endpoint
-  - many geographically distinct and distributed clients
-  - all requests are forwarded to closed cloudfront
-  - reduces TLS overhead and overall improves response speeds
+    - many geographically distinct and distributed clients
+    - all requests are forwarded to closed cloudfront
+    - reduces TLS overhead and overall improves response speeds
 
 
 - Regional API Endpoint
-  - when user wished to use their own CDN or doesn’t want to use CDN
+    - when user wished to use their own CDN or doesn’t want to use CDN
 
 - Private API Endpoint
-  - can only be accessed within VPC, microservices or internal applications
+    - can only be accessed within VPC, microservices or internal applications
 
 #### Supported Protocols
 
@@ -83,17 +83,17 @@ Two ways to do API Integration
 #### API Gateway Authorizers
 
 - IAM Authorizer
-  - client requirements : signature v4, “execute API” permissions
-  - rest api, http api, websocket endpoints
+    - client requirements : signature v4, “execute API” permissions
+    - rest api, http api, websocket endpoints
 - AWS Lambda
-  - legacy or third party auth providers
-  - rest api, http api, websocket endpoints
+    - legacy or third party auth providers
+    - rest api, http api, websocket endpoints
 - Cognito Authorizer
-  - complete auth solution
-  - only rest api
+    - complete auth solution
+    - only rest api
 - JWT Authorizer
-  - Auth2 compliant anything like openID authorizers
-  - only with http
+    - Auth2 compliant anything like openID authorizers
+    - only with http
 
 AWS WAF are available by default protects users APIs using DDOS prevention.
 
@@ -134,13 +134,13 @@ Its main aim is distribution, not to store data for you. Its more used to cache 
 CloudFront uses distribution to control which data needs to be distributed.
 
 - Web Distribution
-  - Speed up static and dynamic content
-  - distribute media files using HTTP or HTTPS
-  - add, update or delete objects and submit data from web forms
-  - use live streaming to stream an event in real-time
+    - Speed up static and dynamic content
+    - distribute media files using HTTP or HTTPS
+    - add, update or delete objects and submit data from web forms
+    - use live streaming to stream an event in real-time
 - RTMP Distribution
-  - distribute streaming media services, adobe flash media services
-  - resource data can only stored in s3 bucked not ec2 instances
+    - distribute streaming media services, adobe flash media services
+    - resource data can only stored in s3 bucked not ec2 instances
 
 If using an S3 bucket as origin, then for additional security you can create a CloudFront user called an **origin access identity** (OAI)
 
@@ -157,16 +157,16 @@ Targets could be from different zones.
 There are three types of Load Balancers
 
 - Application Load Balancer
-  - for web application running HTTP or HTTPS
-  - operates at request level
-  - Advanced routing, TLS termination and visibility features targeteted at application architecture
+    - for web application running HTTP or HTTPS
+    - operates at request level
+    - Advanced routing, TLS termination and visibility features targeteted at application architecture
 - Network Load Balancer
-  - ultra high performance while maintaining very low latencies
-  - operates at the connection level, routing traffic to targets within your VPC
-  - handles millions of request per second
+    - ultra high performance while maintaining very low latencies
+    - operates at the connection level, routing traffic to targets within your VPC
+    - handles millions of request per second
 - Classic Load Balancer
-  - used for application that were built in the existing EC2
-  - Classic environment
+    - used for application that were built in the existing EC2
+    - Classic environment
 
 #### ELB Components
 

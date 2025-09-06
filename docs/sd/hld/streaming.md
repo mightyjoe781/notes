@@ -32,14 +32,14 @@ Features of Message Brokers
 
 * Approach - 1 : One Message Brokers and add logic in consumers
 
-  * process - 1 & process 2, if either failed then we will not be able process both events correctly
+    * process - 1 & process 2, if either failed then we will not be able process both events correctly
 
   ![image-20250429212343027](./streaming.assets/image-20250429212343027.png)
 
 * Approach - 2 : Two Brokers & two sets of consumers
 
-  * API server Writes to two brokers and each has its own set of consumers, (solves issue with partial complete writes)
-  * Issue - when api server writes to two RabbitMQ, one of them fails, we end up with original problem.
+    * API server Writes to two brokers and each has its own set of consumers, (solves issue with partial complete writes)
+    * Issue - when api server writes to two RabbitMQ, one of them fails, we end up with original problem.
 
 * Solution: write once, but read by many systems - Kafka, Kinesis try to solve this problem.
 

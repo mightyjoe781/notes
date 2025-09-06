@@ -5,13 +5,13 @@ To count element frequencies effectively, hash map (dictionary) are used by stor
 * Updates/Insertion/Lookup : Avg Time $O(1)$ 
 
 * Hash Maps are already implemented in modern programming languages
-  * C++ : `map` or `unordered_map` or `set` or `unordered_set`
-  * Python: `dict` , `OrderedDict`
+    * C++ : `map` or `unordered_map` or `set` or `unordered_set`
+    * Python: `dict` , `OrderedDict`
 
 * Use cases
-  * Anagram Detection
-  * First Unique Character in String
-  * Find all elements appearing >= n/3 times
+    * Anagram Detection
+    * First Unique Character in String
+    * Find all elements appearing >= n/3 times
 
 * NOTE: More on Hashing will be discussed in Searching/Sorting Portions
 
@@ -26,9 +26,9 @@ To count element frequencies effectively, hash map (dictionary) are used by stor
 ### Hash Functions
 
 * Properties of a Good Hash Function
-  * Prime number modulus reduces collisions
-  * Cryptographic hashes (SHA) for security
-  * Simple mod/bitmask for speed
+    * Prime number modulus reduces collisions
+    * Cryptographic hashes (SHA) for security
+    * Simple mod/bitmask for speed
 
 ## Usage
 

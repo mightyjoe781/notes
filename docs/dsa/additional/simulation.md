@@ -4,21 +4,21 @@
 
 * Simulate step-by-step execution of a game scenario or interaction according to predefined rules.
 * Example
-  * Grid Based Movement
-  * Turn-Based Movement
-  * Collision Handling
-  * Entity Interaction (e.g. player/enemy/item)
+    * Grid Based Movement
+    * Turn-Based Movement
+    * Collision Handling
+    * Entity Interaction (e.g. player/enemy/item)
 * Common Patterns
-  * Discrete Time Steps: Update the game state at each tick/turn. Minetest actually has globalstep timer you can utilise.
-  * Grid Representation : models position of player, walls, obstacles
-  * Entity Queue
-  * State Tracking 
-  * Rule Engine
+    * Discrete Time Steps: Update the game state at each tick/turn. Minetest actually has globalstep timer you can utilise.
+    * Grid Representation : models position of player, walls, obstacles
+    * Entity Queue
+    * State Tracking 
+    * Rule Engine
 * Techniques
-  * BFS/DFS for movement (zombie spread, virus simulation)
-  * PriorityQueue for ordering actions
-  * Coordinate compression or hashing for large boards
-  * Bitmasks or flags for power-ups, abilities
+    * BFS/DFS for movement (zombie spread, virus simulation)
+    * PriorityQueue for ordering actions
+    * Coordinate compression or hashing for large boards
+    * Bitmasks or flags for power-ups, abilities
 
 ### Problems
 
@@ -31,16 +31,16 @@
 
 * Instead of updating the simulation at every time unit, only process **important events** that change the system. This improves efficiency.
 * Idea
-  * Maintain a priority queue of events
-  * Each event is represented as `(timestamp, event_data)`
-  * process events in *chronological order*
-  * Each event may generate new future events
+    * Maintain a priority queue of events
+    * Each event is represented as `(timestamp, event_data)`
+    * process events in *chronological order*
+    * Each event may generate new future events
 * Use Cases
-  * systems where actions are sparse in time
-  * Real-Time Simulations
-  * Traffic/Server Processing Simulation
-  * Collision Detection
-  * Network Models
+    * systems where actions are sparse in time
+    * Real-Time Simulations
+    * Traffic/Server Processing Simulation
+    * Collision Detection
+    * Network Models
 
 ````python
 import heapq
@@ -66,8 +66,8 @@ while event_queue:
 - Deterministic grid-based models used to simulate complex systems using simple local rules.
 - **Cellular Automaton (CA)**: A discrete model made up of a regular grid of cells, each in a finite state (e.g., alive/dead or 0/1). The state of each cell evolves based on a fixed rule depending on the states of neighboring cells.
 - Neighborhood
-  - Moore : 8 neighbours
-  - Von Neuman : 4 neighbours (no diagonal)
+    - Moore : 8 neighbours
+    - Von Neuman : 4 neighbours (no diagonal)
 
 **Conway’s Game of Life**
 
@@ -174,12 +174,12 @@ def random_walk_2D(n):
 
 - Estimates value using randomness (statistical sampling)
 - Use-Cases
-  - Pi-estimation using random point in square/circle
-  - Probabilistic integral approximation
+    - Pi-estimation using random point in square/circle
+    - Probabilistic integral approximation
 - Usually steps involved are:
-  - Simulate random input based on some distribution
-  - Count/Measure successful outcomes
-  - Estimate with `success/ total trials`
+    - Simulate random input based on some distribution
+    - Count/Measure successful outcomes
+    - Estimate with `success/ total trials`
 - Pi-Estimation Using Monte Carlo Method
 - The idea is to randomly generate points inside a unit square and count how many fall inside the quarter circle of radius 1. The ratio approximates π/4.
 
@@ -234,11 +234,11 @@ print("Estimated ∫ sin(x) dx from 0 to π:", result)
 
 - These are dual to Monte-Carlo Simulation
 - Las Vegas Algorithm
-  - Always give correct answer
-  - Runtime is probabilistic
+    - Always give correct answer
+    - Runtime is probabilistic
 - Examples
-  - Randomized Quicksort : Uses randomness to select pivot (Las Vegas — correctness guaranteed)
-  - Perfect Hashing : Repeatedly tries seeds to find a collision-free assignment of keys.
+    - Randomized Quicksort : Uses randomness to select pivot (Las Vegas — correctness guaranteed)
+    - Perfect Hashing : Repeatedly tries seeds to find a collision-free assignment of keys.
 - Randomized Quicksort : we randomly choose the pivot each time — the correctness is guaranteed, but performance depends on the pivot quality.
 
 ````python

@@ -9,23 +9,23 @@ hide:
 
 <div class="grid cards" markdown>
 
-- __Terminal & Shell Tools__
+-   __Terminal & Shell Tools__
 
-  ---
+    ---
 
-  :simple-fishshell:{ .lg .middle } [Bash/Zsh/Fish](shell.md)
+    :simple-fishshell:{ .lg .middle } [Bash/Zsh/Fish](shell.md)
+    
+    :simple-git:{ .lg .middle } [Git](git.md)
+    
+    :material-ssh:{ .lg .middle } [SSH](ssh.md)
+    
+    :simple-tmux:{ .lg .middle } [Tmux](tmux.md)
+    
+    :simple-neovim:{ .lg .middle } [Vim](../vim/index.md)
+    
+    :simple-gnu:{ .lg .middle } [GNU Coreutils](gnu.md)
   
-  :simple-git:{ .lg .middle } [Git](git.md)
-  
-  :material-ssh:{ .lg .middle } [SSH](ssh.md)
-  
-  :simple-tmux:{ .lg .middle } [Tmux](tmux.md)
-  
-  :simple-neovim:{ .lg .middle } [Vim](../vim/index.md)
-  
-  :simple-gnu:{ .lg .middle } [GNU Coreutils](gnu.md)
-  
-- __System & Monitoring__
+-   __System & Monitoring__
 
     ---
     
@@ -39,7 +39,7 @@ hide:
 
     :material-sync:{ .lg .middle } [rsync](rsync.md)
   
-- __Networking & Security__
+-   __Networking & Security__
 
     ---
     
@@ -53,19 +53,19 @@ hide:
 
     :material-hammer:{ .lg .middle } [Fail2ban](fail2ban.md)
   
-- __Development & DevOps__
+-   __Development & DevOps__
 
-  ---
+    ---
+    
+    :simple-docker:{ .lg .middle } [Docker/Podman](docker.md)
+    
+    :simple-kubernetes:{ .lg .middle } [Kubernetes](kubernetes.md)
+    
+    :simple-terraform:{ .lg .middle } [Terraform](terraform.md)
+    
+    :simple-ansible:{ .lg .middle } [Ansible](ansible.md)
   
-  :simple-docker:{ .lg .middle } [Docker/Podman](docker.md)
-  
-  :simple-kubernetes:{ .lg .middle } [Kubernetes](kubernetes.md)
-  
-  :simple-terraform:{ .lg .middle } [Terraform](terraform.md)
-  
-  :simple-ansible:{ .lg .middle } [Ansible](ansible.md)
-  
-- __Productivity__
+-   __Productivity__
 
     ---
     
@@ -81,7 +81,7 @@ hide:
 
     :octicons-terminal-16:{ .lg .middle } [cheat.sh](cheat.md)
 
-- __Databases__
+-   __Databases__
 
     ---
     
@@ -91,7 +91,7 @@ hide:
 
     :simple-sqlite:{ .lg .middle } [sqlite](sqlite.md)
 
-- __Miscellaneous__
+-   __Miscellaneous__
 
     ---
     

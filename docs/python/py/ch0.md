@@ -2,12 +2,12 @@
 
 - Arithmetic in Python
 
-  - Power : `a**b`
+    - Power : `a**b`
 
 - Division in python :
 
-  - Integer Division : `a//b`
-  - Float Division : `a/b`
+    - Integer Division : `a//b`
+    - Float Division : `a/b`
 
 - Conditionals in Python
 

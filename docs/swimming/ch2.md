@@ -27,7 +27,7 @@
 
 * Know where lifebuoys, rescue hooks, and first aid kits are located.
 * In an emergency, call for help immediately — alert a lifeguard or adult.
-  * Don’t attempt to rescue someone by jumping in unless trained — use reach, throw, don’t go:
-  * Reach with a pole or arm (lie down to avoid being pulled in).
-  * Throw a floatation device or rope.
+    * Don’t attempt to rescue someone by jumping in unless trained — use reach, throw, don’t go:
+    * Reach with a pole or arm (lie down to avoid being pulled in).
+    * Throw a floatation device or rope.
 * Learn basic CPR and rescue breathing — can be life-saving before help arrives.

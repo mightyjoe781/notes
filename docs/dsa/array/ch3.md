@@ -24,9 +24,9 @@ def range_sum(P, l, r):
 ```
 
 * Applications
-  * Efficient Range Sum Queries
-  * Counting Elements satisfying conditions in ranges
-  * Solving problems involving sum of subarrays
+    * Efficient Range Sum Queries
+    * Counting Elements satisfying conditions in ranges
+    * Solving problems involving sum of subarrays
 
 ## Difference Arrays
 
@@ -45,8 +45,8 @@ for i in range(1, n):
 ### Range Update
 
 * To add a `val` to `A[l...r]`
-  * increment `D[l]` by `val`
-  * decrement `D[r+1]` by `val` if `r + 1 < n`
+    * increment `D[l]` by `val`
+    * decrement `D[r+1]` by `val` if `r + 1 < n`
 
 ```python
 D[l] += val
@@ -55,7 +55,7 @@ if r + 1 < D.size():
 ```
 
 * Reconstruction
-  * Prefix sum array of difference array is exactly same as original array
+    * Prefix sum array of difference array is exactly same as original array
 
 ## Problems
 

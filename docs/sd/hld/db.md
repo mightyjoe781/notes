@@ -11,11 +11,11 @@ History of Relational Databases
 * Computers first did *accounting* -> *ledgers* -> *Rows & Columns*
 * Databases were developed to support accounting
 * Key Properties
-  * Data consistency
-  * Data durability
-  * Data integrated
-  * Constraints
-  * Everything in one place
+    * Data consistency
+    * Data durability
+    * Data integrated
+    * Constraints
+    * Everything in one place
 * Because of this reason, relational databases provides ACID properties to support *Transactions*
 
 * A - Atomicity
@@ -123,26 +123,26 @@ History of Relational Databases
 * Sharding : Method of distributing data across *multiple machines*.
 * Partitioning : splitting a subset of data *within* the same instance.
 * How a database is scaled
-  * A database server is just a databases process running on an EC2
-  * post production deploying, your service is serving the real traffic (100wps)
-  * Suddenly there is a surge of users (200wps)
-  * To handle load, you can scale up your database, increase RAM, CPU and DISK
-  * Now, suddenly traffic surges in popularity (1000wps)
-  * you can’t scale up beyond limits of the provider, you will have to scale horizontally 
-  * Then you should split the data into multiple databases, providing higher throughput
+    * A database server is just a databases process running on an EC2
+    * post production deploying, your service is serving the real traffic (100wps)
+    * Suddenly there is a surge of users (200wps)
+    * To handle load, you can scale up your database, increase RAM, CPU and DISK
+    * Now, suddenly traffic surges in popularity (1000wps)
+    * you can’t scale up beyond limits of the provider, you will have to scale horizontally 
+    * Then you should split the data into multiple databases, providing higher throughput
 * In above example splitting data into multiple database(shard) is called *partitioned*
 * How to partition the data ? There are two categories of partitioning
-  * Horizontal Partitioning (Common) - Within table take rows based on some propety into multiple partitions
-  * Vertical Partitioning
+    * Horizontal Partitioning (Common) - Within table take rows based on some propety into multiple partitions
+    * Vertical Partitioning
 * In above split depends on *load*, *usecase*, and *access patterns*
 * Shards
-  * Advantages
-    * Handle large Read and Writes
-    * Increases overall storage capacity
-    * Higher Availability
-  * Disadvantages
-    * Operationally Complex
-    * Cross-Shard Queries Expensive
+    * Advantages
+        * Handle large Read and Writes
+        * Increases overall storage capacity
+        * Higher Availability
+    * Disadvantages
+        * Operationally Complex
+        * Cross-Shard Queries Expensive
 
 ## Non-Relational Databases
 
@@ -181,16 +181,16 @@ History of Relational Databases
 * A database is designed to solve a *particular problem* really well.
 * Common Misconception: Picking Non-relational DB because relational databases do not scale.
 * Why non-relational DBs scale
-  * There are no relations & constraint
-  * Data is modelled to be sharded
+    * There are no relations & constraint
+    * Data is modelled to be sharded
 * If we relax above condition on relational databases then they can be scaled.
-  * do not use foreign key check
-  * do not use cross shard transaction
-  * do manual sharding
+    * do not use foreign key check
+    * do not use cross shard transaction
+    * do manual sharding
 * Does this mean, no DB is different
-  * No every single database has some peculiar properties and guarantees and if you need those, pick that DB
+    * No every single database has some peculiar properties and guarantees and if you need those, pick that DB
 * How does this help in designing system
-  * While designing any system, do no jump to DB directly
-  * Understand *what* & *how much* data you will be storing
-  * Understand the *access pattern* for data
-  * Any special feature like *TTL* etc required.
+    * While designing any system, do no jump to DB directly
+    * Understand *what* & *how much* data you will be storing
+    * Understand the *access pattern* for data
+    * Any special feature like *TTL* etc required.

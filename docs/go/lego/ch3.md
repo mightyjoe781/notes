@@ -42,11 +42,11 @@ var x [][]int
 ````
 
 - Builtins which are useful to be used with slice
-  - `len` : `var size = len(x)`
-  - `append` : `x = append(x, 10, 11, 12)` or appending other slice : `x = append(x, y...)`
-  - `capacity`: number of consecutive memory locations reserved, its increased dynamically when length of slice reaches capacity. `var c = cap(x)`
-  - `make` : create fixed size slices(can be resized) for initialization. `x := make([]int, 5)` or intialize with capacity 10. `x := make([]int, 5, 10)`
-  - emptying slices: `clear(s)`
+    - `len` : `var size = len(x)`
+    - `append` : `x = append(x, 10, 11, 12)` or appending other slice : `x = append(x, y...)`
+    - `capacity`: number of consecutive memory locations reserved, its increased dynamically when length of slice reaches capacity. `var c = cap(x)`
+    - `make` : create fixed size slices(can be resized) for initialization. `x := make([]int, 5)` or intialize with capacity 10. `x := make([]int, 5, 10)`
+    - emptying slices: `clear(s)`
 - declaring slices : usual way is to create a nil slice and then add data to it.
 
 ````go
@@ -57,9 +57,9 @@ data := []int{2,4,6,8}
 ````
 
 - there are three possibilities while using slices
-  - for using as a buffer, specify a nonzero length
-  - if you want exact size, specify length and index into slice to set the values
-  - other situations use `make` with a zero length and specified capacity. Allows appending to add items to slice as required
+    - for using as a buffer, specify a nonzero length
+    - if you want exact size, specify length and index into slice to set the values
+    - other situations use `make` with a zero length and specified capacity. Allows appending to add items to slice as required
 - slice expression : NOTE: slices are not copy but share the memory of the variables, so modification to other references will reflect in original slice
 
 ````go
@@ -192,11 +192,11 @@ teams := map[string][]string {
 
 - Creating map with some default size: `ages := make(map[int][]string, 10)` (this map is still 10 length but can grow beyond specified size)
 - Similarity in maps and slices
-  - grows in size as more key-value pairs are added
-  - we specify size of map druing declaration as well
-  - passing `len` function a map provides its size
-  - zero value of map is `nil`
-  - maps are not comparable, but you can check nullability
+    - grows in size as more key-value pairs are added
+    - we specify size of map druing declaration as well
+    - passing `len` function a map provides its size
+    - zero value of map is `nil`
+    - maps are not comparable, but you can check nullability
 - key of the map can be any comparable type not a slice or another map
 
 ### Reading/Writing a Map

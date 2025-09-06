@@ -6,8 +6,8 @@
 * Direction Constraint : down, right only
 * We have to minimize the sum along a valid path from `(0,0)` to `(m-1, n-1)`
 * Split criteria: Two sets of problems, where we can either take the down or right cell
-  * $s_1$ : Min. Path Sum given first step is right step, then solving problem for $P(0, 1)$
-  * $s_2$ : Min. Path Sum given first step is right step, then solving problem for $P(1, 0)$
+    * $s_1$ : Min. Path Sum given first step is right step, then solving problem for $P(0, 1)$
+    * $s_2$ : Min. Path Sum given first step is right step, then solving problem for $P(1, 0)$
 * All matrices are suffix matrix for the original matrix
 * Recurrence: $P(0, 0) = min\{P(0, 1), P(1, 0)\} + A[0][0]$
 * Its a two dimensional DP, $m*n$
@@ -47,12 +47,12 @@ int minPathSum(vector<vector<int>>& grid) {
 * [Problem Link](https://leetcode.com/problems/dungeon-game/description/)
 * Find a path where the health of knight doesn’t go below zero, 
 * Split Criteria
-  * $H_1$ : Initial min. Health of knight for rescuing in the box `(0, 1)` to `(m-1, n-1)`
-  * $H_2$ : Initial min. Health of knight for rescuing in the box `(1, 0)` to `(m-1, n-1)`
+    * $H_1$ : Initial min. Health of knight for rescuing in the box `(0, 1)` to `(m-1, n-1)`
+    * $H_2$ : Initial min. Health of knight for rescuing in the box `(1, 0)` to `(m-1, n-1)`
 * By definition $H_1 > 0$ & $H_2 > 0$, so `dp[0][0] = val`, so both subproblems will become `H1` is `-6` & `H2` is `-5`, assuming initial health as `val-6` and `val-5` respectively, and it is guaranteed that one path will lead to solution by problem constraint
 * Base Case
-  * bottom row : $H_1 = \max(H_1 - val, 1)$
-  * right column : $H_2 = \max(H_2 - val, 1)$
+    * bottom row : $H_1 = \max(H_1 - val, 1)$
+    * right column : $H_2 = \max(H_2 - val, 1)$
 * Order of filling : B to L & R to L
 
 ````c++
@@ -171,8 +171,8 @@ bool canCross(vector<int>& stones) {
 * [Problem Link](https://leetcode.com/problems/longest-palindromic-subsequence/)
 * Check Stone Game Problem : [Link](ch5.md)
 * Hint : Recurrence : 
-  * Equal : $P(0, n-1) = 2 + P(1, n-2)$
-  * Not Equal : $P(0, n-1) = max\{P(1, n-1), P(0, n-2)\}$
+    * Equal : $P(0, n-1) = 2 + P(1, n-2)$
+    * Not Equal : $P(0, n-1) = max\{P(1, n-1), P(0, n-2)\}$
 
 
 ````c++

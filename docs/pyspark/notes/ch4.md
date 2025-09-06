@@ -2,17 +2,17 @@
 
 - The Structured APIs allows manipulation of all sorts of data from CSV(semi-structured) or Parquet(highly structured because schema validation happens at the write time)
 - APIs refer to three core types of distributed collection APIs
-  - Datasets
-  - DataFrames
-  - SQL tables and views
+    - Datasets
+    - DataFrames
+    - SQL tables and views
 
 ## DataFrames and Datasets
 
 Spark has two notions of structured collections : DataFrames and Datasets.
 
 - Both are (distributed) table like collections with rows and columns
-  - Each column must have same number of rows as all other columns
-  - Each column type has type information that must be consistent in every row in collection.
+    - Each column must have same number of rows as all other columns
+    - Each column type has type information that must be consistent in every row in collection.
 - To spark both represent immutable, lazily evaluated plans that specify what operations to apply to data residing at a location to generate some output.
 
 ## Schemas

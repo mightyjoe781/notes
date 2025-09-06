@@ -13,19 +13,19 @@
 
 - Spark Applications consist of a *driver* process and a set of *executor* processes.
 - Driver Node runs your `main()` function, sits on a node in a cluster, and is responsible for three things
-  - maintaining information about spark application
-  - responding to user program or input
-  - analyzing, distributing and scheduling work across executors
+    - maintaining information about spark application
+    - responding to user program or input
+    - analyzing, distributing and scheduling work across executors
 - Executors actually carry out the work assigned by driver and submit it back.
 
 ## Spark’s Language APIs
 
 - Spark API enables us to run Spark Code in various programming Languages
-  - Scala : Spark is primarily written in spark, making it spark’s default language.
-  - Java : supports Scala, and Java is required for some special cases.
-  - Python : supports nearly all constructs that Scala supports.
-  - SQL : Spark supports a subset of ANSI SQL 2003 Standard.
-  - R : Spark has 2 commonly used R libraries: Spark core (SparkR) and another as R community driven package (sparklyr)
+    - Scala : Spark is primarily written in spark, making it spark’s default language.
+    - Java : supports Scala, and Java is required for some special cases.
+    - Python : supports nearly all constructs that Scala supports.
+    - SQL : Spark supports a subset of ANSI SQL 2003 Standard.
+    - R : Spark has 2 commonly used R libraries: Spark core (SparkR) and another as R community driven package (sparklyr)
 
 ## Spark’s APIs
 
@@ -60,8 +60,8 @@ divisBy2 = myRange.where("number % 2 = 0")
 
 - Notice that these return no output because it is an abstract transformation, and Spark will not act on transformation until we call an action. They are more used for expressing business logic.
 - Types of Transformation
-  - Narrow Dependencies : Each input partition will contribute to only one output partition.
-  - Wide Dependencies : Inpute partitions contributing to many output partitions. (Shuffle)
+    - Narrow Dependencies : Each input partition will contribute to only one output partition.
+    - Wide Dependencies : Inpute partitions contributing to many output partitions. (Shuffle)
 - With narrow transformations, Spark will automatically perform an operation called *pipelining*, meaning that if we specify multiple filters on DataFrames, they’ll all  be performed in-memory. The same cannot be said for shuffles.
 
 |                    Narrow Transformations                    |                     Wide Transformations                     |
@@ -83,9 +83,9 @@ divisBy2.count() # count action
 ````
 
 - Three kinds of actions
-  - actions to view data in console.
-  - actions to collect data to native objects in respective language.
-  - actions to write to output data sources.
+    - actions to view data in console.
+    - actions to collect data to native objects in respective language.
+    - actions to write to output data sources.
 
 - Here first we ran filter transformation (narrow transformation) then an aggregation (wide transformation) performing counts on a per partition basis and collecting results which we can view on spark UI at `http://localhost:4040`
 

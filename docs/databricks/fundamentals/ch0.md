@@ -23,23 +23,23 @@ Why Databricks ?
 **Data Warehouse** : 
 
 - Strengths
-  - Purpose-built for BI and reporting
-  - Meant to unify disparate systems
+    - Purpose-built for BI and reporting
+    - Meant to unify disparate systems
 - Downside
-  - Poor support for Unstructured Data, data science, AI and streaming
-  - Closed and Proprietary formats
-  - Expensive to scale
+    - Poor support for Unstructured Data, data science, AI and streaming
+    - Closed and Proprietary formats
+    - Expensive to scale
 
 **Date Lake** :
 
 - Strengths
-  - Store any kind of data
-  - Inexpensive Storage
-  - Good starting point
+    - Store any kind of data
+    - Inexpensive Storage
+    - Good starting point
 - Downsides
-  - Complex to setup
-  - Poor BI performance
-  - Can become unreliable data swamps
+    - Complex to setup
+    - Poor BI performance
+    - Can become unreliable data swamps
 
 **DataBricks Lakehouse Platform** : Mixture of both of above paradigm.
 

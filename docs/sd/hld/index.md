@@ -30,33 +30,33 @@
 ## Advanced Topics
 
 - Foundational Concepts
-  - Foundational Topics in System Design - I
-  - Foundational Topics in System Design - II
+    - Foundational Topics in System Design - I
+    - Foundational Topics in System Design - II
 
 - Deep Dive into Databases
-  - Relational Databases (Advanced)
-  - Non-Relational Databases (Advanced)
+    - Relational Databases (Advanced)
+    - Non-Relational Databases (Advanced)
 
 - Distributed Systems
-  - Distributed Systems [Storm Overview]
-  - Distributed ID Generators
+    - Distributed Systems [Storm Overview]
+    - Distributed ID Generators
 
 - Storage Systems
-  - Storage Engines - I
-  - Storage Engines - II
+    - Storage Engines - I
+    - Storage Engines - II
 
 - High Throughput System Design
-  - High Throughput Systems - I
-  - High Throughput Systems - II
+    - High Throughput Systems - I
+    - High Throughput Systems - II
 
 - Information Retrieval Systems
-  - Building Search Engines and Retrieval Systems
+    - Building Search Engines and Retrieval Systems
 
 - Building Large-Scale Social Networks
-  - Building a Social Network - I
-  - Building a Social Network - II
+    - Building a Social Network - I
+    - Building a Social Network - II
 
 - Advanced System Design Techniques
-  - Adhoc System Design
-  - Algorithmic System Design - I
-  - Algorithmic System Design - II
+    - Adhoc System Design
+    - Algorithmic System Design - I
+    - Algorithmic System Design - II

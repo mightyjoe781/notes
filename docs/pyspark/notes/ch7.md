@@ -410,10 +410,10 @@ rolledUpDF.show()
 
 - To put in question : 
 
-  - The total across all dates and countries
-  - The total for each date across all countries
-  - The total for each country on each date
-  - The total for each country across all dates
+    - The total across all dates and countries
+    - The total for each date across all countries
+    - The total for each country on each date
+    - The total for each country across all dates
 
   ````python
   from pyspark.sql.functions import sum
@@ -483,12 +483,12 @@ Pivoted DataFrame:
 - UDAFs are a way for users to define their own aggregation functions based on custom formulae or business rules.
 - Spark maintains a single `AggregationBuffer` to store intermediate results for every group of input data.
 - To create a UDAF, you must inherit from the `UserDefinedAggregateFunction` base class and implement the following methods:
-  - `inputSchema` represents input arguments as a `StructType`
-  - `bufferSchema` represents intermediate UDAF results as a `StructType`
-  - `dataType` represents the return `DataType`
-  - `deterministic` is a Boolean value that specifies whether this UDAF will return the same result for a given input
-  - `initialize` allows you to initialize values of an aggregation buffer
-  - `update` describes how you should update the internal buffer based on a given row
-  - `merge` describes how two aggregation buffers should be merged
-  - `evaluate` will generate the final result of the aggregation
+    - `inputSchema` represents input arguments as a `StructType`
+    - `bufferSchema` represents intermediate UDAF results as a `StructType`
+    - `dataType` represents the return `DataType`
+    - `deterministic` is a Boolean value that specifies whether this UDAF will return the same result for a given input
+    - `initialize` allows you to initialize values of an aggregation buffer
+    - `update` describes how you should update the internal buffer based on a given row
+    - `merge` describes how two aggregation buffers should be merged
+    - `evaluate` will generate the final result of the aggregation
 - Currently only available in Scala or Java

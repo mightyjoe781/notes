@@ -4,20 +4,20 @@
 
 * Invented in 1960 by C.A.R. Hoare.
 
-  - easy to implement
-  - resource efficient in many cases
+    - easy to implement
+    - resource efficient in many cases
 
 * features
 
-  - in-place
-  - $N \log{N}$ on avg case
+    - in-place
+    - $N \log{N}$ on avg case
 
 * drawbacks
 
-  - Not stable
+    - Not stable
 
-  - $N^2$ in worst case
-  - fragile ( any small mistake in implementation can go un-noticed and cause bad performance)
+    - $N^2$ in worst case
+    - fragile ( any small mistake in implementation can go un-noticed and cause bad performance)
 
 * STL library uses `qsort` function.
 
@@ -52,8 +52,8 @@ void quicksort(Item a[], int l, int r) {
 ````
 
 * Dynamic Characterstics
-  * Nearly ordered files perform worst.
-  * Because they have many partitions.
+    * Nearly ordered files perform worst.
+    * Because they have many partitions.
 
 ## Quick-Select
 

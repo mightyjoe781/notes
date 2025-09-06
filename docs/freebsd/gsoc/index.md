@@ -24,71 +24,71 @@ FreeBSD supports multiple architectures, file systems, and  disk-partitioning sc
 ### Important Dates
 
 - May 29th: Start of coding 
-  - You'll be doing this in the first week 
+    - You'll be doing this in the first week 
 - June 5th: Week 2 
-  - You plan to do this in the second week 
+    - You plan to do this in the second week 
 - July 10th - July 14th: Mid-term Evaluations #1 
 - August 21st - August 28th: Final-term Evaluations #2 
 - September 5th: End of coding (soft) 
-  - You may wish to use this time to complete documentation etc 
+    - You may wish to use this time to complete documentation etc 
 - Nov 6th: End of coding (hard) 
 
 ### Weekly Check-in
 
 - [Week 1 (29 May) ](week/week1.md)
-  - Successfully deployed a FreeBSD server and established build sytem on Racknerd VPS
-  - Acquired foundation knowledge of Lua programming and explored the design principles of the project, include module systems.
-  - Deliberated and finalized the syntax for the project, as well as devised a robust approach to process user inputs effectively and efficiently.
+    - Successfully deployed a FreeBSD server and established build sytem on Racknerd VPS
+    - Acquired foundation knowledge of Lua programming and explored the design principles of the project, include module systems.
+    - Deliberated and finalized the syntax for the project, as well as devised a robust approach to process user inputs effectively and efficiently.
 - Week 2 (4 Jun)
-  - Developed `combination.lua`, a script that computes and parses regex strings in the specified format: `<arch>-<file-system>-<boot-partition>-<encryption>`
-  - Implemented `optparse` for the `main.lua` file, enabling efficient command-line option parsing and handling.
-  - Created `parser.lua` to significantly improve accuracy of parsing of `input.conf` ensuring correct and reliable data extraction.
+    - Developed `combination.lua`, a script that computes and parses regex strings in the specified format: `<arch>-<file-system>-<boot-partition>-<encryption>`
+    - Implemented `optparse` for the `main.lua` file, enabling efficient command-line option parsing and handling.
+    - Created `parser.lua` to significantly improve accuracy of parsing of `input.conf` ensuring correct and reliable data extraction.
 - [Week 3 (12 Jun)](week/week3.md)
-  - Configured `ntfy` on Warner’s Server to enable seamless notifications for build events.
-  - Successfully build the `freebsd-src` on the server, ensuring smooth and error-free process.
+    - Configured `ntfy` on Warner’s Server to enable seamless notifications for build events.
+    - Successfully build the `freebsd-src` on the server, ensuring smooth and error-free process.
 
-  - Established a streamlined development workflow, optimizing collaboration and productivity.
+    - Established a streamlined development workflow, optimizing collaboration and productivity.
 - Week 4 (19 Jun)
-  - Successfully finalized the `build.lua` script, incorporating extensive design and significant rewrites of the previous code.
-  - Achieved comprehensive functionality through careful planning and meticulous execution.
+    - Successfully finalized the `build.lua` script, incorporating extensive design and significant rewrites of the previous code.
+    - Achieved comprehensive functionality through careful planning and meticulous execution.
 - [Week 5 (26 Jun)](week/week5.md)
-  - Successfully configured luarocks on FreeBSD Server.
+    - Successfully configured luarocks on FreeBSD Server.
 
-  - Conducted a smoke test on the “amd64:amd64-gpt-ufs-none” architecture combination to ensure smooth functionality.
+    - Conducted a smoke test on the “amd64:amd64-gpt-ufs-none” architecture combination to ensure smooth functionality.
 
 
 - Week 6 (3 July)
-  - Wrote `test.lua` script, ensuring its successful design and completion.
-  - Evaluated and streamlines the consicise reporting process for all build runs.
-  - substantially progressed with the coding tasks, meeting expected milestones.
+    - Wrote `test.lua` script, ensuring its successful design and completion.
+    - Evaluated and streamlines the consicise reporting process for all build runs.
+    - substantially progressed with the coding tasks, meeting expected milestones.
 - Week 7 (10 July) - MidTerm Evaluations [Week Off Work]
 - Week 8 (17 July)
 
-  - Enhacned code styling and resolved potential design issues to improve overall script.
-  - Conducted in-depth testing to ensure robutstness of script and addressing several small issues.
+    - Enhacned code styling and resolved potential design issues to improve overall script.
+    - Conducted in-depth testing to ensure robutstness of script and addressing several small issues.
 
 - [Week 9 (24 July)](week/week9.md)
-  - Start working on externalising as much as freebsd related stuff to a `freebsd-util` script while generalising the functionality of `build` script.
-  - Above decision will allow me to easily integrate support for all remaining architectures.
-  - Start working on collecting qemu recipes for different architectures.
+    - Start working on externalising as much as freebsd related stuff to a `freebsd-util` script while generalising the functionality of `build` script.
+    - Above decision will allow me to easily integrate support for all remaining architectures.
+    - Start working on collecting qemu recipes for different architectures.
   
 - Week 10 (31 July)
 
-  - first script end to end works correct
+    - first script end to end works correct
 
 - Week 11 (7 Aug)
 
-  - all amd64 combination work correctly
-  - encountered issues in running arm64 on qemu Synchronous Exception Faults
+    - all amd64 combination work correctly
+    - encountered issues in running arm64 on qemu Synchronous Exception Faults
 
 - Week 12 (14 Aug)
 
-  - fixing up issues in various parts of the script
-  - fixing a critical overwrite flaw in the script
+    - fixing up issues in various parts of the script
+    - fixing a critical overwrite flaw in the script
 
 - Week 13 (21 Aug) - Final Evaluations
 
-  - all arm64 combination work correctly
+    - all arm64 combination work correctly
 
 
 Extension for 4 weeks
@@ -96,18 +96,18 @@ Extension for 4 weeks
 
 - Week 14 (28 Aug)
 
-  - trying to get the riscv64 boot up using openSBI
+    - trying to get the riscv64 boot up using openSBI
 - Week 15 (4 Sept)
 
-  - riscv64-zfs-gpt-none(encryption) & riscv64-ufs-gpt-none(encryption) works fine and builds successfully.
+    - riscv64-zfs-gpt-none(encryption) & riscv64-ufs-gpt-none(encryption) works fine and builds successfully.
 - Week 16 (11 Sept)
 
-  - blocked due to not able to get the arm sd image to extract correctly
-  - consulted with kyle evans with suggestion to look at mounting the partitions of image
+    - blocked due to not able to get the arm sd image to extract correctly
+    - consulted with kyle evans with suggestion to look at mounting the partitions of image
 - Week 17 (18 Sept) [Kinda Busy week]
 - Week 18 (25 Sept)
 
-  - will work on creating a custom image for arm image and host it somewhere.
+    - will work on creating a custom image for arm image and host it somewhere.
 
 ### Meeting Notes
 

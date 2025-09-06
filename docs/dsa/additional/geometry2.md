@@ -18,13 +18,13 @@
 Check if two segments $p1p2$ and $q1q2$ intersect
 
 - Orientation Test: Use oreintation function on all combinations
-  - o1 = orientation(p1, p2, q1)
-  - o2 = orientation(p1, p2, q2)
-  - o3 = orientation(q1, q2, p1)
-  - o4 = orientation(q1, q2, p2)
-  - If o1 != o2 && o3 != o4 → segments intersect.
+    - o1 = orientation(p1, p2, q1)
+    - o2 = orientation(p1, p2, q2)
+    - o3 = orientation(q1, q2, p1)
+    - o4 = orientation(q1, q2, p2)
+    - If o1 != o2 && o3 != o4 → segments intersect.
 - Collinear Case
-  - Check if one point lies on the other segment using bounding box
+    - Check if one point lies on the other segment using bounding box
 
 ````python
 bool onSegment(Point p, Point q, Point r) {

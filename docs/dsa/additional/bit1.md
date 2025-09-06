@@ -90,7 +90,7 @@ for (int sub = mask; sub; sub = (sub - 1) & mask) {
 ````
 
 - XOR Trick : Detect Single Number
-  - Find the number that appears odd number of times, given there is only one such number.
+    - Find the number that appears odd number of times, given there is only one such number.
 
 ````c++
 int xor_all = 0;
@@ -98,7 +98,7 @@ for (int a : arr) xor_all ^= a;
 ````
 
 - Swap without temporary variable
-  - avoid in production, not readable, not safe with references to same memory if `a` and `b` refers to same memory location
+    - avoid in production, not readable, not safe with references to same memory if `a` and `b` refers to same memory location
 
 ````c++
 a ^= b;
@@ -115,7 +115,7 @@ bool isPowerOfTwo(int n) {
 ````
 
 - Difference Bits Sum Pairwise
-  - Efficiently calculates total XOR difference over all pairs
+    - Efficiently calculates total XOR difference over all pairs
 
 ````c++
 // A - array of numbers

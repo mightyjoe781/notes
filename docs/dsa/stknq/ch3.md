@@ -10,8 +10,8 @@
 
 * Convert Infix into Postfix using Stack (Shunting Yard Algorithm)
 * Evaluate Postfix using stack:
-  * If operand - `push`
-  * If operator `pop two operands, evaluate, push result`
+    * If operand - `push`
+    * If operator `pop two operands, evaluate, push result`
 
 ### Problems
 

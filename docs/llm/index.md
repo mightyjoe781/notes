@@ -7,21 +7,21 @@
 ### **Core Concepts**
 
 - Language Modeling Basics
-  - N-gram Models & Statistical Foundations
-  - Neural Language Models
-  - Tokenization & Vocabulary
-  - Context Windows & Attention
+    - N-gram Models & Statistical Foundations
+    - Neural Language Models
+    - Tokenization & Vocabulary
+    - Context Windows & Attention
 - Transformer Architecture
-  - Self-Attention Mechanisms
-  - Multi-Head Attention
-  - Positional Encodings
-  - Feed-Forward Networks
-  - Layer Normalization & Residual Connections
+    - Self-Attention Mechanisms
+    - Multi-Head Attention
+    - Positional Encodings
+    - Feed-Forward Networks
+    - Layer Normalization & Residual Connections
 - Pre-training & Fine-tuning
-  - Unsupervised Pre-training
-  - Supervised Fine-tuning (SFT)
-  - Instruction Tuning
-  - Constitutional AI & RLHF
+    - Unsupervised Pre-training
+    - Supervised Fine-tuning (SFT)
+    - Instruction Tuning
+    - Constitutional AI & RLHF
 
 ### **Model Architectures**
 
@@ -35,17 +35,17 @@
 ### **Training & Optimization**
 
 - Loss Functions & Objectives
-  - Cross-Entropy Loss
-  - Contrastive Learning
-  - Reinforcement Learning from Human Feedback (RLHF)
+    - Cross-Entropy Loss
+    - Contrastive Learning
+    - Reinforcement Learning from Human Feedback (RLHF)
 - Optimization Techniques
-  - Adam, AdamW Optimizers
-  - Learning Rate Scheduling
-  - Gradient Accumulation & Clipping
+    - Adam, AdamW Optimizers
+    - Learning Rate Scheduling
+    - Gradient Accumulation & Clipping
 - Scaling Laws & Compute Efficiency
-  - Parameter Scaling
-  - Data Scaling
-  - Compute-Optimal Training
+    - Parameter Scaling
+    - Data Scaling
+    - Compute-Optimal Training
 
 ## **Prompt Engineering**
 
@@ -76,19 +76,19 @@
 ### **Agent Foundations**
 
 - Agent Types & Classifications
-  - Reactive Agents
-  - Deliberative Agents
-  - Hybrid Architectures
-  - Multi-Agent Systems
+    - Reactive Agents
+    - Deliberative Agents
+    - Hybrid Architectures
+    - Multi-Agent Systems
 - Planning & Decision Making
-  - Goal-Oriented Planning
-  - Hierarchical Planning
-  - Dynamic Planning & Re-planning
+    - Goal-Oriented Planning
+    - Hierarchical Planning
+    - Dynamic Planning & Re-planning
 - Memory Systems
-  - Working Memory
-  - Long-term Memory
-  - Episodic & Semantic Memory
-  - Memory Consolidation & Retrieval
+    - Working Memory
+    - Long-term Memory
+    - Episodic & Semantic Memory
+    - Memory Consolidation & Retrieval
 
 ### **Agent Components**
 
@@ -189,51 +189,51 @@
 ### **Retrieval-Augmented Generation (RAG)**
 
 - Vector Databases & Embeddings
-  - Dense Retrieval (Sentence-BERT, E5)
-  - Sparse Retrieval (BM25, TF-IDF)
-  - Hybrid Retrieval Systems
+    - Dense Retrieval (Sentence-BERT, E5)
+    - Sparse Retrieval (BM25, TF-IDF)
+    - Hybrid Retrieval Systems
 - RAG Architectures
-  - Naive RAG
-  - Advanced RAG (HyDE, Self-RAG)
-  - Modular RAG Systems
-  - Agentic RAG
+    - Naive RAG
+    - Advanced RAG (HyDE, Self-RAG)
+    - Modular RAG Systems
+    - Agentic RAG
 - Knowledge Base Construction
-  - Document Processing & Chunking
-  - Metadata Extraction
-  - Knowledge Graphs Integration
-  - Real-time Updates & Synchronization
+    - Document Processing & Chunking
+    - Metadata Extraction
+    - Knowledge Graphs Integration
+    - Real-time Updates & Synchronization
 
 ### **Fine-tuning & Specialization**
 
 - Parameter-Efficient Fine-tuning
-  - LoRA (Low-Rank Adaptation)
-  - QLoRA & Quantized Training
-  - Adapter Layers
-  - Prefix Tuning
+    - LoRA (Low-Rank Adaptation)
+    - QLoRA & Quantized Training
+    - Adapter Layers
+    - Prefix Tuning
 - Domain Adaptation
-  - Medical, Legal, Financial Domains
-  - Code Generation & Programming
-  - Scientific Research & Academia
+    - Medical, Legal, Financial Domains
+    - Code Generation & Programming
+    - Scientific Research & Academia
 - Alignment & Safety
-  - Constitutional AI
-  - Red Teaming & Adversarial Testing
-  - Bias Detection & Mitigation
+    - Constitutional AI
+    - Red Teaming & Adversarial Testing
+    - Bias Detection & Mitigation
 
 ### **Evaluation & Metrics**
 
 - Language Model Evaluation
-  - Perplexity & Language Modeling Metrics
-  - BLEU, ROUGE, BERTScore
-  - Human Evaluation Protocols
+    - Perplexity & Language Modeling Metrics
+    - BLEU, ROUGE, BERTScore
+    - Human Evaluation Protocols
 - Agent Performance Metrics
-  - Task Success Rate
-  - Efficiency & Resource Usage
-  - User Satisfaction & Trust
-  - Safety & Reliability Metrics
+    - Task Success Rate
+    - Efficiency & Resource Usage
+    - User Satisfaction & Trust
+    - Safety & Reliability Metrics
 - Benchmarking Suites
-  - GLUE, SuperGLUE
-  - HellaSwag, ARC, MMLU
-  - Agent-specific Benchmarks
+    - GLUE, SuperGLUE
+    - HellaSwag, ARC, MMLU
+    - Agent-specific Benchmarks
 
 ## **Domain Applications**
 
@@ -274,20 +274,20 @@
 ### **Production Deployment**
 
 - Scalability Patterns
-  - Horizontal Scaling
-  - Load Balancing
-  - Caching Strategies
-  - Resource Management
+    - Horizontal Scaling
+    - Load Balancing
+    - Caching Strategies
+    - Resource Management
 - Monitoring & Observability
-  - Performance Monitoring
-  - Error Tracking & Debugging
-  - Usage Analytics
-  - Cost Optimization
+    - Performance Monitoring
+    - Error Tracking & Debugging
+    - Usage Analytics
+    - Cost Optimization
 - Security & Privacy
-  - Data Protection
-  - Access Control
-  - Audit Logging
-  - Compliance & Governance
+    - Data Protection
+    - Access Control
+    - Audit Logging
+    - Compliance & Governance
 
 ### **MLOps for LLMs**
 

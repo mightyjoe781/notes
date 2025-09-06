@@ -57,15 +57,15 @@ From this form actually imerges **A mod B = R**.
 ### Modular Properties
 
 - Modular Addition
-  - (A + B) mod C = (A mod C + B mod C) mod C
+    - (A + B) mod C = (A mod C + B mod C) mod C
 - Modular Subtraction
-  - (A - B) mod C = (A mod C - B mod C) mod C
+    - (A - B) mod C = (A mod C - B mod C) mod C
 - Modular Multiplication
-  - (A * B) mod C = (A mod C * B mod C) mod C
+    - (A * B) mod C = (A mod C * B mod C) mod C
 - Modular Exponentiation
-  - $A^{B}$ mod C = $(A \mod C)^{B}$ mod C
+    - $A^{B}$ mod C = $(A \mod C)^{B}$ mod C
 - Extension of Product property above
-  - $(A * B * C)$ mod D = ( ( A mod D) (B mod D) (C mod D) ) mod D
+    - $(A * B * C)$ mod D = ( ( A mod D) (B mod D) (C mod D) ) mod D
 
 ### Modular Exponentiation (Binary Exponentiation)
 
@@ -75,8 +75,8 @@ From this form actually imerges **A mod B = R**.
 How about when B is not perfect power of 2 ? i.e. $5^{117}$ mod 19.
 
 - divide B into powers of 2 by writing it in binary
-  - 117 : 1110101 in binary = $2^0 + 2^2 + 2^4 + 2^5 + 2^6$ = (1 + 4 + 16 + 32 + 64)
-  - $5^{117}$ mod 19 = $(5*5^4*5^{16}*5^{32}*5^{64})$ mod 19
+    - 117 : 1110101 in binary = $2^0 + 2^2 + 2^4 + 2^5 + 2^6$ = (1 + 4 + 16 + 32 + 64)
+    - $5^{117}$ mod 19 = $(5*5^4*5^{16}*5^{32}*5^{64})$ mod 19
 
 
 - Calculate mod C of powers of two $\le$ B

@@ -5,23 +5,23 @@
 * most common way for machines to talk to each other.
 * The communication happens overt the common network connecting the two. Two protocols to exchange data TCP(mostly used) and UDP
 * Some important properties of TCP
-  * TCP connections requires 3-way handshake for setup
-  * TCP connections requires 2-way handshake for teardown
-  * TCP connection does not break immediately after data is exchanged
-    * breaks might be due to network interruption 
-    * breaks could be due to server/client
-  * Hence connection remains open almost *forever*
+    * TCP connections requires 3-way handshake for setup
+    * TCP connections requires 2-way handshake for teardown
+    * TCP connection does not break immediately after data is exchanged
+        * breaks might be due to network interruption 
+        * breaks could be due to server/client
+    * Hence connection remains open almost *forever*
 * Protocol over TCP
-  * TCP does not dictate what data can be sent over it.
-  * Common format agreed upon by client and server is called a protocol : HTTP
+    * TCP does not dictate what data can be sent over it.
+    * Common format agreed upon by client and server is called a protocol : HTTP
 * HTTP is just a format that client and server understand
 * You can define your own  and make your client send data in it and server parses & process it
 * There are many versions of it - HTTP 1.1/HTTP 2/ HTTP 3
 * HTTP 1.1 is most commonly used one
-  * For client and server to talk over HTTP 1.1, they need to establish TCP connection
-  * Connection is typically *terminated* once response is sent to client
-  * almost new connection for every *request/response*
-  * Hence people pass : *Connection: keep-alive* header, which tells client and server to not close the connection. This depends on the server allows or not.
+    * For client and server to talk over HTTP 1.1, they need to establish TCP connection
+    * Connection is typically *terminated* once response is sent to client
+    * almost new connection for every *request/response*
+    * Hence people pass : *Connection: keep-alive* header, which tells client and server to not close the connection. This depends on the server allows or not.
 
 ### Web Socket
 
@@ -37,24 +37,24 @@
 * Above method does work correctly in case of Scaling Storage.
 * Blob Storage/S3 is an infinitely scalable network attached storage/file-system. Any *file* that needs to be accessed by an server, is stored at a place accessible by all.
 * Components of S3
-  * Bucket : (namespace) e.g. my-bucket - needs to be unique
-  * Keys : path of the file within bucket e.g. s3://my-bucket/user123/7829.jpg
+    * Bucket : (namespace) e.g. my-bucket - needs to be unique
+    * Keys : path of the file within bucket e.g. s3://my-bucket/user123/7829.jpg
 * You can seamlessly, create the file, replace the file, delete the file, read entire file or segments of it. But these are not full fledged file systems.
 * Advantages 
-  * cheap, durable storage
-  * can store literally any file
-  * scalable and available
-  * integration with a lot of AWS and Big Data Services
+    * cheap, durable storage
+    * can store literally any file
+    * scalable and available
+    * integration with a lot of AWS and Big Data Services
 * Disadvantage
-  * read on S3 are slow
-  * So if you want quick read, you should not use S3. SSD/Hard Disk attached to instances are better for it.
-  * not a full-fledged file system
+    * read on S3 are slow
+    * So if you want quick read, you should not use S3. SSD/Hard Disk attached to instances are better for it.
+    * not a full-fledged file system
 * S3 Usecases
-  * Database Backups
-  * Logs Archival
-  * Static Website Hosting
-  * Infrequently accessed data dumping ground
-  * Big Data Storage
+    * Database Backups
+    * Logs Archival
+    * Static Website Hosting
+    * Infrequently accessed data dumping ground
+    * Big Data Storage
 
 ## Bloom Filters
 
@@ -66,22 +66,22 @@
 * Filter ~ bit array. We take hash of element (needs to be hashable) and put it in the hash table represented by binary bits.
 * Bloom Filter will surely will confirm non-existance of an item in the set, but doesn’t guarantee existence
 * Advantage:
-  * Space Efficiency
-  * False Positivity Rate (increases as more and more keys are inserted)
-  * Hence, when # keys increases, we have to recreate bloom-filter with larger size & populate keys again. So Estimation of max keys and provision a large one start with it.
+    * Space Efficiency
+    * False Positivity Rate (increases as more and more keys are inserted)
+    * Hence, when # keys increases, we have to recreate bloom-filter with larger size & populate keys again. So Estimation of max keys and provision a large one start with it.
 * Redis provides bloom filter as internal data structure
 * Practical Bloom Filter - Already implemented in all libraries
-  * C++ :  `libbloom`
-  * Python : `from pybloom_live import BloomFilter`
-  * Go : `import "github.com/willf/bloom"`
+    * C++ :  `libbloom`
+    * Python : `from pybloom_live import BloomFilter`
+    * Go : `import "github.com/willf/bloom"`
 * Practical Application
-  * You need to insert but not remove data
-  * You need a No with 100% certainity
-  * having false positive is okay
+    * You need to insert but not remove data
+    * You need a No with 100% certainity
+    * having false positive is okay
 * Ex - recommendation engines, web crawler, feed generators
 * Resources:
-  * [https://www.youtube.com/watch?v=kfFacplFY4Y](https://www.youtube.com/watch?v=kfFacplFY4Y)
-  * [https://www.youtube.com/watch?v=V3pzxngeLqw](https://www.youtube.com/watch?v=V3pzxngeLqw)
+    * [https://www.youtube.com/watch?v=kfFacplFY4Y](https://www.youtube.com/watch?v=kfFacplFY4Y)
+    * [https://www.youtube.com/watch?v=V3pzxngeLqw](https://www.youtube.com/watch?v=V3pzxngeLqw)
 
 ## Consistent Hashing
 

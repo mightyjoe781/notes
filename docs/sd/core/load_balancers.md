@@ -29,18 +29,18 @@ They act as a **single point of contact** for clients while hiding the complexit
 
 - operates on TCP/UDP Level - makes routing based on IP Addresses and Port Numbers only
 - Use Cases
-  - High-throughput applications requiring minimal latency
-  - Non-HTTP protocols (databases, gaming servers, VoIP)
-  - When you need maximum performance and don't need content-based routing
+    - High-throughput applications requiring minimal latency
+    - Non-HTTP protocols (databases, gaming servers, VoIP)
+    - When you need maximum performance and don't need content-based routing
 
 **Layer 7 (Application Layer) Load Balancing**
 
 * Operates on HTTP/HTTPs level - can inspect and make decision based on application content
 * Use Cases
-  * Microservice Architecture requiring path based routing
-  * A/B testing and canary deployments
-  * API Gateways requiring authentication and rate limitting
-  * Content-Based Routing
+    * Microservice Architecture requiring path based routing
+    * A/B testing and canary deployments
+    * API Gateways requiring authentication and rate limitting
+    * Content-Based Routing
 
 **Comparison Table**
 

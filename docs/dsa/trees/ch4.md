@@ -3,9 +3,9 @@
 * **Segment Tree** with **lazy propagation** to efficiently handle range updates and range minimum queries (RMQ).
 * Segment trees provide fast $O(\log n)$ queries and updates, making them ideal for dynamic array problems.
 * to get RSQ in Segment Tree
-  * In build function replace : `st[p] = min(st[2*p], st[2*p+1]);` with `st[p] = st[2*p] + st[2*p+1];`
-  * In query function : `min(query(...), query(...));`  with `query(...left...) + query(...right...);`
-  * In update function : `st[p] = st[2*p] + st[2*p+1];`
+    * In build function replace : `st[p] = min(st[2*p], st[2*p+1]);` with `st[p] = st[2*p] + st[2*p+1];`
+    * In query function : `min(query(...), query(...));`  with `query(...left...) + query(...right...);`
+    * In update function : `st[p] = st[2*p] + st[2*p+1];`
 
 
 | **Operation**    | **Fenwick Tree** | **Segment Tree** |

@@ -85,8 +85,8 @@ build: vet
 
 - go development tools are periodically updated roughly every 6 months, go team commits for backward compatibility.
 - See 
-  - https://go.dev/doc/go1compat
-  - https://www.youtube.com/watch?v=v24wrd3RwGo
+    - https://go.dev/doc/go1compat
+    - https://www.youtube.com/watch?v=v24wrd3RwGo
 
 ## Staying up to Date
 

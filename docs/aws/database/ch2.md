@@ -7,11 +7,11 @@ In AWS three primary types of services used by Consumers : Compute, Storage, Dat
 There are two types of databases
 
 - Relation (SQL)
-  - optimized around data storage
-  - based on Structured Query Language for data retrieval
+    - optimized around data storage
+    - based on Structured Query Language for data retrieval
 - Non-Relational
-  - process unstructured and semi-structured data quickly
-  - often distributed on multiple nodes
+    - process unstructured and semi-structured data quickly
+    - often distributed on multiple nodes
 
 There are nine primary categories of Databases available in AWS
 
@@ -33,12 +33,12 @@ There are nine primary categories of Databases available in AWS
 Types of Workloads
 
 - Operational
-  - Online Transactional Processing (OLTP) : OLTP is centered around a set of common business processes that are : *Regular, Repeatable* and *Durable*.
-  - Examples includes : E-commerce, IT, CMS, etc.
+    - Online Transactional Processing (OLTP) : OLTP is centered around a set of common business processes that are : *Regular, Repeatable* and *Durable*.
+    - Examples includes : E-commerce, IT, CMS, etc.
 
 - Analytical
-  - Online Analytics Processing (OLAP) : Run for Business Intelligence Workloads or Data Analytics
-  - Workloads are often : Retrospective(Company’s Quarter Analysis), Streaming(Real Time Processing) and Predictive(ML/AI)
+    - Online Analytics Processing (OLAP) : Run for Business Intelligence Workloads or Data Analytics
+    - Workloads are often : Retrospective(Company’s Quarter Analysis), Streaming(Real Time Processing) and Predictive(ML/AI)
 
 ### Relational Databases
 
@@ -50,14 +50,14 @@ Types of Workloads
 - Each Row is referred as *Record* and Each Column is referred as *Key*, and the value referenced is called as *Attribute*
 - Each Table will have unique primary key that is used for relational purposes for other tables via foreign key.
 - Data Integrity(data stored is reliable and accurate) is particular concern in RDBS : ACID transactions
-  - Atomicity : A single database transaction (which succeeds or fails completely)
-  - Consistency : Transaction must take database from one valid state to another valid state.
-  - Isolation : Two transactions don’t interfere with each other
-  - Durability : Data changes become permanent once the transaction is committed to database.
+    - Atomicity : A single database transaction (which succeeds or fails completely)
+    - Consistency : Transaction must take database from one valid state to another valid state.
+    - Isolation : Two transactions don’t interfere with each other
+    - Durability : Data changes become permanent once the transaction is committed to database.
 - Keys and Data Integrity
-  - Primary and Foreign Key are constraints
-  - Entity Integrity ensure primary key is unique to table and it has a value (NOT NULL)
-  - Referential Integrity ensures that foreign key is primary key to its originating table. Orphaned Data is BAD !
+    - Primary and Foreign Key are constraints
+    - Entity Integrity ensure primary key is unique to table and it has a value (NOT NULL)
+    - Referential Integrity ensures that foreign key is primary key to its originating table. Orphaned Data is BAD !
 - API of relational database is SQL (Structured Query Language)
 - Relation databases have Data Access Controls and features like : Authentication, Authorization and Audit Logging
 

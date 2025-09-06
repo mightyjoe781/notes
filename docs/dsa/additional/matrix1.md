@@ -110,18 +110,18 @@ def spirallyTraverse(self, matrix):
 ## Matrix Rotation & Transformation
 
 - **Rotation by 90 degrees (clockwise)**
-  - For an $n \times n$ matrix \(M\), the element at position $(i, j)$ moves to $(j, n-1-i)$
-  - Common approach:
-    - **Transpose** the matrix: swap `M[i][j]` with `M[j][i]`
-    - **Reverse each row**.
+    - For an $n \times n$ matrix \(M\), the element at position $(i, j)$ moves to $(j, n-1-i)$
+    - Common approach:
+        - **Transpose** the matrix: swap `M[i][j]` with `M[j][i]`
+        - **Reverse each row**.
 - Rotation by 90 degrees (counter clockwise)
-  - Transpose the Matrix
-  - Reverse each columns
-  - or do the reverse each row, then transpose
+    - Transpose the Matrix
+    - Reverse each columns
+    - or do the reverse each row, then transpose
 - General Transformations
-  - Translation
-  - Scaling 
-  - Rotation by angle $\theta$
+    - Translation
+    - Scaling 
+    - Rotation by angle $\theta$
 
 ## Prefix 2D Sum
 

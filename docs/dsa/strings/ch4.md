@@ -3,9 +3,9 @@
 * A suffix tree is a compressed trie containing all the suffixes of the given text as their keys and positions in the text as their values.
 * Allows particularly fast implementations of many important string operations
 * The Suffix tree for a text `X` of size `n` from an alphabet of size `d` 
-  * stores all the `n(n-1)/2` suffixes of `X` in `O(n)` space.
-  * can be constructed in `O(dn)` time
-  * supports arbitrary pattern matching and prefix matching queries in `O(dm)` time, where `m` is length of the pattern
+    * stores all the `n(n-1)/2` suffixes of `X` in `O(n)` space.
+    * can be constructed in `O(dn)` time
+    * supports arbitrary pattern matching and prefix matching queries in `O(dm)` time, where `m` is length of the pattern
 
 Example - Given a string `banana$` create its suffix tree. NOTE: `$` : represents string termination.
 
@@ -21,8 +21,8 @@ Construct a trie for the data, which is a space-intensive method to represent it
 
 * Actual algorithm work in following way, To add a new suffix to tree, we walk down the current tree, until we come to a place where the path leads off of the current tree.
 * This could happen at anywhere in tree, middle of the edge, or at an already existing node,
-  * In first cast we split the edge in two and add a new node with branching factor of 2 in the middle
-  * second case simply add a new edge from an already existing node.
+    * In first cast we split the edge in two and add a new node with branching factor of 2 in the middle
+    * second case simply add a new edge from an already existing node.
 * Thus number of node in the tree is O(n) (NOTE: Naive construction above is still $O(N^2)$ which can be optimized)
 * NOTE: Ukkonen’n Algorithm (linear time) for creating suffix tree. [Link](https://en.wikipedia.org/wiki/Ukkonen's_algorithm)
 
@@ -59,9 +59,9 @@ Suffixes:         Sorted Order:
 * Build Suffix Array in $O(n \log n)$
 * Build LCP Array using Kasai’s algorithm in $O(n)$
 * Supports
-  * Pattern Matching
-  * Longest Repeated Substring
-  * Count of distinct substring
+    * Pattern Matching
+    * Longest Repeated Substring
+    * Count of distinct substring
 
 ````c++
 #include <bits/stdc++.h>

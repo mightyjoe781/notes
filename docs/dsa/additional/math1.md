@@ -23,18 +23,18 @@ int gcd(int a, int b) {
 ````
 
 * Properties
-  * $\gcd({a,0}) = a$
-  * $\gcd(a, b) = \gcd(b, a\%b)$
-  * $\gcd (a, b, c) = \gcd(\gcd(a, b), c)$
-  * $\gcd(a, b) * lcm(a, b) = a * b$
+    * $\gcd({a,0}) = a$
+    * $\gcd(a, b) = \gcd(b, a\%b)$
+    * $\gcd (a, b, c) = \gcd(\gcd(a, b), c)$
+    * $\gcd(a, b) * lcm(a, b) = a * b$
 
 
 ### Extended Euclidean Algorithm
 
 - Goal : Find $x, y$ such that $ax + by = gcd(a, b)$
 - Useful for:
-  - Finding modular inverse when $\gcd (a, m) = 1$
-  - Solving Linear Diophantine Equations
+    - Finding modular inverse when $\gcd (a, m) = 1$
+    - Solving Linear Diophantine Equations
 
 ````python
 def extended_gcd(a, b):
@@ -50,8 +50,8 @@ def extended_gcd(a, b):
 - Approach : `LCM(a, b) = (a * b) // gcd(a, b)`
 - Reduce $\frac{a}{b}$ to lowest terms, divide both by gcd(a, b)
 - Problems
-  - Rope cutting into equal parts
-  - Synchronizing Cycles (LCM)
+    - Rope cutting into equal parts
+    - Synchronizing Cycles (LCM)
 
 ### Prime Numbers
 
@@ -75,11 +75,11 @@ def prime_factors(n):
 
 * Applications
 
-  * Cryptography (RSA, etc)
+    * Cryptography (RSA, etc)
 
-  * Number theory Problems
+    * Number theory Problems
 
-  * Factorization, divisibility problems
+    * Factorization, divisibility problems
 
 ### Count & Sum of Divisors
 
@@ -135,9 +135,9 @@ vector<int> sieve(int N) {
 
 - Used to find primes $[L, R]$ where $R$ is large ( <= 1e12)
 - Steps
-  - Precompute all primes up to $\sqrt R$ using simple sieve
-  - Create a boolean array of size $R-L+1$
-  - Mark all multiples of precomputed primes in the range
+    - Precompute all primes up to $\sqrt R$ using simple sieve
+    - Create a boolean array of size $R-L+1$
+    - Mark all multiples of precomputed primes in the range
 
 ### Sieve for Smallest/Largest Prime Factors
 

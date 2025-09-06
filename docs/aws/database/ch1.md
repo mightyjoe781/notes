@@ -17,8 +17,8 @@ The components of AWS Global Infra are:
 - Physical data-centers of AWS
 - Multiple Physical data-centers close enough together form one Availability Zone
 - Each AZ will have at least nearby sister AZ(probably in nearby city) which is connected via very low latency private fibre optic (used by many AWS Services to replicate data : Read up synchronous and asynchronous replication)
-  - Note Both AZ will be separate power resources and network connectivity
-  - This is all because of resilience and availability purpose.
+    - Note Both AZ will be separate power resources and network connectivity
+    - This is all because of resilience and availability purpose.
 - Making use of 2 AZs in one Region ensures your infra remains stable, available, and resilient even in worse times
 
 **Region**

@@ -11,9 +11,9 @@ Steps:
 - Choose the point P0 with the lowest y-coordinate (and leftmost if tie).
 - Sort the rest of the points by polar angle with P0.
 - Traverse sorted points:
-  - For each point, check if it makes a **left turn**.
-  - Pop from the stack if not (right turn).
-  - Push otherwise.
+    - For each point, check if it makes a **left turn**.
+    - Pop from the stack if not (right turn).
+    - Push otherwise.
 
 ````python
 def graham_scan(points):
