@@ -68,13 +68,13 @@ I always wanted to learn swimming, atleast enough to come to shore in emergency 
 
 ## 8. 🏊‍♀️ [Swimming Strokes (Core 4)](ch8.md)
 - **Freestyle (Front Crawl)**
-  - Entry, pull, kick, breathing, and timing
+    - Entry, pull, kick, breathing, and timing
 - **Backstroke**
-  - Arm alternation, back float, kick and head position
+    - Arm alternation, back float, kick and head position
 - **Breaststroke**
-  - Simultaneous arm & leg motion, timing, glide
+    - Simultaneous arm & leg motion, timing, glide
 - **Butterfly** *(optional at early stages)*
-  - Dolphin kick, simultaneous arm recovery, rhythm
+    - Dolphin kick, simultaneous arm recovery, rhythm
 
 ---
 
@@ -98,9 +98,9 @@ I always wanted to learn swimming, atleast enough to come to shore in emergency 
 
 ## 11. 🤿 [Diving & Entry](ch11.md)
 - Pool entry techniques
-  - Sitting dive
-  - Kneeling dive
-  - Standing dive
+    - Sitting dive
+    - Kneeling dive
+    - Standing dive
 - Streamlined entry position
 - Safety checks before diving
 

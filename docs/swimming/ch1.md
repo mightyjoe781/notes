@@ -19,16 +19,16 @@
 ## Common fears and how to overcome them
 
 * Fear of drowning
-  * Start learning in shallow water under supervision
-  * Learn to float and tread early-on
+    * Start learning in shallow water under supervision
+    * Learn to float and tread early-on
 * Fear of Deep Water
-  * Gradual Exposure - don’t rush to deep ends
-  * Practice with float or noodle until confident
+    * Gradual Exposure - don’t rush to deep ends
+    * Practice with float or noodle until confident
 * Fear of not Breathing
-  * Practice breath control & exhaling water in a relaxed way
-  * Use Rhythm : Inhale out of water, exhale inside water [Very Important]
+    * Practice breath control & exhaling water in a relaxed way
+    * Use Rhythm : Inhale out of water, exhale inside water [Very Important]
 * General Anxiety
-  * Get a Coach or Friend who could swim
+    * Get a Coach or Friend who could swim
 
 ## Basic pool etiquette
 

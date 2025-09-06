@@ -26,12 +26,12 @@
 ![image-20230501104821814](mod0.assets/image-20230501104821814.png)
 
 - Let’s take chord D for Example
-  - Horizontal Lines : fret
-  - Vertical Lines : Strings
-  - Dark first Horizontal Line : Nut
-  - 1, 2, 3 : which fingers where (T-thumb, 1-index, 2-driving, 3-ring, 4-pinky) [Note in piano : 1-thumb...]
-  - X - won’t play that string
-  - 0 - play that string openly
+    - Horizontal Lines : fret
+    - Vertical Lines : Strings
+    - Dark first Horizontal Line : Nut
+    - 1, 2, 3 : which fingers where (T-thumb, 1-index, 2-driving, 3-ring, 4-pinky) [Note in piano : 1-thumb...]
+    - X - won’t play that string
+    - 0 - play that string openly
 
 
 #### How to Hold Guitar Pick

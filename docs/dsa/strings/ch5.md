@@ -1,25 +1,25 @@
 # String Processing with DP
 
 - String DP problems usually involve breaking a string into smaller parts and solving subproblems based on those. It includes:
-  - Subsequence & substring analysis
-  - Palindromes
-  - Pattern matching
-  - Partitioning
-  - Edit distances
+    - Subsequence & substring analysis
+    - Palindromes
+    - Pattern matching
+    - Partitioning
+    - Edit distances
 
 ### Core Concepts
 
 - Substrings vs Subsequences
-  - **Substring**: Continuous sequence (e.g. "abc" in "abcd").
-  - **Subsequence**: Can skip characters but maintain order (e.g. "acd" in "abcd").
+    - **Substring**: Continuous sequence (e.g. "abc" in "abcd").
+    - **Subsequence**: Can skip characters but maintain order (e.g. "acd" in "abcd").
 - State Design
-  - Most problems are defined using:
-  - `dp[i][j]` → answer for the substring `s[i..j]`
-  - `dp[i][j]` → answer for prefixes/suffixes
-  - `dp[i]` → answer for prefix of length `i`
+    - Most problems are defined using:
+    - `dp[i][j]` → answer for the substring `s[i..j]`
+    - `dp[i][j]` → answer for prefixes/suffixes
+    - `dp[i]` → answer for prefix of length `i`
 - Recurrence Patterns
-  - Try partitioning the string at every k, solving for `i..k` and `k+1..j`.
-  - Use memoization to avoid recomputing overlapping subproblems.
+    - Try partitioning the string at every k, solving for `i..k` and `k+1..j`.
+    - Use memoization to avoid recomputing overlapping subproblems.
 
 ### Classic Patterns
 
@@ -60,8 +60,8 @@ else:
 
 - Palindrome Partitioning
 - State
-  - `is_pal[i][j]` = True/False for checking palindromes
-  - `dp[i]` = min cuts for `s[0..i]`
+    - `is_pal[i][j]` = True/False for checking palindromes
+    - `dp[i]` = min cuts for `s[0..i]`
 
 ````c++
 if is_pal[j][i]:
@@ -69,8 +69,8 @@ if is_pal[j][i]:
 ````
 
 - Count Distinct Subsequences
-  - **Problem**: Count how many times t occurs as a subsequence of s
-  - State: `dp[i][j]` = ways to form `t[0..j-1]` using `s[0..i-1]`
+    - **Problem**: Count how many times t occurs as a subsequence of s
+    - State: `dp[i][j]` = ways to form `t[0..j-1]` using `s[0..i-1]`
 
 ````c++
 if s[i-1] == t[j-1]:

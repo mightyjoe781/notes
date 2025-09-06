@@ -14,43 +14,41 @@ hide:
 
 <div class="grid cards" markdown>
 
-- __Programming Languages and Coding__
+-   __Programming Languages and Coding__
 
-  ---
+    ---
 
-  :simple-thealgorithms:{ .lg .middle } [DSA](dsa/index.md) ✅
+    :simple-thealgorithms:{ .lg .middle } [DSA](dsa/index.md) ✅
 
-  :material-wrench:{ .lg .middle } [System Design](sd/index.md) ✅
+    :material-wrench:{ .lg .middle } [System Design](sd/index.md) ✅
 
-  :simple-openai:{ .lg .middle } [LLM & Agents](llm/index.md) [WIP]
+    :simple-openai:{ .lg .middle } [LLM & Agents](llm/index.md) [WIP]
 
-  :material-language-cpp:{ .lg .middle } C++ [Upcoming]
+    :material-language-cpp:{ .lg .middle } C++ [Upcoming]
 
-  :material-language-go:{ .lg .middle }  [Go](go/index.md) ✅
+    :material-language-go:{ .lg .middle }  [Go](go/index.md) ✅
 
-  :material-language-python:{ .lg .middle }  [Python](python/index.md) ✅
+    :material-language-python:{ .lg .middle }  [Python](python/index.md) ✅
 
-  :material-flash:{ .lg .middle }  [Pyspark](pyspark/index.md) ✅
+    :material-flash:{ .lg .middle }  [Pyspark](pyspark/index.md) ✅
 
-- __Development Tools and Environment__
+-   __Development Tools and Environment__
 
-  ---
+    ---
 
-  
+    :material-laptop:{ .lg .middle } [Dev Setup](dev_setup/index.md)
 
-  :material-laptop:{ .lg .middle } [Dev Setup](dev_setup/index.md)
+    :material-docker:{ .lg .middle } [Docker](docker/index.md)
 
-  :material-docker:{ .lg .middle } [Docker](docker/index.md)
+    :material-git:{ .lg .middle } [Git](git/index.md)
 
-  :material-git:{ .lg .middle } [Git](git/index.md)
+    :material-kubernetes:{ .lg .middle } [Kubernetes](kubernetes/index.md)
 
-  :material-kubernetes:{ .lg .middle } [Kubernetes](kubernetes/index.md)
+    :material-window-maximize:{ .lg .middle } [tmux](tmux/index.md)
 
-  :material-window-maximize:{ .lg .middle } [tmux](tmux/index.md)
+    :simple-vim:{ .lg .middle } [Vim](vim/index.md)
 
-  :simple-vim:{ .lg .middle } [Vim](vim/index.md)
-
-  :material-debian:{ .lg .middle } [Unix Tools](unix/index.md) :octicons-arrow-right-24:{ .icon }
+    :material-debian:{ .lg .middle } [Unix Tools](unix/index.md) :octicons-arrow-right-24:{ .icon }
 
 -   __Personal Interests__
 
@@ -84,36 +82,36 @@ hide:
 
     :material-server:{ .lg .middle } [Server](server/index.md)
 
-- __Technical Books__
+-   __Technical Books__
 
-  ---
+    ---
 
-  :material-book:{ .lg .middle } [Designing Data Intensive Applications]
+    :material-book:{ .lg .middle } [Designing Data Intensive Applications]
+    
+    :material-book:{ .lg .middle } [Domain-Driven Design]
+
+    :material-book:{ .lg .middle } [Pragmatic Programmer](https://media.minetest.in/the_pragmatic_programmer_notes.pdf)
+    
+    [Full List](books/index.md) :octicons-arrow-right-24:{ .icon }
+
+-   __Web and Microservices__
+
+    ---
+
+    :material-aws:{ .lg .middle } [AWS](aws/index.md)
+
+    :material-database:{ .lg .middle } [Databricks](databricks/index.md)
+
+    :material-web:{ .lg .middle } [Microservices](microservices/index.md)
+    
+    :material-web:{ .lg .middle } [WebDev](webdev/index.md)
   
-  :material-book:{ .lg .middle } [Domain-Driven Design]
+-   __Data and Databases__
 
-  :material-book:{ .lg .middle } [Pragmatic Programmer](https://media.minetest.in/the_pragmatic_programmer_notes.pdf)
-  
-  [Full List](books/index.md) :octicons-arrow-right-24:{ .icon }
+    ---
 
-- __Web and Microservices__
+    :material-chart-bar:{ .lg .middle } [Data Analysis](dataanalysis/index.md)
 
-  ---
-
-  :material-aws:{ .lg .middle } [AWS](aws/index.md)
-
-  :material-database:{ .lg .middle } [Databricks](databricks/index.md)
-
-  :material-web:{ .lg .middle } [Microservices](microservices/index.md)
-  
-  :material-web:{ .lg .middle } [WebDev](webdev/index.md)
-  
-- __Data and Databases__
-
-  ---
-
-  :material-chart-bar:{ .lg .middle } [Data Analysis](dataanalysis/index.md)
-
-  :material-database:{ .lg .middle } [Databases](databases/index.md)
+    :material-database:{ .lg .middle } [Databases](databases/index.md)
 
 </div>

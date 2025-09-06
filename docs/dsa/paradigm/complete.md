@@ -3,8 +3,8 @@
 - aka brute force or recursive backtracking
 - in this method we traverse entire search space to obtain solution and during search we are allowed to prune
 - Develop this solution only if
-- - clearly no other algorithm available
-  - better algorithms are overkill for input size
+      - - clearly no other algorithm available
+        - better algorithms are overkill for input size
 - Remember *‘KISS’* - Keep it Short and Simple
 - If there exists a better solution you will get a TLE
 - This method can be used as a verifier for small instances

@@ -6,12 +6,12 @@
 
 * NOTE: Subsets don’t have any specific order
 * To solve this problems lets divide the solution set using some criteria where both solutions are
-  * Disjoint ($c_1 \text{ and } c_2 = \phi $)
-  * Universal ($c_1 \text{ or } c_2 = U$)
+    * Disjoint ($c_1 \text{ and } c_2 = \phi $)
+    * Universal ($c_1 \text{ or } c_2 = U$)
 * we can interpret solution set as : $c_1$ solution that includes first element in the subset, $c_2$ solution that doesn’t include the first element
 * Solution for `[2, 3, 5]` becomes
-  * $c_1$ : number of subset of `[3, 5]`
-  * $c_2$ : any subsets of `[3, 5]` and append `2` to it
+    * $c_1$ : number of subset of `[3, 5]`
+    * $c_2$ : any subsets of `[3, 5]` and append `2` to it
 * Solution is based on Suffix Array
 * Recurrence : `f(arr, 0, n-1) = f(arr, 1, n-1)` $\text{ or }$ `f(arr, 1, n-1) + {arr[0]}`
 * Base Case: `f(arr, n-1, n-1) = { {}, {arr[n-1]}}`
@@ -86,11 +86,11 @@ Solution Set would be : `{[1,2] , [2,3], [3,4], [1,4] , [2,4], [1,3] }`
 - $c_1$ : all possible `k-1` sized subsets of `P(A[l...n-1]) + [A[0]]` (`A[0]` is appended to solution)
 - Recursion: `P(A, 0, n-1, k) = P(A, 1, n-1, k) + (P(A, 1, n-1, k-1)..A[0])`
 - Base Case
-  - `s > e`
-    - `k = 0` : `{{}}`
-    - `k > 0` : no solution
-  - `s <= e`
-    - `k = 0` : `{{}}`
+    - `s > e`
+        - `k = 0` : `{{}}`
+        - `k > 0` : no solution
+    - `s <= e`
+        - `k = 0` : `{{}}`
 
 ````c++
 vector<vector<int>> f(int start, int end, int k){
@@ -159,20 +159,20 @@ vector<vector<int>> combine(int n, int k) {
 Representation : Suffix Array
 
 * Divide
-  * $c_1$ : not including first element :
-  * $c_2$ : contains atleast one instance of first element
+    * $c_1$ : not including first element :
+    * $c_2$ : contains atleast one instance of first element
 * Subproblems
-  * $c_1$ : `P(A, 1, n-1, sum)`
-  * $c_2$ : `P(A, 0, n-1, sum - A[0])` , same as original problem with one copy consumed
+    * $c_1$ : `P(A, 1, n-1, sum)`
+    * $c_2$ : `P(A, 0, n-1, sum - A[0])` , same as original problem with one copy consumed
 * Recurrence: `P(A, 0, n-1, sum)  = P(A, 1, n-1, sum) & P(A, 0, n-1, sum - A[0])`
 * Base Cases
-  * if `A` becomes empty
-    * `sum > 0` : `{}`
-    * `sum = 0` : `{{}}` | result
-    * `sum < 0` : `{}`
-  * `sum <= 0`
-    * `sum == 0`: `{{}}` | result
-    * `sum < 0` : `{}`
+    * if `A` becomes empty
+        * `sum > 0` : `{}`
+        * `sum = 0` : `{{}}` | result
+        * `sum < 0` : `{}`
+    * `sum <= 0`
+        * `sum == 0`: `{{}}` | result
+        * `sum < 0` : `{}`
 
 ````c++
 void f(vector<int>& arr, int start, int end, int target, vector<int>& contri, vector<vector<int>>& res){
@@ -291,14 +291,14 @@ vector<string> letterCombinations(string digits) {
 
 * This is somewhat what represent a `1D` DP. Representation of Solution using Suffix Array usually leads to constraint in 1 dimension.
 * Ex - `[1, 2, 3]` Split Criteria : ?
-  * `n` chunks of solutions, as
-  * begins with 1 `{[1,3,2], [1,2,3]}`
-  * begins with 2 `{[2,1,3], [2,3,1]}`
-  * begins with 3 `{[3,1,2], [3,2,1]}`
+    * `n` chunks of solutions, as
+    * begins with 1 `{[1,3,2], [1,2,3]}`
+    * begins with 2 `{[2,1,3], [2,3,1]}`
+    * begins with 3 `{[3,1,2], [3,2,1]}`
 * Subproblem : permutation calculation of the subarray removing that item. These are subsequences not suffix array problem.
 * Representation:
-  * Keeping a visited array will be helpful to represent the subproblems.
-  * Or we can always send the element not to be included to be swapped with  the first element and that way we have a continuous suffix array as a subproblem
+    * Keeping a visited array will be helpful to represent the subproblems.
+    * Or we can always send the element not to be included to be swapped with  the first element and that way we have a continuous suffix array as a subproblem
 
 ##### Keeping visited array (Optimized) 
 

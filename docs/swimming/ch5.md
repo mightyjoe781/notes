@@ -24,9 +24,9 @@
 ## 2-3-2 breathing pattern
 
 * A useful rhythm for beginners:
-  * Inhale → swim 2 strokes → exhale
-  * Inhale → swim 3 strokes → exhale
-  * Inhale → swim 2 strokes → exhale
+    * Inhale → swim 2 strokes → exhale
+    * Inhale → swim 3 strokes → exhale
+    * Inhale → swim 2 strokes → exhale
 * Helps you learn to **control breathing pace** and avoid panic.
 
 ## Nose clip vs. no clip usage

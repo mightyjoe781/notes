@@ -35,12 +35,12 @@
 
 - A major cause of outages is configuration error by operators while hardware faults(servers or network) played 10-25% of outages.
 - Some ways to make systems 
-  - Minimize opportunity for error. Well designed abstration, APIs and admin interfaces. However if the interfaces are too restrictive creative people try to find workaround it.
-  - Decouple the places where people make most mistakes where they can cause failures
-  - Test thoroughly at all levels, from unit tests to whole-system integration tests and manual tests.
-  - Allow quick and easy recovery from human errors, to minimize impact of failure.
-  - Set up detailed and clear monitoring, such as performance metrics and error rates (Telemetry)
-  - Implement good management practices and training.
+    - Minimize opportunity for error. Well designed abstration, APIs and admin interfaces. However if the interfaces are too restrictive creative people try to find workaround it.
+    - Decouple the places where people make most mistakes where they can cause failures
+    - Test thoroughly at all levels, from unit tests to whole-system integration tests and manual tests.
+    - Allow quick and easy recovery from human errors, to minimize impact of failure.
+    - Set up detailed and clear monitoring, such as performance metrics and error rates (Telemetry)
+    - Implement good management practices and training.
 
 #### How important is Reliability ?
 

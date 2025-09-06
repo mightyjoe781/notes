@@ -6,16 +6,16 @@
 
 * Very Famous & Standard Problem
 * Trying to solve this problem greedily fails, Proof by contradiction
-  * Example - `[1, 15, 25]` coins, to get a total sum of 30, we will need 1 denomination of 25, and 6 denomination of `1`, A total of 6 coins
-  * But optimal solution is to use 2 denomination of 15.
+    * Example - `[1, 15, 25]` coins, to get a total sum of 30, we will need 1 denomination of 25, and 6 denomination of `1`, A total of 6 coins
+    * But optimal solution is to use 2 denomination of 15.
 * Split Criteria is we can divide the problem into two subproblems where we take `0` denomination of first coin, other solution is we take more than zero denomination of the first coin
-  * $s_1$ : Excluding first coin : $P(A, 1, target)$
-  * $s_2$ : Including first coin : $P(A, 0, target-A[0])$ 
+    * $s_1$ : Excluding first coin : $P(A, 1, target)$
+    * $s_2$ : Including first coin : $P(A, 0, target-A[0])$ 
 * Recurrence : $P(A, 0, target) = min {P(A, 1, target), 1 + P(A, 0, target - A[0])} $
 * Clearly its a 2-dimensional DP with a size of `n * (target + 1)`
 * Base Case
-  * `dp[n][0] = 0`
-  * `dp[n][1...target] = INT_MAX` (NOTE: since we are taking min at each step, `INT_MAX` will eventually be replaced)
+    * `dp[n][0] = 0`
+    * `dp[n][1...target] = INT_MAX` (NOTE: since we are taking min at each step, `INT_MAX` will eventually be replaced)
 
 
 **Recursive Solution**
@@ -92,18 +92,18 @@ int coinChange(vector<int>& coins, int amount) {
 
 - Now Try to solve the same problem using following split criteria
 
-  * $s_1$ : picking 1st coin & finding solution
+    * $s_1$ : picking 1st coin & finding solution
 
-  * $s_2$ : picking 2nd coin & finding solution
+    * $s_2$ : picking 2nd coin & finding solution
 
-  * ...
+    * ...
 
-  * $s_n$
+    * $s_n$
 
 - Recurrence : $P(target) = 1 + \min_{0 \le i \le n}{P(target - A[i])}$
 - Base Case:
-  - P(0) = 0 (No coins needed to make amount 0)
-  - If target < 0, return INT_MAX to signify impossible state
+    - P(0) = 0 (No coins needed to make amount 0)
+    - If target < 0, return INT_MAX to signify impossible state
 
 ````c++
 int coinChangeHelper(const vector<int>& coins, int target, vector<int>& dp) {
@@ -155,12 +155,12 @@ int coinChange(vector<int>& coins, int amount) {
 
 * Its quite similar to coin change, but we have to take items such that we get maximum value and capacity less than the max capacity
 * Given
-  * Items : $I_1 I_2 ...I_n$
-  * Value : $v_1, v_2...v_n$
-  * Capacity: $c_1, c_2...c_n$
+    * Items : $I_1 I_2 ...I_n$
+    * Value : $v_1, v_2...v_n$
+    * Capacity: $c_1, c_2...c_n$
 * Criteria: Solving the problem based on whether we get max capacity by including or excluding the first element in the set.
-  * $s_1$ : solving knapsack including the item1
-  * $s_2$ : solving knapsack including the item2
+    * $s_1$ : solving knapsack including the item1
+    * $s_2$ : solving knapsack including the item2
 * Recurrence : $P(A, i, cap) = \max\{v_i + P(A, i+1, cap-c_i), P(A, i+1, cap)\}$
 
 **Tabulation Strategy**
@@ -180,28 +180,28 @@ Item ⬇️ vs Capacity ➡️ (0...W)
 
 * Only difference as compared to above problem is that we are now allowed to take fractional parts of an item. We have to maximize the value given total capacity
 * Given
-  * Items: Each with `value[i], weight[i]`
-  * Partial Items can be taken
-  * Capacity : `W`
+    * Items: Each with `value[i], weight[i]`
+    * Partial Items can be taken
+    * Capacity : `W`
 * This is not a DP Problem, Here greedy will work because we can calculate `value[i]/weight[i]` for each item, giving us the optimal choice to pick items.
 * Sort the above transformed array and take as much as till `W` is reached.
 
 ### Server Problem (0/1) Knapsack
 
 - You have:
-  - A list of task sizes: tasks[i] (integers)
-  - A **single integer capacity**: C (capacity of **server 0**)
+    - A list of task sizes: tasks[i] (integers)
+    - A **single integer capacity**: C (capacity of **server 0**)
 - You need to:
-  - **Generate all possible subsets** of tasks (tasks cannot be split).
-  - For each subset, compute the **sum of its tasks**.
-  - Find the **maximum total task size ≤ C** (that is, the most work server 0 can process **without exceeding** its capacity).
+    - **Generate all possible subsets** of tasks (tasks cannot be split).
+    - For each subset, compute the **sum of its tasks**.
+    - Find the **maximum total task size ≤ C** (that is, the most work server 0 can process **without exceeding** its capacity).
 - You’re not required to assign the rest of the tasks or consider other servers.
 
 * Converting to Knapsack
-  * Items = tasks
-  * Weight = task size
-  * Value = same as weight
-  * Maximize total weight ≤ capacity C
+    * Items = tasks
+    * Weight = task size
+    * Value = same as weight
+    * Maximize total weight ≤ capacity C
 
 ````c++
 int maxSubsetSumWithinLimit(const vector<int>& tasks, int capacity) {

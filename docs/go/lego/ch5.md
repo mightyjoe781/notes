@@ -275,8 +275,8 @@ func main() {
 
 - usually we don’t do anonymous function without declaring because you are well off removing them completely and call the code.
 - Assigning anonymous function to variables is useful in two scenarios
-  - `defer` statements
-  - launching goroutines
+    - `defer` statements
+    - launching goroutines
 - Since we declare variables at package scope, we can also declare package scope variables that are assigned anonymous functions
 
 ````go

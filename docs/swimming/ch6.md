@@ -27,10 +27,10 @@
 * Use a kickboard to isolate leg movement and practice technique.
 * Helps build leg strength and improve propulsion.
 * Drills:
-  * Front flutter kick
-  * Side kick with breathing
-  * Vertical kick (no board)
-  * Dolphin kick on back/front
+    * Front flutter kick
+    * Side kick with breathing
+    * Vertical kick (no board)
+    * Dolphin kick on back/front
 
 ## Common kick mistakes and fixes
 

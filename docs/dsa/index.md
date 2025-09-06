@@ -4,30 +4,30 @@
 
 - Array
 
-  * [Two Pointer](array/ch1.md)
-  * [Sliding Window](array/ch2.md)
-  * [Prefix Sums & Difference Arrays](array/ch3.md)
-  * [Subarrays & Subsequences](array/ch4.md)
+    * [Two Pointer](array/ch1.md)
+    * [Sliding Window](array/ch2.md)
+    * [Prefix Sums & Difference Arrays](array/ch3.md)
+    * [Subarrays & Subsequences](array/ch4.md)
 
 
 - Linked List
 
-  * [Basics of Linked List](ll/ch1.md)
-  * [Linked List Techniques](ll/ch2.md)
+    * [Basics of Linked List](ll/ch1.md)
+    * [Linked List Techniques](ll/ch2.md)
 
 
 * Stack & Queues
 
-  * [Stack Operations & Applications](stknq/ch1.md)
-  * [Queue & Deque Implementations](stknq/ch2.md)
-  * [Expression Evaluation & Parsing](stknq/ch3.md)
-  * [Monotonic Stacks & Sliding Window Maximum](stknq/ch4.md)
+    * [Stack Operations & Applications](stknq/ch1.md)
+    * [Queue & Deque Implementations](stknq/ch2.md)
+    * [Expression Evaluation & Parsing](stknq/ch3.md)
+    * [Monotonic Stacks & Sliding Window Maximum](stknq/ch4.md)
 
 
 * Heaps & Priority Queues
 
-  * [Min-Heaps & Max-Heaps](heaps/ch1.md)
-  * [Applications](heaps/ch2.md)
+    * [Min-Heaps & Max-Heaps](heaps/ch1.md)
+    * [Applications](heaps/ch2.md)
 
 
 * [Disjoint Set Union (DSU)(Union-Find)](dsu.md)
@@ -72,15 +72,15 @@
 - [Divide & Conquer](paradigm/dnc.md)
 - [Greedy Algorithms & Strategies](paradigm/greedy.md)
 - [Dynamic Programming Patterns](dp/intro.md)
-  - [1D DP](dp/ch1.md)
-  - [2D DP](dp/ch2.md)
-  - [Unbounded & Bounded (0/1) Knapsack](dp/ch3.md)
-  - [Grid & Palindrome DP](dp/ch4.md)
-  - [Game & Interval DP](dp/ch5.md)
+    - [1D DP](dp/ch1.md)
+    - [2D DP](dp/ch2.md)
+    - [Unbounded & Bounded (0/1) Knapsack](dp/ch3.md)
+    - [Grid & Palindrome DP](dp/ch4.md)
+    - [Game & Interval DP](dp/ch5.md)
 - Advanced DP Problems
-  - [Bitmask DP](additional/bit2.md)
-  - [DP on Trees](dp/ch6.md)
-  - [Digit DP](dp/ch7.md)
+    - [Bitmask DP](additional/bit2.md)
+    - [DP on Trees](dp/ch6.md)
+    - [Digit DP](dp/ch7.md)
 
 
 
@@ -127,13 +127,13 @@ Optional Topics in Trees
 ## Additional Topics
 
 * Mathematics
-  * [Mathematics & Number Theory](additional/ch1.md)
-  * [Modular Arithmetic & Exponentiation](additional/ch2.md)
-  * [Combinatorics & Probability](additional/math3.md)
-  * [Advanced Math Topics](additional/math4.md) (Optional)
+    * [Mathematics & Number Theory](additional/ch1.md)
+    * [Modular Arithmetic & Exponentiation](additional/ch2.md)
+    * [Combinatorics & Probability](additional/math3.md)
+    * [Advanced Math Topics](additional/math4.md) (Optional)
 * Binary Manipulation
-  * [Bit Manipulation](additional/bit1.md)
-  * [Subset Generation & Bitmask DP](additional/bit2.md)
+    * [Bit Manipulation](additional/bit1.md)
+    * [Subset Generation & Bitmask DP](additional/bit2.md)
 
 
 * [Matrix](additional/matrix1.md)
@@ -141,7 +141,7 @@ Optional Topics in Trees
 * [Meet-in-the-Middle Technique](additional/mitmt.md)
 * [Sparse Tables & Range Queries](additional/sparse.md)
 * Geometry
-  * [Computational Geometry](additional/geometry1.md)
-  * [Points, Lines, Polygons](additional/geometry2.md)
-  * [Convex Hull & Line Intersection](additional/geometry3.md)
-  * [Advanced Geometry Algorithms](additional/geometry4.md)
+    * [Computational Geometry](additional/geometry1.md)
+    * [Points, Lines, Polygons](additional/geometry2.md)
+    * [Convex Hull & Line Intersection](additional/geometry3.md)
+    * [Advanced Geometry Algorithms](additional/geometry4.md)

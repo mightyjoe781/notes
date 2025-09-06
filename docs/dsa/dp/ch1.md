@@ -10,8 +10,8 @@
 * But for solving above problem efficiently we might need to Memoization to store already calculated answers, 
 
 * Splits
-  * $x_1$ : ways to reach top floor using 1st floor
-  * $x_2$ : ways to reach top floor using 2nd floor
+    * $x_1$ : ways to reach top floor using 1st floor
+    * $x_2$ : ways to reach top floor using 2nd floor
 * Recursion : `f(n) = f(n-1) + f(n-2)`
 * Base cases: `f(1) = 1, f(2) = 2`
 
@@ -64,8 +64,8 @@ Further Optimization can be done upon recognising that we are using only 2 varia
 - Say optimal solution is $[H_i, H_j, H_k...]$ we can see that if $H_1$ is part of solution or it is not. dividing problem into two sets.
 - Original Problem : $P(A, 0, n-1)$
 - Subproblems
-  - $p_1$ : $M(H_1) + P(A, 2, n-1)$  // including the H1
-  - $p2$ : $P(A, 1, n-1)$ // doesn’t include H1
+    - $p_1$ : $M(H_1) + P(A, 2, n-1)$  // including the H1
+    - $p2$ : $P(A, 1, n-1)$ // doesn’t include H1
 - Recurrence : $P(A, 0, n-1) = [M(H_1) + P(A, 2, n-1)] + [P(A, 1, n-1)]$
 - Above Recurrence, in correct dimensions : $P(A, 0) = max{A(0) + P(A, 2), P(A, 1)}$
 - Base Cases: while solving for last 2 elements its nothing but $max{A(n-1), A(n-2)}$ or we can last element `A(n-2)`
@@ -133,12 +133,12 @@ Solution of Climbing Stairs using this approach : http://p.ip.fi/a6qS
 
 * Clearly problem is a counting problem, and we don’t want to enumerate
 * DnC Criteria should make solution mutually exclusive and exhaustive
-  * $s_1$ : set of all words made by considering only 1st character
-  * $s_2$ : set of all words made by considering first 2 characters
+    * $s_1$ : set of all words made by considering only 1st character
+    * $s_2$ : set of all words made by considering first 2 characters
 * Let’s connect with original subproblem, hint: Suffix Array
 * Original Problem: $P(S, 0)$
-  * $s_1$ : $P(S, 1)$
-  * $s_2$ : $P(S, 2)$
+    * $s_1$ : $P(S, 1)$
+    * $s_2$ : $P(S, 2)$
 * Recurrence Relation: $P(s, 0) = P(s, 1) + P(s, 2)$
 * NOTE: $s_2$ can be pruned while solving the problem as numbers greater than 26 are invalid.
 
@@ -232,9 +232,9 @@ given : `catsanddog`, we could split at `[1, 4, 7]` or `[3, 6, 8]` and more...
 - Model Problem: $S$ : set of all possible splits
 - DnC Criteria: we can mark first split at `0, 1, 2...`, split at some position is i would be $s_i$ , these splits will be mutually exclusive and exhaustive in nature
 - We can prune the solution and validate each subproblem as
-  - $s_1$ : $A[1...n-1]$ s.t. all words are in dictionary
-  - $s_2$ : A[2 ... n-1]
-  - Suffix Strings
+    - $s_1$ : $A[1...n-1]$ s.t. all words are in dictionary
+    - $s_2$ : A[2 ... n-1]
+    - Suffix Strings
 - We should have split s.t. all words `[0 ... i-1]` for $s_i$ are in dictionary
 - Representation : $res = OR\{w[0 ..i-1] \in D \text{ \& } S_i\}$
 - $S = w_1 | w_2 | w_3 | ...$

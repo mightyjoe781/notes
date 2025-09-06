@@ -75,8 +75,8 @@ cp ~/.dotfiles/vim/.vimrc ~
 ### build.lua module progress
 
 - There are two ways build.lua works atm, depending on linuxboot flag (wait did I ever decide how to enable it oops)
-  - LinuxBoot
-  - FreeBSD Boot
+    - LinuxBoot
+    - FreeBSD Boot
 - This week FreeBSD Boot should be in atleast complete shape to keep up with timelines, Next week could take up configuring `test.lua` for running those FreeBSD trees using `qemu`
 - Later that I can work on bringing the Linux Kernel Boot working (wait that reminds me of extra custom kernel warner hosted)
 - 

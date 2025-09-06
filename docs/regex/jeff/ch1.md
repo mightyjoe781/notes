@@ -1,10 +1,10 @@
 ## Introduction to Regular Expression
 
 - You are tasked with checking all pages of a web server for double words !
-  - accept any number of files, report each line of each file that has doubled words, results nicely formatted
-  - word of the end of a line is repeated at the beginning of next line
-  - ignore Capitalization
-  - find doubled words even when separated by HTML tags.
+    - accept any number of files, report each line of each file that has doubled words, results nicely formatted
+    - word of the end of a line is repeated at the beginning of next line
+    - ignore Capitalization
+    - find doubled words even when separated by HTML tags.
 - Above tasks could be done using Regular Expression with some effort but significantly less than traditional solutions
 
 *Regular Expressions are key to powerful, flexible, and efficient text processing.* Regular expressions allow you to describe and parse text. With additional support by tools being used, regular expression can add, remove, isolate, and generally fold, spindle and mutilate all kinds of text and data.
@@ -62,9 +62,9 @@ NOTE : `-` is metacharacter only when used in character classes otherwise its a 
 **Alternation**
 
 - `|` : (or) : For example to search for Jeffrey or Jeffery we can use either of these three
-  - `Jeffrey|Jeffery`
-  - `Jeff(rey|ery)`
-  - `Jeff(re|er)y`
+    - `Jeffrey|Jeffery`
+    - `Jeff(rey|ery)`
+    - `Jeff(re|er)y`
 - NOTE: Character Class only matches one character while this can take in as many as characters. So `Jeff[re][re]y` might seem correct but it is not :P it matches `Jeffrry or Jeffeey` too.
 
 **Ignoring Differences in Capitalization**

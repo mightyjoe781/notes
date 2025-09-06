@@ -27,8 +27,8 @@ vagrant destroy
 
 - Tracking changes to code overtime
 - Git Basics are required to achieve this
-  - Personal Notes
-  - Blog Article Link
+    - Personal Notes
+    - Blog Article Link
 
 <hr>
 

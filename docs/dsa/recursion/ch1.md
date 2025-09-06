@@ -104,8 +104,8 @@ Flow of execution
 #### Call by Reference
 
 * Change the value at calls
-  * Explicit return types (use struct to create a new data type)
-  * Implicit Return type
+    * Explicit return types (use struct to create a new data type)
+    * Implicit Return type
 * Space Optimized: don’t need extra memory declaration in memory stack
 
 ### Problem Types
@@ -139,8 +139,8 @@ f(n) = f(1) + O(2^n)
 $$
 
 * Tree Method
-  * Imagine the tree
-  * Sum up the work at each level
+    * Imagine the tree
+    * Sum up the work at each level
 * Subsets Problem : $O(2^n)$
 * Combination Problem: $O(2^{max(n, k)}) = O(2^n)$
 

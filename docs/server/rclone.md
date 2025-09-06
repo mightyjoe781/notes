@@ -26,6 +26,6 @@ rclone config
 - you will need to setup a remote for each cloud vendor you wish to add.
 - proceed with some remote name then select your cloud vendor.
 - then you will need to authenticate your rclone using token to access cloud vendor’s storage.
-  - GUI System : If you have some browser, then u can use auto generate token and follow the link provided by cli
-  - Headless System : In case of headless system since there is no browser what you will need to create token on some another system and add it to the headless system.
+    - GUI System : If you have some browser, then u can use auto generate token and follow the link provided by cli
+    - Headless System : In case of headless system since there is no browser what you will need to create token on some another system and add it to the headless system.
 

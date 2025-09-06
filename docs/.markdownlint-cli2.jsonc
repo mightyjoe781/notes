@@ -1,0 +1,9 @@
+{
+  "config": {
+    "default": false,  // Disable all rules
+    "MD007": {
+      // Spaces for indent
+      "indent": 4
+    }
+  }
+}

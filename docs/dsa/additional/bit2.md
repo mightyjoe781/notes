@@ -48,8 +48,8 @@ for (int mask = 0; mask < (1 << N); ++mask) {
 
 - Problem: Find the minimum cost path that visits every city once and returns to the origin.
 - State:
-  - mask = cities visited so far
-  - i = current city
+    - mask = cities visited so far
+    - i = current city
 - Recurrence: `dp[mask][i] = min(dp[mask][i], dp[mask ^ (1 << i)][j] + dist[j][i]) // for all j ≠ i`
 - Base case: `dp[1 << i][i] = cost from 0 to i`
 
@@ -81,8 +81,8 @@ print(res)
 
 - Problem: Partition a set of n elements into exactly k non-empty subsets
 - Use Bell numbers or bitmask DP with memoization over (mask, k) where:
-  - mask = unpicked elements
-  - k = subsets left
+    - mask = unpicked elements
+    - k = subsets left
 
 ### Minimum Incompatibility
 
@@ -90,17 +90,17 @@ print(res)
 - Need to partition array into k subsets of size n / k, minimizing incompatibility (max - min of each subset)
 - Precompute all valid subsets of size n/k and their incompatibility
 - Use Bitmask DP:
-  - dp[mask] = min incompatibility for subset mask
-  - Transition: combine valid group with remaining mask
+    - dp[mask] = min incompatibility for subset mask
+    - Transition: combine valid group with remaining mask
 
 ### Max AND Sum of Array
 
 - [Problem Link](https://leetcode.com/problems/maximum-and-sum-of-array/)
 - You are given a list of nums and you have k slots, each can take up to 2 numbers.
 - Use Bitmask DP:
-  - State: mask of which numbers used
-  - Value: max AND sum you can get
-  - Transition: try placing a number in each slot (0..k-1) with 2 capacity
+    - State: mask of which numbers used
+    - Value: max AND sum you can get
+    - Transition: try placing a number in each slot (0..k-1) with 2 capacity
 
 ## Bitmask Utility Tricks
 

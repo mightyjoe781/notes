@@ -92,15 +92,15 @@ outerKey: {innerKey: innerValue}
 
 - version : maps feature provided by docker engine
 - services : each service can be defined inside this
-  - important keys : image, volumes, ports, environment, logging, security_opt
-  - some configuation work in swarm mode/ specified on cmd, for e.g. memory/cpu limits
-  - Dependecies can be defined : depends_on, links (NOTE: **it doesn’t wait for 1st service to come up**). It just runs it before its dependents.
-  - you can pass a command with args to override CMD in docker file like this => command: [“redis-server”, “--appendonly”, “yes”]
+    - important keys : image, volumes, ports, environment, logging, security_opt
+    - some configuation work in swarm mode/ specified on cmd, for e.g. memory/cpu limits
+    - Dependecies can be defined : depends_on, links (NOTE: **it doesn’t wait for 1st service to come up**). It just runs it before its dependents.
+    - you can pass a command with args to override CMD in docker file like this => command: [“redis-server”, “--appendonly”, “yes”]
 - volumes
-  - keys : named-volume, external-volume
+    - keys : named-volume, external-volume
 - networks
-  - one network created by default
-  - service don’t need to specify port access for each other, only Host to container containers requires port declaration
+    - one network created by default
+    - service don’t need to specify port access for each other, only Host to container containers requires port declaration
 
 ### Variable Substitution
 
@@ -149,7 +149,7 @@ USAGE : `docker-compose [OPTIONS] [COMMAND] [ARGS]`
 
 - tries to find default : `docker-compose.(yml|yaml)` (-f can be used to override)
 - projects to represent isolated apps
-  - defaults to directory as project_name (-p can supply custom_name)
+    - defaults to directory as project_name (-p can supply custom_name)
 
 #### Main Commands
 
@@ -232,10 +232,10 @@ docker-compose build --no-cache --pull
 ### Multiple Compose Files
 
 - compose can combine combose files
-  - Base config + overrides
-  - Default files:
-    - docker-compose.yml
-    - docker-compose.override.yml
+    - Base config + overrides
+    - Default files:
+        - docker-compose.yml
+        - docker-compose.override.yml
 - `config` to view effective configuration
 - -H allows to connect to remote hosts
 

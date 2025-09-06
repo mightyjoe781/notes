@@ -42,13 +42,13 @@ Similarly create the same file in `server` , `worker` and change the last instru
 Designing docker-compose file
 
 - postgress
-  - Image
+    - Image
 - redist
-  - Image
+    - Image
 - server
-  - specify build
-  - specify volumes
-  - Specify env variables
+    - specify build
+    - specify volumes
+    - Specify env variables
 
 Make a `docker-compose.yml` to main root working directory.
 

@@ -97,7 +97,7 @@ Application
 Key Algorithms
 
 - **Ear Clipping** (Greedy, O(n²))
-  - Repeatedly remove “ears” (triangles with no other vertex inside)
+    - Repeatedly remove “ears” (triangles with no other vertex inside)
 - **Sweep Line / Monotone Polygon Partitioning** (Optimal, O(n log n))
 
 Applications

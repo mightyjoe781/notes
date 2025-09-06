@@ -17,18 +17,18 @@ Features:
 - Desired state reconciliation
 - Certificates and cryptographic tokens to secure clustes
 - Container orchestration features:
-  - Service scaling, multi-host networking, resource aware scheduling, load-balancing, rolling updates, restart policies
+    - Service scaling, multi-host networking, resource aware scheduling, load-balancing, rolling updates, restart policies
 
 #### Name Disambiguation
 
 Docker has 2 cluster management solutions:
 
 - Docker Swarm standalone
-  - first container orchestration project by Docker
-  - uses docker API to turn a pool of Docker hosts into single virtual Docker host
+    - first container orchestration project by Docker
+    - uses docker API to turn a pool of Docker hosts into single virtual Docker host
 - Docker swarm mode (swarmkit)
-  - built into docker engine version 1.12
-  - docker generally recommends swarm mode
+    - built into docker engine version 1.12
+    - docker generally recommends swarm mode
 
 #### Swarm Mode Concepts
 
@@ -85,10 +85,10 @@ A service discovery mechanism is required in order to connect to nodes running t
 #### External Access :
 
 - two modes for publishing ports in swarm
-  - Host Mode : Container port is published on host that is running task for a service
-  - if # tasks > # available hosts, tasks will fail to run
-  - Ingress Mode: option to load balance a published port across all tasks of a service. Round Robin Load balanced across healthy instances
-  - default service publishing mode
+    - Host Mode : Container port is published on host that is running task for a service
+    - if # tasks > # available hosts, tasks will fail to run
+    - Ingress Mode: option to load balance a published port across all tasks of a service. Round Robin Load balanced across healthy instances
+    - default service publishing mode
 
 #### Routing Mesh
 
@@ -98,8 +98,8 @@ A service discovery mechanism is required in order to connect to nodes running t
 - when a node receives an external request, it resolves the service name to a VIP
 - The IPVS load balances the request to a service replica over the ingress network
 - NOTE : nodes need to have a couple of ports open
-  - Port 7946 for TCP/UDP protocols to enable network discovery
-  - Port 4789 for UDP protocol to enable the container ingress network
+    - Port 7946 for TCP/UDP protocols to enable network discovery
+    - Port 4789 for UDP protocol to enable the container ingress network
 
 #### docker_gwbridge
 
@@ -114,7 +114,7 @@ virtual bridge that connect the overlay networks to an individual docker daemonâ
 ### Service placement
 
 - for replicated services, decisions need to be made by swarm managers for where service tasks will scheduled, or where service is placed.
-  - 3 ways to influence : CPU/Memory reservations, placement constraints (geolocation/datacenters/node_names/architectures), placement preferences
+    - 3 ways to influence : CPU/Memory reservations, placement constraints (geolocation/datacenters/node_names/architectures), placement preferences
 - A node will never have more than one tasks for a global service
 - global services can also be restricted to a subset of nodes iwth these conditions
 

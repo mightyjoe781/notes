@@ -3,15 +3,15 @@
 ### Key Concepts
 
 * Types of Linked List
-  * Singly Linked List
-  * Doubly Linked List
-  * Circular Linked List
+    * Singly Linked List
+    * Doubly Linked List
+    * Circular Linked List
 * Advantages over arrays
-  * Dynamic Size
-  * Efficient Insertion/Deletion
+    * Dynamic Size
+    * Efficient Insertion/Deletion
 * Disadvantages
-  * No Random Access
-  * Extra Memory for Pointers
+    * No Random Access
+    * Extra Memory for Pointers
 
 ## Implementation
 

@@ -125,12 +125,12 @@ spec:
 Rollout Strategy’s
 
 - Rolling Update
-  - default rollout strategy
-  - update in groups rather than all-at-once
-  - Both old and new version running for some time
-  - alternate is recreate strategy
-  - scaling is not a rollout
-  - kubectl has commands to check, pause, resume, and rollback (undo) rollouts
+    - default rollout strategy
+    - update in groups rather than all-at-once
+    - Both old and new version running for some time
+    - alternate is recreate strategy
+    - scaling is not a rollout
+    - kubectl has commands to check, pause, resume, and rollback (undo) rollouts
 - autoscaling and rollouts are compatible but to observe changes here first delete hpa
 
 ````bash

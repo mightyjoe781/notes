@@ -7,8 +7,8 @@ To satisfy connectivity criteria
 - we need at least V-1 edges that form a tree and this tree must span all $V \in G$.
 
 - MST can be solved with several well known algorithms
-  - Prim's
-  - Krushkal's
+    - Prim's
+    - Krushkal's
 
 Application of MSTs
 

@@ -3,26 +3,26 @@
 ## What is Caching
 
 * caches are anything that helps you avoid an expensive *network I/O*, *disk I/O* or computation.
-  * API call to get profile information
-  * reading specific line from a file
-  * doing multiple table joins
+    * API call to get profile information
+    * reading specific line from a file
+    * doing multiple table joins
 * Frequently accessed data is stored in a temporary location. The API server first checks the cache. If the item is not present, it fetches it from the actual database and stores it in the cache.
 * Cache are faster and expensive. Cache is not a breaking point in a design, it helps improve the design.
 * Caches are just glorified hash tables
 * Examples
-  * Google News
-  * Auth Tokens
-  * Live Stream
+    * Google News
+    * Auth Tokens
+    * Live Stream
 
 ## Populating and Scaling a Cache
 
 * cache is put in between API server and database
 * Lazy Population (most popular)
-  * Read first goes to cache, if data exists return it, or else fetch from db, store in cache, and then return
-  * Ex - Caching Blogs, (multiple joins involved)
+    * Read first goes to cache, if data exists return it, or else fetch from db, store in cache, and then return
+    * Ex - Caching Blogs, (multiple joins involved)
 * Eager Population
-  * Writes go to both database and cache in the request call. Ex - live cricket score
-  * Proactively push data to cache, because you anticipate the need. Ex - Twitter Celebrity Problem
+    * Writes go to both database and cache in the request call. Ex - live cricket score
+    * Proactively push data to cache, because you anticipate the need. Ex - Twitter Celebrity Problem
 
 ## Caching at Different Levels
 

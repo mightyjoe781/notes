@@ -72,13 +72,13 @@ Algorithm
 
 * Precompute the hash of the pattern and the initial substring of the text of the same length.
 * Slide over the text:
-  * If the hashes match, verify the strings.
-  * Recompute the hash for the next substring in O(1)
+    * If the hashes match, verify the strings.
+    * Recompute the hash for the next substring in O(1)
 * Complexity: O(N + M) on average.
 * Things to consider while implementation
-  * Always verify with string comparison after hash match
-  * Consider double hashing for critical applications
-  * Birthday Paradox - The **Birthday Paradox** refers to the counterintuitive probability result that in a group of just 23 people, there is about a 50% chance that at least two people share the same birthday. Shows the vulnerability of hash functions to collisions, leading to the "birthday attack" where finding two inputs that hash to the same output is easier than expected.
+    * Always verify with string comparison after hash match
+    * Consider double hashing for critical applications
+    * Birthday Paradox - The **Birthday Paradox** refers to the counterintuitive probability result that in a group of just 23 people, there is about a 50% chance that at least two people share the same birthday. Shows the vulnerability of hash functions to collisions, leading to the "birthday attack" where finding two inputs that hash to the same output is easier than expected.
 
 
 ````c++
@@ -134,8 +134,8 @@ Algorithm
 * Initialize Z[0] = 0 .
 * Maintain a window [L, R] that matches the prefix.
 * For each i :
-  * If $i \leq R$, use previously computed values.
-  * Otherwise, compute Z[i] directly
+    * If $i \leq R$, use previously computed values.
+    * Otherwise, compute Z[i] directly
 * Complexity: O(N)
 
 ````c++
@@ -163,7 +163,7 @@ The Knuth-Morris-Pratt (KMP) algorithm avoids redundant comparisons by precomput
 Algorithm
 
 * Compute the prefix function:
-  *  $\text{pi}[i]$ is the length of the longest prefix that is also a suffix for the substring ending at i .
+    *  $\text{pi}[i]$ is the length of the longest prefix that is also a suffix for the substring ending at i .
 * Use $\text{pi}[]$ to skip unnecessary comparisons
 * Complexity: O(N + M).
 

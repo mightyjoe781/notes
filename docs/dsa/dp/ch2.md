@@ -7,22 +7,22 @@
 * DnC criteria : think about all possible txn, so we can buy on 6th day and sell on 1st day $(b_6, s_1)$, like that there could be many element of the set. Now problem is finding subproblem which provide us mutually exclusive & exhaustive sets.
 * We could purchase on first day and don’t buy on first day. Let’s try to related the subproblem to original problem
 * Purchase on 0th day
-  * $s_1$ : max profite you can make from $D[1... n-1]$, assuming first thing we do is sell $[S_i, (B_j S_k), (B_iS_m)....]$
+    * $s_1$ : max profite you can make from $D[1... n-1]$, assuming first thing we do is sell $[S_i, (B_j S_k), (B_iS_m)....]$
 * Don’t purchase on 0th day
-  * $s_2$ : max profit that you can make from $D[1...n-1]$, assuming you start with a buy
+    * $s_2$ : max profit that you can make from $D[1...n-1]$, assuming you start with a buy
 * Here we can notice that that there are two degree of freedom making this problem 2D DP
 
 * We will need 2 variable, 1 representing suffix sum & second represent the operation (buy/sell)
 * Representation: $f(D, 0, 1, fee)$
-  * $s_1$ : $f(D, 1, 0, fee)$
-  * $s_2$ : $f(D,1, 1, fee)$
+    * $s_1$ : $f(D, 1, 0, fee)$
+    * $s_2$ : $f(D,1, 1, fee)$
 * NOTE: purchase can be represented as negative profit.
 * $f(D, 0, 1) = max(-D[0] + f(D,1, 0), f(D, 1, 1))$
 * but here there is no way to solve $f(D, 1, 0)$ ? We will need to write another recurrence for it
 * $f(D, 0, 0) = max(D[0] + f(D, 1, 1) - fee, f(D, 1, 0))$
 * We will have two arrays tracking
-  * `n(buy)` : all suffix arrays
-  * `n(sell)` : all prefix arrays
+    * `n(buy)` : all suffix arrays
+    * `n(sell)` : all prefix arrays
 
 ````c++
 int maxProfit(vector<int>& prices, int fee) {
@@ -99,8 +99,8 @@ int longestArithSeqLength(vector<int>& A) {
 * [Problem Link](https://leetcode.com/problems/target-sum/description/)
 * Subset DP, 2 D DP, Counting Problem
 * DnC Criteria : Split the set into 2 components, set $s_1$ contains the sum with $A[0]$ in positive sign while another set $s_2$ with $A[0]$ in negative sign
-  * $s_1$ : number of ways to make `target-A[0]` from `A[1...n]`
-  * $s_2$ : number of ways to make `target+A[0]` from `A[1...n]`
+    * $s_1$ : number of ways to make `target-A[0]` from `A[1...n]`
+    * $s_2$ : number of ways to make `target+A[0]` from `A[1...n]`
 
 * Recurrence : $P(A, 0, target) = P(A, 1, target-A[0]) + P(A, 1, target + A[0])$
 * Size of DP Array : $n(2 + (\Sigma{A[i] + 1}))$
@@ -139,12 +139,12 @@ int findTargetSumWays(vector<int>& nums, int target) {
 * Famous Problem Commonly Asked in Interviews
 * Here, `dp[i][j]` refers to minimum operation needed to convert `s1[0...i]` into `s2[0...j]`
 * Given the operations
-  * If `s1[i] == s2[j]` then `dp[i][j] = dp[i-1][j-1]`
-  * If `s1[i] != s2[j]`
-    * `dp[i][j] = dp[i-1][j-1] + 1` : replace operation
-    * `dp[i][j] = dp[i][j-1]+1 ` : insertion operation
-    * `dp[i][j] = dp[i-1][j]+1 ` : delete operation
-    * `dp[i][j]` is minimum of above operation.
+    * If `s1[i] == s2[j]` then `dp[i][j] = dp[i-1][j-1]`
+    * If `s1[i] != s2[j]`
+        * `dp[i][j] = dp[i-1][j-1] + 1` : replace operation
+        * `dp[i][j] = dp[i][j-1]+1 ` : insertion operation
+        * `dp[i][j] = dp[i-1][j]+1 ` : delete operation
+        * `dp[i][j]` is minimum of above operation.
 * order of filling from top to down and left to right
 * Base Case : to  transform [a] into [ab….] if there is a in second word then $n-1$ deletion otherwise $n$. Simpler base case is by shifting everything by one. :)
 * we add a row above the table and column of left side too. just to make the base case simpler.

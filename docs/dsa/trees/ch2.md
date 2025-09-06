@@ -29,10 +29,10 @@
 - [Problem Link](https://leetcode.com/problems/binary-tree-maximum-path-sum/)
 - We have to find a path in the binary tree, that gives the max sum
 - Maximum at a node could be following
-  - Node’s value
-  - Node’s value + max. sum from left subtree
-  - Node’s value + max. sum from right subtree
-  - Node’s Value + max. sum including both subtree
+    - Node’s value
+    - Node’s value + max. sum from left subtree
+    - Node’s value + max. sum from right subtree
+    - Node’s Value + max. sum including both subtree
 
 ````c++
 int maxSum = INT_MIN;

@@ -4,8 +4,8 @@
 
 - traverses graph in 'depth-first' manner
 - Time Complexity
-  - $O(V+E)$ : Adjacency List
-  - $O(V^2)$ : Adjacency Matrix
+    - $O(V+E)$ : Adjacency List
+    - $O(V^2)$ : Adjacency Matrix
 
 ```c++
 const UNVISITED = -1;
@@ -29,8 +29,8 @@ void dfs(int u) {
 
 - traverses graph in 'breadth-first' manner
 - Time Complexity
-  - $O(V+E)$ : Adjacency List
-  - $O(V^2)$ : Adjacency Matrix
+    - $O(V+E)$ : Adjacency List
+    - $O(V^2)$ : Adjacency Matrix
 
 ````c++
 // inside int main() -- no recursion

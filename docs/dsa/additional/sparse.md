@@ -2,19 +2,19 @@
 
 - A **Sparse Table (ST)** is a **static data structure** used to answer **idempotent range queries** (like min, max, GCD, LCM, XOR, etc.) in **O(1)** time after **O(n log n)** preprocessing.
 - Use Cases
-  - RMQ
-  - Range GCD/LCM
-  - Range XOR/AND/OR
-  - LCA (Lowest Common Ancestor)
-  - Binary Lifting/kth ancestor queries
+    - RMQ
+    - Range GCD/LCM
+    - Range XOR/AND/OR
+    - LCA (Lowest Common Ancestor)
+    - Binary Lifting/kth ancestor queries
 - This topic is very crucial for competitive coding. Interviews often prefer Segment Trees over these due to their dynamic nature.
 - Time Complexity
-  - Preprocessing : $O(n \log n)$
-  - Query: $O(1)$ for idempotent functions
+    - Preprocessing : $O(n \log n)$
+    - Query: $O(1)$ for idempotent functions
 - Concept:
-  - Precompute answers for all intervals of length $2^j$ for all positions.
-  - For a function `f` (idempotent) e.g. min, gcd : ` s[i][j] = f(st[i][j-1], st[i + 2^(j-1)][j-1])`
-  - Query over the range `[L, R]` becomes
+    - Precompute answers for all intervals of length $2^j$ for all positions.
+    - For a function `f` (idempotent) e.g. min, gcd : ` s[i][j] = f(st[i][j-1], st[i + 2^(j-1)][j-1])`
+    - Query over the range `[L, R]` becomes
 
 ````python
 j = log2(R - L + 1)
@@ -85,8 +85,8 @@ print(query_max(4, 7, st))  # Output: 11
 - Binary lifting is used in tree problems to quickly jump $2^k$ levels in $O(\log N)$
 - Preprocess `parent[node][k] = parent[parent[node[k-1]][k-1]`
 - Usage
-  - Kth Ancestor Query
-  - Lowest Common Ancestor (LCA)
+    - Kth Ancestor Query
+    - Lowest Common Ancestor (LCA)
 
 ### LCA using Sparse Tables (Euler Tour)
 
@@ -157,9 +157,9 @@ f(f(a, b), b) = f(a, b)
 $$
 
 - Examples :
-  - `min` , `max`
-  - `gcd` , `lcm`
-  - `XOR`, `AND`, `OR` (XOR is associative but not idempotent, it works)
+    - `min` , `max`
+    - `gcd` , `lcm`
+    - `XOR`, `AND`, `OR` (XOR is associative but not idempotent, it works)
 
 
 
@@ -187,5 +187,5 @@ $$
 - Useful in offline query prolems (given queries beforehand)
 - Sort queries and answer with Sparse Table in O(1)
 - Common Usecases
-  - Mo’s Algorithm
-  - Offline RMQ queries
+    - Mo’s Algorithm
+    - Offline RMQ queries

@@ -28,11 +28,11 @@
 
 * Maintain the median of a dynamic data stream efficiently
 * Use two-heaps
-  * A max-heap for the lower half of the numbers
-  * A min-heap for the upper half of the numbers
+    * A max-heap for the lower half of the numbers
+    * A min-heap for the upper half of the numbers
 * Balancing the heaps ensures
-  * The max-heap size is equal to or one more than the min-heap size
-  * Median is either the top of the max-heap (odd cnt) or average of tops of both heaps (even cnt)
+    * The max-heap size is equal to or one more than the min-heap size
+    * Median is either the top of the max-heap (odd cnt) or average of tops of both heaps (even cnt)
 
 ### Use Cases
 
@@ -46,9 +46,9 @@
 
 * Use a *max-heap* to sort an array in-place
 * Steps
-  * Build a *max-heap* from input array
-  * Repeatedly extract the maximum element and place it at the end
-  * Heapify the reduced heap
+    * Build a *max-heap* from input array
+    * Repeatedly extract the maximum element and place it at the end
+    * Heapify the reduced heap
 * Time Complexity: $O(n \log n)$
 * Space Complexity: $O(1)$ (in-place)
 
@@ -56,10 +56,10 @@
 
 * Use a *min-heap* to efficiently merge K sorted list
 * Steps
-  * Insert the first element of each list into the min-heap
-  * Extract the smallest element from the heap and add it to the merged output.
-  * Insert the next element from the extracted element’s list into the heap.
-  * Repeat until all elements are processed.
+    * Insert the first element of each list into the min-heap
+    * Extract the smallest element from the heap and add it to the merged output.
+    * Insert the next element from the extracted element’s list into the heap.
+    * Repeat until all elements are processed.
 * Time Complexity: $O(N \log K)$
 
 ### Problems

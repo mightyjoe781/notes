@@ -82,9 +82,9 @@ double dist_point_to_segment(Point p, Point a, Point b) {
 
 - $a.b = |a||b| \cos \theta$
 - Sign tells about angle
-  - `> 0` : acute
-  - `< 0` : obtuse
-  - `= 0` : orthogonal
+    - `> 0` : acute
+    - `< 0` : obtuse
+    - `= 0` : orthogonal
 
 ````python
 double dot(Point a, Point b) {

@@ -19,14 +19,14 @@
 ## Benefits
 
 - Manages Complexity
-  - `helm install ca-demo1 ca-repo/voteapp`
+    - `helm install ca-demo1 ca-repo/voteapp`
 - Helm allows upgrades, Rollback and Deletion
-  - `helm upgrade`, `helm rollback`, `helm uninstall`
+    - `helm upgrade`, `helm rollback`, `helm uninstall`
 - Helm makes its chart distribution to easily export your infra to other users
-  - `helm repo add ca-repo https://ca-repo.io/repo`
-  - `helm install ca-repo/cloudacademy-app`
+    - `helm repo add ca-repo https://ca-repo.io/repo`
+    - `helm install ca-repo/cloudacademy-app`
 - Custom Chart Scaffolding
-  - `helm create [chart_name]`
+    - `helm create [chart_name]`
 
 ## Terminology
 
@@ -38,20 +38,20 @@
 ## Architecture
 
 - Helm2 Architecture
-  - server architecture
-  - depended on cluster hosted component tiller
+    - server architecture
+    - depended on cluster hosted component tiller
 - Helm3 Architecture (more simple and secure)
-  - follows client only architecture
-  - communicates directly with k8s API with RBAC enabled using `.kube/config` file credentials
-  - chart rendering is done on client side by helm before deploying
-  - deploying a chart creates a release
+    - follows client only architecture
+    - communicates directly with k8s API with RBAC enabled using `.kube/config` file credentials
+    - chart rendering is done on client side by helm before deploying
+    - deploying a chart creates a release
 
 ## Installation
 
 - `brew install helm`
 - Setup autocompletion :
-  - `source <(helm completion bash)`
-  - `echo ‘source <(helm completion bash)’ >> ~/.bash_profile`
+    - `source <(helm completion bash)`
+    - `echo ‘source <(helm completion bash)’ >> ~/.bash_profile`
 
 ## Commands
 

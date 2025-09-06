@@ -19,7 +19,7 @@ $$
 - A triangular array where each number is sum of two directly above it
 - The `nth` row corresponds to coefficient of $(a+b)^n$
 - Properties
-  - $\binom{n}{r} = \binom{n-1}{r-1} + \binom{n-1}{r}$
+    - $\binom{n}{r} = \binom{n-1}{r-1} + \binom{n-1}{r}$
 - Symmetry: $\binom{n}{r} = \binom{n}{n-r}$
 
 ## Binomial Theorem

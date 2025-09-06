@@ -10,15 +10,15 @@
 - Root Module : simply a directory on local filesystem containing Terraform Code + Configuration
 - Terrafrom files : `*.tf` or `*.tfvars`
 - Root Module typically contains
-  - `main.tf`
-  - `variables.tf`
-  - `outputs.tf`
+    - `main.tf`
+    - `variables.tf`
+    - `outputs.tf`
 - May contain terraform state files
-  - `terraform.tfstate`
-  - `terraform.tfstate.backup`
+    - `terraform.tfstate`
+    - `terraform.tfstate.backup`
 - Other files
-  - `.terraform`
-  - `.terraform.lock.hcl`
+    - `.terraform`
+    - `.terraform.lock.hcl`
 
 ### Terraform Workspaces
 
@@ -32,9 +32,9 @@
 
 - located in project root workspace
 - contains your core terraform code
-  - resources
-  - provider
-  - data sources
+    - resources
+    - provider
+    - data sources
 - complex infra requirements may be split across multiple `*.tf` files
 - modularized templates will each have their own `main.tf`
 
@@ -109,10 +109,10 @@ output "subnet1_id" {
 - manages infrastructure configuration drift and can be refreshed using `terraform refresh`
 - terraform state tracked and recorded within the files : `terraform.tfstate` and `terraform.tfstate.backup`
 - NOTE : terraform by default stores state on local filesystem but we can configure it to store state remotely
-  - S3 backend
-  - Remote state more secure
-    - Data encrypted at rest
-    - tls connections
+    - S3 backend
+    - Remote state more secure
+        - Data encrypted at rest
+        - tls connections
 
 ### Terraform State - Locking
 
@@ -141,16 +141,16 @@ terraform {
 
 - terraform IAM role with programmatic access
 - AWS Credentials can be put (same order of preference)
-  - in `main.tf` : fastest but worse method in terms of security
-  - environment_variables : detected by `terraform cli`
-  - shared credentials file : referenced in `main.tf` (`~/.aws/credentials`)
+    - in `main.tf` : fastest but worse method in terms of security
+    - environment_variables : detected by `terraform cli`
+    - shared credentials file : referenced in `main.tf` (`~/.aws/credentials`)
 
 ### Terraform CLI
 
 - type `terraform -help`
 - type `terrform init`
-  - without any content in `main.tf`, above command will not do anything
-  - add this code to main.tf
+    - without any content in `main.tf`, above command will not do anything
+    - add this code to main.tf
 
 ````
 terraform {
@@ -173,22 +173,22 @@ data "aws_availability_zones" "available" {
 ````
 
 - After this
-  - type `terraform init`
-  - it will initialize `backend` and then get plugins
-  - create `lock file` and `.terraform` directory
+    - type `terraform init`
+    - it will initialize `backend` and then get plugins
+    - create `lock file` and `.terraform` directory
 - `terraform validate` just validates the syntax of tf files
 - `terraform plan` : dry run command ( doesn’t actually create resources / more like an execution plan)
 - `terraform apply` : reruns plan but this time actually creates resources
-  - if fails in mid-way, doesn’t rerun or roll because plan is actually executed.
-  - better to use git for that
+    - if fails in mid-way, doesn’t rerun or roll because plan is actually executed.
+    - better to use git for that
 - `terraform destroy` : removes all resources
 
 ### Terraform Language (HCL Syntax)
 
 - HCL : Hashicorp Configuration Language (HCL)
 - Comments :
-  -  `# Single line`
-  - `/* */ Multi-line`
+    -  `# Single line`
+    - `/* */ Multi-line`
 - Interpolation `${var.varname}`
 - JSON/YML
 - TYPE : Boolean, String and Numbers, Map, List, Tuple

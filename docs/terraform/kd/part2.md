@@ -17,8 +17,8 @@ resource "aws_instance" "my_instance"{
 ````
 
 - local-exec provisioner
-  - invokes a local executable after the resource is created
-  - invokes a process on machine running terraform NOT the target resource **IMPORTANT**
+    - invokes a local executable after the resource is created
+    - invokes a process on machine running terraform NOT the target resource **IMPORTANT**
 
 ````
 resource "aws_instance" "my_instance"{
@@ -31,10 +31,10 @@ resource "aws_instance" "my_instance"{
 ````
 
 - remote-exec provisioner
-  - invokes a script on a remote resource after it is created
-  - supports:
-      - winrm - Windows Remote Management (WinRM)
-      - ssh - Secure shell
+    - invokes a script on a remote resource after it is created
+    - supports:
+        - winrm - Windows Remote Management (WinRM)
+        - ssh - Secure shell
 
 ````
 resource "aws_instance" "myec2"{
@@ -106,9 +106,9 @@ Destroy-Time provisioner
 
 - on_failure
 
-  - continue :: ignore error and continue creation or destruction
+    - continue :: ignore error and continue creation or destruction
 
-  - fail :: default behaviour, raise an error and stop, mark resource as tainted.
+    - fail :: default behaviour, raise an error and stop, mark resource as tainted.
 
 
 ----------------------------------------------------------
@@ -196,8 +196,8 @@ output "db_password"{
 - it is NOT mandatory to include module version argument when pulling code from terraform Registry
 - explicitly constrain version numbers for external modules to avoid unwated changes
 - version constraints are supported for modules installed from:
-  - Terraform Registry :: `Reference <NAMESPACE>/<NAME>/<PROVIDER>`
-  - Private Registry :: `Reference <HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>`
+    - Terraform Registry :: `Reference <NAMESPACE>/<NAME>/<PROVIDER>`
+    - Private Registry :: `Reference <HOSTNAME>/<NAMESPACE>/<NAME>/<PROVIDER>`
 
 specifying a VERSION is mandatory when fetching a module
 
@@ -288,10 +288,10 @@ Terraform Enterprise ---------------------- Testing Organizations
 example hierarchy:
 
 - Development Organization
-  - Networking workspace :: VPC and S3
-  - Persistence workspace :: S3 and Databases
-  - compute workspace :: EKS and ASG
-  - Shared Services workspace :: SNS and SQS and Lambda
+    - Networking workspace :: VPC and S3
+    - Persistence workspace :: S3 and Databases
+    - compute workspace :: EKS and ASG
+    - Shared Services workspace :: SNS and SQS and Lambda
 - Testing Organization
 - Production Organization
 
@@ -329,52 +329,52 @@ Terraform comes in five Flavours:
 Terraform offerings
 
 - Terraform Cloud
-  - free
-  - Team
-  - business
-    - SSO 
-    - auditing
-    - self-hosted terraformcloud agents
-      - terraform cloud agents allow terraform cloud to communicate with isolated, private or on-premises infrastructure
-      - terraform cloud agents can establish a simple connection between your environment and terraform cloud which allows for provisioning operations and management
-    - private data center Networking
-    - clustering
+    - free
+    - Team
+    - business
+        - SSO 
+        - auditing
+        - self-hosted terraformcloud agents
+            - terraform cloud agents allow terraform cloud to communicate with isolated, private or on-premises infrastructure
+            - terraform cloud agents can establish a simple connection between your environment and terraform cloud which allows for provisioning operations and management
+        - private data center Networking
+        - clustering
 
 
 
 - Terraform Self-Hosted Enterprise (ex: TFE)
-  - internally hosted product to run terraform at scale
-  - terraform plan and terraform apply happens on the TFE servers
-  - state is stored on TFE and TFE provides state locking
-  - TFE also supports the Sentinel Policy Engine
+    - internally hosted product to run terraform at scale
+    - terraform plan and terraform apply happens on the TFE servers
+    - state is stored on TFE and TFE provides state locking
+    - TFE also supports the Sentinel Policy Engine
 
 Enterprise offerings
 
 - Sentinel
-  - Sentinel is an embedded Policy as Code framework
-  - Sentinel enables fine grained logic based control policy decisions
-  - Sentinel is an embedded proactive policy as code framework
-  - Sentinel use cases:
-    - verify if ec2 instaces have tags
-    - verify if the S3 buckets have encryption enabled
-  - Sentinel execution sequence:
-    - terraform plan
-    - Sentinel checks
-    - terraform apply
+    - Sentinel is an embedded Policy as Code framework
+    - Sentinel enables fine grained logic based control policy decisions
+    - Sentinel is an embedded proactive policy as code framework
+    - Sentinel use cases:
+        - verify if ec2 instaces have tags
+        - verify if the S3 buckets have encryption enabled
+    - Sentinel execution sequence:
+        - terraform plan
+        - Sentinel checks
+        - terraform apply
 
 - Enterprise state security
-  - treat terraform.tfstate as sensitive
-  - Encrypt terraform.tfstate at rest
-  - encrypt terraform.tfstate in transit with TLS 
-  - Perform audit on State access and operations
-  - S3 backend supports encryption at rest 
+    - treat terraform.tfstate as sensitive
+    - Encrypt terraform.tfstate at rest
+    - encrypt terraform.tfstate in transit with TLS 
+    - Perform audit on State access and operations
+    - S3 backend supports encryption at rest 
 
 - Remote Backend 
-  - remote backend stores terraform.tfstate and supports running operations on terraform cloud
-  - full remote operations include:
-    - executing terraform plan remotely on terraform cloud environment
-    - executing terraform apply remotely on terraform cloud environment
-    - with log streaming to back to a local terminal
+    - remote backend stores terraform.tfstate and supports running operations on terraform cloud
+    - full remote operations include:
+        - executing terraform plan remotely on terraform cloud environment
+        - executing terraform apply remotely on terraform cloud environment
+        - with log streaming to back to a local terminal
 
 ------------------------------------------------------------------------------------
 

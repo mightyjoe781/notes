@@ -13,30 +13,30 @@ EC2 allows you to deploy virtual servers within your AWS environment.
 Components
 
 - Amazon Machine Images (AMIs)
-  - templates of pre-configured EC2 Instance for quick setup
-  - you can create your own AMIs for deployments
-  - AWS Marketplace : market to buy from AMIs from trusted vendors like Citrix,etc
-  - Community AMIs
-  - Instances : Micro (small) , General Purpose, Compute Optimized, GPU, FPGA (genomics, financial), Memory Optimised Instances
+    - templates of pre-configured EC2 Instance for quick setup
+    - you can create your own AMIs for deployments
+    - AWS Marketplace : market to buy from AMIs from trusted vendors like Citrix,etc
+    - Community AMIs
+    - Instances : Micro (small) , General Purpose, Compute Optimized, GPU, FPGA (genomics, financial), Memory Optimised Instances
 - Instance Purchasing Options : 
-  - On-Demand : Launched at any time, usually short-term uses
-  - Reserved : set period of time purchase for reduced cost
-  - Scheduled : similar to reserved instance but recurring/ fixed schedule
-  - Spot : Bid for a unused EC2 compute resources, fluctuating price
-  - On-Demand Capacity Reservations : Reserve capacity based on platform, tenancy and area availability
+    - On-Demand : Launched at any time, usually short-term uses
+    - Reserved : set period of time purchase for reduced cost
+    - Scheduled : similar to reserved instance but recurring/ fixed schedule
+    - Spot : Bid for a unused EC2 compute resources, fluctuating price
+    - On-Demand Capacity Reservations : Reserve capacity based on platform, tenancy and area availability
 - Tenancy
-  - Shared Tenancy : EC2 is launched on any available host with required host, same host may be used by multiple customers.
-  - Dedicated Instances : hosted on hardware that no other customer can access
-  - Dedicated Hosts : Additional visibility and control on physical host
+    - Shared Tenancy : EC2 is launched on any available host with required host, same host may be used by multiple customers.
+    - Dedicated Instances : hosted on hardware that no other customer can access
+    - Dedicated Hosts : Additional visibility and control on physical host
 
 - User Data : allows to enter commands that will run during the first boot cycle of instance.
 - Storage Options : Purely varying option as per need
-  - Persistent Storage : Available by attaching EBS volume (network attached devices served by AWS network)
-  - Ephemeral Storage : Created by EC2 instances using local storage : Physically attached to underlying host. All data gets terminated if you stop or terminate the instance, while during reboots data remains intact.
+    - Persistent Storage : Available by attaching EBS volume (network attached devices served by AWS network)
+    - Ephemeral Storage : Created by EC2 instances using local storage : Physically attached to underlying host. All data gets terminated if you stop or terminate the instance, while during reboots data remains intact.
 
 - Security
-  - Security Group : Creates a security network rules which govern ingress/egress traffic.
-  - Public Key/ Private Key
+    - Security Group : Creates a security network rules which govern ingress/egress traffic.
+    - Public Key/ Private Key
 
 
 #### EC2 Autoscaling
@@ -84,12 +84,12 @@ Reflects on how Elastic Beanstalk provisions resources based on what the applica
 
 - A host manager is installed on every EC2 Instance
 - **Host manager** responsibilities includes
-  - Aid in deployment of application
-  - Collecting different metrices and different events from EC2 instances which can be reviewed from within the console, or vial AWS CLI or API
-  - It generates instance level events
-  - It monitors both the application log files and application server itself
-  - It can be used to patch instance components
-  - manages log files allowing them to be published to S3
+    - Aid in deployment of application
+    - Collecting different metrices and different events from EC2 instances which can be reviewed from within the console, or vial AWS CLI or API
+    - It generates instance level events
+    - It monitors both the application log files and application server itself
+    - It can be used to patch instance components
+    - manages log files allowing them to be published to S3
 
 ##### Worker Tier
 
@@ -114,23 +114,23 @@ Reflects on how Elastic Beanstalk provisions resources based on what the applica
 
 - Basic Health Reporting
 
-  - High level overview of how environment is performing
-  - resources will send metrices to Amazon CloudWatch in 5 minutes interval
-  - 4 colors within AWS Elastic Beanstalk dashboard that show the health status
-  - Every 10s ELB will send a health check request to every instance in the auto scaling group and wait for response to confirm health status
+    - High level overview of how environment is performing
+    - resources will send metrices to Amazon CloudWatch in 5 minutes interval
+    - 4 colors within AWS Elastic Beanstalk dashboard that show the health status
+    - Every 10s ELB will send a health check request to every instance in the auto scaling group and wait for response to confirm health status
 
-  - For single instance environments the health of instance is determined by its EC2 instance status check
-  - Elastic Beanstalk will ensure that in a web environment, an autoscaling group has a min of 1 instance running that is healthy
-  - Check to ensure the CNAME in Route 53 is redirected to correct ELB
-  - Check the security groups for EC2 instances that allows port 80 inbound
-  - In worker environments, check to ensure SQS queue being used is being polled every 3 minutes at a minimum.
+    - For single instance environments the health of instance is determined by its EC2 instance status check
+    - Elastic Beanstalk will ensure that in a web environment, an autoscaling group has a min of 1 instance running that is healthy
+    - Check to ensure the CNAME in Route 53 is redirected to correct ELB
+    - Check the security groups for EC2 instances that allows port 80 inbound
+    - In worker environments, check to ensure SQS queue being used is being polled every 3 minutes at a minimum.
 
 - Advanced Health Reporting
 
-  - Enhanced health monitoring display additional information to that over basic
-  - AMIs used for EC2 instances have a health agent installed and running
-  - Health Agent Captures additional Information about system metrices & logs
-  - Metrices can be sent to AWS CloudWatch as custom metrices, for additional cost
+    - Enhanced health monitoring display additional information to that over basic
+    - AMIs used for EC2 instances have a health agent installed and running
+    - Health Agent Captures additional Information about system metrices & logs
+    - Metrices can be sent to AWS CloudWatch as custom metrices, for additional cost
 
 ### AWS Lambda
 
@@ -166,9 +166,9 @@ An event source is an AWS service that produces the events that your Lambda func
 Event Source Mapping : configuration that links events source to Lambda function
 
 - Push-based service : mapping is maintained within event source
-  - requires specific access to allow your event source to invoke the function
+    - requires specific access to allow your event source to invoke the function
 - poll-based service : configuration mapping is held within lambda function
-  - Permission is required in the execution role policy
+    - Permission is required in the execution role policy
 
 Synchronous Invocation :
 

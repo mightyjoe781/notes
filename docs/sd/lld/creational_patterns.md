@@ -2,9 +2,9 @@
 
 * Design Pattern serves as typical solution to common problems in software design
 * All patterns can be categorised by their *intent*
-	* Creational Pattern - deals with object creation
-	* Structural Pattern - deals organisation of objects/classes
-	* Behavioural Patterns - deals with object/classes communications
+   	* Creational Pattern - deals with object creation
+   	* Structural Pattern - deals organisation of objects/classes
+   	* Behavioural Patterns - deals with object/classes communications
 
 ## Creational Pattern
 * Factory ⭐
@@ -264,9 +264,9 @@ When to Use Prototype Pattern ??
 
 * lets you ensure that a class has only one instance, while providing a global access point to this instance
 * Advantages
-  * **Prevents multiple instances** of a resource-heavy class.
-  * **Centralized access** to a shared instance across the application.
-  * **Ensures consistency** when only one instance should exist (e.g., one DB connection)
+    * **Prevents multiple instances** of a resource-heavy class.
+    * **Centralized access** to a shared instance across the application.
+    * **Ensures consistency** when only one instance should exist (e.g., one DB connection)
 * Examples Use Cases are one-root logger or one spark context, because spark initialization is costly.
 
 ```python

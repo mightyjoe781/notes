@@ -26,18 +26,18 @@ Not all languages provide same implementation of String for e.g. in C it may tak
 ## Basic Problem Categorization in String Processing
 
 * Searching and Matching
-  * Pattern Matching
-  * Exact Match
-  * Approximate Match
+    * Pattern Matching
+    * Exact Match
+    * Approximate Match
 * Transformation
-  * Reversal
-  * Substitution
+    * Reversal
+    * Substitution
 * Parsing and Tokenization
-  * Splitting
-  * Parsing
+    * Splitting
+    * Parsing
 * Dynamic String Construction
-  * Concatenation
-  * Building Substrings
+    * Concatenation
+    * Building Substrings
 * Structural Analysis
 
 ## C++/Python Strings
@@ -76,13 +76,13 @@ Not all languages provide same implementation of String for e.g. in C it may tak
 ### NOTES on String Efficiency
 
 * Avoid concatenation in loops
-  * in python `join()` is faster
-  * Use `ostringstream` or `stringstream ` in C++ for efficient appending
+    * in python `join()` is faster
+    * Use `ostringstream` or `stringstream ` in C++ for efficient appending
 * Use Substrings Sparingly
-  * python slices are efficient
-  * but avoid using `substr` in C++ to avoid copy overhead
+    * python slices are efficient
+    * but avoid using `substr` in C++ to avoid copy overhead
 * Precompute lengths
-  * repeated calls to `len` or `size` are unnecessary, better to cache in a variable.
+    * repeated calls to `len` or `size` are unnecessary, better to cache in a variable.
 
 ## Problems
 

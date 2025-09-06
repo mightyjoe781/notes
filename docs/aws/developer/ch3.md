@@ -69,13 +69,13 @@ Access to data is costly depending on how urgently you need the data : expedited
 #### Using Policies to Control Access
 
 - Identity Based Policies : Attached to IAM identity requiring access, using IAM permission policies, either in-line or managed.
-  - Assoiciated to a User or role or group
-  - We can control access with **conditions** [Resource](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html)
+    - Assoiciated to a User or role or group
+    - We can control access with **conditions** [Resource](https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html)
 - Resource Based Policy : policy is associated with a resource
-  - Forms : Access Control Lists and Bucket Policies
-  - Need to define who will be allowed/denied access
-  - Written in JSON or use AWS policy generator
-  - permissions are controlled with **principals**
+    - Forms : Access Control Lists and Bucket Policies
+    - Need to define who will be allowed/denied access
+    - Written in JSON or use AWS policy generator
+    - permissions are controlled with **principals**
 - IAM Policies are desired in case to centrally manage access and you have several roles to assign rather than 1 bucket/policy, Can control access for more than one service at a time. (max allowed policy size : 2Kb is size for users, 5Kb for groups, 10Kb for roles)
 - Bucket Policies : controls S3 buckets and its objects, Used to maintain security policies within S3 alone. Can grant cross-account access without having to create and assume roles using IAM (max allowed policy size : 20Kb)
 
@@ -105,21 +105,21 @@ Policy(JSON) is evaluated on three fold rules
 ### Amazon S3 Encryption
 
 - SSE-S3 (Server Side Encryption with S3 managed keys)
-  - minimal configuration, upload all data and S3 will manage everything
-  - AWS will manage all encryption keys
+    - minimal configuration, upload all data and S3 will manage everything
+    - AWS will manage all encryption keys
 - SSE-KMS (Server Side Encryption with KMS managed keys)
-  - allows S3 to use Key Management Service to generate data encryption keys
-  - gives greater flexibility of key diabled, rotate and apply access controls.
+    - allows S3 to use Key Management Service to generate data encryption keys
+    - gives greater flexibility of key diabled, rotate and apply access controls.
 - SSE-C (Server Side Encryption with customer provided keys)
-  - provide you master keys
-  - S3 will manage encryption
+    - provide you master keys
+    - S3 will manage encryption
 - CSE-KMS (Client Side Encryption with KMS managed keys)
-  - uses key management service to generate data encryption keys
-  - KMS is called upon viathe client, not S3
-  - encryption happends on client side and encrypted data send to S3
+    - uses key management service to generate data encryption keys
+    - KMS is called upon viathe client, not S3
+    - encryption happends on client side and encrypted data send to S3
 - CSE-C (Client Side Encryption with customer managed keys)
-  - utlise your keys
-  - use an AWS SDK client to encrypt data before sending to AWS for storage
+    - utlise your keys
+    - use an AWS SDK client to encrypt data before sending to AWS for storage
 
 ### Best Techniques to Optimize S3 Performance
 

@@ -12,18 +12,18 @@
 ## Application of Stack
 
 * Function Call Management
-  * Every function call is pushed to the *call* stack and popped when it returns
+    * Every function call is pushed to the *call* stack and popped when it returns
 * Expression Evaluation and Conversion
-  * Infix to Postfix/Prefix Conversion
-  * Postfix Expression Evaluation
+    * Infix to Postfix/Prefix Conversion
+    * Postfix Expression Evaluation
 * Undo Mechanisms in Editors and Apps
-  * Each operation is pushed onto a stack, `undo` just pops the last action
+    * Each operation is pushed onto a stack, `undo` just pops the last action
 * Syntax Parsing
-  * Used in Compilers to parse Expressions, Match Brackets, and More
+    * Used in Compilers to parse Expressions, Match Brackets, and More
 * Backtracking
-  * Pathfinding, Maze Solving, Puzzle Solving (DFS uses stack)
+    * Pathfinding, Maze Solving, Puzzle Solving (DFS uses stack)
 * Memory Management
-  * Stacks are use for **stack frame** in program execution
+    * Stacks are use for **stack frame** in program execution
 
 ## STL & Python Usage
 

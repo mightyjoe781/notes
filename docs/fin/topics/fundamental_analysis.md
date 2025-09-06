@@ -19,24 +19,24 @@ For example, companies will do channel stuffing i.e. send stuff to their distrib
 - P&L : Profit and Loss Statement is a financial statement that shows company’s revenues/sales, expenses, and profits/loss over a specific period.
   - 
 - B/S : Balancesheet is a financial statement that provides overview of a company’s financial position at a specific point in time. It consists of 3 main components:
-  - Assets : assets like cash, inventory, property, equipment and investments.
-  - Liability : represent’s company’s obligation like loan, accounts payable, and bonds.
-  - Equity (Shareholder’s Equity) : portion of company owned by shareholders. It is equal to Total Assets - Total Liability
+    - Assets : assets like cash, inventory, property, equipment and investments.
+    - Liability : represent’s company’s obligation like loan, accounts payable, and bonds.
+    - Equity (Shareholder’s Equity) : portion of company owned by shareholders. It is equal to Total Assets - Total Liability
 - Cash Flow Statement is a financial statement that records the cash generated and used by a company over a particular period. It is divided into three main sections:
-  - **Operating Activities:** Shows the cash flows from the primary business activities, like selling goods or providing services.
-  - **Investing Activities:** Illustrates the cash flows from investment-related activities, such as buying or selling assets or investments.
-  - **Financing Activities:** Covers the cash flows from financing operations, including raising capital, paying dividends, or issuing stock.
+    - **Operating Activities:** Shows the cash flows from the primary business activities, like selling goods or providing services.
+    - **Investing Activities:** Illustrates the cash flows from investment-related activities, such as buying or selling assets or investments.
+    - **Financing Activities:** Covers the cash flows from financing operations, including raising capital, paying dividends, or issuing stock.
 
 ### How these 3 parameters are connected
 
 - **Net Income (P&L) and Equity (B/S):**
-  - **Profit or Loss:** Net income increases equity, while a loss decreases it. The net income/loss gets carried over to the B/S and increases or decreases the total equity.
+    - **Profit or Loss:** Net income increases equity, while a loss decreases it. The net income/loss gets carried over to the B/S and increases or decreases the total equity.
 - **Cash (B/S) and Cash Flow Statement:**
-  - **Cash Position:** The cash balances from the B/S are also reflected in the Cash Flow statement's beginning and ending cash balances. The cash flow statement provides a detailed account of the changes in cash due to various activities, connecting the cash position at the beginning and the end of the period.
+    - **Cash Position:** The cash balances from the B/S are also reflected in the Cash Flow statement's beginning and ending cash balances. The cash flow statement provides a detailed account of the changes in cash due to various activities, connecting the cash position at the beginning and the end of the period.
 - **Working Capital and Operating Activities:**
-  - **Working Capital:** The working capital, calculated as current assets minus current liabilities on the B/S, affects the company's operating cash flow in the Cash Flow Statement. The management of working capital impacts the company's ability to generate operational cash flows.
+    - **Working Capital:** The working capital, calculated as current assets minus current liabilities on the B/S, affects the company's operating cash flow in the Cash Flow Statement. The management of working capital impacts the company's ability to generate operational cash flows.
 - **Investing and Financing Activities:**
-  - **Investment and Financing Decisions:** Investments in assets or divestitures directly impact the balance sheet. The cash flow statement explains the sources and uses of cash due to investing and financing activities, connecting it to the balance sheet items.
+    - **Investment and Financing Decisions:** Investments in assets or divestitures directly impact the balance sheet. The cash flow statement explains the sources and uses of cash due to investing and financing activities, connecting it to the balance sheet items.
 
 These three parameters are connected and should be looked at together.
 

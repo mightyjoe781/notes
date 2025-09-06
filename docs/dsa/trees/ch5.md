@@ -8,8 +8,8 @@ Range Updates
 
 * If the update range is within a single block, apply updates directly to elements and rebuild that block
 * If the update range spans multiple blocks:
-  * Update partial blocks at the edges directly.
-  * For full blocks in between, store lazy updates and update block minimum directly.
+    * Update partial blocks at the edges directly.
+    * For full blocks in between, store lazy updates and update block minimum directly.
 
 Range Minimum Query
 

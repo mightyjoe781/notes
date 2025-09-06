@@ -5,23 +5,23 @@
 - Especially useful in subset problems, Knapsack, XOR-sum
 - We split the input into two halves, solving independently, and combining results
 - When to Apply MITM ?
-  - While dealing with subset or permutation problems where n is too large for brute force
-  - There is **no polynomial-time algorithm**, but a smarter brute-force can be done
-  - Splitting data leads to **independent subproblems**
+    - While dealing with subset or permutation problems where n is too large for brute force
+    - There is **no polynomial-time algorithm**, but a smarter brute-force can be done
+    - Splitting data leads to **independent subproblems**
 
 - Steps
-  - Split the problem in two halves
-  - Enumerate all solution for both halves
-  - Combine both using binary search, hashing or two-pointer techniques
+    - Split the problem in two halves
+    - Enumerate all solution for both halves
+    - Combine both using binary search, hashing or two-pointer techniques
 
 ## Subset Sum Problem
 
 - given $n \le40$ elements and target sum $S$
 - Naive approach of enumeration $2^n$ is too slow
 - MITM
-  - split into two halves A and B
-  - Generate subset sums of both halves : sumA , sumB
-  - for each sum in sumA, check if `target-sum` exists in sumB (using binary_search or hashing)
+    - split into two halves A and B
+    - Generate subset sums of both halves : sumA , sumB
+    - for each sum in sumA, check if `target-sum` exists in sumB (using binary_search or hashing)
 - Time : $O(2^{\frac{n}{2}}) * \log(2^{\frac{n}{2}})$
 
 ````python
@@ -56,10 +56,10 @@ def subset_sum(arr, target):
 
 * Given an array `arr`, determine if it can be partitioned into two subsets with equal sum
 * MITM
-  * total sum must be even
-  * split array into two halves
-  * Generate all subset sums for each half
-  * Use hashing/binary search to check if any combination sums to `total_sum//2`
+    * total sum must be even
+    * split array into two halves
+    * Generate all subset sums for each half
+    * Use hashing/binary search to check if any combination sums to `total_sum//2`
 
 ````python
 def can_partition(arr):
@@ -98,9 +98,9 @@ def can_partition(arr):
 - MITM works well for XOR Problems where DP or naive recursion is too slow
 - Problem: Count number of subsets where XOR = target
 - Steps
-  - Split Array
-  - Generate all XORs of subsets in both halves
-  - Count how many `a xor b == target` using hashmap for one side
+    - Split Array
+    - Generate all XORs of subsets in both halves
+    - Count how many `a xor b == target` using hashmap for one side
 
 ````python
 from collections import Counter
@@ -133,12 +133,12 @@ def count_subsets_xor(arr, target):
 - Given n items (where n is large) each with a weight `w[i]` and value `v[i]`, and a total capacity `W`, find the max total value we can obtain without exceeding the weight `W`
 - Standard DP : $O(n*W)$, which could be quite large when either W or `n` is large
 - MITM Steps
-  - Split into two halves A and B
-  - Generate all subsets of each half with
-    - total weight `w`
-    - total value `v`
-  - For one half, **prune dominated pairs**  (where a subset has both higher weight and lower value)
-  - For each subset in one half, find best possible complement in other (with total weight <= W) using binary search
+    - Split into two halves A and B
+    - Generate all subsets of each half with
+        - total weight `w`
+        - total value `v`
+    - For one half, **prune dominated pairs**  (where a subset has both higher weight and lower value)
+    - For each subset in one half, find best possible complement in other (with total weight <= W) using binary search
 
 ````python
 from bisect import bisect_right
@@ -196,8 +196,8 @@ Double Binary Search is used when the **search space is 2D**, or when we must bi
 Classical Problems
 
 * Minimum Maximum Distance : Given n points, place k stations such that the **maximum distance** from any point to a station is minimized. 
-  * Involves two Binary Search, one of the distance `D`
-  * for each `D`, binary search or greedy check if `k` police station can be placed
+    * Involves two Binary Search, one of the distance `D`
+    * for each `D`, binary search or greedy check if `k` police station can be placed
 * Binary Search in Sorted Matrix : Binary Search in two dimensions, could be reduced to one dimension
 * Aggressive Cows/Router Placement
 
@@ -206,9 +206,9 @@ Classical Problems
 A* Search is an optimization over Dijkstra’s Algorithm using **heuristics** to guide search. It is used to **speed up shortest-path search** (like in pathfinding).
 
 - `f(n) = g(n) + h(n)`
-  - `g(n)` = cost from start to node `n`
-  - `h(n)` = estimated cost from node n to goal (heuristic)
-  - A* selects the node with smallest `f(n)`
+    - `g(n)` = cost from start to node `n`
+    - `h(n)` = estimated cost from node n to goal (heuristic)
+    - A* selects the node with smallest `f(n)`
 
 - When using MITM in **graph traversal** or **state space search**, especially when both forward and backward searches are possible, **bidirectional A\*** is a powerful optimization.
 

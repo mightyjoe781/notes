@@ -11,8 +11,8 @@
 ### Adapter ⭐
 * allows objects with incompatible interfaces to collaborate
 * usecases
-  * helps integrate 3rd-party library without modifying their code
-  * makes incompatible classes work together
+    * helps integrate 3rd-party library without modifying their code
+    * makes incompatible classes work together
 ```python
 # without adapter
 class MP3Player:
@@ -52,15 +52,15 @@ player.play("video.mp4")  # ✅ Plays after conversion
 ### Bridge
 * **decouples an abstraction from its implementation**, allowing them to evolve **independently**
 * When to Use
-  * **When you want to avoid a rigid class hierarchy** – Prevents class explosion due to multiple variations.
-  * **When you need to support multiple implementations** – Example: Different platforms (Windows, Linux, macOS).
-  * **When abstraction and implementation should vary independently** – Example: Devices and their remote controls.
+    * **When you want to avoid a rigid class hierarchy** – Prevents class explosion due to multiple variations.
+    * **When you need to support multiple implementations** – Example: Different platforms (Windows, Linux, macOS).
+    * **When abstraction and implementation should vary independently** – Example: Devices and their remote controls.
 
 * Key Components
-  * **Abstraction** – Defines a high-level interface (e.g., RemoteControl).
-  * **Refined Abstraction** – Extends abstraction with additional behaviour.
-  * **Implementation Interface** – Defines the low-level details (e.g., Device).
-  * **Concrete Implementations** – Provide specific implementations.
+    * **Abstraction** – Defines a high-level interface (e.g., RemoteControl).
+    * **Refined Abstraction** – Extends abstraction with additional behaviour.
+    * **Implementation Interface** – Defines the low-level details (e.g., Device).
+    * **Concrete Implementations** – Provide specific implementations.
 ```python
 from abc import ABC, abstractmethod
 
@@ -113,11 +113,11 @@ radio_remote.toggle_power() # 📻 Radio is now OFF
 ### Decorator ⭐
 * lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
 * Usage
-  * logging, security, caching & UI improvements
+    * logging, security, caching & UI improvements
 * why use it ?
-  * **Extends functionality** without modifying the original class.
-  * **Follows Open-Closed Principle** (open for extension, closed for modification).
-  * **Allows multiple decorators** to be combined flexibly.
+    * **Extends functionality** without modifying the original class.
+    * **Follows Open-Closed Principle** (open for extension, closed for modification).
+    * **Allows multiple decorators** to be combined flexibly.
 ```python
 # without Decorator, adding milk to coffee is cumbersome
 class Coffee:
@@ -195,11 +195,11 @@ print(coffee.description(), "->", coffee.cost())  # Basic Coffee + Milk + Sugar 
 ### Proxy ⭐
 * lets you provide a substitute or placeholder for another object. A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.
 * Advantages
-  * Lazy Initialization - Virtual Proxy
-  * Access Proxy (Control) - Restriction to access original object
-  * Logging/monitoring Proxy - record requests for analytics and debugging
-  * Caching Proxy - store results to avoid recomputation
-  * Remote Proxy - Interface for calling methods on a remote object
+    * Lazy Initialization - Virtual Proxy
+    * Access Proxy (Control) - Restriction to access original object
+    * Logging/monitoring Proxy - record requests for analytics and debugging
+    * Caching Proxy - store results to avoid recomputation
+    * Remote Proxy - Interface for calling methods on a remote object
 * Virtual Proxy
 ```python
 class RealImage:

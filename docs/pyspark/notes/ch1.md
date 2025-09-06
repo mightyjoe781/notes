@@ -8,7 +8,7 @@ Spark supports multiple programming languages (Python, Java, Scala, and R)
 
 - **Unified** : Spark’s key goal is to offer a unified platform for writing big data applications. Spark supports wide range of data analytics tasks, ranging from simple data loading and SQL queries to ML and streaming computation, over the same computing engine and with a *consistent and composable* set of APIs.
 - **Computing Engine** : Spark carefully limits its scope to a computing engine. Spark handles loading data from storage systems and performing computation on it, not permanent storage as the end itself. This allows using it with variety of storage systems like **Azure Storage**, S3, distributed file systems such as **Apache Hadoop**, Key-Value stores like Cassandra and message buses like **Apache Kafka**. Moving data is expensive that is why Spark focuses on performing computation over the data, no matter where it resides.
-  - It differs from Apache Hadoop in the way that Hadoop stores data as well as does computation(MapReduce) which were tightly coupled.
+    - It differs from Apache Hadoop in the way that Hadoop stores data as well as does computation(MapReduce) which were tightly coupled.
 
 - **Libraries** : which builds on its design as a unified engine to provide a unified API for common data analysis tasks. Spark supports both standard libraries that ship with the engine as well as wide array of external libraries published as third-party packages by open-source communities. Spark includes libraries for SQL and structured data (Spark SQL), machine learning (MLlib), stream processing (Spark Streaming and new Structured Streaming), and graph analytics (GraphX).
 

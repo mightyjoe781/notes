@@ -15,8 +15,8 @@
 ## The Docker Architecture
 
 - Docker uses a client-server model
-  - Server : Docker Daemon (Manages Object (Network/Container/Image/..))
-  - Client : Docker CLI
+    - Server : Docker Daemon (Manages Object (Network/Container/Image/..))
+    - Client : Docker CLI
 
 |                High Level Docker Architecture                |
 | :----------------------------------------------------------: |
@@ -28,8 +28,8 @@
 
 - Containers is not a new concept, Docker just made it popular, Hypescale is the defacto standard
 - Docker Popularity
-  - Market Demand
-  - Well Established Technology
+    - Market Demand
+    - Well Established Technology
 
 Docker utilises several features of Linux Kernel Namespaces to provide functionality. Docker supports several features :
 

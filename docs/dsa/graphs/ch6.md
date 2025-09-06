@@ -5,11 +5,11 @@
 * Running DFS on a connected graph generates a DFS spanning tree (or spanning forest if the graph is disconnected). With the help of one more vertex state: EXPLORED = 2 (visited but not yet completed) on top of VISITED (visited and completed), 
 
 * we can classify graph edges into three types:
-  * Tree edge: The edge traversed by DFS, i.e. an edge from a vertex currently with state: EXPLORED to a vertex with state: UNVISITED.
+    * Tree edge: The edge traversed by DFS, i.e. an edge from a vertex currently with state: EXPLORED to a vertex with state: UNVISITED.
 
-  * Back edge: Edge that is part of a cycle, i.e. an edge from a vertex currently with state: EXPLORED to a vertex with state: EXPLORED too. This is an important application of this algorithm. Note that we usually do not count bi-directional edges as having a ‘cycle’ (We need to remember dfs_parent to distinguish this, see the code below).
+    * Back edge: Edge that is part of a cycle, i.e. an edge from a vertex currently with state: EXPLORED to a vertex with state: EXPLORED too. This is an important application of this algorithm. Note that we usually do not count bi-directional edges as having a ‘cycle’ (We need to remember dfs_parent to distinguish this, see the code below).
 
-  * Forward/Cross edges from vertex with state: EXPLORED to vertex with state: VISITED.
+    * Forward/Cross edges from vertex with state: EXPLORED to vertex with state: VISITED.
 
 
 ![image-20241224185858479](./ch6.assets/image-20241224185858479.png)
@@ -229,8 +229,8 @@ Use Cases:
 Properties:
 
 * **Steps:** Two-pass DFS:
-  * First pass: Record finishing times of nodes.
-  * Second pass: Perform DFS on the reversed graph in decreasing order of finishing times.
+    * First pass: Record finishing times of nodes.
+    * Second pass: Perform DFS on the reversed graph in decreasing order of finishing times.
 * Operates on **directed graphs**.
 * **O(V + E):** First DFS, graph reversal, and second DFS each take linear time.
 

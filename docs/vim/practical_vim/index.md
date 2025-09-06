@@ -229,10 +229,10 @@ TIP 73 : Tune the Case Sensitivity of Search Patterns
 TIP 74 : Use the \v Pattern Switch for Regex Searches
 
 - Find Hex Colors with Magic Search
-  - `/#\([0-9a-fA-F]\{6}\|[0-9a-fA-F]\{3}\)`
-  - `/\v#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})` (very magic, similar to perl, python or Ruby)
-  - Using Hex Character class further reduces expression. `/\v#(\x{6}|\x{3})`
-  - Very Magic `\v` matches all characters literally except `_`.
+    - `/#\([0-9a-fA-F]\{6}\|[0-9a-fA-F]\{3}\)`
+    - `/\v#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})` (very magic, similar to perl, python or Ruby)
+    - Using Hex Character class further reduces expression. `/\v#(\x{6}|\x{3})`
+    - Very Magic `\v` matches all characters literally except `_`.
 
 TIP 75 : Use the `\V` Literal Switch for Verbatim Search.
 
@@ -388,8 +388,8 @@ TIP 102 : Meet ctags
 
 - Anatomy of a tags File
 
-  - Keywords Are Addressed by Pattern, Not by Line Number
-  - Keywords Are Tagged with Metadata
+    - Keywords Are Addressed by Pattern, Not by Line Number
+    - Keywords Are Tagged with Metadata
 
 TIP 103 : Configure Vim to work with ctags
 

@@ -2,11 +2,11 @@
 
 - Many modern applications are *data-intensive* rather than *compute-intensive*.
 - A data-intensive application is typically built around standard building blocks providing common needed functionality like
-  - Store data so that they, or another application can find it later (databases)
-  - Remember the result of expensive operation to speed up reads (caches)
-  - allow users to search data by keyword or filter in various ways (search indexes)
-  - send a message to another process, to be handled asynchronously (stream processing)
-  - periodically crunch a large amount of accumulated data (batch processing)
+    - Store data so that they, or another application can find it later (databases)
+    - Remember the result of expensive operation to speed up reads (caches)
+    - allow users to search data by keyword or filter in various ways (search indexes)
+    - send a message to another process, to be handled asynchronously (stream processing)
+    - periodically crunch a large amount of accumulated data (batch processing)
 - If above building blocks sound obvious because these *data systems* are successful abstraction.
 
 ## Thinking about Data Systems
@@ -32,10 +32,10 @@ External factors influencing the design process include:
 ## Reliability
 
 - In a typical software setting, reliability involves ensuring that:
-  - The application performs its expected functionality.
-  - The application can tolerate user mistakes and unexpected usage.
-  - The performance is good under expected load and data volumes.
-  - The system prevents unauthorized access and abuse.
+    - The application performs its expected functionality.
+    - The application can tolerate user mistakes and unexpected usage.
+    - The performance is good under expected load and data volumes.
+    - The system prevents unauthorized access and abuse.
 - Faults are issues that can occur within a system. A fault-tolerant or resilient system can cope with these issues, though this doesn't guarantee handling every possible fault.
 - Failure occurs when the entire system stops working, whereas faults are deviations in individual components from their specifications. Since eliminating all faults is impossible, designing fault-tolerant systems is usually best.
 - One approach to designing fault-tolerant systems is to create deliberate faults and observe the system's reactions, as exemplified by Netflix's Chaos Monkey.
@@ -54,29 +54,29 @@ External factors influencing the design process include:
 - Hardware faults are generally random and independent (one disk failture is not related to other), some weak correlation might exists due to environmental factors like temperature
 - Systematic error are harder to predict and correlated across nodes causing widespread system failures. Examples include software bugs (linux leap year bug), resource-hogging processes, dependency issues, and cascading failures.
 - There are no quick fixes, but several small strategies can help:
-  - Careful assumption and interaction analysis, thorough testing, process isolation, crash recovery, and continuous monitoring.
-  - Implement self-checks to verify system guarantees and raise alerts for discrepancies.
+    - Careful assumption and interaction analysis, thorough testing, process isolation, crash recovery, and continuous monitoring.
+    - Implement self-checks to verify system guarantees and raise alerts for discrepancies.
 
 #### Human Erros
 
 - Humans are prone to errors; configuration mistakes by operators are a major cause of outages, more so than hardware faults.
 - **Strategies for Reliable Systems**:
-  - **Error Minimization**: Design systems with user-friendly abstractions, APIs, and admin interfaces that encourage correct usage.
-  - **Decoupling**: Separate high-risk actions from critical operations; provide sandbox environments for safe experimentation with real data.
-  - **Thorough Testing**: Use comprehensive automated and manual testing, from unit tests to integration tests, to cover rare corner cases.
-  - **Recovery Mechanisms**: Ensure quick recovery from errors by enabling fast rollbacks, gradual code deployment, and tools for data recomputation.
-  - **Detailed Monitoring**: Implement performance metrics and error rate monitoring to detect early warning signals and diagnose issues.
-  - **Management and Training**: Apply good management practices and training to improve human reliability.
+    - **Error Minimization**: Design systems with user-friendly abstractions, APIs, and admin interfaces that encourage correct usage.
+    - **Decoupling**: Separate high-risk actions from critical operations; provide sandbox environments for safe experimentation with real data.
+    - **Thorough Testing**: Use comprehensive automated and manual testing, from unit tests to integration tests, to cover rare corner cases.
+    - **Recovery Mechanisms**: Ensure quick recovery from errors by enabling fast rollbacks, gradual code deployment, and tools for data recomputation.
+    - **Detailed Monitoring**: Implement performance metrics and error rate monitoring to detect early warning signals and diagnose issues.
+    - **Management and Training**: Apply good management practices and training to improve human reliability.
 
 ### How important is Reliability
 
 - **Reliability Beyond Critical Systems**:
-  - Reliable operation is important for all applications, not just critical ones like nuclear power or air traffic control.
-  - Business application bugs can lead to lost productivity, legal issues, and significant revenue losses during outages.
-  - Users depend on applications to safely store important data; losing such data can be devastating.
+    - Reliable operation is important for all applications, not just critical ones like nuclear power or air traffic control.
+    - Business application bugs can lead to lost productivity, legal issues, and significant revenue losses during outages.
+    - Users depend on applications to safely store important data; losing such data can be devastating.
 - **Balancing Reliability and Costs**:
-  - Sometimes, reliability might be sacrificed to reduce development or operational costs, such as for prototype products or low-margin services.
-  - It's crucial to be conscious and deliberate about when and why reliability is being compromised.
+    - Sometimes, reliability might be sacrificed to reduce development or operational costs, such as for prototype products or low-margin services.
+    - It's crucial to be conscious and deliberate about when and why reliability is being compromised.
 
 ## Scalability
 

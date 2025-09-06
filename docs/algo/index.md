@@ -31,13 +31,13 @@
 - [Graph Search]()
 
 
-   - [Digraphs and DAGs]()
+    - [Digraphs and DAGs]()
 
-   - [MSTs]()
+    - [MSTs]()
 
-   - [Shortest Paths]()
+    - [Shortest Paths]()
 
-   - [Network Flows]()
+    - [Network Flows]()
 
 
 5. **Problem Solving Paradigm**
