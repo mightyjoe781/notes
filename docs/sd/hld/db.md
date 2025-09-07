@@ -107,10 +107,7 @@ History of Relational Databases
 * Some Replication Lag
 * Faster Writes
 
-| Difference between Synchronous & Asynchronous Replication    |
-| ------------------------------------------------------------ |
-| ![image-20250429130423029](./db.assets/image-20250429130423029.png) |
-
+![](assets/Pasted%20image%2020250906181306.png)
 ## Sharding and Partitioning
 
 * Since one node cannot handle the data/load, we can split it into muultiple exlusive subsets.

@@ -1,6 +1,4 @@
-
-
-# Notes
+# HLD Notes
 
 
 ## Basics
@@ -15,11 +13,11 @@
   
 ## Real-world System Designs
 
-- Designing an E-commerce Product Listing
-- Designing an API Rate Limiter
-- Designing and Scaling Notification Systems
-- Designing a Realtime Abuse Detection System
-- Designing a Tinder-like Feed
+- [Designing an E-commerce Product Listing](./problems/ecommerce.md)
+- [Designing an API Rate Limiter](./problems/rate_limiter.md)
+- [Designing and Scaling Notification Systems](./problems/notification_system.md)
+- [Designing a Realtime Abuse Detection System](./problems/abuse_masker.md)
+- [Designing a Tinder-like Feed](./problems/tinder_feed.md)
 - Designing Twitter Trends
 - Designing a URL Shortener
 - Designing GitHub Gists / Pastebin
