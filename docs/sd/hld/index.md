@@ -18,7 +18,7 @@
 - [Designing and Scaling Notification Systems](./problems/notification_system.md)
 - [Designing a Realtime Abuse Detection System](./problems/abuse_masker.md)
 - [Designing a Tinder-like Feed](./problems/tinder_feed.md)
-- Designing Twitter Trends
+- [Designing Twitter Trends](./problems/twitter_trends.md)
 - Designing a URL Shortener
 - Designing GitHub Gists / Pastebin
 - Designing a Fraud Detection System
