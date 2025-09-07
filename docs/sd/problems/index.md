@@ -1,8 +1,20 @@
 # System Design Problems
 
 
+Introductory Problems
+* Designing an E-commerce Product Listing
+- Designing an API Rate Limiter
+- Designing and Scaling Notification Systems
+- Designing a Realtime Abuse Detection System
+- Designing a Tinder-like Feed
+- Designing Twitter Trends
+- Designing a URL Shortener
+- Designing GitHub Gists / Pastebin
+- Designing a Fraud Detection System
+- Designing a Recommendation Engine
+- Designing a Web Crawler
 
-
+Advanced Comprehensive Problems Discussions
 
 * URL Shortner
 * Instagram Feed
