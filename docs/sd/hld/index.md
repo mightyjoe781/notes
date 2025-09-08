@@ -13,17 +13,17 @@
   
 ## Real-world System Designs
 
-- [Designing an E-commerce Product Listing](./problems/ecommerce.md)
-- [Designing an API Rate Limiter](./problems/rate_limiter.md)
-- [Designing and Scaling Notification Systems](./problems/notification_system.md)
+- [Designing an E-commerce Product Listing](problems/ecommerce.md)
+- [Designing an API Rate Limiter](problems/rate_limiter.md)
+- [Designing and Scaling Notification Systems](problems/notification_system.md)
 - [Designing a Realtime Abuse Detection System](./problems/abuse_masker.md)
-- [Designing a Tinder-like Feed](./problems/tinder_feed.md)
-- [Designing Twitter Trends](./problems/twitter_trends.md)
-- Designing a URL Shortener
-- Designing GitHub Gists / Pastebin
-- Designing a Fraud Detection System
-- Designing a Recommendation Engine
-- Designing a Web Crawler
+- [Designing a Tinder-like Feed](problems/tinder_feed.md)
+- [Designing Twitter Trends](problems/twitter_trends.md)
+- [Designing a URL Shortener](problems/url_shortener.md)
+- [Designing GitHub Gists / Pastebin](./problems/pastebin.md)
+- [Designing a Fraud Detection System](problems/fraud_detection.md)
+- [Designing a Recommendation Engine](problems/recommendation_engine.md)
+- [Designing a Web Crawler](problems/web_crawler.md)
 
 ## Advanced Topics
 
