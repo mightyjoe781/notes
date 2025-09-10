@@ -27,13 +27,11 @@
 
 ## Advanced Topics
 
-- Foundational Concepts
-    - Foundational Topics in System Design - I
-    - Foundational Topics in System Design - II
+- [Foundational Concepts](./advanced/foundational_1)
 
 - Deep Dive into Databases
-    - Relational Databases (Advanced)
-    - Non-Relational Databases (Advanced)
+    - [Relational Databases](./advanced/relational_database.md)
+    - [Non-Relational Databases](./advanced/non_relational_database.md)
 
 - Distributed Systems
     - Distributed Systems [Storm Overview]
