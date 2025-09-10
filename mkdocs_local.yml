@@ -13,6 +13,7 @@ extra_css:
   - src/css/friendly.css
   - src/css/theme.css
 markdown_extensions:
+  admonition:
   mdx_math:
     enable_dollar_delimiter: True #for use of inline $..$
   toc :
@@ -38,6 +39,7 @@ markdown_extensions:
     pygments_lang_class: true
   pymdownx.inlinehilite:
   pymdownx.snippets:
+  pymdownx.details:
   pymdownx.superfences:
   pymdownx.smartsymbols:
   pymdownx.superfences:
