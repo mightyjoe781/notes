@@ -29,7 +29,7 @@
 
 - [Foundational Concepts](./advanced/foundational_1)
 
-- Deep Dive into Databases
+- Databases
     - [Relational Databases](./advanced/relational_database.md)
     - [Non-Relational Databases](./advanced/non_relational_database.md)
 
@@ -56,3 +56,5 @@
     - Adhoc System Design
     - Algorithmic System Design - I
     - Algorithmic System Design - II
+
+Resources :

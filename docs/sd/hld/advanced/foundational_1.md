@@ -357,3 +357,8 @@ Realtime interactions
 - on twitter, like count updates without refresh
 - on medium, one article clapped, other readers should see it in realtime
 - instagram live interaction
+
+
+Exercises:
+
+- https://github.com/Addi-11/system-design-excercises?tab=readme-ov-file
