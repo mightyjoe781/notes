@@ -209,3 +209,7 @@ When A sends a message on C3
 
 ![](assets/Pasted%20image%2020250911115245.png)
 
+Further Reading
+
+- encryption in chat
+- web transport
