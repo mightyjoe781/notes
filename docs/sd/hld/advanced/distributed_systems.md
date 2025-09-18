@@ -113,9 +113,83 @@ Read this Paper : Maglev : A fast and reliable software load balancer
 
 ## Remote and Distributed Locks
 
+Remote Locks: Locks managed by a central machine lock Manager.
+
+![](assets/Pasted%20image%2020250913133352.png)
+
+The 3 machines co-ordinate through a central lock manager.
+
+* Multiple threads synchronise through *mutexes & semaphores*
+* Multiple processes synchronise through *Disk* (Interesting Example: `apt-get upgrade` cannot be run twice concurrently)
+* Multiple machines synchronise through *Remote Locks*
+
 ## Synchronizing Consumers
+
+To understand remote locks better, lets synchronise *multiple consumers* over an *unprotected remote queue*
+
+![](assets/Pasted%20image%2020250913134116.png)
+
+Queue is remote & unprotected. We want one consumer to make call to the queue at a time. We need to make sure all consumer co-ordinate via shared lock.
+
+#### Consumers pseudocode
+
+```
+ACQ_LOCK()
+    READ_MSG()
+REL_LOCK()
+```
+
+All consumers wait on `ACQ_LOCK()`, while one of them `READ_MSG()`.
+Out requirements from the lock manager ?
+
+- Atomic Operations ~ so that two machines do not `ACQ_LOCK()`
+- Automatic Expiration ~ avoid perpetual locking
+
+So which DB : *redis*(popular choice because in-mem(fast)) , *dynamo_db*
+
+*Implementation* : Set the key in *redis* that says which consumer holds the lock and can read the message.
+e.g. *queue7:consumer2(ex: 300)* : lock held by consumer 2 for expirations of 300s.
+
+![](assets/Pasted%20image%2020250913135153.png)
+
+```python
+
+def acquire_lock(q):
+    consumer_id = get_my_id()
+    while True:
+        v = redis.setnx(q, consumer_id, ex=300) # set non-existent ~ atomic
+        if v == 1: return
+        else: continue
+        
+
+def release_lock(q):
+    # validate ownership of lock, before delete
+    consumer_id = get_my_id()
+    v = redis.get(q)
+    if v == consumer_id: redis.delete(q) 
+    # Use : 'Eval' ~ Executed Atomically using Lua, because when entering if condition, lock can be acquired by other consumer and you delete their lock.
+```
+
+NOTE: This one redis instance is not horizontally scalable.
+Where else do you see this in action ? Mongo transaction uses remote locks on involved rows.
+Distributed Locks (*Redlock*) ~ Distributed locks with Redis.
+
+Idea : What we did in remote lock, just distribute it across multiple instances of redis.
+5 master nodes of Redis, No replication, all independent.
+Acquire lock :
+
+- client goes through 5 nodes, trying to *ACQ_LOCK()* with timeout
+- if lock acquired on > 50% then *ACQUIRED*
+- else release the lock on acquired instances and return *FAILED*
+
+Distributed Locks are used in systems which demand correctness not the high throughput, here its a simple tradeoff.
+
+But why are we doing this ? *We are doing this to avoid single-point of failure(SPOF)*
 
 Exercises
 
-- Implement a load balancer with tunable algorithm locally.
+- Implement a load balancer with tuneable algorithm locally.
 - Read this Paper : Maglev : A fast and reliable software load balancer
+- Read about redis : *Redlock* : Martin Kleppmann & implementation blog
+- Read on Chubby Lock: Lock service for loosely coupled distributed systems
+- https://arpitbhayani.me/blogs > 15 blogs on distributed systems & distributed transactions.
