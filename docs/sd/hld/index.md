@@ -34,23 +34,23 @@
     - [Non-Relational Databases](./advanced/non_relational_database.md)
 
 - Distributed Systems
-    - Distributed Systems [Storm Overview]
-    - Distributed ID Generators
+    - [Distributed Systems](./advanced/distributed_systems.md)
+    - [Distributed ID Generators](./advanced/distributed_id_generators.md)
+
+- Building Large-Scale Social Networks
+    * [Building Social Network](./advanced/social_network.md)
+    * [Building Social Network 2](./advanced/social_network_2.md)
 
 - Storage Systems
-    - Storage Engines - I
-    - Storage Engines - II
+    - [Storage Engines - I](./advanced/storage_engines.md)
+    - [Storage Engines - II](./advanced/storage_engines_2.md)
 
 - High Throughput System Design
-    - High Throughput Systems - I
-    - High Throughput Systems - II
+    - [High Throughput Systems - I](./advanced/high_throughput.md)
+    - [High Throughput Systems - II](./advanced/high_throughput_2.md)
 
 - Information Retrieval Systems
     - Building Search Engines and Retrieval Systems
-
-- Building Large-Scale Social Networks
-    - Building a Social Network - I
-    - Building a Social Network - II
 
 - Advanced System Design Techniques
     - Adhoc System Design
