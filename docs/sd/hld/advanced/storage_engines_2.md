@@ -206,7 +206,7 @@ GET(k) -> pointed queries
 
 limitation : index to fit in memory
 
-When file grows too big ?
+#### When file grows too big ?
 
 Solution : rotate the file every *t* bytes.
 We create new file and old file is made *immutable*
@@ -214,7 +214,7 @@ We create new file and old file is made *immutable*
 
 ![](assets/Pasted%20image%2020250917233227.png)
 
-#### Changes in our 
+#### Changes in our in-memory index
 
 ![](assets/Pasted%20image%2020250917233700.png)
 
