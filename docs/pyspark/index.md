@@ -56,4 +56,4 @@ For Running Machine Learning Workloads on Spark. There is a dedicated guide for 
     - [Ecosystem and Community](notes/ch33.md)
 ## Books
 
-- [Learning Spark 2.0](notes/learning-spark-2.0.pdf)
+- [Learning Spark 2.0]

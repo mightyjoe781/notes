@@ -27,7 +27,7 @@
 
 ## Advanced Topics
 
-- [Foundational Concepts](./advanced/foundational_1)
+- [Foundational Concepts](./advanced/foundational_1.md)
     - Online Offline Indicator
 
 - Databases

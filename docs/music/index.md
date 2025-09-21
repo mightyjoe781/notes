@@ -12,7 +12,7 @@ PS: I do love to talk about music, so you might find a lot of content where I'm 
 
 ## Guitar
 
-### [Theory](guitar/theory.md)
+### [Theory]
 
 0. A helpful message :)
 

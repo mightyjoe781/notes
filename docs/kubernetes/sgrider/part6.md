@@ -432,7 +432,7 @@ spec:
 
 #### Google Cloud Cleanup
 
-[Scroll UP](#Don’t Forge to Cleanup !)
+Don’t Forge to Cleanup !
 
 #### Cleaning Up Local Setup
 
