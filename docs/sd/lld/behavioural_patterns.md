@@ -373,7 +373,7 @@ for _ in range(4):
 * When to use
     * **Multiple algorithms for the same task** – Sorting, Compression.
     * **Reducing conditional logic (if-else/switch)** – Payment methods, Authentication.
-    * **Behavior modification at runtime** – Game difficulty levels.
+    * **Behaviour modification at runtime** – Game difficulty levels.
 
 * Key Components
     * **Context** – Maintains a reference to a strategy object.
