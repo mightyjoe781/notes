@@ -16,28 +16,29 @@
 #### Scalability Patterns
 
 - [Scaling Patterns](core/scalability.md)
-
-
 #### Reliability & Availability
 
 - [Fault Tolerance](reliability/fault_tolerance.md)
 - [High Availability Patterns](reliability/availability_patterns.md)
 - [Monitoring & Observability](reliability/monitoring.md)
+#### System Design Interview Patterns
 
+- [Problem Clarification](interview_patterns/problem_clarification.md)
+- [High-Level Design](interview_patterns/high_level.md)
+- [Detailed Design](interview_patterns/detailed_design.md)
+- [Scale & Optimize](interview_patterns/scale_and_optimize.md)
 #### Design Paradigms
 
 - [Monolithic Architecture](paradigms/monolith.md)
 - [Microservices Architecture](paradigms/microservices.md)
 - [Serverless Architecture](paradigms/serverless.md)
 - [Event-Driven Architecture](paradigms/event_driven.md)
-
 #### Consistency & Distributed Systems
 
 - [CAP Theorem](consistency/cap.md)
 - [Consistency Models](consistency/consistency_models.md)
 - [Consensus Algorithms](consistency/consensus_algorithms.md)
 - [Conflict Resolution](consistency/conflict_resolution.md)
-
 #### Performance Optimization
 
 - [Latency Optimization](performance_optimization/latency.md)
@@ -73,12 +74,19 @@
 - [Real-time Systems](architecture/real_time.md)
 - [Batch Processing Systems](architecture/batch_processing.md)
 
-#### System Design Interview Patterns (Summary)
+### HLD Techniques
 
-- [Problem Clarification](interview_patterns/problem_clarification.md)
-- [High-Level Design](interview_patterns/high_level.md)
-- [Detailed Design](interview_patterns/detailed_design.md)
-- [Scale & Optimize](interview_patterns/scale_and_optimize.md)
+- Bloom Filters
+- Hyper Log-Log
+- Merkle Trees
+- Quad Trees
+- Geo Hashing
+- Consistent Hashing
+- Trie
+- B Tree
+- LSM Tree
+- Operational Transformation (OT)
+- Conflict Free Replicated Data Types (CRDTs)
 
 ### Classic Interview Problems
 

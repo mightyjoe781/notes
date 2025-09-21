@@ -8,6 +8,7 @@
 * [Creational Patterns](creational_patterns.md)
 * [Structural Patterns](structural_patterns.md)
 * [Behavioural Patterns](behavioural_patterns.md)
+* [Interview Guide](interviews.md)
 
 ### Problems
 * Design an ATM Machine (State Pattern)
