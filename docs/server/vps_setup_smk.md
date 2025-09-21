@@ -246,13 +246,13 @@ server {
 }
 ````
 
-More on this Page : [Pre-requiste](#Installing lego) 
+More on this Page : Installing lego
 
 See Also : 
 
 * [Setting up Nginx](nginx.md)
 * [Setting up Static Site on Nginx](nginx2.md)
-* [Setting up a dynamic site on Nginx](nginx3.md)
+* [Setting up a dynamic site on Nginx]
 
 <hr>
 ### Setting up source paths

@@ -8,7 +8,7 @@
 
 ### Topics
 
-- [Fundamental Analysis](fundamental_analysis.md)
+- [Fundamental Analysis](./topics/fundamental_analysis.md)
 - Sectorial Portfolio
 - Reading Charts
 

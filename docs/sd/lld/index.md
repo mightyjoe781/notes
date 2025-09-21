@@ -1,7 +1,7 @@
 # LLD Notes
 
 
-* [SOLID Principles](solid_principles)
+* [SOLID Principles](./solid_principles.md)
 * Problem : Chess Game
 * Problem : Simple Rule Engine
 ### Design Patterns

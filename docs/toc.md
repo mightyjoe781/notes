@@ -11,7 +11,7 @@ hide:
 
 ### Shortcuts
 
-[AWS](aws/index.md) - [Algorithms](algo/index.md)  - [C++](cpp/index.md) - [Data Analysis](dataanalysis/index.md) - [Databases](databases/index.md) - [Docker](docker/index.md) - [FreeBSD](freebsd/index.md) - [Minetest](mt/index.md) - [Microservices](microservices/index.md) - [Finance](fin/index.md) - [Git](git/index.md) - [Go](go/index.md) - [OS](os/index.md) - [Server](server/index.md) - [tmux](tmux/index.md) - [Terraform](terraform/index.md) - [Vim](vim/index.md) - [WebDev](webdev/index.md) - [Python](python/index.md) - [Pyspark](pyspark/index.md)
+[AWS](aws/index.md) - [Algorithms](dsa/index.md)  - [Data Analysis](dataanalysis/index.md) - [Databases](databases/index.md) - [Docker](docker/index.md) - [FreeBSD](freebsd/index.md) - [Minetest](mt/index.md) - [Microservices](microservices/index.md) - [Finance](fin/index.md) - [Git](git/index.md) - [Go](go/index.md) - [OS](os/index.md) - [Server](server/index.md) - [tmux](tmux/index.md) - [Terraform](terraform/index.md) - [Vim](vim/index.md) - [WebDev](webdev/index.md) - [Python](python/index.md) - [Pyspark](pyspark/index.md)
 
 ### Contents
 
@@ -75,7 +75,7 @@ hide:
 
     ---
 
-    :material-debian:{ .lg .middle } [Unix/Linux](linux/index.md)
+    :material-debian:{ .lg .middle } [Unix/Linux]
     
     :material-freebsd:{ .lg .middle } [FreeBSD](freebsd/index.md)	    
     
