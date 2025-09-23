@@ -9,10 +9,12 @@
 * Proxy ⭐
 
 ### Adapter ⭐
+
 * allows objects with incompatible interfaces to collaborate
 * usecases
     * helps integrate 3rd-party library without modifying their code
     * makes incompatible classes work together
+
 ```python
 # without adapter
 class MP3Player:
@@ -24,7 +26,9 @@ player = MP3Player()
 player.play_mp3("song.mp3")  # Works fine ✅
 player.play_mp4("video.mp4")  # ❌ AttributeError: 'MP3Player' object has no attribute 'play_mp4'
 ```
+
 * Using Adapter to modify this class
+
 ```python
 class MP3Player:
     def play_mp3(self, filename):
@@ -50,6 +54,8 @@ player = MediaAdapter("mp4")
 player.play("video.mp4")  # ✅ Plays after conversion
 ```
 ### Bridge
+
+
 * **decouples an abstraction from its implementation**, allowing them to evolve **independently**
 * When to Use
     * **When you want to avoid a rigid class hierarchy** – Prevents class explosion due to multiple variations.
@@ -61,6 +67,7 @@ player.play("video.mp4")  # ✅ Plays after conversion
     * **Refined Abstraction** – Extends abstraction with additional behaviour.
     * **Implementation Interface** – Defines the low-level details (e.g., Device).
     * **Concrete Implementations** – Provide specific implementations.
+
 ```python
 from abc import ABC, abstractmethod
 
@@ -200,7 +207,9 @@ print(coffee.description(), "->", coffee.cost())  # Basic Coffee + Milk + Sugar 
     * Logging/monitoring Proxy - record requests for analytics and debugging
     * Caching Proxy - store results to avoid recomputation
     * Remote Proxy - Interface for calling methods on a remote object
-* Virtual Proxy
+
+Virtual Proxy
+
 ```python
 class RealImage:
     """Heavy object that loads an image from disk."""
@@ -231,7 +240,8 @@ image.display()  # Loads image only when needed
 image.display()  # Second call does not reload image
 ```
 
-* logging Proxy
+logging Proxy
+
 ```python
 class RealService:
     def operation(self):
@@ -252,3 +262,4 @@ service = RealService()
 proxy = LoggingProxy(service)
 proxy.operation()
 ```
+

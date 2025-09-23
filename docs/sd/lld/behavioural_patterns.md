@@ -2,7 +2,7 @@
 
 * Chain of Responsibility ⭐
 * Command ⭐
-* Iterator
+* Iterator ⭐
 * Mediator
 * Memento
 * Observer ⭐
@@ -188,6 +188,86 @@ remote.press_button()  # TV is OFF
 ```
 
 ### Iterator
+
+Without the Iterator, lets say there is a repository returning all the users.
+
+•	Client doesn’t care about LIMIT / OFFSET.
+•	Repository provides a clean, Pythonic iteration interface.
+•	If DB changes from SQL → API → cache, client code stays the same.
+
+Without Iterator (client handles the pagination ❌) 
+
+```python
+class UserRepository:
+    def __init__(self, db):
+        self.db = db
+
+    def get_users(self, limit, offset):
+        # Imagine this queries the DB
+        return self.db.query(f"SELECT * FROM users LIMIT {limit} OFFSET {offset}")
+
+# Client code needs to handle pagination manually
+repo = UserRepository(db=...)
+limit, offset = 2, 0
+
+while True:
+    users = repo.get_users(limit, offset)
+    if not users:
+        break
+    for user in users:
+        print("👤", user)
+    offset += limit
+```
+
+Problem : Client code is tied to limit/offset and pagination logic
+
+With Iterator Pattern. Encapsulate the pagination details inside an iterator.
+
+```python
+class UserIterator:
+    """Iterator that hides pagination logic."""
+    def __init__(self, repo, batch_size=2):
+        self.repo = repo
+        self.batch_size = batch_size
+        self.offset = 0
+        self.current_batch = []
+        self.index = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        # Load next batch if needed
+        if self.index >= len(self.current_batch):
+            self.current_batch = self.repo.get_users(self.batch_size, self.offset)
+            if not self.current_batch:
+                raise StopIteration
+            self.offset += self.batch_size
+            self.index = 0
+
+        user = self.current_batch[self.index]
+        self.index += 1
+        return user
+
+
+class UserRepository:
+    def __init__(self, db):
+        self.db = db
+
+    def get_users(self, limit, offset):
+        # Mock DB fetch
+        data = ["Alice", "Bob", "Charlie", "Diana", "Eve"]
+        return data[offset: offset + limit]
+
+    def __iter__(self):
+        return UserIterator(self)
+```
+
+```python
+repo = UserRepository(db=None)  # Mock DB
+for user in repo:   # Client just iterates, no offsets/limits
+    print(user)
+```
 
 ### Mediator
 
@@ -420,6 +500,70 @@ context.set_strategy(PayPalPayment())
 context.checkout(200)  # Paid using PayPal
 ```
 
+### Repository Pattern
+
+It is an architectural pattern, not structural/behaviour. Proxy(introduced in Gang of 4) has intent of structural wrapper, while Repository has architecture abstraction (introduced in DDD).
+
+Another comparison often drawn with mediator, but Mediator deals with preventing dependencies/coupling between objects, while Repository is just database abstraction layer.
+
+Often known as DAO (Data Access Objects).
+
+- **Repository** acts as a **mediator between domain/business logic and data access layer**.
+- It hides database queries, providing a **clean abstraction** for data operations.
+- Usage:
+    - Decouples business logic from persistence logic.
+    - Centralizes data access logic (CRUD, queries).
+    - Makes switching storage (SQL → NoSQL, in-memory) easier.
+
+```python
+from abc import ABC, abstractmethod
+
+# Domain Model
+class User:
+    def __init__(self, user_id, name):
+        self.user_id = user_id
+        self.name = name
+
+    def __repr__(self):
+        return f"User(id={self.user_id}, name='{self.name}')"
+
+# Repository Interface
+class UserRepository(ABC):
+    @abstractmethod
+    def add(self, user: User):
+        pass
+
+    @abstractmethod
+    def get(self, user_id: int) -> User:
+        pass
+
+    @abstractmethod
+    def list_all(self):
+        pass
+
+
+# In-memory Repository (Concrete Implementation)
+class InMemoryUserRepository(UserRepository):
+    def __init__(self):
+        self._users = {} # private store
+
+    def add(self, user: User):
+        self._users[user.user_id] = user.name
+        print(f"Added {user}")
+        
+    def get(self, user_id: int) -> User:
+        return self._users[user_id]
+
+    def list_all(self):
+        return list(self._users.values())
+
+repo = InMemoryUserRepository()
+repo.add(User(1, "Alice"))
+repo.add(User(2, "Bob"))
+
+print(repo.get(1))
+print(repo.list_all())
+```
 ### Template Method
 
 * defines the **skeleton** of an algorithm in a **base class**, allowing subclasses to **override specific steps** without modifying the structure of the algorithm.
