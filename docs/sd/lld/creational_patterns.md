@@ -8,7 +8,7 @@
 
 ## Creational Pattern
 * Factory ⭐
-* Abstract Factory
+* Abstract Factory ⭐
 * Builder ⭐
 * Prototype
 * Singleton ⭐
