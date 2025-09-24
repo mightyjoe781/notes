@@ -5,7 +5,7 @@ A very basic understanding of database and SQL queries is expected as pre-requis
 
 Content
 
-- ACID
+- [ACID](acid.md)
 - Understanding Database Internals
 - Database Indexing
 - B Trees vs B+ Tree in Production DB Systems
