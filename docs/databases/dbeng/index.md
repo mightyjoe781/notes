@@ -6,8 +6,8 @@ A very basic understanding of database and SQL queries is expected as pre-requis
 Content
 
 - [ACID](acid.md)
-- Understanding Database Internals
-- Database Indexing
+- [Understanding Database Internals](internals.md)
+- [Database Indexing](indexing.md)
 - B Trees vs B+ Tree in Production DB Systems
 - Database Partitioning
 - Database Sharding
