@@ -8,14 +8,14 @@ Content
 - [ACID](acid.md)
 - [Understanding Database Internals](internals.md)
 - [Database Indexing](indexing.md)
-- B Trees vs B+ Tree in Production DB Systems
-- Database Partitioning
-- Database Sharding
-- Concurrency Control
-- Database Replication
+- [B Trees vs B+ Tree in Production DB Systems](btrees.md)
+- [Database Partitioning](partitioning.md)
+- [Database Sharding](sharding.md)
+- [Concurrency Control](concurrency_control.md)
+- [Database Replication](replication.md)
 - Database System Design
-- Database Engines
-- Database Cursors
+- [Database Engines](engines.md)
+- [Database Cursors](cursors.md)
 - NoSQL Architecture
 - Database Security
 - Homomorphic Encryption (Performing Queries on Encrypted DB)
