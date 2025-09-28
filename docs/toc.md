@@ -19,7 +19,7 @@ hide:
 
 <div class="grid cards" markdown>
 
--   __Programming Languages and Coding__
+-   __Software Engineering__
 
     ---
 
@@ -27,15 +27,13 @@ hide:
 
     :material-wrench:{ .lg .middle } [System Design](sd/index.md) ✅
 
+    :material-database:{ .lg .middle } [Databases](databases/index.md)
+
+    :material-network:{ .lg .middle } [Networking](networking/index.md)
+
+    :material-laptop:{ .lg .middle } [OS](os/index.md)
+
     :simple-openai:{ .lg .middle } [LLM & Agents](llm/index.md) [WIP]
-
-    :material-language-cpp:{ .lg .middle } C++ [Upcoming]
-
-    :material-language-go:{ .lg .middle }  [Go](go/index.md) ✅
-
-    :material-language-python:{ .lg .middle }  [Python](python/index.md) ✅
-
-    :material-flash:{ .lg .middle }  [Pyspark](pyspark/index.md) ✅
 
 -   __Development Tools and Environment__
 
@@ -55,23 +53,21 @@ hide:
 
     :material-debian:{ .lg .middle } [Unix Tools](unix/index.md) :octicons-arrow-right-24:{ .icon }
 
--   __Personal Interests__
+-   __Programming Languages__
 
     ---
 
-    :material-currency-usd:{ .lg .middle } [Finance](fin/index.md)
+    :material-language-cpp:{ .lg .middle } C++ [Upcoming]
 
-    :material-heart-pulse:{ .lg .middle } [Health](health/index.md)
+    :material-language-go:{ .lg .middle }  [Go](go/index.md) ✅
 
-    :material-gamepad-variant:{ .lg .middle } [Minetest](mt/index.md)
+    :material-language-java:{ .lg .middle } Java [Upcoming]
 
-    :material-music:{ .lg .middle } [Music](music/index.md)
+    :material-language-python:{ .lg .middle }  [Python](python/index.md) ✅
 
-    :fontawesome-solid-person-swimming:{ .lg .middle } [Swimming](swimming/index.md)
+    :material-flash:{ .lg .middle }  [Pyspark](pyspark/index.md) ✅
 
-    :material-camera:{ .lg .middle } [Photography](photography/index.md)
-
-    :material-regex:{ .lg .middle } [Regex](regex/index.md)
+    :material-language-rust:{ .lg .middle }  Rust [Upcoming]
 
 -   __Systems and Servers__
 
@@ -82,8 +78,6 @@ hide:
     :material-freebsd:{ .lg .middle } [FreeBSD](freebsd/index.md)	    
     
     :material-apple:{ .lg .middle } [MacOS](macos/index.md)
-
-    :material-laptop:{ .lg .middle } [OS](os/index.md)
 
     :material-server:{ .lg .middle } [Server](server/index.md)
 
@@ -111,12 +105,22 @@ hide:
     
     :material-web:{ .lg .middle } [WebDev](webdev/index.md)
   
--   __Data and Databases__
+-   __Miscellaneous__
 
     ---
 
+    :material-currency-usd:{ .lg .middle } [Finance](fin/index.md)
+
     :material-chart-bar:{ .lg .middle } [Data Analysis](dataanalysis/index.md)
 
-    :material-database:{ .lg .middle } [Databases](databases/index.md)
+    :material-gamepad-variant:{ .lg .middle } [Minetest](mt/index.md)
+
+    :material-music:{ .lg .middle } [Music](music/index.md)
+
+    :fontawesome-solid-person-swimming:{ .lg .middle } [Swimming](swimming/index.md)
+
+    :material-camera:{ .lg .middle } [Photography](photography/index.md)
+
+    :material-regex:{ .lg .middle } [Regex](regex/index.md)
 
 </div>

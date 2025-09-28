@@ -6,11 +6,11 @@ The design of databases spans formal techniques and practical considerations inc
 
 A database management system (DBMS) is the software that interacts with end users, applications, and the database itself to capture and analyze the data. The DBMS software additionally encompasses the core facilities provided to administer the database. The sum total of the database, the DBMS and the associated applications can be referred to as a database system.
 
-### Tutorials
-
 ### Notes
 
 - [SQL](sql/index.md)
 - [PostgreSQL](postgresql/index.md)
-- [Introduction to Database Engineering](dbeng/index.md)
+- MongoDB [Upcoming]
+- Redis [Upcoming]
+- [Database Engineering](dbeng/index.md)
 
