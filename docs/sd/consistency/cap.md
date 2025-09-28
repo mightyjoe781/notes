@@ -16,20 +16,18 @@ The CAP Theorem, formulated by Eric Brewer in 2000, is one of the most important
 
 ### The Fundamental Trade-off
 
-```
-CAP Theorem Constraint:
-In the presence of a network partition, you must choose between:
-├── Consistency: Reject requests to maintain data consistency
-└── Availability: Accept requests but risk data inconsistency
+CAP Theorem Constraints
 
-When no partition exists:
-├── Both consistency and availability can be maintained
-└── The trade-off becomes irrelevant
-```
+- In the presence of a network partition, you must choose between
+    - Consistency: Reject requests to maintain data consistency
+    - Availability: Accept requests but risk data inconsistency
+- When no partition exists
+    - Both consistency and availability can be maintained
+    - The trade-off becomes irrelevant
 
 ### Real-World Context
 
-The CAP theorem applies specifically to network partitions. In practice, partitions are temporary events, and systems can be designed to optimize for normal operation while having clear behavior during partition scenarios.
+The CAP theorem applies specifically to network partitions. In practice, partitions are temporary events, and systems can be designed to optimize for normal operation while having clear behaviour during partition scenarios.
 
 ------
 
