@@ -4,7 +4,7 @@
 ## Content
 
 - [Fundamentals of Networking](fundamentals.md)
-- Internet Protocol (IP)
+- [Internet Protocol (IP)](ip.md)
 - User Datagram Protocol (UDP)
 - Transmission Control Protocol (TCP)
 - Overview of Popular Networking Protocols
