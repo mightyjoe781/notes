@@ -8,7 +8,7 @@
 - [User Datagram Protocol (UDP)](udp.md)
 - [Transmission Control Protocol (TCP)](tcp.md)
 - [Overview of Popular Networking Protocols](protocols.md)
-- Network Performance
+- [Network Performance](network_performance.md)
 - Network.  Routing
 - Analyzing Protocols
 - Important Questions
