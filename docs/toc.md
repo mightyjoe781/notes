@@ -33,7 +33,9 @@ hide:
 
     :material-laptop:{ .lg .middle } [OS](os/index.md)
 
-    :simple-openai:{ .lg .middle } [LLM & Agents](llm/index.md) [WIP]
+    :simple-openai:{ .lg .middle } [ML, AI & LLMs](llm/index.md) [WIP]
+
+    :material-apps:{ .lg .middle } Other Topics [Upcoming]
 
 -   __Development Tools and Environment__
 
@@ -57,17 +59,20 @@ hide:
 
     ---
 
-    :material-language-cpp:{ .lg .middle } C++ [Upcoming]
+    :material-language-cpp:{ .lg .middle } C/C++/Lua [Upcoming]
 
     :material-language-go:{ .lg .middle }  [Go](go/index.md) ✅
 
     :material-language-java:{ .lg .middle } Java [Upcoming]
+
+    :material-language-javascript:{ .lg .middle } JavaScript [Upcoming]
 
     :material-language-python:{ .lg .middle }  [Python](python/index.md) ✅
 
     :material-flash:{ .lg .middle }  [Pyspark](pyspark/index.md) ✅
 
     :material-language-rust:{ .lg .middle }  Rust [Upcoming]
+
 
 -   __Systems and Servers__
 

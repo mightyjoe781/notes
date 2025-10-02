@@ -9,7 +9,6 @@
 - [Transmission Control Protocol (TCP)](tcp.md)
 - [Overview of Popular Networking Protocols](protocols.md)
 - [Network Performance](network_performance.md)
-- Network.  Routing
-- Analyzing Protocols
-- Important Questions
-- Other Topics
+- [Network  Routing](network_routing.md)
+- [Other Topics](extra.md)
+- Wireshark Basics

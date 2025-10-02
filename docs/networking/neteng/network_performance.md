@@ -150,11 +150,84 @@ Wait can I send data during handshake ?
 
 ## Listening Server
 
-## TCP Head of line blocking
+- You create a server by listening on a port on a specific ip address
+- Your machine might have multiple interfaces with multiple IP address
+- `listen(127.0.0.1, 8080)` -> listens on the local host ipv4 interface on port 8080
+- `listen(::1, 8080)` -> listens on localhost ipv6 interface on port 8080
+- `listen(192.168.1.2, 8080)` -> listens on `192.168.1.2` on port 8080
+- `listen(0.0.0.0, 8080)` -> listens on all interfaces on port 8080 (can be dangerous)
+
+- You can only have one process in a host listening on IP/Port
+- No two processes can listen on the same port
+- P1 -> `Listen(127.0.0.1, 8080)`
+- P2 -> `Listen(127.0.0.1, 8080)` -> error
+
+### There is an exception
+
+- There is a configuration that allows more than one process to listen on the same port
+- `SO_PORTREUSE`
+- Operating System balance segments among processes
+- OS create a hash source ip/source port/ dest ip/ dest port
+- Guarantees always go to same process if the pair match
+
+## TCP Head of line blocking (HOL)
+
+- TCP orders packets in the order they are sent
+- The segments are not acknowledged or delivered to the app until they are in order
+- This is great ! But what if multiple clients are using the same connection
+
+- HTTP requests may use the same connection to send multiple requests
+- Request 1 is segments 1, 2
+- Request 2 is segments 3, 4
+- Segments 2, 3, 4 arrive but 1 is lost ?
+- Request 2 technically was delivered but TCP is blocking it
+- Huge latency in apps, big problem in HTTP/2 with streams
+- QUIC solves it
+
+![](assets/Pasted%20image%2020251002085123.png)
 
 ## Importance of Proxy and Reverse Proxies
 
+Proxy is a server that makes request on behalf of clients.
+
+![](assets/Pasted%20image%2020251002085623.png)
+
+Use cases of Proxy
+
+- Caching
+- Anonymity
+- Logging
+- Block Sites
+- Microservices
+
+![](assets/Pasted%20image%2020251002090015.png)
+
+![](assets/Pasted%20image%2020251002090024.png)
+
+- Can Proxy & Reverse Proxy used in the same time ? Yes
+- Can I use Proxy instead of VPN for anonymity ? No, proxy takes a look at the packet
+- Is proxy just for HTTP traffic ? No there are multiple types HTTPS/SOCK4/SOCKS5
 ## Load Balancing at Layer 4 vs Layer 7
+
+### Layer 4 
+
+![](assets/Pasted%20image%2020251002090845.png)
+
+- When a client connects to the L4 load balancer, the LB chooses one server and all segments for that connections go to that server
+- L4 Load Balancer, doesn't know anything about request(HTTP/HTTPS/) other than its TCP packet, it doesn't buffer data, immediately passes request to servers.
+
+| Pros                                                                                                                                 | Cons                                                                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| - Simpler Load Balancing<br>- Efficient (no data lookup)<br>- More secure<br>- Works with any protocol<br>- One TCP connection (NAT) | - No smart Load Balancing<br>- NA microservices<br>- Sticky per connection<br>- No caching<br>- Protocol unaware (can be dangerous) bypass rules |
+
+### Layer 7
+
+![](assets/Pasted%20image%2020251002091939.png)
+
+| Pros                                                                                                        | Cons                                                                                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| - Smart Load Balancing<br>- Caching<br>- Great for microservices<br>- API Gateway Logic<br>- Authentication | - Expensive (looks at the data)<br>- Decrypts (terminates TLS)<br>- Two TCP Connections<br>- Must share TLS certificate<br>- Needs to buffer<br>- Needs to understand protocol |
 
 ## Network Access Control to database Servers
 
+https://www.postgresql.org/docs/current/auth-pg-hba-conf.html
