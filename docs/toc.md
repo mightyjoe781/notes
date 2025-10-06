@@ -35,7 +35,7 @@ hide:
 
     :simple-openai:{ .lg .middle } [ML, AI & LLMs](llm/index.md) [WIP]
 
-    :material-apps:{ .lg .middle } Other Topics [Upcoming]
+    :material-hammer:{ .lg .middle } [Engineering](other_sde/index.md)
 
 -   __Development Tools and Environment__
 
