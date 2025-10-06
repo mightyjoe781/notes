@@ -9,5 +9,5 @@
 - [Many Ways to HTTPS](../../networking/neteng/https.md)
 - [Backend Execution Patterns](execution_patterns.md)
 - [Proxy and Load balancing](../../networking/neteng/network_performance.md)
-- [JWT](jwt.md)
+- [JWT](../security/authentication.md)
 - [Debugging](debug.md)
