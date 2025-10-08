@@ -23,5 +23,5 @@ Content
     -  [CAP](../../sd/consistency/cap.md)
 - [Database Security](security.md)
 - [Homomorphic Encryption (Performing Queries on Encrypted DB)](homomorphic.md)
-- Important Questions
+- [Important Questions](questions.md)
 - More Topics
