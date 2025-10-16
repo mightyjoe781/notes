@@ -1,19 +1,22 @@
 # AI Practitioner
 
+!!! note "updates"
+
+    Last Updated 13/10/2025
+
 Note : Practitioner exams mainly deal with very basic knowledge of topics, Understanding the Services, its pros and cons is more than enough to pass this exam.
 Exam Code : `AIF-C01`
 NOTE: All the sections are kept short from Exam standpoint
 
 - [Introduction to AWS](introduction.md)
 - [Amazon Bedrock & Gen AI](bedrock_genai.md)
-- Prompt Engineering
+- [Prompt Engineering](prompt.md)
 - Amazon Q
 - AI & ML
-- AWS Managed AI Services
+- [AWS Managed AI Services](managed_ai.md)
 - Amazon Sagemaker
 - AI Challenges & Responsibility
-- AWS Security Services
-- Exam Guide
+- [AWS Services Summary](aws_services.md)
 
 Resources
 
