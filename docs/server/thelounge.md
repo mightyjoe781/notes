@@ -47,8 +47,12 @@ networks:
 `torrc` ~ 
 
 ```text
-# Listen for SOCKS connections on localhost, port 9050                                                                                                       # This is usually the default.
-# SocksPort 127.0.0.1:9050                                                                                                                                   SocksPort 0.0.0.0:9050 # bind with all interface in the container
+# Listen for SOCKS connections on localhost, port 9050
+# This is usually the default.
+# SocksPort 127.0.0.1:9050
+
+SocksPort 0.0.0.0:9050 # bind with all interface in the container
+
 
 # Allow connections from any IP address to the SOCKS proxy.
 # Use with caution, as this exposes your Tor proxy to the network.
