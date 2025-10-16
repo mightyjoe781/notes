@@ -120,10 +120,92 @@ RAG ~ Retrieval Augmented Generation
 ![](assets/Pasted%20image%2020251008123810.png)
 
 - https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/
+
+![](assets/Pasted%20image%2020251009093409.png)
+
+RAG Vector Databases
+
+- Amazon OpenSearch Service (service & Managed Clusters)
+- Amazon Aurora PostgresSQL - relational database, proprietary on AWS
+- Amazon Neptune Analytics - graph database that support GraphRAG
+- Amazon S3 Vectors - cost effective and durable storage with sub-second query peformance
+
+RAG Data Sources
+
+- Amazon S3
+- confluence
+- Microsoft Share point
+- Salesforce
+- Web pages
+
+Use Cases
+
+- Customer Service Chatbot
+- Legal Research and Analysis
+- Healthcare Question Answering
+
+Online Tokenizer : https://platform.openai.com/tokenizer
 ### Guardrails
 
-
+- Control the interaction between users and Foundation Models (FMs)
+- Filter undesirable and harmful content
+- Remove Personally Identifiable Information (PII)
+- Enhanced Privacy
+- Reduce Hallucinations
+- Ability to create multiple Guardrails and monitor and analyze user inputs that can violate the Guardrails
 
 ### Agents
 
+- Manage and carry out various multi-step tasks related to infrastructure provisioning, application deployment and operational activities
+- Task co-ordination; Perform tasks in the correct order and ensure information is passed correctly between tasks
+- Agents are configured to perform specific pre-defined action groups
+- Integrate with other systems, services, DB and API to exchange data or initiate actions
+- Leverage RAG to retrieve information when necessary.
+
+![](assets/Pasted%20image%2020251009100148.png)
+
+### CloudWatch Integration
+
+- Model Invocation Logging
+    - Can include text, images and embeddings
+    - Analyze further and build alerting thanks to Cloud Watch Logs Insights
+- CloudWatch Metrics
+    - Published metrics from Bedrock to CloudWatch
+        - Including ContentFilteredCount, which helps to see if Guardrails are functioning
+    - Can build CloudWatch Alarms on top of Metrics
 ### Pricing
+
+- On-Demand
+    - pay-as-you-go
+    - Text Models - charges for every input/output token processed
+    - Embedding Models - charged for every input token processed
+    - Image Models - charged for every image generated
+    - Works with Base Models only
+- Batch
+    - Multiple predictions at a time (output is a single file in Amazon S3)
+    - Can provide discounts of up to 50%
+- Provisioned Throughput
+    - Purchase Model units for a certain time (I month, 6 months...)
+    - Throughput - max. number of input/output tokens processed per minute
+    - Works with Base, Fine-tuned, and Custom Models
+
+### Model Improvement Techniques Cost Order
+
+- Prompt Engineering
+    - No model training needed (no additional computation or fine-tuning)
+- Retrieval Augmented Generation (RAG)
+    - Uses external knowledge (FM doesn't need to "know everything", less complex)
+    - No FM changes (no additional computation or fine-tuning)
+- Instruction-based Fine-tuning
+    - FM is fine-tuned with specific instructions (requires additional computation)
+- Domain Adaptation Fine-tuning
+    - Model is trained on a domain-specific dataset (requires intensive computation)
+
+### Bedrock - Cost Savings
+
+- On-Demand - great for unpredictable workloads, no long-term commitment
+- Batch - provides up to 50% discounts
+- Provisioned Throughput - (usually) not a cost-saving measure, great to "reserve" capacity
+- Temperature, Top K, Top P - no impact on pricing
+- Model size - usually a smaller model will be cheaper (varies based on providers)
+- Number of Input and Output Tokens - main driver of cost

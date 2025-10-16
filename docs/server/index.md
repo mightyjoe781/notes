@@ -16,4 +16,6 @@
 - [ZNC Setup](znc.md) 
 - [Setting up Rclone](rclone.md)
 - [Backup VPS with Pcloud](bkp.md)
+- Docker
+    - [TheLounge](thelounge.md)
 - [A general talk with OldCoder](guide.md)
