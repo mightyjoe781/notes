@@ -11,11 +11,10 @@ NOTE: All the sections are kept short from Exam standpoint
 - [Introduction to AWS](introduction.md)
 - [Amazon Bedrock & Gen AI](bedrock_genai.md)
 - [Prompt Engineering](prompt.md)
-- Amazon Q
-- AI & ML
+- [Amazon Q](amazon_q.md)
 - [AWS Managed AI Services](managed_ai.md)
-- Amazon Sagemaker
-- AI Challenges & Responsibility
+- [Amazon Sagemaker](sagemaker.md)
+- [AI Challenges & Responsibility](ai_challenges.md)
 - [AWS Services Summary](aws_services.md)
 
 Resources

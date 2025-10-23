@@ -194,17 +194,20 @@ Lambda Pricing : https://aws.amazon.com/lambda/pricing/
 
 ## AWS Config
 
-- Helps with auditing and recording compliance of your AWS resources 
-- Helps records configurations and changes over time
+- Helps with auditing and recording *compliance* of your AWS resources 
+- Helps records *configurations* and changes over time
 - Possibility of storing the configuration data into S3
 - Question that can be solved by AWS Config
     - Is there unrestricted SSH access to my security groups
     - Do my buckets have any public access
     - How has my ALB configuration changed over time
+- Receive alerts (SNS Notifications) for any changes
+- AWS Config per Region
+- Can be aggregated across regions and accounts
 
 ## Amazon Inspector
 
-- Automated Security Assessments
+- *Automated Security Assessments*
 - For EC2 instances
     - Leveraging the AWS system Manager (ASM) agent
     - Analyze against unintended network accessibility
@@ -215,9 +218,21 @@ Lambda Pricing : https://aws.amazon.com/lambda/pricing/
     - Identifies software vulnerabilities in function code and package dependencies
     - Assessment of functions as they are deployed
 - Report & integration with AWS Security Hub
-- Send findings to Amazon Even Bridge
+- Send findings to Amazon Event Bridge
+
+![](assets/Pasted%20image%2020251019205944.png)
+
+What does it evaluate ?
+
+- NOTE: Its only for EC2 instances, Container Images & Lambda functions
+- Only scans infrastructure, only when needed
+- Package Vulnerability ~ database of CVE
+- Network Reachability
+- Assigns Risk Score
 
 ## AWS CloudTrail
+
+![](assets/Pasted%20image%2020251019210324.png)
 
 - Provides governance, compliance and audit for your AWS Account
 - CloudTrail is enabled by default!
@@ -230,8 +245,6 @@ Lambda Pricing : https://aws.amazon.com/lambda/pricing/
 - A trail can be applied to All Regions (default) or a single   Region.
 - If a resource is deleted in AWS, investigate Cloud Trail first!
 
-![](assets/Pasted%20image%2020251012210225.png)
-
 ## AWS Artifact (not really a service)
 
 - Portal that provides customers with on-demand access to AWS compliance documentation and AWS agreements
@@ -242,6 +255,8 @@ Lambda Pricing : https://aws.amazon.com/lambda/pricing/
 - On-demand access to security compliance reports of Independent Software Vendors (ISVs)
 - ISV compliance reports will only be accessible to the AWS customers who have been granted access to AWS Marketplace Vendor Insights for a specific ISV
 - Ability to receive notifications when new reports are available
+
+![](assets/Pasted%20image%2020251019211215.png)
 ## AWS Audit Manager
 
 - Assess risk and compliance of your AWS workloads

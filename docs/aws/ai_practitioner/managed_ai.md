@@ -26,24 +26,106 @@
 
 ### Comprehend - Custom Classification
 
+- Organize documents into categories that you define
+- Ex ~ categorize customer emails so that you can provide guidance based on type of request
+- Support for different types of documents.
 
+![](assets/Pasted%20image%2020251019223645.png)
+### Named Entity Recognition (NER)
 
+- NER ~ Extracts predefined, general-purpose entities like people, places, organizations, dates and other standard categories, from *text*
+- Comprehend supports for Custom Entity Recognition
 ## Amazon Translate
 
+- Natural and accurate language translation
+- Amazon Translate allows you to localize content ~ such as website and applications for international users.
+- Easily Translate large volume of text efficiently
 ## Amazon Transcribe
+
+- Automatically convert speech to text
+- Uses a deep learning process called automatic speech recognition (ASR) to convert speech to text quickly and accurately.
+- Automatic PII data removal using redaction
+- Use cases
+    - transcribe customer service calls
+    - automate closed captioning and subtitling
+    - generate metadata for media assets to create a fully searchable archive
+
+### Transcribe Improving Accuracy
+
+- allows transcribe to capture domain specific or non standard terms
+- Custom Vocabularies (for words)
+- Custom Language Models (for context)
+- NOTE: use both for highest transcription accuracy
 
 ## Amazon Polly
 
+- Turn text into lifelike speech using deep learning
+- Allowing to create applications that talk
+- Advanced Features
+    - Lexicons
+    - SSML ~ Speech Synthesis Markup Language
+    - Voice engine : generative, long-form, neutral, standard
+    - Speech mark
+        - encode where a sentence starts and ends in the audio.
+
 ## Amazon Rekognition
 
+- Find objects, people, text, scenes in images and videos using ML
+- Facial analysis and facial search to do user verification, people counting
+- Create a database of *familiar faces* or compare against celebrities
+- Use Cases
+    - Labeling
+    - Content Moderation
+    - Text Detection
+    - Face Detection
+    - Face Search and Verification
+    - Pathing
+
+#### Content Moderation API Example
+
+![](assets/Pasted%20image%2020251019225806.png)
 ## Amazon Lex
+
+- Build Chatbots quickly for your application using voice and text
+- Example ~ chatbot ordering pizza or book a hotel
+- supports multiple languages
+- Integration with AWS Lambda, Comprehend, Connect, Kendra
+- The bot automatically understands the user intent to invoke the correct lambda function to *fulfill the intent*
 
 ## Amazon Personalize
 
+- Fully managed ML-service to build apps with real-time personalized recommendations
+- Example ~ personalized product recommendations
+- Same technology used by `amazon.com`
+- Integrates into existing website, application, SMS, etc..
+- Implement in days, not months
+- Use cases retail stores, media and entertainment.
+
+![](assets/Pasted%20image%2020251019230633.png)
+
+- Amazon Personalize Recipes are multiple ways to extract different types of recommendations based on algorithms.
 ## Amazon Textract
+
+- Automatically extracts text, handwriting, and data from any scanned documents using Al and ML
+
+![](assets/Pasted%20image%2020251019230706.png)
+
+- Extract data from forms and tables
+- Read and process any type of document (PDFs, images, ...)
+- Use cases:
+    - Financial Service
+    - Healthcare
+    - Public Sector
 
 ## Amazon Kendra
 
+- Fully managed document search service powered by ML
+- Extract answers from within a document (text, pdf, HTML, etc..)
+- Natural language search capabilities
+- Learn from user interactions/feedback to promote preferred results (Incremental Learning)
+- Ability to manually fine-tune search results (importance of data, freshness, custom, ...)
+
+![](assets/Pasted%20image%2020251019230943.png)
 ## Amazon Mechanical Turk
 
 - Crowdsourcing marketplace to perform simple human tasks
