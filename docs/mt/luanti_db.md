@@ -74,7 +74,7 @@ psql -h hostname -p port -U username -d database_name
 > SELECT pg_size_pretty(pg_total_relation_size('public.blocks')) AS size;
 
 # vaccum a table
-VACUUM [VERBOSE] schema_name.table_name;
+VACUUM VERBOSE schema_name.table_name;
 
 # vaccum entire db
 VACUUM;
@@ -97,7 +97,7 @@ pg_dump -U username -h hostname -F c -b -v -f /path/to/backup/file.backup dbname
 Example taking prismo backup
 
 ```sh
-pg_dump -U prismo -h 127.0.0.1 -b -v -f ~/bkp/20251018_adv.backup adventure
+pg_dump -U prismo -h 127.0.0.1 -F c -b -v -f ~/bkp/20251018_adv.backup adventure
 ```
 
 ## Trimming Database
