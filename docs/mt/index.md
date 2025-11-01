@@ -6,10 +6,10 @@ Minetest is programmed in C++ using the Irrlicht Engine. Minetest provides an AP
 
 #### Server
 
-[Creating a Minetest Server](server.md)
-[Setting up a server for Minetest](vpssetup.md)
-[Server Scripts](scripts.md)
-[Managing Server Backend](luanti_db.md)
+- [Creating a Minetest Server](server.md) 
+- [Setting up a server for Minetest](vpssetup.md)
+- [Server Scripts](scripts.md)
+- [Managing Server Backend](luanti_db.md)
 
 #### Resources
 
