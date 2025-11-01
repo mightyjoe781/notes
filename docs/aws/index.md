@@ -10,6 +10,7 @@ AWS Exams can broadly be divided into 4 categories : https://aws.amazon.com/cert
 ### Associate
 
 - [Developer Associate Notes](./developer/index.md)
+- [Data Engineer Associate](./dataeng/index.md)
 - Solutions Architect Associate
 ### Professional
 
