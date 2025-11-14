@@ -2,18 +2,18 @@
 
 
 - [Data Engineering Fundamentals](fundamentals.md)
-- Storage
-- Database
-- Migration & Transfer
-- Compute
-- Containers
+- [Storage](storage.md)
+- [Database](database.md)
+- [Migration & Transfer](migration_and_transfer.md)
+- [Compute](compute.md)
+- [Containers](container.md)
 - Analytics
-- Application Integration
-- Security, Identity, and Compliance
-- Networking & Content Delivery
-- Management & Governance
-- Machine Learning
-- Developer Tools
+    - [Data Solutions](analytics_data.md)
+    - [Streaming Solutions](analytics_streaming.md)
+- [Application Integration](integration.md)
+- [Security, Identity, and Compliance](security.md)
+- [Networking & Content Delivery](networking.md)
+- [Management & Governance](governance.md)
 
 
 Resource : [Sundog Education](https://www.sundog-education.com/aws-data-engineer/)

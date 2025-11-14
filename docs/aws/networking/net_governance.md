@@ -126,7 +126,6 @@ Auto remediation using Systems Manager SSM documents
 
 ### Summary
 
-
 - AWS Config Rule does not prevent actions from happening (no deny)
 - Questions that can be solved by AWS Config:
     - Is there unrestricted SSH access to my security groups?
