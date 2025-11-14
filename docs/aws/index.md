@@ -4,7 +4,7 @@ AWS Exams can broadly be divided into 4 categories : https://aws.amazon.com/cert
 
 ### Practitioner
 
-- [Cloud Practitioner](./cloud/index.md) (WIP)
+- Cloud Practitioner
 - [AI Practitioner](ai_practitioner/index.md)
 
 ### Associate
@@ -19,4 +19,3 @@ AWS Exams can broadly be divided into 4 categories : https://aws.amazon.com/cert
 ### Speciality
 
 - [Networking Speciality](./networking/index.md)
-- [Database Speciality](database/index.md) (Discontinued)
