@@ -206,7 +206,9 @@ class Penguin(Bird):
         # Penguins can’t fly!
         raise Exception("Penguins cannot fly")
 ```
+
 * Violates A Penguin is-a Bird, but substituting it breaks client code that assumes all Birds can fly. That’s a violation of LSP.
+
 ```python
 from abc import ABC, abstractmethod
 
@@ -229,7 +231,9 @@ birds = [Sparrow(), Penguin()]
 for b in birds:
     b.move()   # works for both sparrow & penguin
 ```
+
 * So technically design of the previous class was not correct, and design needs to address this. An abstract representation should not force us to implement designs.
+
 ## ISP (Interface Segregation Principle)
 * Clients should not be forced to depend on interfaces, methods, behaviours they do not use.
 
@@ -260,7 +264,9 @@ class RobotWorker(Worker):
         # Robots don't eat!
         raise Exception("Robots cannot eat")
 ```
+
 * RobotWorker is forced to implement eat() even though it doesn’t apply
+
 ```python
 class Workable(ABC):
     @abstractmethod
@@ -282,10 +288,13 @@ class RobotWorker(Workable):
     def work(self):
         print("Robot working")
 ```
+
 * Now interfaces are segregated.
 
 ## DIP (Dependency Inversion Principle)
+
 * High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
 Example - 1 : Notifications
 ```python
 class EmailService:
