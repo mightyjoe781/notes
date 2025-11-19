@@ -12,10 +12,10 @@
 
 ### Problems
 * Design an ATM Machine (State Pattern)
-* Design Pub-Sub System (Observer Pattern)
+* [Design Pub-Sub System](problems/pub_sub.md) (Observer Pattern)
 * Design Middleware (COR)
 * Design Cache with LRU & LFU
-* Design Parking Lot System
+* [Design Parking Lot System](parking_lot.md)
 * Design BookMyShow
 * Design E-Commerce
 * Design Tic-Tac-Toe

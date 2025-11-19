@@ -5,7 +5,7 @@
 * Iterator ⭐
 * Mediator
 * Memento
-* Observer ⭐
+* Observer(PubSub) ⭐
 * Stage
 * Strategy Pattern ⭐
 * Template Method
@@ -339,9 +339,10 @@ editor.restore(caretaker.restore_state())
 editor.show()  # Output: Current Text: Hello, World!
 ```
 
-### Observer ⭐
+### Observer/PubSub ⭐
 
 * The **Observer Pattern** allows multiple objects (**observers**) to listen to and react to changes in another object (**subject**). When the subject’s state changes, all registered observers are notified automatically.
+* It is often referred to as Pub/Sub Communication model.
 * When to Use
     * **Event-driven programming** – UI elements react to user actions.
     * **Publish-Subscribe systems** – Notification services, message brokers.
