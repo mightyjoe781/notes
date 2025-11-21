@@ -127,7 +127,7 @@ Handle multiple people trying to pick seat on the plane.
     | id  | name  |
     | --- | ----- |
     | 1   | smk   |
-    | 2   | anup  |
+    | 2   | hmk  |
     | 3   | Abhay |
     | 4   | Ram   |
     | 5   | Mohan |
