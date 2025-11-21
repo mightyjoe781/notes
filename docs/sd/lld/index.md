@@ -18,7 +18,8 @@
 * [Design Parking Lot System](./problems/parking_lot.md)
 * [Design BookMyShow](./problems/bookmyshow.md)
 * [Design E-Commerce](./problems/ecommerce.md)
-* Design Stock Broker Machine
+* [Design Stock Broker Machine](./problems/stock_broker.md)
+* [Design Stock Exchange](./problems/stock_exchange.md)
 * Design Tic-Tac-Toe
 * Design Complete Chess Game
 * Design Splitwise
