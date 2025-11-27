@@ -2,7 +2,6 @@
 
 
 * [SOLID Principles](./solid_principles.md)
-* Problem : Chess Game
 * Problem : Simple Rule Engine
 ### Design Patterns
 * [Creational Patterns](creational_patterns.md)
@@ -20,10 +19,11 @@
 * [Design E-Commerce](./problems/ecommerce.md)
 * [Design Stock Broker Machine](./problems/stock_broker.md)
 * [Design Stock Exchange](./problems/stock_exchange.md)
+* [Design Text Editor](./problems/text_editor.md)
 * Design Tic-Tac-Toe
-* Design Complete Chess Game
+* [Design Complete Chess Game](./problems/chess_game.md)
 * Design Splitwise
-* Design Assignment Logger
+* Design Logger (COR Pattern)
 
 ### Extras
 - Locks & Semaphores

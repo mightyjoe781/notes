@@ -9,5 +9,5 @@ if [[ -z "$VIRTUAL_ENV" ]]; then
     fi
 fi
 
-mkdocs build && rsync -avz --delete site/ sudomoon:/var/www/notes/
+mkdocs build && rsync -avz --delete site/ sudoroot:/var/www/notes/
 exit 0
