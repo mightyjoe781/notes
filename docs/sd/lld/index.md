@@ -22,14 +22,13 @@
 * [Design Text Editor](./problems/text_editor.md)
 * Design Tic-Tac-Toe
 * [Design Complete Chess Game](./problems/chess_game.md)
-* Design Splitwise
+* [Design Splitwise](./problems/splitwise.md)
 * Design Logger (COR Pattern)
 
 ### Extras
-- Locks & Semaphores
+- [Locks & Semaphores](locks.md)
 - Socket Programming
 - Design Socket based Chat Application
-- Example Questions
 
 #### Resources
 * https://medium.com/backticks-tildes/the-s-o-l-i-d-principles-in-pictures-b34ce2f1e898
