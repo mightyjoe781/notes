@@ -20,7 +20,7 @@
 * [Design Stock Broker Machine](./problems/stock_broker.md)
 * [Design Stock Exchange](./problems/stock_exchange.md)
 * [Design Text Editor](./problems/text_editor.md)
-* Design Tic-Tac-Toe
+* [Design Tic-Tac-Toe](./problems/tic_tac_toe.md)
 * [Design Complete Chess Game](./problems/chess_game.md)
 * [Design Splitwise](./problems/splitwise.md)
 * Design Logger (COR Pattern)
