@@ -13,7 +13,7 @@
 * Design an ATM Machine (State Pattern)
 * [Design Pub-Sub System](problems/pub_sub.md) (Observer Pattern)
 * Design Middleware (COR)
-* Design Cache with LRU & LFU
+* [Design Cache with LRU](./problems/cache.md)
 * [Design Parking Lot System](./problems/parking_lot.md)
 * [Design BookMyShow](./problems/bookmyshow.md)
 * [Design E-Commerce](./problems/ecommerce.md)
@@ -23,7 +23,7 @@
 * [Design Tic-Tac-Toe](./problems/tic_tac_toe.md)
 * [Design Complete Chess Game](./problems/chess_game.md)
 * [Design Splitwise](./problems/splitwise.md)
-* [Design Logger](./problems/logger.md) (COR Pattern)
+* [Design Logger](./problems/logger.md)
 
 ### Extras
 - [Locks & Semaphores](locks.md)
