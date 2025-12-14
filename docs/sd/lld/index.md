@@ -23,7 +23,7 @@
 * [Design Tic-Tac-Toe](./problems/tic_tac_toe.md)
 * [Design Complete Chess Game](./problems/chess_game.md)
 * [Design Splitwise](./problems/splitwise.md)
-* Design Logger (COR Pattern)
+* [Design Logger](./problems/logger.md) (COR Pattern)
 
 ### Extras
 - [Locks & Semaphores](locks.md)
