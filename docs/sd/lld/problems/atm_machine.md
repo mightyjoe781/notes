@@ -78,3 +78,11 @@ We should utilize State Design Pattern, where other classes will call the State 
 Create a State Interface and rest of the classes will implement the state interface.
 
 Link to Example Code : [Link](https://github.com/singhsanket143/Design-Patterns/tree/master/src/ATMMachine_StateDesignPattern)
+
+## Class Diagram
+
+![](assets/Pasted%20image%2020251215235701.png)
+
+![](assets/Pasted%20image%2020251216000440.png)
+
+Some of the implementation details are left as exercise like, Card, User, Amount, ATM (will have amount + currency) etc.
