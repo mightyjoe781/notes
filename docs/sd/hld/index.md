@@ -1,4 +1,4 @@
-# HLD Notes
+# High-Level Design
 
 
 ## Basics
