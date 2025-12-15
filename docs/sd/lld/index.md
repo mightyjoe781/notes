@@ -1,5 +1,7 @@
 # LLD Notes
 
+Following Notes are sourced from multiple-sources and then rewritten to sound coherent. All notes uses primarily *Python* but there maybe few usages for *Java* as well.
+
 
 * [SOLID Principles](./solid_principles.md)
 * Problem : Simple Rule Engine
@@ -10,9 +12,8 @@
 * [Interview Guide](interviews.md)
 
 ### Problems
-* Design an ATM Machine (State Pattern)
+* [Design an ATM Machine (State Pattern)](./problems/atm_machine.md)
 * [Design Pub-Sub System](problems/pub_sub.md) (Observer Pattern)
-* Design Middleware (COR)
 * [Design Cache with LRU](./problems/cache.md)
 * [Design Parking Lot System](./problems/parking_lot.md)
 * [Design BookMyShow](./problems/bookmyshow.md)
@@ -27,8 +28,7 @@
 
 ### Extras
 - [Locks & Semaphores](locks.md)
-- Socket Programming
-- Design Socket based Chat Application
+- [Socket Programming](sockets.md)
 
 #### Resources
 * https://medium.com/backticks-tildes/the-s-o-l-i-d-principles-in-pictures-b34ce2f1e898
