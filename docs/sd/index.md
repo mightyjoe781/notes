@@ -17,7 +17,8 @@ Notes
 * [General Software Engineering Principle Overview](principles.md)
 * [Notes on LLD](lld/index.md) ✅
 * [Notes on HLD](hld/index.md) ✅
-* Microservices [WIP]
+* MicroServices
+* [API Design Principles](api_design.md)
 * [HLD Notes Topic Wise](./index_2.md) [WIP]
 
 Resources
