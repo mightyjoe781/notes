@@ -27,9 +27,9 @@ All Availability Zones are connected thru a low latency optic fiber with differe
 
 There is a misconception that we should not choose `us-east-1a` and choose other regions just because of the load. But internally `us-east-1a` for you might be `us-east-1b` some other user. AWS decides this based on load and occupancy at the availability zone.
 
-![](assets/Pasted%20image%2020251008094450.png)
+![](../ai_practitioner/assets/Pasted%20image%2020251008094450.png)
 
-![](assets/Pasted%20image%2020251008094508.png)
+![](../ai_practitioner/assets/Pasted%20image%2020251008094508.png)
 
 #### AWS Services scope with respect to VPC
 

@@ -1,5 +1,6 @@
 # Load Balancing and Fault Tolerance
 
+>    Everything fails eventually. Good systems don’t
 ## Load Balancers
 
 ![](assets/Pasted%20image%2020251221204406.png)

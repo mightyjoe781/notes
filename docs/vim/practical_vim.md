@@ -78,7 +78,7 @@ TIP 26 : Append After a ragged Visual Block
 
 #### Chapter 5 : Command Line Mode
 
-TIP 27 : Meet Vim’s Command Line : `:` to invoke command lines, refer [Link](../notes.md) (Ex Commands Strike far and wide than normal mode)
+TIP 27 : Meet Vim’s Command Line : `:` to invoke command lines, refer [Link](notes.md) (Ex Commands Strike far and wide than normal mode)
 
 TIP 28 : Execute a command on one or more cosecutive lines. `:{start},{end}` for selection text
 
