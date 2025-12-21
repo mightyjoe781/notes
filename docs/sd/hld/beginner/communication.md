@@ -2,8 +2,12 @@
 
 ## Client-Server Model and Communication Protocols
 
+![](assets/Pasted%20image%2020251221210118.png)
+
+![](assets/Pasted%20image%2020251221210659.png)
+
 * most common way for machines to talk to each other.
-* The communication happens overt the common network connecting the two. Two protocols to exchange data TCP(mostly used) and UDP
+* The communication happens over the common network connecting the two. Two protocols to exchange data TCP(mostly used) and UDP
 * Some important properties of TCP
     * TCP connections requires 3-way handshake for setup
     * TCP connections requires 2-way handshake for teardown
@@ -25,11 +29,11 @@
 
 ### Web Socket
 
-* Websockets are mean to do *bi-directional communication*
+* WebSockets are mean to do *bi-directional communication*
 * Key Features : Server can proactively send data to client, without client asking for it
 * Because there is no need for setting up TCP, every single time. We get really low latency in communication
 * Any where we need *realtime*, *low-latency* communication. Your end user *over the internet* think about web socket.
-* Use Cases - Chat, Realtime likes on live stream, Stock Market ticks.
+* Use Cases - Chat (WhatsApp, Telegram, etc), Realtime likes on live stream, Stock Market ticks.
 
 ## Blob Storage and S3
 
@@ -101,6 +105,7 @@
 * It’s visualized as a circular ring of slots, where each node is placed based on a hash function.
 * The structure behaves like an ordered array with wraparound using modulo (%) to locate neighboring nodes.
 * To find the owner of a key like `k1`, its hash is computed, and ownership is assigned to the first node clockwise (right) from the hash point.
+* [More Here](../advanced/storage_engines.md)
 
 ### Scaling Up
 

@@ -1,10 +1,11 @@
 # Databases and Scaling
 
-* most important component of any system
+>    most important component of any system
 
+Databases can be divided into two categories: *Relational* or *Non-Relational* Databases, 
 ## Relational Databases
 
-* Data is stored and represented in rows & column 
+* Data is stored and represented in row & columnar fashion.
 
 History of Relational Databases
 
@@ -13,7 +14,7 @@ History of Relational Databases
 * Key Properties
     * Data consistency
     * Data durability
-    * Data integrated
+    * Data integrity
     * Constraints
     * Everything in one place
 * Because of this reason, relational databases provides ACID properties to support *Transactions*
@@ -26,7 +27,7 @@ History of Relational Databases
 
 ### Atomicity
 
-* All statements within a transaction takes effect or non
+* All statements within a transaction takes effect or none
 * e.g. start transaction { publish a post and increase total posts count } commit
 * Often confused with concurrency, while it actually defines how system recovers from faults (rollback). Should have been called *Abortability*.
 
@@ -34,9 +35,9 @@ History of Relational Databases
 
 * `C` in ACID is not same as one in CAP Theorem.
 * C is more like a term thrown around to make the acronym work. It defines that data will always move from one consistent state to another.
-* Defn : Data will never go incorrect, no matter what. Constraint, Cascades, Triggers ensure above property
+* Definition : Data will never go incorrect, no matter what. Constraint, Cascades, Triggers will ensure above property in one way or another.
 * Ex - In a Financial system, all the debits must add up to equal to credits. 
-* Foreign Keys Checks ensure parent cant’ be deleted if child exists (can be turned on in DB). You can enable cascades or triggers to ensure data comes back to consistent state.
+* Foreign Keys Checks ensure parent can't be deleted if child exists (can be turned on in DB). You can enable cascades or triggers to ensure data comes back to consistent state.
 
 ### Durability
 
@@ -45,32 +46,32 @@ History of Relational Databases
 
 ### Isolation
 
-* when multiple transactions are executing parallely, the *isolation level* determines how much changes of one trasactions are visible to other.
-* Serializable ? Effect of all txn is as if they have executed serially. In Comparch people realised it was little slow they fiddled around locks to figure out to make it work fast.
+* when multiple transactions are executing parallely, the *isolation level* determines how much changes of one transactions are visible to other.
+* Serializable ? Effect of all transaction is as if they have executed serially. In Computer Architecture people realized it was little slow, so they fiddled around locks to figure out to make it work fast.
 
 ## Database Isolation Levels
 
-* Isolation levels dictate how much one transaction knows about the other
+* Isolation levels dictate how much one transaction knows about the other.
+
+NOTE: Following examples assumes that there are two txns executing parallely, i.e. T1, T2
 
 ### Repeatable Reads
 
-* consistent reads within same transaction
-* Even if other transaction commited 1st transaction would not see the changes (if value is already read)
+* consistent reads within same transaction.
+* Even if other transaction(T2) committed 1st transaction(T1) would not see the changes (if value is already read)
 * Default in Postgres, Oracle, SQL Server. 
 * It guarantees : both dirty reads and dirty writes never happen.
-
-### Read Commited
+### Read Committed
 
 * Read within same transaction always reads fresh value.
-* con : multiple reads withing same transaction are inconsistent
+* cons : multiple reads within same transaction are inconsistent
+### Read Uncommitted
 
-### Read Uncommited
-
-* reads even uncommited values from other transactions : *dirty reads*
-
+* reads even uncommitted values from other transactions : *dirty reads*
+* Example: Let's say both T1, and T2 begins, T2 modifies some value but doesn't commit. Yet querying same value in T1 will show the changes.
 ### Serializable
 
-* Every read is a locking read (depends on engine) and while one txn reads, other will have to wait
+* Every read is a locking read (depends on engine) and while one txn reads, other will have to wait.
 * NOTE: Every storage engine has its own implementation of serializable isolation, read documentation carefully.
 
 ## Scaling Databases
@@ -84,7 +85,7 @@ History of Relational Databases
 * gives ability to handle *scale*, more load
 * vertical scaling has physical hardware limitation
 
-### Horizaontal Scaling : Read Replicas
+### Horizontal Scaling : Read Replicas
 
 * when read: write = 90:10
 * you move reads to other databases using Master-Slave Topology
@@ -107,15 +108,21 @@ History of Relational Databases
 * Some Replication Lag
 * Faster Writes
 
-![](assets/Pasted%20image%2020250906181306.png)
+![](assets/Pasted%20image%2020251221192552.png)
+
 ## Sharding and Partitioning
 
-* Since one node cannot handle the data/load, we can split it into muultiple exlusive subsets.
-* writes on a particular row/document will go to one particular shard, allowing use to scale overall database load
+* Since one node cannot handle the data/load, we can split it into multiple exclusive subsets.
+* writes on a particular row/document will go to one particular shard, allowing us to scale overall database load
 * NOTE: Shards are independent no replication b/w them
 * API server needs to know which shard to connect, some databases have their own proxy to take care of routing. Each shard can have its own replica as well.
+* NOTE: *Indexing* is just a quick reference to keys, doesn't physically divide the table.
 
 ### Sharding & Partitioning
+
+![](assets/Pasted%20image%2020251221193317.png)
+
+![](assets/Pasted%20image%2020251221193850.png)
 
 * Sharding : Method of distributing data across *multiple machines*.
 * Partitioning : splitting a subset of data *within* the same instance.
@@ -129,9 +136,9 @@ History of Relational Databases
     * Then you should split the data into multiple databases, providing higher throughput
 * In above example splitting data into multiple database(shard) is called *partitioned*
 * How to partition the data ? There are two categories of partitioning
-    * Horizontal Partitioning (Common) - Within table take rows based on some propety into multiple partitions
+    * Horizontal Partitioning (Common) - Within table take rows based on some property into multiple partitions
     * Vertical Partitioning
-* In above split depends on *load*, *usecase*, and *access patterns*
+* In above split depends on *load*, *use-case*, and *access patterns*
 * Shards
     * Advantages
         * Handle large Read and Writes
@@ -167,7 +174,7 @@ History of Relational Databases
 
 ### Graph Databases
 
-* Neo4j, Neptune, Dgraph
+* Neo4j, Neptune, DGraph
 * what if our graph data structure had a database
 * it stores data that are represented as nodes, edges and relations
 * useful for running complex graph algorithms
@@ -179,7 +186,7 @@ History of Relational Databases
 * Common Misconception: Picking Non-relational DB because relational databases do not scale.
 * Why non-relational DBs scale
     * There are no relations & constraint
-    * Data is modelled to be sharded
+    * Data is modeled to be sharded
 * If we relax above condition on relational databases then they can be scaled.
     * do not use foreign key check
     * do not use cross shard transaction
