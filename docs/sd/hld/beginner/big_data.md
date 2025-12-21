@@ -35,7 +35,7 @@ Approach 3 : Distributed Computing
 * More computers, more cpu, more processing
 * Idea: Split the file into `partitions`, distribute the partition across all servers and let each server compute word frequency independently and send the result to the cluster co-ordinator which merges the result and returns final answer
 
-![](assets/Pasted%20image%2020250906174456.png)
+![](assets/Pasted%20image%2020251221211833.png)
 
 Challenges with this approach
 

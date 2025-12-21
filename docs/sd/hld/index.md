@@ -3,13 +3,13 @@
 
 ## Basics
 
-- [Introduction to System Design](intro.md)
-- [Databases and Scaling](db.md)
-- [Caching and Optimization](cache.md)
-- [Messaging and Streaming Systems](streaming.md)
-- [Load Balancing and Fault Tolerance](load.md)
-- [Communication and Protocols](communication.md)
-- [Big Data and Applications](big_data.md)
+- [Introduction to System Design](./beginner/intro.md)
+- [Databases and Scaling](./beginner/db.md)
+- [Caching and Optimization](./beginner/cache.md)
+- [Messaging and Streaming Systems](./beginner/messaging.md)
+- [Load Balancing and Fault Tolerance](beginner/load.md)
+- [Communication and Protocols](beginner/communication.md)
+- [Big Data and Applications](./beginner/big_data.md)
   
 ## Real-world System Designs
 
