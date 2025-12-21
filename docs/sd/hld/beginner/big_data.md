@@ -1,5 +1,7 @@
 # Big Data
 
+>    Big data is not about data size, it’s about extracting value.
+
 When one machine is not enough to process the data, we distribute processing over several machines and combine their results to get final result.
 
 This process in fundamental in all kinds of Big Data Processing, useful in extracting insights from the data, train Machine Learning Models, move data across databases and much more.

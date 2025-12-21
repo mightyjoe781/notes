@@ -1,5 +1,6 @@
 # Introduction to System Design
 
+>    “Systems run the world. Good design keeps them from falling apart.”
 ## What is System Design ?
 
 ![](assets/Pasted%20image%2020251221191055.png)

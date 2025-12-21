@@ -1,5 +1,6 @@
 # Messaging and Streaming Systems
 
+>    Move data, don’t wait for it.
 ## Asynchronous Processing
 
 ![](assets/Pasted%20image%2020251221201204.png)

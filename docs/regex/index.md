@@ -1,10 +1,10 @@
 # Regular Expressions
 
+> Use regex wisely - it’s power and pain in one package.
+## Notes
 
-
-## Mastering Regular Expressions Notes
-
-- [Chapter 1: Introduction to Regular Expression](jeff/ch1.md)
-- [Chapter 2: Extended Introductory Examples](jeff/ch2.md)
-- [Chapter 3: Overview of Regular Expression Features and Flavors](jeff/ch3.md)
-- [Chapter 5: Practical Regex Techniques](jeff/ch5.md)
+- Mastering Regular Expressions
+    - [Introduction to Regular Expression](jeff/ch1.md)
+    - [Extended Introductory Examples](jeff/ch2.md)
+    - [Overview of Regular Expression Features and Flavors](jeff/ch3.md)
+    - [Practical Regex Techniques](jeff/ch5.md)

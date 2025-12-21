@@ -1,5 +1,6 @@
 # Communication and Protocols
 
+>    Distributed systems are just computers trying their best to talk to each other.
 ## Client-Server Model and Communication Protocols
 
 ![](assets/Pasted%20image%2020251221210118.png)

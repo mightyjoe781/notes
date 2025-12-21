@@ -1,6 +1,6 @@
 # Databases and Scaling
 
->    most important component of any system
+>    Data is the new oil — but only if you can store, query, and scale it.
 
 Databases can be divided into two categories: *Relational* or *Non-Relational* Databases, 
 ## Relational Databases
