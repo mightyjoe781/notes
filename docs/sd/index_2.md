@@ -6,7 +6,6 @@
 - [Caching Systems](core/caching.md)
 - [Databases & Storage](core/databases.md)
 - [Message Queues & Streaming](core/queue_streaming.md)
-
 #### Networking & Communication
 
 - [Network Protocols](communication/network.md)
@@ -73,37 +72,6 @@
 - [Mobile Backend Systems](architecture/mobile_backend.md)
 - [Real-time Systems](architecture/real_time.md)
 - [Batch Processing Systems](architecture/batch_processing.md)
-
-### HLD Techniques
-
-- Bloom Filters
-- Hyper Log-Log
-- Merkle Trees
-- Quad Trees
-- Geo Hashing
-- Consistent Hashing
-- Trie
-- B Tree
-- LSM Tree
-- Operational Transformation (OT)
-- Conflict Free Replicated Data Types (CRDTs)
-
-Advanced Algorithms
-- GeoHash
-- Quadtree
-- Consistent Hashing
-- Token Bucket
-- Trie
-- Rsync
-- Raft/Paxos
-- Bloomfilter
-- Merkle Tree
-- HyperLogLog
-- Count-min Sketch
-- Hiearchical timing wheels
-- Operational Transformation
-
-
 ### Classic Interview Problems
 
 - Social Media Platforms

@@ -13,7 +13,7 @@ hide:
 
 ### Shortcuts
 
-[AWS](aws/index.md) - [Algorithms](dsa/index.md)  - [Databases](databases/index.md) - [Docker](docker/index.md) - [FreeBSD](freebsd/index.md) - [Minetest](mt/index.md) - [Microservices](microservices/index.md) - [Finance](fin/index.md) - [Git](git/index.md) - [Go](go/index.md) - [OS](os/index.md) - [Server](server/index.md) - [tmux](tmux/index.md) - [Terraform](terraform/index.md) - [Vim](vim/index.md) - [WebDev](webdev/index.md) - [Python](python/index.md) - [Pyspark](pyspark/index.md)
+[AWS](aws/index.md) - [Algorithms](dsa/index.md)  - [Databases](databases/index.md) - [Docker](docker/index.md) - [FreeBSD](freebsd/index.md) - [Minetest](mt/index.md) - [Microservices](microservices/index.md) - [Git](git/index.md) - [Go](go/index.md) - [OS](os/index.md) - [Server](server/index.md) - [tmux](tmux/index.md) - [Terraform](terraform/index.md) - [Vim](vim/index.md) - [WebDev](webdev/index.md) - [Python](python/index.md) - [Pyspark](pyspark/index.md)
 
 ### Contents
 
@@ -113,8 +113,6 @@ hide:
 -   __Miscellaneous__
 
     ---
-
-    :material-currency-usd:{ .lg .middle } [Finance](fin/index.md)
 
     :material-chart-bar:{ .lg .middle } [Data Analysis](dataanalysis/index.md)
 

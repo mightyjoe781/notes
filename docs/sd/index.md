@@ -20,6 +20,7 @@ Notes
 * MicroServices
 * [API Design Principles](api_design.md)
 * [HLD Notes Topic Wise](./index_2.md) [WIP]
+* Advanced Algorithms
 
 Resources
 
