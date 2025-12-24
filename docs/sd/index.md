@@ -17,10 +17,17 @@ Notes
 * [General Software Engineering Principle Overview](principles.md)
 * [Notes on LLD](lld/index.md) ✅
 * [Notes on HLD](hld/index.md) ✅
-* MicroServices
+* Micro-Services
 * [API Design Principles](api_design.md)
-* [HLD Notes Topic Wise](./index_2.md) [WIP]
-* Advanced Algorithms
+* Appendices
+    * [Reference Numbers](appendices/ref_numbers.md)
+    * [Tools & Technology](appendices/toolsntech.md)
+
+Advanced Topics
+
+* [HLD Notes Topic Wise](topics/index.md) [WIP]
+* [Advanced Algorithms](../advanced_dsa/index.md)
+* General Problems
 
 Resources
 

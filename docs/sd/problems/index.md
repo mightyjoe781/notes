@@ -31,3 +31,36 @@ Advanced Comprehensive Problems Discussions
 * File Storage System
 * E-commerce cart-system
 * Real-Time Document Editor
+
+
+- Social Media Platforms
+    - Twitter/X-like System
+    - Instagram-like System
+    - LinkedIn-like System
+    - TikTok-like System
+- E-commerce Systems
+    - Amazon-like System
+    - Shopping Cart Design
+    - Payment Processing System
+    - Inventory Management System
+- Communication Systems
+    - WhatsApp/Slack-like Chat
+    - Video Conferencing System
+    - Email System
+    - Notification System
+- Media & Content
+    - Netflix/YouTube-like Streaming
+    - Spotify-like Music Streaming
+    - Content Management System
+    - Live Streaming Platform
+- Transportation & Location
+    - Uber/Lyft Ride-sharing
+    - Google Maps-like System
+    - Food Delivery System
+    - Parking System
+- Utility Systems
+    - URL Shortener (bit.ly)
+    - [Pastebin](pastebin.md)
+    - Web Crawler & Search Engine
+    - Rate Limiter Design
+    - Distributed Cache System
