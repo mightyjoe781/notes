@@ -188,7 +188,7 @@ But why are we doing this ? *We are doing this to avoid single-point of failure(
 
 Exercises
 
-- Implement a load balancer with tuneable algorithm locally.
+- Implement a load balancer with tunable algorithm locally.
 - Read this Paper : Maglev : A fast and reliable software load balancer
 - Read about redis : *Redlock* : Martin Kleppmann & implementation blog
 - Read on Chubby Lock: Lock service for loosely coupled distributed systems

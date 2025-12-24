@@ -27,14 +27,11 @@
 
 ## Cache Levels
 
+![](assets/Pasted%20image%2020251224114125.png)
+
 ### Client-side Caching
 
 **Location**: Browser, Mobile Apps
-
-```
-[User] -> [Browser Cache] -> Network
-```
-
 **Use Cases**:
 
 - Static assets (images, CSS, JS)
@@ -42,17 +39,11 @@
 - Offline functionality
 
 Advantages: Zero Network Calls, fastest possible response
-
 Disadvantages: Limited Control, potential for stale data
 
 ### Content Delivery Network
 
 **Location**: Geographically distributed edge servers
-
-```
-[User] -> [CDN Edge Server] -> [Origin Server]
-```
-
 **Use Cases**:
 
 - Static content delivery
@@ -64,11 +55,6 @@ Disadvantages: Limited Control, potential for stale data
 ### Reverse Proxy Cache
 
 **Location**: Between clients and application servers
-
-```
-[Client] -> [Reverse Proxy/Load Balancer] -> [App Server]
-```
-
 **Use Cases**:
 
 - Caching API responses
@@ -97,17 +83,8 @@ def get_user_profile(user_id):
 ### Distributed Cache (Remote Cache)
 
 **Location**: Separate cache servers (Redis, Memcached)
-
-````
-[App Server 1] \
-[App Server 2] -> [Redis Cluster] -> [Database]
-[App Server 3] /
-````
-
 **Advantages**: Shared across multiple application instances 
-
 **Use Cases**: Session storage, computed results, hot data
-
 ### Database-Level Caching
 
 **Types**:
@@ -137,7 +114,8 @@ def update_data(key, new_data):
     cache.delete(key)  # Invalidate cache
 ```
 
-**Pros**: Only caches requested data, handles cache failures gracefully **Cons**: Cache miss penalty, potential for stale data
+**Pros**: Only caches requested data, handles cache failures gracefully
+**Cons**: Cache miss penalty, potential for stale data
 
 ### Write-Through Cache
 
@@ -148,7 +126,8 @@ def update_data(key, data):
     return data
 ````
 
-**Pros**: Cache always consistent with database **Cons**: Higher write latency, unnecessary cache writes
+**Pros**: Cache always consistent with database
+**Cons**: Higher write latency, unnecessary cache writes
 
 ### Write Behind (Write-Back) Cache
 
@@ -160,7 +139,8 @@ def update_data(key, data):
     return data
 ````
 
-**Pros**: Fastest write performance **Cons**: Risk of data loss, complex implementation
+**Pros**: Fastest write performance, used in live scores dashboards etc.
+**Cons**: Risk of data loss, complex implementation
 
 ### Refresh Ahead
 
@@ -173,10 +153,12 @@ def get_data_with_refresh(key):
     return data
 ````
 
-**Pros**: Reduces cache miss latency **Cons**: Complex logic, may refresh unused data
+**Pros**: Reduces cache miss latency 
+**Cons**: Complex logic, may refresh unused data
 
 ## Cache Population Strategies
 
+![](../../hld/beginner/assets/Pasted%20image%2020251221195711.png)
 ### Lazy Population (Cache-Aside)
 
 - Load data into cache only when requested
@@ -396,27 +378,6 @@ def check_cache_health():
 - **Latency**: Response time for cache operations
 - **Memory Usage**: Cache memory consumption
 - **Eviction Rate**: How often items are evicted
-
-```python
-class CacheMetrics:
-    def __init__(self):
-        self.hits = 0
-        self.misses = 0
-        self.total_latency = 0
-        
-    def record_hit(self, latency):
-        self.hits += 1
-        self.total_latency += latency
-        
-    def record_miss(self, latency):
-        self.misses += 1
-        self.total_latency += latency
-        
-    def hit_ratio(self):
-        total = self.hits + self.misses
-        return self.hits / total if total > 0 else 0
-```
-
 ## Technology Choices
 
 ### In-Memory Caches
@@ -460,31 +421,3 @@ class CacheMetrics:
 - Ignoring cache invalidation complexity
 - Caching data that changes frequently
 - Not handling cache failures gracefully
-
-## Interview Tips
-
-### Common Questions
-
-1. "When would you use caching in your system design?"
-2. "How would you handle cache invalidation?"
-3. "What's the difference between Redis and Memcached?"
-4. "How do you prevent cache stampede?"
-5. "What metrics would you monitor for cache performance?"
-
-### Key Points to Remember
-
-- Caches are not silver bullets - use strategically
-- Always consider consistency requirements
-- Plan for cache failures and fallback mechanisms
-- Different cache levels serve different purposes
-- Monitor and measure cache effectiveness
-
-### Example System Design Application
-
-When designing a social media feed:
-
-1. **CDN**: Cache static assets (images, videos)
-2. **Redis**: Cache user sessions and computed feeds
-3. **Application Cache**: Cache user profile data
-4. **Database Cache**: Cache frequently accessed posts
-5. **Invalidation**: Event-driven invalidation when posts are updated

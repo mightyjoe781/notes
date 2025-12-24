@@ -1,10 +1,12 @@
 # Load Balancers
 
-**What are Load Balancers**
+**What are Load Balancers ?**
 
 Load balancers are critical components in distributed systems that distribute incoming requests across multiple backend servers. 
 
 They act as a **single point of contact** for clients while hiding the complexity of multiple servers behind them.
+
+![](../../hld/beginner/assets/Pasted%20image%2020251221204406.png)
 
 **Key Benefits**
 
@@ -12,6 +14,8 @@ They act as a **single point of contact** for clients while hiding the complexit
 - **High Availability** - Prevent single points of failure by routing around unhealthy servers
 - **Performance** - Distribute load to prevent server overload and reduce response times
 - **Flexibility** - Allow maintenance and updates without service interruption
+
+![](../../hld/beginner/assets/Pasted%20image%2020251221205436.png)
 
 **Request-Response Flow**
 
@@ -21,28 +25,25 @@ They act as a **single point of contact** for clients while hiding the complexit
 4. Backend server processes request and returns response
 5. Load balancer forwards response back to client
 
-(todo: put a digram here for load balancer)
+## Layer 4 vs Layer 7 Load Balancing
 
-### Layer 4 vs Layer 7 Load Balancing
-
-**Layer 4 (Transport Layer) Load Balancing**
+### Layer 4 (Transport Layer) Load Balancing
 
 - operates on TCP/UDP Level - makes routing based on IP Addresses and Port Numbers only
 - Use Cases
     - High-throughput applications requiring minimal latency
     - Non-HTTP protocols (databases, gaming servers, VoIP)
-    - When you need maximum performance and don't need content-based routing
+    - When you need maximum performance and don't need *content-based routing*
+    - Faster and doesn't read the content, so its more private.
 
-**Layer 7 (Application Layer) Load Balancing**
+### Layer 7 (Application Layer) Load Balancing
 
 * Operates on HTTP/HTTPs level - can inspect and make decision based on application content
 * Use Cases
     * Microservice Architecture requiring path based routing
     * A/B testing and canary deployments
-    * API Gateways requiring authentication and rate limitting
+    * API Gateways requiring authentication and rate limiting
     * Content-Based Routing
-
-**Comparison Table**
 
 | Aspect               | Layer 4                  | Layer 7                  |
 | -------------------- | ------------------------ | ------------------------ |
@@ -53,9 +54,9 @@ They act as a **single point of contact** for clients while hiding the complexit
 | Protocol Support     | Any TCP/UDP              | Primarily HTTP/HTTPS     |
 | Complexity           | Simple                   | Complex                  |
 
-### Load Balancing Algorithms
+## Load Balancing Algorithms
 
-#### Round Robin
+### Round Robin
 
 * distributes the load iteratively (uniformly) across all servers
 * best for homogenous servers with similar processing capabilities
@@ -72,7 +73,7 @@ class RoundRobinBalancer:
         return server
 ````
 
-#### Weighted Round Robin
+### Weighted Round Robin
 
 * distribute the load iteratively but as per weights
 * best for heterogeneous environments with servers of different capacities
@@ -92,7 +93,7 @@ class WeightedRoundRobinBalancer:
         return server
 ````
 
-#### Least Connections
+### Least Connections
 
 - pick server with least connection from the balancer. Used when response time has a big variance (analytics, file upload)
 
@@ -112,21 +113,21 @@ class LeastConnectionsBalancer:
         self.connection_counts[server] -= 1
 ````
 
-#### Least Response Time
+### Least Response Time
 
 * Combines connection count with average response time.
 * Algorithm : Routes to server with `(active_connections * average_response_time)` minimum value.
 
-#### IP Hash
+### IP Hash
 
 * has of some attributes (ip, user id, url) determines which serve to pick
 * Ensures session is persistent without sticky sessions, but can create uneven distribution if clients are behind a NAT
 
-#### Consistent Hashing
+### Consistent Hashing
 
 * best for session-stick applications, caching
 
-#### Resource Based (Dynamic)
+### Resource Based (Dynamic)
 
 * Routes based on real-time server resource utilization (CPU, memory, disk I/O).
 * Implementation requires monitoring agents on each server reporting metrics to the load balancer.
@@ -135,13 +136,13 @@ class LeastConnectionsBalancer:
 
 ### Active-Active Configuration
 
-All load balancers handle traffic simulatenously
+All load balancers handle traffic simultaneously
 
 Implementation Pattern
 
 * DNS Round Robin - Multiple A records for the same domain
 * BGP Anycast - Same IP announced from multiple locations
-* Clustered Load Balancers - shared state beteween multiple LB instances
+* Clustered Load Balancers - shared state between multiple LB instances
 
 ### Active-Passive Configuration
 
@@ -153,8 +154,6 @@ Implementation
 * Heartbeat Monitoring - Passive monitors active health
 * Automatic Promotion - Standby becomes active on failure detection
 
-#### Comparisons
-
 | Aspect               | Active-Active              | Active-Passive          |
 | -------------------- | -------------------------- | ----------------------- |
 | Management           | Complex Synchronisation    | Simple                  |
@@ -162,15 +161,14 @@ Implementation
 | Point of Failure     | None, Multiple Entry Point | Single Point of Failure |
 | Throughput           | High                       | Low                     |
 
-
-
 ## Health Checks
 
-#### HTTP Health Checks
+### HTTP Health Checks
 
-* Moniter real request/response patterns to detect failures
+* Monitor real request/response patterns to detect failures
 
 ````python
+# we implement a health check which only activates when failures cross certain threshold
 class PassiveHealthCheck:
     def __init__(self, failure_threshold=3, timeout_threshold=5.0):
         self.failure_threshold = failure_threshold
@@ -195,7 +193,7 @@ class PassiveHealthCheck:
 * Advantages: No additional network overhead, reflect real user experience.
 * Disadvantages: Reactive only, may take time to detect issues.
 
-#### Active Health Check
+### Active Health Check
 
 * Proactively send test requests to verify server health
 
@@ -240,53 +238,46 @@ Common Health Check Endpoints
 
 ### Application-Level Health Checks
 
-* Verify application fuctionality beyond basic connectivity
+* Verify application functionality beyond basic connectivity.
+* Example assume we have few services connected to `/health` endpoint : Postgres, & Redis.
 
-````python
-# Example health check endpoint implementation
-from flask import Flask, jsonify
-import psycopg2
-import redis
+```json
+{
+    "checks": {
+        "database": "healthy",
+        "cache": "healthy",
+        "dns": "degraded"
+    },
+    "status": "degraded"
+}
+```
 
-app = Flask(__name__)
 
-@app.route('/health')
-def health_check():
-    health_status = {
-        'status': 'healthy',
-        'checks': {},
-        'timestamp': datetime.utcnow().isoformat()
-    }
-    
-    # Database connectivity check
-    try:
-        conn = psycopg2.connect(DATABASE_URL)
-        conn.close()
-        health_status['checks']['database'] = 'healthy'
-    except Exception as e:
-        health_status['checks']['database'] = f'unhealthy: {str(e)}'
-        health_status['status'] = 'unhealthy'
-    
-    # Cache connectivity check
-    try:
-        redis_client = redis.Redis.from_url(REDIS_URL)
-        redis_client.ping()
-        health_status['checks']['cache'] = 'healthy'
-    except Exception as e:
-        health_status['checks']['cache'] = f'unhealthy: {str(e)}'
-        health_status['status'] = 'unhealthy'
-    
-    status_code = 200 if health_status['status'] == 'healthy' else 503
-    return jsonify(health_status), status_code
-````
+### Phi Accrual Failure Detector Algorithm
+
+$\phi$ : suspicion level of failure.
+$P_{fail}$ : is the probability that the node has failed based on observed heartbeat intervals.
+
+
+$$
+\phi = -\log_{10}(1-P_{fail})
+$$
+
+NOTE: if $\phi$ exceeds some threshold, node is suspected to have failed.
+
+Now Health Check Frequency can be adjusted based on phi values. Ex- if low phi is detected then checks can be less frequent or else we can increase checks.
+
+Applications : Systems like Cassandra & Zookeeper, and other distributed systems use it for failure detection.
 
 ## Failover Mechanisms
+### Circuit Breaker Pattern
 
-#### Circuit Breaker Pattern
+![](../../hld/beginner/assets/Pasted%20image%2020251221205200.png)
 
 * Prevents cascading failures by temporarily stopping requests to failed service.
 
 ````python
+# Sample Example Python Code
 import time
 from enum import Enum
 
@@ -330,7 +321,7 @@ class CircuitBreaker:
             self.state = CircuitState.OPEN
 ````
 
-#### Graceful Degration
+### Graceful Degration
 
 * provide reduced functionality when some servers are unavailable
 
@@ -357,6 +348,7 @@ class GracefulDegradationBalancer:
         return self.fallback_servers[0]
 ````
 
+## Other Topics on Load Balancer
 ### Popular Load Balancer Solutions
 
 Hardware Load Balancers
@@ -410,13 +402,10 @@ Operation Requirements
 
 ### Further Reading
 
-[AWS Application Load Balancer Documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/)
-
-[NGINX Load Balancing Guide](https://nginx.org/en/docs/http/load_balancing.html)
-
-[HAProxy Configuration Manual](http://cbonte.github.io/haproxy-dconv/)
-
-[Google Cloud Load Balancing Concepts](https://cloud.google.com/load-balancing/docs/load-balancing-overview)
+- [AWS Application Load Balancer Documentation](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/)
+- [NGINX Load Balancing Guide](https://nginx.org/en/docs/http/load_balancing.html)
+- [HAProxy Configuration Manual](http://cbonte.github.io/haproxy-dconv/)
+- [Google Cloud Load Balancing Concepts](https://cloud.google.com/load-balancing/docs/load-balancing-overview)
 
 Advanced Load Balancing Features
 
