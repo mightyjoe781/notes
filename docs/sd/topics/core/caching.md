@@ -32,6 +32,7 @@
 ### Client-side Caching
 
 **Location**: Browser, Mobile Apps
+
 **Use Cases**:
 
 - Static assets (images, CSS, JS)
@@ -39,11 +40,13 @@
 - Offline functionality
 
 Advantages: Zero Network Calls, fastest possible response
+
 Disadvantages: Limited Control, potential for stale data
 
 ### Content Delivery Network
 
 **Location**: Geographically distributed edge servers
+
 **Use Cases**:
 
 - Static content delivery
@@ -55,6 +58,7 @@ Disadvantages: Limited Control, potential for stale data
 ### Reverse Proxy Cache
 
 **Location**: Between clients and application servers
+
 **Use Cases**:
 
 - Caching API responses
@@ -83,8 +87,11 @@ def get_user_profile(user_id):
 ### Distributed Cache (Remote Cache)
 
 **Location**: Separate cache servers (Redis, Memcached)
+
 **Advantages**: Shared across multiple application instances 
+
 **Use Cases**: Session storage, computed results, hot data
+
 ### Database-Level Caching
 
 **Types**:
@@ -115,6 +122,7 @@ def update_data(key, new_data):
 ```
 
 **Pros**: Only caches requested data, handles cache failures gracefully
+
 **Cons**: Cache miss penalty, potential for stale data
 
 ### Write-Through Cache
@@ -127,6 +135,7 @@ def update_data(key, data):
 ````
 
 **Pros**: Cache always consistent with database
+
 **Cons**: Higher write latency, unnecessary cache writes
 
 ### Write Behind (Write-Back) Cache
@@ -140,6 +149,7 @@ def update_data(key, data):
 ````
 
 **Pros**: Fastest write performance, used in live scores dashboards etc.
+
 **Cons**: Risk of data loss, complex implementation
 
 ### Refresh Ahead
@@ -154,6 +164,7 @@ def get_data_with_refresh(key):
 ````
 
 **Pros**: Reduces cache miss latency 
+
 **Cons**: Complex logic, may refresh unused data
 
 ## Cache Population Strategies

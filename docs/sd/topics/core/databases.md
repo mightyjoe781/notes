@@ -276,6 +276,7 @@ CREATE (user)-[:FRIENDS_WITH]->(other_user)
 - Changes are immediately reflected in replicas
 
 **Pros**: Strong consistency, zero data loss 
+
 **Cons**: Higher latency, availability issues
 
 #### Asynchronous Replication
@@ -283,6 +284,7 @@ CREATE (user)-[:FRIENDS_WITH]->(other_user)
 - Changes are sent to replicas, assuming that they will reflect master db eventually.
 
 **Pros**: Lower latency, better availability 
+
 **Cons**: Replication lag, potential data loss
 
 #### Semi-Synchronous Replication
@@ -290,6 +292,7 @@ CREATE (user)-[:FRIENDS_WITH]->(other_user)
 - Wait for at-least one of the replica to confirm replication
 
 **Pros**: Balance of consistency and performance
+
 **Cons**: More complex implementation
 
 ## Database Partitioning & Sharding
@@ -447,22 +450,23 @@ def get_user_posts(user_id):
 
 ## Common Questions
 
-- "How would you scale a database that's reaching its limits?"
-   - Start with read replicas
-   - Consider caching strategies
-   - Vertical scaling first, then horizontal
-   - Eventually move to sharding
-- "When would you choose NoSQL over SQL?"
-   - Rapid development with changing schema
-   - Need for horizontal scaling
-   - Specific data models (document, graph)
-   - Eventual consistency is acceptable
-- "How do you handle database failures?"
-   - Replication for redundancy
-   - Automated failover
-   - Regular backups
-   - Health monitoring
-- "Explain the CAP theorem and its implications"
-   - Consistency, Availability, Partition tolerance
-   - Can only guarantee two of three
-   - Real-world trade-offs
+
+- How would you scale a database that's reaching its limits?
+    - Start with read replicas
+    - Consider caching strategies
+    - Vertical scaling first, then horizontal
+    - Eventually move to sharding
+- When would you choose NoSQL over SQL ?
+    - Rapid development with changing schema
+    - Need for horizontal scaling
+    - Specific data models (document, graph)
+    - Eventual consistency is acceptable
+- How do you handle database failures?
+    - Replication for redundancy
+    - Automated failover
+    - Regular backups
+    - Health monitoring
+- Explain the CAP theorem and its implications
+    - Consistency, Availability, Partition tolerance
+    - Can only guarantee two of three
+    - Real-world trade-offs
