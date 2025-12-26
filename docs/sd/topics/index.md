@@ -8,23 +8,27 @@
 - [Message Queues & Streaming](core/queue_streaming.md)
 #### Networking & Communication
 
-- [Network Protocols](communication/network.md)
+- [Network Protocols](core/network.md)
 - [API Design Patterns](../api_design.md)
-- [Service Communication](communication/service.md)
-#### Scalability Patterns
 
-- [Scaling Patterns](core/scalability.md)
-#### Reliability & Availability
+#### Key Aspects of System Design
 
-- [Fault Tolerance](reliability/fault_tolerance.md)
-- [High Availability Patterns](reliability/availability_patterns.md)
-- [Monitoring & Observability](reliability/monitoring.md)
-#### System Design Interview Patterns
+- [Scalability](core/scalability.md)
+* [Reliability & Availability](core/reliability.md)
+* [Performance](core/performance.md)
+* [Maintainability](core/maintainability.md)
+
+---
+
+Under Refactoring ....
+
+#### System Design Interview Guide
 
 - [Problem Clarification](interview_patterns/problem_clarification.md)
 - [High-Level Design](interview_patterns/high_level.md)
 - [Detailed Design](interview_patterns/detailed_design.md)
 - [Scale & Optimize](interview_patterns/scale_and_optimize.md)
+
 #### Design Paradigms
 
 - [Monolithic Architecture](paradigms/monolith.md)
@@ -37,13 +41,6 @@
 - [Consistency Models](consistency/consistency_models.md)
 - [Consensus Algorithms](consistency/consensus_algorithms.md)
 - [Conflict Resolution](consistency/conflict_resolution.md)
-#### Performance Optimization
-
-- [Latency Optimization](performance_optimization/latency.md)
-- [Throughput Optimization](performance_optimization/throughput.md)
-- [Resource Optimization](performance_optimization/resource.md)
-- [Capacity Planning](performance_optimization/capacity.md)
-
 #### Database Design Patterns
 
 - [Relational Database Patterns](database/relational.md)
@@ -60,10 +57,8 @@
 
 #### System Design Patterns
 
-- [Reliability Patterns](patterns/reliability.md)
-- [Performance Patterns](patterns/performance.md)
-- [Scalability Patterns](patterns/scalability.md)
 - [Data Patterns](patterns/data.md)
+- [Service Communication](communication/service.md)  (MicroServices, Needs to be refactored a lot!!)
 
 #### Common System Architectures
 

@@ -122,8 +122,6 @@ hide:
 
     :fontawesome-solid-person-swimming:{ .lg .middle } [Swimming](swimming/index.md)
 
-    :material-camera:{ .lg .middle } [Photography](photography/index.md)
-
     :material-regex:{ .lg .middle } [Regex](regex/index.md)
 
 </div>
