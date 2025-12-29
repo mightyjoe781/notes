@@ -17,6 +17,7 @@ Notes
 * [General Software Engineering Principle Overview](principles.md)
 * [Notes on LLD](lld/index.md) ✅
 * [Notes on HLD](hld/index.md) ✅
+* [Interview Guide](interview_guide.md)
 * Micro-Services
 * [API Design Principles](api_design.md)
 * Appendices
@@ -26,7 +27,7 @@ Notes
 Advanced Topics
 
 * [HLD Notes Topic Wise](topics/index.md) [WIP]
-* [Advanced Algorithms](../advanced_dsa/index.md)
+* [Advanced Algorithms](../advanced_dsa/index.md) [WIP]
 * General Problems
 
 Resources

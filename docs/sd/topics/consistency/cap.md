@@ -27,7 +27,7 @@ CAP Theorem Constraints
 
 ### Real-World Context
 
-The CAP theorem applies specifically to network partitions. In practice, partitions are temporary events, and systems can be designed to optimize for normal operation while having clear behaviour during partition scenarios.
+The CAP theorem applies specifically to network partitions. In practice, partitions are temporary events, and systems can be designed to optimize for normal operation while having clear behavior during partition scenarios.
 
 ------
 
