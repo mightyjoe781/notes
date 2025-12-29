@@ -12,20 +12,19 @@ Authentication is the process of verifying the identity of users, systems, or en
     - SAML
     - OIDC
     - Enterprise SSO Patterns
-- MFA (Multifactor Authentication)
+- MFA (MultiFactor Authentication)
     - TOTP
     - SMS-Based
     - Hardware Security Keys
     - Biometric
 - Token Based Authentication
     - JWT
-
 -  Stateless vs Stateful Authentication
 ### Authorization Patterns
 
+[Authorization Notes](authorization.md)
+
 Authorization determines what authenticated users can access and what actions they can perform.
-
-
 
 - RBAC
     - Flat RBAC Model
@@ -35,3 +34,6 @@ Authorization determines what authenticated users can access and what actions th
     - XACML (eXtensible Access Control Markup Language)
 - OAuth 2.0 Flow Patterns
 
+### Data Security
+
+- [Data Security](data_security.md)

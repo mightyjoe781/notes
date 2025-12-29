@@ -18,29 +18,21 @@
 * [Performance](core/performance.md)
 * [Maintainability](core/maintainability.md)
 
----
+#### Interview Guide
+
+- [Interview Guide](../interview_guide.md)
+
+#### Security & Privacy
+
+- [Authentication Patterns](../../other_sde/security/authentication.md)
+- [Authorization Patterns](../../other_sde/security/authorization.md)
+- [Data Security](../../other_sde/security/data_security.md)
+- [Network Security](../../networking/neteng/protocols.md)
+
+------
 
 Under Refactoring ....
 
-#### System Design Interview Guide
-
-- [Problem Clarification](interview_patterns/problem_clarification.md)
-- [High-Level Design](interview_patterns/high_level.md)
-- [Detailed Design](interview_patterns/detailed_design.md)
-- [Scale & Optimize](interview_patterns/scale_and_optimize.md)
-
-#### Design Paradigms
-
-- [Monolithic Architecture](paradigms/monolith.md)
-- [Microservices Architecture](paradigms/microservices.md)
-- [Serverless Architecture](paradigms/serverless.md)
-- [Event-Driven Architecture](paradigms/event_driven.md)
-#### Consistency & Distributed Systems
-
-- [CAP Theorem](consistency/cap.md)
-- [Consistency Models](consistency/consistency_models.md)
-- [Consensus Algorithms](consistency/consensus_algorithms.md)
-- [Conflict Resolution](consistency/conflict_resolution.md)
 #### Database Design Patterns
 
 - [Relational Database Patterns](database/relational.md)
@@ -48,12 +40,26 @@ Under Refactoring ....
 - [Data Modeling](database/data_modelling.md)
 - [Advanced Database Topics](database/advanced_models.md)
 
-#### Security & Privacy
+#### Consistency & Distributed Systems
 
-- [Authentication Patterns](security/authentication_patterns.md)
-- [Authorization Patterns](security/authorization_patterns.md)
-- [Data Security](security/data_security.md)
-- [Network Security](security/network_security.md)
+- [CAP Theorem](consistency/cap.md)
+- [Consistency Models](consistency/consistency_models.md)
+- [Consensus Algorithms](consistency/consensus_algorithms.md)
+- [Conflict Resolution](consistency/conflict_resolution.md)
+
+#### Design Paradigms
+
+- [Monolithic Architecture](paradigms/monolith.md)
+- [Microservices Architecture](paradigms/microservices.md)
+- [Serverless Architecture](paradigms/serverless.md)
+- [Event-Driven Architecture](paradigms/event_driven.md)
+
+#### System Design Guide
+
+- [Problem Clarification](interview_patterns/problem_clarification.md)
+- [High-Level Design](interview_patterns/high_level.md)
+- [Detailed Design](interview_patterns/detailed_design.md)
+- [Scale & Optimize](interview_patterns/scale_and_optimize.md)
 
 #### System Design Patterns
 
