@@ -237,6 +237,12 @@ RESPONSE:
 
 ```
 
+| Method           | Example                              | Pros                                   | Cons                         |
+| ---------------- | ------------------------------------ | -------------------------------------- | ---------------------------- |
+| **Offset-based** | `GET /posts?page=2&limit=20`         | Easy to implement, familiar            | Issues with data changes     |
+| **Cursor-based** | `GET /posts?cursor=abc123&limit=20`  | Consistent results, real-time friendly | More complex implementation  |
+| **Key-based**    | `GET /posts?since_id=12345&limit=20` | Efficient for time-ordered data        | Limited to specific ordering |
+
 ### Request/Response Patterns
 
 #### Standard HTTP Status Code

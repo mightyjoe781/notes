@@ -18,7 +18,7 @@ Notes
 * [Notes on LLD](lld/index.md) ✅
 * [Notes on HLD](hld/index.md) ✅
 * [Interview Guide](interview_guide.md)
-* Micro-Services
+* [Micro-Services](../microservices/index.md)
 * [API Design Principles](api_design.md)
 * Appendices
     * [Reference Numbers](appendices/ref_numbers.md)
@@ -26,7 +26,7 @@ Notes
 
 Advanced Topics
 
-* [HLD Notes Topic Wise](topics/index.md) [WIP]
+* [HLD Notes Topic Wise](topics/index.md)
 * [Advanced Algorithms](../advanced_dsa/index.md) [WIP]
 * General Problems
 

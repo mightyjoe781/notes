@@ -1,38 +1,30 @@
 # Relational Database Patterns
 
-*Comprehensive guide to designing, optimizing, and scaling relational database systems for modern applications, covering normalization strategies, indexing approaches, query optimization, and federation patterns.*
-
-### Overview
-
 Relational databases remain the backbone of most modern applications due to their ACID guarantees, mature tooling, and well-understood patterns. Understanding how to properly design, optimize, and scale relational databases is crucial for building robust systems that can handle growing data volumes and user loads while maintaining data consistency and performance.
 
-**Core Relational Database Concepts:**
+Core Relational Database Concepts:
 
-- **ACID Properties**: Atomicity, Consistency, Isolation, Durability
-- **SQL Standards**: Structured Query Language for data manipulation
-- **Schema Enforcement**: Strict data types and constraints
-- **Relational Integrity**: Foreign keys and referential constraints
-- **Transaction Support**: Multi-statement operations with rollback capabilities
+- ACID Properties: Atomicity, Consistency, Isolation, Durability
+- SQL Standards: Structured Query Language for data manipulation
+- Schema Enforcement: Strict data types and constraints
+- Relational Integrity: Foreign keys and referential constraints
+- Transaction Support: Multi-statement operations with rollback capabilities
 
-**When to Choose Relational Databases:**
+When to Choose Relational Databases:
 
-- **Complex relationships**: Multiple entities with intricate relationships
-- **ACID requirements**: Strong consistency and transaction guarantees needed
-- **Mature ecosystem**: Extensive tooling, monitoring, and expertise available
-- **Structured data**: Well-defined schema with predictable data types
-- **Reporting needs**: Complex queries, joins, and analytical operations
+- Complex relationships: Multiple entities with intricate relationships
+- ACID requirements: Strong consistency and transaction guarantees needed
+- Mature ecosystem: Extensive tooling, monitoring, and expertise available
+- Structured data: Well-defined schema with predictable data types
+- Reporting needs: Complex queries, joins, and analytical operations
 
 ------
 
 ## Normalization vs Denormalization
 
-### Database Normalization
-
-**Normalization Fundamentals:**
-
 Normalization is the process of organizing data to *minimize redundancy and dependency* by dividing large tables into smaller, related tables. The goal is to eliminate duplicate data and ensure data integrity through proper table relationships.
 
-**Normal Forms Progression:**
+### Normal Form Progression
 
 **First Normal Form (1NF):**
 
@@ -64,37 +56,50 @@ Normalization is the process of organizing data to *minimize redundancy and depe
 
 **Normalization Example:**
 
-Consider an e-commerce order system transformation:
+![](assets/Pasted%20image%2020251229221231.png)
 
-**Un-normalized Table (0NF):**
+Consider above student and course table.
 
-```sql
-Orders_Denormalized:
-order_id | customer_name | customer_email | customer_phone | product_names | product_prices | order_total
-1        | John Doe      | john@email.com | 555-1234      | Laptop,Mouse  | 999.99,29.99  | 1029.98
-```
+Let's understand 1 NF : NF fixes the structure, not redundancy
 
-**Normalized Tables (3NF):**
+![](assets/Pasted%20image%2020251229221539.png)
 
-```sql
-Customers:
-customer_id | name     | email          | phone
-1          | John Doe | john@email.com | 555-1234
+2 NF : Table must be in 1NF and every non-key attribute must depend on the full primary key.
+Primary Key : `(student_id, course_id)`
 
-Products:
-product_id | name   | price
-1         | Laptop | 999.99
-2         | Mouse  | 29.99
+![](assets/Pasted%20image%2020251229221904.png)
 
-Orders:
-order_id | customer_id | order_date | total
-1        | 1          | 2024-01-15 | 1029.98
+Correct 2NF Tables :
 
-Order_Items:
-order_id | product_id | quantity | price
-1        | 1         | 1        | 999.99
-1        | 2         | 1        | 29.99
-```
+![](assets/Pasted%20image%2020251229222050.png)
+
+- No partial dependencies
+- Each non-key attribute depends on full key
+
+for 3NF Table must be in 2NF and no transitive dependency should exist
+
+![](assets/Pasted%20image%2020251229222355.png)
+
+![](assets/Pasted%20image%2020251229222607.png)
+
+- No non-key -> non-key dependency, removes indirect dependency
+
+BCNF : for every functional dependency A -> B, A must be superkey. Stronger form of 3NF
+
+![](assets/Pasted%20image%2020251229223023.png)
+
+![](assets/Pasted%20image%2020251229223142.png)
+
+- All determinants are super-keys
+
+
+| Normal Form | Fixes                 | Eliminates                     |
+| ----------- | --------------------- | ------------------------------ |
+| 1NF         | Atomicity             | Multi-valued fields            |
+| 2NF         | Partial Dependency    | Redundancy from composite keys |
+| 3NF         | Transitive Dependency | indirect redundancy            |
+| BCNF        | Weak Determinants     | All FD Anomalies               |
+
 
 **Benefits of Normalization:**
 
@@ -632,5 +637,3 @@ REFRESH MATERIALIZED VIEW monthly_sales;
 - Suggesting federation without clear functional boundaries
 - Not considering transaction requirements across federated databases
 - Ignoring operational complexity of proposed database architectures
-
-> **Remember**: Relational database design is about finding the right balance between data integrity, query performance, and operational simplicity. The best designs evolve with the application and are continuously optimized based on real-world usage patterns and performance metrics.
