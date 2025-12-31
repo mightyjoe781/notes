@@ -1,9 +1,5 @@
 # Microservices Architecture
 
-*An architectural approach where applications are built as a collection of loosely coupled, independently deployable services that communicate over well-defined APIs.*
-
-#### Overview
-
 Microservices architecture decomposes applications into small, autonomous services that are organized around business capabilities. Each service is owned by a small team and can be developed, deployed, and scaled independently.
 
 #### Key Characteristics
@@ -16,21 +12,21 @@ Microservices architecture decomposes applications into small, autonomous servic
 
 #### When Microservices Make Sense
 
-- **Large organizations** (> 20 developers) with multiple teams
-- **Complex domains** with distinct business capabilities
-- **Independent scaling** requirements across features
-- **Technology diversity** needs
-- **High deployment frequency** requirements
-- **Strong DevOps culture** and operational expertise
+- Large organizations (> 20 developers) with multiple teams
+- Complex domains with distinct business capabilities
+- Independent scaling requirements across features
+- Technology diversity needs
+- High deployment frequency requirements
+- Strong DevOps culture and operational expertise
 
 #### When to Avoid Microservices
 
-- **Small teams** (< 10 developers)
-- **Simple, well-defined domains**
-- **Limited operational expertise**
-- **Strong consistency requirements** across all operations
-- **Prototype or MVP** development
-- **Monolith-first approach** often recommended
+- Small teams (< 10 developers)
+- Simple, well-defined domains
+- Limited operational expertise
+- Strong consistency requirements across all operations
+- Prototype or MVP development
+- Monolith-first approach often recommended
 
 ------
 
@@ -46,47 +42,45 @@ The process of breaking down a monolithic application or designing a new system 
 
 **Bounded Contexts** as service boundaries:
 
-```
 E-commerce Domain Decomposition:
-├── User Management (Identity & Access)
-│   ├── User registration/authentication
-│   ├── Profile management
-│   └── Access control
-├── Product Catalog (Product Information)
-│   ├── Product information
-│   ├── Categories and search
-│   └── Inventory tracking
-├── Order Management (Order Processing)
-│   ├── Shopping cart
-│   ├── Order placement
-│   └── Order tracking
-├── Payment Processing (Financial Transactions)
-│   ├── Payment methods
-│   ├── Transaction processing
-│   └── Refunds and billing
-└── Shipping & Fulfillment (Logistics)
-    ├── Shipping calculation
-    ├── Delivery tracking
-    └── Warehouse management
-```
+
+- User Management (Identity & Access)
+    - User registration/authentication
+    - Profile management
+    - Access control
+- Product Catalog (Product Information)
+    - Product information
+    - Categories and search
+    - Inventory tracking
+- Order Management (Order Processing)
+    - Shopping cart
+    - Order placement
+    - Order tracking
+- Payment Processing (Financial Transactions)
+    - Payment methods
+    - Transaction processing
+    - Refunds and billing
+- Shipping & Fulfillment (Logistics)
+    - Shipping calculation
+    - Delivery tracking
+    - Warehouse management
 
 #### Business Capability Decomposition
 
-```
 Identify Core Business Capabilities:
-├── Customer-facing capabilities
-│   ├── Product discovery
-│   ├── Order placement
-│   └── Customer support
-├── Operational capabilities  
-│   ├── Inventory management
-│   ├── Order fulfillment
-│   └── Supplier management
-└── Support capabilities
-    ├── Analytics and reporting
-    ├── Notification services
-    └── Audit and compliance
-```
+
+- Customer-facing capabilities
+    - Product discovery
+    - Order placement
+    - Customer support
+- Operational capabilities  
+    - Inventory management
+    - Order fulfillment
+    - Supplier management
+- Support capabilities
+    - Analytics and reporting
+    - Notification services
+    - Audit and compliance
 
 #### Data Ownership Decomposition
 
@@ -116,23 +110,25 @@ Order Service:
 
 Gradually replace monolith functionality:
 
-```
 Legacy Monolith Decomposition Timeline:
-Month 1-2: Extract User Service
-├── Route /api/users/* to new User Service
-├── Keep authentication in monolith temporarily
-└── Migrate user data to separate database
 
-Month 3-4: Extract Product Service  
-├── Route /api/products/* to new Product Service
-├── Handle product data migration
-└── Update order service integration
+Month 1-2: Extract User Service
+
+- Route `/api/users/*` to new User Service
+- Keep authentication in monolith temporarily
+- Migrate user data to separate database
+
+Month 3-4: Extract Product Service 
+
+- Route `/api/products/*` to new Product Service
+- Handle product data migration
+- Update order service integration
 
 Month 5-6: Extract Order Service
-├── Most complex due to dependencies
-├── Implement saga pattern for order processing
-└── Update all service integrations
-```
+
+- Most complex due to dependencies
+- Implement saga pattern for order processing
+- Update all service integrations
 
 #### Branch by Abstraction
 
@@ -148,87 +144,71 @@ class PaymentProcessor:
 
 #### Database Per Service
 
-```
 Service Database Patterns:
-├── User Service → PostgreSQL (relational user data)
-├── Product Service → MongoDB (flexible product catalog)
-├── Order Service → PostgreSQL (transactional data)
-├── Analytics Service → ClickHouse (time-series data)
-└── Notification Service → Redis (temporary message storage)
-```
+
+- User Service → PostgreSQL (relational user data)
+- Product Service → MongoDB (flexible product catalog)
+- Order Service → PostgreSQL (transactional data)
+- Analytics Service → ClickHouse (time-series data)
+- Notification Service → Redis (temporary message storage)
 
 ### Service Sizing Guidelines
 
 #### Microservice Size Principles
 
-```
 Size Indicators:
-├── Team Size: 2-8 developers (Amazon's "two-pizza team")
-├── Codebase: 10k-50k lines of code
-├── Development Time: Rewrite in 2-4 weeks
-├── Cognitive Load: One person can understand entire service
-└── Business Capability: Single, well-defined responsibility
-```
+
+- Team Size: 2-8 developers (Amazon's "two-pizza team")
+- Codebase: 10k-50k lines of code
+- Development Time: Rewrite in 2-4 weeks
+- Cognitive Load: One person can understand entire service
+- Business Capability: Single, well-defined responsibility
 
 #### Anti-patterns to Avoid
 
-```
 Too Small (Nano-services):
-├── Single function per service
-├── Excessive network overhead
-├── Operational complexity exceeds benefits
-└── Distributed monolith behavior
+
+- Single function per service
+- Excessive network overhead
+- Operational complexity exceeds benefits
+- Distributed monolith behavior
 
 Too Large (Mini-monoliths):
-├── Multiple business capabilities
-├── Multiple teams working on same service
-├── Difficulty in independent deployment
-└── Complex internal architecture
-```
+
+- Multiple business capabilities
+- Multiple teams working on same service
+- Difficulty in independent deployment
+- Complex internal architecture
 
 ### Decomposition Best Practices
 
 #### Start with Monolith
 
-```
 Recommended Evolution Path:
+
 1. Start with well-structured monolith
 2. Identify service boundaries through usage patterns
 3. Extract services incrementally (highest value first)
 4. Learn and improve with each extraction
 5. Avoid "big bang" decomposition
-```
 
 #### Service Boundary Identification
 
-```python
-# Analyze data flow and dependencies
-def analyze_service_boundaries():
-    coupling_indicators = {
-        "high_cohesion": [
-            "functions_that_change_together",
-            "shared_data_structures", 
-            "related_business_rules"
-        ],
-        "low_coupling": [
-            "independent_business_capabilities",
-            "different_change_frequencies",
-            "minimal_data_sharing"
-        ]
-    }
-    
-    # Look for natural boundaries:
-    # - Different teams owning different features
-    # - Different scaling requirements
-    # - Different technology needs
-    # - Different data models
-```
+Coupling Indicators
+
+- High Cohesion : Functions That change together, shared data structures, related business rules
+- Low Coupling : Independent Business Capabilities, Different Change Frequencies, Minimal Data Sharing
+
+Look for natural Boundaries :
+
+- Different teams owning different features
+- Different scaling requirements
+- Different technology needs
+- Different data models
 
 ------
 
 ## Data Consistency Across Services
-
-#### The Challenge of Distributed Data
 
 In microservices, each service owns its data, making traditional ACID transactions across services impossible. This creates challenges for maintaining consistency across the system.
 
@@ -236,8 +216,8 @@ In microservices, each service owns its data, making traditional ACID transactio
 
 #### Eventual Consistency
 
-```
 Order Processing Example:
+
 1. Order Service creates order (status: PENDING)
 2. Payment Service processes payment (async)
 3. Order Service updates order (status: CONFIRMED)
@@ -245,42 +225,22 @@ Order Processing Example:
 5. Order Service updates order (status: RESERVED)
 
 Timeline:
+
 T0: Order created (PENDING)
 T1: Payment processed (but order still PENDING)
 T2: Order updated (CONFIRMED)  
 T3: Inventory reserved (RESERVED)
 
 System is eventually consistent, not immediately consistent
-```
 
 #### Strong Consistency Patterns
 
-```python
-# Two-Phase Commit (2PC) - Generally avoided in microservices
-class TwoPhaseCommitCoordinator:
-    def execute_transaction(self, operations):
-        # Phase 1: Prepare
-        prepared_services = []
-        for service, operation in operations:
-            if service.prepare(operation):
-                prepared_services.append(service)
-            else:
-                # Abort all prepared services
-                for prepared in prepared_services:
-                    prepared.abort()
-                return False
-        
-        # Phase 2: Commit
-        for service in prepared_services:
-            service.commit()
-        return True
+Generally 2 Phase Commit (2PC) - generally avoided in Microservices
 
-# Problems with 2PC:
-# - Blocking protocol (coordinator failure blocks all)
-# - Network partitions cause issues
-# - Performance overhead
-# - Not suitable for microservices
-```
+- Blocking protocol (coordinator failure blocks all)
+- Network partitions cause issues
+- Performance overhead
+- Not suitable for microservices
 
 ### Saga Pattern
 
@@ -288,121 +248,20 @@ Manages distributed transactions as a sequence of local transactions, with compe
 
 #### Choreography-based Saga
 
-```
-Order Saga Choreography:
-1. Order Service: Create order → Publishes OrderCreated event
-2. Payment Service: Listens → Process payment → Publishes PaymentCompleted
-3. Inventory Service: Listens → Reserve items → Publishes ItemsReserved  
-4. Shipping Service: Listens → Schedule shipping → Publishes ShippingScheduled
 
-Compensation Flow (if inventory fails):
-1. Inventory Service: Publishes ItemReservationFailed
-2. Payment Service: Listens → Refund payment → Publishes PaymentRefunded
-3. Order Service: Listens → Cancel order → Publishes OrderCancelled
-```
-
+In Choreography Based Saga Co-ordination among microservices is decentralized, Each service knows the next step and the communication is event driven. Services react to events they receive.
 #### Orchestration-based Saga
 
-```python
-# Centralized saga orchestrator
-class OrderSagaOrchestrator:
-    def __init__(self):
-        self.steps = [
-            ("create_order", "cancel_order"),
-            ("process_payment", "refund_payment"),
-            ("reserve_inventory", "release_inventory"), 
-            ("schedule_shipping", "cancel_shipping")
-        ]
-    
-    def execute_order_saga(self, order_data):
-        completed_steps = []
-        
-        try:
-            for step, compensation in self.steps:
-                result = self.execute_step(step, order_data)
-                completed_steps.append((step, compensation, result))
-                
-                if not result.success:
-                    raise SagaStepFailedException(step)
-                    
-            return SagaResult(success=True)
-            
-        except SagaStepFailedException:
-            # Execute compensations in reverse order
-            for step, compensation, result in reversed(completed_steps):
-                self.execute_compensation(compensation, result.data)
-            
-            return SagaResult(success=False)
-```
-
-#### Saga Pattern Comparison
-
-| Aspect               | Choreography | Orchestration  |
-| -------------------- | ------------ | -------------- |
-| **Coupling**         | Low          | Higher         |
-| **Complexity**       | Distributed  | Centralized    |
-| **Debugging**        | Harder       | Easier         |
-| **Failure Handling** | Complex      | Simpler        |
-| **Performance**      | Better       | Slightly worse |
-
+In Orchestration Based Saga Co-ordination among microservices is centralized and done by Saga Orchestrator which manages the flow. Central Decision Making does the explicit state managements.
 ### Event Sourcing Pattern
 
 Store all changes as a sequence of events, allowing reconstruction of current state.
-
-```python
-# Event sourcing for order aggregate
-class OrderEvents:
-    @dataclass
-    class OrderCreated:
-        order_id: str
-        user_id: str
-        items: List[OrderItem]
-        timestamp: datetime
-    
-    @dataclass  
-    class PaymentProcessed:
-        order_id: str
-        payment_id: str
-        amount: Decimal
-        timestamp: datetime
-    
-    @dataclass
-    class OrderShipped:
-        order_id: str
-        tracking_number: str
-        timestamp: datetime
-
-class OrderAggregate:
-    def __init__(self, order_id):
-        self.order_id = order_id
-        self.status = None
-        self.items = []
-        self.payment_id = None
-        
-    def apply_event(self, event):
-        if isinstance(event, OrderEvents.OrderCreated):
-            self.status = "CREATED"
-            self.items = event.items
-        elif isinstance(event, OrderEvents.PaymentProcessed):
-            self.status = "PAID"
-            self.payment_id = event.payment_id
-        elif isinstance(event, OrderEvents.OrderShipped):
-            self.status = "SHIPPED"
-    
-    @classmethod
-    def from_events(cls, order_id, events):
-        aggregate = cls(order_id)
-        for event in events:
-            aggregate.apply_event(event)
-        return aggregate
-```
-
 ### Data Synchronization Patterns
 
 #### Event-Driven Data Sync
 
-```
 Data Synchronization Flow:
+
 1. User Service updates user profile
 2. Publishes UserProfileUpdated event  
 3. Order Service listens and updates local user cache
@@ -410,291 +269,78 @@ Data Synchronization Flow:
 5. Recommendation Service listens and refreshes user model
 
 Benefits:
-├── Near real-time synchronization
-├── Loose coupling between services
-├── Audit trail of all changes
-└── Support for multiple consumers
-```
+
+- Near real-time synchronization
+- Loose coupling between services
+- Audit trail of all changes
+- Support for multiple consumers
 
 #### Polling-based Sync
 
-```python
-# Periodic data synchronization
-class DataSyncService:
-    def __init__(self, sync_interval=300):  # 5 minutes
-        self.sync_interval = sync_interval
-        
-    async def sync_user_data(self):
-        # Get latest user updates
-        last_sync = self.get_last_sync_timestamp()
-        updated_users = await self.user_service.get_updated_users(since=last_sync)
-        
-        # Update local cache/database
-        for user in updated_users:
-            await self.update_local_user_data(user)
-        
-        self.update_last_sync_timestamp(datetime.now())
+Periodic Data Synchronization, every 5 minutes, get the latest updates and update the local cache/database.
 
-# Trade-offs:
-# Pros: Simple, predictable
-# Cons: Latency, resource usage, potential for conflicts
-```
+Trade Offs
+
+- Pro : Simple, Predictable
+- Cons : Latency, Resource Usage, Potential for Conflicts
 
 ### Distributed Transaction Alternatives
 
 #### Outbox Pattern
 
-```python
-# Ensure message publishing with database updates
-class OrderService:
-    def create_order(self, order_data):
-        with database.transaction():
-            # 1. Create order in database
-            order = self.order_repository.create(order_data)
-            
-            # 2. Create outbox event in same transaction
-            outbox_event = OutboxEvent(
-                event_type="OrderCreated",
-                payload=order.to_dict(),
-                timestamp=datetime.now()
-            )
-            self.outbox_repository.create(outbox_event)
-        
-        # 3. Separate process publishes events from outbox
-        return order
+The **Outbox Pattern** is a reliability pattern used in **distributed systems** to ensure **atomicity between database state changes and event/message publishing**.
 
-class OutboxPublisher:
-    def publish_pending_events(self):
-        pending_events = self.outbox_repository.get_pending_events()
-        
-        for event in pending_events:
-            try:
-                self.message_broker.publish(event.payload)
-                self.outbox_repository.mark_published(event.id)
-            except Exception as e:
-                # Retry logic here
-                pass
-```
+Instead of publishing messages directly to a message broker inside a business transaction, the application **writes events to an outbox table in the same database transaction** as the domain data. A **separate process** later reads these outbox records and publishes them to the messaging system.
 
 #### Command Query Responsibility Segregation (CQRS)
 
-```
 CQRS Pattern:
-├── Command Side (Writes)
-│   ├── Handles business operations
-│   ├── Updates normalized data store
-│   └── Publishes events
-└── Query Side (Reads)  
-    ├── Handles read requests
-    ├── Uses denormalized views
-    └── Optimized for queries
+
+- Command Side (Writes)
+    - Handles business operations
+    - Updates normalized data store
+    - Publishes events
+- Query Side (Reads)  
+    - Handles read requests
+    - Uses denormalized views
+    - Optimized for queries
 
 Benefits:
-├── Independent scaling of reads/writes
-├── Optimized data models for different use cases
-├── Event sourcing compatibility
-└── Improved performance
-```
+
+-  Independent scaling of reads/writes
+- Optimized data models for different use cases
+- Event sourcing compatibility
+- Improved performance
 
 ------
 
 ## Inter-service Communication Patterns
 
-### Communication Styles
-
 Microservices communicate through network calls, requiring careful consideration of communication patterns, protocols, and failure handling.
 
 ### Synchronous Communication
 
-#### HTTP/REST APIs
-
-```python
-# REST API communication between services
-class OrderService:
-    def __init__(self, user_service_client, product_service_client):
-        self.user_service = user_service_client
-        self.product_service = product_service_client
-    
-    async def create_order(self, order_request):
-        # Synchronous calls to other services
-        user = await self.user_service.get_user(order_request.user_id)
-        if not user.is_active:
-            raise UserNotActiveError()
-        
-        products = await self.product_service.get_products(order_request.item_ids)
-        if not all(p.available for p in products):
-            raise ProductNotAvailableError()
-        
-        # Create order with validated data
-        return self.create_order_record(order_request, user, products)
-```
-
-#### gRPC Communication
-
-```protobuf
-// user_service.proto
-service UserService {
-  rpc GetUser(GetUserRequest) returns (UserResponse);
-  rpc ValidateUser(ValidateUserRequest) returns (ValidationResponse);
-}
-
-message GetUserRequest {
-  string user_id = 1;
-}
-
-message UserResponse {
-  string user_id = 1;
-  string name = 2;
-  string email = 3;
-  bool is_active = 4;
-}
-```
-
-#### GraphQL Federation
-
-```graphql
-# User service schema
-type User @key(fields: "id") {
-  id: ID!
-  name: String!
-  email: String!
-}
-
-# Order service schema  
-type Order @key(fields: "id") {
-  id: ID!
-  user: User!  # Reference to User from User service
-  items: [OrderItem!]!
-  total: Float!
-}
-
-# Gateway automatically federates the schemas
-```
-
+- HTTP/REST APIs
+- gRPC Communication
+- GraphQL Federation
 ### Asynchronous Communication
 
-#### Message Queues
+- Message Queues
+- Event Streaming
 
-```python
-# Point-to-point messaging
-class OrderProcessor:
-    def __init__(self, message_queue):
-        self.queue = message_queue
-        
-    def process_order(self, order):
-        # Add order to processing queue
-        message = {
-            "order_id": order.id,
-            "user_id": order.user_id,
-            "items": order.items,
-            "timestamp": datetime.now().isoformat()
-        }
-        
-        self.queue.send_message("order-processing-queue", message)
+### Communication Patterns
 
-class PaymentProcessor:
-    def __init__(self, message_queue):
-        self.queue = message_queue
-        
-    def start_processing(self):
-        # Listen for messages
-        self.queue.listen("order-processing-queue", self.handle_order)
-        
-    def handle_order(self, message):
-        order_data = json.loads(message.body)
-        # Process payment for order
-        payment_result = self.process_payment(order_data)
-        
-        # Send result to next queue
-        if payment_result.success:
-            self.queue.send_message("order-fulfillment-queue", order_data)
-        else:
-            self.queue.send_message("order-failed-queue", order_data)
-```
-
-#### Event Streaming
-
-```python
-# Kafka event streaming
-class EventStreamingExample:
-    def __init__(self, kafka_producer, kafka_consumer):
-        self.producer = kafka_producer
-        self.consumer = kafka_consumer
-    
-    def publish_order_event(self, order):
-        event = {
-            "event_type": "OrderCreated",
-            "order_id": order.id,
-            "user_id": order.user_id,
-            "total": float(order.total),
-            "timestamp": datetime.now().isoformat()
-        }
-        
-        # Publish to Kafka topic
-        self.producer.send("order-events", value=event)
-    
-    def consume_order_events(self):
-        # Multiple services can consume the same event stream
-        for message in self.consumer:
-            event = message.value
-            
-            if event["event_type"] == "OrderCreated":
-                self.handle_order_created(event)
-```
-
-### 3.3 Communication Patterns
-
-#### Request-Response Pattern
-
-```
-Synchronous Request-Response:
-Client → API Gateway → Service A → Service B → Database
-                          ↓           ↓         ↓
-                       Response ← Response ← Result
-
-Characteristics:
-├── Immediate response required
-├── Strong consistency needed  
-├── Simple error handling
-└── Higher coupling between services
-```
-
-#### Fire-and-Forget Pattern
-
-```
-Asynchronous Fire-and-Forget:
-Service A → Message Queue → Service B
-         ↓
-    Continue Processing
-
-Use Cases:
-├── Audit logging
-├── Analytics events
-├── Notification sending
-└── Background processing
-```
-
-#### Publish-Subscribe Pattern
-
-```
-Event Publishing:
-Service A → Event Bus → [Service B, Service C, Service D]
-
-Benefits:
-├── Low coupling between services
-├── Easy to add new consumers
-├── Scalable event processing
-└── Supports eventual consistency
-```
-
+- Request-Response Pattern
+- Fire and Forget Pattern
+- Publish-Subscribe Pattern
 ### Communication Best Practices
 
 #### API Versioning Strategies
 
-- **URL-based versioning**: `/api/v1/users` vs `/api/v2/users`
-- **Header-based versioning**: `API-Version: 2` in request headers
-- **Semantic versioning**: For backward compatibility guarantees
-- **Deprecation timeline**: Clear communication about version lifecycle
+- URL-based versioning: `/api/v1/users` vs `/api/v2/users`
+- Header-based versioning: `API-Version: 2` in request headers
+- Semantic versioning: For backward compatibility guarantees
+- Deprecation timeline: Clear communication about version lifecycle
 
 #### Circuit Breaker for Service Calls
 
@@ -729,38 +375,33 @@ Key Configuration:
 
 ## Service Mesh Architecture
 
-#### What is Service Mesh?
-
 A dedicated infrastructure layer that handles service-to-service communication, providing features like load balancing, service discovery, security, and observability without requiring changes to application code.
 
 ### Service Mesh Components
 
 #### Data Plane
 
-```
-Service Mesh Data Plane:
-Service A ←→ Sidecar Proxy ←→ Network ←→ Sidecar Proxy ←→ Service B
+![](assets/Pasted%20image%2020251231211048.png)
 
 Sidecar Proxy Responsibilities:
-├── Load balancing
-├── Health checking  
-├── Circuit breaking
-├── Retries and timeouts
-├── TLS termination
-├── Metrics collection
-└── Traffic routing
-```
+
+- Load balancing
+- Health checking  
+- Circuit breaking
+- Retries and timeouts
+- TLS termination
+- Metrics collection
+- Traffic routing
 
 #### Control Plane
 
-```
 Service Mesh Control Plane:
-├── Service Discovery (Registry of all services)
-├── Configuration Management (Routing rules, policies)
-├── Certificate Management (mTLS certificates)
-├── Policy Enforcement (Access control, rate limiting)
-└── Telemetry Collection (Metrics, traces, logs)
-```
+
+- Service Discovery (Registry of all services)
+- Configuration Management (Routing rules, policies)
+- Certificate Management (mTLS certificates)
+- Policy Enforcement (Access control, rate limiting)
+- Telemetry Collection (Metrics, traces, logs)
 
 ### Service Mesh Benefits
 
@@ -823,13 +464,12 @@ spec:
 
 #### Observability
 
-```
 Service Mesh Observability:
-├── Automatic metrics collection (latency, throughput, errors)
-├── Distributed tracing (request path across services)
-├── Access logs (all service-to-service communication)
-└── Service topology visualization
-```
+
+- Automatic metrics collection (latency, throughput, errors)
+- Distributed tracing (request path across services)
+- Access logs (all service-to-service communication)
+- Service topology visualization
 
 ### Service Mesh Patterns
 
@@ -899,20 +539,20 @@ spec:
 
 #### When to Use Service Mesh
 
-```
 Consider Service Mesh When:
-├── 10+ microservices
-├── Complex networking requirements
-├── Strong security requirements
-├── Need advanced traffic management
-└── Multiple teams/languages
+
+- 10+ microservices
+- Complex networking requirements
+- Strong security requirements
+- Need advanced traffic management
+- Multiple teams/languages
 
 Avoid Service Mesh When:
-├── Simple microservices architecture
-├── Performance is critical (latency sensitive)
-├── Limited operational expertise
-└── Cost is a major concern
-```
+
+- Simple microservices architecture
+- Performance is critical (latency sensitive)
+- Limited operational expertise
+- Cost is a major concern
 
 ------
 
@@ -969,16 +609,15 @@ paths:
 
 #### Database Per Service
 
-```
 Service Data Ownership:
-├── User Service → PostgreSQL (user data)
-├── Product Service → MongoDB (product catalog)  
-├── Order Service → PostgreSQL (transactional data)
-├── Analytics Service → ClickHouse (events)
-└── Search Service → Elasticsearch (indexed data)
+
+- User Service → PostgreSQL (user data)
+- Product Service → MongoDB (product catalog)  
+- Order Service → PostgreSQL (transactional data)
+- Analytics Service → ClickHouse (events)
+- Search Service → Elasticsearch (indexed data)
 
 No cross-service database access allowed
-```
 
 #### Event-Driven Data Synchronization
 
@@ -1000,17 +639,7 @@ When data changes in one service, events are published for other services to con
 
 #### Testing Pyramid for Microservices
 
-```
-Testing Pyramid:
-                    E2E Tests
-                  (Expensive, Slow)
-                /                \
-            Integration Tests
-          (Moderate Cost/Speed)
-          /                    \
-    Unit Tests              Contract Tests
-  (Fast, Cheap)           (API Contracts)
-```
+![](assets/Pasted%20image%2020251231210835.png)
 
 #### Contract Testing
 
@@ -1120,142 +749,7 @@ services:
 
 ------
 
-## Migration Strategies
-
-### Monolith to Microservices Migration
-
-#### Assessment Phase
-
-**Monolith Analysis Factors**:
-
-- **Codebase size**: Lines of code, module count, complexity
-- **Team structure**: Number of teams, ownership boundaries
-- **Coupling analysis**: Dependencies between modules
-- **Change patterns**: Which parts change together frequently
-- **Deployment metrics**: Frequency, lead time, failure rate
-
-**Readiness Indicators**:
-
-- Large codebase (> 100k LOC) with clear module boundaries
-- Multiple teams working on different business areas
-- Different scaling requirements across features
-- Need for technology diversity
-- High deployment frequency requirements
-
-#### Incremental Migration Strategy
-
-```
-Migration Phases:
-Phase 1: Extract Edge Services (3-6 months)
-├── Authentication service
-├── Notification service  
-├── File upload service
-└── Static content service
-
-Phase 2: Extract Core Services (6-12 months)
-├── User management service
-├── Product catalog service
-├── Search service
-└── Analytics service
-
-Phase 3: Extract Transaction Services (12-18 months)
-├── Order processing service
-├── Payment processing service
-├── Inventory management service
-└── Shipping service
-
-Phase 4: Decompose Remaining Monolith (18-24 months)
-├── Advanced analytics
-├── Reporting services
-├── Admin services
-└── Legacy feature services
-```
-
-### Migration Patterns
-
-#### Strangler Fig Pattern Implementation
-
-**Gradual Replacement Strategy**:
-
-- Route traffic between old and new systems using feature flags
-- Start with edge services (lower risk, fewer dependencies)
-- Gradually increase traffic percentage to new services
-- Monitor performance and rollback if issues occur
-
-**Implementation Steps**:
-
-1. Create routing layer with feature flags
-2. Implement new service alongside existing functionality
-3. Start with small percentage of traffic (5-10%)
-4. Monitor metrics and gradually increase percentage
-5. Remove old functionality once migration is complete
-
-#### Database Decomposition Strategy
-
-```sql
--- Phase 1: Separate schemas within same database
-CREATE SCHEMA user_service;
-CREATE SCHEMA product_service;
-CREATE SCHEMA order_service;
-
--- Migrate tables to appropriate schemas
-ALTER TABLE users SET SCHEMA user_service;
-ALTER TABLE products SET SCHEMA product_service;
-ALTER TABLE orders SET SCHEMA order_service;
-
--- Phase 2: Create views for cross-schema dependencies
-CREATE VIEW order_service.user_summary AS
-SELECT user_id, name, email, status 
-FROM user_service.users;
-
--- Phase 3: Replace views with service calls
--- Remove view, implement API call in application code
-
--- Phase 4: Split into separate databases
--- Export schemas to separate database instances
-```
-
-------
-
 ## Decision Framework
-
-### Microservices Readiness Assessment
-
-#### Organizational Readiness
-
-```
-Team Structure Assessment:
-├── Team Size: 20+ developers (multiple teams)
-├── Team Autonomy: Teams can work independently  
-├── DevOps Culture: Strong automation and monitoring
-├── Domain Knowledge: Clear business capability boundaries
-└── Change Management: Frequent, independent deployments needed
-
-Technical Readiness:
-├── Operational Expertise: Container orchestration, service mesh
-├── Monitoring Capabilities: Distributed tracing, observability
-├── Testing Strategy: Contract testing, end-to-end automation
-├── Data Management: Event-driven architecture understanding
-└── Security: Service-to-service authentication and authorization
-```
-
-#### Microservices Suitability Assessment
-
-**Scoring Factors**:
-
-- **Domain complexity**: Multiple distinct business capabilities
-- **Team structure**: Multiple autonomous teams
-- **Scaling needs**: Different performance requirements
-- **Technology diversity**: Need for different tech stacks
-- **Deployment frequency**: Daily or multiple deployments per day
-- **Fault isolation**: Critical failure isolation requirements
-
-**Recommendation Guidelines**:
-
-- Score < 30: Stay with monolith
-- Score 30-60: Consider modular monolith
-- Score 60-80: Good candidate for microservices
-- Score > 80: Strong candidate for microservices
 
 ### Architecture Decision Matrix
 
@@ -1270,72 +764,52 @@ Technical Readiness:
 | **Development Speed**      | Fast (initially) | Medium             | Slow (initially) |
 | **Fault Isolation**        | None             | Limited            | High             |
 | **Data Consistency**       | Strong           | Strong             | Eventual         |
+|                            |                  |                    |                  |
 
 ### Common Anti-patterns
 
 #### Distributed Monolith
 
-```
 Anti-pattern: Distributed Monolith
-├── Services that must be deployed together
-├── Synchronous communication for everything
-├── Shared database across services
-├── High coupling between services
-└── No independent scaling
+
+- Services that must be deployed together
+- Synchronous communication for everything
+- Shared database across services
+- High coupling between services
+- No independent scaling
 
 Symptoms:
-├── Cannot deploy services independently
-├── Cascading failures across services
-├── Long deployment pipelines
-├── High network latency
-└── Complex debugging across services
-```
+
+- Cannot deploy services independently
+- Cascading failures across services
+- Long deployment pipelines
+- High network latency
+- Complex debugging across services
 
 #### Microservice Anarchy
 
-```
-Anti-pattern: Microservice Anarchy  
-├── No consistent patterns across services
-├── Each team chooses different technologies
-├── No standard monitoring or logging
-├── Inconsistent API patterns
-└── No shared infrastructure
+Anti-pattern: Microservice Anarchy
 
-Problems:
-├── Operational nightmare
-├── Difficult to hire and train
-├── No reusable components
-├── Inconsistent user experience
-└── High maintenance overhead
-```
+- No consistent patterns across services
+- Each team chooses different technologies
+- No standard monitoring or logging
+- Inconsistent API patterns
+- No shared infrastructure
+
+Problems
+
+- Operational nightmare
+- Difficult to hire and train
+- No reusable components
+- Inconsistent user experience
+- High maintenance overhead
 
 ------
 
 ## Conclusion
-
-### Key Takeaways
 
 1. **Microservices solve organizational problems**: Most beneficial for large, multi-team organizations
 2. **Start with monolith**: Build domain knowledge before decomposing
 3. **Conway's Law applies**: Service boundaries should match team boundaries
 4. **Operational complexity**: Requires significant investment in tooling and processes
 5. **Data consistency trade-offs**: Embrace eventual consistency and compensating patterns
-
-#### Success Factors
-
-- **Strong DevOps culture** with automation-first mindset
-- **Clear service ownership** and team accountability
-- **Comprehensive testing strategy** including contract testing
-- **Robust monitoring and observability** across all services
-- **Gradual migration approach** with learning and adaptation
-- **Executive support** for long-term investment in architecture
-
-#### Warning Signs
-
-- **Premature optimization**: Jumping to microservices too early
-- **Lack of operational readiness**: Insufficient monitoring and automation
-- **Unclear service boundaries**: Services that change together frequently
-- **Over-communication**: Too many synchronous service calls
-- **Data inconsistency**: Poor handling of distributed transactions
-
-Remember: Microservices are not a silver bullet. They solve specific problems around team scaling, technology diversity, and independent deployment, but come with significant complexity costs. The decision should be driven by organizational needs, not technology trends.

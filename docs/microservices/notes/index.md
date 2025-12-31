@@ -1,7 +1,5 @@
 ## Microservices
 
-### Content
-
 1. [Introduction to Microservices](ch1.md)
 2. [Architecting Microservices](ch2.md)
 3. [Building Microservices](ch3.md)

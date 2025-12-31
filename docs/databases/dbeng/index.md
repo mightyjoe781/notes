@@ -20,7 +20,7 @@ Content
     - [MongoDB](mongodb.md)
     - [Memcached](memcached.md)
     - [Redis](redis.md)
-    -  [CAP](../../sd/topics/consistency/cap.md)
+    - [CAP](../../sd/topics/consistency/cap.md)
 - [Database Security](security.md)
 - [Homomorphic Encryption (Performing Queries on Encrypted DB)](homomorphic.md)
 - [Important Questions](questions.md)

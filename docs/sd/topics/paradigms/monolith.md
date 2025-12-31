@@ -1,41 +1,35 @@
 # Monolithic Architecture
 
-*A software architecture pattern where all components of an application are packaged and deployed as a single unit.*
-
-## Overview
-
 A monolithic architecture structures an application as a single deployable unit where all business functionality is contained within one codebase and runs as a single process. This traditional approach has been the foundation of software development for decades and remains relevant for many use cases.
 
 ### Key Characteristics
 
-- **Single Codebase**: All features in one repository
-- **Single Deployment**: One artifact deployed as a unit
-- **Shared Runtime**: All components run in the same process
-- **Shared Database**: Common data store for all features
-- **Internal Communication**: In-process method calls
+- Single Codebase: All features in one repository
+- Single Deployment: One artifact deployed as a unit
+- Shared Runtime: All components run in the same process
+- Shared Database: Common data store for all features
+- Internal Communication: In-process method calls
 
 ### When Monoliths Make Sense
 
-- **Small to medium applications** (< 50k LOC)
-- **Simple business domains** with clear boundaries
-- **Limited team size** (< 10 developers)
-- **Rapid prototyping** and MVP development
-- **Resource-constrained environments**
-- **Applications with strong consistency requirements**
+- Small to medium applications (< 50k LOC)
+- Simple business domains with clear boundaries
+- Limited team size (< 10 developers)
+- Rapid prototyping and MVP development
+- Resource-constrained environments
+- Applications with strong consistency requirements
 
 ### When to Avoid Monoliths
 
-- **Large teams** (> 20 developers) working on same codebase
-- **Complex domains** with distinct business capabilities
-- **Different scaling requirements** across features
-- **Technology diversity needs** (different languages/frameworks)
-- **Independent deployment requirements**
+- Large teams (> 20 developers) working on same codebase
+- Complex domains with distinct business capabilities
+- Different scaling requirements across features
+- Technology diversity needs (different languages/frameworks)
+- Independent deployment requirements
 
 ------
 
 ## Single Deployment Unit
-
-### What is a Single Deployment Unit?
 
 All application components are packaged together and deployed as one artifact. This means the entire application is versioned, built, tested, and deployed together.
 
@@ -43,12 +37,7 @@ All application components are packaged together and deployed as one artifact. T
 
 #### Build and Package Process
 
-```
-Source Code → Build Process → Single Artifact → Deployment
-     ↓              ↓              ↓              ↓
-All Features → Compile/Test → WAR/JAR/Binary → All Environments
-```
-
+![](assets/Pasted%20image%2020251231150659.png)
 #### Deployment Pipeline
 
 ```yaml
@@ -69,60 +58,16 @@ stages:
       - production_deployment (blue-green)
 ```
 
-### Benefits of Single Deployment
+Benefits of Single Deployment
 
-#### Simplicity
+- Simplicity : One artifact to manage & Version, Simple to rollback, Consistent Env Setup
+- Operational Advantages : Atomic Deployment, No co-ordination needed between teams, Simplified Infra Management
+- Development Benefits : Easy local development & debugging, immediate consistency
 
-- **One artifact** to manage and version
-- **Straightforward deployment** process
-- **Simple rollback** strategy (previous version)
-- **Consistent environment** setup
+Challenges of Single Deployment
 
-#### Operational Advantages
-
-- **Atomic deployments**: All changes go live together
-- **No deployment coordination** between teams
-- **Single monitoring** and logging setup
-- **Simplified infrastructure** management
-
-#### Development Benefits
-
-- **Easy local development**: Run entire app locally
-- **Simple debugging**: All code in one process
-- **Immediate consistency**: No distributed system issues
-- **Faster initial development**: No service coordination overhead
-
-### Challenges of Single Deployment
-
-#### Scaling Limitations
-
-```
-Monolith Scaling Pattern:
-Load Balancer → [Instance 1, Instance 2, Instance 3, ...]
-
-Issues:
-├── Must scale entire application (even unused features)
-├── Cannot scale individual features independently  
-├── Resource waste on lightly-used components
-└── All instances must handle all traffic types
-```
-
-#### Development Constraints
-
-- **Coordination required** for releases
-- **Large blast radius** for changes
-- **Technology lock-in** for entire application
-- **Build time increases** with codebase size
-
-#### Deployment Risks
-
-```
-Deployment Risk Factors:
-├── One bug can bring down entire application
-├── Large changes increase risk of deployment failures
-├── Rollback affects all features (even working ones)
-└── Longer deployment windows due to application size
-```
+- Scaling Limitation : Usually supports on vertical scaling which soon hits limits, for horizontal scaling all features will automatic scale, due to being single deployment unit.
+- Development Constraint : Co-ordination required for releases, Large Blast Radius of the changes, Build Time keeps on increasing
 
 ### Single Deployment Best Practices
 
@@ -156,37 +101,19 @@ monolith_app/
 
 **Blue-Green Deployment**:
 
-```
-Production Traffic → Blue Environment (Current Version)
-                  ↗
-Load Balancer → Switch → Green Environment (New Version)
-                  ↘
-                    Blue Environment (Becomes Standby)
-```
+![](assets/Pasted%20image%2020251231151756.png)
 
 **Rolling Deployment**:
 
-```
-Instance 1: v1.0 → v1.1 (Deploy and Test)
-Instance 2: v1.0 → v1.1 (Deploy and Test)  
-Instance 3: v1.0 → v1.1 (Deploy and Test)
-```
+![](assets/Pasted%20image%2020251231151812.png)
 
 **Canary Deployment**:
 
-```
-90% Traffic → Stable Version (v1.0)
-10% Traffic → Canary Version (v1.1)
-
-If successful → Gradually increase canary traffic
-If issues → Route all traffic back to stable
-```
+![](assets/Pasted%20image%2020251231151821.png)
 
 ------
 
 ## Shared Database
-
-### What is a Shared Database?
 
 All application modules access the same database instance, sharing tables, schemas, and data. This creates a central data store that serves the entire application.
 
@@ -249,10 +176,10 @@ class OrderService:
 
 #### Data Consistency
 
-- **ACID transactions** across all business operations
-- **Strong consistency** guarantees
-- **Referential integrity** enforced by database
-- **No distributed transaction complexity**
+- ACID transactions across all business operations
+- Strong consistency guarantees
+- Referential integrity enforced by database
+- No distributed transaction complexity
 
 #### Simplified Operations
 
@@ -270,10 +197,10 @@ GROUP BY u.id;
 
 #### Development Advantages
 
-- **Single connection pool** management
-- **Unified schema management**
-- **Simple backup and recovery**
-- **Straightforward reporting** across all data
+- Single connection pool management
+- Unified schema management
+- Simple backup and recovery
+- Straightforward reporting across all data
 
 ### Challenges of Shared Database
 
@@ -293,21 +220,18 @@ GROUP BY u.id;
 
 #### Performance Issues
 
-```
-Shared Database Bottlenecks:
-├── Connection pool contention
-├── Lock contention between modules
-├── Query interference (slow queries affect all)
-├── Scaling limitations (single database instance)
-└── Backup/maintenance affects entire application
-```
+- Connection pool contention
+- Lock contention between modules
+- Query interference (slow queries affect all)
+- Scaling limitations (single database instance)
+- Backup/maintenance affects entire application
 
 #### Development Conflicts
 
-- **Schema migration coordination** between teams
-- **Database lock contention** during development
-- **Difficult to parallelize** database-related work
-- **Testing complexity** with shared test data
+- Schema migration coordination between teams
+- Database lock contention during development
+- Difficult to parallelize database-related work
+- Testing complexity with shared test data
 
 ### Shared Database Best Practices
 
@@ -393,8 +317,6 @@ CREATE INDEX idx_orders_user_status ON orders(user_id, status);
 
 ## Inter-module Communication
 
-### What is Inter-module Communication?
-
 In a monolithic architecture, different functional modules communicate through direct method calls, shared memory, and in-process mechanisms since they all run within the same application runtime.
 
 ### Communication Patterns
@@ -458,16 +380,7 @@ class OrderProcessingWorkflow:
 
 #### Layered Architecture
 
-```
-Presentation Layer (Controllers, APIs)
-           ↓
-Business Logic Layer (Services, Domain Logic)
-           ↓  
-Data Access Layer (Repositories, DAOs)
-           ↓
-Database Layer (Shared Database)
-```
-
+![](assets/Pasted%20image%2020251231152352.png)
 #### Module-based Organization
 
 ```python
@@ -525,10 +438,10 @@ order_service = app_container.get('order_service')
 
 #### Performance Advantages
 
-- **No network latency**: Direct memory access
-- **No serialization overhead**: Objects passed by reference
-- **Shared resources**: Connection pools, caches, configuration
-- **Fast debugging**: Single process to debug
+- No network latency: Direct memory access
+- No serialization overhead: Objects passed by reference
+- Shared resources: Connection pools, caches, configuration
+- Fast debugging: Single process to debug
 
 #### Consistency Benefits
 
@@ -547,10 +460,10 @@ def process_order_with_transaction():
 
 #### Development Simplicity
 
-- **Single IDE workspace**: All code in one project
-- **Unified testing**: Test all modules together
-- **Simple refactoring**: IDE can refactor across modules
-- **Shared utilities**: Common functions easily accessible
+- Single IDE workspace: All code in one project
+- Unified testing: Test all modules together
+- Simple refactoring: IDE can refactor across modules
+- Shared utilities: Common functions easily accessible
 
 ### Challenges of Inter-module Communication
 
@@ -705,33 +618,33 @@ class OrderService:
 
 #### Growth Indicators
 
-```
-Team Size Growth:
-├── 1-5 developers: Monolith is efficient
-├── 6-15 developers: Monolith with good modularity
-├── 16-30 developers: Consider modular monolith
-└── 30+ developers: Consider microservices
+Team Size Growth :
 
-Codebase Size:
-├── < 50k LOC: Monolith is manageable
-├── 50k-200k LOC: Need strong modularization
-├── 200k-500k LOC: Consider splitting
-└── > 500k LOC: Likely needs decomposition
+- 1-5 developers: Monolith is efficient
+- 6-15 developers: Monolith with good modularity
+- 16-30 developers: Consider modular monolith
+- 30+ developers: Consider microservices
 
-Deployment Frequency:
-├── Weekly/Monthly: Monolith is fine
-├── Daily: Need good CI/CD
-├── Multiple times/day: Consider independent deployments
-└── Continuous: Need microservices architecture
-```
+CodeBase Size :
 
+- < 50k LOC: Monolith is manageable
+- 50k-200k LOC: Need strong modularization
+- 200k-500k LOC: Consider splitting
+- 500k LOC: Likely needs decomposition
+
+Deployment Frequency
+
+- Weekly/Monthly: Monolith is fine
+- Daily: Need good CI/CD
+- Multiple times/day: Consider independent deployments
+- Continuous: Need microservices architecture
 #### Technical Debt Indicators
 
-- **Long build times** (> 20 minutes)
-- **Difficult to test** due to dependencies
-- **Slow development velocity** due to coordination
-- **Frequent merge conflicts** across teams
-- **Technology diversity** requirements
+- Long build times (> 20 minutes)
+- Difficult to test due to dependencies
+- Slow development velocity due to coordination
+- Frequent merge conflicts across teams
+- Technology diversity requirements
 
 ### Modular Monolith Pattern
 
@@ -763,65 +676,12 @@ monolith_app/
 └── main.py              # Application entry point
 ```
 
-### Migration Strategies
-
-#### Strangler Fig Pattern
-
-```
-Legacy Monolith → Gradual Replacement → New Architecture
-     ↓                    ↓                    ↓
-Feature A,B,C → Feature A extracted → Feature A: New Service
-Feature D,E,F → Feature B extracted → Feature B: New Service  
-Feature G,H,I → Legacy monolith     → Feature C-I: Monolith
-```
-
-#### Database Decomposition
-
-```
-Shared Database → Module Schemas → Separate Databases
-       ↓                ↓               ↓
-All in one DB → Logical separation → Physical separation
-```
-
 ------
 
 ## Conclusion
-
-### Key Takeaways
 
 1. **Monoliths aren't legacy**: They're appropriate for many scenarios
 2. **Simplicity has value**: Operational and development simplicity
 3. **Team size matters**: Monoliths work well for smaller teams
 4. **Evolution is possible**: Can transition to microservices when needed
 5. **Modular design**: Good architecture principles apply regardless
-
-### Decision Framework
-
-**Choose Monolithic When**:
-
-- Small to medium team (< 15 developers)
-- Well-defined, stable domain
-- Strong consistency requirements
-- Limited operational expertise
-- Rapid prototyping or MVP development
-
-**Consider Alternatives When**:
-
-- Large team (> 20 developers)
-- Complex, evolving domain
-- Independent scaling requirements
-- Technology diversity needs
-- High deployment frequency requirements
-
-### Best Practices Summary
-
-- Design clear module boundaries from the start
-- Use dependency injection for loose coupling
-- Implement comprehensive testing strategy
-- Plan for database schema evolution
-- Monitor performance and identify bottlenecks
-- Document module interfaces and dependencies
-- Consider internal event system for decoupling
-- Prepare for potential future decomposition
-
-Remember: A well-designed monolith is better than a poorly designed microservices architecture. Focus on good software engineering principles regardless of the architectural pattern chosen.

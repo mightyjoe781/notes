@@ -1,6 +1,6 @@
 # Advanced Database Topics
 
-### Overview
+NOTE: This is not at all required for interviews, just for fun purposes.
 
 Advanced database topics become critical when building systems that require strong consistency guarantees, complex business logic enforcement, or sophisticated concurrency control. These concepts are essential for understanding how modern databases handle concurrent access, maintain data integrity across distributed systems, and implement complex business rules efficiently.
 
@@ -12,7 +12,7 @@ Advanced database topics become critical when building systems that require stro
 - **Complex business logic**: Rules that span multiple tables or require atomic operations
 - **Performance optimization**: Fine-tuning database behavior for specific workloads
 
-**Key Concepts:**
+Content :
 
 - How databases handle concurrent access without blocking
 - Maintaining consistency across distributed systems
@@ -27,13 +27,13 @@ Advanced database topics become critical when building systems that require stro
 
 **What is MVCC:** Multi-version Concurrency Control allows databases to handle concurrent transactions by maintaining multiple versions of data. Instead of locking rows during reads, MVCC creates a snapshot of data for each transaction, enabling high concurrency without blocking.
 
-**Key Benefits:**
+Advantages of MVCC
 
-- **Readers don't block writers**: Read operations never wait for write operations
-- **Writers don't block readers**: Write operations don't prevent concurrent reads
-- **Consistent snapshots**: Each transaction sees a consistent view of data
-- **High concurrency**: Multiple transactions can operate simultaneously
-- **No deadlocks on reads**: Read-only transactions cannot cause deadlocks
+- Readers don't block writers: Read operations never wait for write operations
+- Writers don't block readers: Write operations don't prevent concurrent reads
+- Consistent snapshots: Each transaction sees a consistent view of data
+- High concurrency: Multiple transactions can operate simultaneously
+- No deadlocks on reads: Read-only transactions cannot cause deadlocks
 
 **MVCC vs Locking:**
 
@@ -50,6 +50,9 @@ MVCC eliminates most locking requirements:
 - **Snapshot isolation** provides consistent reads
 - **Write conflicts** detected through version checking
 - **Garbage collection** removes old versions
+
+MVCC internals using a diagram
+![](assets/Pasted%20image%2020251229230123.png)
 
 ### MVCC Implementation Details
 
@@ -247,7 +250,7 @@ LIMIT 10;
 **Phase 1 - Prepare:**
 
 ```
-Coordinator → All Participants: PREPARE
+Coordinator ~ All Participants: PREPARE
 Each Participant:
 1. Locks all resources needed for transaction
 2. Writes transaction to durable log
@@ -258,146 +261,29 @@ Each Participant:
 
 ```
 If all participants responded READY:
-  Coordinator → All Participants: COMMIT
+  Coordinator ~ All Participants: COMMIT
   Each participant commits and releases locks
 Else:
-  Coordinator → All Participants: ABORT  
+  Coordinator ~ All Participants: ABORT
   Each participant aborts and releases locks
-```
-
-**2PC Implementation Example:**
-
-```javascript
-class TwoPhaseCommitCoordinator {
-  async executeDistributedTransaction(operations) {
-    const transactionId = this.generateTransactionId();
-    const participants = this.getParticipants(operations);
-    
-    try {
-      // Phase 1: Prepare
-      const prepareResults = await Promise.all(
-        participants.map(participant => 
-          participant.prepare(transactionId, operations)
-        )
-      );
-      
-      // Check if all participants are ready
-      const allReady = prepareResults.every(result => result.status === 'READY');
-      
-      if (allReady) {
-        // Phase 2: Commit
-        await Promise.all(
-          participants.map(participant =>
-            participant.commit(transactionId)
-          )
-        );
-        return { status: 'COMMITTED' };
-      } else {
-        // Phase 2: Abort
-        await Promise.all(
-          participants.map(participant =>
-            participant.abort(transactionId)
-          )
-        );
-        return { status: 'ABORTED' };
-      }
-    } catch (error) {
-      // Abort on any error
-      await this.abortAll(participants, transactionId);
-      throw error;
-    }
-  }
-}
-
-class DatabaseParticipant {
-  async prepare(transactionId, operations) {
-    const transaction = await this.db.beginTransaction();
-    
-    try {
-      // Execute operations within transaction
-      await Promise.all(operations.map(op => this.executeOperation(op, transaction)));
-      
-      // Write prepare record to log
-      await this.writeLog(transactionId, 'PREPARED', operations);
-      
-      // Keep transaction open and return ready
-      this.preparedTransactions.set(transactionId, transaction);
-      return { status: 'READY' };
-      
-    } catch (error) {
-      await transaction.rollback();
-      return { status: 'ABORT', error: error.message };
-    }
-  }
-  
-  async commit(transactionId) {
-    const transaction = this.preparedTransactions.get(transactionId);
-    if (!transaction) {
-      throw new Error(`Transaction ${transactionId} not found`);
-    }
-    
-    try {
-      await transaction.commit();
-      await this.writeLog(transactionId, 'COMMITTED');
-      this.preparedTransactions.delete(transactionId);
-    } catch (error) {
-      // Log error but don't throw - coordinator may retry
-      await this.writeLog(transactionId, 'COMMIT_FAILED', error);
-    }
-  }
-}
 ```
 
 **2PC Problems:**
 
-- **Blocking protocol**: Participants wait for coordinator decisions
-- **Single point of failure**: Coordinator failure can block all participants
-- **Performance overhead**: Multiple round-trips and logging requirements
-- **Timeout complexity**: Determining appropriate timeout values
+- Blocking protocol: Participants wait for coordinator decisions
+- Single point of failure: Coordinator failure can block all participants
+- Performance overhead: Multiple round-trips and logging requirements
+- Timeout complexity: Determining appropriate timeout values
 
 ### Three-Phase Commit (3PC)
 
 **3PC Improvements:** Three-Phase Commit adds a pre-commit phase to reduce blocking scenarios:
 
-**Phase 1 - Prepare** (same as 2PC) **Phase 2 - Pre-commit** (new phase) **Phase 3 - Commit** (final phase)
+**Phase 1 - Prepare** (same as 2PC) 
 
-```javascript
-class ThreePhaseCommitCoordinator {
-  async executeDistributedTransaction(operations) {
-    const transactionId = this.generateTransactionId();
-    const participants = this.getParticipants(operations);
-    
-    try {
-      // Phase 1: Prepare
-      const prepareResults = await this.phaseOne(participants, transactionId, operations);
-      if (!prepareResults.allReady) {
-        await this.abortAll(participants, transactionId);
-        return { status: 'ABORTED' };
-      }
-      
-      // Phase 2: Pre-commit
-      await Promise.all(
-        participants.map(participant =>
-          participant.preCommit(transactionId)
-        )
-      );
-      
-      // Phase 3: Commit
-      await Promise.all(
-        participants.map(participant =>
-          participant.commit(transactionId)
-        )
-      );
-      
-      return { status: 'COMMITTED' };
-      
-    } catch (error) {
-      await this.handleFailure(participants, transactionId, error);
-      throw error;
-    }
-  }
-}
-```
+**Phase 2 - Pre-commit** (new phase) 
+
+**Phase 3 - Commit** (final phase)
 
 ### Saga Pattern
 
@@ -405,145 +291,12 @@ class ThreePhaseCommitCoordinator {
 
 **Forward Recovery Saga:**
 
-```javascript
-class OrderSaga {
-  constructor() {
-    this.steps = [
-      {
-        action: this.reserveInventory,
-        compensation: this.releaseInventory
-      },
-      {
-        action: this.processPayment,
-        compensation: this.refundPayment
-      },
-      {
-        action: this.createShipment,
-        compensation: this.cancelShipment
-      },
-      {
-        action: this.sendConfirmation,
-        compensation: this.sendCancellation
-      }
-    ];
-  }
-  
-  async execute(orderData) {
-    const sagaId = this.generateSagaId();
-    const completedSteps = [];
-    
-    try {
-      for (const [index, step] of this.steps.entries()) {
-        await this.logSagaStep(sagaId, index, 'STARTED');
-        
-        const result = await step.action(orderData);
-        completedSteps.push({ step, result });
-        
-        await this.logSagaStep(sagaId, index, 'COMPLETED', result);
-      }
-      
-      await this.logSagaComplete(sagaId);
-      return { status: 'SUCCESS', sagaId };
-      
-    } catch (error) {
-      await this.compensate(completedSteps, sagaId, error);
-      throw error;
-    }
-  }
-  
-  async compensate(completedSteps, sagaId, originalError) {
-    // Execute compensations in reverse order
-    for (const { step, result } of completedSteps.reverse()) {
-      try {
-        await step.compensation(result);
-        await this.logCompensation(sagaId, step, 'COMPLETED');
-      } catch (compensationError) {
-        await this.logCompensation(sagaId, step, 'FAILED', compensationError);
-        // Continue with other compensations
-      }
-    }
-    
-    await this.logSagaFailed(sagaId, originalError);
-  }
-}
-```
+![](assets/Pasted%20image%2020251229225519.png)
 
 **Choreography vs Orchestration:**
 
-**Choreography Pattern:** Each service knows what to do when certain events occur:
-
-```javascript
-// Order Service
-class OrderService {
-  async createOrder(orderData) {
-    const order = await this.saveOrder(orderData);
-    
-    // Publish event for other services
-    await this.eventBus.publish('order.created', {
-      orderId: order.id,
-      customerId: orderData.customerId,
-      items: orderData.items,
-      total: orderData.total
-    });
-    
-    return order;
-  }
-}
-
-// Inventory Service
-class InventoryService {
-  constructor() {
-    this.eventBus.subscribe('order.created', this.handleOrderCreated.bind(this));
-    this.eventBus.subscribe('payment.failed', this.handlePaymentFailed.bind(this));
-  }
-  
-  async handleOrderCreated(orderEvent) {
-    try {
-      await this.reserveInventory(orderEvent.items);
-      
-      await this.eventBus.publish('inventory.reserved', {
-        orderId: orderEvent.orderId,
-        items: orderEvent.items
-      });
-    } catch (error) {
-      await this.eventBus.publish('inventory.reservation.failed', {
-        orderId: orderEvent.orderId,
-        error: error.message
-      });
-    }
-  }
-}
-```
-
-**Orchestration Pattern:** Central orchestrator coordinates the entire saga:
-
-```javascript
-class OrderOrchestrator {
-  async processOrder(orderData) {
-    const sagaId = this.generateSagaId();
-    
-    try {
-      // Step 1: Reserve inventory
-      const inventoryResult = await this.inventoryService.reserve(orderData.items);
-      await this.logStep(sagaId, 'inventory.reserved', inventoryResult);
-      
-      // Step 2: Process payment
-      const paymentResult = await this.paymentService.charge(orderData.payment);
-      await this.logStep(sagaId, 'payment.processed', paymentResult);
-      
-      // Step 3: Create shipment
-      const shipmentResult = await this.shippingService.createShipment(orderData);
-      await this.logStep(sagaId, 'shipment.created', shipmentResult);
-      
-      return { status: 'SUCCESS', sagaId };
-      
-    } catch (error) {
-      await this.handleFailure(sagaId, error);
-      throw error;
-    }
-  }
-}
-```
+**Choreography Pattern:** Each service knows what to do when certain events occur: (Above Example)
+**Orchestration Pattern:** Central orchestrator coordinates the entire saga: 
 
 ------
 
@@ -888,39 +641,7 @@ $$ LANGUAGE plpgsql;
 - **Scalability**: Application servers can scale independently
 - **Technology choice**: Use best programming languages for specific tasks
 
-**Hybrid Approach:**
-
-```javascript
-class OrderService {
-  async createOrder(orderData) {
-    // Application-level validation and preparation
-    const validatedData = await this.validateOrderData(orderData);
-    const enrichedData = await this.enrichOrderData(validatedData);
-    
-    try {
-      // Database-level processing for consistency
-      const result = await this.db.query(
-        'SELECT * FROM process_order($1, $2, $3)',
-        [
-          enrichedData.customerId,
-          JSON.stringify(enrichedData.items),
-          enrichedData.paymentMethod
-        ]
-      );
-      
-      // Application-level post-processing
-      await this.sendOrderConfirmation(result.order_id);
-      await this.triggerFulfillmentWorkflow(result.order_id);
-      
-      return result;
-      
-    } catch (error) {
-      await this.handleOrderError(orderData, error);
-      throw error;
-    }
-  }
-}
-```
+**Hybrid Approach:** Its combination both the approaches to have application level logic and database level procedures
 
 ------
 
@@ -942,23 +663,3 @@ class OrderService {
 - **Blocking long transactions**: Not considering the impact of long-running transactions on MVCC
 - **Poor error handling**: Not properly handling failures in stored procedures and triggers
 - **Tight coupling**: Creating tight coupling between application and database through stored procedures
-
-### Interview Tips
-
-**Effective Advanced Database Discussion:**
-
-- Explain the trade-offs between different concurrency control mechanisms
-- Discuss when to use distributed transactions vs eventual consistency
-- Address the pros and cons of database-side vs application-side logic
-- Consider operational complexity and debugging challenges
-- Relate concepts to real-world scenarios and use cases
-
-**Red Flags:**
-
-- Suggesting complex distributed transactions without understanding the complexity
-- Not considering the performance implications of MVCC and long transactions
-- Recommending triggers for all business logic without considering alternatives
-- Not understanding isolation level implications for application behavior
-- Ignoring the operational challenges of debugging database-side logic
-
-> **Remember**: Advanced database topics should be applied judiciously. While these features provide powerful capabilities, they also add complexity that must be balanced against the benefits. The key is understanding when the added complexity is justified by the requirements and constraints of your specific system.

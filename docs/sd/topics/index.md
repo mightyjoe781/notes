@@ -29,16 +29,12 @@
 - [Data Security](../../other_sde/security/data_security.md)
 - [Network Security](../../networking/neteng/protocols.md)
 
-------
-
-Under Refactoring ....
-
 #### Database Design Patterns
 
 - [Relational Database Patterns](database/relational.md)
 - [NoSQL Patterns](database/nosql.md)
 - [Data Modeling](database/data_modelling.md)
-- [Advanced Database Topics](database/advanced_models.md)
+- [Advanced Database Topics](database/advanced_topics.md)
 
 #### Consistency & Distributed Systems
 
@@ -47,28 +43,16 @@ Under Refactoring ....
 - [Consensus Algorithms](consistency/consensus_algorithms.md)
 - [Conflict Resolution](consistency/conflict_resolution.md)
 
-#### Design Paradigms
-
-- [Monolithic Architecture](paradigms/monolith.md)
-- [Microservices Architecture](paradigms/microservices.md)
-- [Serverless Architecture](paradigms/serverless.md)
-- [Event-Driven Architecture](paradigms/event_driven.md)
-
-#### System Design Guide
-
-- [Problem Clarification](interview_patterns/problem_clarification.md)
-- [High-Level Design](interview_patterns/high_level.md)
-- [Detailed Design](interview_patterns/detailed_design.md)
-- [Scale & Optimize](interview_patterns/scale_and_optimize.md)
-
-#### System Design Patterns
-
-- [Data Patterns](patterns/data.md)
-- [Service Communication](communication/service.md)  (MicroServices, Needs to be refactored a lot!!)
-
 #### Common System Architectures
 
 - [Web Applications](architecture/web_apps.md)
 - [Mobile Backend Systems](architecture/mobile_backend.md)
 - [Real-time Systems](architecture/real_time.md)
 - [Batch Processing Systems](architecture/batch_processing.md)
+
+#### Design Paradigms
+
+- [Monolithic Architecture](paradigms/monolith.md)
+- [Microservices Architecture](paradigms/microservices.md)
+- [Serverless Architecture](paradigms/serverless.md)
+- [Event-Driven Architecture](paradigms/event_driven.md)
