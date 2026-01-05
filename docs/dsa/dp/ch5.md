@@ -121,7 +121,9 @@ def minDeletions(s):
             else:
                 dp[i][j] = 1 + min(dp[i+1][j], dp[i][j-1])
 
-    return dp[0][n-1]The question of whether machines can think is about as relevant as the question of whether submarines can swim" Edsger Dijkstra
+    return dp[0][n-1]
+    
+# The question of whether machines can think is about as relevant as the question of whether submarines can swim" Edsger Dijkstra
 ````
 
 ### Matrix Chain Multiplication

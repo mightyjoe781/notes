@@ -6,7 +6,7 @@
 
 * NOTE: Subsets don’t have any specific order
 * To solve this problems lets divide the solution set using some criteria where both solutions are
-    * Disjoint ($c_1 \text{ and } c_2 = \phi $)
+    * Disjoint ($c_1 \text{ and } c_2 = \phi$)
     * Universal ($c_1 \text{ or } c_2 = U$)
 * we can interpret solution set as : $c_1$ solution that includes first element in the subset, $c_2$ solution that doesn’t include the first element
 * Solution for `[2, 3, 5]` becomes
@@ -300,7 +300,7 @@ vector<string> letterCombinations(string digits) {
     * Keeping a visited array will be helpful to represent the subproblems.
     * Or we can always send the element not to be included to be swapped with  the first element and that way we have a continuous suffix array as a subproblem
 
-##### Keeping visited array (Optimized) 
+#### Keeping visited array (Optimized) 
 
 ````c++
 void f(vector<int>& nums, vector<bool>& visited, vector<int>& contri, vector<vector<int>>& res){
@@ -349,7 +349,7 @@ if(contri.size() == nums.size()){
 }
 ````
 
-##### Swapping based solution (creates explicit suffix array)
+#### Swapping based solution (creates explicit suffix array)
 
 ````c++
 void f(vector<int>& nums,int j, vector<int>& contri, vector<vector<int>>& res){

@@ -76,12 +76,14 @@
     - [2D DP](dp/ch2.md)
     - [Unbounded & Bounded (0/1) Knapsack](dp/ch3.md)
     - [Grid & Palindrome DP](dp/ch4.md)
+    - [String DP](dp/strings.md)
+    - [DP on LIS](dp/dp_lis.md)
+    - [Interval DP/MCM](dp/mcm.md)
     - [Game & Interval DP](dp/ch5.md)
 - Advanced DP Problems
     - [Bitmask DP](additional/bit2.md)
     - [DP on Trees](dp/ch6.md)
     - [Digit DP](dp/ch7.md)
-
 
 
 ## Trees
