@@ -132,10 +132,12 @@ Note: This is a broad classification. Some types will be discussed in later sect
 * A very straight forward method to solve recursion complexity is using Back Substitution method (write-out recurrence)
 
 $$
-f(n) = f(n-1) + f(n-2)\\
-f(n) = f(n-2) + f(n-3) + f(n-3) + f(n-4)\\
-f(n) = f(n-2) + 2 f(n-3) + f(n-4) ... f(n)\\
-f(n) = f(1) + O(2^n)
+\begin{align}
+f(n) &= f(n-1) + f(n-2)\\
+f(n) &= f(n-2) + f(n-3) + f(n-3) + f(n-4)\\
+f(n) &= f(n-2) + 2 f(n-3) + f(n-4) ... f(n)\\
+f(n) &= f(1) + O(2^n)
+\end{align}
 $$
 
 * Tree Method
@@ -145,3 +147,44 @@ $$
 * Combination Problem: $O(2^{max(n, k)}) = O(2^n)$
 
 - A recursion Visualizer : https://recursion.vercel.app/
+
+### Another Example : Fast Collapsing Recursion State (Fast Exponentiation Example)
+
+- Implement a `pow(x, n)` function which calculates the following : $x^n$
+
+A naive recursive solution would be :
+
+```python
+
+def pow(x, n):
+    if n == 0:
+        return 1
+    return x * pow(x, n-1)
+
+pow(2, 5) # returns 32
+```
+
+Problem with above solution is let's say we have a question like $2^{50000}$ then above solution fails to resolve in most cases within time-limits. (NOTE: In python you may encounter recursion stack limits)
+
+Problem is the rate at which recursion being called, making the solution linear in time at worst case. But here we can prune the solution to obtain a $O(\log n)$ time complexity.
+
+Ex - fast Exponentiation
+
+```python
+
+def fast_pow(x, n):
+    if n == 0:
+        return 1
+        
+    # break it into : x^(n/2) and x^(n/2)
+    half = fast_pow(x, n//2)
+    
+    if n % 2:
+        return half * half * x
+        
+    return half * half
+
+fast_pow(2, 5000) # works ~
+```
+
+NOTE: we can't represent larger number in python variables, so often problems require calculating this against a mod value.
