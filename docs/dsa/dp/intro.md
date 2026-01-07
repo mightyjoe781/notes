@@ -4,7 +4,7 @@ Key skill to master DP is ability to determine the problem *states* and to deter
 
 Identify problems related to Dynamic Programming by determining whether the problem can be solved by counting solutions rather than enumeration or involve Optimization. Often, pruning is necessary to obtain the answer within time limits.
 
-If the problem cannot be solved using another technique, dynamic programming must be applied.
+If the problem cannot be solved using another technique, dynamic programming must be applied. Only when problem is still hard due to enumeration, DP fails and methods like MITM come saving.
 
 ### Types of DP Problems
 

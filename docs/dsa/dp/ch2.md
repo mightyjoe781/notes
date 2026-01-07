@@ -1,13 +1,158 @@
-# 2D DP
+# 2D/3D DP
 
-### Best Time to Buy & Sell Stocks with Txn Fee
+## Grid Unique Paths
+
+Problem Link 62 - [Link](https://leetcode.com/problems/unique-paths/)
+
+Problem is Simple Grid traversal, and count ways you can reach to final tile.
+
+```python
+
+def uniquePaths(self, m: int, n: int) -> int:
+
+    # dp = [[0] * (n+1) for _ in range(m+1)]
+    # dp[m-1][n-1] = 1
+
+    # for i in range(m-1, -1, -1):
+    #     for j in range(n-1, -1, -1):
+    #         dp[i][j] += dp[i+1][j] + dp[i][j+1]
+        
+    # return dp[0][0]
+
+    @cache
+    def solve(i, j):
+        
+        if i >= m or j >= n: # invalid point
+            return 0
+        
+        if i == m-1 and j == n-1:
+            return 1
+
+        return solve(i+1, j) + solve(i, j+1)
+
+
+    return solve(0, 0)
+
+```
+
+## Unique Paths II
+
+Problem Link 63 - [Link](https://leetcode.com/problems/unique-paths-ii/)
+
+Problem is similar to above problem, except we now early terminate impossible grid points,
+
+```python
+def uniquePathsWithObstacles(grid):
+    m, n = len(grid), len(grid[0])
+    
+    @cache
+    def solve(i, j):
+        if i >= m or j >= n or grid[i][j]:
+            return 0
+            
+        if i == m-1 and j == n-1:
+            return 1
+        
+        return solve(i+1, j) + solve(i, j+1)
+    
+    return solve(0, 0)
+```
+
+
+## Minimum Path Sum
+
+Problem Link 64 - [Link](https://leetcode.com/problems/minimum-path-sum/)
+
+```python
+
+def minPathSum(grid):
+    n, m = len(grid), len(grid[0])
+    
+    @cache
+    def solve(i, j):
+
+        if i >= n or j >= m: # impossible path, stop traversal
+            return float('inf')
+
+        if i == n-1 and j == m-1:
+            return grid[i][j]
+
+        return grid[i][j] + min(solve(i+1, j), solve(i, j+1))
+    
+    return solve(0, 0)
+```
+
+
+## Triangle
+
+```python
+
+def minimumTotal(triangle):
+    
+    n = len(triangle)
+
+    @cache
+    def solve(i, j):
+        if i >= n or j >= n:
+            return float('inf')
+
+        if i == n-1:
+            return triangle[i][j]
+
+        return triangle[i][j] + min(solve(i+1, j), solve(i+1, j+1))
+
+    return solve(0, 0)
+    
+    # dp = [row[:] for row in triangle]  # copy triangle
+
+    # for i in range(n-2, -1, -1):
+    #     for j in range(i+1):
+    #         dp[i][j] = triangle[i][j] + min(
+    #             dp[i+1][j],
+    #             dp[i+1][j+1]
+    #         )
+
+    # return dp[0][0]
+
+```
+
+## Minimum Falling Path Sum
+
+Problem Link 931 - [Minimum Falling Path Sum](https://leetcode.com/problems/minimum-falling-path-sum/)
+
+```python
+
+def minFallingPathSum(matrix):
+
+    n = len(matrix)
+
+    dp = [[0] * n for _ in range(n)]
+
+    # Base case: last row
+    for j in range(n):
+        dp[n-1][j] = matrix[n-1][j]
+
+    # Build bottom-up
+    for i in range(n-2, -1, -1):
+        for j in range(n):
+            dp[i][j] = matrix[i][j] + min(
+                dp[i+1][j],
+                dp[i+1][j-1] if j > 0 else float('inf'),
+                dp[i+1][j+1] if j < n-1 else float('inf')
+            )
+
+    return min(dp[0])
+```
+
+
+## Best Time to Buy & Sell Stocks with Txn Fee
 
 * [Best Time to Buy and Sell Stocks with Transaction Fee](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/) : might look like above problems but its not because we can sell at will.
 * Cue to DP : Maximize profit (try DP!)
 * DnC criteria : think about all possible txn, so we can buy on 6th day and sell on 1st day $(b_6, s_1)$, like that there could be many element of the set. Now problem is finding subproblem which provide us mutually exclusive & exhaustive sets.
 * We could purchase on first day and don’t buy on first day. Let’s try to related the subproblem to original problem
 * Purchase on 0th day
-    * $s_1$ : max profite you can make from $D[1... n-1]$, assuming first thing we do is sell $[S_i, (B_j S_k), (B_iS_m)....]$
+    * $s_1$ : max profit you can make from $D[1... n-1]$, assuming first thing we do is sell $[S_i, (B_j S_k), (B_iS_m)....]$
 * Don’t purchase on 0th day
     * $s_2$ : max profit that you can make from $D[1...n-1]$, assuming you start with a buy
 * Here we can notice that that there are two degree of freedom making this problem 2D DP
@@ -44,7 +189,7 @@ int maxProfit(vector<int>& prices, int fee) {
 }
 ````
 
-### Longest Arithmetic Subsequence
+## Longest Arithmetic Subsequence
 
 * Nested, 2D DP
 * [Problem Link](https://leetcode.com/problems/longest-arithmetic-subsequence/)
@@ -94,7 +239,7 @@ int longestArithSeqLength(vector<int>& A) {
 }
 ````
 
-### Target Sum
+## Target Sum
 
 * [Problem Link](https://leetcode.com/problems/target-sum/description/)
 * Subset DP, 2 D DP, Counting Problem
@@ -133,7 +278,7 @@ int findTargetSumWays(vector<int>& nums, int target) {
 
 * A further state space optimization is possible here by using a 2x(2001) size array
 
-### Edit Distance
+## Edit Distance
 
 * [Problem Link](https://leetcode.com/problems/edit-distance/)
 * Famous Problem Commonly Asked in Interviews
@@ -166,8 +311,3 @@ int minDistance(string word1, string word2) {
 	return dp[m][n]; 
 }
 ````
-
-
-
-### Distinct Subsequences
-

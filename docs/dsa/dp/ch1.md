@@ -1,6 +1,6 @@
 # 1D DP
 
-### Climbing Stairs
+## Climbing Stairs
 
 [Problem Link](https://leetcode.com/problems/climbing-stairs/)
 
@@ -37,6 +37,18 @@ int climbStairs(int n) {
 }
 ````
 
+```python
+
+@cache
+def fib(i):
+    if i <= 1: return 1
+    
+    return fib(i-1) + fib(i-2)
+
+return solve(n)
+
+```
+
 Recurrence: $O(n^2)$, Memoization: $O(n)$
 
 Now we could have solved same problem from smallest solution to largest then, we don’t even have to check anything. `dp[n]` would simply be the answer
@@ -53,9 +65,76 @@ int climbStairs(int n) {
 }
 ````
 
-Further Optimization can be done upon recognising that we are using only 2 variables to store states. (State Compression)
+Further Optimization can be done upon recognizing that we are using only 2 variables to store states. (State Compression)
 
-### House Robber
+## Frog Jump
+
+Problem Link : [Link](https://takeuforward.org/data-structure/dynamic-programming-frog-jump-dp-3)
+
+So this problem is similar to model as previous problem but now there is a cost for a jump that needs to be minimized.
+
+Python Solution : 
+
+```python
+
+def frog_jump(heights):
+    n = len(heights)
+    heights.append(float("inf"))  # sentinel value
+    
+    # dp = [float("inf")] * (n + 1)
+    # dp[n - 1] = 0
+
+    # for i in range(n-1, -1, -1):
+    #     dp[i] = min(
+    #         dp[i + 1] + abs(heights[i] - heights[i + 1]),
+    #         dp[i + 2] + abs(heights[i] - heights[i + 2]),
+    #     )
+    # return dp[0]
+
+    @cache
+    def jump(i):
+        if i >= n:
+            return float("inf") # invalid states
+
+        if i == n - 1: # no need to jump
+            return 0
+
+        e1 = jump(i + 1) + abs(heights[i] - heights[i + 1])
+        e2 = jump(i + 2) + abs(heights[i] - heights[i + 2])
+
+        return min(e1, e2)
+
+    return jump(0)
+```
+
+
+NOTE: How indexing problem can be solved using using sentinels, but be careful using these techniques.
+
+## Frog Jump with `k` Distances
+
+Problem Link - [Link](https://takeuforward.org/data-structure/dynamic-programming-frog-jump-with-k-distances-dp-4)
+
+```python
+
+def frog_jump(heights, k):
+    n = len(heights)
+    heights.extend([float("inf")] * k)  # sentinel value
+    
+    @cache
+    def jump(i):
+        if i >= n - 1: # no need to jump
+            return 0
+        
+        res = float('inf')
+        for j in range(1, k):
+            res = min(jump(i + j) + abs(heights[i] - heights[i + j]))
+        return res
+
+    return jump(0)
+
+```
+
+## House Robber
 
 - [Problem Link](https://leetcode.com/problems/house-robber/)
 - Notice how robber can’t rob two adjacent houses. Determing houses he will rob to get maximum money
@@ -123,11 +202,29 @@ int rob(vector<int>& nums) {
 
 Solution of Climbing Stairs using this approach : http://p.ip.fi/a6qS
 
+Pythonic Approach :
+
+```python
+def rob(nums):
+    n = len(nums)
+
+    @cache
+    def solve(i):
+        if i >= n: return 0
+
+        return max(
+            nums[i] + solve(i+2),
+            solve(i+1)
+        )
+
+    return solve(0)
+```
+
 ### Problems
 
 * [House Robber II](https://leetcode.com/problems/house-robber-ii/) : Try similar problem with constraint changed.
 
-### Decode Ways
+## Decode Ways
 
 [Problem Link](https://leetcode.com/problems/decode-ways/description/)
 
@@ -196,10 +293,10 @@ int numDecodings(string s) {
 
 - [Problem Link](https://leetcode.com/problems/longest-increasing-subsequence/)
 
-Up until we have looked at subarrays, subsequences are different that subarray, they follow the order they appear in, but not necessarily contigous
+Up until we have looked at subarrays, subsequences are different that subarray, they follow the order they appear in, but not necessarily contagious
 
-1. Modelling the Problem: We have to find $res = max\{s_i\}$, where $s_i$ : Length of LIS ending at $i$
-2. Now to find $s_i$ : Length of LIS ending at $i$, we assume that at any $j$, (where $j < i$) If $A[i] > A[j]$ we can extend teh subsequence by 1
+1. Modeling the Problem: We have to find $res = max\{s_i\}$, where $s_i$ : Length of LIS ending at $i$
+2. Now to find $s_i$ : Length of LIS ending at $i$, we assume that at any $j$, (where $j < i$) If $A[i] > A[j]$ we can extend the subsequence by 1
 3. Recurrence : $S_i = 1 + max_{j \le i} S_j$ and $A[i] > A[j]$
 4. Checking DP, Prefix Array with dimension 1, size <- n
 5. Base case : `dp[0] = 1`
@@ -233,7 +330,7 @@ given : `catsanddog`, we could split at `[1, 4, 7]` or `[3, 6, 8]` and more...
 - DnC Criteria: we can mark first split at `0, 1, 2...`, split at some position is i would be $s_i$ , these splits will be mutually exclusive and exhaustive in nature
 - We can prune the solution and validate each subproblem as
     - $s_1$ : $A[1...n-1]$ s.t. all words are in dictionary
-    - $s_2$ : A[2 ... n-1]
+    - $s_2$ : `A[2 ... n-1]`
     - Suffix Strings
 - We should have split s.t. all words `[0 ... i-1]` for $s_i$ are in dictionary
 - Representation : $res = OR\{w[0 ..i-1] \in D \text{ \& } S_i\}$
