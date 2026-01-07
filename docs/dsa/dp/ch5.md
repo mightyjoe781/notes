@@ -126,4 +126,4 @@ def minDeletions(s):
 # The question of whether machines can think is about as relevant as the question of whether submarines can swim" Edsger Dijkstra
 ````
 
-### Matrix Chain Multiplication
+
