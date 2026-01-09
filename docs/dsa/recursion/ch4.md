@@ -85,4 +85,200 @@ vector<vector<string>> solveNQueens(int n) {
 }
 ````
 
+Python Solution for above problem:
+
+```python
+from copy import deepcopy
+
+def solveNQueens(n):
+    board = [['.']*(n) for _ in range(n)]
+    res = []
+
+    def validate(board, i, j):
+        # check if the current column already doesn't have a queen
+        for k in range(i):
+            if board[k][j] == 'Q':
+                return False
+        
+        # check upper-left diagonal
+        r, c = i - 1, j - 1
+        while r >= 0 and c >= 0:
+            if board[r][c] == 'Q':
+                return False
+            r -= 1
+            c -= 1
+
+        # check upper-right diagonal
+        r, c = i - 1, j + 1
+        while r >= 0 and c < n:
+            if board[r][c] == 'Q':
+                return False
+            r -= 1
+            c += 1
+
+        return True
+
+    def solve(i):
+
+        if i == n:
+            # put correctly here
+            res.append([ "".join(row) for row in deepcopy(board)])
+            return 1
+
+        for j in range(n):
+            if validate(board, i, j):
+                # place queen
+                board[i][j] = 'Q'
+                solve(i+1)
+                # remove queen
+                board[i][j] = '.'
+
+    solve(0)
+    return res
+
+```
+
+Above solution tries to fill the board layer by layer.
 ## Sudoko Solver
+
+Problem Link - 37 : [Link](https://leetcode.com/problems/sudoku-solver/description/)
+
+Write a program to solve a Sudoku puzzle by filling the empty cells.
+
+```python
+
+def solveSudoku(self, board: List[List[str]]) -> None:
+
+    def is_valid(r, c, ch):
+        # row
+        for j in range(9):
+            if board[r][j] == ch:
+                return False
+
+        # column
+        for i in range(9):
+            if board[i][c] == ch:
+                return False
+
+        # 3x3 box
+        br = (r // 3) * 3
+        bc = (c // 3) * 3
+        for i in range(br, br + 3):
+            for j in range(bc, bc + 3):
+                if board[i][j] == ch:
+                    return False
+
+        return True
+
+    def dfs():
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == '.':
+                    for ch in "123456789":
+                        if is_valid(i, j, ch):
+                            board[i][j] = ch
+                            if dfs():
+                                return True
+                            board[i][j] = '.'
+                    return False
+        return True  # no empty cell left
+
+    dfs()
+        
+```
+
+
+## M-Coloring Problem
+
+**Problem Statement:** Given an undirected graph and a number `m`, determine if the graph can be colored with at most m colors such that no two adjacent vertices of the graph are colored with the same color.
+
+Python Solution to problem : 
+
+```python
+def main(graph, V, M):
+    color = [-1] * V
+
+    def is_safe(u, col):
+        for v in graph[u]:
+            if color[v] == col:
+                return False
+        return True
+
+    def dfs(u):
+        if u == V:
+            return True
+
+        for col in range(M):
+            if is_safe(u, col):
+                color[u] = col
+                if dfs(u + 1):
+                    return True
+                color[u] = -1  # backtrack
+
+        return False
+
+    possible = dfs(0)
+    return possible, color
+```
+
+
+## Expression Add Operators
+
+Problem Link - 282 - [Link](https://leetcode.com/problems/expression-add-operators/description/)
+
+This problem is quite hard, 
+
+At each step:
+
+- Pick the next number chunk `num[pos:i]`
+- Insert one of +, -, * before it (except at start)
+- Track:
+- `value: current evaluated result
+- last: last operand (needed for `*`)
+- expr: expression string so far
+
+NOTE: `*` is tricky to calculate here, lets say input it `1 + 2 * 3`
+
+It evaluation should be `1 + (2 * 3)` but we might calculate `1+2 = 3` from previous values, so to do correct evaluation we perform following
+
+```
+value - last + (last * curr)
+```
+
+
+```python
+
+def addOperators(num, target):
+    res = []
+    n = len(num)
+
+    def dfs(pos, expr, value, last):
+
+        if pos == n:
+            if value == target:
+                res.append(expr)
+            return
+
+        for i in range(pos, n):
+            # avoid numbers with leading zeros
+            if i > pos and num[pos] == '0':
+                break
+
+            curr_str = num[pos:i+1]
+            curr = int(curr_str)
+
+            if pos == 0:
+                # first number: no operator
+                dfs(i + 1, curr_str, curr, curr)
+            else:
+                dfs(i + 1, expr + "+" + curr_str, value + curr, curr)
+                dfs(i + 1, expr + "-" + curr_str, value - curr, -curr)
+
+                # multiplication (IMPORTANT)
+                dfs(i + 1, expr + "*" + curr_str,
+                    value - last + last * curr,
+                    last * curr)
+
+    dfs(0, "", 0, 0)
+    return res
+```
