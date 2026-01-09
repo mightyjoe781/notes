@@ -58,7 +58,31 @@ vector<vector<string>> partition(string s) {
 
 ````
 
+Python Solution :
 
+```python
+
+def partition(s):
+
+    n = len(s)
+    res = []
+
+    def dfs(i, curr):
+
+        if i == n:
+            res.append(curr[:])
+            return
+        
+        for j in range(i, n):
+            part = s[i:j + 1]
+            if part == part[::-1]: # check palindrome
+                dfs(j+1, curr + [part])
+
+
+    dfs(0, [])
+    return res
+
+```
 
 ## Word Search
 
@@ -103,5 +127,114 @@ bool exist(vector<vector<char>>& board, string word) {
     return res;
 }
 ````
+
+Python Solution :
+
+```python
+
+def exist(self, board: List[List[str]], word: str) -> bool:
+
+    n, m = len(board), len(board[0])
+    dirs = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+    vis = set()
+
+    def dfs(i, j, k):
+        # matched full word
+        if k == len(word):
+            return True
+
+        # bounds + char check
+        if i < 0 or i >= n or j < 0 or j >= m:
+            return False
+        if (i, j) in vis:
+            return False
+        if board[i][j] != word[k]:
+            return False
+
+        vis.add((i, j))
+
+        for dx, dy in dirs:
+            if dfs(i + dx, j + dy, k + 1):
+                return True
+
+        vis.remove((i, j))
+        return False
+
+    # MUST try every starting cell
+    for i in range(n):
+        for j in range(m):
+            if dfs(i, j, 0):
+                return True
+
+    return False
+```
+
+
+## Word Break
+
+Problem Link 139 - [Link](https://leetcode.com/problems/word-break/)
+
+Although this a DP problem but shows how recursion can be used to this problem.
+
+Python Solution :
+
+```python
+def wordBreak(s, wordDict):
+
+    dt = set(wordDict)
+    @cache
+    def dfs(i):
+        if i == len(s): return True
+
+        word = ""
+        ans = False
+        for j in range(i, len(s)):
+            word += s[j]
+            if word in dt:
+                ans |= dfs(j+1)
+        return ans
+
+    return dfs(0)
+```
+
+
+## Rat in a Maze
+
+**Problem Statement:** Given a grid of dimensions n x n. A rat is placed at coordinates (0, 0) and wants to reach at coordinates (n-1, n-1). Find all possible paths that rat can take to travel from (0, 0) to (n-1, n-1). The directions in which rat can move are 'U' (up) , 'D' (down) , 'L' (left) , 'R' (right).  
+The value 0 in grid denotes that the cell is blocked and rat cannot use that cell for traveling, whereas value 1 represents that rat can travel through the cell. If the cell (0, 0) has 0 value, then mouse cannot move to any other cell.
+
+NOTE: instead of using visited array, reused the grid. Generally its bad practice mutate the inputs.
+
+```python
+
+def main(n, grid):
+    res = []
+    dirs = [(0, 1, "R"), (1, 0, "D"), (-1, 0, "L"), (0, -1, "U")]
+
+    def dfs(i, j, path):
+        if i == n - 1 and j == n - 1:
+            res.append(path)
+            return
+
+        if i < 0 or j < 0 or i >= n or j >= n:
+            return
+
+        if grid[i][j] == 0:
+            return
+
+        # block back travel
+        grid[i][j] = 0
+
+        for dx, dy, name in dirs:
+            dfs(i + dx, j + dy, path + name)
+
+        # reset grid
+        grid[i][j] = 1
+
+    dfs(0, 0, "")
+    return res
+
+
+```
 
 ## Generate valid Parenthesis

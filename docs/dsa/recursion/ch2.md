@@ -74,6 +74,82 @@ vector<vector<int>> subsets(vector<int>& nums){
 }
 ````
 
+Below are two quite interesting approach to above problem.
+
+NOTE: Python never copies objects automatically, 
+
+For lists:
+
+- Function parameters receive a reference to the same list object
+- Mutating it (append, pop, clear) affects everyone holding that reference
+- Rebinding `(x = [])` does not affect the caller
+
+
+Using Pythonic Recursion
+
+```python
+
+def subsets(nums):
+    res = []
+
+    def dfs(i, contri): # don't use defaults, as they are init during declaration
+        # Base case
+        if i == len(nums):
+            res.append(contri[:])  # copy current subset # very important
+            return
+
+        # Exclude nums[i]
+        dfs(i + 1, contri)
+
+        # Include nums[i]
+        contri.append(nums[i])
+        dfs(i + 1, contri)
+        contri.pop()  # backtrack
+        
+        # or use this for include
+        # dfs(i + 1, contri + [nums[i]]) # this is copy of the arr being passed
+
+    dfs(0, []) # explicit shared list reference
+    return res
+```
+
+
+```python
+def subsets(nums):
+    res = []
+
+    def dfs(i, contri):
+        if i == len(nums):
+            res.append(contri)
+            return
+
+        dfs(i + 1, contri)
+        dfs(i + 1, contri + [nums[i]]) # this is copy of the arr being passed
+
+    dfs(0, [])
+    return res
+```
+
+Using BitMasks
+
+```python
+
+def subsets(nums):
+
+    n = len(nums)
+    
+    # for 2 elements : Mask 00, 01, 10, 11
+    for mask in range(1 << n):
+        curr = []
+        for j in range(n):
+            if mask & (1 << j):
+                curr.append(nums[j]) 
+        res.append(curr)
+        
+    return res
+
+```
+
 ## Combination
 
 Given an array = `[1, 2, 3, 4]` and `k=2`
@@ -153,6 +229,30 @@ vector<vector<int>> combine(int n, int k) {
     return res;
 }
 ````
+
+Pythonic Solution
+
+```python
+
+def combinationSum(candidates, target):
+
+    n = len(candidates)
+    res = []
+
+    def solve(i, curr):
+        if sum(curr) == target:
+            res.append(curr[:]) # always prefer to copy here
+            return
+
+        if i >= n or sum(curr) > target:
+            return
+        
+        solve(i+1, curr)
+        solve(i, curr + [candidates[i]]) # notice its passing copy
+
+    solve(0, [])
+    return res
+```
 
 ## Combination Sum
 
@@ -239,6 +339,34 @@ vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
 }
 ````
 
+```python
+def combinationSum2(self, target):
+
+    candidates.sort()
+    res = []
+    n = len(candidates)
+
+    def dfs(start, remaining, path):
+        if remaining == 0:
+            res.append(path[:])
+            return
+
+        for i in range(start, n):
+            # Skip duplicates at the same recursion depth
+            if i > start and candidates[i] == candidates[i - 1]:
+                continue
+
+            if candidates[i] > remaining:
+                break  # pruning
+
+            path.append(candidates[i])
+            dfs(i + 1, remaining - candidates[i], path)
+            path.pop()
+
+    dfs(0, target, [])
+    return res
+```
+
 ### Letter Combination of a Phone Number
 
 [Leetcode Link](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
@@ -284,8 +412,40 @@ vector<string> letterCombinations(string digits) {
     f(digits,0,contri,res);
     return res;
 }
-
 ````
+
+Python Solution
+
+```python
+
+def letterCombinations(digits):
+
+    mp = {
+        "2" : "abc",
+        "3" : "def",
+        "4" : "ghi",
+        "5" : "jkl",
+        "6" : "mno",
+        "7" : "pqrs",
+        "8" : "tuv",
+        "9" : "wxyz",
+    }
+    n = len(digits)
+    res = []
+
+    def solve(i, curr):
+
+        if i == n:
+            res.append(curr)
+            return
+
+        for c in mp[digits[i]]:
+            solve(i+1, curr + c)
+
+    
+    solve(0, "")
+    return res
+```
 
 ## Permutation
 

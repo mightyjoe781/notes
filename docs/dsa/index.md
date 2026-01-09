@@ -80,6 +80,7 @@
     - [DP on LIS](dp/dp_lis.md)
     - [Interval DP/MCM](dp/mcm.md)
     - [Game & Minimax](dp/ch5.md)
+    - [Misc Types](dp/other.md)
 - Advanced DP Problems
     - [Bitmask DP](additional/bit2.md)
     - [DP on Trees](dp/ch6.md)
