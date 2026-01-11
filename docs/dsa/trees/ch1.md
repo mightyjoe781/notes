@@ -1,6 +1,6 @@
 # Trees
 
-* Trees are heirarchical data structures consisting of nodes connected by edges.
+* Trees are hierarchical data structures consisting of nodes connected by edges.
 * Each tree has a root node, and zero or more child nodes forming a *parent-child* relationship without cycles.
 
 ## Types of Trees
@@ -122,4 +122,31 @@ public:
     bool search(int key) { return search(root, key) != nullptr; }
 };
 ````
+
+### Iterative Approach to Above Traversals
+
+Pre-order Traversal
+
+```python
+
+from collections import deque
+def preorderTraversal(root):
+
+    res = []
+    stk = deque()
+    stk.append(root)
+
+    while stk:
+        t = stk.pop()
+        if not t:
+            continue
+        res.append(t.val)
+        stk.append(t.right)
+        stk.append(t.left)
+    
+    return res
+```
+
+## Problems
+
 

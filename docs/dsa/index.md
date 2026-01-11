@@ -89,7 +89,9 @@
 
 ## Trees
 
-* [Binary Trees & Binary Search Trees (BST)](trees/ch1.md)
+* [Introduction](trees/ch1.md)
+* Binary Trees
+* BSTs
 * [Problems on Binary Trees](trees/ch2.md)
 * [Tries](strings/ch3.md)
 
