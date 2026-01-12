@@ -21,7 +21,8 @@
     * [Stack Operations & Applications](stknq/ch1.md)
     * [Queue & Deque Implementations](stknq/ch2.md)
     * [Expression Evaluation & Parsing](stknq/ch3.md)
-    * [Monotonic Stacks & Sliding Window Maximum](stknq/ch4.md)
+    * [Monotonic Stacks](stknq/monotonic_stk.md)
+    * [Implementation Problems](stknq/implementations.md)
 
 
 * Heaps & Priority Queues
