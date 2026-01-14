@@ -5,17 +5,17 @@
 
 ## Types of Trees
 
-| Tree Type                    | Description                                                  |
-| ---------------------------- | ------------------------------------------------------------ |
-| **Binary Tree**              | Each node has at most two children (left and right).         |
-| **Binary Search Tree (BST)** | A binary tree where left child < parent < right child, enabling efficient search operations. |
-| **Balanced Trees**           | Trees maintaining height balance for efficient operations (e.g., AVL, Red-Black trees). |
-| **Heap**                     | Complete binary tree satisfying heap property (min-heap or max-heap). |
+| Tree Type                    | Description                                                                                          |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Binary Tree**              | Each node has at most two children (left and right).                                                 |
+| **Binary Search Tree (BST)** | A binary tree where left child < parent < right child, enabling efficient search operations.         |
+| **Balanced Trees**           | Trees maintaining height balance for efficient operations (e.g., AVL, Red-Black trees).              |
+| **Heap**                     | Complete binary tree satisfying heap property (min-heap or max-heap).                                |
 | **Trie (Prefix Tree)**       | Tree used for storing strings, where each node represents a character, enabling fast prefix queries. |
-| **Fenwick Tree (BIT)**       | Binary Indexed Tree for efficient prefix sum queries and updates. |
-| **Segment Tree**             | Tree structure to efficiently answer range queries and updates on arrays. |
-| **N-ary Tree**               | Each node can have any number of children, generalizing binary trees. |
-| **Suffix Tree**              | Compressed trie of all suffixes of a string, used in string processing. |
+| **Fenwick Tree (BIT)**       | Binary Indexed Tree for efficient prefix sum queries and updates.                                    |
+| **Segment Tree**             | Tree structure to efficiently answer range queries and updates on arrays.                            |
+| **N-ary Tree**               | Each node can have any number of children, generalizing binary trees.                                |
+| **Suffix Tree**              | Compressed trie of all suffixes of a string, used in string processing.                              |
 
 ## Implementation
 
