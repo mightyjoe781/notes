@@ -91,7 +91,7 @@
 ## Trees
 
 * [Introduction](trees/ch1.md)
-* Binary Trees
+* [Binary Trees](binary_trees.md)
 * BSTs
 * [Problems on Binary Trees](trees/ch2.md)
 * [Tries](strings/ch3.md)
