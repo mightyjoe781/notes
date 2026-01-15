@@ -195,3 +195,64 @@ def verticalTraversal(root) -> List[List[int]]:
 
 ```
 
+### Symmetric Tree
+
+Problem Link 101 - [Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
+
+Given the `root` of a binary tree, _check whether it is a mirror of itself_ (i.e., symmetric around its center).
+
+![](assets/Pasted%20image%2020260114231038.png)
+
+```python
+
+def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+
+    def dfs(node1, node2):
+        if node1 == None and node2 == None:
+            return True
+        
+        if node1 == None or node2 == None:
+            return False
+        
+        if node1.val == node2.val:
+            return dfs(node1.left, node2.right) and dfs(node1.right, node2.left)
+        return False
+
+    return dfs(root, root)
+
+```
+
+### Binary Tree Right Side View
+
+Problem Link 199 - [Problem Link](https://leetcode.com/problems/binary-tree-right-side-view/
+
+Given the `root` of a binary tree, imagine yourself standing on the **right side** of it, return _the values of the nodes you can see ordered from top to bottom_.
+
+![](assets/Pasted%20image%2020260114231756.png)
+
+```python
+
+def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+
+    if not root:
+        return []
+    
+    dq = deque()
+    dq.append(root)
+
+    res = []
+
+    while dq:
+        n = len(dq)
+        val = None
+        for _ in range(n):
+            t = dq.popleft()
+            val = t.val
+            if t.left: dq.append(t.left)
+            if t.right: dq.append(t.right)
+        
+        res.append(val)
+    
+    return res
+
+```
