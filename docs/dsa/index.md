@@ -52,7 +52,7 @@
 
 * [Binary Search](search/binary_search.md)
 * [Search in Rotated/Sorted Array](search/ch2.md)
-* [Binary Search Trees (BSTs) Operations](trees/ch1.md)
+* [Binary Search Trees (BSTs) Operations](trees/introduction.md)
 * Hashing Based Search Methods
 * Radix Search & Trie-based Search (Optional)
 
@@ -90,19 +90,19 @@
 
 ## Trees
 
-* [Introduction](trees/ch1.md)
+* [Introduction](trees/introduction.md)
 * [Binary Trees](binary_trees.md)
-* BSTs
-* [Problems on Binary Trees](trees/ch2.md)
+* [More Problems on Binary Trees](trees/more_binary_trees.md)
+* [BSTs](trees/bst.md)
 * [Tries](strings/ch3.md)
 
 Optional Topics in Trees
 
 * [Suffix Trees](strings/ch4.md)
-* [Fenwick Trees (Binary Indexed Trees)](trees/ch3.md)
-* [Segment Trees & Lazy Propagation](trees/ch4.md)
-* [Sqrt Decomposition Techniques](trees/ch5.md)
-* [Heap](trees/ch6.md)
+* [Fenwick Trees (Binary Indexed Trees)](trees/fenwick.md)
+* [Segment Trees & Lazy Propagation](trees/segment.md)
+* [Sqrt Decomposition Techniques](trees/sqrt_decomposition.md)
+* [Heap](trees/heaps.md)
 * Advanced Trees: AVL, Red-Black Trees
 
 

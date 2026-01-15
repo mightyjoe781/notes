@@ -157,15 +157,15 @@ public:
 
 ## Problems
 
-| **Problem**                                                  | **Problem Type**       | **Optimal with**        | **Notes**                                                    |
-| ------------------------------------------------------------ | ---------------------- | ----------------------- | ------------------------------------------------------------ |
-| [#336. Palindrome Pairs](https://leetcode.com/problems/palindrome-pairs/) | Substring checks       | Trie / Suffix tree idea | Though typically solved with tries, suffix structures help in understanding efficient string lookups. |
-| [#472. Concatenated Words](https://leetcode.com/problems/concatenated-words/) | Substring parsing      | Trie / DP               | Suffix tree logic helps if asked to optimize DP further.     |
-| [#920. Number of Music Playlists](https://leetcode.com/problems/number-of-music-playlists/) | Rare use case          | DP + Combinatorics      | Suffix trees aren’t a fit here, but LCP might be used to optimize substring checks. |
-| [#1044. Longest Duplicate Substring](https://leetcode.com/problems/longest-duplicate-substring/) | **Direct application** | **Suffix Array + LCP**  | This is the **clearest modern Suffix Tree replacement problem** on LeetCode. |
-| [#1153. String Compression II](https://leetcode.com/problems/string-compression-ii/) | Optimization           | DP + Preprocessing      | Advanced string structure can help, but not common in brute-force. |
-| [#1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/) | Interval covering      | Segment Tree            | Not suffix-related, but string segment problems sometimes align with this. |
-| [#1178. Number of Valid Words for Each Puzzle](https://leetcode.com/problems/number-of-valid-words-for-each-puzzle/) | Bitmask / Trie         | Trie / hashing          | Again, tries are more practical here.                        |
+| **Problem**                                                                                                                                | **Problem Type**       | **Optimal with**        | **Notes**                                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------- |
+| [#336. Palindrome Pairs](https://leetcode.com/problems/palindrome-pairs/)                                                                  | Substring checks       | Trie / Suffix tree idea | Though typically solved with tries, suffix structures help in understanding efficient string lookups. |
+| [#472. Concatenated Words](https://leetcode.com/problems/concatenated-words/)                                                              | Substring parsing      | Trie / DP               | Suffix tree logic helps if asked to optimize DP further.                                              |
+| [#920. Number of Music Playlists](https://leetcode.com/problems/number-of-music-playlists/)                                                | Rare use case          | DP + Combinatorics      | Suffix trees aren’t a fit here, but LCP might be used to optimize substring checks.                   |
+| [#1044. Longest Duplicate Substring](https://leetcode.com/problems/longest-duplicate-substring/)                                           | **Direct application** | **Suffix Array + LCP**  | This is the **clearest modern Suffix Tree replacement problem** on LeetCode.                          |
+| [#1153. String Compression II](https://leetcode.com/problems/string-compression-ii/)                                                       | Optimization           | DP + Preprocessing      | Advanced string structure can help, but not common in brute-force.                                    |
+| [#1326. Minimum Number of Taps to Open to Water a Garden](https://leetcode.com/problems/minimum-number-of-taps-to-open-to-water-a-garden/) | Interval covering      | Segment Tree            | Not suffix-related, but string segment problems sometimes align with this.                            |
+| [#1178. Number of Valid Words for Each Puzzle](https://leetcode.com/problems/number-of-valid-words-for-each-puzzle/)                       | Bitmask / Trie         | Trie / hashing          | Again, tries are more practical here.                                                                 |
 
 ### Summary
 
