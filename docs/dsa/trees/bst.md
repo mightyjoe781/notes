@@ -115,6 +115,78 @@ def insertIntoBST(root, val):
 
 ```
 
+A similar question is : MyCalendar I
+
+You are implementing a program to use as your calendar. We can add a new event if adding the event will not cause a **double booking**.
+
+A **double booking** happens when two events have some non-empty intersection (i.e., some moment is common to both events.).
+
+```python
+
+# using python sortedarray
+from sortedcontainers import SortedList
+class MyCalendar:
+
+    def __init__(self):
+        self.calendar = SortedList()
+        
+
+    def book(self, start: int, end: int) -> bool:
+        idx = self.calendar.bisect_right((start, end))
+        if (idx > 0 and self.calendar[idx-1][1] > start) or (idx < len(self.calendar) and self.calendar[idx][0] < end):
+            return False
+        self.calendar.add((start, end))
+        return True
+
+```
+
+Same Problem in Most Optimal Time using BST
+
+```python
+
+class Node:
+    def __init__(self, s, e):
+        self.val = (s, e)
+        self.right = None
+        self.left = None
+
+class MyCalendar:
+
+    def __init__(self):
+        self.root = None
+
+    def book_helper(self, s, e, node):
+        if s >= node.val[1]:
+            # right subtree is correct insertion
+            if node.right:
+                return self.book_helper(s, e, node.right)
+            else:
+                node.right = Node(s, e)
+                return True
+        
+        elif e <= node.val[0]:
+            # left subtree
+            if node.left:
+                return self.book_helper(s, e, node.left)
+            else:
+                node.left = Node(s, e)
+                return True
+
+        else:
+            # conflicting
+            return False
+
+        
+
+    def book(self, start: int, end: int) -> bool:
+        if not self.root:
+            self.root = Node(start, end)
+            return True
+        return self.book_helper(start, end, self.root)
+        
+
+```
+
 ### Delete a node in BST
 
 Given a root node reference of a BST and a key, delete the node with the given key in the BST. Return _the **root node reference** (possibly updated) of the BST_.
