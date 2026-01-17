@@ -254,7 +254,7 @@ Tarjan’s algorithm can be used to identify SCCs of a digraph. However code is 
 
 ## Problems
 
-1. https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1 NOTICE few things, first there is no need to track visited since in undirected grpah it processes layer by layer, its a special case of floyd warshal which is special case PFS.
+1. https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1 NOTICE few things, first there is no need to track visited since in undirected graph it processes layer by layer, its a special case of floyd warshal which is special case PFS.
 2. https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1 NOTICE NOW we need visited array to for safeguard and efficiency. Try removing it and see memory comparisons.
 3. https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1 for fun try to use set for this approach to implement dijkstras
 
@@ -279,70 +279,36 @@ Tarjan’s algorithm can be used to identify SCCs of a digraph. However code is 
 
 9. https://leetcode.com/problems/cheapest-flights-within-k-stops/ Cheapest flight with K stops, this is important question look at DFS solution presented as well.
 
-````c++
-    int dfs(vector<vector<pair<int,int>>> &graph, vector<vector<int>> &vis, int i, int dst, int k) {
-        if(i == dst){
-            return 0;
-        }
-        if(k < 0) {
-            return INT_MAX;
-        }
-        if(vis[i][k] != 0) {
-            return vis[i][k];
-        }
+Even though this problem looks like a Dijkstra problem it is not, but Dijkstra traverses the optimal path, while problem doesn't care about the minimum cost, it just needs to be within k stops.
 
-        int cost = INT_MAX;
-        for(auto nbr: graph[i]) {
-            int next = nbr.first;
-            int weight = nbr.second;
-            int subproblem = dfs(graph, vis, next, dst, k - 1);
-            if (subproblem != INT_MAX) {
-                cost = min(cost, weight + subproblem);
-            }
-        }
-        return vis[i][k] = cost;
+Dijkstra might fail here since optimal path doesn't may be have less than k stops.
 
-    }
-    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
-        // looks like a weighted graph with bfs
-        // vector<vector<pair<int,int>>> graph(n);
-        unordered_map<int, vector<pair<int,int>>> graph;
+````python
 
+from collections import defaultdict
+def findCheapestPrice(n, flights, src, dst, k):
 
-        // construct graph
-        for(auto f : flights) {
-            graph[f[0]].push_back({f[1],f[2]});
-        }
+    graph = defaultdict(list)
 
-        // ----------- bfs ----------
-        queue<pair<int,int>> q;
-        vector<int> dist(n+1, INT_MAX);
-        dist[src] = 0;
-        q.push({src,0});
-        while(!q.empty() && k >= 0) {
-            // travel all current level nodes - level order traversal
-            int n = q.size();
-            for(int i = 0; i < n; i++) {
-                auto t = q.front(); q.pop();
-                // do edge relaxation from all neighbors
-                for(auto nbr: graph[t.first]) {
-                    if(t.second + nbr.second < dist[nbr.first]) {
-                        dist[nbr.first] = t.second + nbr.second;
-                        q.push({nbr.first, dist[nbr.first]});
-                    }
-                }
-            }
-            k--;
-        }
-        return dist[dst] >= INT_MAX ? -1 : dist[dst];
+    for u, v, w in flights:
+        graph[u].append((v, w))
 
-        // ----------- dfs -----------
-        // vector<vector<int>> vis(n, vector<int>(k + 2, 0)); // Initializing vis with -1
-        // start from src and do bfs till k dist or destination
-        // int result = dfs(graph, vis, src, dst, k);
-        // return result == INT_MAX ? -1 : result;
-        
-    }
+    @cache
+    def dfs(i, k):
+        if i == dst:
+            return 0
+
+        if k < 0:
+            return float('inf')
+
+        cost = float('inf')
+        for v, w in graph[i]:
+            cost = min(cost, w + dfs(v, k-1))
+        return cost
+       
+    res = dfs(src, k)
+    return -1 if res == float('inf') else res
+
 ````
 
 10. https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1 Use bellman ford

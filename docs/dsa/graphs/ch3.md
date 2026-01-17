@@ -159,6 +159,45 @@ vector<int> kahnTopologicalSort(int numVertices, vector<vector<int>>& edges) {
 }
 ````
 
+
+Python Implementation :
+
+```python
+
+from collections import deque
+from typing import List, Iterable, Tuple
+
+def topo_sort_kahn(n: int, edges: Iterable[Tuple[int, int]]) -> List[int]:
+    """
+    Returns a topological ordering of a directed graph with n vertices.
+    If a cycle exists, returns an empty list.
+    """
+
+    graph = [[] for _ in range(n)]
+    indegree = [0] * n
+
+    # Build graph
+    for u, v in edges:
+        graph[u].append(v)
+        indegree[v] += 1
+
+    # Queue of nodes with no incoming edges
+    q = deque(i for i in range(n) if indegree[i] == 0)
+    order = []
+
+    while q:
+        u = q.popleft()
+        order.append(u)
+
+        for v in graph[u]:
+            indegree[v] -= 1
+            if indegree[v] == 0:
+                q.append(v)
+
+    return order if len(order) == n else []
+
+```
+
 ## Problems
 
 ### Example Problems with Links
@@ -174,7 +213,20 @@ vector<int> kahnTopologicalSort(int numVertices, vector<vector<int>>& edges) {
 
 ### Alien Dictionary
 
+**Problem Statement:** Determine the order of characters in an alien language given a sorted list of words from its dictionary.
+
+```
+Example 1:
+Input: N = 5, K = 4
+dict = {"baa","abcd","abca","cab","cad"}
+Output: b d a c
+
+```
+
 We can represent the problem as directed graph. Now if there is a cycle or self loops then its invalid.
+
+Characters - Nodes
+Ordering Constraint - Directed Edges
 
 Vertices will be unique characters from the words. After the construction of graph we have to return topological sort of the graph!
 
@@ -259,3 +311,51 @@ public:
 Improvements : We need to check only consecutive words to create graph.
 
 Because graph captures transitive relation by the fact input is sorted in alien dictionary implying word $ a, b, c$ in order mean $a < b$ and $ b < c$ but that directly implies $ a < c $.
+
+Python Optimal Approach:
+
+```python
+
+from collections import defaultdict, deque
+from typing import List
+
+def alienOrder(words: List[str]) -> str:
+    graph = defaultdict(set)
+    indegree = {}
+
+    # initialize all characters
+    for word in words:
+        for c in word:
+            indegree[c] = 0
+
+    # build graph using adjacent words only
+    for i in range(len(words) - 1):
+        w1, w2 = words[i], words[i + 1]
+        min_len = min(len(w1), len(w2))
+
+        # invalid prefix case
+        if len(w1) > len(w2) and w1[:min_len] == w2[:min_len]:
+            return ""
+
+        for j in range(min_len):
+            if w1[j] != w2[j]:
+                if w2[j] not in graph[w1[j]]:
+                    graph[w1[j]].add(w2[j])
+                    indegree[w2[j]] += 1
+                break
+
+    # topological sort
+    q = deque([c for c in indegree if indegree[c] == 0])
+    res = []
+
+    while q:
+        c = q.popleft()
+        res.append(c)
+        for nei in graph[c]:
+            indegree[nei] -= 1
+            if indegree[nei] == 0:
+                q.append(nei)
+
+    return "".join(res) if len(res) == len(indegree) else ""
+
+```

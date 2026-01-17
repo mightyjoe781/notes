@@ -55,6 +55,41 @@ else printf("Loowater is doomed!\n");
     * Job Scheduling Problem
 * More on [Greedy](https://algo.minetest.in/CP3_Book/3_Problem_Solving_Paradigms/#greedy)
 
+### Water Sprinkler
+
+You’re given: A line segment to cover: `[0 ... L]`, Sprinklers placed at positions i, Each sprinkler covers an interval: `[i - range[i], i + range[i]]`
+
+Use the minimum number of sprinklers to fully cover `[0 ... L]`. If impossible, return -1
+
+```python
+
+def minSprinklers(arr, n):
+    intervals = []
+    for i, r in enumerate(arr):
+        if r != -1:
+            intervals.append((i - r, i + r))
+
+    
+    intervals.sort()
+    covered = 0  # farthest position covered so far
+    i = 0        # interval index
+    used = 0     # sprinklers used
+    
+    while covered < n:
+        farthest = covered
+        while i < len(intervals) and intervals[i][0] <= covered:
+            farthest = max(farthest, intervals[i][1] + 1)
+            i += 1
+            
+        if farthest == covered:
+            return -1
+        covered = farthest
+        used += 1
+        
+    return used
+
+```
+
 ## Problems
 
 * **Station Balance(Load Balancing)- UVa 410**

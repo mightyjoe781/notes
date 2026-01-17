@@ -342,4 +342,3 @@ Now how to serialize : Create a traversal strings representing traversal DRLU re
       return (int) islands.size();
   }
 ````
-
