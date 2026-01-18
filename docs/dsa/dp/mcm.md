@@ -235,3 +235,8 @@ def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
         
     return solve(0)
 ```
+
+
+### Egg Dropping Problem
+
+*Interval DP + Binary Search* Combination
