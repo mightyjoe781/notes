@@ -49,93 +49,6 @@ int maxSubArray(vector<int>& nums) {
 // NOTE: Both Implementation works regardless of negative numbers
 ```
 
-### Absolute Diff less than or Equal to Limit
-
-Given an array of integers `nums` and an integer `limit`, return the size of the longest **non-empty** subarray such that the absolute difference between any two elements of this subarray is less than or equal to `limit`
-
-```
-
-Input: nums = [8,2,4,7], limit = 4
-Output: 2 
-Explanation: All subarrays are: 
-[8] with maximum absolute diff |8-8| = 0 <= 4.
-[8,2] with maximum absolute diff |8-2| = 6 > 4. 
-[8,2,4] with maximum absolute diff |8-2| = 6 > 4.
-[8,2,4,7] with maximum absolute diff |8-2| = 6 > 4.
-[2] with maximum absolute diff |2-2| = 0 <= 4.
-[2,4] with maximum absolute diff |2-4| = 2 <= 4.
-[2,4,7] with maximum absolute diff |2-7| = 5 > 4.
-[4] with maximum absolute diff |4-4| = 0 <= 4.
-[4,7] with maximum absolute diff |4-7| = 3 <= 4.
-[7] with maximum absolute diff |7-7| = 0 <= 4. 
-Therefore, the size of the longest subarray is 2.
-
-```
-
-A simple brute force solution will be to generate all subarrays, which will be quadratic time.
-A simpler solution is to run a sliding window over the array keeping track of the minimum and maximum numbers in this window.
-
-A Simpler solution using Priority Queue (Heaps) : Time : $O(n\log n)$
-
-```python
-
-import heapq
-def longestSubarray(nums: List[int], limit: int):
-    maxq, minq = [], []
-    res = i = 0
-
-    for j, a in enumerate(nums):
-        heapq.heappush(maxq, [-a, j])
-        heapq.heappush(minq, [a, j])
-
-        # shrink the window
-        while -maxq[0][0] - minq[0][0] > limit:
-            i = min(maxq[0][1], minq[0][1]) + 1
-            while maxq[0][1] < i: heapq.heappop(maxq)
-            while minq[0][1] < i: heapq.heappop(minq)
-        
-        res = max(res, j - i + 1)
-    
-    return res
-
-```
-
-A more simpler optimization is to use Monotonic Queue & Sliding Window to keep track of the Maximum and Minimum both in the same window.
-
-```python
-
-from collections import deque
-
-def longestSubarray(nums: List[int], limit: int):
-    maxd, mind = deque(), deque()
-    l = 0
-
-    for r in range(len(nums)):
-        v = nums[r]
-
-        # maintain decreasing max deque
-        while maxd and v > maxd[-1]:
-            maxd.pop()
-
-        # maintain increasing min deque
-        while mind and v < mind[-1]:
-            mind.pop()
-
-        maxd.append(v)
-        mind.append(v)
-
-        # shrink window if invalid
-        if maxd[0] - mind[0] > limit:
-            if maxd[0] == nums[l]:
-                maxd.popleft()
-            if mind[0] == nums[l]:
-                mind.popleft()
-            l += 1
-
-    return len(nums) - l
-
-```
-
 
 ## Subsequences
 
@@ -187,10 +100,34 @@ Pre-requisite : Prefix and Sliding Window
 
 Subsequences
 
-Pre-requsite : Recursion, DP
+Prerequisite : Recursion, DP
 
 * LIS (Longest Increasing Subsequence)
 * LCS (longest common Subsequences)
 * Count Subsequences with Given Property
 * Subsequence Matching
 * Distinct Subsequences
+
+
+## Solution to Some Problems
+
+### Maximum Product Subarray
+
+[Link]([Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/))
+
+Given an integer array `nums`, find a that has the largest product, and return _the product_.
+
+Its a variant of Kadane's algorithm.
+
+```python
+
+def maxProduct(nums: List[int]) -> int:
+    prefix, suffix, max_so_far = 0, 0, float('-inf')
+    for i in range(len(nums)):
+        prefix = (prefix or 1) * nums[i]
+        # The expression ~i is equivalent to -i - 1
+        suffix = (suffix or 1) * nums[~i]
+        max_so_far = max(max_so_far, prefix, suffix)
+    return max_so_far
+
+```

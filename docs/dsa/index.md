@@ -4,10 +4,11 @@
 
 - Array
 
-    * [Two Pointer](array/ch1.md)
-    * [Sliding Window](array/ch2.md)
+    * [1D & 2D Array Basic Problems](array/basic.md)
     * [Prefix Sums & Difference Arrays](array/ch3.md)
+    * [Two Pointer](array/ch1.md)
     * [Subarrays & Subsequences](array/ch4.md)
+    * [Sliding Window](array/ch2.md)
 
 
 - Linked List
@@ -31,10 +32,10 @@
     * [Applications](heaps/ch2.md)
 
 
+
 * [Disjoint Set Union (DSU)(Union-Find)](dsu.md)
-
 * [Hash Maps & Frequency Counting](hash/ch1.md)
-
+- [Interval Problems](heaps/intervals.md)
 
 
 ## Sorting
@@ -47,7 +48,6 @@
 * Special Sorting Techniques
 
 
-
 ## Search
 
 * [Binary Search](search/binary_search.md)
@@ -57,14 +57,12 @@
 * Radix Search & Trie-based Search (Optional)
 
 
-
 ## Recursion
 
 * [Simple Recursion](recursion/ch1.md)
 * [Combinatorics & Permutations](recursion/ch2.md)
 * [String Recursion](recursion/ch3.md)
 * [Backtracking](recursion/ch4.md)
-
 
 
 ## Problem Solving Paradigm

@@ -82,3 +82,122 @@ Hybrid Problems
 * Longest Turbulent Subarray (978)
 * Find Pivot Index (724)
 
+
+## Prefix Sum Problems
+
+### Counting Zero-Sum Subarrays
+
+Give a subarray : 
+
+$(a[i] + a[i+1] ... a[j]) = \Sigma_{k \in 0 \le i < j < n} a[k] = \Sigma_{k \in [0, j]} a[k] - \Sigma_{k \in [0, i-1]} a[k] = prefix[j] - prefix[i] = 0$
+
+So we have to find how many times we have encountered the specific prefix - 1 (for the current prefix)
+
+```python
+
+from collections import defaultdict
+def findSubarray(arr):
+    
+    mp = defaultdict(lambda: 0)
+    mp[0] = 1
+    
+    res = 0
+    s = 0
+    
+    for v in arr:
+        s += v # prefix sum
+        mp[s] += 1
+        res += mp[s] - 1 # this is subarray counting trick during enumeration
+        # quite common in window operations
+    
+    return res
+```
+
+NOTE: Repeat above problem, but now find longest subarray where sum is zero.
+### Subarray Sum Equals K
+
+**Problem Statement:** Given an array nums of size n and an integer k, find the length of the longest sub-array that sums to k. If no such sub-array exists, return 0.
+
+Solved Using Sliding Window if length of longest subarray is asked, but here it is asking subarray sum equals k, and their count.
+
+Similar to above problem, now we search `mp[s-target] - 1` in the map
+
+```python
+
+from collections import defaultdict
+def subarraySum(nums: List[int], k: int) -> int:
+
+    mp = defaultdict(lambda: 0)
+    mp[0] = 1
+    
+    res = 0
+    s = 0
+    
+    for v in nums:
+        s += v # prefix sum
+        if s - k in mp:
+            res += mp[s - k]
+        mp[s] += 1
+    return res
+
+```
+
+### Count the number of subarrays with given xor K
+
+**Problem Statement:** Given an array of integers A and an integer B. Find the total number of subarrays having bitwise XOR of all elements equal to k.
+
+A prefix XOR at index `i`, represents the XOR of all elements up to `i`
+
+```
+subarray_xor(i, j) = prefix_xor(j) - prefix_xor(j)
+
+```
+
+We can store its frequency in a map, and solve using above code in Linear Time.
+
+## Difference Array
+
+
+
+## Hybrid Problems
+
+### Product of Array Except Self
+
+This is more like prefix product problem, 
+
+A naive approach to this problem would be to just directly multiplying all numbers of the array, then dividing the current number, but that would work only if array doesn't contain any zeroes at all.
+
+![](assets/Pasted%20image%2020260117173824.png)
+
+```python
+def productExceptSelf(self, nums: List[int]) -> List[int]:
+    n = len(nums)
+
+    prefix = [1] * len(nums)
+    suffix = [1] * len(nums)
+
+    prefix[0] = nums[0]
+    suffix[n-1] = nums[n-1]
+
+    for i in range(1, n):
+        prefix[i] = nums[i] * prefix[i-1]
+
+    for i in range(n-2, -1, -1):
+        suffix[i] = nums[i] * suffix[i+1]
+    
+    res = [1] * len(nums)
+    res[0] = suffix[1]
+    res[n-1] = prefix[n-2]
+
+    for i in range(1, n-1):
+        res[i] = prefix[i-1] * suffix[i+1]
+    
+    return res
+
+```
+
+A further optimization can be storing suffix product information into the array itself.
+
+
+
+
