@@ -105,3 +105,47 @@ link mergesort(link c){
 }
 ````
 
+### Count Inversions in an Array
+
+**Problem Statement:** Given an array of N integers, count the inversion of the array (using merge-sort).
+
+Inversion of an array: for all i & j < size of array, if i < j then you have to find pair `(A[i],A[j])` such that `A[j] < A[i]`.
+
+A $O(n^2)$ strategy would be to count inversion for each element, but we can do this optimally using merge-sort.
+
+During merge sort, when we merge two sorted halves, if an element from the right half is smaller than an element from the left half, then it forms inversions with all remaining elements in the left half.
+
+```python
+
+def count_inversions(arr):
+    def merge_sort(nums):
+        if len(nums) <= 1:
+            return nums, 0
+
+        mid = len(nums) // 2
+        left, inv_left = merge_sort(nums[:mid])
+        right, inv_right = merge_sort(nums[mid:])
+
+        merged = []
+        i = j = 0
+        inv_count = inv_left + inv_right
+
+        while i < len(left) and j < len(right):
+            if left[i] <= right[j]:
+                merged.append(left[i])
+                i += 1
+            else:
+                merged.append(right[j])
+                inv_count += len(left) - i
+                j += 1
+
+        merged.extend(left[i:])
+        merged.extend(right[j:])
+
+        return merged, inv_count
+
+    _, count = merge_sort(arr)
+    return count
+
+```
+
