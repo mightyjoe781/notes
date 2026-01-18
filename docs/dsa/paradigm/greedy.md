@@ -7,11 +7,13 @@
     * It has optimal sub structures
     * It has the greedy property (difficult to prove in time -critical environment)
 
+- Proving Greedy Stays Ahead : [Link](https://www.cs.cornell.edu/courses/cs482/2007su/ahead.pdf)
+
 * **Coin Change**
 
     * Problem Statement:
 
-    Given a target amount $( V )$ cents and a list of $( n ) $ coin denominations, represented as coinValue[i] (in cents) for coin types $ i \in [0..n-1] $, determine the minimum number of coins required to represent the amount \( V \). Assume an unlimited supply of coins of each type.
+    Given a target amount $( V )$ cents and a list of $( n )$ coin denominations, represented as `coinValue[i]` (in cents) for coin types $i \in [0..n-1]$, determine the minimum number of coins required to represent the amount (V). Assume an unlimited supply of coins of each type.
 
     Example: For \( n = 4 \) and coinValue = {25, 10, 5, 1} cents, to represent \( V = 42 \) cents, apply the greedy algorithm by selecting the largest coin denomination not exceeding the remaining amount: \( 42 - 25 = 17 \), \( 17 - 10 = 7 \), \( 7 - 5 = 2 \), \( 2 - 1 = 1 \), \( 1 - 1 = 0 \). This requires a total of 5 coins and is optimal.
 
@@ -24,7 +26,7 @@
             - To represent 17 cents we use 10+5+1+1
             - To represent 7 cents we use 5+1+1
 
-        - Greedy property- Given every amount V,we can greedily subtract the  largest coin denomination which is not greater than this amount V. It  can be proven that using any other strategies will not lead to an  optimal solution, at least for this set of coin denominations.
+        - Greedy property- Given every amount V, we can greedily subtract the  largest coin denomination which is not greater than this amount V. It  can be proven that using any other strategies will not lead to an  optimal solution, at least for this set of coin denominations.
 
     - However **this greedy doesn’t always work** for all sets of coin denominations e.g.  cents. To make 6 cents with this set will fail optimal solution.
 
