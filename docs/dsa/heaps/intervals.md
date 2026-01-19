@@ -883,17 +883,255 @@ def main(updates, n):
         res.append(curr)
     return res
 
-
 ```
-
 
 ### Corporate Flight Bookings : 
 
 Exactly Same Problem as Above : https://leetcode.com/problems/corporate-flight-bookings/
-
 
 ### Count Number of Nice Subarrays
 
 https://leetcode.com/problems/count-number-of-nice-subarrays/
 
 Use Prefix Sum make sure that this `curr_sum - k` value exists already in the map and we can add that to count of our count
+
+## Room Booking Problem
+
+### Hour Based Room Booking
+
+You are given a list of meeting room IDs and a set of booking requests.
+
+Each booking request consists of a start hour s and an end hour e, where time is divided into **hour-long slots** within a single day (0 ≤ s < e ≤ 24).
+
+A booking occupies all hour slots in the interval `[s, e)`.
+
+For each booking request:
+
+- Assign **any available room** that is free for the entire interval
+- Return a **unique booking ID**
+- If no room is available, return None
+
+Once a room is booked for a slot, it cannot be used by another booking overlapping that slot.
+
+When problem is discrete intervals, we don't need to worry about scheduling using *heaps*, we can quickly use a simple array of length *n* to store such events.
+
+```python
+
+class BookingSystem:
+    def __init__(self, rooms):
+        self.rooms = rooms
+        self.usage = {room: [False] * 24 for room in rooms}
+        self.booking_id = 0
+
+    def book(self, start, end):
+        for room in self.rooms:
+            if all(not self.usage[room][h] for h in range(start, end)):
+                # book it
+                for h in range(start, end):
+                    self.usage[room][h] = True
+
+                self.booking_id += 1
+                return {
+                    "booking_id": self.booking_id,
+                    "room": room,
+                    "start": start,
+                    "end": end
+                }
+
+        return None
+        
+```
+
+So above solution runs in $O(24.m.n) \sim O(m.n)$  complexity for and supports online queries as well. for *m* rooms and *n* queries.
+
+
+### 15-Minute Slot Room Booking (Fine-Grained Discrete Slots)
+
+NOTE: This is what google/Microsoft calendar uses internally.
+
+You are given a list of meeting room IDs and a series of booking requests.
+The day is divided into **15-minute time** slots, resulting in 96 slots per day.
+
+Each booking request consists of a start time s and end time e, expressed as fractional hours (e.g., 9.25 for 9:15 AM).
+A booking occupies all 15-minute slots that intersect the interval `[s, e)`.
+
+For each booking request:
+	•	Assign any available room that is free for the entire interval
+	•	Return a unique booking ID
+	•	Return None if no room can accommodate the request
+
+Since there are 24 hours ~ 96 - 15-min slots in a day, we can efficiently use bitsets to represent the array we expressed earlier.
+
+We keep a int representing the room
+
+```
+room_mask : int # 96 bits
+~ 1 - occupied
+~ 0 - free
+
+Then convert interval to required mask,
+
+if room_mask & req_mask ~ 0 then we can book room
+else its bit collision
+example :
+
+room : 000111000111
+mask : 000000111000
+
+```
+
+
+```python
+
+class BookingSystem15Min:
+    def __init__(self, rooms):
+        self.rooms = rooms
+        self.mask = {room: 0 for room in rooms}
+        self.booking_id = 0
+
+    def _to_slot(self, time):
+        # time like 9.25, 10.75
+        hour = int(time)
+        minutes = round((time - hour) * 60)
+        return hour * 4 + minutes // 15
+
+    def book(self, start, end):
+        l = self._to_slot(start)
+        r = self._to_slot(end)
+
+        req_mask = ((1 << (r - l)) - 1) << l
+
+        for room in self.rooms:
+            if self.mask[room] & req_mask == 0:
+                self.mask[room] |= req_mask
+                self.booking_id += 1
+                return {
+                    "booking_id": self.booking_id,
+                    "room": room,
+                    "start": start,
+                    "end": end
+                }
+
+        return None
+
+```
+
+
+Comparison with Boolean Array
+
+- 96 checks vs 1 AND ops
+- Loop vs Constant Operation
+- More Memory vs Single Int
+
+### Generalized Formulation
+
+You are given a list of meeting room IDs and a sequence of booking requests.
+Each booking request is defined by a continuous time interval `(s, e)`, where s and e are real numbers representing time within a single day.
+
+A room can host only one booking at any given time.
+Two bookings overlap if their intervals intersect.
+
+For each booking request:
+	•	Assign any available room such that the entire interval `(s, e)` does not overlap with an existing booking in that room
+	•	Return a unique booking ID
+	•	Return None if no room is available
+
+```
+heap : (end_time, room_id)
+```
+
+So now intervals are generalized and we have implement the solution which is optimal.
+
+```python
+
+import heapq
+
+class ContinuousBookingSystem:
+    def __init__(self, rooms):
+        self.free_rooms = rooms[:]
+        heapq.heapify(self.free_rooms)
+        self.occupied = []  # (end_time, room)
+        self.booking_id = 0
+
+    def book(self, start, end):
+        if start >= end:
+            return None
+
+        # release rooms
+        while self.occupied and self.occupied[0][0] <= start:
+            _, room = heapq.heappop(self.occupied)
+            heapq.heappush(self.free_rooms, room)
+
+        if not self.free_rooms:
+            return None
+
+        room = heapq.heappop(self.free_rooms)
+        self.booking_id += 1
+        booking_id = self.booking_id
+
+        heapq.heappush(self.occupied, (end, room))
+
+        return {
+            "booking_id": booking_id,
+            "room": room,
+            "start": start,
+            "end": end
+        }
+
+```
+
+
+This is an Online Algorithm IF and only if bookings are in order, but if booking are out of order and in arbitrary manner, then we need to further optimize
+
+Problem becomes : *Dynamic interval allocation with arbitrary insertion order* which mimics real life random allocation is more complex that we initially started,
+
+Instead of tracking “global active bookings”, you must track each room’s own timeline.
+
+Better to use BST, in python you can use SortedList or a combination of binary search with `list`
+
+```python
+
+from bisect import bisect_left
+
+class IntervalBookingSystem:
+    def __init__(self, rooms):
+        self.rooms = rooms
+        self.calendar = {room: [] for room in rooms}
+        self.booking_id = 0
+
+    def book(self, s, e):
+        for room in self.rooms:
+            intervals = self.calendar[room]
+            i = bisect_left(intervals, (s, e))
+
+            # check previous
+            if i > 0 and intervals[i-1][1] > s:
+                continue
+
+            # check next
+            if i < len(intervals) and intervals[i][0] < e:
+                continue
+
+            # safe to insert
+            intervals.insert(i, (s, e))
+            self.booking_id += 1
+            return {
+                "booking_id": self.booking_id,
+                "room": room,
+                "start": s,
+                "end": e
+            }
+
+        return None
+
+```
+
+
+| **Case**             | **Time Model**      | **Booking Arrival Order** | **Optimal Data Structure**           | **Booking Time Complexity** | **Space Complexity** | **Key Assumption**      | **When to Use**        | **Real-World Examples**        |
+| -------------------- | ------------------- | ------------------------- | ------------------------------------ | --------------------------- | -------------------- | ----------------------- | ---------------------- | ------------------------------ |
+| Hour slots           | Discrete (24 slots) | Any                       | Boolean array per room               | **O(R)**                    | O(R × 24)            | Fixed small time domain | Simple daily schedules | Classrooms, exam halls         |
+| 15-min slots         | Discrete (96 slots) | Any                       | Bitmask per room                     | **O(R)**                    | O(R)                 | Fixed granularity       | Fine-grained calendars | Google Calendar (day view)     |
+| Continuous intervals | Continuous          | **Sorted by start time**  | Min-heap (end time) + free rooms     | **O(log R)**                | O(R)                 | Time moves forward      | Streaming schedulers   | CPU/GPU allocators             |
+| Continuous intervals | Continuous          | **Arbitrary order**       | Per-room ordered interval sets (BST) | **O(R × log B)**            | O(total bookings)    | No ordering guarantees  | Full calendar systems  | Outlook, hospital OT           |
+| Continuous + edits   | Continuous          | Arbitrary + cancel        | Interval Tree / Segment Tree         | **O(log N)**                | O(N)                 | Need fast insert/delete | Large-scale systems    | Airline seats, booking engines |
+

@@ -274,7 +274,7 @@ def removeKdigits(self, num: str, k: int) -> str:
 But above might not pass under the constraint when number is way too big.
 Clearly we can see for each character we will have choice of choosing it and not choosing it, we get $2^{n}$ ~ over a million states and we cache them,
 
-Correct way to approach is greedy + stack.
+Correct way to approach is greedy + stack. As the smallest number would be the number that *increases*, so we can maintain that constraint using monotonically increasing stack.
 
 ```python
 
