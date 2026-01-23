@@ -13,7 +13,7 @@ Applications
 
 NOTE: [Linear Implementation](https://algo.minetest.in/3-Sorting/9-Priority_Queues_and_Heapsort/2-Heap_Data_Structure/) , [Tree Implementation](https://algo.minetest.in/3-Sorting/9-Priority_Queues_and_Heapsort/3-Algorithms_on_heap/)
 
-The PQ algorithms on heaps all work by first making a simple  modification that could violate the heap condition and them traversing  the and restoring the heap condition everywhere. This is known as ***Heapifying*** or ***fixing*** the heap.
+The PQ algorithms on heaps all work by first making a simple modification that could violate the heap condition and them traversing  the and restoring the heap condition everywhere. This is known as ***Heapifying*** or ***fixing*** the heap.
 
 There are 2 possibilities
 
@@ -67,8 +67,115 @@ priority_queue<Task> pq;
 
 * use locks if needed for threading
 
-### Problems
+## Problems
 
-* Implement a Priority Queue using Heap
-* Heap Sort (Concept)
-* Build a Max Heap from an Array
+### Implement a Priority Queue using Binary Heap
+
+A Binary Heap is a Binary Tree that satisfies the following conditions
+
+- It should be Complete Binary Tree ~ A tree in which all levels are completely filled except last level and last level is filled in such a way that all keys are as left as possible.
+- It should satisfy Heap Property
+
+Min-Heap Property : For every node in Binary Heap, the node values are less than its right and left child's value.
+
+As a Result Root is always the minimum Element in the Array.
+
+![](assets/Pasted%20image%2020260119210935.png)
+
+### Heap Sort (Concept)
+
+**Heap Sort** is a **comparison-based, in-place sorting algorithm** that uses a **binary heap** data structure to sort elements in **O(n log n)** time.
+
+Repeatedly extract the maximum (or minimum) element from a heap and place it in its correct position.
+
+Building a Heap will take : $O(n)$ time using heapify operations
+Additionally Popping n elements will take :  $O(n \log n)$
+
+| Case        | Time            |
+| ----------- | --------------- |
+| Best        | O(n log n)      |
+| Average     | O(n log n)      |
+| Worst       | O(n log n)      |
+| Extra Space | O(1) (in-place) |
+
+NOTE: It is not a stable algorithm, and works in-place. Worst Case is guaranteed.
+### Check if an array represents a min-heap or not
+
+So left and right child should always be greater than the elements !
+
+```python
+
+def isHeap(nums):
+    n = len(nums)
+
+    for i in range(n):
+        left = 2 * i + 1
+        right = 2 * i + 2
+
+        if left < n and nums[left] < nums[i]:
+            return False
+
+        if right < n and nums[right] < nums[i]:
+            return False
+
+    return True
+
+```
+
+### Convert min Heap to max Heap
+
+Often Known as floyd's heap construction : $O(n)$ time.
+
+Min Heap -> Max Heap
+
+```python
+
+def build_max_heap(nums):
+    n = len(nums)
+
+    def heapify(i):
+        largest = i
+        l = 2*i + 1
+        r = 2*i + 2
+
+        if l < n and nums[l] > nums[largest]:
+            largest = l
+        if r < n and nums[r] > nums[largest]:
+            largest = r
+
+        if largest != i:
+            nums[i], nums[largest] = nums[largest], nums[i]
+            heapify(largest)
+
+    for i in range(n//2 - 1, -1, -1):
+        heapify(i)
+
+```
+
+Max Heap -> Min Heap
+
+```python
+
+def build_min_heap(nums):
+    n = len(nums)
+
+    def heapify(i):
+        smallest = i
+        l = 2*i + 1
+        r = 2*i + 2
+
+        if l < n and nums[l] < nums[smallest]:
+            smallest = l
+        if r < n and nums[r] < nums[smallest]:
+            smallest = r
+
+        if smallest != i:
+            nums[i], nums[smallest] = nums[smallest], nums[i]
+            heapify(smallest)
+
+    for i in range(n//2 - 1, -1, -1):
+        heapify(i)
+
+```
+
+You only need to know one of above methods, you could negate elements and apply the heapify operations again and then negate elements to restore signs.

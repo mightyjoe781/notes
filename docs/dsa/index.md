@@ -30,12 +30,12 @@
 
     * [Min-Heaps & Max-Heaps](heaps/ch1.md)
     * [Applications](heaps/ch2.md)
-
+    - [Interval Problems](heaps/intervals.md)
+    - [Greedy Algorithms & Strategies](paradigm/greedy.md)
 
 
 * [Disjoint Set Union (DSU)(Union-Find)](dsu.md)
 * [Hash Maps & Frequency Counting](hash/ch1.md)
-- [Interval Problems](heaps/intervals.md)
 
 
 ## Sorting
@@ -51,7 +51,7 @@
 ## Search
 
 * [Binary Search](search/binary_search.md)
-* [Search in Rotated/Sorted Array](search/ch2.md)
+* [Search the Answer](search/ch2.md)
 * [Binary Search Trees (BSTs) Operations](trees/introduction.md)
 * Hashing Based Search Methods
 * Radix Search & Trie-based Search (Optional)

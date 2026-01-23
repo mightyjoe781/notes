@@ -38,11 +38,20 @@ int count = __builtin_popcount(n);
 int countll = __builtin_popcountll(n);  // For long long
 ````
 
+```python
+x = 13
+set_bits = bin(x).count('1')  # 3
+```
+
 - Count trailing zeroes (rightmost 0s)
 
 ````cpp
 int tz = __builtin_ctz(n);	// Undefined if n == 0
 ````
+
+```python
+tz = len(bin(x)) - len(bin(x).rstrip('0')) - 2 # remove(0b)
+```
 
 - Count leading zeroes :
 
@@ -50,6 +59,11 @@ int tz = __builtin_ctz(n);	// Undefined if n == 0
 ````cpp
 int lz = __builtin_clz(n);  // Undefined if n == 0
 ````
+
+```python
+bit_length = x.bit_length()
+lz = 32 - bit_length
+```
 
 ### Bit Tricks
 
@@ -88,6 +102,16 @@ for (int sub = mask; sub; sub = (sub - 1) & mask) {
     // process sub
 }
 ````
+
+```python
+
+mask = ...  # define your mask value here
+sub = mask
+while sub:
+    # process sub
+    sub = (sub - 1) & mask
+
+```
 
 - XOR Trick : Detect Single Number
     - Find the number that appears odd number of times, given there is only one such number.
@@ -169,7 +193,7 @@ def is_power_of_two(x):
     return x > 0 and (x & (x - 1)) == 0
 ````
 
-## Problems on Bit Manipulation
+### Problems on Bit Manipulation
 
 - **Single Number (Leetcode 136)** – XOR trick (A ^ A = 0)
 - **Single Number II (Leetcode 137)** – Bit count per position, modulo 3 trick
@@ -188,3 +212,113 @@ def is_power_of_two(x):
 - **Binary Watch (Leetcode 401)** – Count set bits, generate valid times
 - **Complement of Base 10 Integer (Leetcode 1009)** – Flip bits up to MSB
 - **Find Rightmost Set Bit** – x & -x, used in subset iteration, masks, etc.
+
+## Problems
+
+### Divide Two Integers
+
+Given two integers `dividend` and `divisor`, divide two integers **without** using multiplication, division, and mod operator.
+
+The integer division should truncate toward zero, which means losing its fractional part. For example, `8.345` would be truncated to `8`, and `-2.7335` would be truncated to `-2`.
+
+Return _the **quotient** after dividing_ `dividend` _by_ `divisor`.
+
+Hint : We can subtract using bit operations, and repeated subtraction is nothing but division.
+
+```python
+
+def divide(self, A, B):
+    # overflow case !!
+    # divide (-2^31/ -1) -> 2^31 (overflows as range is [-2^31, 2^31-1])
+    if (A == -2147483648 and B == -1): return 2147483647
+    a, b, res = abs(A), abs(B), 0
+    for x in range(32)[::-1]:
+        # check if current shifted divisor fits
+        if (a >> x) - b >= 0:
+            res += 1 << x # Adds 2^x to quotient
+            a -= b << x # Substract b.2^x from reminder
+    # fix final sign
+    return res if (A > 0) == (B > 0) else -res
+
+```
+
+### Minimum Bit Flips to Convert Number
+
+A **bit flip** of a number `x` is choosing a bit in the binary representation of `x` and **flipping** it from either `0` to `1` or `1` to `0`.
+
+```python
+
+def minBitFlips(start, goal):
+    return bin(start ^ goal).count('1')
+
+```
+
+### Single Number
+
+Given a **non-empty** array of integers `nums`, every element appears _twice_ except for one. Find that single one.
+
+Straightforward XOR application, similar numbers cancel out, leaving only the number occuring once.
+
+```python
+def singleNumber(nums):
+    return reduce(lambda x, y: x ^ y,nums)
+```
+
+
+### Find Two numbers appearing odd number of times
+
+**Problem Statement:** Given an array nums of length n, every integer in the array appears twice except for two integers. Identify and return the two integers that appear only once in the array. Return the two numbers in **ascending order**.  
+  
+For example, if `nums = [1, 2, 1, 3, 5, 2]`, the correct answer is `[3, 5]`, not `[5, 3]`.
+
+What is interesting here, is that since both number occurs odd number of times, xor of entire array is just xor of both number.
+
+$$
+
+XOR(0, n) = A \oplus B
+
+$$
+
+Although it looks like we can't restore both numbers, but let's think about both numbers for a bit, Assume both number are like following
+
+```
+
+A : 0b0001001010
+B : 0b0010000010
+            ~
+NOTICE : how tilde bit is the first different bit,
+
+```
+
+So we can divide all numbers into two groups, 1st group with `~` bit as set, and another group as `~` bit set as unset.
+
+Now lets say there are `a0, a1, a2, ...` and `b0, b1, b2, ...` are those groups, and since these numbers appear in group, so total numbers will be.
+
+```
+group 1 : {a0, a0, a1, a1, ....., A}
+group 2 : {b0, b0, b1, b1, ....., B}
+
+```
+
+If we take xor of both groups separately, then we will be able to restore the numbers.
+
+```python
+
+def main(nums):
+    
+    xor_xy = reduce(xor, nums)
+    # xor set i th bit 0 if different, find that
+    i = (~xor_xy) & (xor_xy + 1)
+
+    x, y = 0, 0
+
+    for num in nums:
+        # check group membership
+        if num & (1 << i):
+            x ^= num
+        else:
+            y ^= num
+
+    return x, y
+
+```
