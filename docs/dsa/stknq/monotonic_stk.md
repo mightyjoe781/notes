@@ -49,6 +49,34 @@ for i, v in enumerate(nums):
 
 ```
 
+### Stock Span Problem
+
+The stock span problem is a financial problem where we have a series of daily price quotes for a stock and we need to calculate the span of stock price for all days.  
+You are given an array **arr[]** representing daily stock prices, the stock span for the **i-th** day is the number of consecutive days up to day i (including day i itself) for which the price of the stock is **less than or equal** to the price on day **i**. Return the span of stock prices for each day in the given sequence.
+
+Hint : For day i, you only care about the **nearest previous day with a higher price**. Monotonically decreasing stack can answer this problem fast.
+
+```python
+
+def calculateSpan(prices):
+    n = len(prices)
+    span = [0] * n
+    stack = []  # stores indices
+
+    for i in range(n):
+        while stack and prices[stack[-1]] <= prices[i]:
+            stack.pop()
+
+        if not stack:
+            span[i] = i + 1
+        else:
+            span[i] = i - stack[-1] # j-i ~ 
+
+        stack.append(i)
+
+    return span
+
+```
 ### Maximal Area in Histogram
 
 This can be solved using the above concept on monotonically decreasing stack.
