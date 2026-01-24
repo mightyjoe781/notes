@@ -199,9 +199,7 @@ There is a $O(n)$ of solution for this using Monotonic Stack.
 Definition of this problem
 
 $$
-
 \Sigma_k \text{ range}_k = \Sigma_k (\text{ maxVal}_k - \text{ minVal}_k) = \Sigma_k \text{ maxVal}_k - \Sigma_k \text{ minVal}_k
-
 $$
 
 Above equation implies if we are able to find `maxVal` of each subarray and `minVal` for each subarray separately then we can still solve the problem.
@@ -211,9 +209,7 @@ Now instead of thinking about the *maxValue* or *minValue*, focus on the value a
 Then formally : 
 
 $$
-
 \Sigma_k \text{ minVal}_k = \Sigma_{i=1}^{n} \text{ minTime[i]} . \text {nums[i]}
-
 $$
 
 So problem reduces to finding `minTime` for each element.

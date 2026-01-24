@@ -1,5 +1,7 @@
 # Heap
 
+> for detailed description n this topic refer to Heaps Section specifically.
+
 ## Simple Max-Heap Implementation
 
 ````c++
