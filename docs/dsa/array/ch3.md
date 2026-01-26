@@ -28,6 +28,21 @@ def range_sum(P, l, r):
     * Counting Elements satisfying conditions in ranges
     * Solving problems involving sum of subarrays
 
+NOTE: In python we can use accumulate function from `itertools` to calculate prefix sum, product quickly.
+
+```python
+
+from itertools import accumulate
+import operator
+
+arr = [1, 2, 3, 4, 5]
+
+pre_sum = accumulate(arr)
+pre_mul = accumulate(arr, operator.mul)
+pre_xor = accumulate(arr, operator.xor)
+
+```
+
 ## Difference Arrays
 
 ### Concept
@@ -54,7 +69,7 @@ if r + 1 < D.size():
   D[r+1] -= val
 ```
 
-* Reconstruction
+* Reconstruction of Original Array
     * Prefix sum array of difference array is exactly same as original array
 
 ## Problems
@@ -149,7 +164,7 @@ def subarraySum(nums: List[int], k: int) -> int:
 A prefix XOR at index `i`, represents the XOR of all elements up to `i`
 
 ```
-subarray_xor(i, j) = prefix_xor(j) - prefix_xor(j)
+subarray_xor(i, j) = prefix_xor(j) ^ prefix_xor(i)
 
 ```
 

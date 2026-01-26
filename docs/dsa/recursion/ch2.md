@@ -543,6 +543,27 @@ vector<vector<int>> permute(vector<int>& nums) {
 }
 ````
 
+You don't even need `curr` and just swap the array in place
+
+```python
+def permutations(arr):
+    n = len(arr)
+    res = []
+
+    def solve(i):
+        if i == n:
+            res.append(arr[:]) # copy and append
+            return
+
+        for j in range(i, n):
+            arr[i], arr[j] = arr[j], arr[i]
+            solve(i + 1)
+            arr[i], arr[j] = arr[j], arr[i]
+
+    solve(0)
+    return res
+```
+
 ### Permutation Sequence
 
 [k-th Permutation Sequence](https://leetcode.com/problems/permutation-sequence/description/)
@@ -550,7 +571,7 @@ vector<vector<int>> permute(vector<int>& nums) {
 * Naively Listing all permutations and then finding `kth` will give TLE in this case.
 * We will perform DFS, and try to search that solution
 * Ex - `[1, 2, 3]`
-* Possibilities = `(123, 132,213, 231, 312,321)` and we have to give `kth` solution.
+* Possibilities = `(123, 132, 213, 231, 312, 321)` and we have to give `kth` solution.
 * There are 3 chunks, chunks including 1, 2, 3 as first number respectively
 * now say its a ordered list, then we can easily say chunk size and the chunk in which this `k-th` number will lie would be
 
