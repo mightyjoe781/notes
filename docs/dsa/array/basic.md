@@ -307,7 +307,7 @@ return solve(0, True)
 
 ```
 
-Idea : Track minimum price we have seen so far and what would be the profile if sold today.
+Idea : Track minimum price we have seen so far and what would be the profit if sold today.
 
 ```python
 
@@ -340,19 +340,15 @@ Let's find max profit or difference we get is : `a2, a6` : is
 
 $$
 \begin{align}
-
 b3 &= a3 - a2 \\
 b4 &= a4 - a3 \\
 b5 &= a5 - a4 \\
 b6 &= a6 - a5
-
 \end{align}
 $$
 
 $$
-
 subarry(b3 + b4 + b5 + b6) = a6 - a2
-
 $$
 
 Original Problem : $\max_{0 \le i < j < n} (a[j] - a[i])$
@@ -360,13 +356,11 @@ Original Problem : $\max_{0 \le i < j < n} (a[j] - a[i])$
 Transformation to Difference Array :
 
 $$
-
 b[i] =
 \begin{cases}
 0, & \text{if } i = 0 \\
 a[i] - a[i-1], & \text{if } i > 0
 \end{cases}
-
 $$
 
 $$
@@ -689,6 +683,7 @@ Given an integer array of size `n`, find all elements that appear more than `⌊
 ### Count Number of Inversions
 
 Pre-requisite : Sorting : Merge - Sort
+
 [Solution Link](../sorting/ch3.md)
 
 ### Reverse Pair

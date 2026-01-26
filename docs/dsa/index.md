@@ -19,9 +19,9 @@
 
 * Stack & Queues
 
-    * [Stack Operations & Applications](stknq/ch1.md)
-    * [Queue & Deque Implementations](stknq/ch2.md)
-    * [Expression Evaluation & Parsing](stknq/ch3.md)
+    * [Stack Operations & Applications](stknq/stack_and_ops.md)
+    * [Queue & Deque Implementations](stknq/queue_and_deque.md)
+    * [Expression Evaluation & Parsing](stknq/expression_evaluation.md)
     * [Monotonic Stacks](stknq/monotonic_stk.md)
     * [Implementation Problems](stknq/implementations.md)
 

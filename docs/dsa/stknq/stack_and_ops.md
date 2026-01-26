@@ -52,12 +52,84 @@ C++ (`std::stack`)
 
 - To use a different container: `stack<int, vector<int>> s; or stack<int, deque<int>> s;`
 
-### Problems
+#### Problems
 
-* Valid Parentheses (20)
-* Min Stack (155)
-* String Reversal
 * Basic Calculator
 * Longest Valid Parentheses
 * Decode String
-* Remove K Digits
+
+### Check For Balanced Parenthesis
+
+Given a string `s` containing just the characters `'('`, `')'`, `'{'`, `'}'`, `'['` and `']'`, determine if the input string is valid.
+
+An input string is valid if:
+
+1. Open brackets must be closed by the same type of brackets.
+2. Open brackets must be closed in the correct order.
+3. Every close bracket has a corresponding open bracket of the same type.
+
+```python
+
+def isValid(s):
+    stk = []
+
+    for c in s:
+        if c in ('(', '[', '{'):
+            stk.append(c)
+        else:
+            match c:
+                case ')':
+                    if stk and stk[-1] != '(':
+                        return False
+                case ']':
+                    if stk and stk[-1] != '[':
+                        return False
+                case '}':
+                    if stk and stk[-1] != '{':
+                        return False
+
+            if stk:
+                stk.pop()
+            else:
+                return False
+
+    return len(stk) == 0
+
+```
+
+Now complete the longest Valid Parenthesis Problem, just keep track of the longest brackets where stack becomes empty.
+
+### Min-Stack
+
+Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+```python
+
+class MinStack:
+
+    def __init__(self):
+        self.min_stk = []
+        self.normal_stk = []
+        
+
+    def push(self, val: int) -> None:
+        self.normal_stk.append(val)
+        if self.min_stk:
+            self.min_stk.append(min(val, self.min_stk[-1]))
+        else:
+            self.min_stk.append(val)
+        
+
+    def pop(self) -> None:
+        self.min_stk.pop()
+        self.normal_stk.pop()
+        
+
+    def top(self) -> int:
+        return self.normal_stk[-1]
+        
+
+    def getMin(self) -> int:
+        return self.min_stk[-1]
+
+```

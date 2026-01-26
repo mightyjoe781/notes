@@ -237,4 +237,96 @@ def main(n, grid):
 
 ```
 
-## Generate valid Parenthesis
+## Valid Parenthesis
+
+### Number of Valid Parenthesis
+
+```
+n = 2 => possible ~ [(), )(]
+res = 1
+```
+
+A simple python solution
+
+```python
+
+def ways(n):
+    # invalid scenario
+    if n & 1:
+        return 0
+    
+    @cache 
+    def count(op, close):
+        # invalid scenario, too many open
+        if close < op:
+            return 0
+        
+        if not op:
+            return 1
+        
+        return count(op - 1, close) + count(op, close - 1)
+    
+    return count(n//2, n//2)
+        
+```
+
+If $n$ is odd then there no possible answer, but if $n$ is even, then is just arranging $n//2$ pairs of open close brackets,
+
+Arranging all $n//2$ pairs in all possible ways. We can use *Catalan Number* to calculate arrangements which are valid.
+
+$$
+C_n = \frac{1}{n+1} \binom{2n}{n} = \frac{(2n)!}{(n+1)!n!}
+$$
+
+```python
+
+def findWays(self, n):
+    
+    if n & 1:
+        return 0
+    
+    k = n//2 # pairs
+    
+    
+    res = 1
+    for i in range(k):
+        res = res * (2 * k - i)//(i+1)
+    
+    return res // (k + 1)
+
+```
+
+Read more on Catalan Number and its Application : [Link](https://www.geeksforgeeks.org/maths/catalan-numbers/)
+### Generate all Valid Parenthesis
+
+```python
+
+def generate_parentheses(n):
+    if n & 1:
+        return []
+
+    k = n // 2
+    res = []
+
+    def dfs(open, close, path):
+        # invalid: more ')' than '(' used
+        if close < open:
+            return
+        
+        # finished building
+        if open == 0 and close == 0:
+            res.append(path)
+            return
+        
+        # place '(' if available
+        if open > 0:
+            dfs(open - 1, close, path + "(")
+        
+        # place ')' if valid
+        if close > 0:
+            dfs(open, close - 1, path + ")")
+
+    dfs(k, k, "")
+    return res
+
+```
