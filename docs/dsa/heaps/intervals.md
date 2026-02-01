@@ -55,6 +55,36 @@ Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
 
 **Note** that you don't need to modify `intervals` in-place. You can make a new array and return it.
 
+```python
+
+def insert(intervals, newInterval):
+
+    res = []
+
+    i, n = 0, len(intervals)
+    start, end = newInterval
+
+    # insert intervals before new interval
+    while i < n and intervals[i][1] < start:
+        res.append(intervals[i])
+        i += 1
+    
+    # merge interval
+    while i < n and intervals[i][0] <= end:
+        start = min(start, intervals[i][0])
+        end = max(end, intervals[i][1])
+        i += 1
+
+    # insert intervals after the merging
+    res.append([start, end])
+
+    while i < n:
+        res.append(intervals[i])
+        i += 1
+    
+    return res
+
+```
 ### Interval List Intersection
 
 [Problem Link](https://leetcode.com/problems/interval-list-intersections/)

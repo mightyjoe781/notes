@@ -285,6 +285,37 @@ int numDecodings(string s) {
 }
 ````
 
+
+```python
+
+def numDecodings(s: str) -> int:
+    n = len(s)
+
+    @cache
+    def solve(i):
+        # reached end successfully
+        if i == n:
+            return 1
+
+        # leading zero is invalid
+        if s[i] == '0':
+            return 0
+
+        # take one digit
+        res = solve(i + 1)
+
+        # take two digits if valid
+        if (
+            i + 1 < n and
+            (s[i] == '1' or (s[i] == '2' and s[i + 1] <= '6'))
+        ):
+            res += solve(i + 2)
+
+        return res
+
+    return solve(0)
+
+```
 ## Advanced 1D DP Problems
 
 * These problems either have Nested Loops, or more than 1 degree of freedom but in a limited capacity (second dimension is small enough to enumerate) 
