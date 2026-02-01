@@ -5,7 +5,7 @@
 ### Concept
 
 * Maintain the top `K` largest or smallest elements from a stream or dataset in real-time
-* Use a *min-heap* of size `K` to track top `K` largest elements
+* Use a *min-heap* of size `K` to track top `K` largest elements (stream)
 
 ### Use Cases
 
@@ -40,6 +40,7 @@ def findKthLargest(nums):
 
 ```
 
+Could you do the same in a *stream* ?
 ### Top K Frequent Elements
 
 Given an integer array `nums` and an integer `k`, return _the_ `k` _most frequent elements_. You may return the answer in **any order**.
@@ -256,6 +257,21 @@ class Solution:
 
 ```
 
+To merge lists which are already sorted in $O(n \log k)$ time, we can use python in-built.
+
+```python
+import heapq
+
+# Two sorted lists
+list1 = [1, 4, 7]
+list2 = [2, 5, 8]
+list3 = [3, 6, 9]
+
+# Merging the sorted lists
+merged_list = list(heapq.merge(list1, list2, list3))
+print(merged_list)
+
+```
 
 ### Hand of Straight/Divide array in sets of k-consecutive numbers
 

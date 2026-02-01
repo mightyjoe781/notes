@@ -2,86 +2,99 @@
 
 Used when input is a **tree (acyclic connected graph)** and we need to calculate DP states at each node, often in a **bottom-up (post-order)** or **top-down (rerooting)** fashion.
 
-## Post-order DFS (Bottom Up Tree DP)
+We assume :
+
+ Post-order DFS (Bottom Up Tree DP)
 
 We process children first, then compute the parent’s result using children’s DP.
 
-````c++
-vector<int> adj[N];
-int dp[N];
-
-void dfs(int node, int parent) {
-    for (int child : adj[node]) {
-        if (child == parent) continue;
-        dfs(child, node);
-        dp[node] += dp[child];  // Combine child results
-    }
-    dp[node] += value[node];  // Include current node’s own value
-}
+````python
+def dfs(u, parent):
+    for v in adj[u]:
+        if v == parent: # don't go to back edge
+            continue
+        dfs(v, u)
+        dp[u] += dp[v]          # combine child results
+    dp[u] += value[u]           # include current node
 ````
 
 ## Common Patterns
 
 ### Subtree Size
 
-````c++
-int size[N];
-
-void dfs(int u, int p) {
-    size[u] = 1;
-    for (int v : adj[u]) {
-        if (v == p) continue;
-        dfs(v, u);
-        size[u] += size[v];
-    }
-}
+````python
+def dfs(u, parent):
+    size[u] = 1
+    for v in adj[u]:
+        if v == parent:
+            continue
+        dfs(v, u)
+        size[u] += size[v]
 ````
 
 ### Longest Path (Diameter of Tree)
 
-````c++
-int diameter = 0;
+````python
+diameter = 0
 
-int dfs(int u, int p) {
-    int max1 = 0, max2 = 0;
-    for (int v : adj[u]) {
-        if (v == p) continue;
-        int d = dfs(v, u);
-        if (d > max1) {
-            max2 = max1;
-            max1 = d;
-        } else if (d > max2) {
-            max2 = d;
-        }
-    }
-    diameter = max(diameter, max1 + max2);
-    return max1 + 1;
-}
+def dfs(u, parent):
+    global diameter
+    max1 = max2 = 0
+
+    for v in adj[u]:
+        if v == parent:
+            continue
+        d = dfs(v, u)
+
+        if d > max1:
+            max2 = max1
+            max1 = d
+        elif d > max2:
+            max2 = d
+
+    diameter = max(diameter, max1 + max2)
+    return max1 + 1
 ````
 
 ## Tree Rerooting (Top-Down Tree DP)
 
+Used when DP value is needed for every node as root.
+
 We compute `dp[root]`, then update `dp[child]` by “rerooting” at each child using the parent’s value.
 
-````c++
-void dfs1(int u, int p) {
-    for (int v : adj[u]) {
-        if (v == p) continue;
-        dfs1(v, u);
-        dp[u] += dp[v] + size[v];
-    }
-}
+````python
 
-void dfs2(int u, int p) {
-    for (int v : adj[u]) {
-        if (v == p) continue;
-        dp[v] = dp[u] - size[v] + (total_nodes - size[v]);
-        dfs2(v, u);
-    }
-}
+def solve():
+    N = len(adj)
+    size = [0] * N
+    dp = [0] * N
+    
+    # dp[u] = sum of distances from u to all nodes in its subtree
+    def dfs1(u, parent):
+        size[u] = 1
+        for v in adj[u]:
+            if v == parent:
+                continue
+            dfs1(v, u)
+            size[u] += size[v]
+            dp[u] += dp[v] + size[v]
+    # Reroot DP to children
+    def dfs2(u, parent):
+        for v in adj[u]:
+            if v == parent:
+                continue
+            dp[v] = dp[u] - size[v] + (N - size[v])
+            dfs2(v, u)
+
+    dfs1(0, -1)
+    dfs2(0, -1)
+
+    return dp
 ````
 
-### Problems
+## Problems
+
+
 
 **Easy to Medium**
 

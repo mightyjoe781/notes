@@ -79,3 +79,82 @@ else:
     dp[i][j] = dp[i-1][j]
 ````
 
+### Longest Palindromic Subarray
+
+Given a string `s`, return the longest substring of `s` that is a _palindrome_.
+
+A **palindrome** is a string that reads the same forward and backward.
+
+This is *two-pointer* approach to problem.
+
+```python
+
+def longestPalindrome(s: str) -> str:
+
+    n = len(s)
+    if n == 0:
+        return ""
+
+    start = 0
+    max_len = 1
+
+    def expand(l, r):
+        nonlocal start, max_len
+        while l >= 0 and r < n and s[l] == s[r]:
+            if r - l + 1 > max_len:
+                start = l
+                max_len = r - l + 1
+            l -= 1
+            r += 1
+
+    for i in range(n):
+        expand(i, i)     # odd length
+        expand(i, i + 1) # even length
+
+    return s[start:start + max_len]
+
+```
+
+This is a $O(n^2)$ solution, There is a better approach to solve this problem using *Manacher's Algorithm* in $O(n)$ time.
+
+Key Idea
+
+- Unify odd and even length palindromes by inserting a special character like (`#`) between characters. Example : `abba`, `#a#b#b#a#`
+- Use previous palindrome information to avoid rechecking characters
+- Maintain a current Rightmost Palindrome and mirror indices to reuse results.
+
+Instead of expanding from center independently, Manacher's algorithm *reuses* symmetry
+
+```python
+
+def longestPalindrome(s: str) -> str:
+
+    def manacher(s):
+        t = '#' + '#'.join(s) + '#'
+        n = len(t)
+
+        p = [0] * n
+
+        l, r = 0, 0
+        for i in range(n):
+            p[i] = min(r - i, p[l + (r - i)]) if i < r else 0
+            while (i + p[i] + 1 < n and i - p[i] - 1 >= 0
+                    and t[i + p[i] + 1] == t[i - p[i] - 1]):
+                p[i] += 1
+            
+            if i + p[i] > r:
+                l, r = i - p[i], i + p[i]
+        
+        return p
+    
+    p = manacher(s)
+
+    resLen, center_idx = max((v, i) for i, v in enumerate(p))
+    resIdx = (center_idx - resLen) // 2
+
+    return s[resIdx: resIdx + resLen]
+
+```
+
+
+

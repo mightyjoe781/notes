@@ -263,3 +263,180 @@ def isMatch(self, s: str, p: str) -> bool:
 ```
 
 Cache might fail here to a special case where a single character is repeated multiple times, better use a dp table for that case.
+
+### Minimum Cost to Convert String II (Trie DP)
+
+You are given two **0-indexed** strings `source` and `target`, both of length `n` and consisting of **lowercase** English characters. You are also given two **0-indexed** string arrays `original` and `changed`, and an integer array `cost`, where `cost[i]` represents the cost of converting the string `original[i]` to the string `changed[i]`.
+
+You start with the string `source`. In one operation, you can pick a **substring** `x` from the string, and change it to `y` at a cost of `z` **if** there exists **any** index `j` such that `cost[j] == z`, `original[j] == x`, and `changed[j] == y`. You are allowed to do **any** number of operations, but any pair of operations must satisfy **either** of these two conditions:
+
+- The substrings picked in the operations are `source[a..b]` and `source[c..d]` with either `b < c` **or** `d < a`. In other words, the indices picked in both operations are **disjoint**.
+- The substrings picked in the operations are `source[a..b]` and `source[c..d]` with `a == c` **and** `b == d`. In other words, the indices picked in both operations are **identical**.
+
+Return _the **minimum** cost to convert the string_ `source` _to the string_ `target` _using **any** number of operations_. _If it is impossible to convert_ `source` _to_ `target`, _return_ `-1`.
+
+**Note** that there may exist indices `i`, `j` such that `original[j] == original[i]` and `changed[j] == changed[i]`
+
+```
+Input: source = "abcd", target = "acbe", original = ["a","b","c","c","e","d"], changed = ["b","c","b","e","b","e"], cost = [2,5,5,1,2,20]
+```
+
+First, consider a simplified version of the problem where substrings are **not** allowed and we can only convert characters individually.
+
+Approach:
+
+- Treat each character as a node in a graph.
+- Each conversion rule defines a directed edge with a cost.
+- Use **Floyd–Warshall** to compute the shortest conversion cost between every pair of characters.
+    - Iterate over the string:
+    - If `source[i] == target[i]`, cost is 0.
+    - Otherwise, add the shortest conversion cost from `source[i]` to `target[i]`.
+- If any character conversion is impossible, return -1.
+
+
+Solving the Given Problem (Substring Transformations)
+
+Challenges :
+
+- We must consider **all possible substrings** starting at each index.
+- For each substring, we need to check whether:
+    - it exists in the transformation rules, and
+    - it can be converted to the corresponding target substring at minimum cost.
+- Naively checking all substrings leads to $O(n^3)$ complexity.
+
+Optimized Strategy
+
+- Trie for Efficient Substring Matching
+    - Insert all original and changed strings into a trie.
+    - This allows us to grow substrings character-by-character and stop early if no prefix exists.
+    - Each terminal node in the trie is assigned a **unique ID**.
+- Graph + Floyd-Warshall on Words
+    - Treat each unique word (trie terminal) as a node in a graph.
+    - Each transformation rule becomes a directed edge with a cost.
+    - Run Floyd–Warshall to compute the minimum cost to convert any word into another.
+- Dynamic Programming on the String
+    - Define `dp[i]` as the minimum cost to convert `source[:i]` into `target[:i]`.
+    - Transitions:
+        - Single character match: if `source[i] == target[i]`, then `dp[i+1] = min(dp[i+1], dp[i])`
+        - Substring transformation:
+            - Starting at index i, grow substrings using the trie in both source and target.
+            - Whenever both substrings form valid words, use the precomputed Floyd–Warshall cost to update dp.
+
+
+```python
+from typing import List
+
+INF = 10**18
+INF_INT = 10**9
+
+
+class Trie:
+    def __init__(self):
+        self.child = [[-1] * 26]   # node 0 = root
+        self.tid = [-1]            # terminal word id
+        self.next_id = 0
+
+    def _new_node(self):
+        self.child.append([-1] * 26)
+        self.tid.append(-1)
+        return len(self.child) - 1
+
+    def add(self, word: str) -> int:
+        node = 0
+        for ch in word:
+            c = ord(ch) - 97
+            if self.child[node][c] == -1:
+                self.child[node][c] = self._new_node()
+            node = self.child[node][c]
+
+        if self.tid[node] == -1:
+            self.tid[node] = self.next_id
+            self.next_id += 1
+
+        return self.tid[node]
+
+
+class Solution:
+    def minimumCost(
+        self,
+        source: str,
+        target: str,
+        original: List[str],
+        changed: List[str],
+        cost: List[int],
+    ) -> int:
+
+        n = len(source)
+        if n != len(target):
+            return -1
+
+        # Build trie + edges
+        trie = Trie()
+        edges = []
+
+        for u, v, w in zip(original, changed, cost):
+            x = trie.add(u)
+            y = trie.add(v)
+            edges.append((x, y, w))
+
+        P = trie.next_id
+        if P == 0:
+            return 0 if source == target else -1
+
+        # Floyd–Warshall
+        dist = [[INF_INT] * P for _ in range(P)]
+        for i in range(P):
+            dist[i][i] = 0
+
+        for x, y, w in edges:
+            if w < dist[x][y]:
+                dist[x][y] = w
+
+        for k in range(P):
+            dk = dist[k]
+            for i in range(P):
+                di = dist[i]
+                dik = di[k]
+                if dik == INF_INT:
+                    continue
+                base = dik
+                for j in range(P):
+                    nd = base + dk[j]
+                    if nd < di[j]:
+                        di[j] = nd
+
+        # DP over source / target
+        dp = [INF] * (n + 1)
+        dp[0] = 0
+
+        s_arr = [ord(c) - 97 for c in source]
+        t_arr = [ord(c) - 97 for c in target]
+
+        for j in range(n):
+            if dp[j] >= INF:
+                continue
+
+            base = dp[j]
+
+            # case 1: single character matches
+            if source[j] == target[j]:
+                dp[j + 1] = min(dp[j + 1], base)
+
+            # case 2: substring transformations
+            u = v = 0
+            for i in range(j, n):
+                u = trie.child[u][s_arr[i]]
+                v = trie.child[v][t_arr[i]]
+                if u == -1 or v == -1:
+                    break
+
+                uid = trie.tid[u]
+                vid = trie.tid[v]
+                if uid != -1 and vid != -1:
+                    w = dist[uid][vid]
+                    if w != INF_INT:
+                        dp[i + 1] = min(dp[i + 1], base + w)
+
+        return -1 if dp[n] >= INF else dp[n]
+```
+
