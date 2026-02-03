@@ -155,6 +155,64 @@ public:
 };
 ````
 
+Simpler Python Implementation as python can compare strings *lexicographically out of box*
+
+```python
+
+class SuffixArray:
+    def __init__(self, s: str):
+        self.s = s
+        self.n = len(s)
+        self.sa = sorted(range(self.n), key=lambda i: s[i:])
+        self.lcp = self._build_lcp()
+
+    def _build_lcp(self):
+        n, s, sa = self.n, self.s, self.sa
+        rank = [0] * n
+        for i, idx in enumerate(sa):
+            rank[idx] = i
+
+        lcp = [0] * n
+        k = 0
+        for i in range(n):
+            if rank[i] == 0:
+                continue
+            j = sa[rank[i] - 1]
+            while i + k < n and j + k < n and s[i + k] == s[j + k]:
+                k += 1
+            lcp[rank[i]] = k
+            if k:
+                k -= 1
+        return lcp
+
+    def contains(self, pattern: str) -> bool:
+        l, r = 0, self.n - 1
+        m = len(pattern)
+        while l <= r:
+            mid = (l + r) // 2
+            substr = self.s[self.sa[mid]:self.sa[mid] + m]
+            if substr == pattern:
+                return True
+            elif substr < pattern:
+                l = mid + 1
+            else:
+                r = mid - 1
+        return False
+
+    def longest_repeated_substring(self) -> str:
+        max_len = 0
+        pos = 0
+        for i in range(1, self.n):
+            if self.lcp[i] > max_len:
+                max_len = self.lcp[i]
+                pos = self.sa[i]
+        return self.s[pos:pos + max_len]
+
+    def count_distinct_substrings(self) -> int:
+        return self.n * (self.n + 1) // 2 - sum(self.lcp)
+
+```
+
 ## Problems
 
 | **Problem**                                                                                                                                | **Problem Type**       | **Optimal with**        | **Notes**                                                                                             |
