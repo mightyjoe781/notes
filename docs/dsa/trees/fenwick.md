@@ -4,6 +4,17 @@
 
 - Supports efficient prefix sums (range sum queries from index 1 to \(j\)) and point updates.
 - Internally stores cumulative frequencies in a vector ⁠ft.
+- Memory Efficient Alternative to Segment Tree
+
+Operations
+
+- Point Update : $O(\log n)$
+- Prefix Sum Query : $O(\log n)$
+- Range Sum Query : $O(\log n)$
+
+In Fenwick Tree, each index stores a sum of range of numbers : `[i - LSB(i) + 1, i]`, where `LSB(i) = i & -i`.
+
+Above property allows logarithmic traversal up/down.
 
 ## Simple Implementation
 
@@ -49,118 +60,191 @@ public:
 };
 ````
 
+Python Implementation
 
+```python
 
-## Complete Implementation 
+class FenwickTree:
+    def __init__(self, n):
+        self.n = n
+        self.ft = [0] * (n + 1)   # 1-based indexing
 
-```c++
-#include <bits/stdc++.h>
-using namespace std;
+    def _lsb(self, i):
+        return i & -i
 
-#define LSOne(S) ((S) & -(S))                    // the key operation
+    def update(self, i, v):
+        while i <= self.n:
+            self.ft[i] += v
+            i += self._lsb(i)
 
-typedef long long ll;                            // for extra flexibility
-typedef vector<ll> vll;
-typedef vector<int> vi;
+    def prefix_sum(self, i):
+        s = 0
+        while i > 0:
+            s += self.ft[i]
+            i -= self._lsb(i)
+        return s
 
-class FenwickTree {                              // index 0 is not used
-private:
-  vll ft;                                        // internal FT is an array
-public:
-  FenwickTree(int m) { ft.assign(m+1, 0); }      // create an empty FT
-
-  void build(const vll &f) {
-    int m = (int)f.size()-1;                     // note f[0] is always 0
-    ft.assign(m+1, 0);
-    for (int i = 1; i <= m; ++i) {               // O(m)
-      ft[i] += f[i];                             // add this value
-      if (i+LSOne(i) <= m)                       // i has parent
-        ft[i+LSOne(i)] += ft[i];                 // add to that parent
-    }
-  }
-
-  FenwickTree(const vll &f) { build(f); }        // create FT based on f
-
-  FenwickTree(int m, const vi &s) {              // create FT based on s
-    vll f(m+1, 0);
-    for (int i = 0; i < (int)s.size(); ++i)      // do the conversion first
-      ++f[s[i]];                                 // in O(n)
-    build(f);                                    // in O(m)
-  }
-
-  ll rsq(int j) {                                // returns RSQ(1, j)
-    ll sum = 0;
-    for (; j; j -= LSOne(j))
-      sum += ft[j];
-    return sum;
-  }
-
-  ll rsq(int i, int j) { return rsq(j) - rsq(i-1); } // inc/exclusion
-
-  // updates value of the i-th element by v (v can be +ve/inc or -ve/dec)
-  void update(int i, ll v) {
-    for (; i < (int)ft.size(); i += LSOne(i))
-      ft[i] += v;
-  }
-
-  int select(ll k) {                             // O(log m)
-    int p = 1;
-    while (p*2 < (int)ft.size()) p *= 2;
-    int i = 0;
-    while (p) {
-      if (k > ft[i+p]) {
-        k -= ft[i+p];
-        i += p;
-      }
-      p /= 2;
-    }
-    return i+1;
-  }
-};
-
+    def range_sum(self, l, r):
+        return self.prefix_sum(r) - self.prefix_sum(l - 1)
 
 ```
 
+Building Fenwick Tree in $O(n)$.
 
+Instead of calling update repeatedly $O(n \log n)$, we propagate values upwards
 
+```python
 
+class FenwickTree:
+    def __init__(self, arr):
+        self.n = len(arr) - 1  # arr must be 1-indexed
+        self.ft = arr[:]
 
+        for i in range(1, self.n + 1):
+            j = i + (i & -i)
+            if j <= self.n:
+                self.ft[j] += self.ft[i]
 
+```
+
+Select `k-th` Element (Prefix Sum $\ge$ k)
+
+Used in
+
+- Order Statistics
+- Finding `k-th` smallest frequency
+
+```python
+
+def select(self, k):
+    idx = 0
+    bit_mask = 1 << (self.n.bit_length() - 1)
+
+    while bit_mask:
+        nxt = idx + bit_mask
+        if nxt <= self.n and self.ft[nxt] < k:
+            k -= self.ft[nxt]
+            idx = nxt
+        bit_mask >>= 1
+
+    return idx + 1
+
+```
 
 ## Range Update Point Query & Range Query
 
 * Supports **range updates** & **point queries**
 * Uses a Fenwick Tree internally but updates the Fenwick Tree in a way that a range update is simulated by two point updates.
 
-````c++
-class RUPQ {                                     // RUPQ variant
-private:
-  FenwickTree ft;                                // internally use PURQ FT
-public:
-  RUPQ(int m) : ft(FenwickTree(m)) {}
-  void range_update(int ui, int uj, ll v) {
-    ft.update(ui, v);                            // [ui, ui+1, .., m] +v
-    ft.update(uj+1, -v);                         // [uj+1, uj+2, .., m] -v
-  }                                              // [ui, ui+1, .., uj] +v
-  ll point_query(int i) { return ft.rsq(i); }    // rsq(i) is sufficient
-};
+Usually representing updates as difference array, and prefix sum restores the actual values. Fenwick Array Represents the `diff`
 
-class RURQ  {                                    // RURQ variant
-private:                                         // needs two helper FTs
-  RUPQ rupq;                                     // one RUPQ and
-  FenwickTree purq;                              // one PURQ
-public:
-  RURQ(int m) : rupq(RUPQ(m)), purq(FenwickTree(m)) {} // initialization
-  void range_update(int ui, int uj, ll v) {
-    rupq.range_update(ui, uj, v);                // [ui, ui+1, .., uj] +v
-    purq.update(ui, v*(ui-1));                   // -(ui-1)*v before ui
-    purq.update(uj+1, -v*uj);                    // +(uj-ui+1)*v after uj
-  }
-  ll rsq(int j) {
-    return rupq.point_query(j)*j -               // optimistic calculation
-           purq.rsq(j);                          // cancelation factor
-  }
-  ll rsq(int i, int j) { return rsq(j) - rsq(i-1); } // standard
-};
-````
+```
+diff[l] += v
+diff[r+1] -= v
+```
+
+
+```python
+
+# fenwick tree store diff
+class RUPQ:
+    def __init__(self, n):
+        self.ft = FenwickTree(n)
+
+    def range_update(self, l, r, v):
+        self.ft.update(l, v)
+        self.ft.update(r + 1, -v)
+
+    def point_query(self, i):
+        return self.ft.prefix_sum(i)
+        
+# to support Range Query, we use second Fenwick Tree, storing count
+class RURQ:
+    def __init__(self, n):
+        self.n = n
+        self.ft1 = FenwickTree(n)
+        self.ft2 = FenwickTree(n)
+
+    def _update(self, ft, i, v):
+        while i <= self.n:
+            ft.ft[i] += v
+            i += i & -i
+
+    def range_update(self, l, r, v):
+        self._update(self.ft1, l, v)
+        self._update(self.ft1, r + 1, -v)
+
+        self._update(self.ft2, l, v * (l - 1))
+        self._update(self.ft2, r + 1, -v * r)
+
+    def prefix_sum(self, x):
+        return (
+            x * self.ft1.prefix_sum(x)
+            - self.ft2.prefix_sum(x)
+        )
+
+    def range_sum(self, l, r):
+        return self.prefix_sum(r) - self.prefix_sum(l - 1)
+
+```
+
+## Problems
+
+### Range Sum Query - Mutable
+
+*Above Implementation already solves this problem*
+
+### Count of Smaller Numbers after Self
+
+LeetCode : 315
+For each element, count how many numbers to its right are smaller than it.
+
+Topics it covers
+
+- Fenwick Tree as a frequency table
+- Co-ordinate Compression
+- Offline Queries
+
+```python
+class FenwickTree:
+    def __init__(self, n):
+        self.n = n
+        self.ft = [0] * (n + 1)
+
+    def update(self, i, v):
+        while i <= self.n:
+            self.ft[i] += v
+            i += i & -i
+
+    def query(self, i):
+        s = 0
+        while i > 0:
+            s += self.ft[i]
+            i -= i & -i
+        return s
+
+class Solution:
+    def countSmaller(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        
+        # Step 1: coordinate compression
+        sorted_vals = sorted(set(nums))
+        rank = {v: i + 1 for i, v in enumerate(sorted_vals)}
+
+        # Fenwick Tree over frequencies
+        ft = FenwickTree(len(sorted_vals))
+        res = [0] * n
+
+        # Step 2: traverse from right to left
+        for i in range(n - 1, -1, -1):
+            r = rank[nums[i]]
+            res[i] = ft.query(r - 1)   # count smaller elements
+            ft.update(r, 1)            # mark current number
+
+        return res
+```
+
+### K-th Order Statistics
+
+*Already solved above*
 

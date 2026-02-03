@@ -100,7 +100,7 @@ Optional Topics in Trees
 * [Fenwick Trees (Binary Indexed Trees)](trees/fenwick.md)
 * [Segment Trees & Lazy Propagation](trees/segment.md)
 * [Sqrt Decomposition Techniques](trees/sqrt_decomposition.md)
-* [Heap](trees/heaps.md)
+* [Heap Implementation](trees/heaps.md)
 * Advanced Trees: AVL, Red-Black Trees
 
 

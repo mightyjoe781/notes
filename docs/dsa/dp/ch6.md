@@ -537,6 +537,8 @@ def diameterOfBinaryTree(self, root):
         left = dfs(node.left)
         right = dfs(node.right)
 
+        # postorder ensures both children yield answer for
+        # local decision
         diameter = max(diameter, left + right)
 
         return 1 + max(left, right)

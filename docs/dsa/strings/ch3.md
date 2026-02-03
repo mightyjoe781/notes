@@ -307,3 +307,135 @@ def maximizeXor(self, nums, queries):
     return ans
 
 ```
+
+### Design Add Word and Search Data Structure
+
+Design a data structure that supports adding new words and searching for existing words.
+
+Implement the `WordDictionary` class:
+
+- `void addWord(word)` Adds `word` to the data structure.
+- `bool search(word)` Returns `true` if there is any string in the data structure that matches `word` or `false` otherwise. `word` may contain dots `'.'` where dots can be matched with any letter.
+
+```python
+class WordDictionary:
+
+    def __init__(self):
+        self.root = {}
+        
+    def addWord(self, word: str) -> None:
+        node = self.root
+        for ch in word:
+            node = node.setdefault(ch, {})
+        node["$"] = True 
+
+    def search(self, word: str) -> bool:
+
+        n = len(word)
+        
+        def find(node, i):
+            if i == n:
+                return "$" in node
+
+            ch = word[i]            
+            if ch != ".":
+                if ch not in node:
+                    return False
+                return find(node[word[i]], i+1)
+            else:
+                for nxt in node:
+                    if nxt == "$":
+                        continue
+                    if find(node[nxt], i + 1):
+                        return True
+                return False
+
+        return find(self.root, 0)
+```
+
+### Word Search II
+
+Given a 2-D grid of characters `board` and a list of strings `words`, return all words that are present in the grid.
+
+For a word to be present it must be possible to form the word with a path in the board with horizontally or vertically neighboring cells. The same cell may not be used more than once in a word.
+
+```
+Input:
+board = [
+  ["a","b","c","d"],
+  ["s","a","a","t"],
+  ["a","c","k","e"],
+  ["a","c","d","n"]
+],
+words = ["bat","cat","back","backend","stack"]
+
+Output: ["cat","back","backend"]
+```
+
+
+| ![](assets/Pasted%20image%2020260203081026.png) |
+| ----------------------------------------------- |
+
+In above problem, if only single word was given, then we could have tried backtracking at every cell `(i, j)`, but since while tracking we can match any of the words from the list of the words given Trie is more optimal choice here for prefix matching.
+
+We will keep visited array here to avoid traversing already visited cells.
+
+```python
+
+class TrieNode:
+    def __init__(self):
+        self.root = {}
+    
+    def addWord(self, word):
+        node = self.root
+        for ch in word:
+            node = node.setdefault(ch, {})
+        node["$"] = True
+
+class Solution:
+    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+        trie = TrieNode()
+        for w in words:
+            trie.addWord(w)
+
+        n, m = len(board), len(board[0])
+        res, vis = set(), set()
+
+        dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)]
+
+        def dfs(i, j, node, word):
+            if (i, j) in vis:
+                return
+            vis.add((i, j))
+
+            node = node[board[i][j]]
+            word += board[i][j]
+            if "$" in node:
+                res.add(word)
+
+            for dx, dy in dirs:
+                x = dx + i 
+                y = dy + j
+
+                if x < 0 or y < 0 or x >= n or y >= m:
+                    continue
+                
+                if board[x][y] not in node:
+                    continue
+
+                
+                dfs(x, y, node, word)
+            
+            vis.remove((i, j))
+        
+        for r in range(n):
+            for c in range(m):
+                if board[r][c] in trie.root:
+                    dfs(r, c, trie.root, "")
+        
+        return list(res)
+```
+
+Further improvement can be done in above problem by running DFS in guided manner using Trie
+
+
