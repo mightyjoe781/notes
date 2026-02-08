@@ -170,6 +170,8 @@ Different Types of Ordering Strategy that can be employed are
     - Usually people use idempotency as well with this.
 ## Retry Mechanisms Implementations
 
+[Amazing Article by Amazon on Exponential Backoff](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
+
 **Exponential Backoff**
 
 ````python

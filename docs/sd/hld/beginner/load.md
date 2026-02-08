@@ -98,3 +98,6 @@
 * Read up more on various Consensus Algorithms
 
 ![](assets/Pasted%20image%2020251221205633.png)
+
+
+AWS Blog on Disaster Recovery : [Link](https://aws.amazon.com/blogs/architecture/tag/disaster-recovery-series/)

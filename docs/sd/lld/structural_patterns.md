@@ -53,20 +53,20 @@ class MediaAdapter:
 player = MediaAdapter("mp4")
 player.play("video.mp4")  # ✅ Plays after conversion
 ```
-### Bridge
 
+### Bridge
 
 * **decouples an abstraction from its implementation**, allowing them to evolve **independently**
 * When to Use
-    * **When you want to avoid a rigid class hierarchy** – Prevents class explosion due to multiple variations.
-    * **When you need to support multiple implementations** – Example: Different platforms (Windows, Linux, macOS).
-    * **When abstraction and implementation should vary independently** – Example: Devices and their remote controls.
+    * **When you want to avoid a rigid class hierarchy** - Prevents class explosion due to multiple variations.
+    * **When you need to support multiple implementations** - Example: Different platforms (Windows, Linux, macOS).
+    * **When abstraction and implementation should vary independently** - Example: Devices and their remote controls.
 
 * Key Components
-    * **Abstraction** – Defines a high-level interface (e.g., RemoteControl).
-    * **Refined Abstraction** – Extends abstraction with additional behaviour.
-    * **Implementation Interface** – Defines the low-level details (e.g., Device).
-    * **Concrete Implementations** – Provide specific implementations.
+    * **Abstraction** - Defines a high-level interface (e.g., RemoteControl).
+    * **Refined Abstraction** - Extends abstraction with additional behavior.
+    * **Implementation Interface** - Defines the low-level details (e.g., Device).
+    * **Concrete Implementations** - Provide specific implementations.
 
 ```python
 from abc import ABC, abstractmethod
@@ -117,14 +117,19 @@ tv_remote.toggle_power()   # 📺 TV is now ON
 radio_remote.toggle_power() # 📻 Radio is now OFF
 ```
 ### Composite
+
+**Composite** is a structural design pattern that lets you compose objects into tree structures and then work with these structures as if they were individual objects.
+
+Read up about AST (Abstract Syntax Tree)
 ### Decorator ⭐
+
 * lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
-* Usage
-    * logging, security, caching & UI improvements
+* Usage : logging, security, caching & UI improvements
 * why use it ?
     * **Extends functionality** without modifying the original class.
     * **Follows Open-Closed Principle** (open for extension, closed for modification).
     * **Allows multiple decorators** to be combined flexibly.
+
 ```python
 # without Decorator, adding milk to coffee is cumbersome
 class Coffee:
@@ -134,7 +139,7 @@ class Coffee:
     def description(self):
         return "Basic Coffee"
 
-# Adding features by modifying the class (Not scalable ❌)
+# Adding features by modifying the class (Not scalable)
 class CoffeeWithMilk(Coffee):
     def cost(self):
         return super().cost() + 2
@@ -146,7 +151,9 @@ coffee = CoffeeWithMilk()
 print(coffee.description())  # Basic Coffee + Milk
 print(coffee.cost())  # 7
 ```
+
 * creating an ingredient decorator
+
 ```python
 # Base Component
 class Coffee:
@@ -195,11 +202,51 @@ print(coffee.description(), "->", coffee.cost())  # Basic Coffee + Milk + Sugar 
 
 - Flexible & Scalable
 - Combinable - decorators can be combines
-- **Follows SOLID principles** – No unnecessary subclasses or modifications.
-
+- **Follows SOLID principles** - No unnecessary subclasses or modifications.
 ### Facade
+
+**Facade** is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
 ### Flyweight
+
+**Flyweight** is a structural design pattern that reduces memory usage by **sharing common (intrinsic) state across many objects**, while keeping only the **unique (extrinsic) state per object**.
+
+```python
+
+class BulletType:
+    def __init__(self, sprite, damage):
+        self.sprite = sprite      # shared
+        self.damage = damage      # shared
+        
+class BulletFactory:
+    _types = {}
+
+    @classmethod
+    def get_bullet_type(cls, sprite, damage):
+        key = (sprite, damage)
+        if key not in cls._types:
+            cls._types[key] = BulletType(sprite, damage)
+        return cls._types[key]
+        
+class Bullet:
+    def __init__(self, x, y, velocity, bullet_type):
+        self.x = x                # unique
+        self.y = y                # unique
+        self.velocity = velocity # unique
+        self.bullet_type = bullet_type  # shared
+        
+# Shared flyweight 
+fast_bullet = BulletFactory.get_bullet_type("bullet.png", 10)
+
+# Thousands of bullets share the same BulletType
+b1 = Bullet(10, 20, 5, fast_bullet)
+b2 = Bullet(15, 25, 6, fast_bullet)
+b3 = Bullet(30, 40, 7, fast_bullet)
+
+print(b1.bullet_type is b2.bullet_type)  # True
+
+```
 ### Proxy ⭐
+
 * lets you provide a substitute or placeholder for another object. A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.
 * Advantages
     * Lazy Initialization - Virtual Proxy
@@ -240,7 +287,7 @@ image.display()  # Loads image only when needed
 image.display()  # Second call does not reload image
 ```
 
-logging Proxy
+Logging Proxy
 
 ```python
 class RealService:
