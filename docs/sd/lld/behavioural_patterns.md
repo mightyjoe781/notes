@@ -18,14 +18,14 @@
     * ✅ **Process the request** OR
     * ✅ **Forward it to the next handler**
 * When to Use
-    * **Logging and Debugging** – Different loggers (file, console, database) handle messages.
-    * **Event Handling** – UI elements process events (buttons, forms, popups).
-    * **Request Validation** – Middleware authentication in web frameworks.
-    * **Customer Support System** – Requests escalate from agent → supervisor → manager.
+    * **Logging and Debugging** - Different loggers (file, console, database) handle messages.
+    * **Event Handling** - UI elements process events (buttons, forms, popups).
+    * **Request Validation** - Middleware authentication in web frameworks.
+    * **Customer Support System** - Requests escalate from agent -> supervisor -> manager.
 * Key Components
     * Handler (abstract class) - Defines the method to handle requests.
-    * **Concrete Handlers** – Implement request processing & decide whether to pass it forward.
-    * **Client** – Sends requests to the first handler in the chain.
+    * **Concrete Handlers** - Implement request processing & decide whether to pass it forward.
+    * **Client** - Sends requests to the first handler in the chain.
 
 ```python
 # logging System
@@ -118,14 +118,14 @@ print(middleware_chain.handle(request3))  # Authentication Failed
 
 * encapsulates a request as an object, allowing for **delayed execution, undo/redo functionality, and queuing commands**.
 * When to Use
-    * **Undo/Redo functionality** – Text editors, Photoshop.
-    * **Job Scheduling** – Task execution in threads.
-    * **Remote Control Devices** – TV remote buttons, IoT devices.
+    * **Undo/Redo functionality** - Text editors, Photoshop.
+    * **Job Scheduling** - Task execution in threads.
+    * **Remote Control Devices** - TV remote buttons, IoT devices.
 * Key Components
-    * **Command Interface** – Declares an execution method.
-    * **Concrete Commands** – Implement specific actions.
-    * **Invoker** – Triggers commands.
-    * **Receiver** – Performs the actual work.
+    * **Command Interface** - Declares an execution method.
+    * **Concrete Commands** - Implement specific actions.
+    * **Invoker** - Triggers commands.
+    * **Receiver** - Performs the actual work.
 
 ```python
 # tv remote
@@ -191,9 +191,9 @@ remote.press_button()  # TV is OFF
 
 Without the Iterator, lets say there is a repository returning all the users.
 
-•	Client doesn’t care about LIMIT / OFFSET.
-•	Repository provides a clean, Pythonic iteration interface.
-•	If DB changes from SQL → API → cache, client code stays the same.
+- Client doesn’t care about LIMIT / OFFSET.
+- Repository provides a clean, Pythonic iteration interface.
+- If DB changes from SQL --> API --> cache, client code stays the same.
 
 Without Iterator (client handles the pagination ❌) 
 
@@ -271,17 +271,18 @@ for user in repo:   # Client just iterates, no offsets/limits
 
 ### Mediator
 
+**Mediator** is a behavioral design pattern that lets you reduce chaotic dependencies between objects. The pattern restricts direct communications between the objects and forces them to collaborate only via a mediator object
 ### Memento
 
 * lets you save and restore the previous state of an object without revealing the details of its implementation
 * When to use
-    * *Undo/Redo operations** – Text editors, games, drawing applications.
-    * **State recovery** – Crash recovery in software.
-    * **Checkpointing** – Saving progress in a game.
+    * **Undo/Redo operations** - Text editors, games, drawing applications.
+    * **State recovery** - Crash recovery in software.
+    * **Checkpointing** - Saving progress in a game.
 * Key Components
-    * **Memento** – Stores the state of an object.
-    * **Originator** – Creates and restores mementos.
-    * **Caretaker** – Manages mementos and handles state restoration.
+    * **Memento** - Stores the state of an object.
+    * **Originator** - Creates and restores mementos.
+    * **Caretaker** - Manages mementos and handles state restoration.
 
 ```python
 class Memento:
@@ -344,14 +345,14 @@ editor.show()  # Output: Current Text: Hello, World!
 * The **Observer Pattern** allows multiple objects (**observers**) to listen to and react to changes in another object (**subject**). When the subject’s state changes, all registered observers are notified automatically.
 * It is often referred to as Pub/Sub Communication model.
 * When to Use
-    * **Event-driven programming** – UI elements react to user actions.
-    * **Publish-Subscribe systems** – Notification services, message brokers.
-    * **Data Binding** – React.js, Vue.js frameworks.
-    * **Stock Market Updates** – Multiple clients get real-time stock prices.
+    * **Event-driven programming** - UI elements react to user actions.
+    * **Publish-Subscribe systems** - Notification services, message brokers.
+    * **Data Binding** - React.js, Vue.js frameworks.
+    * **Stock Market Updates** - Multiple clients get real-time stock prices.
 * Key Components
-    * **Subject (Publisher)** – Maintains a list of observers and notifies them when state changes.
-    * **Observer (Subscriber)** – Listens for updates from the subject.
-    * **Concrete Subject** – Implements state changes and observer management.
+    * **Subject (Publisher)** - Maintains a list of observers and notifies them when state changes.
+    * **Observer (Subscriber)** - Listens for updates from the subject.
+    * **Concrete Subject** - Implements state changes and observer management.
 
 ```python
 class StockMarket:
@@ -394,17 +395,17 @@ market.set_price(100)  # Both investors get notified
 market.set_price(120)  # Another update is sent
 ```
 
-### Stage
+### State
 
 * models an **object’s behavior as a finite set of states**, with **each state defining its own behavior**.
 * When to Use
-    * When an object has different modes or stages** – Traffic lights, vending machines.
-    * **State-dependent behavior** – Objects act differently in different states.
-    * **Reducing complex if-else logic** – Avoids conditionals in methods.
+    * **When an object has different modes or stages** - Traffic lights, vending machines.
+    * **State-dependent behavior** - Objects act differently in different states.
+    * **Reducing complex if-else logic** - Avoids conditionals in methods.
 * Key Components
-    * **State Interface** – Defines behavior for all states.
-    * **Concrete States** – Implement specific behavior for each state.
-    * **Context (Object)** – Maintains current state & delegates actions.
+    * **State Interface** - Defines behavior for all states.
+    * **Concrete States** - Implement specific behavior for each state.
+    * **Context (Object)** - Maintains current state & delegates actions.
 
 ```python
 from abc import ABC, abstractmethod
@@ -452,14 +453,14 @@ for _ in range(4):
 **define a family of algorithms**, put them in separate classes, and make them **interchangeable** at runtime.
 
 * When to use
-    * **Multiple algorithms for the same task** – Sorting, Compression.
-    * **Reducing conditional logic (if-else/switch)** – Payment methods, Authentication.
-    * **Behaviour modification at runtime** – Game difficulty levels.
+    * **Multiple algorithms for the same task** - Sorting, Compression.
+    * **Reducing conditional logic (if-else/switch)** - Payment methods, Authentication.
+    * **Behaviour modification at runtime** - Game difficulty levels.
 
 * Key Components
-    * **Context** – Maintains a reference to a strategy object.
-    * **Strategy Interface** – Defines a common interface for all strategies.
-    * **Concrete Strategies** – Implement different algorithms.
+    * **Context** - Maintains a reference to a strategy object.
+    * **Strategy Interface** - Defines a common interface for all strategies.
+    * **Concrete Strategies** - Implement different algorithms.
 
 
 ```python
@@ -514,7 +515,8 @@ Often known as DAO (Data Access Objects).
 - Usage:
     - Decouples business logic from persistence logic.
     - Centralizes data access logic (CRUD, queries).
-    - Makes switching storage (SQL → NoSQL, in-memory) easier.
+    - Makes switching storage (SQL -> NoSQL, in-memory) easier.
+- Drawback : A potential drawback is that they can sometimes become bottlenecks in high-performance systems due to the object creation semantics of the language
 
 ```python
 from abc import ABC, abstractmethod
@@ -569,12 +571,12 @@ print(repo.list_all())
 
 * defines the **skeleton** of an algorithm in a **base class**, allowing subclasses to **override specific steps** without modifying the structure of the algorithm.
 * When to Use
-    * **Common workflow with variations** – Report generation, data processing.
-    * **Code reuse** – Avoids duplicate code in similar processes.
-    * **Standardized behavior** – Ensures steps are executed in a defined order.
+    * **Common workflow with variations** - Report generation, data processing.
+    * **Code reuse** - Avoids duplicate code in similar processes.
+    * **Standardized behavior** - Ensures steps are executed in a defined order.
 * Key Components
-    * **Abstract Class (Template)** – Defines the algorithm structure.
-    * **Concrete Class** – Implements missing steps of the algorithm.
+    * **Abstract Class (Template)** - Defines the algorithm structure.
+    * **Concrete Class** - Implements missing steps of the algorithm.
 
 ```python
 from abc import ABC, abstractmethod
@@ -623,13 +625,13 @@ report.generate_report()
 
 * **add new behaviors to objects** **without modifying their structure**, by **separating the operation from the object itself**.
 * When to Use
-    * **Extending behavior without modifying existing classes** – Syntax tree traversal.
-    * **Applying different operations to a group of objects** – Compilers, AST manipulation
-    * **Avoiding clutter in existing classes** – Separates logic from data structures.
+    * **Extending behavior without modifying existing classes** - Syntax tree traversal.
+    * **Applying different operations to a group of objects** - Compilers, AST manipulation
+    * **Avoiding clutter in existing classes** - Separates logic from data structures.
 * Components
-    * **Visitor** – Defines new operations on elements.
-    * **Concrete Visitors** – Implement specific behavior.
-    * **Element** – Accepts a visitor and allows it to operate on itself.
+    * **Visitor** - Defines new operations on elements.
+    * **Concrete Visitors** - Implement specific behavior.
+    * **Element** - Accepts a visitor and allows it to operate on itself.
 
 
 ```python
@@ -694,3 +696,13 @@ folder = Folder("MyFolder", [file1, file2])
 size_calculator = SizeCalculator()
 folder.accept(size_calculator)
 ```
+
+Its difficult to understand this pattern directly from the example above, as technically it doesn't make sense to use this pattern, (as we have better ways to do this), but for libraries and AST writing this a quite popular pattern.
+
+A primary example of this AST traversal. Check out this code base from `mako` (template processing library in python).
+
+[Github Link](https://github.com/sqlalchemy/mako/blob/main/mako/pyparser.py)
+
+Interesting Talks on AST
+- [Supercharge your Python library using AST parsing](https://www.youtube.com/watch?v=A0vR3l1X-CU)
+- [Python AST Parsing and Custom Linting](https://www.youtube.com/watch?v=OjPT15y2EpE)

@@ -285,7 +285,34 @@ obj2 = Singleton()
 print(obj1 is obj2)  # ✅ True (Same instance)
 ```
 
+ThreadSafe Version of above Code, which supports thread safety during creation and then no performance overhead later on.
+
+```python
+
+class Singleton:
+    _instance = None
+    _lock = threading.Lock()
+    _initialized = False
+
+    def __new__(cls):
+        # optimization for avoid lock overhead on later init
+        if cls._instance is None:
+            # init thread guard
+            with cls._lock:
+                if cls._instance is None:
+                    cls._instance = super().__new__(cls)
+        return cls._instance
+
+    def __init__(self):
+        if self._initialized:
+            return
+        self._initialized = True
+        print("Initialize only once")
+```
+
+
 Other Interesting ways to create Singleton Classes in Python
+
 ```python
 # using decorator
 def singleton(cls):
