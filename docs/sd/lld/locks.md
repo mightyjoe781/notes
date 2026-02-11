@@ -23,7 +23,7 @@ counter = 0
 
 def worker():
     global counter
-    for _ in range(1000):
+    for _ in range(100000):
         with lock:  # similar to lock.acquire()
             counter += 1
 ```
@@ -154,7 +154,7 @@ def a():
     a_arrived.release() # signal A is here
     b_arrived.wait() # wait for B
     # phase 2
-    print("A: after rendezvous)
+    print("A: after rendezvous")
 
 def b():
     # phase 1
@@ -162,7 +162,10 @@ def b():
     b_arrived.release() # signal B is here
     a_arrived.wait() # wait for A
     # phase 2
-    print("B: after rendezvous)
+    print("B: after rendezvous")
+
+threading.Thread(target=a).start()
+threading.Thread(target=b).start()
 
 ```
 
@@ -195,6 +198,16 @@ def print_even():
             print(i)
             turn = "odd"
             cond.notify()
+            
+t1 = threading.Thread(target=print_odd)
+t2 = threading.Thread(target=print_even)
+
+t1.start()
+t2.start()
+
+t1.join()
+t2.join()
+
 ```
 
 #### Producer/Consumer (Bounded Buffer)
@@ -215,6 +228,8 @@ def producer():
 def consumer():
     while True:
         item = q.get()           # blocks if empty
+        if item is None: # graceful shutdown
+            break
         print("consumed", item)
         q.task_done()
 
@@ -235,6 +250,23 @@ def init():
     with init_lock:
         if not initialized:
             # heavy setup here
+            initialized = True
+```
+
+Improved version is useful for singleton classes, to avoid allowing multiple creators to acquire lock.
+
+```python
+init_lock = threading.Lock()
+initialized = False
+
+def init():
+    global initialized
+    if initialized:
+        return
+
+    with init_lock:
+        if not initialized:
+            print("Heavy initialization")
             initialized = True
 ```
 
@@ -268,6 +300,18 @@ def t1():
             ...
 ```
 
+```python
+
+def acquire_locks(*locks):
+    for lock in sorted(locks, key=id):
+        lock.acquire()
+
+def release_locks(*locks):
+    for lock in sorted(locks, key=id, reverse=True):
+        lock.release()
+        
+```
+
 NOTE: "How do you avoid deadlocks when you must hold multiple locks?” -> fixed order, timeouts, lock hierarchy.
 
 ### ThreadPool Executor
@@ -286,7 +330,11 @@ urls = [...]
 with ThreadPoolExecutor(max_workers=10) as executor:
     futures = [executor.submit(fetch, u) for u in urls]
     for fut in as_completed(futures):
-        print(fut.result())
+        try:
+            result = fut.result()
+            print(result)
+        except Exception as e:
+            print("Task failed:", e)
 ```
 
 - `max_workers`
