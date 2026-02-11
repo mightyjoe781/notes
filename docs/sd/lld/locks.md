@@ -268,7 +268,7 @@ def t1():
             ...
 ```
 
-NOTE: "How do you avoid deadlocks when you must hold multiple locks?” → fixed order, timeouts, lock hierarchy.
+NOTE: "How do you avoid deadlocks when you must hold multiple locks?” -> fixed order, timeouts, lock hierarchy.
 
 ### ThreadPool Executor
 
@@ -290,11 +290,11 @@ with ThreadPoolExecutor(max_workers=10) as executor:
 ```
 
 - `max_workers`
-    - Too low → underutilization.
-    - Too high → context-switch overhead, possible resource problems.
+    - Too low -> underutilization.
+    - Too high -> context-switch overhead, possible resource problems.
 - Difference:
-    - `submit(fn, *args)` → returns Future.
-    - `map(fn, iter)` → returns results in input order, not completion order.
+    - `submit(fn, *args)` -> returns Future.
+    - `map(fn, iter)` -> returns results in input order, not completion order.
 - Exceptions in task:
-    - Raised when you call future.result().
+    - Raised when you call `future.result()`
 
