@@ -7,9 +7,9 @@ Most of the algorithm are often implemented in the solutions of System Design Pr
 
 Core Probabilistic & Approximate Data Structures (*Space-Accuracy Trade-Off*)
 
-- Bloom Filters : Membership testing with false positives
-- Count-Min Sketch : Frequency estimation in Data Streams
-- Hyper Log-Log : Cardinality Estimation
+- [Bloom Filters](bloom_filters.md) : Membership testing with false positives
+- [Count-Min Sketch](count-min_sketch.md) : Frequency estimation in Data Streams
+- [Hyper Log-Log](hyper_log_log.md) : Cardinality Estimation
 
 
 Tree Based Indexing & Spatial Data Structures (*Hierarchical partitioning*)

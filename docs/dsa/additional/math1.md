@@ -85,7 +85,7 @@ def prime_factors(n):
 
 Let $n = p_1^{e_1} *p_2^{e_2} * ... *p_k^{e_k}$
 
-- #Divisors = $(e_1 + 1) * (e_2 + 1)* ... *(e_k + 1)$
+- Number of divisors = $(e_1 + 1) * (e_2 + 1)* ... *(e_k + 1)$
 - Sum of Divisors = $((p_1^{(e_1 + 1)}-1)*(p_2^{(e_2 + 1)}-1))*...$
 
 ````python
@@ -178,7 +178,6 @@ y = y0 - (a/g)*t
 ### Integer Solution using GCD
 
 - If g = gcd(a, b) divides c, then solutions exist.
-
 - Scale extended Euclid’s output to match c/g.
 
 ### Application in Modular Inverse

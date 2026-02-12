@@ -2,6 +2,9 @@
 
 The **Convex Hull** of a set of points is the smallest convex polygon that contains all the points. It’s like stretching a rubber band around the outermost points.
 
+![](assets/Pasted%20image%2020260212083041.png)
+
+Applications in Study Polynomials, Matrix Eigenvalues, Thermodynamics, Quantum Physics, Ethology, etc.
 ## Graham Scan
 
 **Idea**: Sort points by polar angle w.r.t. lowest point (y-coordinate, then x), then walk through the sorted list, maintaining a stack of convex points.
@@ -57,7 +60,7 @@ def monotone_chain(points):
 **Idea**: Start from the leftmost point, then at each step choose the most counterclockwise point.
 
 - Time Complexity : $O(nh)$, $h$ is the number of points on the convex hull.
-- Good when $h$ is small like ~ $ \log n$
+- Good when $h$ is small like ~ $\log n$
 - Easy to understand
 
 ## Application

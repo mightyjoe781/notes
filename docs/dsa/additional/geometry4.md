@@ -10,7 +10,7 @@ Idea:
 - Maintain a balanced BST of active segments ordered by their y-coordinates.
 - At each **event** (segment start/end or intersection), update BST and check neighboring segments for intersections.
 
-Time Complexity : $O((n+k) \log n)$ , $n$ = number of segments, $k = $ number of intersections
+Time Complexity : $O((n+k) \log n)$ , $n$ = number of segments, $k = \text{number of intersections}$
 
 Key Concepts
 

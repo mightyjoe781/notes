@@ -35,10 +35,10 @@ Both 26 and 11 belong to equivalence class for 1.
 
 Note following relations.
 
-- $A \equiv B (mod\ C) \\$
-- $A \ mod \ C = B \ mod \ C \\$
+- $A \equiv B (mod\ C)$
+- $A \ mod \ C = B \ mod \ C$
 - C | (A - B)  : ( The | symbol means divide, or is a factor of)
-- A  = B + K. C (where K is some integer)
+- $A  = B + K \cdot C$ (where K is some integer)
 
 Congruence Modulo is an Equivalence Relation. Follows equivalence property.
 
@@ -50,7 +50,7 @@ Congruence Modulo is an Equivalence Relation. Follows equivalence property.
 
 Given any integer A, and a positive integer B, there exist unique integers Q and R such that
 $$
-A = B * Q + R \text{ where } 0 \le R < B
+A = B \cdot Q + R \text{ where } 0 \le R < B
 $$
 From this form actually imerges **A mod B = R**.
 
@@ -210,7 +210,7 @@ x ≡ a2 mod m2
 
 Where m1, m2, ... are **pairwise coprime**
 
-- Solution exists & is unique modulo M = m1*m2*...
+- Solution exists & is unique modulo $M = m1*m2*...$
 - Combine equations step by step using extended Euclid
 
 ### Modular Arithmetic in Primes vs Non-Primes
@@ -218,8 +218,8 @@ Where m1, m2, ... are **pairwise coprime**
 | **Feature**         | **Prime Modulus**         | **Non-Prime Modulus**    |
 | ------------------- | ------------------------- | ------------------------ |
 | Inverses Exist      | If gcd(a, p) = 1 → always | Only if gcd(a, m) = 1    |
-| Fermat’s Theorem    | ✅                         | ❌                        |
-| Use Euler’s Theorem | ❌                         | ✅                        |
+| Fermat’s Theorem    | Yes                       | No                       |
+| Use Euler’s Theorem | No                        | Yes                      |
 | Simplifications     | Easier (unique fields)    | Harder, may lack inverse |
 
 - Prefer Primes like $1e9+7$ or $998244353$ for programming
