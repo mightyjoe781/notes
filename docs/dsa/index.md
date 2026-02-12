@@ -10,7 +10,6 @@
     * [Subarrays & Subsequences](array/ch4.md)
     * [Sliding Window](array/ch2.md)
 
-
 - Linked List
 
     * [Basics of Linked List](ll/ch1.md)
@@ -37,7 +36,6 @@
 * [Disjoint Set Union (DSU)(Union-Find)](dsu.md)
 * [Hash Maps & Frequency Counting](hash/ch1.md)
 
-
 ## Sorting
 
 * [Elementary Sorting Strategies](sorting/ch1.md)
@@ -47,7 +45,6 @@
 * Counting Sort, Radix Sort & Bucket Sort
 * Special Sorting Techniques
 
-
 ## Search
 
 * [Binary Search](search/binary_search.md)
@@ -56,14 +53,12 @@
 * Hashing Based Search Methods
 * Radix Search & Trie-based Search (Optional)
 
-
 ## Recursion
 
 * [Simple Recursion](recursion/ch1.md)
 * [Combinatorics & Permutations](recursion/ch2.md)
 * [String Recursion](recursion/ch3.md)
 * [Backtracking](recursion/ch4.md)
-
 
 ## Problem Solving Paradigm
 
@@ -85,7 +80,6 @@
     - [DP on Trees](dp/ch6.md)
     - [Digit DP](dp/digit_dp.md)
 
-
 ## Trees
 
 * [Introduction](trees/introduction.md)
@@ -103,7 +97,6 @@ Optional Topics in Trees
 * [Heap Implementation](trees/heaps.md)
 * Advanced Trees: AVL, Red-Black Trees
 
-
 ## Graph
 
 * [Graph Properties and their Types](graphs/ch1.md)
@@ -113,8 +106,6 @@ Optional Topics in Trees
 * [Minimum Spanning Trees](graphs/ch5.md) (Kruskal, Prim)
 * Network Flow Algorithm (Ford-Fulkerson, Edmond-Karp) (Optional)
 * [Other Algorithms](graphs/ch6.md) (SCC, Bridges, Articulation Points)
-
-
 
 ## Strings
 
@@ -126,8 +117,6 @@ Optional Topics in Trees
 * [String Tasks](strings/ch6.md)
 * [Compression & Encoding Techniques](strings/ch7.md)
 
-
-
 ## Additional Topics
 
 * Mathematics
@@ -138,8 +127,6 @@ Optional Topics in Trees
 * Binary Manipulation
     * [Bit Manipulation](additional/bit1.md)
     * [Subset Generation & Bitmask DP](additional/bit2.md)
-
-
 * [Matrix](additional/matrix1.md)
 * [Simulation & Randomized Algorithms](additional/simulation.md)
 * [Meet-in-the-Middle Technique](additional/mitmt.md)

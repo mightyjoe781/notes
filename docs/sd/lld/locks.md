@@ -1,11 +1,10 @@
 # Concurrency & Multi-Threading Concepts
 
-
 ## Python Concepts
 
 - `threading.Thread` ~ OS-level thread wrapper
 - `GIL` ~ Global Interpreter Lock
-    - Only one thread runs Python bytecode at a time.
+    - Only one thread runs Python byte-code at a time.
     - Still needs locks ~ Gil doesn't protect your own shared data invariants
     - Threads are useful for I/O bound tasks (CPU bound tasks should generally use *multi-processing* )
 

@@ -24,6 +24,23 @@ def rle(s):
     return ''.join(res)
 ````
 
+Using Python in-built function
+
+```python
+from itertools import groupby
+
+def rle_encode(iterable):
+    return [(key, sum(1 for _ in group))
+            for key, group in groupby(iterable)]
+            
+# "AAAABBBCCDAA"
+# A4 B3 C2 D1 A2
+
+from itertools import chain, repeat
+def rle_decode(pairs):
+    return ''.join(chain.from_iterable(repeat(k, n) for k, n in pairs))
+
+```
 ## Huffman Coding
 
 **Idea:**
