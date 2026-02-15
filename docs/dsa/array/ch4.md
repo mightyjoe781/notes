@@ -113,7 +113,7 @@ Prerequisite : Recursion, DP
 
 ### Maximum Product Subarray
 
-[Link]([Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/))
+[Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/)
 
 Given an integer array `nums`, find a that has the largest product, and return _the product_.
 
