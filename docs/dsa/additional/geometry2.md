@@ -85,7 +85,7 @@ def is_inside(edges, xp, yp):
 
 ```
 
-Full Code for Simulation : [Gist Link](gist.github.com/inside-code-yt/7064d1d1553a2ee117e60217cfd1d099)
+Full Code for Simulation : [Gist Link](https://gist.github.com/inside-code-yt/7064d1d1553a2ee117e60217cfd1d099)
 Video for Explanation : [Video Link](https://www.youtube.com/watch?v=RSXM9bgqxJM)
 #### Winding Number
 
