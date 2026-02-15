@@ -18,6 +18,12 @@ Steps:
     - Pop from the stack if not (right turn).
     - Push otherwise.
 
+[Visual Simulation](https://www.youtube.com/watch?v=SBdWdT_5isI)
+
+![](assets/Pasted%20image%2020260215160923.png)
+
+![](assets/Pasted%20image%2020260215160932.png)
+
 ````python
 def graham_scan(points):
     def cross(o, a, b): return (a[0]-o[0])*(b[1]-o[1]) - (a[1]-o[1])*(b[0]-o[0])
@@ -62,7 +68,9 @@ def monotone_chain(points):
 - Time Complexity : $O(nh)$, $h$ is the number of points on the convex hull.
 - Good when $h$ is small like ~ $\log n$
 - Easy to understand
+- Generally not preferred if $h$ is quite large and comparable to $n$
 
+[Video Simulation](https://www.youtube.com/watch?v=nBvCZi34F_o)
 ## Application
 
 ### Rotating Calipers

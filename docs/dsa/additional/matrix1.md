@@ -105,8 +105,6 @@ def spirallyTraverse(self, matrix):
 
 - Pretty Intuitive Traversal
 
-
-
 ## Matrix Rotation & Transformation
 
 - **Rotation by 90 degrees (clockwise)**
@@ -124,7 +122,6 @@ def spirallyTraverse(self, matrix):
     - Rotation by angle $\theta$
 
 ## Prefix 2D Sum
-
 
 
 ````c++

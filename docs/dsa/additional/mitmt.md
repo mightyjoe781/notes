@@ -14,6 +14,21 @@
     - Enumerate all solution for both halves
     - Combine both using binary search, hashing or two-pointer techniques
 
+A classic example of MITM is solving a 3x3 Rubik's Cube. It can be solved in at least 20 moves (https://cube20.org/)
+
+Simulating the solution for searching for solution is just finding the shortest distance between both the configuration as shown.
+
+![](assets/Pasted%20image%2020260215005428.png)
+
+In worst our algorithm might take 4 quintillion moves to solve the rubik's cube, $\approx 10^{20}$ states
+
+A regular computer can explore about $10^6$ states/seconds. This would take $\approx 10 ^{14} s \approx 3 \cdot 10 ^ 6 \text{years}$. We could try to solve from both direction and combine the results in about $\approx 10^{10} \text{moves}$
+
+This obviously trades off speed for storage.
+
+![](assets/Pasted%20image%2020260215005909.png)
+
+Reference Video : [Polylog Video](https://www.youtube.com/watch?v=wL3uWO-KLUE)
 ## Subset Sum Problem
 
 - given $n \le40$ elements and target sum $S$

@@ -15,14 +15,14 @@ Core Probabilistic & Approximate Data Structures (*Space-Accuracy Trade-Off*)
 Tree Based Indexing & Spatial Data Structures (*Hierarchical partitioning*)
 
 - Trie : Prefix Based Lookup
-- B-Tree : Disk friendly ordered indexing
-- Quad Tree : 2D Spatial Partitioning
+- [B-Tree](btree.md) : Disk friendly ordered indexing
+- [Quad Tree](quadtree.md) : 2D Spatial Partitioning
 - GeoHashing : Spatial Indexing using String Prefixes
 
 
 Storage & Synchronization Structures (*Efficient Persistence & Comparisons*)
 
-- LSM Tree : Write-optimized Storage Engines
+- [LSM Tree](lsm.md) : Write-optimized Storage Engines
 - Merkle Tree : Efficient Data Integrity & Sync
 - Rsync Algorithm : Delta based file synchronization
 
@@ -38,7 +38,6 @@ Distributed Consensus & Coordination (*Agreement under failure*)
 
 - Raft
 - Paxos
-
 
 Collaborative & Conflict Resolution Algorithms (*Eventually consistent collaboration*)
 

@@ -686,6 +686,47 @@ Pre-requisite : Sorting : Merge - Sort
 
 [Solution Link](../sorting/ch3.md)
 
+### Shuffle Array in Linear Time
+
+*Fisher Yates Algorithm*
+
+[Video Explanation](https://www.youtube.com/watch?v=4zx5bM2OcvA&list=PL3edoBgC7ScV9WPytQ2dtso21YrTuUSBd&index=14)
+
+```python
+import random
+
+# Solution 1: Fisher-Yates algorithm (old version)
+# Time complexity: O(n²)
+# Space complexity: O(n)
+def shuffle(arr):
+  shuffled = []
+  while len(arr) > 0:
+    rand_index = random.randrange(0, len(arr))
+    shuffled.append(arr[rand_index])
+    arr.pop(rand_index)
+  arr = shuffled
+
+# Solution 2: Sorting assigned random values
+# Time complexity: O(nlogn)
+# Space complexity: O(n)
+def shuffle(arr):
+  rand_values = [random.random() for i in range(len(arr))]
+  rand_indexes = [i for i in range(len(arr))]
+  rand_indexes.sort(key=lambda i: rand_values[i])
+  arr = [arr[i] for i in rand_indexes]
+
+# Solution 3: Fisher-Yates algorithm (modern version)
+# Time complexity: O(n)
+# Space complexity: O(1)
+def shuffle(arr):
+  last_index = len(arr)-1
+  while last_index > 0:
+    rand_index = random.randint(0, last_index)
+    temp = arr[last_index]
+    arr[last_index] = arr[rand_index]
+    arr[rand_index] = temp
+    last_index -= 1
+```
 ### Reverse Pair
 
 Given an integer array `nums`, return _the number of **reverse pairs** in the array_.

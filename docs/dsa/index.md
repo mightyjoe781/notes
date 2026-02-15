@@ -96,6 +96,7 @@ Optional Topics in Trees
 * [Sqrt Decomposition Techniques](trees/sqrt_decomposition.md)
 * [Heap Implementation](trees/heaps.md)
 * Advanced Trees: AVL, Red-Black Trees
+* QuadTrees, k-d Trees
 
 ## Graph
 
@@ -136,3 +137,4 @@ Optional Topics in Trees
     * [Points, Lines, Polygons](additional/geometry2.md)
     * [Convex Hull & Line Intersection](additional/geometry3.md)
     * [Advanced Geometry Algorithms](additional/geometry4.md)
+* [SAT, SMT & Constraint Solving](additional/constraint_solving.md)
