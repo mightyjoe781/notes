@@ -202,6 +202,8 @@ def sortNearlySortedArray(nums, k):
 Here complexity would be : $O(n \log k)$, We insert k times at max in the heap, for each number, 
 ### Merge K Sorted Lists/Array
 
+[Video Explanation](https://www.youtube.com/watch?v=xS9Qix5RDA8&list=PL3edoBgC7ScV9WPytQ2dtso21YrTuUSBd&index=21)
+
 You are given an array of `k` linked-lists `lists`, each linked-list is sorted in ascending order.
 _Merge all the linked-lists into one sorted linked-list and return it._
 

@@ -55,14 +55,44 @@ bool point_in_triangle(Point a, Point b, Point c, Point p) {
 
 - Shoot a ray from the point to the right.
 - Count how many times it intersects with polygon edges.
-- If odd → inside, else outside.
+- If odd -> inside, else outside.
 
+![](assets/Pasted%20image%2020260215010916.png)
+
+To find whether a point $(x_p, y_p)$ intersects an edge after raycasting given by pair $[(x_1, y_1), (x_2, y_2)]$ would be intersection if $y_1 \le y_p \le y_2$
+
+![](assets/Pasted%20image%2020260215011159.png)
+
+Another situation could be point could be on the right side of the edge in that there won't be any edge, to find the location of point, we can following diagram.
+
+![](assets/Pasted%20image%2020260215011732.png)
+
+So we realize second condition
+
+$$
+x_p < x_1 + \frac{y_p - y_1}{y_2 - y1} * (x_2 - x_1)
+$$
+
+```python
+
+def is_inside(edges, xp, yp):
+    cnt = 0
+    for edge in edges:
+        (x1, y1), (x2, y2) = edge
+        if (yp < y1) != (yp < y2) and xp < x1 + ((yp-y1)/(y2-y1))*(x2-x1):
+            cnt += 1
+    return cnt%2 == 1
+
+```
+
+Full Code for Simulation : [Gist Link](gist.github.com/inside-code-yt/7064d1d1553a2ee117e60217cfd1d099)
+Video for Explanation : [Video Link](https://www.youtube.com/watch?v=RSXM9bgqxJM)
 #### Winding Number
 
 - Based on angle the polygon wraps around the point.
-- Winding number ≠ 0 ⇒ point is inside.
+- Winding number $\ne 0 \implies$ point is inside.
 
-````python
+````c++
 // Ray-casting method
 bool isInside(vector<Point> &polygon, Point p) {
     int n = polygon.size(), cnt = 0;
@@ -137,12 +167,16 @@ Check if **all turns** between consecutive triplets are either all **left** (CCW
 
 ## Closest Pair of Points (Divide & Conquer)
 
+[Video Explanation](https://www.youtube.com/watch?v=ldHA8UcQI9Q)
+
 Find closest pair in $O(n log n)$ time:
 
 1. Sort points by x-coordinate
 2. Recursively solve for left and right halves
 3. Combine step: consider only points within $d$ distance of mid-line
 4. Sort those by $y$ and check distance within a vertical strip
+
+*Karatsuba Algorithm*
 
 ````python
 import math
@@ -186,3 +220,11 @@ def closest_pair(points):
     return closest_pair_rec(px, py)
 ````
 
+## Find Fixed-Radius neighbors of a point
+
+[Video Explanation](https://www.youtube.com/watch?v=w4Dosp2U74Y)
+
+
+## k-d Trees
+
+Improving above problem.

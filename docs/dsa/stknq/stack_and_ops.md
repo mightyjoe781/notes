@@ -133,3 +133,7 @@ class MinStack:
         return self.min_stk[-1]
 
 ```
+
+### Sort a Stack
+
+[Video Explanation](https://www.youtube.com/watch?v=4zx5bM2OcvA&list=PL3edoBgC7ScV9WPytQ2dtso21YrTuUSBd&index=14)

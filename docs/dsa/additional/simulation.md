@@ -25,7 +25,7 @@
 - [LC 1275: Find Winner on a Tic Tac Toe Game](https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game/)
 - [LC 794: Valid Tic Tac Toe State](https://leetcode.com/problems/valid-tic-tac-toe-state/)
 - [LC 1496: Path Crossing](https://leetcode.com/problems/path-crossing/)
-- [LC 847: Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/)
+- [LC 847: Shortest Path Visiting All Nodes](https://leetcode.com/problems/shortest-path-visiting-all-nodes/) ~ TSP Problem
 
 ## Event Based Simulation
 
@@ -137,6 +137,49 @@ for i in range(10):
 
 - Resources : John Conway Interview : [Link](https://www.youtube.com/watch?v=xOCe5HUObD4)
 
+## Randomized Algorithms
+
+Why do we even prefer randomization in algorithms ?
+
+- Use randomness to achieve simplicity or performance
+- Can be faster or memory efficient
+- Las-Vegas & Monte Carlo are two broad types
+### Randomized QuickSort/QuickSelect
+
+Quicksort is a very good example of the case where we prefer randomness in an algorithm, Quicksort gives $O(n \log n)$ complexity on average case, but $O(n^2)$ in worst case (which is the case when input is nearly sorted).
+
+Since input is not controlled by the algorithm, any malicious/external factor almost always will send nearly sorted causing Quicksort to perform poorly.
+
+A simple strategy is to just randomize the input before sorting, which may yield nearly sorted array as well but with low probability (introducing a luck factor) helping us to reduce complexity from external factors to be poor to maybe once in a while.
+
+![](assets/Pasted%20image%2020260215001131.png)
+
+- Pick pivot randomly -> reduces chance of worst case
+- Find k-th smallest element with expected O(n) time
+
+Resource : [Polylog Video](https://www.youtube.com/watch?v=3iGFUyxthfc)
+
+### Treaps (Randomized BST)
+
+- Combines BST + Heap
+- Each node has a key and random priority
+- Maintains BST by key and Heap by priority
+
+**Advantages**:
+
+- Balanced with high probability
+- Easy to implement split/merge operations
+
+### Randomized Hashing
+
+- Add randomness to hash functions to reduce collision
+- E.g., Polynomial Rolling Hash with random base/mod
+
+**Use Case**:
+
+- Hashing strings in rolling hashes
+- Prevent collision attacks in contests
+
 ## Random Walks & Probabilistic Modelling
 
 - A **random walk** is a process where an object randomly moves in space (line, grid, graph), often used to model physical or stochastic processes like diffusion, stock prices, or Brownian motion.
@@ -159,7 +202,7 @@ for i in range(10):
 - Monte Carlo simulations
 
 ````python
-# Estimate average distance after n steps of a 2D walk.
+# Estimate average distance after n steps of a 2D walk
 import random
 def random_walk_2D(n):
     x = y = 0
@@ -176,12 +219,21 @@ def random_walk_2D(n):
 - Use-Cases
     - Pi-estimation using random point in square/circle
     - Probabilistic integral approximation
+    - Optimization
 - Usually steps involved are:
     - Simulate random input based on some distribution
     - Count/Measure successful outcomes
     - Estimate with `success/ total trials`
 - Pi-Estimation Using Monte Carlo Method
 - The idea is to randomly generate points inside a unit square and count how many fall inside the quarter circle of radius 1. The ratio approximates π/4.
+
+A good explanation of [Monte Carlo Simulation](https://www.youtube.com/watch?v=psOYFdx838E)
+
+![](assets/Pasted%20image%2020260215003403.png)
+
+NOTE: Above diagram is for full circle, as we generate large amount of numbers, according to law of large numbers answer converges towards the true value.
+
+![](assets/Pasted%20image%2020260215004030.png)
 
 ````python
 import random
@@ -216,7 +268,7 @@ import math
 
 # Function to integrate
 def f(x):
-    return math.sin(x)  # ∫₀^π sin(x) dx = 2
+    return math.sin(x)  # ∫sin(x) dx = 2
 
 def monte_carlo_integral(f, a, b, num_samples=100000):
     total = 0
@@ -232,14 +284,14 @@ print("Estimated ∫ sin(x) dx from 0 to π:", result)
 
 ## Las Vegas Algorithms
 
-- These are dual to Monte-Carlo Simulation
+- These are dual to Monte-Carlo Simulation algorithms
 - Las Vegas Algorithm
     - Always give correct answer
     - Runtime is probabilistic
 - Examples
-    - Randomized Quicksort : Uses randomness to select pivot (Las Vegas — correctness guaranteed)
+    - Randomized Quicksort : Uses randomness to select pivot (Las Vegas - correctness guaranteed)
     - Perfect Hashing : Repeatedly tries seeds to find a collision-free assignment of keys.
-- Randomized Quicksort : we randomly choose the pivot each time — the correctness is guaranteed, but performance depends on the pivot quality.
+- Randomized Quicksort : we randomly choose the pivot each time - the correctness is guaranteed, but performance depends on the pivot quality.
 
 ````python
 import random
@@ -271,7 +323,7 @@ print("Sorted:", sorted_arr)
 
 - Randomly pick `k` items from a stream of unknown size
 - Time : $O(n)$, Space : $O(k)$
-- Formula: Replace element with $i-th$ element with probability $k/i$
+- Formula: Replace element with $i-th$ element with probability $\frac{k}{i}$
 
 ````python
 import random
@@ -285,46 +337,9 @@ def reservoir_sampling(stream, k):
     return res
 ````
 
-## Randomized Algorithms
-
-- Use randomness to achieve simplicity or performance
-- Can be faster or memory efficient
-- Las-Vegas & Monte Carlo are two broad types
-
-### Randomized Quicksort/Quickselect
-
-**QuickSort**:
-
-- Pick pivot randomly → reduces chance of worst case
-
-**QuickSelect**:
-
-- Find k-th smallest element with expected O(n) time
-
-### Treaps (Randomized BST)
-
-- Combines BST + Heap
-- Each node has a key and random priority
-- Maintains BST by key and Heap by priority
-
-**Advantages**:
-
-- Balanced with high probability
-- Easy to implement split/merge operations
-
-### Randomized Hashing
-
-- Add randomness to hash functions to reduce collision
-- E.g., Polynomial Rolling Hash with random base/mod
-
-**Use Case**:
-
-- Hashing strings in rolling hashes
-- Prevent collision attacks in contests
-
 ## Hashing & Randomization for Collision Detection
 
-Use **hash functions** (with randomness) to detect collisions efficiently in large datasets or data streams. Randomization helps reduce the chance of adversarial inputs causing worst-case behavior.
+Use **hash functions** (with randomness) to detect collisions efficiently in large datasets or data streams. Randomization helps reduce the chance of *adversarial inputs causing worst-case behavior*.
 
 ### Use Cases
 
@@ -412,11 +427,19 @@ def is_probably_prime(n, k=5):
 
 ## State Compression in Simulation
 
-Idea: Encode complex states (grid, position, moves left, etc) into integers or bitmasks
+Idea: Encode complex states (grid, position, moves left, etc) into integers or bitmasks.
 
-Why ? Reduces memory and improves cache usages
+Why ? It helps in reducing memory and improves cache usages.
 
 Examples
 
 - `3x3` board can be represented in 9 bits
 - Compress states as (x, y, moves_left) into a tuple/int
+
+```
+OFFSET = y * MAX_WIDTH + x
+```
+
+![](assets/Pasted%20image%2020260215002346.png)
+
+Amazing Video from Redis Explaining this : [Link](https://www.youtube.com/watch?v=oj8LdJQjhJo)

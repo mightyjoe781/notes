@@ -6,12 +6,12 @@ Modern programming languages provide library solutions for basic string matching
 
 ### C++
 
-C++ offers several built-in functions in the <string> library for string matching:
+C++ offers several built-in functions in the `<string>` library for string matching:
 
 * `find()`: Returns the index of the first occurrence of a substring.
 * `substr()`: Extracts a portion of the string.
 
-````c++
+```c++
 string text = "hello world";
 string pattern = "world";
 size_t pos = text.find(pattern);
@@ -20,7 +20,7 @@ if (pos != string::npos) {
 } else {
     cout << "Pattern not found" << endl;
 }
-````
+```
 
 ### Python
 
@@ -65,6 +65,8 @@ vector<long long> compute_hash(string s, int base, int mod) {
 ````
 
 ## Rabin-Karp
+
+[Best Explanation of Rabin Karp](https://www.youtube.com/watch?v=4qEZned9qWM)
 
 The Rabin-Karp algorithm uses hashing to find all occurrences of a pattern in a text.
 
@@ -157,6 +159,8 @@ vector<int> compute_z(string s) {
 ````
 
 ## Prefix Function (KMP) Algorithm
+
+Very Good Explanation : [Link](https://www.youtube.com/watch?v=M9azY7YyMqI&list=PL3edoBgC7ScV9WPytQ2dtso21YrTuUSBd)
 
 The Knuth-Morris-Pratt (KMP) algorithm avoids redundant comparisons by precomputing a prefix function(lps).
 
