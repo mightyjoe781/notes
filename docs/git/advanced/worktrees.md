@@ -41,7 +41,7 @@ cd repo.git
 
 # fix remote refs as bare doesn't have them correctly setup
 # git clone by default does these two steps, side effect of --bare
-git config remote.origin.fetch '+refs/heads/*:refs/remotes/origin/*'
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 git fetch origin
 
 

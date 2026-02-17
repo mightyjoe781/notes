@@ -14,17 +14,17 @@ Core Probabilistic & Approximate Data Structures (*Space-Accuracy Trade-Off*)
 
 Tree Based Indexing & Spatial Data Structures (*Hierarchical partitioning*)
 
-- Trie : Prefix Based Lookup
+- [Trie](../dsa/strings/ch3.md) : Prefix Based Lookup
 - [B-Tree](btree.md) : Disk friendly ordered indexing
 - [Quad Tree](quadtree.md) : 2D Spatial Partitioning
-- GeoHashing : Spatial Indexing using String Prefixes
+- [GeoHashing](geohashing.md) : Spatial Indexing using String Prefixes
 
 
 Storage & Synchronization Structures (*Efficient Persistence & Comparisons*)
 
 - [LSM Tree](lsm.md) : Write-optimized Storage Engines
-- Merkle Tree : Efficient Data Integrity & Sync
-- Rsync Algorithm : Delta based file synchronization
+- [Merkle Tree](merkle_tree.md) : Efficient Data Integrity & Sync
+- [Rsync Algorithm](rsync_algo.md) : Delta based file synchronization
 
 
 Hashing, Distribution & Rate Control (*Load Distribution & Control*)
