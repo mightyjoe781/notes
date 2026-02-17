@@ -1,4 +1,4 @@
-# B-Tree
+# B Tree
 
 ## Full Table Scans
 
@@ -7,7 +7,7 @@
 - Requires many IOs to read all pages,
 - We need a way to reduce the IOs
 
-## B-Tree
+## B Tree
 
 - Balanced Data Structure for fast traversal
 - B-Tree has Nodes
@@ -30,7 +30,7 @@ Try Online Visualizer
 - https://btree.app/
 
 ![](assets/Pasted%20image%2020250925191121.png)
-## B-Tree Limitations
+## B Tree Limitations
 
 - Elements in all nodes store both the key and the value.
 - Internal nodes take more space thus require more IO, and can slow down traversal
