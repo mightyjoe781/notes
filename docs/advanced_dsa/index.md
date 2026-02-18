@@ -1,6 +1,6 @@
 # Advanced Algorithms
 
-NOTE: Following algorithms are way too advanced for implementation, you are better off using some library implementing these algorithms. Its important to understand what problems these algorithms are solving efficiently.
+NOTE: Following algorithms are way too advanced for implementation, you are better off using some library implementing these algorithms optimally. Its important to understand what problems these algorithms are solving efficiently.
 Most of the algorithm are often implemented in the solutions of System Design Problems.
 
 ## Content
@@ -29,15 +29,15 @@ Storage & Synchronization Structures (*Efficient Persistence & Comparisons*)
 
 Hashing, Distribution & Rate Control (*Load Distribution & Control*)
 
-- Consistent Hashing : Stable sharding with minimum reshuffling
-- Token Bucket : Rate Limiting & Traffic Shaping
+- [Consistent Hashing](consistent_hashing.md) : Stable sharding with minimum reshuffling
+- [Token Bucket](token_bucket.md) : Rate Limiting & Traffic Shaping
 - Hierarchical Timing Wheels : Efficient time management at scale
 
 
 Distributed Consensus & Coordination (*Agreement under failure*)
 
-- Raft
-- Paxos
+- [Raft](raft.md)
+- [Paxos](paxos.md)
 
 Collaborative & Conflict Resolution Algorithms (*Eventually consistent collaboration*)
 
