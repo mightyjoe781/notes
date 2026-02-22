@@ -111,4 +111,31 @@ for leader_id in [1, 2, 3]:
 ```
 ## Raft
 
-Replicated and Fault Tolerant
+Replicated and Fault Tolerant Algorithm
+
+It is a *leader-based*, understandable protocol designed for managing replicated logs in fault-tolerant distributed systems.
+
+[Martin Kleppmann Lecture](https://www.youtube.com/watch?v=uXEYuDwm7e4)
+
+[Best Site for Explanation](https://raft.github.io/)
+
+- **Leader Election:** Nodes are either Leaders, Followers, or Candidates. If a follower receives no communication (heartbeat) from a leader, it becomes a candidate, increases its "term," and requests votes to become the new leader
+
+- **Log Replication:** The leader receives client requests, writes them to its log, and forces followers to replicate these entries.
+
+- **Safety & Quorums:** A majority of nodes (quorum) must agree on log entries before they are committed. This ensures that if any node fails, the system can still function, provided a majority remains.
+
+- **Log Consistency:** If a follower's log diverges from the leader, the leader forces the follower to duplicate its own log.
+
+Amazing Visualization : https://thesecretlivesofdata.com/raft/
+
+### Raft in Real Life
+
+`etcd (coreOS/CNCF)`
+
+- Probably the most widely used Raft implementation.
+- Production-grade.
+- Used by Kubernetes for cluster state storage.
+
+`HashiCorp Raft`
+
