@@ -31,7 +31,7 @@ Hashing, Distribution & Rate Control (*Load Distribution & Control*)
 
 - [Consistent Hashing](consistent_hashing.md) : Stable sharding with minimum reshuffling
 - [Token Bucket](token_bucket.md) : Rate Limiting & Traffic Shaping
-- Hierarchical Timing Wheels : Efficient time management at scale
+- [Hierarchical Timing Wheels](timing_wheels.md) : Efficient time management at scale
 
 
 Distributed Consensus & Coordination (*Agreement under failure*)
@@ -41,5 +41,5 @@ Distributed Consensus & Coordination (*Agreement under failure*)
 
 Collaborative & Conflict Resolution Algorithms (*Eventually consistent collaboration*)
 
-- Operational Transformation (OT) : Real-time collaborative editing
-- Conflict-Free Replicated Data Types (CRDTs) : Convergent state without coordination
+- [Operational Transformation (OT)](ots.md) : Real-time collaborative editing
+- [Conflict-Free Replicated Data Types (CRDTs)](crdts.md) : Convergent state without coordination
