@@ -9,7 +9,7 @@ hide:
 
 !!! note "updates"
 
-    New content added System Design & Databases
+    New content added System Design/Advanced Algorithm & LLM [WIP]
 
 ### Shortcuts
 
@@ -31,9 +31,9 @@ hide:
 
     :material-network:{ .lg .middle } [Networking](networking/index.md)
 
-    :material-laptop:{ .lg .middle } [OS](os/index.md)
+    :material-laptop:{ .lg .middle } [OS](os/index.md) [WIP]
 
-    :simple-openai:{ .lg .middle } [ML, AI & LLMs](llm/index.md) [WIP]
+    :simple-openai:{ .lg .middle } [ML, AI & LLMs](llm/index.md)
 
     :material-apps:{ .lg .middle } [More](other_sde/index.md) :octicons-arrow-right-24:{ .icon }
 
