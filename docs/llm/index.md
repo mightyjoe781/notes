@@ -1,8 +1,14 @@
-# LLM & Agents - Comprehensive Learning Guide
+# LLM & Agents
 
 *A structured approach to understanding Large Language Models and AI Agents from foundations to advanced implementations.*
 
-## **LLM Fundamentals**
+## LLM & Agents Tooling
+
+- [Github Copilot VSCode](tooling/copilot.md)
+- Claude Code
+- Open Clawd
+
+## LLM Fundamentals
 
 ### **Core Concepts**
 

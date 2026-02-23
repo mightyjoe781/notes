@@ -27,7 +27,7 @@ Notes
 Advanced Topics
 
 * [HLD Notes Topic Wise](topics/index.md)
-* [Advanced Algorithms](../advanced_dsa/index.md) [WIP]
+* [Advanced Algorithms](../advanced_dsa/index.md) ✅
 * General Problems
 
 Resources
