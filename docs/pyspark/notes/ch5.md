@@ -1,16 +1,16 @@
 # Basic Structured Operations
 
-Dataframe:
+DataFrame:
 
 - consists of series of records that are of type `Row`
-- columns representing a computation expression to be performed on rows
+- columns represents a computation expression to be performed on rows
 - *Schema* representing type of data in each column
 - *Partitioning* of DataFrame defines the layout of the DataFrame or Dataset’s physical distribution across clusters.
 
 ## Schemas
 
 - schema defines the column names and types of DataFrame.
-- schema is a `StructType` made up of a number of fields, `StructField`s that have name, type and a Boolean representing nullability of the column.
+- schema is a `StructType` made up of a number of fields, `StructFields` that have name, type and a Boolean representing nullability of the column.
 
 ````python
 spark.read.format("json").load("/data/flight-data/json/2015-summary.json").schema
@@ -49,7 +49,7 @@ col("someColumnName")
 column("someColumnName")
 ````
 
-- Columns are not *resolved* until we compare the column names with those we are maintaining in the *catalog*.Column and table resolution happens in the *analyzer* phase
+- Columns are not *resolved* until we compare the column names with those we are maintaining in the *catalog*. Column and table resolution happens in the *analyzer* phase
 
 ````python
 # referencing a column of a df explicitly
