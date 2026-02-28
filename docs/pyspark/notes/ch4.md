@@ -1,7 +1,7 @@
 # Structured API Overview
 
 - The Structured APIs allows manipulation of all sorts of data from CSV(semi-structured) or Parquet(highly structured because schema validation happens at the write time)
-- APIs refer to three core types of distributed collection APIs
+- Structured APIs refer to three core types of distributed collection APIs
     - Datasets
     - DataFrames
     - SQL tables and views
@@ -22,7 +22,7 @@ Spark has two notions of structured collections : DataFrames and Datasets.
 
 ## Overview of Structured Spark Types
 
-- Spark is effectively a programming languages that uses a engine *Catalyst* that maintains its own type information through the planning and processing of the work.
+- Spark is effectively a programming languages that uses an engine *Catalyst* that maintains its own type information through the planning and processing of the work.
 - Even if we use dynamically typed language most of these operation still operate strictly on Spark Types, not python.
 
 ### DataFrames vs DataSets
@@ -40,13 +40,9 @@ Usages in Languages
 
 -  NOTE : The `Row` type is Spark’s internal representation of its optimized in-memory format for computation
 
-### Columns
+**Columns** : represents a simple type like an integer or a string, a complex type like an air or map or *null* value.
 
-- represent a simple type like an integer or a string, a complex type like an air or map or *null* value.
-
-### Rows
-
-- A row is nothing more than a record of data. Each record in a DataFrame must be of type `Row`. e.g. `spark.range(2).collect()`
+**Rows** : A row is nothing more than a record of data. Each record in a DataFrame must be of type `Row`. e.g. `spark.range(2).collect()`
 
 ### Spark Types
 
@@ -81,9 +77,10 @@ b = ByteType()
 
 ## Overview of Structured API Executions
 
-- Execution of a single structured API query from user code to executed code.
+Flow of execution of a single structured API query from user code to executed code.
+
   1. Write DataFrame/Dataset/SQL Code
-  2. If valid code, spark converts this to a *Logical Plan*
+  2. If code is valid, spark converts this to a *Logical Plan*
   3. Spark transforms this *Logical Plan* to a *Physical Plan*, checking for optimizations along the way.
   4. Spark then executes this *Physical Plan* (RDD manipulations) on the cluster.
 
@@ -107,4 +104,4 @@ b = ByteType()
 ### Execution
 
 - Spark runs all of this code over RDDs
-- Spark performs further optimizations at runtime, generating native Java  bytecode that can remove entire tasks or stages during execution. Finally the result is returned to the user.
+- Spark performs further optimizations at runtime, generating native Java `bytecode` that can remove entire tasks or stages during execution. Finally the result is returned to the user.
