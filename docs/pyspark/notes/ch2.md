@@ -64,8 +64,8 @@ divisBy2 = myRange.where("number % 2 = 0")
     - Wide Dependencies : Inpute partitions contributing to many output partitions. (Shuffle)
 - With narrow transformations, Spark will automatically perform an operation called *pipelining*, meaning that if we specify multiple filters on DataFrames, they’ll all  be performed in-memory. The same cannot be said for shuffles.
 
-|                    Narrow Transformations                    |                     Wide Transformations                     |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
+|                                          Narrow Transformations                                           |                                           Wide Transformations                                            |
+| :-------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------: |
 | ![image](https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781491912201/files/assets/spdg_0204.png) | ![image](https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781491912201/files/assets/spdg_0205.png) |
 
 ### Lazy Evaluation
@@ -135,7 +135,7 @@ flightData2015.sort("count").take(2)
 - *The logical plan of transformations that we build up defines a lineage for  the DataFrame so that at any given point in time, Spark knows how to  recompute any partition by performing all of the operations it had  before on the same input data. This sits at the heart of Spark’s  programming model—functional programming where the same inputs always  result in the same outputs when the transformations on that data stay  constant.*
 - We do not manipulate the physical data; instead, we configure physical  execution characteristics through things like the shuffle partitions  parameter
 
-![image](https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781491912201/files/assets/spdg_0209.png)
+![image|592](https://learning.oreilly.com/api/v2/epubs/urn:orm:book:9781491912201/files/assets/spdg_0209.png)
 
 ### DataFrames and SQL
 
