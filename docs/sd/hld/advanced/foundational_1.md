@@ -1,58 +1,64 @@
 # Foundational Topics - I
 
-## Online Offline Indicator
+## Online/Offline Indicator
 
-Approaching System Design :
+Design Philosophy :
 
-Spiral Building :
-Decide the core & build your systems around it. 
-Core is use-case specific : Database, Communication.
+Spiral Building - Identify the *core* of the system first, then build outward around it. The *core* is use-case specific. It could be a database choice, a communication pattern, or a protocol.
 
 Incremental Building :
-1. start with a Day Zero architecture
-2. See how each component would behave
-    1. under load
-    2. at scale
-3. identify the bottleneck
-4. re-architect
 
-Points to remember :
+1. Start with a Day Zero (simplest viable) architecture.
+2. Stress-test each component - under load and at scale (observe behaviour)
+3. Identify the bottleneck.
+4. Re-architect around it.
 
-- understand the core property ? access pattern
-- affinity towards a tech comes second
-- build an *intuition* towards building systems
+Guiding Principles
 
-#### Storage :
+- Understand the access patterns before choosing a technology.
+- Affinity towards a particular tech comes second
+- Build *intuition*, not just familiarity
 
-$$
-user(int) \to offline/online (bool)
-$$
+### Storage Model
 
-Access would be based on *Key-Value*
+We need to answer : is a user online or offline ?
 
-#### Interfacing API :
+```
+user_id (int) -> online/offline (bool)
+```
+
+This is natural *Key-Value* access pattern.
+
+### API Design
+
+#### Bulk Status Endpoint
+
+*preferred over individual lookups*
+
+```http
+GET /status/users?ids=u1,u2,u3
+```
+
 
 ![](assets/Pasted%20image%2020250909111107.png)
 
-NOTE: we expose a bulk endpoint to reduce multiple network calls.
+Exposing a bulk endpoint reduces multiple round-trip network calls into one.
 
-#### Updating the database
+#### Heartbeat Model
 
-Push based model : Users push their status periodically.
-Out API servers cannot *pull* from client because we cannot proactively talk to client. (unless there is a persistent connection)
+Since servers cannot proactively talk to clients (without a persistent connection), we use a **push-based model**: every client periodically sends a heartbeat to the service.
 
-Every user periodically sends *heartbeat* to the service
+```http
+POST /heartbeat
+```
 
-`POST   /heartbeat` -> the authenticated user will be marked as alive.
+The authenticated user is marked as alive upon each request.
 
-So, when is a user offline ?
-    When we did not receive *heartbeat* for long enough time it will mark user offline.
+**How offline is determined:** If no heartbeat is received within a threshold window (e.g., 30 seconds), the user is considered offline.
 
-#### Offline
-When we do not receive heartbeat long enough (Handled through business logic)
+#### Database Schema
 
-In database store *time received the last heartbeat*
-
+In database store *time received the last heartbeat* (`last_hb`)
 
 | user_id | last_hb |
 | ------- | ------- |
@@ -72,176 +78,209 @@ User sends heartbeat every 10 seconds.
 
 #### Get status API
 
-`GET   /status/<user_id>`
+```
+GET /status/<user_id>
+```
 
-* if no entry in the database for user : *offline*
-* if entry and `entry.last_hb < now() - 30s` : offline ? online
+- No entry in DB : offline
+- `last_hb` < `now()` - 30 : offline
+- otherwise : online
 
 #### Scale Estimation
 
-* user_id : int -> 4B
-* last_hb : int -> 4B
+| Field     | Size |
+| --------- | ---- |
+| `user_id` | 4B   |
+| `last_hb` | 4B   |
+| Total     | 8B   |
 
-Total size = 8Bytes
-
-for 1B users ~ 1 B x 8Bytes ~ 8 GB
+For 1 billion users : `1B x 8Bytes = 8GB`
 
 Can we do better on storage ?
+
 Requirement : is that we only care whether user is online/offline. We could design if absence means offline ?
-Idea : if user not present in the DB, we return offline. So let's expire (TTL) the entries after 30
-seconds.
-Total entries = Active users = 100k x 8B ~ 800 KB
 
-#### How to auto delete ?
+If absence of an entry implies offline, we only need to store _currently active_ users. Use a TTL of 30 seconds on each entry - it expires automatically if no heartbeat arrives.
 
-Approach 1 : Write a CRON job that deletes expired entries
+For 100K active users: `100K × 8B ≈ 800 KB` — a dramatic reduction.
+#### Auto Expiry Strategy
 
- - not a robust solution
+Approach 1 : Write a CRON job that periodically deletes expired entries.
+
+ - not a robust solution at scale
  - we need to handle edge case in business logic
 
 Approach 2 : Can we not offload this to our datastore. (Don't reinvent the wheel)
 
-DB with KV + expiration -> *redis, dynamodb*
-upon receiving an heartbeat
-- update entry in redis/dynamodb with ttl = 30seconds
+Databases like *Redis*, *DynamoDB* natively support per key TTL features.
 
-#### Which one would you pick & why
+Upon receiving a heartbeat
 
-| Features                                  | Redis | DynamoDB |
-| ----------------------------------------- | ----- | -------- |
-| Persistence                               |       | ✅        |
-| Managed                                   |       | ✅        |
-| Vendor Lockin                             | ✅     |          |
-| future extensionability                   | ✅     |          |
-| time sensitivity (persistent connections) | ✅     |          |
-|                                           |       |          |
-NOTE: in real world, web-sockets are used in such systems, but this is Day 1, hence we keep things simple.
+- Upsert the entry with `TTL = 30 seconds`
+- No manual deletion needed
+
+#### Which one would you pick & why ?
+
+| Features                                               | Redis | DynamoDB |
+| ------------------------------------------------------ | ----- | -------- |
+| Persistence                                            | ❌     | ✅        |
+| Fully Managed                                          | ❌     | ✅        |
+| Vendor lock-in                                         | ✅     | ❌        |
+| future extensibility                                   | ✅     | ❌        |
+| time sensitivity <br>(persistent connections use case) | ✅     | ❌        |
+
+
+> **Note:** In production systems, WebSockets are typically used for online/offline indicators. This Day Zero design intentionally avoids that complexity.
 
 #### How is our DB doing ?
 
-Heartbeat is sent every 10 seconds, each user sends 6 heartbeats every seconds,
-then 1M active users send 6M req/minute
+**Load Calculations**
 
-That is 6M DB calls in a minute. Micro Reads/Updates -> hence n/w bottleneck
+- Users send a heartbeat every 10 seconds -> 6 heartbeats/minute per user.
+- 1M active users -> *6M DB writes per minute*
 
-So this means our must support high throughput, and we should utilise connection pool rather than creating new connections for each request. We should micro-batch this update and send it as a bulk updates.
+This creates a high-frequency micro-write pattern, which becomes a network bottleneck.
+
+**Solutions**
+
+- Connection Pooling : Reuse existing DB connections rather than opening a new one per request.
+- Micro-Batching : Buffer heartbeat updates in memory and flush them to the DB in bulk at short intervals.
 
 ![](assets/Pasted%20image%2020250909115345.png)
 
-Connection Pool solves the problem too many noisy queries with Database.
+Connection Pool solves the problem too many noisy queries thrashing the Database.
 
-## Foundational Topics in System Design
+## The Six Pillars of System Design
 
-- Database
-- Scaling
-- Concurrency
-- Caching
-- Delegation
-- Communication
+Almost every design decision in a system maps back to one of these six areas:
+
+1. **Database**
+2. **Scaling**
+3. **Concurrency**
+4. **Caching**
+5. **Delegation**
+6. **Communication**
 
 Any and every decision would affect one of these 6 factors.
 
-We design a multi-user blogging platform (medium.com)
-- one user multiple blogs
+We'll explore each using a multi-user blogging platform (think: Medium) as the running example 
+
+- one user, multiple blogs
 - multiple users
 
 ### Database
 
-| users |
-| ----- |
-| id    |
-| name  |
-| bio   |
+#### Schema
 
-| blogs        |     |
-| ------------ | --- |
-| id           |     |
-| author_id    |     |
-| title        |     |
-| is_deleted   |     |
-| published_at |     |
-| body         |     |
+```
+users
+-----
+id
+name
+bio
+
+blogs
+-----
+id
+author_id (FK → users.id)
+title
+is_deleted      ← soft delete flag
+published_at    ← epoch integer
+body
+```
+
 #### Importance of `is_deleted` [soft delete]
 
-When user invokes delete blog, instead of DELETE we update the entry.
-Key Reasons : *recoverability, archival, audit*
-Easy on the database engine. (No tree re-balancing)
+When a user deletes a blog, set `is_deleted = true` instead of running a `DELETE`
+
+Reasons :
+
+- **Recoverability** - accidental deletions can be undone.
+- **Auditing** - maintain a history of what existed.
+- **Archival** - keep data for analytics without it being user-visible.
+- **DB performance** - avoids B-tree rebalancing from physical row deletion.
 
 #### Column Type
 
 ![](assets/Pasted%20image%2020250909125838.png)
 
-#### Storing datetime in DB
+#### Storing `datetime` in DB
 
-datetime as *datetime* : 02-04-2022 T 09:01:362 (serialized format) : convenient sub-optimal, heavy on size and index
+| Format          | Example                | Trade-off                                         |
+| --------------- | ---------------------- | ------------------------------------------------- |
+| `DATETIME` type | `2022-04-02T09:01:36Z` | Human-readable, but heavy on storage and indexing |
+| Epoch integer   | `1648893696`           | Efficient, lightweight, easy arithmetic           |
+| Custom int      | `20220402`             | Compact for date-only, loses time precision       |
 
-datetime as *epoch integer* : 172562347162 (seconds since 1st Jan 1970) : efficient optimal, and light weight
-
-datetime as *custom format* (int) : YYYYMMDD - 20220402
-
+**Recommendation:** Use epoch integers for `published_at` and similar fields.
 ### Caching
 
-- reduce response times by saving any heavy computation : Cache are not only RAM based
-- Typical Use : reduce disk I/O or network I/O or compute (CDNs)
-- Cache are just glorified Hash Tables with some advanced data structures.
+Core Idea : Avoid re-computing or re-fetching the same data. A cache is essentially a hash table with an optional eviction policy.
 
-Exercise : 
-Find possible places that you can use as cache with an example. central cache (RAM) for application-level cache. (save DB computations)
+Use-Cases :
 
+- Reduce disk I/O (avoid hitting DB for repeated reads)
+- Reduce network I/O (CDN for static assets)
+- Reduce compute (cache results of expensive aggregations)
 
-### Caching at different levels
+Exercise : Find possible places that you can use as cache with an example. central cache (RAM) for application-level cache. (save DB computations)
 
-- Main memory of the API server
-    - limited
-    - API server cache
-    - inconsistency, (local to server)
-- DB Views (Materialised)
-    - pre-join tables
-    - database triggers can refresh materialised views
-- Browser Cache (local Storage) / Personalised Recom. (Ranking stored on Browsers)
-- CDN (cache response)
-- Disk of API Server
-- Load Balancer
+Solution : Caching layers (from closest to farthest from the user):
+
+| Layer                   | Example                      | Notes                               |
+| ----------------------- | ---------------------------- | ----------------------------------- |
+| Browser / Local Storage | Personalized recommendations | Highly specific to the user         |
+| CDN                     | Static HTML, images, CSS     | Distributed globally                |
+| Load Balancer           | Cached responses             | Reduces upstream pressure           |
+| API Server (in-memory)  | Recent blog reads            | Fast but local, risks inconsistency |
+| API Server (disk)       | Pre-rendered pages           | Slower than RAM, larger capacity    |
+| DB Materialized Views   | Pre-joined tables            | Refreshed via DB triggers           |
+
 ### Scaling
 
-Ability to handle large number of *concurrent* requests.
-Two scaling strategies
+**Goal:** Handle a large number of _concurrent_ requests.
 
-- vertical scaling
-    - easy to manage
-    - risk of downtime
-    - make infra bulky (hulk)
-- horizontal scaling
-    - complex architecture
-    - linear amplification
-    - fault tolerance
-    - network partitioning
-    - add more machines (minions)
+**Vertical Scaling (Scale Up)**
 
-In general a good scaling strategy is to start with scale vertically, then move towards horizontal scaling.
+- Upgrade the machine (more CPU, RAM).
+- Simple to manage, but has a ceiling.
+- Risk of downtime during upgrades.
+
+**Horizontal Scaling (Scale Out):**
+
+- Add more machines running the same service.
+- Theoretically unbounded.
+- Adds architectural complexity (load balancing, distributed state).
+- Provides fault tolerance.
+
+In general a good scaling strategy is to start scaling vertically first, then move towards horizontal scaling.
 
 Horizontal Scaling ~ $\infty$ , but there is a catch !!
 
-You stateful components like DB and cache can handle those many concurrent requests.
-Hence whenever you scale, always do it *bottom up* ! 
+Stateless API servers are easy to scale horizontally. But stateful components (databases, caches) are the real bottleneck.
+
+Always scale from the data layer upward - not the other way around.
 
 ![](assets/Pasted%20image%2020250909150413.png)
 
-scaling DB
+**Scaling a Database**
 
 ![](assets/Pasted%20image%2020250909150700.png)
 
 ### Delegation
 
-*What does not need to be done in realtime should not be done in realtime.* (mantra for performance)
+**Mantra for Performance:** _What does not need to happen in real time should not happen in real time._
 
-Core idea : *Delegate & Respond*
+**Core idea** : *Delegate & Respond*
+
+Acknowledge the request immediately. Delegate the actual work to background workers via a message broker.
 
 ![](assets/Pasted%20image%2020250909161947.png)
 
-Here in the example, lets say if we want total blogs, we can create a *field*, `total_blogs` in user_schema and update this in db, via workers as it is not required to be processed immediately.
-Similar delegation would happen for publish, deletion (`ON_DELETE` events)
 
+On publishing a blog, instead of synchronously updating `total_blogs` on the user record, emit an event to a broker and let a worker handle the update asynchronously.
+
+Similar delegation would happen for publish, deletion (`ON_DELETE` events)
 #### Brokers
 
 Buffer to keep the tasks and messages.
@@ -249,70 +288,91 @@ Buffer to keep the tasks and messages.
 Two common implementations
 
 - Message Queues : SQS, RabbitMQ
-    - consumers are homogenous, and poll the messages from queue, and pull them out of queue
 - Message Streams : Kafka, Kinesis
-    - heterogenous consumers, and they keep track of messages via checkpointing or until expired, provides error recovery by just replaying old checkpoint.
+
+|Feature|Message Queue (SQS, RabbitMQ)|Message Stream (Kafka, Kinesis)|
+|---|---|---|
+|Consumer model|Homogeneous; message pulled and removed|Heterogeneous; each consumer tracks offset|
+|Replay|❌|✅|
+|Error recovery|Harder|Replay from checkpoint|
+|Ordering|Per-queue|Per-partition|
 
 ![](assets/Pasted%20image%2020250909162704.png)
 
+#### Kafka Essentials
+
+Kafka is a distributed message stream. Key concepts:
+
+- **Topic:** A named channel for a category of events (e.g., `blog.published`).
+- **Partition:** Each topic is split into `n` ordered partitions. Messages are routed to partitions via a hash key.
+- **Ordering:** Guaranteed _within_ a partition, not across partitions.
+- **Consumer Groups:** Each group reads from the topic independently. Each partition is consumed by exactly one consumer in a group at a time.
+
+**Limitations:**
+
+- Max parallelism per consumer group = number of partitions.
+- Kafka guarantees **at-least-once** delivery (not exactly-once by default). Consumers must handle *idempotency*.
+
 Now with Kafka, previous architecture will become :
+
 ![](assets/Pasted%20image%2020250909163125.png)
-
-
-### Kafka Essentials
-
-Kafka is a message stream that holds the messages. Internally kafka has topics.
-Every topic has `n` partitions. Message is sent to a topic and depending on the configured hash key, it is put into a partition.
-Within partition, messages are ordered. (no ordering guarantee across partitions)
-
-Limitations of Kafka
-- number of consumers = numbers of partitions
-- kafka doesn't guarantee 1 consumption, it guarantees at least 1 consumption as consumer resume from last commit point.
 
 ### Concurrency
 
-Concurrency -> to get faster execution (*Threads & Multiprocessing*)
+**Goal:** Execute work faster using threads or multiprocessing.
 
-Issue with concurrency
+**Problems introduced:**
 
-- communication between threads
-- concurrent use of shared resources (database, in-memory variables)
+- **Shared state:** Multiple threads modifying the same variable or DB row simultaneously.
+- **Race conditions:** Final state depends on execution order.
 
-Handling Concurrency
+**Solutions for Handling Concurrency**
 
-- Locks (Optimistic & Pessimistic)
-- Mutexes and Semaphores
-- go lock-free (CRDTs)
+- **Pessimistic locking:** Lock the row before reading; others wait.
+- **Optimistic locking:** Read, compute, write with a version check; retry on conflict.
+- **Mutexes / Semaphores:** OS-level synchronization primitives.
+- **CRDTs:** Conflict-free replicated data types — lock-free by design.
 
-Concurrency in our blogging platform : two users clap the same, count should be `+=2`
+**Example - clap count race condition:** Two users clap simultaneously. Both read `count = 5`. Both write `count = 6`. The correct answer is `7`.
+
 We protect our data through : *Transactions* or *Atomic Instructions*
+
+```sql
+-- Atomic increment - no race condition
+UPDATE blogs SET clap_count = clap_count + 1 WHERE id = 'b1';
+
+-- Or wrap in a transaction for complex operations
+BEGIN;
+SELECT clap_count FROM blogs WHERE id = 'b1' FOR UPDATE;
+UPDATE blogs SET clap_count = clap_count + 1 WHERE id = 'b1';
+COMMIT;
+```
 
 ### Communication
 
-The usual communication
+#### Standard Request-Response (HTTP):
 
 ![](assets/Pasted%20image%2020250909183415.png)
 
+Simple, stateless. Works for most use cases.
 
-**Short Polling**
+#### Short Polling
+
+Client repeatedly sends requests at a fixed interval to check for updates.
 
 ![](assets/Pasted%20image%2020250909183520.png)
 
-continuously
-- refreshing cricket score
-- checking if server ready
+- Use case: Checking if an EC2 instance is ready, refreshing a cricket score.
+- Downside: High HTTP overhead, many empty responses.
 
-disadvantages
-- HTTP overhead
-- requests & responses
+#### Long Polling
 
-
-**Long Polling**
+Client sends a request. Server holds the connection open and responds only when new data is available (or on timeout).
 
 ![](assets/Pasted%20image%2020250909184007.png)
 
-response only when the ball is bowled
-connection re-established, after timeout & retrieved
+- Use case: EC2 provisioning status, chat messages.
+- Advantage: Fewer wasted responses than short polling.
 
 Short Polling v/s long polling
 - short polling *sends response right away*
@@ -323,34 +383,34 @@ e.g. EC2 provisioning
 - short polling - get status every few seconds
 - long polling - get response when server ready
 
-**Web Sockets**
+#### Web Sockets
+
+A persistent, full-duplex connection over the `wss://` protocol (not HTTP).
 
 ![](assets/Pasted%20image%2020250909184213.png)
 
-its a protocol, wss (not running on top of HTTP)
+- Server can proactively push data to the client.
+- Use cases: 
+    - Real-time chat
+    - stock tickers
+    - live collaboration
+    - multiplayer games.
+- Advantage: 
+    - Lowest latency
+    - minimal overhead per message.
 
-- server can proactively send data to the client
+#### Server-sent events (SSE)
 
-Advantages:
-
-- realtime data transfer
-- low communication overhead
-
-Applications
-
-- realtime communication
-- stock market ticker
-- live experiences
-- multiplayer games
-
-**Server-sent events**
+A persistent, _unidirectional_ HTTP-based connection. Server pushes; client only listens.
 
 ![](assets/Pasted%20image%2020250909184459.png)
 
-Application :
-
-- stock market ticker
-- deployment logs streaming
+- Use cases
+    - Deployment log streaming
+    - live like count updates
+    - notification feeds
+- Advantage
+    - Simpler than WebSockets when you only need server -> client push.
 
 Realtime interactions
 
@@ -358,7 +418,15 @@ Realtime interactions
 - on medium, one article clapped, other readers should see it in realtime
 - instagram live interaction
 
+**Choosing a pattern:**
 
-Exercises:
+| Pattern       | Direction       | Connection | Best For               |
+| ------------- | --------------- | ---------- | ---------------------- |
+| Short Polling | Client → Server | Stateless  | Simple status checks   |
+| Long Polling  | Client → Server | Held open  | Delayed responses      |
+| WebSockets    | Bidirectional   | Persistent | Real-time, interactive |
+| SSE           | Server → Client | Persistent | Live feeds, logs       |
+
+## Exercises
 
 - https://github.com/Addi-11/system-design-excercises?tab=readme-ov-file
