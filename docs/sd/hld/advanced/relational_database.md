@@ -1,88 +1,67 @@
 # Databases
 
-## Relational Databases & Pessimistic locking
+## Relational Databases
 
-### Relational Databases
+Data is organized into *rows* and *columns*, with **relations** between tables being the defining feature. Relational databases are built around ACID guarantees - Atomicity, Consistency, Isolation and Durability.
 
-Data is stored and represented in *rows* and *column*. Key highlight of relational databases are *Relations*.
 Users pick the relational database for *relations*.
 
-Relational Database are known for *ACID*.
+**Database Indexes** : speed up **reads** at the cost of slower **writes**, since the index structure must be updated on every write.
 
-### Database Indexes
+### Database Locking
 
-Indexes make reads *faster* and writes *slower*.
+#### Pessimistic Locking
 
-### Database Locking :
-Pessimistic Locking
+The core idea: **acquire the lock before doing any work**, then release it after.
 
-Core Idea : You acquire the lock before proceeding.
-Typical Flow
 ```sql
 ACQ_LOCK()
-    READ UPDATE -- operations
+    READ / UPDATE -- operations
 REL_LOCK()
 ```
 
-Two types of locking strategies
+**Why locks?** To protect data **consistency and integrity** against concurrent updates. Without locks, two transactions can read the same row, both decide to update it, and one update silently overwrites the other (lost update problem).
 
-- shared lock
-- exclusive lock
+**Risk:** Transactional Deadlock - two transactions each hold a lock the other needs. The database detects this and kills one of the transactions automatically.
 
-**why do we need locks** ?
-- to protect the sanity of the data.
-- sanity : consistency & integrity
+There are two types of locks :
 
-Protecting the data against **concurrent** updates.
+**Shared Lock** : Used for **reads** where you want to prevent concurrent modification.
 
-Risk : Transactional Deadlock !!
-The transaction that detects the deadlock, kills itself.
+- Other transactions **can read** the locked rows
+- Other transactions **cannot modify** the locked rows
+- If the current transaction later needs to write, the lock is **upgraded to exclusive**
 
-### Shared Locks
-
-- reserved for read by the current transaction
-- other transactions can read the locked rows
-- other transactions cannot modify the locked rows
-- if the current transaction wants to *modify* then the locks will be upgraded to exclusive lock.
-
-Implementation
 ```sql
 SELECT * FROM ... FOR SHARE;
 ```
 
-### Exclusive Locks
+**Exclusive Lock** (`FOR UPDATE`) : Used when you **intend to write**.
 
 - reserved for *write* by the current transaction
 - other transactions cannot *read* the locked rows
 - other transactions cannot *modify* the locked rows
 
-Implementation
 ```sql
 SELECT * FROM ... FOR UPDATE;
 ```
 
-####  Skip Locked
+####  Modifiers
 
-Remove the locked rows from the result set.
-
-```sql
-SELECT * FROM t where id = 2
-FOR UPDATE SKIP LOCKED;
-```
-
-#### NOWAIT
-
-locking read does not wait for the lock to be acquired. Th fails immediately if row is locked.
+`SKIP LOCKED` : exclude locked rows from the result set entirely. Useful for job queues and seat-booking systems where you just want _any_ available row, not a specific one
 
 ```sql
-SELECT * FROM t where id = 2
-FOR UPDATE NOWAIT;
+SELECT * FROM t WHERE id = 2 FOR UPDATE SKIP LOCKED;
 ```
 
-- if the row is locked *kill the txn*
-- ERROR 3572: Do Not wait for lock
+`NOWAIT` : fail immediately instead of waiting if the row is already locked. Avoids the transaction hanging.
 
-## Designing: Airline Checkin System
+```sql
+SELECT * FROM t WHERE id = 2 FOR UPDATE NOWAIT;
+-- ERROR 3572: Do not wait for lock
+```
+
+## Case Study: Airline Check-in System
 
 - multiple airlines
 - every airline has multiple plan (flight)
@@ -90,7 +69,9 @@ FOR UPDATE NOWAIT;
 - every flight has multiple trips
 - user books a seat in one trip of a flight
 
-Handle multiple people trying to pick seat on the plane.
+**Problem:** 120 passengers on the same flight trying to pick seats simultaneously.
+
+This is the classic **fixed inventory + high contention** problem, seen in systems like IRCTC, BookMyShow, CoWIN, and flash sales.
 
 #### Schema
 
@@ -154,39 +135,44 @@ Admin adds new flights, trips, keeps the status updates.
 
 *Locking Demonstration* : how will we handle when all 120 people flying in one flight in the same trip check-in at the same time !
 
-*Similar System* : Fixed Inventory + Contentions (cowin, irctc, bookmyshow, flash sale)
+**The Contention Problem** : When 120 threads simultaneously query for an available seat:
 
 ```sql
-'SELECT id, name, trip_id, user_id from seats
-where trip_id = 1 and user_id IS null
-ORDER BY ia LIMIT 1 FOR UPDATE
+SELECT id, name, trip_id, user_id
+FROM seats
+WHERE trip_id = 1 AND user_id IS NULL
+ORDER BY name LIMIT 1
+FOR UPDATE;
 ```
 
-* using `FOR UPDATE`: each thread waits for first thread (which acquired lock on row-1) and as soon as lock is released, database engine will re-evaluate the query for waiting threads then it picks second seat, happens for 120 seats, increasing overall time of queries/
-* using `FOR UPDATE SKIP LOCKED` : now each thread will try its best to get a row which is not locked, entire process will work within microseconds.
+- **Without any lock modifier:** All 120 threads queue up waiting for the first locked row to release. After release, the DB re-evaluates the query for each waiting thread one by one. This serializes the entire check-in process - very slow.
+- **With `SKIP LOCKED`:** Each thread skips rows locked by others and grabs the next available seat. All 120 can proceed near-simultaneously. This is the correct approach here.
 
-If above locks are not used, then database isolation levels will be the one processing the query.
+> If neither modifier is used, behavior falls back to the database's isolation level, which won't give you the semantics you want for this use case.
 
-## Designing : KV store on relational DB
+---
 
-Requirements
+## Case Study: KV Store on a Relational DB
 
-- Infinitely Scalable
-- GET/PUT/DEL/TTL
+**Requirements:** 
 
-Brainstorm : Storage, optimize storage, insert updates, TTL
+- GET, PUT, DELETE, TTL support.
+- Infinitely scalable.
+
+Brainstorm : Storage, optimize storage, insert updates, TTL.
 
 ### Storage
 
-MYSQL : start with single node & then scale as the system demands
+MYSQL : start with single node & then scale as the system demands.
 
-schema : store
+**Schema**
 
-| key | value | ttl                   | is_deleted  |
-| --- | ----- | --------------------- | ----------- |
-|     |       | (absolute expiration) | soft delete |
+```
+key | value | ttl (absolute Unix timestamp) | is_deleted
+```
 
-Saving Storage : mark `ttl` as negative for deletion
+
+Instead of a separate `is_deleted` flag, use `ttl = -1` to signal deletion. This saves a column and simplifies queries.
 
 | key | value | ttl                   |
 | --- | ----- | --------------------- |
@@ -195,90 +181,92 @@ Saving Storage : mark `ttl` as negative for deletion
 How to hard delete ? Batch & periodic cleanup
 
 - Run a separate cleanup process to hard delete the soft deleted rows.
-- Minimize I/O
+- Minimize I/O.
 
-### Insert
+#### PUT(Upsert)
 
 - key exists - update
 - key doesn't exist - insert
 
-Instead of apply GET & INSERT/UPDATE, use *UPSERTS* (PostgreSQL)
-or `REPLACE INTO store values (k, v, ttl)` (MySQL)
+Avoid a separate GET + INSERT/UPDATE. Use a single atomic upsert:
 
-Multiple PUT request ? *locks* (protects data integrity), when one is update other waits.
+```mysql
+-- MySQL
+REPLACE INTO store VALUES (k, v, ttl);
 
-```sql
-SELECT * from store FOR UPDATE NOWAIT;
-UPDATE store SET value = v2
-WHERE key = k1
+-- PostgreSQL
+INSERT INTO store (key, value, ttl) VALUES (k, v, ttl)
+ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value, ttl = EXCLUDED.ttl;
 ```
 
+For concurrent PUTs on the same key, use `FOR UPDATE NOWAIT` to fail fast instead of queuing:
 
-### Implementing TTL
+```sql
+SELECT * FROM store WHERE key = k1 FOR UPDATE NOWAIT;
+UPDATE store SET value = v2 WHERE key = k1;
+```
 
-Approach 1 : Batch deletion with CRON Job
+#### GET
 
-- what about expired keys before they are hard deleted, filter out
+Filter out expired keys at query time:
 
-Approach 2: Lazy Evaluation (in-mem)
+```sql
+SELECT * FROM store WHERE key = k1 AND ttl > UNIX_TIMESTAMP();
+```
 
-Do hard delete when an expired key is fetched,
+#### DELETE (Soft)
 
-- what if the key is never fetched ?
-- key will never be deleted
-- cron to delete expired keys (but with small pauses)
+Mark as deleted by setting `ttl = -1`
 
-Approach 3 : Random Sampling & Deletion
+```sql
+UPDATE store SET ttl = -1 WHERE key = k1 AND ttl > UNIX_TIMESTAMP();
+```
+
+### TTL Cleanup Strategies
+
+**Approach 1 : Cron batch delete**
+
+- Simple, but expired keys remain readable between runs unless the GET query filters by TTL (which it does above).
+
+```sql
+DELETE FROM store WHERE ttl < UNIX_TIMESTAMP();
+```
+
+**Approach 2: Lazy Evaluation (in-mem)**
+
+Hard-delete an expired key when it's fetched. 
+
+What if the key is never fetched ?
+
+Problem: keys never fetched are never cleaned up. Needs a cron as a fallback anyway.
+
+**Approach 3 : Random Sampling(Redis-Style)**
 
 - Not suitable for disk backed DBs
-- Randomly sample 20 keys having expiration set
-- delete all keys that are expired from the sample
-- if delete key > 25%, repeat the process
+- Randomly sample 20 keys that have a TTL set
+- Delete all expired keys in the sample
+- If >25% of the sample was expired, repeat immediately
 
-!!! note "idea"
+The intuition: if fewer than 25% of a random sample are expired, the overall population likely has fewer than 25% expired keys - good enough. The sample size of 20 comes from the **Central Limit Theorem** ensuring the sample is statistically representative. This is what Redis uses internally.
 
-    If sample has `<25%` of expired keys, population will have `<25% of expired keys>`
+> This approach is designed for in-memory stores. For disk-backed DBs, a simple scheduled batch delete is more practical.
 
-This approach is used by Redis & the number (sample size) 20 comes from the *Central Limit Theorem*
-
-### Implementing DELETE
-
-```sql
-UPDATE store SET ttl = -1
-WHERE key = k1 AND ttl > now();
-```
-
-### Implementing DELETE for Batch Cleanup
-
-```sql
-DELETE FROM store WHERE ttl < now();
-```
-
-### Implementing GET
-
-```sql
-SELECT * FROM store
-WHERE key = k1 AND ttl > now();
-```
-
-### High Level Architecture
+### High Level Architecture (Scaling)
 
 
 ![](assets/Pasted%20image%2020250910123246.png)
 
-We add as many KV API servers to support the load. (Assuming MySQL is able to handle the load)
-
-If we have a *99:1* read requests and one DB is not able to handle the load, we can add read replicas & a batch cleanup process.
-
-We can have sharding where each node owns an exclusive fragment of the data.
+- Start with a single MySQL node
+- For read-heavy workloads (e.g., 99:1 read/write), add **read replicas**
+- For write scaling, use **sharding** — each node owns an exclusive key range or hash bucket
+- Run batch cleanup as a separate background process to minimize I/O impact on the primary
 
 
 ![](assets/Pasted%20image%2020250910123839.png)
 
+## Further Study
 
-Further Study
-
-- Why ORMs are bad ideas
-- Central Limit Theorem
-- B+ Tree Rebalancing
-- FizzBuzz Test Enterprise Edition
+- Why ORMs are bad ideas ?
+- Central Limit Theorem (why sample size 20 works ?)
+- B+ Tree rebalancing
+- FizzBuzz Enterprise Edition (a joke, but an instructive one)
