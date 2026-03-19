@@ -1,108 +1,111 @@
-# Database
+# Database (Part 2)
 
-
-## Non-Relational Databases
+## Non-Relational Databases (NoSQL)
 
 NOSQL: Data is non-relational structures
 
-*In most cases, NOSQL databases provide scalability and availability by compromising consistency*
-Most NOSQL DBs are eventually consistent.
+NoSQL databases store data in non-relational structures. The core tradeoff: **most NoSQL databases trade consistency for scalability and availability**, making them eventually consistent by default.
 
-!!! note
-    NOSQL DBs scale does not mean SQL does not. (Anything that shards will scale)
+> A common misconception: "NoSQL scales, SQL doesn't." This isn't true — anything that shards will scale. The real question is what your data model and access patterns demand.
 
-### Types of NOSQL databases
+### Types of NoSQL Databases
 
 #### Document DB
 
-- Mostly JSON based
+- Store data as JSON-like documents.
 - Supports Complex Queries
 - Partial Updates to documents possible
 - closest to relational database
+- Good default choice when your data is hierarchical but you still need query flexibility.
 - Examples : *MongoDB*, *ElasticSearch*
 
 #### Key Value Store
 
-- Key-wise access pattern
-- Heavily partitioned
-- No complex queries supported
-- Examples : *Redis*, *DynamoDB*, *Aerospike*
+- Pure key-based access.
+- Heavily partitioned and extremely fast, 
+- but no complex query support.
+- Use when your access pattern is always "give me X by its key." 
+- Examples: _Redis, DynamoDB, Aerospike_
 
 #### Column Oriented Databases
 
-- storage layout is in columnar fashion
+- Data is stored column-by-column on disk rather than row-by-row.
+- The payoff is massive for analytics
 
-Say you have a table with 100 columns and you want to perform analytics.
-`SELECT avg(price) WHERE ts='_'`
+If you run `SELECT avg(price) WHERE ts = '_'` on a 100-column table, a row-store reads and discards 98 columns per row. A column-store reads only the two columns (`price` and `ts`) it needs.
 
-- all you care is two columns `price` and `ts`
-- But a row DB will go row by row reading all columns & discarding 98 of them *inefficient*
-- Column oriented databases will read columns that are part of the query and will not even skim others
-
-Hence column oriented DBs are used in massive analytics & data warehouses e.g. Redshift
-
-Foundational Paper on column oriented DB: *C-Store: A column oriented DMBS*
+- This is why column-oriented DBs dominate analytics and data warehouses. Examples: _Redshift, BigQuery, Snowflake, Apache Parquet (storage format)_ 
+- Foundational paper: _C-Store: A Column-Oriented DBMS (Stonebraker et al., 2005)_
 
 #### Graph Databases
 
-- stores data in nodes and edges
-- great for modelling social behaviours, recommendations (collaborative filtering)
-- solid use case : Fraud Detection
-- e.g. *Neptune*, *Neo4j*, *TigerGraph*, *DGraph*
+- Nodes and edges as first-class citizens.
+- Shine when relationships between entities are the query
+- social graphs, recommendations (collaborative filtering), and especially **fraud detection** where you're looking for suspicious relationship patterns.
+- Examples: _Neo4j, Amazon Neptune, TigerGraph, DGraph_
 
-### Why non-relational DB scale
+#### Why non-relational DB scale
 
-- There are no relations
+- There are no relations between tables.
 - Data can be denormalised
 - Data is modelled to be sharded
 
 We can also achieve above properties on SQL databases, So saying SQL doesn't scale is not entirely correct.
 
-So, when to use SQL ?
+#### When to Use SQL vs NoSQL
 
-- ACID
-- Relations, Constraints
-- Fixed Schema
+| Use SQL when                             | Use NoSQL when                             |
+| ---------------------------------------- | ------------------------------------------ |
+| You need ACID guarantees                 | You can tolerate eventual consistency      |
+| Data has clear relations and constraints | Data is denormalized or document-shaped    |
+| Schema is fixed and well-defined         | Schema is flexible or evolving             |
+| Complex joins are required               | Access patterns are simple and predictable |
 
-When to use NoSQL
+#### Consistency & NoSQL Databases
 
-* No relations
-* data can be denormalised
-* Data can be sharded
+| Database            | Type                    | Notes                                              |
+|---------------------|-------------------------|----------------------------------------------------|
+| **Cassandra**       | Column-family store     | Tunable consistency, often configured for eventual consistency |
+| **DynamoDB**        | Key-value / Document    | Default eventual consistency for reads, configurable for strong consistency |
+| **Riak**           | Key-value store         | Designed for eventual consistency, high availability |
+| **Couchbase**      | Document / Key-value    | Defaults to eventual consistency, with options for strong consistency |
+| **Apache HBase**    | Column-family store     | Typically eventual consistency, with some options for strong consistency |
 
-## Designing : Slack's Realtime Communication
+## Case Study : Slack's Realtime Communication
 
-Requirements
+**Requirements:** 
 
-- Multiple users, Multiple channels
-- Users DM on message in channel
-- Real-time chat
-- Historical messages can be scrolled through
+- Multi-user, multi-channel messaging. 
+- Real-time delivery. 
+- Scrollable message history. 
+- DMs and group channels.
 
-Similar System : Multiplayer games, realtime chat, interactions, realtime polls, creator tools, etc.
+_Similar systems:_ multiplayer games, live polls, collaborative tools, realtime notifications.
 
-
-
-Insight 1: DMs are channel with 2 people.
-Thus we only need to model *channels* very well.
+**Key Insight**: DMs are just channels with 2 members
+This simplification means you only need to model **channels** well - the rest falls out naturally.
 
 How to store messages in slack workspace ?
 Workspace -> multiple channels -> multiple messages
 
-Schema:
+#### Schema
 
-- workspace : (id, name)
-- channels : (id, workspace_id, name, channel_type)
-- messages : (id, channel_id, message, user_id, ts)
-- membership : (channel_id, user_id, checkpoint) ~ this entity allows us to add attributes on users and their interaction with channels.
+```
+workspaces  : (id, name)
+channels    : (id, workspace_id, name, channel_type)
+messages    : (id, channel_id, user_id, message, ts)
+membership  : (channel_id, user_id, checkpoint)
+```
 
-Because there will be large number of messages, we store it in a sharded DB
-Pick any DB that you can shard, ... even SQL Works.
+`membership` is worth calling out - the `checkpoint` field lets you track where each user last read in a channel, enabling unread counts and scroll position. This is a clean way to attach per-user state to channel interactions without bloating the messages table.
 
-All message of a channel in one DB, scrolling will be simple, no cross shard query.
+**Storage:** Messages are sharded by `channel_id`. 
 
-*Cassandra* is a high ingestion database, but here any simple relational database will do since we have small load.
+All messages for a channel live on the same shard. 
 
+This means channel scroll is always a single-shard query with no cross-shard joins. Any DB that supports sharding works here, including relational ones. 
+
+_Cassandra_ is often cited for high write ingestion, but for Slack's access patterns a sharded relational DB is perfectly fine.
 #### Simple Architecture Diagram
 
 A very basic flow [to start with]
@@ -119,16 +122,17 @@ API server find relevant shard using `channel_id` and store message there. This 
 
 Depending upon criticality of persistence  we pick one over other.
 
-- sending messages over API and then storing them into database ensures persistence, (*important for enterprise applications*), but we use *websockets* for receiving messages from edge servers so as to not poll the message.
-- NOTE : Let's say if it was whatapp application, we will sends & receive on the Edge Server via websockets only. Or in case zoom where persistence doesn't matter we can just broadcast message and not store it at all.
+1. **Persist-first via API, then push via WebSocket** - strongest durability guarantee. Message is written to DB before delivery. Right choice for enterprise/compliance-heavy products.
+2. **Send and receive on edge servers via WebSocket, persist asynchronously** - good balance of speed and durability. WhatsApp-style.
+3. **Broadcast only, no persistence** - for ephemeral interactions where history doesn't matter (e.g., Zoom meeting reactions).
 
 ### Websockets
 
 Every user will have 1 websocket connection open with our backend infrastructure and that will be used for anything and everything *realtime*
 
-Edge Servers : Because websockets are expensive (persist TCP) and have 6 concurrent TCP connection limit. We have to *multiplex* all realtime communication on *ONE WEBSOCKET* connection.
+**Why a fleet of edge servers?** WebSocket connections are expensive (they hold open a TCP connection). Browsers also limit concurrent WebSocket connections. You can't have every user connected to a single server. So you run a fleet of **Edge Servers**, each managing a pool of active WebSocket connections via a library like Socket.IO.
 
-Hence, we need a fleet of servers (Edge Servers) to whom our end users connect  over websocket.
+Any backend service that wants to reach a user in realtime routes through these edge servers.
 
 ![](assets/Pasted%20image%2020250911110833.png)
 
@@ -138,24 +142,20 @@ Insight: Messages once sent will always be persisted, there will not be any DB l
 
 ![](assets/Pasted%20image%2020250911111759.png)
 
-Any thing related to messaging that is NOT *pushed*
-Non-realtime usecases
-
-- Channel Scroll
-- DM Scroll
-- Unimportant Messages that are loaded when channel is clicked, e.g. muted channels
-
 ### Realtime Communication
 
-Every edge server knows which user is connected to it and *how to communicate with it* (Socket IO library manages this)
+Every edge server knows which user is connected to it and *how to communicate with it* (Socket IO library manages this).
 
 ![](assets/Pasted%20image%2020250911112754.png)
 
-Hence when the message is sent from A to B the edge server will
+Hence when a message is sent from A to B.
 
-- persist message in kafka
-- Find B in the local pool
-- send message to B
+**Happy path (A and B on the same edge server):**
+
+1. A sends a message to channel C3
+2. Edge server persists the message asynchronously (Kafka to DB)
+3. Edge server finds B in its local connection pool
+4. Delivers directly
 
 ![](assets/Pasted%20image%2020250911112819.png)
 
@@ -166,23 +166,28 @@ Hence when the message is sent from A to B the edge server will
 We cannot drop the message hence we can use the channel scroll API (REST) to load the messages when channel is clicked. Just for the sake of connection !
 
 *Will there be just one Edge Server ?*
+
 How will we horizontally scale then ?
-Core Idea : connect the servers
 
-Say each server can handle 4 users. what if we get 5th user. The 5th user forms a websocket with another server
+Core Idea : Connect the servers in a mesh manner.
+
+Say each server can handle 4 users. what if we get 5th user. The 5th user forms a websocket with another server.
+
 How will message from A go to B ? (local connection pool)
-How will message go from A to E ? Possible only when message reaches Edge Server 2 and we use TCP for that
 
-But we can connect Edge servers to one another over TCP.
+How will message go from A to E ? Possible only when message reaches Edge Server 2 and we use TCP for that.
 
+But we can connect Edge servers to one another over TCP. Yes
 
 ![](assets/Pasted%20image%2020250911113421.png)
 
 But if we have 100 edge server will every server to every another server ? It would be a very bad idea to send message thru mesh network of interconnected servers.
 
-Use *Realtime PubSub*
+Naively, you could connect every edge server to every other edge server (full mesh). At 100 servers that's ~5000 TCP connections — clearly doesn't scale.
 
-Idea : Every slack channel has a *pubsub* channel (can be optimized). Each edge server subscribes to the *PubSub* channel corresponding to the slack channels that users connected to it are part of.
+**The right solution: Realtime PubSub**
+
+Each Slack channel maps to a **PubSub channel** (e.g., via Redis Pub/Sub). Each edge server subscribes to the PubSub channels corresponding to the Slack channels that its locally-connected users are part of.
 
 e.g.
 - A is part of slack channel (c1, c2, c3)
@@ -191,8 +196,10 @@ e.g.
 
 ![](assets/Pasted%20image%2020250911114328.png)
 
-Say E joins the system and is part of channel c3. Hence Edge Server 2 will connect to realtime pubsub & Sub(c3)
+Say E joins the system and is part of channel c3. Hence Edge Server 2 will connect to realtime pubsub and Sub(c3).
+
 So users A, C and E are part of channel C3.
+
 When A sends a message on C3
 
 - message is asynchronously persisted in memory store 
@@ -205,11 +212,30 @@ When A sends a message on C3
 
 ![](assets/Pasted%20image%2020250911115437.png)
 
+This scales cleanly — adding more edge servers just means more PubSub subscribers, no mesh rewiring.
+
+**What if a user is offline or their message isn't delivered in realtime?** Don't drop it. When they open the channel, the **channel scroll REST API** loads historical messages from the DB. Realtime delivery is best-effort; the DB is the source of truth.
 ### Overall Architecture
+
+#### Non-Realtime Operations
+
+Not everything needs WebSockets. These go through regular REST APIs backed by the sharded message DB:
+
+- Channel scroll / message history
+- DM history
+- Loading muted or low-priority channels
+- Search
 
 ![](assets/Pasted%20image%2020250911115245.png)
 
-Further Reading
 
-- encryption in chat
-- web transport
+## Further Reading
+
+- _Designing Data-Intensive Applications_ - Kleppmann (chapters on replication, partitioning, stream processing)
+- _Building a Scalable Chat Application_ - Cassandra data modeling for messaging (Discord's blog post on switching from Cassandra → ScyllaDB is excellent)
+- _Redis Pub/Sub vs Streams_ - understand when to use each for realtime fanout
+- _The WebSocket Protocol_ - RFC 6455 (short, readable)
+- _Socket.IO internals_ - how it handles fallback, reconnection, and multiplexing
+- _Kafka for async persistence_ - why a message queue between edge servers and the DB is better than direct writes under load
+- _End-to-end encryption in messaging_ - Signal Protocol (used by WhatsApp, Signal); good starting point is the Signal blog
+- _WebTransport_ - the modern successor to WebSockets over HTTP/3 (QUIC); actively being adopted
