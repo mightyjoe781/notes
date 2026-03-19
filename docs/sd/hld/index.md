@@ -92,5 +92,3 @@
     - [Algorithmic System Design - II](./advanced/algorithmic_design_2.md)
         - Geo-Proximity
         - User Affinity Service
-
-Resources :

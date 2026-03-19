@@ -270,3 +270,12 @@ The intuition: if fewer than 25% of a random sample are expired, the overall pop
 - Central Limit Theorem (why sample size 20 works ?)
 - B+ Tree rebalancing
 - FizzBuzz Enterprise Edition (a joke, but an instructive one)
+
+More Resources
+
+- _A Critique of ANSI SQL Isolation Levels_ - Berenson et al. (1995) - properly defines isolation anomalies (dirty read, phantom, lost update)
+- _DDIA_ - Chapter 7 (Transactions) - clearest explanation of isolation levels in practice
+- PostgreSQL docs on _Explicit Locking_ - best practical reference for `FOR UPDATE`, `SKIP LOCKED`, `NOWAIT` and their interaction with MVCC
+- _Use The Index, Luke_ (use-the-index-luke.com) - free, deep dive into how B-Tree indexes actually work and why most developers misuse them
+- _Uber's migration from PostgreSQL to MySQL_ - real-world case where B-Tree rebalancing on write-heavy workloads drove the decision
+- _Redis source - `expire.c`_ - see the random sampling TTL strategy implemented directly

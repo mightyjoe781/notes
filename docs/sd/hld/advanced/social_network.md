@@ -4,29 +4,51 @@
 
 ![](assets/Pasted%20image%2020250914101946.png)
 
-Facebook made PHP MySQL famous -> everyone did that 
-Instagram made above arch famous ... everyone started doing it.
+Instagram's original stack was elegantly simple: **Django (Python) + PostgreSQL + Nginx**, fronted by a CDN, with media stored on S3. What made it famous wasn't novelty - it was restraint. 
 
-Why famous ? 1 year, 14 million, 3 engineers.
-## How CDN works ?
+Three engineers served 14 million users in the first year by choosing boring, proven technology and combining it well. (Facebook had already popularized the PHP + MySQL pairing; Instagram did the same for this Python-centric stack.)
 
-Say, you origin is https://smk.minetest.in/ and there is a path that returns some response. *JSON, Bytes, Image, HTML, Video, anything*
+The lesson: you don't need a microservices fleet on day one. Vertical scaling, aggressive caching, and a good CDN take you surprisingly far.
+## How a CDN works ?
 
+Suppose your origin server is at `https://smk.minetest.in/` and it serves a file at:
+
+```
 https://smk.minetest.in/logo.png
+```
 
-CDN has its own domain, say cloudflare.net
+CDN has its own domain, say cloudflare.net.
+
+A CDN (e.g. Cloudflare) gives you a CDN-scoped subdomain:
+
+```
+https://smk.cloudflare.net/logo.png
+```
+
 
 ![](assets/Pasted%20image%2020250914104236.png)
 
-User hitting : https://smk.cloudflare.net/logo.png, goes to CDN, which finds the origin for `smk.cloudflare.net` it then forwards request to origin server
+When a user requests the CDN URL, the flow is:
 
-https://smk.minetest.in/logo.png (cache it and returns)
+1. Request hits the nearest **CDN edge node** (geographically close to the user).
+2. The edge node checks its cache.
+    - **Cache hit** → serves the file directly. Fast.
+    - **Cache miss** → edge node forwards the request to your origin (`smk.minetest.in`), caches the response, then returns it.
 
-## Uploading photos at scale
+Subsequent users (especially those in the same region) get the cached copy. This cuts latency dramatically for static assets like images, JS bundles, and videos.
 
-Requirements 
+**Key CDN benefits:**
 
-- 5 M photos upload a day
+- Geographical distribution (edge nodes worldwide)
+- Cache layer that absorbs origin load
+- DDoS protection and TLS termination out of the box
+- On-the-fly transformations (resizing, format conversion) on many providers
+
+## Photo Upload at Scale
+
+**Requirements** 
+
+5 million photo uploads per day (~58 uploads/second sustained).
 
 Brainstorm : Storage, data flow, separation of concern, privacy, extensibility, optimization
 
@@ -37,33 +59,55 @@ Basics
 
 ![](assets/Pasted%20image%2020250914132806.png)
 
-Bad Idea ! Twice the bandwidth is consumed.
+#### Naive Approach - Why It's Bad
 
-- storage decision ? sharded relational DB
-- serving images ? directly through S3
-- serving images quickly ? use CDN
-    - caching of images on CDN
-    - security out of the box
-    - geographical distribution
+Routing uploads _through_ your API servers means:
+
+- The photo travels from the client → API server → S3.
+- Your API server consumes **double the bandwidth** (once inbound, once to forward to S3).
+- API servers become a bottleneck and an expensive one - they're stateful during the upload.
+
+#### Serving Photos
+
+- Raw storage: **S3**
+- Delivery: **CDN** in front of S3
+- The backend dynamically constructs CDN URLs and returns them in API responses. The frontend drops them into `<img src="..." />` - the browser fetches from the CDN, not from your servers.
+
 
 ![](assets/Pasted%20image%2020250914141234.png)
 
-Upload Photos
+#### Better Approach - Pre-signed URLs (Direct Upload)
 
-- user A talks to *Image Service* to prepare for upload
-- Image service generates a *random image ID* and talks to S3 to create a signed-url to allow *anyone* to upload on the path. `s3://photos/<user_id>/<random_photo_id>.jpg`
-- user A *directly* uploads the photo to s3 on the signed URL and the file sits at the specified S3 path.
+The client never routes the binary through your servers. Instead:
 
-Publish Photos
+**Step-by-step:**
 
-User keeps track of the random image id it got from image it uses this to create the entry in posts table
+1. **Client calls Image Service**: `POST /images/prepare`
+2. **Image Service** generates a `random_image_id` and asks S3 to create a **pre-signed URL** for the path:
+
+```
+s3://photos/<user_id>/<random_image_id>.jpg
+```
+
+A pre-signed URL grants temporary, scoped write permission to _anyone_ who holds it - no AWS credentials needed on the client side. 3. Image Service returns the pre-signed URL and the `random_image_id` to the client. 4. **Client uploads directly to S3** using the pre-signed URL (PUT request). The file lands at the expected path.
+
+> LinkedIn, Dropbox, and most modern platforms use this exact pattern.
+
+#### Publishing the Posts
+
+After the upload completes, the client calls the **Post Service** to create the post:
 
 - LinkedIn also does this
 - CDNs also do this
 
 ![](assets/Pasted%20image%2020250914141734.png)
 
-Post service can also validate that the *image_id* provided in the request belongs to the same user or not.
+The Post Service: 
+
+- **Validates ownership**: confirms that `image_id` actually belongs to the requesting user (prevents one user from hijacking another's image ID).
+- Creates a row in the `posts` table referencing the image path.
+- The stored URL is the **CDN URL**, not the raw S3 URL: `https://instacdn.net/<user_id>/<image_id>.jpg`
+
 
 ![](assets/Pasted%20image%2020250914141913.png)
 
@@ -71,48 +115,59 @@ Post service can also validate that the *image_id* provided in the request belon
 
 ![](assets/Pasted%20image%2020250914143049.png)
 
-- user A uploads photo using Image Service
-- user A posts the photo
-    - creates an entry in post table
-- user B visits A's profile
+- User A uploads photo using Image Service
+- User A posts the photo
+    - This creates an entry in post table
+- User B visits A's profile
 - GET /users/A/posts
 
-NOTE: url will be Dynamically generated by backend. e.g. https://instacdn.net/A/1234.png
+NOTE: URL will be Dynamically generated by backend. e.g. https://instacdn.net/A/1234.png
 
 The image urls are rendered in `< IMG/>` tag
 The photo are loaded from "instacdn"  and are rendered
 
-### Privacy
+### Privacy - Are Private Photos Actually Private?
 
-Are instagram's private photo really private ? *NO*
-Every photo URL has signature (timed) attached in the URL
+Short answer: **Not truly private in the cryptographic sense**, but made short-lived via signed URLs.
 
-`https://instacdn.net/ul/1729_4275.jpg?ig_cache_key=...&oh=...&oe=...&nc_sid=...`
+Every photo URL Instagram generates looks something like:
 
-when the URL is rendered through IMG tag, the request goes to CDN, CDN validate the request using the attached keys and if certs are valid and not expired, *it returns the image* otherwise it returns bad url.
+```
+https://instacdn.net/ul/1729_4275.jpg?ig_cache_key=...&oh=...&oe=...&nc_sid=...`
+```
 
-The URL is short lived because certs are short-lived.
+The query parameters are a **signed token** with an expiry (the `oe` field is typically the expiry timestamp). When the browser requests this URL:
 
-### Image Optimisations
+1. The CDN validates the signature and expiry.
+2. If valid → returns the image.
+3. If expired or tampered → returns a 403/bad URL.
 
-Users belong to different geographics, different network bandwidth different mobile device, different processing power.
-So sending 5 MB photo uploaded by your favourite celeb to all the followers is a very bad idea. 
+**Implication**: if you copy a private Instagram image URL and try to open it in a new tab an hour later, it will fail - the URL has expired. The image is not locked to your account, it's locked to a time window. This is "privacy by URL obscurity + expiry" rather than per-request auth.
 
-So we should have different resolutions off the photos ready to serve to the users depending on their *state*
+### Image Optimizations
 
-- instead of building our image optimizer service
-- we can leverage the CDN features that are provided out of box.
+Users have wildly different conditions - mobile data in rural areas, 4K monitors in offices, low-RAM devices. Sending a 5 MB original to every device is wasteful.
 
-`https://instacdn.net/ul/1729_4275.jpg?w=360`
+**Solution**: Use CDN-level on-the-fly transformations instead of building your own image resizing pipeline.
 
-Here last `w` sets the width of the photo and transforms it before sending to user, and caches as well.
+```
+https://instacdn.net/ul/1729_4275.jpg?w=360
+```
 
+The `w=360` query parameter tells the CDN to resize the image to 360px wide before serving.
 
-## HashTag Service
+The CDN:
+
+1. Checks if the transformed variant is already cached.
+2. If not, fetches from origin, resizes, caches the result, serves it.
+
+You get multiple resolution variants for free without running any image-processing servers. Most CDNs (Cloudflare, Fastly, Imgix, CloudFront + Lambda@Edge) support this natively.
+
+## Hashtag Service
 
 ![](assets/Pasted%20image%2020250914161209.png)
 
-- millions of hashtag
+- There are millions of hashtag
 - assume there is a service that notifies us when it generates *top* photos for a hashtag.
 
 ### Input to our system ?
@@ -123,6 +178,7 @@ Here last `w` sets the width of the photo and transforms it before sending to us
 ![](assets/Pasted%20image%2020250914163301.png)
 
 Key Requirement : *Superfast response times*
+
 One request : `/hashtag/<tag>` 
 
 ```json
@@ -162,6 +218,7 @@ Requirements from storage ?
 - partial updates
 
 Challenge : POST_PUBLISH topic is partitioned by *post_id* or *user_id*. But for our own batching and counting to work, we need an event per hashing.
+
 If a post has 8 hashtags we would need one event for each hashtag so that we can count and batch *efficiently*
 
 So, we have to write an adapter that
@@ -184,3 +241,31 @@ Key Takeaways :
 - Adapter Pattern
 - Effective Batching & Counting
 - READ/WRITE Path optimizations
+
+## Further Reading
+
+**On CDN & Content Delivery**
+
+- _Web Performance in Action_ - Jeremy Wagner. Practical and covers CDN caching strategies well.
+- Cloudflare's engineering blog - specifically their posts on cache architecture and image resizing pipelines.
+
+**On Object Storage & Upload Patterns**
+
+- AWS S3 documentation on pre-signed URLs is actually worth reading in full - it covers expiry, scoping, and the security model clearly.
+- Dropbox's 2016 blog post _"Migrating from S3 to our own infrastructure"_ - interesting counter-perspective on when S3 stops being the right answer at extreme scale.
+
+**On Event-Driven Architecture & Kafka**
+
+- _"The Log: What every software engineer should know about real-time data's unifying abstraction"_ - Jay Kreps (LinkedIn, 2013).
+- _Designing Event-Driven Systems_ - Ben Stopford (free PDF from Confluent). Good follow-up to Kreps; covers the adapter/repartitioning pattern more concretely.
+- _Kafka: The Definitive Guide_ - Narkhede, Shapira, Palino. Reference-level, not a cover-to-cover read.
+
+**On Distributed Counting & Aggregation**
+
+- Google's _MapReduce_ paper (2004) - the batching + aggregation pattern your worker nodes use is essentially a streaming MapReduce. Worth understanding the origin.
+- Twitter's paper on _"Summingbird"_ - their hybrid batch/streaming counting system. Directly relevant to the hashtag counting problem.
+
+**On Instagram's Actual Architecture**
+
+- Instagram Engineering Blog (on Medium) - their posts from 2011–2013 are gold. _"Sharding & IDs at Instagram"_ and _"What Powers Instagram"_ specifically.
+- _"Scaling Instagram Infrastructure"_ - Lisa Guo & Hui Ding's PyCon 2017 talk (YouTube). Covers the journey from that Year-1 stack to where it went.

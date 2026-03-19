@@ -1,100 +1,95 @@
 # Distributed Systems
 
-Multiple Components, Multiple Machines but acts a single coherent system which solves a bigger problem
+A distributed system is one where multiple components running on multiple machines work together to appear as a single coherent system solving a bigger problem.
 
-The best and worst thing about distributed system is : *Anything that could go wrong would go wrong*
+The best and worst thing about distributed systems is the same: _anything that can go wrong, will go wrong._
 
-Key to designing a good Distributed System
-Start with a *Day 0* architecture and *scale* each component. See how it performs under load *rectify the system*, *rearchitect* and *repair*.
+**Key design principle:** Start with a Day 0 architecture, then scale each component incrementally.
 
-Why Distributed Systems ?
+Observe behavior under load, rectify bottlenecks, rearchitect where necessary, and repeat.
 
-- Scale
-- Horizontal Scalability
-- Fault Tolerance
+**Why distributed systems?**
+
+- Scale and horizontal scalability
+- Fault tolerance
 
 #### Load Balancers
 
-One of the most *important* component in any system. We kinda take it for granted.
+Load balancers are one of the most important components in any system - and one we tend to take for granted.
 
 ![](assets/Pasted%20image%2020250912104430.png)
 
-Advantages of using a Load Balancer
+**Advantages:**
 
-- Fault Tolerance
-- No over-clocked server
+- Fault tolerance: traffic is rerouted away from failed servers
+- Prevents any single server from being over-clocked
 
-Load Balancing Algorithms
+**Load balancing algorithms:**
 
-**Round Robin**
-Distribute the load iteratively
-Uniform infrastructure
-
-**Weighted Round Robin**
-Distribute the load iteratively but as per weights
-Non-Uniform Infrastructure
-
-**Least Connection**
-Pick the server having the least connections
-When response times has a big variance. (*Analytics*)
+- **Round Robin** - distributes load iteratively across servers; assumes uniform infrastructure
+- **Weighted Round Robin** - same as above but assigns weights per server; suited for non-uniform infrastructure
+- **Least Connection** - routes to the server with fewest active connections; best when response times vary significantly (e.g., analytics workloads)
 
 ![](assets/Pasted%20image%2020250912105111.png)
 
 ## Designing Load Balancer
 
-Requirements
+**Requirements**
 
 - balance the load
-- tunable algorithm
-- scaling beyond one machine
+- support a tunable algorithm
+- scale beyond a single machine
 
-Terminology : LB Server, Backend Server
+**Terminology:** LB Server, Backend Server
 
-Brainstorm : LB Configuration, Monitoring, Availability, Extensibility
+Brainstorm : LB configuration, monitoring, availability, extensibility
 
-#### Load Balancer Needs Configuration
+#### Configuration
 
-- balancing configuration
-- backend server list
+A load balancer needs two things configured:
+
+1. The balancing algorithm
+2. The list of backend servers
 
 ![](assets/Pasted%20image%2020250912115446.png)
 
-Configuration DB will config per load balancer.
-But making a DB call upon getting every request will be *catastrophic* to response times
-Hence we keep a copy of the configuration in memory of the LB server.
+Making a DB call on every incoming request would be catastrophic for latency. 
 
 ![](assets/Pasted%20image%2020250912115552.png)
 
-How to keep the LB configuration in sync between : LB Server & Configuration DB
+Instead, the LB server keeps a copy of its configuration in memory and syncs it with the Configuration DB in one of two ways:
 
-- write a CRON job (PULL)
-- reative approach (PUSH)
+- **Pull:** a cron job periodically fetches updates
+- **Push:** a reactive approach where the DB pushes changes to the LB
 
 ![](assets/Pasted%20image%2020250912115910.png)
 
-How will a load balancer ensure that it is not forwarding request to an *Unhealthy* backend server ?
+### Health Monitoring
 
+How does a load balancer avoid forwarding requests to unhealthy backend servers? Through an **Orchestration** layer.
 #### Orchestration
 
-- keeps and eye *on the health* of the backend servers
-- if any backend server is unhealthy
-    - orchestration updates the DB
-    - changes then reach the LB server through a pub-sub using CDC (change data capture)
-- monitors health of LB servers & scales them up and down
+- Continuously monitors the health of backend servers
+- If any of the servers are unhealthy
+    - Marks unhealthy servers in the DB; 
+    - changes propagate to the LB via pub-sub using CDC (Change Data Capture)
+- Monitors LB server health and scales them up or down as needed
 
 ![](assets/Pasted%20image%2020250912120418.png)
 
-NOTE: read about $\phi$ accrual failure detection algorithm, better than simple health checks.
+> **Note:** Look into the φ (phi) Accrual Failure Detection algorithm - it's significantly better than simple health checks.
 
 How will orchestration decide scaling LB servers ?
-Scaling will happen on CPU, Memory, # TCP connections, where do we have this data ?
-*Monitoring Agents* on Load Balancer, example ~ prometheus
+
+Orchestration decides when to scale LB servers based on metrics: CPU, memory, and number of TCP connections. These are collected by **monitoring agents** (e.g., Prometheus) running on each LB server.
 
 ![](assets/Pasted%20image%2020250912121102.png)
 
 ### Scaling Load Balancers
 
-LB servers cannot be just 1 instance, so how do we scale, What is that one thing sharded & Scales well ? *DNS*
+A single LB instance is itself a single point of failure. The solution is **DNS**, which is lightweight, horizontally scalable, and battle-tested (e.g., CoreDNS).
+
+A domain like `lb.payments.minetest.in` can resolve to multiple IPs, each pointing to a different LB server.
 
 - resolves IP for the domain name
 - very light weight, e.g. *coreDNS*
@@ -105,33 +100,32 @@ LB servers cannot be just 1 instance, so how do we scale, What is that one thing
 
 ![](assets/Pasted%20image%2020250912121437.png)
 
-#### Complete Infra
+#### Complete Infrastructure
 
 ![](assets/Pasted%20image%2020250912121605.png)
 
-Read this Paper : Maglev : A fast and reliable software load balancer
+> **Paper to read:** _Maglev: A Fast and Reliable Software Load Balancer_
 
 ## Remote and Distributed Locks
 
-Remote Locks: Locks managed by a central machine lock Manager.
+A **Remote Lock** is a lock managed by a centralized Lock Manager, used to coordinate access across multiple machines.
 
 ![](assets/Pasted%20image%2020250913133352.png)
 
 The 3 machines co-ordinate through a central lock manager.
 
-* Multiple threads synchronise through *mutexes & semaphores*
-* Multiple processes synchronise through *Disk* (Interesting Example: `apt-get upgrade` cannot be run twice concurrently)
-* Multiple machines synchronise through *Remote Locks*
+- Threads synchronize via mutexes and semaphores
+- Processes synchronize via disk (e.g., `apt-get upgrade` cannot run twice concurrently)
+- Machines synchronize via remote locks
 
-## Synchronizing Consumers
+### Motivating Example: Synchronizing Multiple Consumers
 
-To understand remote locks better, lets synchronise *multiple consumers* over an *unprotected remote queue*
+To understand remote locks better, lets synchronise *multiple consumers* over an *unprotected remote queue*.
+
 
 ![](assets/Pasted%20image%2020250913134116.png)
 
 Queue is remote & unprotected. We want one consumer to make call to the queue at a time. We need to make sure all consumer co-ordinate via shared lock.
-
-#### Consumers pseudocode
 
 ```
 ACQ_LOCK()
@@ -139,54 +133,56 @@ ACQ_LOCK()
 REL_LOCK()
 ```
 
-All consumers wait on `ACQ_LOCK()`, while one of them `READ_MSG()`.
-Out requirements from the lock manager ?
+All consumers block on `ACQ_LOCK()` while one proceeds to `READ_MSG()`.
 
-- Atomic Operations ~ so that two machines do not `ACQ_LOCK()`
-- Automatic Expiration ~ avoid perpetual locking
+**Requirements from the lock manager:**
+
+- **Atomic operations** - prevent two machines from acquiring the lock simultaneously
+- **Automatic expiration** - prevent perpetual locking if a consumer crashes
 
 So which DB : *redis*(popular choice because in-mem(fast)) , *dynamo_db*
 
-*Implementation* : Set the key in *redis* that says which consumer holds the lock and can read the message.
-e.g. *queue7:consumer2(ex: 300)* : lock held by consumer 2 for expirations of 300s.
+**Implementation using Redis:** Store a key like `queue7:consumer2 (ex: 300)` - meaning consumer 2 holds the lock on queue 7 for 300 seconds.
 
 ![](assets/Pasted%20image%2020250913135153.png)
 
 ```python
-
 def acquire_lock(q):
     consumer_id = get_my_id()
     while True:
-        v = redis.setnx(q, consumer_id, ex=300) # set non-existent ~ atomic
-        if v == 1: return
-        else: continue
-        
+        v = redis.setnx(q, consumer_id, ex=300)  # SETNX = set if not exists (atomic)
+        if v == 1:
+            return  # lock acquired
+        # else: keep retrying
 
 def release_lock(q):
-    # validate ownership of lock, before delete
     consumer_id = get_my_id()
     v = redis.get(q)
-    if v == consumer_id: redis.delete(q) 
-    # Use : 'Eval' ~ Executed Atomically using Lua, because when entering if condition, lock can be acquired by other consumer and you delete their lock.
+    if v == consumer_id:
+        redis.delete(q)
+    # IMPORTANT: the get + delete must be executed atomically using Lua's EVAL,
+    # otherwise another consumer could acquire the lock between the check and the delete.
 ```
 
-NOTE: This one redis instance is not horizontally scalable.
-Where else do you see this in action ? Mongo transaction uses remote locks on involved rows.
-Distributed Locks (*Redlock*) ~ Distributed locks with Redis.
+>**Note:** This single Redis instance is not horizontally scalable. MongoDB transactions use a similar remote locking mechanism on the rows involved.
 
-Idea : What we did in remote lock, just distribute it across multiple instances of redis.
-5 master nodes of Redis, No replication, all independent.
-Acquire lock :
+#### Distributed Locks (Redlock)
 
-- client goes through 5 nodes, trying to *ACQ_LOCK()* with timeout
-- if lock acquired on > 50% then *ACQUIRED*
-- else release the lock on acquired instances and return *FAILED*
+Redlock extends the remote lock idea across multiple independent Redis instances to eliminate the single point of failure.
 
-Distributed Locks are used in systems which demand correctness not the high throughput, here its a simple tradeoff.
+**Setup:** 5 independent Redis master nodes (no replication between them)
+
+**Acquire lock:**
+
+1. The client attempts to acquire the lock on all 5 nodes with a timeout
+2. If the lock is acquired on **more than 50%** of nodes -> **ACQUIRED**
+3. Otherwise -> release locks on any acquired nodes and return **FAILED**
+
+Distributed locks are the right tool when **correctness matters more than throughput** - that's the core tradeoff here.
 
 But why are we doing this ? *We are doing this to avoid single-point of failure(SPOF)*
 
-Exercises
+## Further Reading
 
 - Implement a load balancer with tunable algorithm locally.
 - Read this Paper : Maglev : A fast and reliable software load balancer
