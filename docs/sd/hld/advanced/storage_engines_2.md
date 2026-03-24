@@ -2,20 +2,19 @@
 
 ## Word Dictionary without using any DB
 
-Requirements
+**Requirements**
 
-    scalable (storage (portable) and API servers (resposne time can be high))
+- Scalable storage (portable) and API servers (response time can be high)
+- No traditional database
+- Words and meanings are updated weekly via a changelog
+- Lookup is always a single word
+- Dictionary is 1TB, containing ~170,000 words
 
-- No traditional database, Be creative
-- words and meanings are updated weekly (though a changelog)
-- lookup is always a singular word
-- dictionary is 1TB big, and has 170,000 words.
+### Storage Design
 
-### Storage
+Since we can't use a traditional DB, let's use S3 (network-attached storage) as a raw filesystem.
 
-Because we cannot use a traditional DB, let's be creative and use S3 (network attached filesystem) - raw file system.
-
-Approach 1 : 170k words, each word in a separate file
+**Approach 1: One file per word**
 
 ```txt
 s3://word-dict/a/apple.txt
@@ -24,153 +23,143 @@ s3://word-dict/a/apple.txt
             .../z/zoo.txt
 ```
 
-Folder for each character.
-Lookup : `get_word(w)` -> create s3 path, goto s3, read the file return the meaning.
+One folder per starting character. Lookup: `get_word(w)` → construct S3 path → read file → return meaning.
 
-But this approach breaks a major requirement. *Portability*
+Problem: breaks the **portability** requirement. 170,000 separate files tied to S3's path structure can't be easily packaged or moved.
 
-Approach 2: Storing all words & meanings in one file. Simplest format would be CSV
-The file will be 1TB big. Now, how would the lookup word ?
-Traversing complete dictionary is not a good choice. *Too slow and expensive*
+**Approach 2: Single flat file (CSV)**
 
-Making lookups faster:
-A universal strategy to make lookups faster - *Indexing*
-index.data & data.dat
+Store all words and meanings in one file. Simple, portable. But the file is 1TB - a linear scan for lookup is far too slow and expensive.
+
+### Making Lookups Fast - Indexing
+
+The universal strategy for fast lookups is **indexing**. We split the data logically into two parts: `index.dat` and `data.dat`.
+
+```
+word → (offset in data.dat, length)
+```
 
 ![](assets/Pasted%20image%2020250917211217.png)
 
-This could be stored as a separate file. but with some smart choices we can divide the file logically.
+**How big is the index?**
 
-What is the size of index.dat ?
+```
+~171,476 words × avg entry size of ~15.7 bytes ≈ 2.6 MB
+```
 
-Total words 171476
-Avg Words length 4.7
+2.6 MB fits comfortably in memory. This changes the whole lookup flow.
 
-Total index size : 2.6 MB
+**API server boot sequence:**
 
-$$
-size = 15.7 \times 171476 \sim 2692173.2 \sim 2.6 MB
-$$
-
-Since index is very small in size & can be stored in memory, flow would be like this
-
-API server on boot
-
-- loads the index file in memory
-- upon receiving a req
-- lookup in index (memory)
-- find offset
-- goto s3 and read the entry
-- return the memory
+1. Load `index.dat` into memory
+2. On receiving a request, look up the word in the in-memory index
+3. Get the offset and length
+4. Issue a single S3 range-read at that offset
+5. Return the meaning
 
 ![](assets/Pasted%20image%2020250917214912.png)
 
+---
 
-#### Updating the dictionary
+### Updating the Dictionary
 
-updates are *changelog*
+Updates arrive as a **changelog** (a diff of added/modified words).
 
-Procedure
+**Update procedure:**
 
-- spinup a new server
-- download the dictionary locally
-- download the changelog
-- merge in $O(n)$, create a new dict & index locally
-- upload the new dictionary on S3 & new index
+1. Spin up a new server
+2. Download the current dictionary locally
+3. Download the changelog
+4. Merge in O(n) - produce a new `data.dat` and `index.dat` locally
+5. Upload both to S3
 
-#### How is merge O(n)
+**Why is merge O(n)?**
 
-Dictionary is sorted. Index is sorted
-
-Merge -> merging of two sorted list.
+Both the dictionary and the changelog are sorted. Merging two sorted lists is O(n) - a standard merge step from merge sort.
 
 ![](assets/Pasted%20image%2020250917214633.png)
 
-#### Where to upload the new dictionary
+### Handling the Transition (Zero Downtime Updates)
 
-Same location ? `s3//word-dictionary/data.dat & index.dat`
-NOTE: servers have already loaded the old index built for old dictionary data
+If we overwrite files at the same S3 path, in-flight servers still hold the old index, causing garbage responses. Three options:
 
-User might see garbage data in response during replacement, how will we make transition smooth for users
-
-#### Transitions
-
-1. Periodic refresh of server's idnex
-2. Reactive : Use a redis pub sub to send events to the servers serving the dictionary
-3. Parallel Setup
-    1. upload index and data to a new path, keep a `meta.json`
-    2. `meta.json` will point to new location where file is uploaded.
+1. **Periodic refresh:** Servers reload the index on a schedule (e.g., every hour)
+2. **Reactive:** Use Redis Pub/Sub to notify all API servers to reload immediately
+3. **Parallel setup (cleanest):**
+    - Upload the new `index.dat` and `data.dat` to a new versioned S3 path
+    - Update a `meta.json` file to point to the new path
+    - New/restarted servers read `meta.json` on boot and serve from the new files
+    - Old servers continue serving the old files until they restart or refresh
 
 ![](assets/Pasted%20image%2020250917214923.png)
 
-New data & index files are uploaded to new path on S3 and `meta.json` file changed
-Old server continues serving old data. New server will load new `meta.json` & serve from new files.
+This gives a clean, atomic cutover with no user-visible inconsistency.
 
 ![](assets/Pasted%20image%2020250917223334.png)
-#### Solving portability
 
-Two files index and data not portable, let's merge !
-How to where index ends and data starts ? Adding a separator or predefined size of bytes.
-Adding a separator is not a good choice, we solve this problem using header.
+### Solving Portability — The Single-File Format
+
+Two separate files (`index.dat` + `data.dat`) aren't portable. Let's merge them into one file.
+
+**Problem:** How does a reader know where the index ends and data begins?
+
+**Bad idea:** Use a separator character - the separator could appear in data.
+
+**Good idea:** Use a **fixed-width header**.
 
 ![](assets/Pasted%20image%2020250917222136.png)
 
-Header stores
+The header stores:
 
-- offset of index, data
-- meta information ~ total words + versions
+- Byte offset where the index starts
+- Byte offset where the data starts
+- Metadata: total word count, version, etc.
 
 ![](assets/Pasted%20image%2020250917222143.png)
 
-*New Flow*
+**New API server boot sequence:**
 
-- API server loads header (fixed width)
-- API server loads the index
-- API server starts serving the requests
+1. Read the fixed-size header (known size, always at byte 0)
+2. Use header offsets to load the index section into memory
+3. Begin serving requests
 
-#### Real world applications
+This single-file format is fully portable - copy it anywhere and it works.
 
-- multi - tiered storage
-    - historical orders on S3
-    - latest orders in MySQL
-- Without loosing an ability to query the data store historical data on S3
+### Real-World Applications of This Pattern
 
-Athena
-DataLake
-
+- **Multi-tiered storage:** Recent orders in MySQL, historical orders as indexed flat files on S3 - without losing query ability on historical data
+- **Apache Parquet / ORC:** Column-oriented file formats that embed their own index/schema in a file footer (same idea as our header)
+- **AWS Athena / Data Lakes:** Query structured flat files on S3 directly, no database required
 ## Superfast DB KV
 
-Requirements : superfast reads, writes, deletes, persitence
+**Requirements:** Superfast reads, writes, deletes - with persistence
 
-SSD are more closer to memory rather than magnetic disks, both in terms of cost and speed.
-Each hard disk has sector and data is read based on offsets across sectors.
+### Why Append-Only Files Are Fast
+
+SSDs are closer to memory than spinning disks in both cost and speed, but the design principle here matters most for **HDDs**: sequential writes avoid disk seeks, which are the bottleneck on rotating media.
 
 ![](assets/Pasted%20image%2020250917230428.png)
 
-Log - Structured Storage
+**Log-Structured Storage:**
 
-Data stored files
+- Data written to append-only files
+- Sequential writes only - no random updates, no disk seeks during writes
+- Result: very high write throughput, especially on HDDs
 
-- append-only
-- sequential writes
-- no random updates
+> Note: SSDs don't benefit as dramatically from sequential writes since they have no seek penalty, but the design still simplifies the storage engine considerably.
 
-No disk seeks during writes
-
-What we get ? High write throughput (even on HDD)
-The SSD doesn't give similar gain
-
-
-**Simple Design** : Single files of KV pairs
+### Simple Design: Append-Only KV File
 
 ![](assets/Pasted%20image%2020250917231928.png)
 
-PUT (k, v) -> append to this file (lighting fast operations)
+```
+PUT(k, v) → append entry to file   ← extremely fast
+DEL(k)    → append a tombstone entry: PUT(k, tombstone)
+```
 
-DEL (k) -> delete operation is also a *PUT* with special value (-1) (representational)
-DEL(k) = PUT(K, -1)
+Deletes are also appends - no random disk writes ever.
 
-#### How one entry in file looks like ?
+**On-disk entry format:**
 
 ![](assets/Pasted%20image%2020250917232240.png)
 
@@ -179,9 +168,15 @@ When reading one entry from file, do we know how much to read. We cannot read *u
 
 ![](assets/Pasted%20image%2020250917232248.png)
 
-We read KS2 (4 bytes) VS2(4 bytes) and then read
-KS2 bytes for key
-VS2 bytes for values
+```
+[ CRC (4B) | Key Size (4B) | Value Size (4B) | Key | Value ]
+```
+
+- Read `Key Size` and `Value Size` first (fixed 4 bytes each)
+- Then read exactly that many bytes for the key and value
+- **CRC** is written first — used to detect corruption on read
+
+**Detecting corruption:** Compute CRC over the entry; if it doesn't match the stored CRC, the entry is corrupt and can be discarded.
 
 #### Solving Integrity
 
@@ -191,41 +186,48 @@ Finding corrupt entries : CRC -> first thing we flush
 
 ![](assets/Pasted%20image%2020250917232724.png)
 
-#### Faster GET(k)
+### Faster GET - In-Memory Hash Index
 
-To get O(1) GET we use *Index*.
-We create an in-memory Hash Table
+To achieve O(1) reads, maintain an in-memory hash table:
 
 ![](assets/Pasted%20image%2020250917233018.png)
 
-GET(k) -> pointed queries
+```
+key → (file_id, offset, size)
+```
 
-- Hash Table lookup
-- disk seek
-- disk read
+**GET(k):**
 
-limitation : index to fit in memory
+1. Hash table lookup → get file ID + offset
+2. Seek to that offset on disk
+3. Read and return the value
 
-#### When file grows too big ?
+**Limitation:** All keys must fit in memory (values live on disk, only keys are indexed).
 
-Solution : rotate the file every *t* bytes.
-We create new file and old file is made *immutable*
+### File Rotation and Compaction
+
+**Problem:** The append-only file grows forever.
+
+**Solution:** Rotate the file every _t_ bytes. The current file becomes **immutable**; a new active file is created.
 
 
 ![](assets/Pasted%20image%2020250917233227.png)
+
 
 #### Changes in our in-memory index
 
 ![](assets/Pasted%20image%2020250917233700.png)
 
-We have a lot of files, can we optimize ?
+**Problem:** Many files accumulate stale and deleted entries.
 
-We merge & compact.
-All immutable files are merged(stale entries skipped) & compact(deleted entries skipped)
+**Solution:** **Merge and compact** immutable segments in the background:
+
+- **Merge:** Combine multiple segment files, keeping only the latest value per key
+- **Compact:** Skip tombstone (deleted) entries entirely
 
 ![](assets/Pasted%20image%2020250917233832.png)
 
-Because files are merged offset changes, we have to update index atomically !
+After compaction, byte offsets change - the in-memory index must be **updated atomically** to reflect new file IDs and offsets.
 
 Limitations of the DB : Keys must fit in memory
 Strength of this DB : O(1) reads, writes, deletes
@@ -236,14 +238,48 @@ Strength of this DB : O(1) reads, writes, deletes
 
 What we just designed is *Bitcask*
 
+### Bitcask
+
+This is the **Bitcask** storage engine, used in production at Uber as the storage backend for **Riak**.
+
+**Riak** is a distributed key-value store that wraps Bitcask, adding distributed features (consistent hashing, replication, fault tolerance) on top of each node's local Bitcask instance.
+
 ![](assets/Pasted%20image%2020250917234340.png)
 
-Most efficient KV database, used by uber in production as backend for Riak, Each node of Riak has an instances of Bitcask running
+**Bitcask characteristics:**
 
-Riak ~ wrapper on top of Bitcask, helps in distributed features for Bitcask.
+|Property|Detail|
+|---|---|
+|Reads|O(1) — one disk seek per GET|
+|Writes|O(1) — sequential append|
+|Deletes|O(1) — tombstone append|
+|Throughput|Very high — I/O saturating|
+|Constraint|All keys must fit in RAM|
+|Backups|Trivial — copy the immutable segment files|
 
+---
 
-Exercise
+## Exercises
 
-- implement Riak/Bitcask
-- read the paper on bitcask
+- Implement a basic Bitcask-style storage engine
+- Read the [Bitcask paper](https://riak.com/assets/bitcask-a-log-structured-hash-table-for-fast-key-value-data.pdf)
+## Further Reading
+
+**Word Dictionary / Indexed Flat Files**
+
+- [Apache Parquet format spec](https://parquet.apache.org/docs/file-format/) - see how Parquet embeds its schema and row-group index in a file footer (same header concept, production-grade)
+- [SSTable and LSM-Tree](https://www.cs.umb.edu/~poneil/lsmtree.pdf) - O'Neil et al., the LSM-Tree paper - a natural next step from the indexed flat file design
+
+**Log-Structured Storage**
+
+- [Bitcask: A Log-Structured Hash Table for Fast Key/Value Data](https://riak.com/assets/bitcask-a-log-structured-hash-table-for-fast-key-value-data.pdf) - the original Basho paper, short and very readable
+- _Designing Data-Intensive Applications_ - Ch. 3 (Storage and Retrieval) covers log-structured engines, SSTables, and LSM-Trees in depth
+- [LevelDB implementation notes](https://github.com/google/leveldb/blob/main/doc/impl.md) - how Google's LSM-based KV store extends the ideas here
+
+**Compaction & Merge Strategies**
+
+- [RocksDB tuning guide](https://github.com/facebook/rocksdb/wiki/RocksDB-Tuning-Guide) - production-grade compaction strategies (size-tiered vs leveled) used at Facebook
+
+**Riak**
+
+- [Riak architecture overview](https://docs.riak.com/riak/kv/latest/learn/concepts/) - how Riak distributes Bitcask across a cluster using consistent hashing
