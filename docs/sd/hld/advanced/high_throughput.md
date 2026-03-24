@@ -1,200 +1,211 @@
 # High Throughput
 
-Why we build word dictionary on S3 ?
+## Recap: Why These Designs Matter
 
-- embedded database
-- cheap storage, costly access
-- cold storage with infrequent access
+**Why did we build the word dictionary on S3?**
 
-Why we studied Bitcask ?
+- Demonstrates embedded/file-based databases without a traditional DB engine
+- S3 is cheap storage with costly per-access pricing - ideal for cold storage with infrequent access
+- Shows how indexing can make flat-file lookups practical
 
-- log-structured storage
-- Kafka  Similar high write throughput systems use that
-- Metrics, Analytics, click-stream, uses log-structured.
+**Why did we study Bitcask?**
+
+- Demonstrates log-structured storage - the foundation of high write throughput systems
+- Kafka, metrics pipelines, analytics engines, and clickstream processors all use log-structured designs for the same reason: sequential appends are fast
+- Establishes the building blocks for understanding LSM-Trees and SSTable-based engines
 
 ## Multi-Tiered Datastore
 
-Cost efficient Order Storage Systems
+### The Problem: Cost-Efficient Order Storage at Scale
 
-Transactional System : *Orders* -> all orders that happen on Amazon goes through this. So scale on the system becomes a top priority
+Consider Amazon's order system. Every order flows through a transactional database. At launch this works fine, but as the system grows:
+
+- Write and read volume increases
+- The orders table becomes very large
+- Index lookups become disk-bound
+- Query performance degrades
 
 ![](assets/Pasted%20image%2020250918113142.png)
 
-Everything works fine for the first few months, and then Database performance degrades -> large number of writes & reads
+Everything works fine for the first few months, and then Database performance degrades because of large number of writes & reads
 
 ![](assets/Pasted%20image%2020250918113341.png)
 
-The next phase of DB scaling seems to *Sharding*
-Sharding is not always a great choice because
+The next phase of DB scaling seems to be *Sharding* but sharding introduces significant problems:
 
-- multi-tenant isolation
-- operational overhead.
+- Multi-tenant isolation becomes difficult
+- Cross-shard queries and transactions are painful
+- Operational overhead is high
 
 ![](assets/Pasted%20image%2020250918113515.png)
 
 #### What next after replicas ?
 
-Root cause of DB degradation. -> Table is too large, computation takes time, index lookups are disk bound.
+**Root cause of degradation:** The table is simply too large. All orders - new and old - compete for the same resources.
 
-Can we reduce the table size ?
+**Key insight:** Do users actually query 3-year-old orders as frequently as last week's orders? Almost never. Access patterns are heavily skewed toward recent data.
 
 ### Access Pattern
 
-The Idea : move orders from one DB to another depending on its age to *reduce the load* on the transactional database.
+*Move orders between storage tiers* based on age. This reduces the working set of the hot transactional database without sharding it.
 
 ![](assets/Pasted%20image%2020250918113916.png)
 
-### Tiered Datastore
-By moving data from one tier to another we are reducing the time to computation
+### Tiered Storage Architecture
 
-#### Hot Store : Transactional store (read/write)
+**Hot Store - Transactional (read/write)**
 
-- transactional
-- low latency
-- strong consistency
-- expensive
+- Low latency, strong consistency
+- Full transactional support (ACID)
+- Expensive (e.g., RDS, Aurora)
+- Stores recent orders (e.g., last 90 days)
 
-#### Warm Store : Read-only workloads
+**Warm Store - Read-heavy workloads**
 
-- read-only
-- non-transactional
-- frequent reads
-- could be a little slower
-- horizontally scalable
-- less expensive
+- Read-only, non-transactional
+- Slightly higher latency acceptable
+- Horizontally scalable, less expensive
+- Stores older orders (e.g., 90 days–2 years)
 
-#### Cold Store : Infrequent reads, cheap, very slow
+**Cold Store - Archival**
 
-- read-only
-- very infrequent reads
-- compliance and accounting
-- offline analytics
+- Read-only, very infrequent access
+- Compliance, accounting, offline analytics
+- Very cheap, slow retrieval acceptable (e.g., S3, Glacier)
+- Stores everything older than 2 years
+
+A background migration job (driven by CDC or a scheduled process) moves records across tiers as they age. The API layer routes queries to the appropriate tier based on the order's age or ID range.
 
 ![](assets/Pasted%20image%2020250918115830.png)
 
 ## Designing S3
 
-Requirements
+**Requirements:**
 
-- Blob Storage
-- Network File System
-- Scalable & Cheap
+- Blob/object storage
+- Accessible as a network file system
+- Infinitely scalable and cheap
 
 S3 : just a distributed file storage that scales *infinitely*
 
-Day 0 architecture
+### Day 0: The Simplest Design
+
+S3 is conceptually a static file server:
 
 ![](assets/Pasted%20image%2020250918232808.png)
 
-S3 is just like a Static File Server. `s3://bucket.s3.aws.com/image/logo.png`
+```
+s3://bucket.s3.aws.com/images/logo.png
+```
+
 Request comes to the API server then goto storage and fetch the file at the location specified and return it.
 
-If one HDD is not enough what is the next stage of evolution. ? *Two HDDs*
+As storage needs grow, you add more HDDs. 
 
 ![](assets/Pasted%20image%2020250918233021.png)
 
-What if one computer is not able to support all the request. You can add more machines ! But before that makes the storage central and add a load balancer.
+As request volume grows, you add more API servers behind a load balancer and move to a centralized, shared storage layer.
 
 ![](assets/Pasted%20image%2020250918233259.png)
 
-#### Storage Layer
+### Storage Layer Design
 
-What type of storage to use here ? and why ?
+**Why HDDs over SSDs here?**
+
+S3 is optimized for cost and throughput, not latency. Spinning disks (HDDs) are far cheaper per GB. The key to getting good write performance on HDDs is eliminating disk seeks - which is exactly what log-structured storage provides.
 
 ![](assets/Pasted%20image%2020250918222918.png)
 
-How can we have an infinite storage ?
+**Log-structured filesystem on HDDs:**
 
-Spinning disk (cheap) HDD. To get write performance. No disk seek. Log Structured Storage Filesystem.
+- All writes are sequential appends - no random writes, no disk seeks
+- High write throughput even on spinning disks
 
 ![](assets/Pasted%20image%2020250918224846.png)
 
-*How do we get infinite/scalable storage ?*
+**Achieving infinite/scalable storage:**
 
-There is a device driver in each server rack which connects all disk in serial, and keeps track of the head of the write pointer. To ensure new write don't conflict with switching to new disk we redirect new writes to new disk, 70% full on current disk.
+Each server rack has a device driver that manages all disks in the rack serially and tracks a single write-head pointer. When the current disk reaches ~70% capacity, new writes are redirected to the next disk. A higher-level rack monitor connects multiple racks, extending this to cluster scale.
 
-But device driver is limited to the rack, we can have another monitor/switch application connecting racks.
+**Deletes** in S3 are implemented as tombstone entries - the actual data is reclaimed lazily during background **merge and compaction** (defragmentation).
 
-Delete in S3 is classic use case of merge and compact (defragmentation).
-Updating in S3 would require writing the same object to a new location, in a structured log manner and mark previous items old version. (*giving object versioning feature*)
+**Updates** in S3 write the new object to a new location and mark the old entry as a previous version - this is what gives S3 its **object versioning** feature naturally.
 
-How does the S3 API server know which HDD (nodes) to go to ?
+### Routing: How Does the API Server Know Which Node to Use?
 
-### Routing
+#### Hash-Based Partitioning
 
-#### Hash Based Partitioning
-For every path, compute hash & pick a HDD and store/read there.
+Hash the object path → pick a storage node.
 
-*Advantages:* near random allocation, near uniform distribution, no explicit configuration
+- **Advantages:** Near-random, near-uniform distribution; no explicit configuration
+- **Disadvantages:**
+    - Rebalancing and re-indexing required whenever nodes are added or removed
+    - Files from the same bucket may be spread across many nodes - no tenant isolation
+    - Load from one high-traffic tenant can impact others sharing the same node
 
-Disadvantages : What if number of HDD changes ?
-
-- rebalancing
-- reindexing
-
-Files of same bucket may lie on different nodes. You do not get *tenant isolation*
-Files from multiple tenants may lie on same node, load from one client will affect performance of others.
-
-Hash Based Routing is almost always bad as it takes control away from user & doesn't enforce data locality.
+Hash-based routing gives up locality and control, making it a poor choice for an object store.
 
 #### Consistent Hashing
 
-Partitioning & keys on a consistent hash ring.
-The node to the right owns the data
+Map both objects and nodes onto a hash ring. Each node owns the keys in the arc to its left.
 
-Advantages: Minimal data transfer when new storage node is added or removed, Near random/near uniform distribution.
-Disadvantage:
+- **Advantages:** Minimal data movement when nodes are added/removed; near-uniform distribution
+- **Disadvantages:** Same tenant isolation problems as hash-based partitioning - files are still spread across nodes, and one tenant's workload affects others
 
-- no tenant isolation
-- workload of one will affect the other
-- files of one tenant are spread across nodes.
+#### Range-Based Partitioning (What S3 Actually Uses)
 
-#### Range Based Partitioning
+Partition the key space by prefix ranges. This preserves **locality of objects**.
 
-*Hash based approaches loses locality of objects*
-We want more control to partitioning logic.
+- **Advantages:**
+    - Tenant isolation - one bucket's files can be colocated
+    - Easier performance isolation per tenant
+    - Full control over where data resides
+    - When a node becomes hot, **split its range** into two sub-ranges and assign each to a separate node
 
-- easier performance isolation
-- locality of objects
-- more control over where objects are residing
-
-`bucket/_/_`
-
-`amzn/image/a.jpg`
-`amzn/image/b.jpg`
+```
+amzn/images/a.jpg  →  Node A
+amzn/images/b.jpg  →  Node A
+amzn/videos/x.mp4  →  Node B
+```
 
 ![](assets/Pasted%20image%2020250918231428.png)
 
-*Dealing with hot nodes*
-
-When a node becomes *hot*, scale out (split into two)
-Simple with ranges based partitioning. If requests go beyond a certain limit you can limit `#request` per account.
+**Handling hot nodes:** If a single prefix receives too much traffic, split the range. You can also enforce per-account request rate limits as an additional control
 
 ![](assets/Pasted%20image%2020250918231758.png)
 
-#### Another way to solve Hot Nodes (not S3)
-Have large number of logical shards (partitions) on a few physical machines
+### Logical Shards on Physical Nodes (General Strategy)
+
+An alternative to direct range ownership is maintaining many **logical shards** mapped onto fewer **physical nodes** via a partition map.
+
+This is how **Elasticsearch** (index shards) and Instagram's posts table work.
 
 ![](assets/Pasted%20image%2020250918232129.png)
 
-- Elastic Search uses this strategy. (Head Plugin)
-- Instagram did this with their main posts table.
 
-Key reason : Moving one exclusive subset of data across data nodes (load balancing) is simpler & efficient.
+**Why it helps:**
 
-How do we know which partition is on which node ?
+- Moving one logical shard between physical nodes is a well-defined, bounded operation
+- Load balancing becomes: reassign a shard, not migrate arbitrary data ranges
 
-There has to be an entry some where *Partition Map Table*, and someone (*Partition Manager*) needs to manage the partitions movement.
+**Components needed:**
+
+- **Partition Map Table:** Records which logical shard lives on which physical node
+- **Partition Manager:** Orchestrates shard movement and keeps the map consistent
+
+
 
 
 ![](assets/Pasted%20image%2020250919000601.png)
 
-One partition is owned by one partition server but one partition server can own multiple partitions.
+One physical node can own multiple logical shards, but each logical shard has exactly one owning node at a time (plus replicas).
 
 
 ![](assets/Pasted%20image%2020250919001259.png)
 
-Making partition manager no *SPOF*
+**Avoiding a Single Point of Failure (SPOF) on the Partition Manager:**
+
+The Partition Manager must itself be highly available — run it as a replicated service (e.g., backed by ZooKeeper, etcd, or Raft consensus).
 
 ![](assets/Pasted%20image%2020250919001524.png)
 
@@ -204,31 +215,55 @@ NOTE: below diagram seems counterintuitive to having each microservice own its o
 ![](assets/Pasted%20image%2020250919001944.png)
 
 What happens when a partition server goes down ?
-
-
 ### Data Durability
 
-Duplication Data : only way to achieve durability
+The only reliable way to achieve durability is **replication**.
+
+Each object is written to multiple storage nodes (typically 3 replicas across different racks or availability zones). A write is acknowledged only after a quorum of replicas confirm it.
 
 ![](assets/Pasted%20image%2020250919002306.png)
 
 
 
-#### Data Integrity : End-to end checksum
+**Data Integrity: End-to-End Checksums**
 
-Within same storage node durability ? *RAID*
+Bit rot, hardware faults, and network corruption are real at scale. Every component in the read/write path validates a checksum:
 
-- We have to ensure that we never save or return corrupted data
-- So, we check & validate checksum across all systems & components while storing & retrieving data
-- Multiple Chunk -> combined -> integrity -> checksum
+- Computed when data is written
+- Verified when data is read
+- Applied at each hop: client → API server → storage node
+- For large objects split into chunks, each chunk carries its own checksum; a combined checksum covers the full object
 
-Read following Research papers
+Within a single storage node, **RAID** provides an additional layer of hardware-level redundancy.
 
-- Windows Azure Storage : A highly available cloud storage service with strong consistency
-- Building a database on S3
-- SCUBA by Facebook
+---
 
-Following Book is great for DB
+## Exercises
 
-- Database internals by Alex Petrov
+- Trace a PUT and GET request through the full S3 design above, identifying every component touched
+- Implement a simplified range-based partition manager with a shard map
+- Read the papers listed below
 
+---
+
+## Further Reading
+
+**Research Papers**
+
+- [Windows Azure Storage: A Highly Available Cloud Storage Service with Strong Consistency](https://sigops.org/s/conferences/sosp/2011/current/2011-Cascais/printable/11-calder.pdf) - Microsoft's production blob storage architecture; covers stream layer, partition layer, and end-to-end checksums
+- [Building a Database on S3](https://dl.acm.org/doi/10.1145/1376616.1376645) - Brantner et al.; explores using S3 as a database storage backend
+- [SCUBA: Diving into Data at Facebook](https://research.facebook.com/publications/scuba-diving-into-data-at-facebook/) - Facebook's fast, scalable in-memory analytics store
+
+**Books**
+
+- _Database Internals_ by Alex Petrov - covers storage engines, log-structured storage, B-Trees, and distributed consensus in depth; directly extends everything in this module
+- _Designing Data-Intensive Applications_ by Martin Kleppmann - Ch. 3 (Storage and Retrieval) and Ch. 6 (Partitioning) are directly relevant
+
+**Log-Structured Storage**
+
+- [The Log-Structured Merge-Tree (LSM-Tree)](https://www.cs.umb.edu/~poneil/lsmtree.pdf) - O'Neil et al.; the paper that formalized log-structured storage for databases
+- [WiscKey: Separating Keys from Values in SSD-Conscious Storage](https://www.usenix.org/system/files/conference/fast16/fast16-papers-lu.pdf) - a modern take on Bitcask-style key-value separation, optimized for SSDs
+
+**Tiered Storage**
+
+- [Amazon S3 storage classes](https://aws.amazon.com/s3/storage-classes/) - a practical overview of hot/warm/cold tiers as implemented in production (S3 Standard → S3-IA → Glacier)
