@@ -231,11 +231,32 @@ Not everything needs WebSockets. These go through regular REST APIs backed by th
 
 ## Further Reading
 
-- _Designing Data-Intensive Applications_ - Kleppmann (chapters on replication, partitioning, stream processing)
-- _Building a Scalable Chat Application_ - Cassandra data modeling for messaging (Discord's blog post on switching from Cassandra → ScyllaDB is excellent)
-- _Redis Pub/Sub vs Streams_ - understand when to use each for realtime fanout
-- _The WebSocket Protocol_ - RFC 6455 (short, readable)
-- _Socket.IO internals_ - how it handles fallback, reconnection, and multiplexing
-- _Kafka for async persistence_ - why a message queue between edge servers and the DB is better than direct writes under load
-- _End-to-end encryption in messaging_ - Signal Protocol (used by WhatsApp, Signal); good starting point is the Signal blog
-- _WebTransport_ - the modern successor to WebSockets over HTTP/3 (QUIC); actively being adopted
+**Foundational Texts**
+
+- [Designing Data-Intensive Applications — Kleppmann](https://dataintensive.net/) - chapters on replication, partitioning, and stream processing are directly relevant
+
+**Messaging & Chat at Scale**
+
+- [Discord: How We Switched from Cassandra to ScyllaDB](https://discord.com/blog/how-discord-stores-trillions-of-messages) - excellent real-world case study on Cassandra data modeling for messaging and why they migrated; covers tombstone accumulation, hot partitions, and latency tail issues
+- [Discord: How We Store Billions of Messages](https://discord.com/blog/how-discord-stores-billions-of-messages) - the earlier post; read this first, then the ScyllaDB migration post for the full arc
+
+**Redis**
+
+- [Redis Pub/Sub documentation](https://redis.io/docs/latest/develop/interact/pubsub/) - fire-and-forget fanout; no persistence, no consumer groups, no replay
+- [Redis Streams documentation](https://redis.io/docs/latest/develop/data-types/streams/) - persistent, consumer-group-aware, replayable; the right choice when you need delivery guarantees
+- [Redis Pub/Sub vs Streams — when to use each](https://redis.io/blog/redis-pub-sub-under-the-hood/) - use Pub/Sub for ephemeral presence signals (typing indicators, online status); use Streams for messages that must not be lost
+
+**WebSockets & Real-Time Transport**
+
+- [RFC 6455 — The WebSocket Protocol](https://www.rfc-editor.org/rfc/rfc6455) - short and readable as RFCs go; understanding the handshake, framing, and close sequence is worth the hour
+- [Socket.IO internals](https://socket.io/docs/v4/how-it-works/) - how it handles transport fallback (WebSocket → HTTP long-poll), reconnection with exponential backoff, and namespace multiplexing over a single connection
+- [WebTransport — the successor to WebSockets over HTTP/3](https://developer.chrome.com/docs/capabilities/web-apis/webtransport) - built on QUIC; eliminates head-of-line blocking that plagues WebSockets over TCP; actively being adopted by browsers and CDNs
+
+**Async Persistence**
+
+- [Kafka as a write buffer — the case for async persistence](https://kafka.apache.org/documentation/#introduction) - a message queue between edge servers and the DB decouples write spikes from DB capacity; under load, direct DB writes cause cascading failures whereas Kafka absorbs the burst and lets the DB drain at its own pace
+
+**End-to-End Encryption**
+
+- [The Signal Protocol — technical overview](https://signal.org/docs/) - the Double Ratchet Algorithm and X3DH key agreement; used by WhatsApp, Signal, and Google Messages; the starting point for understanding E2E encryption in messaging
+- [WhatsApp Encryption Overview](https://www.whatsapp.com/security/WhatsApp-Security-Whitepaper.pdf) - WhatsApp's whitepaper describing their Signal Protocol implementation; a concrete applied example

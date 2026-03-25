@@ -246,26 +246,27 @@ Key Takeaways :
 
 **On CDN & Content Delivery**
 
-- _Web Performance in Action_ - Jeremy Wagner. Practical and covers CDN caching strategies well.
-- Cloudflare's engineering blog - specifically their posts on cache architecture and image resizing pipelines.
+- [Web Performance in Action — Jeremy Wagner](https://www.manning.com/books/web-performance-in-action) - practical and covers CDN caching strategies well
+- [Cloudflare Engineering Blog — Cache Architecture](https://blog.cloudflare.com/tag/cache/) - specifically their posts on cache architecture and image resizing pipelines
 
 **On Object Storage & Upload Patterns**
 
-- AWS S3 documentation on pre-signed URLs is actually worth reading in full - it covers expiry, scoping, and the security model clearly.
-- Dropbox's 2016 blog post _"Migrating from S3 to our own infrastructure"_ - interesting counter-perspective on when S3 stops being the right answer at extreme scale.
+- [AWS S3 Pre-signed URLs documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html) - covers expiry, scoping, and the security model clearly; worth reading in full
+- [Dropbox: Migrating from S3 to our own infrastructure (2016)](https://dropbox.tech/infrastructure/magic-pocket-infrastructure) - interesting counter-perspective on when S3 stops being the right answer at extreme scale
 
 **On Event-Driven Architecture & Kafka**
 
-- _"The Log: What every software engineer should know about real-time data's unifying abstraction"_ - Jay Kreps (LinkedIn, 2013).
-- _Designing Event-Driven Systems_ - Ben Stopford (free PDF from Confluent). Good follow-up to Kreps; covers the adapter/repartitioning pattern more concretely.
-- _Kafka: The Definitive Guide_ - Narkhede, Shapira, Palino. Reference-level, not a cover-to-cover read.
+- [The Log: What every software engineer should know about real-time data's unifying abstraction — Jay Kreps (2013)](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying) - foundational; read this first
+- [Designing Event-Driven Systems — Ben Stopford](https://www.confluent.io/designing-event-driven-systems/) - free PDF from Confluent; good follow-up to Kreps, covers the adapter/repartitioning pattern more concretely
+- [Kafka: The Definitive Guide — Narkhede, Shapira, Palino](https://www.oreilly.com/library/view/kafka-the-definitive/9781491936153/) - reference-level, not a cover-to-cover read
 
 **On Distributed Counting & Aggregation**
 
-- Google's _MapReduce_ paper (2004) - the batching + aggregation pattern your worker nodes use is essentially a streaming MapReduce. Worth understanding the origin.
-- Twitter's paper on _"Summingbird"_ - their hybrid batch/streaming counting system. Directly relevant to the hashtag counting problem.
+- [MapReduce: Simplified Data Processing on Large Clusters — Dean & Ghemawat (2004)](https://research.google/pubs/mapreduce-simplified-data-processing-on-large-clusters/) - the batching and aggregation pattern your worker nodes use is essentially a streaming MapReduce; worth understanding the origin
+- [Summingbird: A Framework for Integrating Batch and Online MapReduce Computations — Twitter](https://www.vldb.org/pvldb/vol7/p1441-boykin.pdf) - Twitter's hybrid batch/streaming counting system; directly relevant to the hashtag counting problem
 
 **On Instagram's Actual Architecture**
 
-- Instagram Engineering Blog (on Medium) - their posts from 2011–2013 are gold. _"Sharding & IDs at Instagram"_ and _"What Powers Instagram"_ specifically.
-- _"Scaling Instagram Infrastructure"_ - Lisa Guo & Hui Ding's PyCon 2017 talk (YouTube). Covers the journey from that Year-1 stack to where it went.
+- [Sharding & IDs at Instagram](https://instagram-engineering.com/sharding-ids-at-instagram-1cf5a71e5a5c) - one of the best practical posts on ID generation and sharding decisions
+- [What Powers Instagram — Instagram Engineering (2011)](https://instagram-engineering.com/what-powers-instagram-hundreds-of-instances-dozens-of-technologies-adf2969a604d) - the original Year-1 stack post; read before the scaling talk for full context
+- [Scaling Instagram Infrastructure — Lisa Guo & Hui Ding, PyCon 2017](https://www.youtube.com/watch?v=hnpzNAPiC0E) - covers the journey from the Year-1 stack to where it went; one of the better infrastructure talks on YouTube

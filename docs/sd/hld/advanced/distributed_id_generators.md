@@ -386,23 +386,23 @@ $$ LANGUAGE plpgsql;
 
 ## Further Reading & Exercises
 
-**Essential reads:**
+**Essential Reads**
 
-- [Instagram Engineering: Sharding & IDs at Instagram](https://instagram-engineering.com/sharding-ids-at-instagram-1cf5a71e5a5c)
-- [Twitter's Snowflake announcement blog post](https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake)
-- [Flickr's Ticket Servers](https://code.flickr.net/2010/02/08/ticket-servers-distributed-unique-primary-keys-on-the-cheap/)
-- [Discord's Snowflake documentation](https://discord.com/developers/docs/reference#snowflakes)
-- DDIA Chapter 9 — covers linearizability and ordering guarantees in depth
+- [Instagram Engineering: Sharding & IDs at Instagram](https://instagram-engineering.com/sharding-ids-at-instagram-1cf5a71e5a5c) - how Instagram generates 64-bit sortable IDs using Postgres schemas, avoiding a central ID service entirely
+- [Twitter's Snowflake announcement](https://blog.twitter.com/engineering/en_us/a/2010/announcing-snowflake) - the original announcement; short and worth reading before diving into implementations
+- [Flickr's Ticket Servers](https://code.flickr.net/2010/02/08/ticket-servers-distributed-unique-primary-keys-on-the-cheap/) - MySQL-based centralized ID generation; simpler than Snowflake, instructive on the trade-offs
+- [Discord's Snowflake documentation](https://discord.com/developers/docs/reference#snowflakes) - how Discord adapted Snowflake for their epoch, worker IDs, and API sorting guarantees
+- [DDIA Chapter 9 — Consistency and Consensus](https://dataintensive.net/) - covers linearizability and ordering guarantees in depth; the theoretical grounding for why ID ordering is harder than it looks
 
-**Go deeper:**
+**Go Deeper**
 
-- [Sonyflake on GitHub](https://github.com/sony/sonyflake) - well-structured open-source implementation worth reading
-- _Lamport Clocks_ and _Vector Clocks_ - the theoretical foundation for logical time in distributed systems; if you care about ordering without a central clock, these are the next step
-- _Hybrid Logical Clocks (HLC)_ - used in CockroachDB; combines physical and logical time for causally consistent IDs
-- [TiDB's approach to distributed auto-increment](https://docs.pingcap.com/tidb/stable/auto-increment) - similar to Amazon batching but with guarantees around monotonicity within a session
+- [Sonyflake on GitHub](https://github.com/sony/sonyflake) - Sony's Snowflake variant; well-structured open-source implementation worth reading for how they handle machine IDs across AWS instances
+- [Lamport Clocks](https://lamport.azurewebsites.net/pubs/time-clocks.pdf) and [Vector Clocks](https://en.wikipedia.org/wiki/Vector_clock) - the theoretical foundation for logical time in distributed systems; the next step if you care about ordering without a central clock
+- [Hybrid Logical Clocks (HLC)](https://cse.buffalo.edu/tech-reports/2014-04.pdf) - used in CockroachDB; combines physical and logical time for causally consistent IDs
+- [TiDB's approach to distributed auto-increment](https://docs.pingcap.com/tidb/stable/auto-increment/) - similar to Amazon batching but with monotonicity guarantees within a session
 
-**Exercises:**
+**Exercises**
 
 - Implement Snowflake ID generation in Go - handle sequence overflow and clock rollback gracefully
 - Benchmark UUID vs. int64 Snowflake IDs in PostgreSQL: create two tables with 10M rows and compare index size and range query performance
-- Read the New Yorker article : [The Friendship That Made Google Huge](https://www.newyorker.com/magazine/2018/12/10/the-friendship-that-made-google-huge) - it's about Jeff Dean and Sanjay Ghemawat, and gives context for how Google's infrastructure (which these ID systems feed into) was built.
+- [The Friendship That Made Google Huge — The New Yorker](https://www.newyorker.com/magazine/2018/12/10/the-friendship-that-made-google-huge) - about Jeff Dean and Sanjay Ghemawat; gives context for how Google's infrastructure was built

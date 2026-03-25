@@ -266,16 +266,16 @@ The intuition: if fewer than 25% of a random sample are expired, the overall pop
 
 ## Further Study
 
-- Why ORMs are bad ideas ?
-- Central Limit Theorem (why sample size 20 works ?)
-- B+ Tree rebalancing
-- FizzBuzz Enterprise Edition (a joke, but an instructive one)
+- [Why ORMs are bad ideas?](https://www.google.com/search?q=why+ORMs+are+bad+ideas) - start with Matthas Noback's critiques and the "ORM is an anti-pattern" discourse; form your own opinion
+- [Central Limit Theorem - why does a sample size of 20 work?](https://en.wikipedia.org/wiki/Central_limit_theorem) - understanding this explains why Redis's random 20-key TTL sampling is statistically sound
+- [B+ Tree rebalancing](https://en.wikipedia.org/wiki/B%2B_tree) - understand splits and rotations; critical for reasoning about write amplification in indexes
+- [FizzBuzz Enterprise Edition](https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition) - a joke, but an instructive one on over-engineering
 
-More Resources
+## More Resources
 
-- _A Critique of ANSI SQL Isolation Levels_ - Berenson et al. (1995) - properly defines isolation anomalies (dirty read, phantom, lost update)
-- _DDIA_ - Chapter 7 (Transactions) - clearest explanation of isolation levels in practice
-- PostgreSQL docs on _Explicit Locking_ - best practical reference for `FOR UPDATE`, `SKIP LOCKED`, `NOWAIT` and their interaction with MVCC
-- _Use The Index, Luke_ (use-the-index-luke.com) - free, deep dive into how B-Tree indexes actually work and why most developers misuse them
-- _Uber's migration from PostgreSQL to MySQL_ - real-world case where B-Tree rebalancing on write-heavy workloads drove the decision
-- _Redis source - `expire.c`_ - see the random sampling TTL strategy implemented directly
+- [A Critique of ANSI SQL Isolation Levels — Berenson et al. (1995)](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/tr-95-51.pdf) - properly defines isolation anomalies (dirty read, phantom, lost update); the paper that fixed decades of ambiguous SQL spec language
+- [DDIA - Chapter 7 (Transactions)](https://dataintensive.net/) - clearest explanation of isolation levels in practice; read alongside the Berenson paper
+- [PostgreSQL docs on Explicit Locking](https://www.postgresql.org/docs/current/explicit-locking.html) - best practical reference for `FOR UPDATE`, `SKIP LOCKED`, `NOWAIT` and their interaction with MVCC
+- [Use The Index, Luke](https://use-the-index-luke.com/) - free, deep dive into how B-Tree indexes actually work and why most developers misuse them
+- [Uber's migration from PostgreSQL to MySQL](https://www.uber.com/blog/postgres-to-mysql-migration/) - real-world case where B-Tree rebalancing on write-heavy workloads drove the decision
+- [Redis source - `expire.c`](https://github.com/redis/redis/blob/unstable/src/expire.c) - see the random sampling TTL strategy implemented directly
