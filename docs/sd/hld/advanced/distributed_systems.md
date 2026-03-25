@@ -184,8 +184,21 @@ But why are we doing this ? *We are doing this to avoid single-point of failure(
 
 ## Further Reading
 
-- Implement a load balancer with tunable algorithm locally.
-- Read this Paper : Maglev : A fast and reliable software load balancer
-- Read about redis : *Redlock* : Martin Kleppmann & implementation blog
-- Read on Chubby Lock: Lock service for loosely coupled distributed systems
-- https://arpitbhayani.me/blogs > 15 blogs on distributed systems & distributed transactions.
+**Implementation**
+
+- [Build a load balancer locally](https://github.com/karanpratapsingh/system-design#load-balancing) - implement round-robin, least-connections, and consistent-hash algorithms yourself; the implementation details reveal trade-offs that theory glosses over
+
+**Papers**
+
+- [Maglev: A Fast and Reliable Software Network Load Balancer — Google (2016)](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/44824.pdf) — Google's production load balancer; covers consistent hashing with Maglev hashing (better distribution than standard consistent hashing), connection tracking, and fault tolerance at Google scale
+- [Chubby: The Chubby Lock Service for Loosely-Coupled Distributed Systems — Burrows (2006)](https://research.google/pubs/the-chubby-lock-service-for-loosely-coupled-distributed-systems/) - Google's distributed lock service; the inspiration for ZooKeeper and etcd; explains how leader election and distributed coordination are done in production
+
+**Distributed Locking**
+
+- [Redlock — Redis Distributed Locking](https://redis.io/docs/latest/develop/use/patterns/distributed-locks/) - the official Redis documentation on Redlock; read the algorithm description carefully before the controversy
+- [How to do distributed locking — Martin Kleppmann](https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html) - Kleppmann's critique of Redlock; argues it is unsafe under certain timing assumptions; essential reading
+- [Is Redlock safe? — Antirez (Redis author) response](http://antirez.com/news/101) - Salvatore Sanfilippo's rebuttal to Kleppmann; read both back-to-back and form your own view; this exchange is one of the best public distributed systems debates available
+
+**Blogs**
+
+- [Arpit Bhayani — Distributed Systems & Distributed Transactions](https://arpitbhayani.me/blogs) - 15+ posts covering distributed transactions, sagas, two-phase commit, and consistency patterns; written for practitioners, not academics; high signal-to-noise ratio

@@ -427,6 +427,49 @@ Realtime interactions
 | WebSockets    | Bidirectional   | Persistent | Real-time, interactive |
 | SSE           | Server → Client | Persistent | Live feeds, logs       |
 
+---
+
 ## Exercises
 
-- https://github.com/Addi-11/system-design-excercises?tab=readme-ov-file
+- Implement the heartbeat service end-to-end: Redis with TTL-based expiry, a `/heartbeat` POST endpoint, and a `/status` GET endpoint - load test with 10K concurrent clients and observe Redis memory usage
+- Implement micro-batching for heartbeats: buffer updates in memory for 2 seconds, flush in bulk - measure the reduction in DB write operations vs. naive per-request writes
+- Reproduce the clap count race condition: fire 100 concurrent `UPDATE blogs SET clap_count = clap_count + 1` requests without a transaction and observe the final count - then fix it and verify
+- Build a minimal Kafka producer/consumer for the blog publish event: emit `ON_PUBLISH`, `ON_DELETE` events, have separate consumers update `total_blogs` and send notification emails - verify idempotency by replaying the same event twice
+- Implement all four communication patterns (short polling, long polling, WebSockets, SSE) for a single use case (e.g., live blog clap count) - compare request count and latency across all four under the same load
+## Further Reading
+
+**Online/Offline & Heartbeat Systems**
+
+- [How Discord tracks online/offline presence at scale](https://discord.com/blog/how-discord-maintains-performance-while-adding-features) - covers the move from polling to persistent connections and the challenges of presence at hundreds of millions of users
+- [Redis TTL and key expiry internals](https://redis.io/docs/latest/develop/use/keyspace/) - understand lazy vs. active expiry; important when reasoning about TTL precision at scale
+
+**Database Design**
+
+- [Soft deletes - the good, the bad, and the ugly](https://brandur.org/soft-deletion) - Brandur (Stripe); covers exactly the `is_deleted` pattern, its trade-offs, and a cleaner alternative using an archived rows table
+- [Storing datetimes as epoch integers - Use The Index, Luke](https://use-the-index-luke.com/sql/where-clause/obfuscation/dates) - why datetime arithmetic on indexed columns is dangerous and when integers are safer
+
+**Caching**
+
+- [Caching at Scale - Facebook's Memcache paper (2013)](https://research.facebook.com/publications/scaling-memcache-at-facebook/) - the definitive real-world reference on caching layers, invalidation, and thundering herd problems
+- [Cache invalidation strategies](https://codeahoy.com/2017/08/11/caching-strategies-and-how-to-choose-the-right-one/) - write-through, write-behind, cache-aside, read-through; know when to use each
+
+**Scaling**
+
+- [DDIA Chapter 6 - Partitioning](https://dataintensive.net/) - the canonical reference on how stateful components are scaled; complements the vertical vs. horizontal scaling discussion here
+- [The Twelve-Factor App](https://12factor.net/) - specifically factors VI (stateless processes) and IX (disposability); explains why stateless API servers scale trivially
+
+**Delegation & Message Brokers**
+
+- [Kafka: The Definitive Guide](https://www.oreilly.com/library/view/kafka-the-definitive/9781491936153/) - reference-level; read the chapters on producers, consumers, and consumer groups rather than cover-to-cover
+- [The Log - Jay Kreps](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying) - foundational; explains why Kafka's offset model is more powerful than a traditional message queue
+
+**Concurrency**
+
+- [PostgreSQL docs - Concurrency Control](https://www.postgresql.org/docs/current/mvcc.html) - MVCC internals; explains why `FOR UPDATE` behaves the way it does and what "snapshot isolation" actually means
+- [An Introduction to Lock-Free Programming](https://preshing.com/20120612/an-introduction-to-lock-free-programming/) - Preshing; bridges the gap between mutex-based and CAS/CRDT-based concurrency models
+
+**Communication Patterns**
+
+- [RFC 6455 - The WebSocket Protocol](https://www.rfc-editor.org/rfc/rfc6455) - short and readable; understanding the upgrade handshake and framing is worth the time
+- [Server-Sent Events - MDN](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) - practical reference; covers reconnection, event IDs, and browser support
+- [WebSockets vs SSE vs Long Polling - Ably](https://ably.com/topic/websockets-vs-sse) - side-by-side comparison with latency and cost trade-offs

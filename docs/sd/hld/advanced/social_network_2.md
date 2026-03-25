@@ -273,21 +273,21 @@ Partitioning by `dest_user_id` ensures all notifications for a given user are pr
 
 **On Image Processing**
 
-- _libvips_ documentation — particularly the "Why is libvips quick" page. Explains pipeline-based processing vs load-modify-save and why it uses a fraction of the memory ImageMagick does.
-- Cloudinary's engineering blog — covers lazy transformation pipelines, CDN integration, and format negotiation (WebP/AVIF).
+- [libvips documentation](https://www.libvips.org/API/current/) - particularly [Why is libvips quick](https://www.libvips.org/2013/11/12/why-is-libvips-quick.html) - explains pipeline-based processing vs. load-modify-save and why it uses a fraction of the memory ImageMagick does
+- [Cloudinary Engineering Blog](https://cloudinary.com/blog/engineering) - covers lazy transformation pipelines, CDN integration, and format negotiation (WebP/AVIF)
 
 **On Distributed Counters and Sets**
 
-- Redis documentation on HyperLogLog - if you need approximate unique counts at extreme scale (billions of users), HyperLogLog trades exactness for constant memory.
-- _"Counting at Scale"_ - Stripe's engineering blog post on their counter architecture. Covers batching, approximate vs exact counts, and when each is appropriate.
+- [Redis HyperLogLog documentation](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/) - if you need approximate unique counts at extreme scale (billions of users), HyperLogLog trades exactness for constant memory
+- [Counting at Scale - Stripe Engineering](https://stripe.com/blog/counting-with-prometheus) - covers batching, approximate vs. exact counts, and when each is appropriate
 
 **On Notification Systems**
 
-- Slack's engineering post _"Building Slack's Real-Time Messaging Infrastructure"_ - covers WebSocket fan-out, presence detection, and the tradeoffs between push and pull delivery.
-- _"How Facebook Scales its Notifications Infrastructure"_ - Meta engineering blog. Covers the move from pull-based polling to push, and the Kafka-based fan-out architecture they settled on.
-- _"The Tail at Scale"_ - Jeff Dean & Luiz André Barroso (Google, 2013). Foundational paper on latency distribution in large systems. Notification delivery SLAs are directly impacted by the patterns described here.
+- [Building Slack's Real-Time Messaging Infrastructure](https://slack.engineering/real-time-messaging/) - covers WebSocket fan-out, presence detection, and the trade-offs between push and pull delivery
+- [How Facebook Scales its Notifications Infrastructure - Meta Engineering](https://engineering.fb.com/2022/12/19/core-infra/scaling-notification-system/) - covers the move from pull-based polling to push and the Kafka-based fan-out architecture they settled on
+- [The Tail at Scale - Jeff Dean & Luiz André Barroso (Google, 2013)](https://research.google/pubs/the-tail-at-scale/) - foundational paper on latency distribution in large systems; notification delivery SLAs are directly impacted by the patterns described here
 
 **On Event-Driven Design**
 
-- _"The Log: What every software engineer should know about real-time data's unifying abstraction"_ - Jay Kreps. The Kafka consumer group model for extensible notification fan-out comes directly from the principles here.
-- _"Designing Event-Driven Systems"_ - Ben Stopford (free PDF, Confluent). Chapter on event-driven microservices covers the tagging extensibility pattern in depth.
+- [The Log: What every software engineer should know about real-time data's unifying abstraction - Jay Kreps](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying) - the Kafka consumer group model for extensible notification fan-out comes directly from the principles here
+- [Designing Event-Driven Systems - Ben Stopford](https://www.confluent.io/designing-event-driven-systems/) - free PDF from Confluent; the chapter on event-driven microservices covers the tagging extensibility pattern in depth

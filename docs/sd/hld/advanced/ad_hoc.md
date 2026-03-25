@@ -1,193 +1,213 @@
 # Ad Hoc Systems
 
 ## Distributed Task Scheduler
-*without retries*
 
-- dkron, AWS Cloudwatch Events
-- Schedule a task to be executed
-    - at a certain time [fixed]
-    - recurring task [cron]
-- 30 seconds SLA
-    - eg. task scheduled at 10:01 AM should execute before 10:01:30 AM
-- Minute Level Granularity
+**Reference implementations:** Dkron, AWS CloudWatch Events (EventBridge Scheduler)
 
-Discuss : store, pick, execute, status (COMPLETED/FAILED/IN-PROGRESS/SCHEDULED)
+**Requirements:**
+
+- Schedule a task to run at a fixed time or on a recurring schedule (cron)
+- 30-second SLA - a task scheduled at 10:01:00 AM must begin execution by 10:01:30 AM
+- Minute-level scheduling granularity
+
+**Core concerns:** store, pick, execute, track status (`SCHEDULED` / `IN_PROGRESS` / `COMPLETED` / `FAILED`)
 ### Store
 
-Schema for Relational DB
+**Naive schema:**
 
 | id (uuid) | command | scheduled_at | status |
 | --------- | ------- | ------------ | ------ |
 |           |         |              |        |
 
-Above design is not robust, rather have this table and then we can infer *status* from the tables.
+Problem: `status` as a single column requires explicit updates and makes it hard to audit what happened (when was it picked, when did it fail, etc.).
 
+**Better schema - derive status from timestamps:**
 
 | id (uuid) | command | scheduled_at | picked_at | started_at | completed_at | failed_at |
 | --------- | ------- | ------------ | --------- | ---------- | ------------ | --------- |
 |           |         |              |           |            |              |           |
 
-Store in normal *MYSQL* table, no need of sharding, etc.
-Registering a task is as simple as making an entry in tasks table.
+Status is inferred:
+
+- `picked_at IS NULL` → SCHEDULED
+- `picked_at IS NOT NULL AND completed_at IS NULL AND failed_at IS NULL` → IN_PROGRESS
+- `completed_at IS NOT NULL` → COMPLETED
+- `failed_at IS NOT NULL` → FAILED
+
+A plain MySQL table is sufficient here - no sharding needed. Registering a task is a single `INSERT`.
  
 ![](assets/Pasted%20image%2020250920234318.png)
 ### Pick
 
 ![](assets/Pasted%20image%2020250921080825.png)
 
-How will a task puller pull the task & schedule it for execution.
+Multiple **task pullers** poll the DB and push tasks into a message broker (SQS, RabbitMQ) for **executor** nodes to process.
 
-Challenge : how will multiple task puller pull with high throughput ?
-
-Picking a Task
+**The challenge:** Multiple pullers running concurrently must not pick the same task twice.
 
 ```sql
+-- Atomically claim a batch of due tasks
 SELECT * FROM jobs
-where scheduled_at < now() + 30 AND picked_at is NULL
-ORDER BY scheduled_at ASC LIMIT 10 -- batched pull
-FOR UPDATE SKIP LOCKED -- this is important, so multiple puller don't wait
+WHERE scheduled_at <= NOW() + INTERVAL 30 SECOND
+  AND picked_at IS NULL
+ORDER BY scheduled_at ASC
+LIMIT 10
+FOR UPDATE SKIP LOCKED;  -- other pullers skip rows locked by this transaction, no blocking
+
+-- Mark as picked
+UPDATE jobs
+SET picked_at = NOW()
+WHERE id IN (...);
 ```
 
 ![](assets/Pasted%20image%2020250921081157.png)
 
-Worker/Executor are bulky machines which will run the jobs, and *Orchestration* will scale up and scale down number of workers based on load. To adhere to 30seconds SLA, we have to compute time it takes for a task to be picked from DB into the queue and started at executor nodes.
+`FOR UPDATE SKIP LOCKED` is the key - concurrent pullers skip rows already locked by another transaction rather than waiting, giving high-throughput non-blocking pulls.
+### Execute
 
-Executors are scaled in proportion of number of tasks in the Broker (SQS/RabbitMQ)
-#### Handling Bursts:
+Executor nodes are beefy machines that run the actual job commands. An **orchestrator** scales the executor fleet up and down based on queue depth in the broker.
 
-- keep an eye on the number of task in DB in coming few minutes and *SCALE UP* and *DOWN* accordingly. *predictive scaling*, as look just at message broker may not give enough time to bring up executors before SLA.
-- Orchestrator, read DB, see tasks 10 mins in future and scales up & down.
+**Handling bursts - predictive scaling:**
+
+Watching only the broker queue depth doesn't give enough lead time to provision new executors before the SLA window closes. Instead, the orchestrator reads the `jobs` table and looks ahead (e.g., 10 minutes into the future) to anticipate load and scale proactively.
 
 ![](assets/Pasted%20image%2020250921081640.png)
 
-Key metrics to monitor
+### Key Metrics to Monitor
 
-- number of task pulled per minute
-- task wait time
-- average time to completion
-#### Handling recurring tasks
+- Tasks pulled per minute
+- Task wait time (time between `scheduled_at` and `started_at`)
+- Average time to completion
+- Broker queue depth
+### Handling Recurring Tasks
 
-CRON Syntax : `* * * * 5`
+Recurring tasks use cron syntax (e.g., `* * * * 5`). Separate the concept of a **task definition** from individual **job executions**:
 
-tasks
+**tasks table** (the recurring definition)
 
-| id  | task | schedule  | scheduled_at |
-| --- | ---- | --------- | ------------ |
-| 2   | -    | * * * * * | -            |
+|id|command|cron_schedule|
+|---|---|---|
+|2|send_report.sh|`0 9 * * 1`|
 
-jobs
+**jobs table** (concrete scheduled executions)
 
-| id    | task_id | scheduled_at | picked_at/st_at/failed_at |
-| ----- | ------- | ------------ | ------------------------- |
-| 20972 | 2       | -            | -                         |
-| 20993 | 2       | -            | -                         |
+|id|task_id|scheduled_at|picked_at|completed_at|failed_at|
+|---|---|---|---|---|---|
+|20972|2|2025-01-06 09:00|...|...||
+|20993|2|2025-01-13 09:00|...|...||
 
-When task is created
+**Generation strategy:** When a task is created (or when a job is picked for execution), compute the next N occurrences from the cron expression and pre-insert them into the `jobs` table.
 
-- find the next 10 executions and add them to *jobs* when task is picked for execution from *jobs* tasks
-- find the next 10 executions and add them to *jobs* table
+Flow: `CRON expression → next N absolute timestamps → insert into jobs → regular pick/execute flow`
 
-Example : *Google Calendar Recurring Meetings*
+Think of it like Google Calendar recurring meetings - the recurrence rule generates concrete event instances.
 
-CRON -> ABSOLUTE -> Regular Flow
+## Message Broker on a Relational DB
 
-## Message Brokers on Relational DB
+This is essentially the task puller pattern generalized. Building a simple queue on MySQL is more common than it sounds (and is exactly how Amazon SQS originally worked internally).
 
-Requirements
+**Requirements:**
 
-- FIFO
-- Consumer reads and deletes the message
-- High Throughput
-- When one consumer reads the message, it should become unavailable for others
+- FIFO ordering
+- High throughput
+- When one consumer reads a message, it must be invisible to all other consumers
+- If a consumer fails to delete the message, it reappears after a timeout (visibility timeout)
 
 Very similar to distributed task scheduler. *Task Puller* part of distributed task scheduler.
 
-messages
+### Schema
 
-| id       | msg | created_at | picked_at | deleted_at | reciept_handle |
-| -------- | --- | ---------- | --------- | ---------- | -------------- |
-| AUTO_INC |     |            |           |            | uuid1          |
+**messages table**
+
+|id (AUTO_INC)|body|created_at|picked_at|deleted_at|receipt_handle|
+|---|---|---|---|---|---|
+
+`receipt_handle` is a UUID generated at pick time. The consumer must present it to delete the message - this prevents a consumer from accidentally deleting a message it didn't pick.
+
 
 ![](assets/Pasted%20image%2020250921083620.png)
 
 Query will something like this for picking up the message from the table.
 
 ```sql
--- get
+-- Pick messages (non-blocking, concurrent consumers safe)
 SELECT * FROM messages
-WHERE picked_at is NULL
-AND deleted_at is NULL
+WHERE picked_at IS NULL
+  AND deleted_at IS NULL
 ORDER BY created_at ASC
-LIMIT n
-FOR UPDATE SKIP LOCKED
+LIMIT 10
+FOR UPDATE SKIP LOCKED;
 
--- updating the row
+-- Mark as picked (make invisible to other consumers)
 UPDATE messages
-SET picked_at = NOW()
-reciept_handle = uuid()
+SET picked_at = NOW(),
+    receipt_handle = UUID()
+WHERE id = ?;
+
+-- Delete after successful processing
+UPDATE messages
+SET deleted_at = NOW()
 WHERE id = ?
+  AND receipt_handle = ?;  -- must match to prevent accidental deletes
 ```
 
-#### Visibility Timeout
+### Visibility Timeout
 
-If a message is read but not deleted then after 10 mins it should appear in front of queue.
+If a consumer picks a message but crashes before deleting it, the message would be lost forever without a safety net. A periodic background job re-enqueues stuck messages:
 
-CRON job that
 ```sql
-UPDATE message
-SET picked_at = NULL
-WHERE picked_at < now() - 10min;;
-AND deleted_at IS NULL
+-- Run every minute via cron
+UPDATE messages
+SET picked_at = NULL,
+    receipt_handle = NULL
+WHERE picked_at < NOW() - INTERVAL 10 MINUTE
+  AND deleted_at IS NULL;
 ```
 
-## YouTube Views Counter
+After the timeout window, the message becomes visible again and another consumer can pick it up.
+## YouTube View Counter
 
-- views happening on YouTube count them
-- You will need to filter out some views as per the rule engine
+A view event pipeline with a rule engine for filtering invalid views (bots, repeated views, etc.).
 
 ![](assets/Pasted%20image%2020250921090345.png)
 
-Questions to Ask Here
+**Design questions worth thinking through:**
 
-- why are we re-ingestion it in kafka
-- what is the parallelism here
-- how are we partitioning ?
-- why are we counting in so many machines ?
-
+- **Why re-ingest into Kafka after filtering?** Decouples the filter stage from the counting stage - each can scale independently and fail independently
+- **What is the parallelism here?** Kafka partitions by video ID - all events for the same video go to the same partition, ensuring counts are aggregated in order per video
+- **Why count across many machines?** A single counter would be a bottleneck at YouTube's write volume - partitioning by video ID distributes the counting load
+- **How do you handle approximate vs. exact counts?** At scale, exact real-time counts are expensive - systems like this often use approximate counting (HyperLogLog) for display and reconcile exact counts in batch
 
 ## Flash Sale
-*Fixed Inventory + Contention* 
-*NOT Distributed Transactions*
 
-Requirements
+**Problem:** Fixed inventory, high contention, short purchase window.
 
-- fixed set of items
-- people come-in to buy them in short window
+**Core challenge:** Many users trying to buy the same items simultaneously - requires locking without distributed transactions.
 
-Resource : https://www.youtube.com/watch?v=-I4tIudkArY
+> Good reference: [How Flash Sales Work at Scale](https://www.youtube.com/watch?v=-I4tIudkArY)
 
-Flow : Similar to what happens in real world.
+### Phase 0: Pre-stock Inventory
 
-Phase 0: Prepare the stock
+Before the sale, insert one row per physical unit into the `units` table:
 
-- As a store owner, you stock the items in store
+**units table**
 
-units
+| id  | item_id | picked_at | picked_by | purchased_at | purchased_by |
+| --- | ------- | --------- | --------- | ------------ | ------------ |
+| 1   | 720     | NULL      | NULL      | NULL         | NULL         |
+| 2   | 720     | NULL      | NULL      | NULL         | NULL         |
+Selling 10,000 iPhones (item_id = 720) → 10,000 rows. One row = one unit.
 
-| id  | item_id | picked_at | picked_by | purchased_by |
-| --- | ------- | --------- | --------- | ------------ |
-| 1   | 720     | NULL      | NULL      | NULL         |
-|     |         |           |           |              |
+### Phase 1: Add to Cart (Pick a Unit)
 
-If you are selling 10,000 iphone phones (product_id = 720), have 10,000 entries in your units table.
-
-Phase 1: let them pick it
+Users attempt to claim a unit. Exactly N users should succeed where N is inventory count.
 
 - you want to let as many people in as many items you have and they physically pick and add to their cart.
 - Fixed inventory, contention -> locking
 - users come in
     - they try to grab the items
     - they add to their cart, and only N should succeed.
+
 High Throughput and contention
 
 units
@@ -198,50 +218,107 @@ units
 |     |         |            |           |              |
 
 ```sql
-SELECT * from units
+-- Find and lock one available unit atomically
+SELECT id FROM units
 WHERE item_id = 720
-AND picked_at IS NULL
-ORDER BY id
+  AND picked_at IS NULL
+ORDER BY id ASC
 LIMIT 1
-FOR UPDATE SKIP LOCKED -- non-squential exclusive & non-blocking
+FOR UPDATE SKIP LOCKED;  -- non-blocking, non-sequential exclusive lock
 
+-- Claim it
 UPDATE units
-SET picked_at = NOW()
-picked_by = 1023 -- making item unavailable for others
-WHERE id = ?
+SET picked_at = NOW(),
+    picked_by = 1023  -- user_id
+WHERE id = ?;
 ```
 
-Phase 2 : Payment
+`FOR UPDATE SKIP LOCKED` ensures concurrent users each get a distinct unit without contention - no queueing on locked rows.
 
-User continues with the normal flow of payment and confirms the purchase
+### Phase 2: Payment
 
-On successful payment
+The user proceeds through checkout normally.
 
-- mark item set purchased_by = ? & puchased_at = now()
-- create order, etc...
+**On successful payment:**
 
-On unsuccessful payment
-
-- make item re-available by settings, picked_at = NULL, picked_by = NULL
-
-You cannot have a distributed transaction spanning, add to cart and payment
-
-#### What if no payment after adding to cart
-
-Run a cron job that iterated through *expired* unites and sets picked_at = NULL, picked_by = NULL
 ```sql
-UPDATE units SET picked_at = NULL
-picked_by = NULL
-where picked_at < NOW() - 12 mins
+UPDATE units
+SET purchased_at = NOW(), purchased_by = ?
+WHERE id = ?;
+-- then create order record, etc.
 ```
 
-Either you disappoint some of your consumers or you as a company get disappointed with under selling.
+**On payment failure or abandonment:**
 
+```sql
+UPDATE units
+SET picked_at = NULL, picked_by = NULL
+WHERE id = ?;
+```
 
-Similar Systems
+You cannot span a distributed transaction across "add to cart" and "payment" - they are separate systems. The picked/purchased split handles this gracefully.
 
-- any ticket booking site
-    - BookMyShow
-    - IRCTC
-    - Hotel Booking
+### Handling Cart Abandonment
 
+A background cron job reclaims units that were picked but never paid for:
+
+```sql
+UPDATE units
+SET picked_at = NULL,
+    picked_by = NULL
+WHERE picked_at < NOW() - INTERVAL 12 MINUTE
+  AND purchased_at IS NULL;
+```
+
+**The trade-off:** Too short a timeout → users lose items mid-checkout. Too long → inventory appears sold out when it isn't. Pick a window that matches your expected checkout duration.
+
+Either you occasionally disappoint users (item reclaimed before they pay) or the business under-sells (items held by abandonments). Most systems accept the former.
+
+---
+
+### Similar Systems
+
+This exact pattern applies to:
+
+- Ticket booking (BookMyShow, IRCTC) - seats are units
+- Hotel booking - room-nights are units
+- Airline seat selection - seats are units
+
+The schema and locking strategy are nearly identical in all cases.
+
+---
+## Exercises
+
+- Implement the task scheduler end-to-end locally: MySQL + a task puller in Go/Python + a worker that executes shell commands
+- Add retry logic to the scheduler - how do you distinguish a failed task from one still in progress?
+- Implement the message broker on MySQL from scratch - test visibility timeout behavior by killing a consumer mid-processing
+- Benchmark `FOR UPDATE SKIP LOCKED` vs `FOR UPDATE` under concurrent load - measure throughput difference at 10, 50, 100 concurrent pullers
+- Simulate a flash sale locally: pre-stock 100 units, fire 1000 concurrent requests, verify exactly 100 succeed with no overselling
+
+## Further Reading
+
+**Task Scheduling**
+
+- [Dkron documentation](https://dkron.io/docs/basics/getting-started/) - open-source distributed job scheduler; read the architecture section to see how they handle leader election and fault tolerance
+- [AWS EventBridge Scheduler](https://docs.aws.amazon.com/scheduler/latest/UserGuide/what-is-scheduler.html) - managed alternative; useful to understand what problems a production scheduler actually solves
+- [Sidekiq Pro - job scheduling internals](https://github.com/mperham/sidekiq/wiki/Scheduled-Jobs) - Ruby-based but the polling and retry design maps directly to what we built
+
+**Locking & Concurrency**
+
+- [PostgreSQL docs - FOR UPDATE SKIP LOCKED](https://www.postgresql.org/docs/current/sql-select.html#SQL-FOR-UPDATE-SHARE) - authoritative reference; covers interaction with MVCC and subtleties around visibility
+- [SELECT FOR UPDATE and SKIP LOCKED - Use The Index, Luke](https://use-the-index-luke.com/sql/row-locks) - explains the index implications of row-level locking that most developers miss
+
+**Message Queues on Relational DBs**
+
+- [Transactional outbox pattern](https://microservices.io/patterns/data/transactional-outbox.html) - the production-grade evolution of the MySQL queue pattern; solves the dual-write problem between DB and broker
+- [PGMQ - Postgres Message Queue](https://github.com/tembo-io/pgmq) - a well-implemented open-source message queue on Postgres; read the source to see how visibility timeout and receipt handles are implemented in practice
+
+**Flash Sales & Inventory Locking**
+
+- [How Shopify handles flash sales](https://shopify.engineering/surviving-flashes-of-high-write-traffic-using-queues-inspired-by-cache-theory) - real-world inventory contention at scale; covers queue-based approaches as an alternative to DB locking
+- [IRCTC architecture](https://www.youtube.com/watch?v=4-A5lPq2jMk) - one of the most extreme flash-sale-like systems in the world; 1.4 billion users competing for train tickets
+
+**View Counting**
+
+- [Counting at Scale - Stripe Engineering](https://stripe.com/blog/counting-with-prometheus) - batching, approximate vs exact counts, when each is appropriate
+- [Lambda Architecture](https://en.wikipedia.org/wiki/Lambda_architecture) - the batch/stream hybrid pattern behind reconciling approximate real-time counts with exact batch counts

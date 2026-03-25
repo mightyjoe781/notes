@@ -267,26 +267,26 @@ Say we have *Blogs* table and we insert, update, delete something. we get one CD
 
 **Distributed Caching**
 
-- [Redis Architecture](https://redis.io/docs/latest/operate/oss_and_stack/reference/cluster-spec/) — Redis Cluster internals, hash slots, and replication
-- _Designing Data-Intensive Applications_ — Ch. 6 (Partitioning) and Ch. 5 (Replication) by Martin Kleppmann
-- [Consistent Hashing and Random Trees](https://www.cs.princeton.edu/courses/archive/fall09/cos518/papers/chash.pdf) — Karger et al., the original paper
+- [Redis Architecture](https://redis.io/docs/latest/operate/oss_and_stack/reference/cluster-spec/) - Redis Cluster internals, hash slots, and replication
+- _Designing Data-Intensive Applications_ - Ch. 6 (Partitioning) and Ch. 5 (Replication) by Martin Kleppmann
+- [Consistent Hashing and Random Trees](https://www.cs.princeton.edu/courses/archive/fall09/cos518/papers/chash.pdf) - Karger et al., the original paper
 
 **Eviction & Memory Management**
 
-- [Redis eviction policies](https://redis.io/docs/latest/develop/reference/eviction/) — LRU, LFU, and allkeys-* policies explained
-- [How Redis expires keys](https://redis.io/docs/latest/develop/use/keyspace/) — lazy + active expiry internals
+- [Redis eviction policies](https://redis.io/docs/latest/develop/reference/eviction/) - LRU, LFU, and allkeys-* policies explained
+- [How Redis expires keys](https://redis.io/docs/latest/develop/use/keyspace/) - lazy + active expiry internals
 
 **Consistent Hashing**
 
-- [Amazon Dynamo paper](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf) — §4.2 covers consistent hashing with virtual nodes in production
+- [Amazon Dynamo paper](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf) - §4.2 covers consistent hashing with virtual nodes in production
 
 **CDC & ETL**
 
-- [Debezium documentation](https://debezium.io/documentation/) — most widely used open-source CDC framework
-- [The Log: What every software engineer should know about real-time data's unifying abstraction](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying) — Jay Kreps, LinkedIn (foundational read, already on your list)
-- [Turning the database inside out](https://martin.kleppmann.com/2015/11/05/database-inside-out.html) — Martin Kleppmann's talk on CDC and stream processing
+- [Debezium documentation](https://debezium.io/documentation/) - most widely used open-source CDC framework
+- [The Log: What every software engineer should know about real-time data's unifying abstraction](https://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying) - Jay Kreps, LinkedIn (foundational read, already on your list)
+- [Turning the database inside out](https://martin.kleppmann.com/2015/11/05/database-inside-out.html) - Martin Kleppmann's talk on CDC and stream processing
 
 **DHTs**
 
-- [Kademlia: A Peer-to-peer Information System Based on the XOR Metric](https://pdos.csail.mit.edu/~petar/papers/maymounkov-kademlia-lncs.pdf) — the DHT algorithm BitTorrent uses
-- [Chord: A Scalable Peer-to-peer Lookup Service](https://pdos.csail.mit.edu/papers/chord:sigcomm01/chord_sigcomm.pdf) — a simpler DHT, good for understanding the fundamentals
+- [Kademlia: A Peer-to-peer Information System Based on the XOR Metric](https://pdos.csail.mit.edu/~petar/papers/maymounkov-kademlia-lncs.pdf) - the DHT algorithm BitTorrent uses
+- [Chord: A Scalable Peer-to-peer Lookup Service](https://pdos.csail.mit.edu/papers/chord:sigcomm01/chord_sigcomm.pdf) - a simpler DHT, good for understanding the fundamentals

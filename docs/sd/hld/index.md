@@ -25,10 +25,15 @@
 - [Designing a Recommendation Engine](problems/recommendation_engine.md)
 - [Designing a Web Crawler](problems/web_crawler.md)
 
+**Optional (External)**
+
+- [Designing a Webhook](https://pyemma.github.io/How-to-Design-Webhook/)
+
 ## Advanced Topics
 
 - [Foundational Concepts](./advanced/foundational_1.md)
     - Online Offline Indicator
+    - Six Pillars of System Design
 
 - Databases
     - [Relational Databases](./advanced/relational_database.md)
