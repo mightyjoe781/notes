@@ -7,7 +7,8 @@ Any booking system is fundamentally a **resource contention** problem: multiple 
 |Strategy|Mechanism|When to use|
 |---|---|---|
 |**Pessimistic lock**|Acquire DB row lock before the transaction starts|High contention (popular shows)|
-|**Optimistic lock**|Version column on the row; fail on mismatch at commit|Low-to-medium contention
+|**Optimistic lock**|Version column on the row; fail on mismatch at commit|Low-to-medium contention|
+
 BookMyShow warrants **pessimistic locking** on `ShowSeat` rows - a Friday night premiere will have dozens of concurrent users hitting the same seats. A failed `SELECT FOR UPDATE` is cheaper than a rollback storm from optimistic collisions.
 
 > Reference for both approaches: the RDBMS System Design note linked in the original.

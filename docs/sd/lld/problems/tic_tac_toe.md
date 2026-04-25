@@ -102,7 +102,7 @@ make_move(row, col):
 ```
 
 `Game` never does game logic directly. It's pure delegation. The Demo class calls `game.make_move(row, col)` in a loop and the two patterns handle everything else.
-## ## What's Missing / Not Covered (Intentionally)
+## What's Missing / Not Covered (Intentionally)
 
 - **`CompositeWinningStrategy`** - to check row + col + diagonal in one call, wrap all three in a composite. Straightforward extension, left as exercise.
 - **N×N board** - `Board.size` is already a field; `WinningStrategy` implementations need to loop to `size`, not hardcode 3. Parameterisation is trivial once the structure is right.

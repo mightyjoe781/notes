@@ -19,7 +19,7 @@ Pros:
 
 Cons
 
-- Two parameters in the algorithm are bucket size and token refill rate. However, it mightbe challenging to tune them properly.
+- Two parameters in the algorithm are bucket size and token refill rate. However, it might be challenging to tune them properly.
 
 ## Leaking Bucket Algorithm
 
@@ -54,7 +54,7 @@ Cons:
 
 Fixed window counter algorithm works as follows:
 
-- The algorithm divides the timeline into fix-sized time windows and assign a counter for  each window.
+- The algorithm divides the timeline into fixed-sized time windows and assigns a counter for each window.
 - Each request increments the counter by one.
 - Once the counter reaches the pre-defined threshold, new requests are dropped until a new time window starts.
 

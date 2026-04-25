@@ -11,7 +11,7 @@ A common method to distribute data as evenly as possible is simple hashing, like
 
 A good hashing function would distribute hashes evenly across the range. Second we perform module on the hash with number of servers. This determines the server where data is located at.
 
-If in above diagram if lets say server 1 goes down, we may need to recompute hash of all object and data will be reshuffled a lot.
+If in the above diagram server 1 goes down, we may need to recompute hash of all objects and data will be reshuffled a lot.
 
 ![](assets/Pasted%20image%2020260218092906.png)
 
@@ -54,7 +54,7 @@ If we hash each node once, Some nodes may end up owning large range of keys. Con
 
 ![](assets/Pasted%20image%2020260218095153.png)
 
-Server S1 ends up owning 3 keys in this example, S2 and S0 own no data at all, if server comes and goes all the time, it may happen that one server ends up owning a lot keys.
+Server S1 ends up owning 3 keys in this example, S2 and S0 own no data at all, if server comes and goes all the time, it may happen that one server ends up owning a lot of keys.
 
 We use Virtual Nodes to mitigate this.
 

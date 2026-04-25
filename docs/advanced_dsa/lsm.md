@@ -94,14 +94,14 @@ Limitations of the DB : Keys must fit in memory
 Strength of this DB : O(1) reads, writes, deletes
 
 - High throughput, low latency
-- I/O stauration
+- I/O saturation
 - Easy Backups
 
 What we just designed is *Bitcask*
 
 ![](assets/Pasted%20image%2020250917234340.png)
 
-Most efficient KV database, used by uber in production as backend for Riak, Each node of Riak has an instances of Bitcask running
+Most efficient KV database, used by Uber in production as backend for Riak. Each node of Riak has an instance of Bitcask running
 
 Riak ~ wrapper on top of Bitcask, helps in distributed features for Bitcask.
 
@@ -124,7 +124,7 @@ Core Idea : Attempt to make writes faster
 
 So can we write directly to RAM ? instead of disk ? that would make writes faster.
 
-Another question is why are we trying to this ? Usually all products eventually start by solving small problem or niche in the already existing sea of solutions and then expand to compete against them. Ex - Duck DB started as a small scale analytics solutions.
+Another question is why are we trying to do this? Usually all products eventually start by solving small problem or niche in the already existing sea of solutions and then expand to compete against them. Ex - Duck DB started as a small scale analytics solutions.
 
 Niche where this works in real-time data, which requires a very high write throughputs, e.g. sensors, IOT, clickstream, logging, location updates data, etc.
 
@@ -203,7 +203,7 @@ If we need zero data loss, we have to have WAL
 How is it better than Bitcask ?
 Keys are disk bound and not memory bound, we get comparable write amplification while being disk bound.
 
-Whole uses LSM ? *RocksDB, LevelDB, BadgerDB* (why not redis) ?
+Who uses LSM? *RocksDB, LevelDB, BadgerDB* (why not redis) ?
 Use cases: Bidding (4 min, bid then persistence, redis key expires and data is gone), Adtech
 
 Some piece of data in memory and some on disk.

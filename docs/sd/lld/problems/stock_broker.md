@@ -131,7 +131,7 @@ Multiple exchanges pushing the same symbol → both call `update_stock` on the s
 
 If you need OHLC (open/high/low/close) later, you'd aggregate over the list - no schema change needed. For now, raw list is correct.
 
-Pandas dataframes actually provide this as a inbuild function for OHLC.
+Pandas dataframes actually provide this as a built-in function for OHLC.
 
 **Missing from the original diagram:** `Value` should probably carry a `timestamp` too, or historical data is unorderable if two exchanges push simultaneously. Add it.
 

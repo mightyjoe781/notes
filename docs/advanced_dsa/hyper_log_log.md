@@ -8,7 +8,7 @@ Given a very large stream of elements: Estimate the number of **distinct element
 
 The algorithm divides the stream in `m` independent substreams and keeps the maximum length of a seen `00...1` prefix of each substream. Then, it estimates the final value by taking the mean value of all substreams.
 
-We often use *hash functions* to each element in the original multiset to obtain multiset of uniformly distributed random numbers with same cardinality as original multiset.
+We often apply *hash functions* to each element in the original multiset to obtain a multiset of uniformly distributed random numbers with the same cardinality as the original multiset.
 
 StackOverFlow Example : [Link](https://stackoverflow.com/questions/12327004/how-does-the-hyperloglog-algorithm-work)
 Original Flajolet-Marting Algorithm : [Link](https://en.wikipedia.org/wiki/Flajolet%E2%80%93Martin_algorithm)

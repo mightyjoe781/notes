@@ -1,7 +1,7 @@
 # Advanced Algorithms
 
-NOTE: Following algorithms are way too advanced for implementation, you are better off using some library implementing these algorithms optimally. Its important to understand what problems these algorithms are solving efficiently.
-Most of the algorithm are often implemented in the solutions of System Design Problems.
+NOTE: Following algorithms are way too advanced for implementation, you are better off using some library implementing these algorithms optimally. It's important to understand what problems these algorithms are solving efficiently.
+Most of the algorithms are often implemented in the solutions of System Design Problems.
 
 ## Content
 

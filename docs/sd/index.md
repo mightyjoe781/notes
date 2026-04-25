@@ -26,19 +26,11 @@ Notes
 
 Advanced Topics
 
-* [HLD Notes Topic Wise](topics/index.md)
+* [HLD Notes Topic Wise](topics/index.md) [WIP]
 * [Advanced Algorithms](../advanced_dsa/index.md) ✅
-* General Problems
 
 Resources
 
-- Recommended Books
-    - System Design Interview Guide (Alex Xu) (Part I & II)
-    - Designing Data-Intensive Applications (Martin Kleppmann)
-    - Building Microservices (Sam Newman)
-    - _The Art of Scalability_ – Abbott & Fisher
-    - Database Systems: The Complete Book
-- Online Resources
-    - [Engineering blogs](company.md) and case studies
-    - Open source system architectures
-    - Conference talks and presentations
+* [Books](resources/books.md) - recommended reading with descriptions and reading order
+* [Online Resources](resources/online.md) - courses, papers, communities, and video channels
+* [Engineering Blogs & Case Studies](company.md) - real-world architecture posts from major companies

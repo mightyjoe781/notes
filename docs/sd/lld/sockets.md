@@ -9,7 +9,7 @@
 | ------------------- | ---------------------- |
 | Reliable            | Unreliable             |
 | Ordered             | No Ordering            |
-| Connection Oriented | Connections            |
+| Connection Oriented | Connectionless         |
 | Used for Chat, HTTP | Used for Video, Games, |
 
 ## Minimal TCP Server & Client

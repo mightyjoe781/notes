@@ -6,7 +6,7 @@
 * Mediator
 * Memento
 * Observer(PubSub) ⭐
-* Stage
+* State
 * Strategy Pattern ⭐
 * Template Method
 * Visitor

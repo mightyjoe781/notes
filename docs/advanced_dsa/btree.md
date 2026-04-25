@@ -25,7 +25,7 @@ Reading 1 node is quite expensive, what if we make the node large. Instead of cr
 100 (BTree) ~ 1 Billion Records ~ 4 height
 ```
 
-Effectively requiring on 4 Disk Reads.
+Effectively requiring only 4 Disk Reads.
 
 ## B Tree
 
@@ -41,7 +41,7 @@ Effectively requiring on 4 Disk Reads.
 ![](assets/Pasted%20image%2020250925181131.png)
 
 NOTE: Diagram in original paper is not correctly represented, $\alpha$ is not shown in the diagram.
-NOTE: arrow are from inside the node, note this in the online simulator from sites below.
+NOTE: arrows are from inside the node, note this in the online simulator from sites below.
 
 Try Online Visualizer
 
@@ -84,7 +84,7 @@ Find rows (ID between (4 and 9))
 ## B+ Tree storage cost in MySQL vs Postgres
 
 - B+ Trees secondary index values can either point directly to tuple (postgres) or to the primary key (MYSQL)
-- If the Primary key data type is expensive this can cause bloat in all secondary indexes for database such MySQL (innoDB)
-- Leaf nodes in MySQL (InnoDB) contains the full row since its an IOT/Clustered Index.
+- If the Primary key data type is expensive this can cause bloat in all secondary indexes for databases such as MySQL (innoDB)
+- Leaf nodes in MySQL (InnoDB) contains the full row since it's an IOT/Clustered Index.
 
 

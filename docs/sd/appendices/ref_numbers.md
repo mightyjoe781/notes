@@ -1,8 +1,8 @@
-# A. Reference Materials
+# Reference Numbers
 
-*Quick reference tables and comparison charts for system design decisions*
+*Quick reference tables and benchmarks for system design decisions.*
 
-------
+---
 
 ## Quick Reference Tables
 
@@ -77,7 +77,7 @@
 | **RAM**             | 10M+     | 50-100 GB/s   | 100 ns      |
 | **Network Storage** | 1K-10K   | 100-1000 MB/s | 1-10 ms     |
 
-------
+---
 
 ## Comparison Charts
 
@@ -171,7 +171,7 @@
 | **Global Anycast**    | ❌     | ❌       | ❌       | ✅          |
 | **Auto Scaling**      | ❌     | ❌       | ✅       | ✅          |
 
-------
+---
 
 ## Storage and Networking Quick Reference
 
@@ -196,65 +196,64 @@
 | **Satellite**           | 10-100 Mbps        | 600ms   | High   | Remote locations     |
 | **5G Mobile**           | 100 Mbps - 1 Gbps  | 10-50ms | High   | Mobile applications  |
 
-------
+---
 
 ## Capacity Planning Quick Calculations
 
 ### User Activity Patterns
 
-```
-Daily Active Users (DAU) Ratios:
-├── Mobile Apps: 10-20% of total users
-├── Web Apps: 5-15% of total users  
-├── Gaming: 15-30% of total users
-├── Social Media: 20-40% of total users
-└── Enterprise: 60-80% of total users
+**DAU as % of total users:**
 
-Peak Traffic Multipliers:
-├── 2x average: Most web applications
-├── 3-5x average: E-commerce during sales
-├── 10x average: News sites during events
-├── 20x+ average: Live streaming events
-└── Seasonal: Holiday shopping, tax season
-```
+- Mobile apps - 10–20%
+- Web apps - 5–15%
+- Gaming - 15–30%
+- Social media - 20–40%
+- Enterprise - 60–80%
+
+**Peak traffic multipliers:**
+
+- 2× average - most web applications
+- 3–5× average - e-commerce during sales
+- 10× average - news sites during events
+- 20×+ average - live streaming events
+- Seasonal spikes - holiday shopping, tax season
 
 ### Storage Growth Estimates
 
-```
-Data Growth Patterns:
-├── User profiles: 1-10 KB per user
-├── Social posts: 1-100 KB per post
-├── Images: 100 KB - 10 MB each
-├── Videos: 10 MB - 1 GB each
-├── Logs: 1-100 KB per request
-└── Analytics: 100 bytes - 10 KB per event
+**Typical data sizes:**
 
-Annual Growth Rates:
-├── User data: 50-100% per year
-├── Transaction logs: 100-300% per year
-├── Media content: 200-500% per year
-├── Analytics data: 300-1000% per year
-└── Backup storage: 150-250% per year
-```
+- User profiles - 1–10 KB per user
+- Social posts - 1–100 KB per post
+- Images - 100 KB – 10 MB each
+- Videos - 10 MB – 1 GB each
+- Logs - 1–100 KB per request
+- Analytics events - 100 bytes – 10 KB each
+
+**Annual growth rates:**
+
+- User data - 50–100%
+- Transaction logs - 100–300%
+- Media content - 200–500%
+- Analytics data - 300–1000%
+- Backup storage - 150–250%
 
 ### Bandwidth Calculations
 
-```
-Common Bandwidth Requirements:
-├── REST API call: 1-10 KB
-├── Web page load: 1-5 MB
-├── Image download: 100 KB - 5 MB
-├── Video streaming (720p): 2-5 Mbps
-├── Video streaming (1080p): 5-10 Mbps
-├── Video streaming (4K): 25-50 Mbps
-└── Database replication: 10-100 MB/hour
+**Common payload sizes:**
 
-Peak Bandwidth Formula:
-Peak = Average × Peak Multiplier × Safety Factor
-Safety Factor: 1.5-2x for capacity planning
-```
+- REST API call - 1–10 KB
+- Web page load - 1–5 MB
+- Image download - 100 KB – 5 MB
+- Video streaming 720p - 2–5 Mbps
+- Video streaming 1080p - 5–10 Mbps
+- Video streaming 4K - 25–50 Mbps
+- Database replication - 10–100 MB/hour
 
-------
+**Peak bandwidth formula:**
+
+Peak = Average × Peak Multiplier × Safety Factor (1.5–2×)
+
+---
 
 ## SLA and Availability Reference
 
@@ -272,20 +271,19 @@ Safety Factor: 1.5-2x for capacity planning
 
 ### SLA Budget Calculation
 
-```
-Error Budget = (1 - SLA) × Time Period
+Error budget = (1 − SLA) × time period
 
-Examples (per month):
-├── 99.9% SLA = 43.8 minutes error budget
-├── 99.95% SLA = 21.9 minutes error budget  
-├── 99.99% SLA = 4.38 minutes error budget
-└── 99.999% SLA = 26.3 seconds error budget
+**Monthly error budgets:**
 
-Use for:
-├── Planned maintenance windows
-├── Deployment risk assessment
-├── Incident impact analysis
-└── Feature release decisions
-```
+- 99.9% SLA - 43.8 minutes
+- 99.95% SLA - 21.9 minutes
+- 99.99% SLA - 4.38 minutes
+- 99.999% SLA - 26.3 seconds
 
-This reference appendix provides quick lookup tables for common system design decisions, performance benchmarks, and capacity planning calculations that every system architect should know.
+**Use error budgets to govern:**
+
+- Planned maintenance windows
+- Deployment risk assessment
+- Incident impact analysis
+- Feature release decisions
+

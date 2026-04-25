@@ -33,7 +33,7 @@ def worker():
 `threading.RLock`
 
 - Reentrant Lock : same thread can be acquired multiple times, (must release same number of times).
-- Use in recursive code or when a function holding a lock calls another than also uses the same lock
+- Use in recursive code or when a function holding a lock calls another that also uses the same lock
 
 ```python
 rlock = threading.RLock()

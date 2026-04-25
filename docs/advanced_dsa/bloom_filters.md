@@ -2,7 +2,7 @@
 
 *Membership testing with false positives*
 
-A Bloom filter is ==a space-efficient, probabilistic data structure that quickly checks if an element might be in a set==, offering fast "definitely not in set" (true negative) or "possibly in set" (potential false positive) answers, but never a "definitely in set (no false negatives)"
+A Bloom filter is ==a space-efficient, probabilistic data structure that quickly checks if an element might be in a set==, offering fast "definitely not in set" (true negative) or "possibly in set" (potential false positive) answers, but never "definitely in set" (no false negatives)
 
 
 Good Explanation Videos :
@@ -22,7 +22,7 @@ Use Cases:
 
 ## Algorithm Description
 
-- Create a Bloom Filter (a bit array for of size $m$), with $k$ hash functions
+- Create a Bloom Filter (a bit array of size $m$), with $k$ hash functions
 - Add(x)
     - Hash element `x` with `k` hash functions
     - Each Hash gives an index

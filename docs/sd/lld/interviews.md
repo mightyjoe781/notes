@@ -10,7 +10,7 @@ Where to find questions ~
 
 - search LeetCode reviews for SDE 2 rounds
     - Management Systems
-    - Game Related Problems (ticktactoe, chess, card games)
+    - Game Related Problems (tic-tac-toe, chess, card games)
     - Infra Questions -> Designing Cache, a logger, Distributed Queue, etc
     - Product -> SplitWise, BookMyShow (booking flow), E-commerce
 

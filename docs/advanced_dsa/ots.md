@@ -28,7 +28,7 @@ Operational Transformation (OT) is a technique that:
 
 ![](assets/Pasted%20image%2020260222090619.png)
 
-This is probably most overused example to explain OT. But its easier.
+This is probably the most overused example to explain OT. But its easier.
 
 Consider we are given work `Helo` and two users change the word, but editing at index 3 and at index 4 respectively.
 
@@ -53,7 +53,7 @@ In text editors
 
 OT must satisfy
 
-- Convergence : All replicas reach same state
+- Convergence : All replicas reach the same state
 - Intention Preservation : Operation effect remains what user intended.
 
 ## Architecture Pattern

@@ -13,7 +13,7 @@ O(1) expire
 O(1) delete (amortized)
 ```
 
-thats what timing wheel provide
+that's what timing wheels provide
 
 ## Basic Timing Wheel
 
@@ -39,7 +39,7 @@ slot = (current_time + d) % wheel_size
 ```
 
 Insert timer in that bucket
-When pointer reached that slots -> execute.
+When the pointer reaches that slot -> execute.
 
 ### Problem ? Limited Range
 

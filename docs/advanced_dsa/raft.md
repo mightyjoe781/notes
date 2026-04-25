@@ -2,7 +2,7 @@
 
 Consensus Algorithms are used to gain agreement between network of nodes in a distributed system.
 
-A consensus algorithm  must have following three property
+A consensus algorithm must have the following three properties
 
 - Agreement : every correct process must agree on the same value
 - Validity : values agreed upon must have been proposed by another process termination.
@@ -71,7 +71,7 @@ Only Flaw is if we select a bad node as leader, it can send out wrong results.
 
 ### Local Algorithm
 
-Everybody sends their opinion to everyone their opinion, and each of the nodes agrees on the most frequent value.
+Everybody sends their opinion to everyone, and each of the nodes agrees on the most frequent value.
 
 ![](assets/Pasted%20image%2020260218121655.png)
 
@@ -95,7 +95,7 @@ A simple solution is to lock the leader once a majority is reached.
 
 ![](assets/Pasted%20image%2020260218122412.png)
 
-During agreement if we get leaders opinion along with local opinion, if majority of the votes lean towards one of the value then we go with local opinion (rogue generals can't skew the decision) but if there is a tie, its almost alway better to go with leader's opinion
+During agreement if we get leaders opinion along with local opinion, if majority of the votes lean towards one of the value then we go with local opinion (rogue generals can't skew the decision) but if there is a tie, it's almost always better to go with leader's opinion
 
 ```
 for leader_id in [1, 2, 3]:

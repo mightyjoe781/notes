@@ -6,7 +6,7 @@ Problem : You are given two systems, you are supposed to maintain them in sync.
 
 A naive approach is to check each and every file in that directory and compare with the files from the remote system.
 
-But we could approach it in atleast a better way where we compute the hash of Local and Remote System and compare it before scanning all directories for deltas.
+But we could approach it in at least a better way where we compute the hash of Local and Remote System and compare it before scanning all directories for deltas.
 
 But it still poses a difficulty when there are lots of files, but change is minuscule, and it happens too often.
 
@@ -38,7 +38,7 @@ Building a Merkle Tree
 
 ![](assets/Pasted%20image%2020260217115849.png)
 
-Let's see we made a change in `scrapper.ts` then tree will trigger rebuilding hash on following nodes (highlighted)
+Let's say we made a change in `scrapper.ts` then tree will trigger rebuilding hash on following nodes (highlighted)
 
 ![](assets/Pasted%20image%2020260217115953.png)
 

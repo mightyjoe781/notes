@@ -71,7 +71,7 @@ NOTES :
 
 - Decouples Object Creation - Client Classes don't need to know how objects are created
 - Encapsulation - Factory class has the logic to create objects
-- Extensionability - Adding a new Vehicle requires just adding a new subclass, without modifying client code
+- Extensibility - Adding a new Vehicle requires just adding a new subclass, without modifying client code
 
 
 Why you don't want user to create objects directly ??
@@ -89,7 +89,7 @@ Why you don't want user to create objects directly ??
 * lets you construct complex objects step by step
 * The pattern allows you to produce different types and representations of an object using the same construction code.
 
-Why Use Builder PatternTest
+Why Use Builder Pattern?
 
 * Better Readability – Instead of a constructor with too many parameters, we build the object step by step.
 * Flexibility – Can construct different variations of an object (e.g., Car, SportsCar, SUV).

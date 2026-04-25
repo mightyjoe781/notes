@@ -15,6 +15,7 @@ Instead of directly jumping to send *millions* of notifications, lets start with
 ![](assets/Pasted%20image%2020250906230723.png)
 
 When any team/product wants to send notification
+
 * create a template using the Notification Control Service
 * Specify the variables
 * note the ID of the defined the template

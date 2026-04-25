@@ -80,7 +80,7 @@ ParkingLot (Singleton)
 
 ### Ticket
 
-First foremost we will require a paymentslip or ticket, along with that we will need various Pricing strategy like time or dynamic or type of vehicle.
+First and foremost, we will require a payment slip or ticket, along with that we will need various Pricing strategy like time or dynamic or type of vehicle.
 
 ```
 Ticket

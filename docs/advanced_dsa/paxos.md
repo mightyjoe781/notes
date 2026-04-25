@@ -12,9 +12,9 @@ There are three conceptual roles (often same node plays multiple roles)
 - Acceptor : votes on proposals
 - Learner : Learns the chosen value.
 
-Key Idea is Consensus is achieved by : *Majority Agreement among acceptors*
+Key idea: Consensus is achieved by *Majority Agreement among acceptors*
 
-If a majority agrees on a value, no conflicting value can ever be chosen. This is quorum intersection property
+If a majority agrees on a value, no conflicting value can ever be chosen. This is the quorum intersection property
 
 ### Single Decree Paxos (Basic Paxos)
 

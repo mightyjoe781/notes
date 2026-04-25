@@ -1,7 +1,7 @@
 # Rsync Algorithm
 *Delta based file synchronization*
 
-Often people confuse this with Merkle Trees, which in reality both serve different purpose.
+Often people confuse this with Merkle Trees, which in reality both serve different purposes.
 
 Merkle Trees actually compute difference or prove integrity quickly but Rsync is more about efficiently copying changed file.
 

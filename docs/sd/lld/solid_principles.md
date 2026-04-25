@@ -13,7 +13,7 @@ Key Principle of LLD
 
 * A class, module, or function should have only one reason to change, meaning it should perform only one specific task or have one primary responsibility.
 
-* Goal : Separate behaviours so that if bug arise as a result of your change, it won't affect other unrelated behaviours.
+* Goal : Separate behaviours so that if bugs arise as a result of your change, it won't affect other unrelated behaviours.
 
 Example - 1 Report Generation & Printing
 ```python
@@ -112,7 +112,7 @@ class PaymentProcessor:
         else:
             print("Unknown payment method")
 ```
-* correct way to implement, now we can extent new payment processors by inheriting Abstract Class.
+* correct way to implement; now we can extend new payment processors by inheriting Abstract Class.
 ```python
 from abc import ABC, abstractmethod
 

@@ -43,7 +43,7 @@ For this write-up: single-feature flow, in-memory store, no real network.
                 - Allow the user to cancel or re-enter the amount
 - Cash Dispensing
     - Action : If the amount is valid, the ATM dispense the cash
-    - API Call: Close the transaction and resent it for tracking purposes.
+    - API Call: Close the transaction and reset it for tracking purposes.
     - User Feedback : Display a confirmation message indication successful transaction completion.
 - Cancellation Options
     - NOTE:
@@ -52,7 +52,7 @@ For this write-up: single-feature flow, in-memory store, no real network.
         - After entering amount but before cash dispensing.
     - Restricted Cancellation
         - Once cash dispensing has started the transactions cannot be canceled
-- Transaction Clouser
+- Transaction Closure
     - Action : After cash dispensing or cancellation, the transaction is finished
     - API Call:
         - Mark the transaction as completed or canceled

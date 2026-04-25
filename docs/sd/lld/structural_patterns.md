@@ -201,7 +201,7 @@ print(coffee.description(), "->", coffee.cost())  # Basic Coffee + Milk + Sugar 
 ```
 
 - Flexible & Scalable
-- Combinable - decorators can be combines
+- Combinable - decorators can be combined
 - **Follows SOLID principles** - No unnecessary subclasses or modifications.
 ### Facade
 

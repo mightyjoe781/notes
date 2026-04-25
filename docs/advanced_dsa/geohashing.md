@@ -1,6 +1,6 @@
 # Geohashing
 
-Excellent way to reduce one type of problem (proximity search) to another, seemingly unrelated one (string prefix matching), allowing databases to re-use their regular index datastructures on these fancy new co-ordinates.
+Excellent way to reduce one type of problem (proximity search) to another, seemingly unrelated one (string prefix matching), allowing databases to re-use their regular index data structures on these fancy new co-ordinates.
 
 It usually maps `(lat, lng)` to a string.
 
@@ -15,7 +15,7 @@ L R L T R T ...
 0 1 0 1 1 0 ...
 ```
 
-This is called as a Z-order Curve (Morton Encoding), nearby points ends up in similar patterns.
+This is called a Z-order Curve (Morton Encoding), nearby points end up in similar patterns.
 
 Since these binary string could be quite large we encode them using *base32*, starting from the left, the *high-bits*
 
@@ -32,7 +32,7 @@ An important observation is two quadrant which are close share a common prefix. 
 Examples :
 
 ```
-Mount Everent -> tuvz4p0f7
+Mount Everest -> tuvz4p0f7
 Nearby Point -> tuvz4p0fe
 Far Point     -> u4pruydqqv
 ```
@@ -135,10 +135,10 @@ Step 2 : Get center Hash
 
 ```
 h = geohash(point)
-prefix = h:[:length]
+prefix = h[:length]
 ```
 
-Step 3: Also query neighbors, because edges exists
+Step 3: Also query neighbors, because edges exist
 
 ```
 +----+----+----+

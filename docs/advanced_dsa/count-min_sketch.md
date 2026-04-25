@@ -40,7 +40,7 @@ OK
 
 ### Sizing the Count-Min Sketch
 
-Even though the Count-Min sketch is similar to Bloom filter in many ways, its sizing is considerably more complex. The initialisation command receives only two sizing parameters, but you have to understand them thoroughly if you want to have a usable sketch.
+Even though the Count-Min sketch is similar to Bloom filters in many ways, its sizing is considerably more complex. The initialisation command receives only two sizing parameters, but you have to understand them thoroughly if you want to have a usable sketch.
 
 -  `error` parameter will determine the width `w` of your sketch and the probability will determine the number of hash functions (depth `d`). The error rate we choose will determine the threshold above which we can trust the result from the sketch. $\text{threshold} = \text{error} \times \text{total\_count}$
 - `probability` in this data structure represents the chance of an element that has a count below the threshold to collide with elements that had a count above the threshold on all sketches/depths thus returning a min-count of a frequently occurring element instead of its own.

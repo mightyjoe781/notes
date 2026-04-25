@@ -52,7 +52,7 @@ ORCriteria(Criteria)          — union: runs all criteria, deduplicates by prod
 
 **ORCriteria logic:** run each criterion on the _original_ full list independently, then union the results. You cannot chain them like AND - each must see the unfiltered list.
 
-This distinction is easy to get wrong in an interview. This is clearly called it out - AND chains, OR fans out.
+This distinction is easy to get wrong in an interview. This is clearly called out here - AND chains, OR fans out.
 
 ### Product Entity
 

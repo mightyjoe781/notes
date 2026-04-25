@@ -1,7 +1,7 @@
 # Conflict-Free Replicated Data Types (CRDTs)
 *Convergent state without coordination*
 
-NOTE: following notes serve as mathematical intuition towards why does CRDTs work, after understanding understanding rest of the resources should be easier.
+NOTE: following notes serve as mathematical intuition towards why CRDTs work, after understanding the rest of the resources should be easier.
 
 The core problems in distributed systems are : 
 
@@ -81,7 +81,7 @@ $(1,3,5) \le (1, 4, 6)$ but $(5, 1, 4) \parallel (5, 2, 3)$ (incomparable) might
 
 Now imagine we have an ordered set S and we pick subset P ($P \subseteq S$)
 
-An upper bound of P is an element in S thats greater than or equal to every element in P
+An upper bound of P is an element in S that's greater than or equal to every element in P
 
 ![](assets/Pasted%20image%2020260222002512.png)
 
@@ -107,7 +107,7 @@ Join obey 3 laws
 
 Say we have an ordered set S, If we can find a join for every pair of elements in S then we have a join *semi-lattice*
 
-If $x \cup y$ exits for all $\{x, y \} \subseteq S$, then $S$ is a *join semi-lattice.*
+If $x \cup y$ exists for all $\{x, y \} \subseteq S$, then $S$ is a *join semi-lattice.*
 
 ![](assets/Pasted%20image%2020260222074056.png)
 
@@ -156,12 +156,12 @@ As we call `merge()` on our states, the results converge towards a global value.
 
 The join laws give us nice properties
 
-- Associativity and Commutativity : The order of merges doesnt' matter
+- Associativity and Commutativity : The order of merges doesn't matter
 - Idempotence: We can merge in the same state multiple times.
 
 ![](assets/Pasted%20image%2020260222075712.png)
 
-No matter how we merge we will always reach to global value.
+No matter how we merge we will always reach the global value.
 
 |                                                 |                                                 |
 | ----------------------------------------------- | ----------------------------------------------- |
