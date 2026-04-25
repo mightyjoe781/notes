@@ -4,9 +4,9 @@
 
 When one machine is not enough to process the data, we distribute processing over several machines and combine their results to get final result.
 
-This process in fundamental in all kinds of Big Data Processing, useful in extracting insights from the data, train Machine Learning Models, move data across databases and much more.
+This process is fundamental in all kinds of Big Data Processing, useful in extracting insights from the data, train Machine Learning Models, move data across databases and much more.
 
-When too much data needs to be processed quickly we use Big Data Tools, done on commodity hardwares and readily available by various cloud vendors.
+When too much data needs to be processed quickly we use Big Data Tools, done on commodity hardware and readily available by various cloud vendors.
 
 ### Example Word Frequency
 
@@ -18,23 +18,23 @@ Approach 1 : Simple
 - read it character by character
 - when space is encountered, update the in-mem hash table, increase count.
 
-This is a simple approach that runs in $O(n)$ time approx., But because one machine is doing this it will take a long time. We can parallelize it using threads.
+This is a simple approach that runs in $O(n)$ time approx., but because one machine is doing this, it will take a long time. We can parallelize it using threads.
 
 Approach 2 : Threads
 
 * Parallelize the code
 * Each thread can handle a chunk of the file
-* we can wait for all threads to join and compute total sum from cnt of thread.
+* we can wait for all threads to join and compute total sum from count of each thread.
 
 But what if the dataset is not 1TB but 100TB ?
 
-* this file will not fit in single machine, even if it did, it would be very slow to compute this threads are bounded by timeshare provided by each CPU, limited computation capability of the underlying hardware.
+* this file will not fit in a single machine. Even if it did, it would be very slow to compute — threads are bounded by the timeshare provided by each CPU and the limited computation capability of the underlying hardware.
 
 * Instead of one machine, we can distribute the workload across (often smaller) machines and utilize their parallelism to compute the result.
 
 Approach 3 : Distributed Computing
 
-* More computers, more cpu, more processing
+* More computers, more CPU, more processing
 * Idea: Split the file into `partitions`, distribute the partition across all servers and let each server compute word frequency independently and send the result to the cluster co-ordinator which merges the result and returns final answer
 
 ![](assets/Pasted%20image%2020251221211833.png)

@@ -2,10 +2,10 @@
 
 >    Data is the new oil — but only if you can store, query, and scale it.
 
-Databases can be divided into two categories: *Relational* or *Non-Relational* Databases, 
+Databases can be divided into two categories: *Relational* or *Non-Relational* Databases.
 ## Relational Databases
 
-* Data is stored and represented in row & columnar fashion.
+* Data is stored and represented in rows and columns.
 
 History of Relational Databases
 
@@ -17,7 +17,7 @@ History of Relational Databases
     * Data integrity
     * Constraints
     * Everything in one place
-* Because of this reason, relational databases provides ACID properties to support *Transactions*
+* Because of this, relational databases provide ACID properties to support *Transactions*
 
 * A - Atomicity
 * C - Consistency
@@ -41,19 +41,19 @@ History of Relational Databases
 
 ### Durability
 
-* when transaction commits, the changes outlives outage.
+* when a transaction commits, the changes outlive the outage.
 * When archive tapes were used, you can restore database back from its initial state to final state using archives.
 
 ### Isolation
 
-* when multiple transactions are executing parallely, the *isolation level* determines how much changes of one transactions are visible to other.
-* Serializable ? Effect of all transaction is as if they have executed serially. In Computer Architecture people realized it was little slow, so they fiddled around locks to figure out to make it work fast.
+* when multiple transactions are executing in parallel, the *isolation level* determines how much of one transaction's changes are visible to others.
+* Serializable: The effect of all transactions is as if they have been executed serially. In Computer Architecture, people realized it was a little slow, so they fiddled around with locks to make it work fast.
 
 ## Database Isolation Levels
 
 * Isolation levels dictate how much one transaction knows about the other.
 
-NOTE: Following examples assumes that there are two txns executing parallely, i.e. T1, T2
+NOTE: Following examples assume that there are two txns executing in parallel, i.e. T1, T2
 
 ### Repeatable Reads
 
@@ -93,8 +93,8 @@ NOTE: Following examples assumes that there are two txns executing parallely, i.
 
 ### Replication
 
-* Changes on one database (Master) needs to be sent to Replica to Maintain Consistency
-* There are two types to of replication
+* Changes on one database (Master) need to be sent to Replica to Maintain Consistency
+* There are two types of replication
 
 #### Synchronous Replication
 
@@ -128,13 +128,13 @@ NOTE: Following examples assumes that there are two txns executing parallely, i.
 * Partitioning : splitting a subset of data *within* the same instance.
 * How a database is scaled
     * A database server is just a databases process running on an EC2
-    * post production deploying, your service is serving the real traffic (100wps)
+    * post production deployment, your service is serving the real traffic (100wps)
     * Suddenly there is a surge of users (200wps)
     * To handle load, you can scale up your database, increase RAM, CPU and DISK
     * Now, suddenly traffic surges in popularity (1000wps)
     * you can’t scale up beyond limits of the provider, you will have to scale horizontally 
     * Then you should split the data into multiple databases, providing higher throughput
-* In above example splitting data into multiple database(shard) is called *partitioned*
+* In the above example, splitting data into multiple databases (shards) is called *partitioning*
 * How to partition the data ? There are two categories of partitioning
     * Horizontal Partitioning (Common) - Within table take rows based on some property into multiple partitions
     * Vertical Partitioning
@@ -154,7 +154,7 @@ NOTE: Following examples assumes that there are two txns executing parallely, i.
 
 ### Document DB
 
-* Ex - MongoDB, DynamoDB (supports documentDB features)
+* Ex - MongoDB, DynamoDB (supporting documentDB features)
 * Mostly JSON based
 * Support complex queries (almost like relational databases)
 * Partial Updates to documents possible (no need to update entire document)
@@ -194,7 +194,7 @@ NOTE: Following examples assumes that there are two txns executing parallely, i.
 * Does this mean, no DB is different
     * No every single database has some peculiar properties and guarantees and if you need those, pick that DB
 * How does this help in designing system
-    * While designing any system, do no jump to DB directly
+    * While designing any system, do not jump to DB directly
     * Understand *what* & *how much* data you will be storing
     * Understand the *access pattern* for data
     * Any special feature like *TTL* etc required.

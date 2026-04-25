@@ -1,11 +1,11 @@
 # Load Balancing and Fault Tolerance
 
->    Everything fails eventually. Good systems don’t
+>    Everything fails eventually. Good systems don’t.
 ## Load Balancers
 
 ![](assets/Pasted%20image%2020251221204406.png)
 
-* *Load Balancers* are one of the most important component in distributed system that makes it easy to scale systems horizontally.
+* *Load Balancers* are one of the most important components in a distributed system that makes it easy to scale systems horizontally.
 * Load Balancer is the *only point of contact* between users and systems
 * Every Load Balancer has either
     * Static IP
@@ -50,7 +50,7 @@
 ## Data Redundancy and Recovery
 
 * API servers are *stateless* but databases are *stateful*
-* API servers going down is fine because it can be respawned but thats no the cash if disk crashes
+* API servers going down is fine because they can be respawned, but that's not the case if a disk crashes
 * A good system always takes care of such catastrophic situation
 * The only way to protect against loss of data to create multiple copies of it - *Data Redundancy*
 * Backup & Restore
@@ -71,7 +71,7 @@
 
 ![](assets/Pasted%20image%2020251221205436.png)
 
-* If there are bunch of nodes serving traffic, then if any of the node goes down, then a *orchestration* service should bring up another replica of that node.
+* If there are a bunch of nodes serving traffic, then if any of the nodes go down, an *orchestration* service should bring up another replica of that node.
     * No human intervention involved
     * Minimal Time - outage
 * But above scenario always keeps happening as orchestration might be down, how do we keep orchestration correctly ? orchestrator for orchestrators :(

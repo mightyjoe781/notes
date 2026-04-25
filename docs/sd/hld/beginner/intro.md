@@ -1,7 +1,7 @@
 # Introduction to System Design
 
 >    “Systems run the world. Good design keeps them from falling apart.”
-## What is System Design ?
+## What is System Design?
 
 ![485](assets/Pasted%20image%2020260425132059.png)
 
@@ -16,7 +16,7 @@
 ![](assets/Pasted%20image%2020260425132213.png)
 
 * Pattern for solving a system design problem goes something like :
-    * Break down problem statement into *solvable* sub-problem (divide & conquer)
+    * Break down problem statement into *solvable* sub-problems (divide & conquer)
     * Decide *key components and responsibilities*
     * Declare *boundaries* of each component
     * Understand *Key Challenges* in scaling your solution
@@ -44,9 +44,9 @@
 * Every system can be improved *infinitely* & you should develop a better sense of when to stop.
 * Follow these points
     * Break system into components
-    * Each Component has a clear set of responsibility (Exclusive)
+    * Each Component has a clear set of responsibilities (Exclusive)
     * For Each Component have Clear technical details on database, caching, scaling, fault-tolerance, async processing, communication
 * Make sure Each Component in Isolation is
     * Scalable - horizontally scalable
     * Fault-Tolerant - Plan for recovery in case of a failure
-    * Available - Component function (partially) even under load or failure
+    * Available - Component functions (partially) even under load or failure

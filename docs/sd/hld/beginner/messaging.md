@@ -6,7 +6,7 @@
 ![](assets/Pasted%20image%2020251221201204.png)
 
 
-* user sent the request to API and immediately got the response is called as synchronous processing.
+* When a user sends a request to an API and immediately gets a response, this is called synchronous processing.
 * Ex - loading feed, login, payments.
 * Asynchronous Systems usually will accept the user payload and forward it to message brokers which will pass this work to workers. User will not wait for response and get back some id to track status of the work, and When workers complete their task, they can just update the DB & status of the task.
 * There are three ways of message passing:
@@ -31,9 +31,9 @@ Features of Message Brokers
 
 Let's assume in above example, workers perform two tasks, Update the DB and Writes to Elastic Search.
 
-Then there are two approached to solve the problem,
+Then there are two approaches to solve the problem,
 
-Approach - 1 : One Message Brokers and add logic in consumers.
+Approach - 1 : One Message Broker, adding logic in consumers.
 
 ![](assets/Pasted%20image%2020251221202105.png)
 
@@ -42,7 +42,7 @@ Here process-1 & process-2, if either failed then we will not be able to process
 Approach 2 : Two brokers & two set of consumers
 
 - API server Writes to two brokers and each has its own set of consumers, (solves issue with partial complete writes)
-* Issue - when API server writes to two RabbitMQ, one of them fails, we end up with original problem.
+* Issue - when API server writes to two RabbitMQ instances and one of them fails, we end up with the original problem.
 
 ![](assets/Pasted%20image%2020251221202307.png)
 
@@ -56,7 +56,7 @@ Similar to Message Queue except there could be multiple consumers reading from t
 
 Message Queue vs Message Streams
 
-* In Message Queue, consumers consume a message once while in Kinesis a specific consumer group consumes the message once (usually tracked by checkpoint)
+* In a Message Queue, consumers consume a message once; while in Kinesis, a specific consumer group consumes the message once (usually tracked by checkpoint)
 
 ### Kafka Essentials
 
@@ -74,7 +74,7 @@ Message Queue vs Message Streams
 * Advantage : Consumers can pull at their own pace, and consumers don’t get overwhelmed
 * Disadvantage: Consumption lag when high ingestion.
 
-What if we want low latency  Zero Lag ? --> realtime pub-sub
+What if we want low latency, zero lag? --> realtime pub-sub
 
 * Instead of consumers pulling the message, the message is pushed to them.
 * This way we get really fast delivery time, but can overwhelm the consumers if they are not able to process the message fast (usually we use queue at each consumer)
