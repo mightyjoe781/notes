@@ -2,11 +2,10 @@
 
 *A structured approach to understanding Large Language Models and AI Agents from foundations to advanced implementations.*
 
-## LLM & Agents Tooling
+## AI Tooling
 
 - [Github Copilot VSCode](tooling/copilot.md)
-- Claude Code
-- Open Clawd
+- [Claude Code](tooling/claude_code.md)
 
 ## LLM Fundamentals
 

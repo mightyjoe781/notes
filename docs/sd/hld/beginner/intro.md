@@ -3,7 +3,7 @@
 >    “Systems run the world. Good design keeps them from falling apart.”
 ## What is System Design ?
 
-![](assets/Pasted%20image%2020251221191055.png)
+![485](assets/Pasted%20image%2020260425132059.png)
 
 * A set of requirements which requires defining :
     * Architecture
@@ -12,6 +12,8 @@
 * It deals with how above 3 pieces interact with each other, cumulatively solving the problem at hand.
 
 ## Framework for Designing a System
+
+![](assets/Pasted%20image%2020260425132213.png)
 
 * Pattern for solving a system design problem goes something like :
     * Break down problem statement into *solvable* sub-problem (divide & conquer)
@@ -37,12 +39,14 @@
 
 ## How do you Evaluate a System ?
 
-* Every system can be improved *infinitely* & you should have a better idea when to stop
+![](assets/Pasted%20image%2020260425132251.png)
+
+* Every system can be improved *infinitely* & you should develop a better sense of when to stop.
 * Follow these points
     * Break system into components
-    * Each Component has a clear set of responsibility(Exclusive)
+    * Each Component has a clear set of responsibility (Exclusive)
     * For Each Component have Clear technical details on database, caching, scaling, fault-tolerance, async processing, communication
 * Make sure Each Component in Isolation is
     * Scalable - horizontally scalable
     * Fault-Tolerant - Plan for recovery in case of a failure
-    * Available - Component function even when some component fails
+    * Available - Component function (partially) even under load or failure

@@ -73,11 +73,14 @@ psql -h hostname -p port -U username -d database_name
 > \dt
 > SELECT pg_size_pretty(pg_total_relation_size('public.blocks')) AS size;
 
-# vaccum a table
+# vaccum a table, marks deletes to be collected
 VACUUM VERBOSE schema_name.table_name;
 
 # vaccum entire db
 VACUUM;
+
+# real-vacuum, reduces actual storage space
+VACUUM FULL public.blocks;
 ```
 
 ## Backups !
@@ -104,5 +107,37 @@ pg_dump -U prismo -h 127.0.0.1 -F c -b -v -f ~/bkp/20251018_adv.backup adventure
 
 Since Luanti Maps are generated using a Perlin noise, we can trim database to make our database lean.
 
-https://github.com/minetest-go/mapcleaner
-https://github.com/random-geek/MapEditr
+- https://github.com/minetest-go/mapcleaner
+- https://github.com/random-geek/MapEditr
+
+
+```bash
+
+# ---- CLONE REPO ------
+git clone git@github.com:mightyjoe781/mapcleaner.git
+
+# compile the binary
+go build -o mapcleaner . && ./mapcleaner -help
+
+```
+
+
+Example `mapcleaner.json` for removing everything below -1000.
+
+
+```json
+{
+  "chunk_x": -400,
+  "chunk_y": -400,
+  "chunk_z": -400,
+  "removed_chunks": 0,
+  "retained_chunks": 0,
+  "processed_chunks": 0,
+  "from_x": -400,
+  "from_z": -400,
+  "to_x": 400,
+  "to_y": -14,
+  "to_z": 400,
+  "delay": 50
+}
+```

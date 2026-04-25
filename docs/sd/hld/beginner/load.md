@@ -18,30 +18,12 @@
     * load balancer gets the response from the server
     * load balancer responds back to the client
 
-### Load Balancing Algorithms
-
-![](../advanced/assets/Pasted%20image%2020250912105111.png)
-
-#### Round Robin
-
-* distribute the load iteratively (uniform)
-
-#### Weighted Round Robin
-
-* distribute the load iteratively but as per weights
-
-#### Least Connection
-
-* pick server with least connection from the balancer. Used when response time has a big variance (analytics)
-
-#### Hash Based Routing
-
-* Generate a Hash of the request and based on a mapping of hash to servers, transmit the request to the mapped server.
-
 ### Key Advantages of Load Balancers
 
 * Scalability - servers can be scaled up and scaled down without User ever knowing.
 * Availability - crashing of one server doesn’t affect entire infra, load balancer can route traffic to healthy nodes
+
+![](assets/Pasted%20image%2020260425135608.png)
 
 ## Circuit Breakers
 
