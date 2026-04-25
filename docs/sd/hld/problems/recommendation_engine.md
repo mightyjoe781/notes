@@ -25,14 +25,14 @@ You have never made a purchase > 10k Rs, but amazon keeps recommending a 1.5Lakh
 
 ### ML Approach 1 : Content Filtering (Exploitation)
 
-Show me products similar to ones I shopped. Can be expended to *videos*, *songs*, *searches*
+Show me products similar to ones I shopped. Can be extended to *videos*, *songs*, *searches*
 Above technique works well for some niche use cases
 
 - recommending similar books, songs, videos, creators.
 
 How to implement ?
 
-Cluster the *content* (title, description, type, tags) such that similar ones falls closer when user sees/watches/consumers one, we pick few more from this cluster and add to recommendation section.
+Cluster the *content* (title, description, type, tags) such that similar ones fall closer; when user sees/watches/consumes one, we pick a few more from this cluster and add to recommendation section.
 
 ![](assets/Pasted%20image%2020250908090838.png)
 
@@ -56,7 +56,7 @@ We can also use other distances Euclidean to quantify similarity.
 
 ### ML Approach 2 : Collaborative Filtering (Exploration)
 
-Collaborative Filtering Clusters users and recommends things that other similar user bough
+Collaborative Filtering clusters users and recommends things that other similar users bought
 
 - A *bought* iPhone
 - A *similar* to B

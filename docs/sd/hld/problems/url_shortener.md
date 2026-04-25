@@ -12,7 +12,7 @@ Why ? easy to share in Messaging Apps.
 
 Approach 1 : Hash the URL
 
-- SHA 256 are 256 bits long ~ 15 B
+- SHA 256 is 256 bits long ~ 32 B
 - 16 B short url are not short. (`url.sml/abcedfghij...16 chars`)
 - Two URLs can have the same hash.
 
@@ -92,7 +92,7 @@ NOTE: stats DB is sharded by user who created the url. Aggregation are mostly pe
 - generating random integer is prone to collision
     - hence we have to do it uniquely pseudo random
 - only one machine should not be handling this ~ too much load on one machine
-- 100M/30 ~ 3 M per day ~ 125k per hour ~ 2k per minute (averge) ~ peak will be way worse traffic
+- 100M/30 ~ 3 M per day ~ 125k per hour ~ 2k per minute (average) ~ peak will be way worse traffic
 
 We leverage partitioning, sharding and transactions to achieve this !!
 

@@ -55,7 +55,7 @@ In order to find what's trending, we have to
 - extract domain, entity and aggregate
 - score and rank
 
-If we consider every tweet to find, what's trending then it become easy to game the system. Hence its important to filter out *spam* (replies, low quality tweets, tweets with sensitive content, etc)
+If we consider every tweet to find, what's trending then it becomes easy to game the system. Hence its important to filter out *spam* (replies, low quality tweets, tweets with sensitive content, etc)
 
 ![](assets/Pasted%20image%2020250907162537.png)
 

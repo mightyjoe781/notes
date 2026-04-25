@@ -75,7 +75,7 @@ To train our model, we need data, the details about the transaction
 - who sent to whom
 - from which ip, location, region, currency, etc. (these should be present in txn DB)
 
-Similar to moving data from CS DB to S3 we used spark, we will move data from S3.
+Similar to moving data from CS DB to S3 using Spark, we will move transaction data to S3.
 
 ![](assets/Pasted%20image%2020250908080246.png)
 

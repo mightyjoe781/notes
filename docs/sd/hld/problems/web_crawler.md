@@ -33,7 +33,7 @@ KV database like Dynamo DB.
 
 Assume : every webpage is assigned a 32 byte identifier, there are 1,000,000,000 webpages and there are 1,000,000 words, with on average each word is present in 1% of pages
 
-Size of inverted index = 1,000,000 x (8 (avg word lenght) + 10,000, 000 x 32)
+Size of inverted index = 1,000,000 x (8 (avg word length) + 10,000,000 x 32)
 Size of inverted index = 8 MB  + 32 x 10, 000, 000, 000, 000 B
 Size of inverted index = 8 MB + 32 x 10 TB = 320 TB
 
@@ -81,7 +81,7 @@ Daemon packs and upload to S3 `[at specific location - partitioned by time]`and 
 Yes, we know crawler start with the seed URLs and all, but given there are distributed server they should have a DB
 
 All servers running crawlers co-ordinate through a common DB (URL DB).
-URL DB is responsible for assigning a uniquer id to each URL is responsible to hold stats about recent crawling amount of data is huge, hence we need it to be sharded and KV based access is fine.
+URL DB is responsible for assigning a unique id to each URL and for holding stats about recent crawling amount of data is huge, hence we need it to be sharded and KV based access is fine.
 
 Dynamo DB with domain as hash key seems fine.
 

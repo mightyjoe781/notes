@@ -98,14 +98,14 @@ This would help us with disaster recovery ? recovering from data loss
 
 Whenever a file is accessed, the API server captures the request metadata and stores it on *elastisearch* for end-user analytics.
 
-- Elastisearch : good for recent analytics
-- Aggregation and Visuatlization
+- Elasticsearch : good for recent analytics
+- Aggregation and Visualization
 
 Given analytics data is huge & we may not query it beyond 6 months. Archive to save space.
 
 ![](assets/Pasted%20image%2020250907232635.png)
 ### Exercise
 
-- capture request data (ip, region, user-agent, etc) and dump it in Elastic Search
+- capture request data (ip, region, user-agent, etc) and dump it in Elasticsearch
 - build visualisation on top of it with *Kibana*
 - Write a small cleanup job that periodically deletes the data from Relational DB

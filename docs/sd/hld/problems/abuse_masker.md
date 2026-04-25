@@ -18,7 +18,7 @@ Socket IO has notion of rooms, Simple Socket IO process is running on server. We
 
 #### Abuse Dictionary
 
-Assume that we have a list of words (*abuses*) stored in a text file on Blog Storage like S3 (at a path).
+Assume that we have a list of words (*abuses*) stored in a text file on Blob Storage like S3 (at a path).
 Hence, when the live stream server starts up
 
 * downloads the abuse file
@@ -44,9 +44,9 @@ This is a simple approach but not efficient.
 Approach 2 : Trie
 
 We can build a trie out of abuses and in just $O(n)$ traversal mask the abuses.
-For each character in text we iterate through trie everytime we get `_`, `,`, ... etc we reset our trie iteration (to the top).
+For each character in text we iterate through trie every time we get `_`, `,`, ... etc we reset our trie iteration (to the top).
 
-if the abuse is found an next char is EOS or non-alphabet, we mask and write the new string. Else the word copied as is. The final string is then sent/broadcasted to every participant.
+if the abuse is found an next char is EOS or non-alphabet, we mask and write the new string. Else the word is copied as is. The final string is then sent/broadcasted to every participant.
 
 How this fits in the system ? 
 We typically think of databases and all to hold and query but that is very slow for this plus no database exposes trie, So what should we do ?
@@ -60,7 +60,7 @@ Have a *abuse masker* service that exposes an HTTP endpoint accepting text and r
 NOTE : Not everything needs to be a *service* . It would add network latency.
 Setting up TCP connection will take (3 way handshake) and teardown will require 2 way teardown. For persistent connection we will incur network I/O.
 
-Hence, create a config in S3 that load every time server boots up
+Hence, create a config in S3 that loads every time server boots up
 
 ![](assets/Pasted%20image%2020250907091308.png)
 

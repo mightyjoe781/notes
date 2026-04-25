@@ -1,6 +1,6 @@
 # Design e-commerce product listing
 
-Motive : Understanding how a system is built and taking a structures approach in building one. Understanding core-infra components and how they fit.
+Motive : Understanding how a system is built and taking a structured approach in building one. Understanding core-infra components and how they fit.
 
 Problem Statement:
 
@@ -35,7 +35,7 @@ Load Balancer will have DNS like `api.mstore.com`
 ![](assets/Pasted%20image%2020250906182516.png)
 
 * End user will not directly interact with backend, needs the frontend service.
-*  In read world we will need an admin UI as well for adding products to listing.
+*  In real world we will need an admin UI as well for adding products to listing.
 
 ![](assets/Pasted%20image%2020250906182902.png)
 

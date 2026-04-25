@@ -10,7 +10,7 @@ Instead of directly jumping to send *millions* of notifications, lets start with
 ## Notification Template
 
 * We need a UI and simple backend to create notification template that will be configured by some internal team.
-* number of notification templates will not be huge & will fit on a single machine. Hence, we start with relational OB
+* number of notification templates will not be huge & will fit on a single machine. Hence, we start with relational DB
 
 ![](assets/Pasted%20image%2020250906230723.png)
 
@@ -64,13 +64,13 @@ Approach 2 : Control server delegates iteration
 ![](assets/Pasted%20image%2020250906233319.png)
 
 SQS1 : Notification Emitter
-SSQ2 : User iterator, and anything that requires some processing.
+SQS2 : User iterator, and anything that requires some processing.
 
 ### Important Notification
 
 Some notifications are more important than others. e.g. Appointment Reminders >>> Marketing Push
 
-In out current architecture, one marketing campaign will keep executors busy and all other notifications will starve in the queue.
+In our current architecture, one marketing campaign will keep executors busy and all other notifications will starve in the queue.
 To solve this : Instead of having one Notification Emitter Queue, have multiple queues with priority queue (p1, p2, p3) & each having its own set of workers.
 
 ![](assets/Pasted%20image%2020250906234942.png)
@@ -81,7 +81,7 @@ Duplicate Notification ?
 
 It is really irritating to receive marketing notifications and it is the worst if we receive multiple of the same campaign.
 
-To ensure we do not accidentally send multiple notification from same campaign we keep track in the a database (KV store is fine)
+To ensure we do not accidentally send multiple notification from same campaign we keep track in a database (KV store is fine)
 
 $$
 \begin{split}

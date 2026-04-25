@@ -2,7 +2,7 @@
 
 Motive : playing with location and keeping things efficient.
 
-Statement : Design Feed for Tinder and feature to swipe left or right. For great user experience, a user should not be shown a profile that he/she already swiped.
+Statement : Design Feed for Tinder and a feature to swipe left or right. For great user experience, a user should not be shown a profile that he/she already swiped.
 Feed Criteria
 
 * Proximity : near the better
@@ -62,7 +62,7 @@ In either case, you should never store feed of a user is "`list`" (say Mongo DB)
 ### Storing Swipes
 
 People swipe left or right to indicate interest.
-We do not need a separate DB to hold this info and we leverage Feed Database and just add `is_intrested` in each item
+We do not need a separate DB to hold this info and we leverage Feed Database and just add `is_interested` in each item
 
 NOTE: You don't have to create a new DB for everything
 

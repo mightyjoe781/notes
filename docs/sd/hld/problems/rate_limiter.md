@@ -26,7 +26,7 @@ Where does it fit ?
 
 ## Understanding Rate Limiter
 
-Rate Limiter needs track `#` requests in a given period. Hence we need a database to hold the count, but which one ?
+Rate Limiter needs to track `#` requests in a given period. Hence we need a database to hold the count, but which one ?
 
 * for every incoming request we would update the db
 * for every incoming request we would read from the db (aggregate)
@@ -62,7 +62,7 @@ Scaling Rate limiter = scaling the database.
     * Any function in backend service will extract user_id from token
     * check rate-limiter Db if good then proceed otherwise block
 
-We can easily shard the database to handle more load. And store the redis servers by storing the configuration on the s3, and logic to handle the selection of the redis server would be handled by the library.
+We can easily shard the database to handle more load. We configure the Redis servers by storing the configuration on S3, and logic to handle the selection of the Redis server would be handled by the library.
 
 ![](assets/Pasted%20image%2020250906192514.png)
 
