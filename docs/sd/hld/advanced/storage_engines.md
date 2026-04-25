@@ -209,7 +209,7 @@ DHTs are used in:
 
 ## ETL & Tiered Storage
 
-Say, we are building a multi-user blogging application in which the data is stored in *Transactional Database* like Mongo DB
+Say, we are building a multi-user blogging application in which the data is stored in *Transactional Database* like MongoDB
 
 ![](assets/Pasted%20image%2020250915114251.png)
 

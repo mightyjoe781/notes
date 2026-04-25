@@ -1,3 +1,5 @@
+# Algorithmic Design (Part 2)
+
 ## Impression Counting
 
 ### Point in Polygon : *RayCasting*
@@ -219,7 +221,7 @@ How is a file information hold in DB.  File is a list of block hashes.
 
 ![](assets/Pasted%20image%2020250921142714.png)
 
-The file is saved implies and entry in file metadata DB.
+The file is saved implies an entry in file metadata DB.
 
 #### What if a file changed ?
 

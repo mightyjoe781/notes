@@ -98,7 +98,7 @@ S3 is conceptually a static file server:
 s3://bucket.s3.aws.com/images/logo.png
 ```
 
-Request comes to the API server then goto storage and fetch the file at the location specified and return it.
+Request comes to the API server then go to storage and fetch the file at the location specified and return it.
 
 As storage needs grow, you add more HDDs. 
 
@@ -210,7 +210,7 @@ The Partition Manager must itself be highly available — run it as a replicated
 ![](assets/Pasted%20image%2020250919001524.png)
 
 
-NOTE: below diagram seems counterintuitive to having each microservice own its own data. but here since data can be huge it makes sense to directly pickup the files rather than sending it around.
+NOTE: The following diagram seems counterintuitive to having each microservice own its own data. But here, since data can be huge, it makes sense to directly pick up the files rather than sending them around.
 
 ![](assets/Pasted%20image%2020250919001944.png)
 

@@ -64,7 +64,7 @@ SELECT * FROM t WHERE id = 2 FOR UPDATE NOWAIT;
 ## Case Study: Airline Check-in System
 
 - multiple airlines
-- every airline has multiple plan (flight)
+- every airline has multiple planes (flights)
 - each flight has 120 seats
 - every flight has multiple trips
 - user books a seat in one trip of a flight
@@ -163,7 +163,7 @@ Brainstorm : Storage, optimize storage, insert updates, TTL.
 
 ### Storage
 
-MYSQL : start with single node & then scale as the system demands.
+MySQL: start with single node & then scale as the system demands.
 
 **Schema**
 
@@ -266,7 +266,7 @@ The intuition: if fewer than 25% of a random sample are expired, the overall pop
 
 ## Further Study
 
-- [Why ORMs are bad ideas?](https://www.google.com/search?q=why+ORMs+are+bad+ideas) - start with Matthas Noback's critiques and the "ORM is an anti-pattern" discourse; form your own opinion
+- [Why ORMs are bad ideas?](https://www.google.com/search?q=why+ORMs+are+bad+ideas) - start with Matthias Noback's critiques and the "ORM is an anti-pattern" discourse; form your own opinion
 - [Central Limit Theorem - why does a sample size of 20 work?](https://en.wikipedia.org/wiki/Central_limit_theorem) - understanding this explains why Redis's random 20-key TTL sampling is statistically sound
 - [B+ Tree rebalancing](https://en.wikipedia.org/wiki/B%2B_tree) - understand splits and rotations; critical for reasoning about write amplification in indexes
 - [FizzBuzz Enterprise Edition](https://github.com/EnterpriseQualityCoding/FizzBuzzEnterpriseEdition) - a joke, but an instructive one on over-engineering

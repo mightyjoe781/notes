@@ -85,7 +85,7 @@ _Similar systems:_ multiplayer games, live polls, collaborative tools, realtime 
 **Key Insight**: DMs are just channels with 2 members
 This simplification means you only need to model **channels** well - the rest falls out naturally.
 
-How to store messages in slack workspace ?
+How to store messages in a Slack workspace?
 Workspace -> multiple channels -> multiple messages
 
 #### Schema
@@ -181,7 +181,7 @@ But we can connect Edge servers to one another over TCP. Yes
 
 ![](assets/Pasted%20image%2020250911113421.png)
 
-But if we have 100 edge server will every server to every another server ? It would be a very bad idea to send message thru mesh network of interconnected servers.
+But if we have 100 edge servers, will every server connect to every other server? It would be a very bad idea to send messages through a mesh network of interconnected servers.
 
 Naively, you could connect every edge server to every other edge server (full mesh). At 100 servers that's ~5000 TCP connections — clearly doesn't scale.
 

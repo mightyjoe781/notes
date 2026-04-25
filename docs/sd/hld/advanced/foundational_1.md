@@ -148,7 +148,7 @@ This creates a high-frequency micro-write pattern, which becomes a network bottl
 
 ![](assets/Pasted%20image%2020250909115345.png)
 
-Connection Pool solves the problem too many noisy queries thrashing the Database.
+Connection Pool solves the problem of too many noisy queries thrashing the Database.
 
 ## The Six Pillars of System Design
 
@@ -376,7 +376,7 @@ Client sends a request. Server holds the connection open and responds only when 
 
 Short Polling v/s long polling
 - short polling *sends response right away*
-- long poling sends response only when done
+- long polling sends response only when done
     - connection kept open for entire duration
 
 e.g. EC2 provisioning

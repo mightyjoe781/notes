@@ -17,12 +17,12 @@ The solution is **divide and conquer**: recursively partition the 2D space into 
 
 ![](assets/Pasted%20image%2020250921175017.png)
 
-Split in half everytime & assign left = 0, right = 1, top = 0, bottom 1
+Split in half every time & assign left = 0, right = 1, top = 0, bottom = 1
 
 - zoom in ... more bits in the right
 - zoom out ... remove bits from the right
 
-Edge case : same points near maybe far in GeoHash
+Edge case: nearby points may be far apart in GeoHash
 
 ### GeoHash
 

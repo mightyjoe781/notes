@@ -78,7 +78,7 @@ where USER.hash = {hash} and IS_ACTIVE = True
 **Construct S3 path**
 
 - read the file from s3 : `https://gravatar_images/{user_id}/{photo_id}`
-- return the resposne
+- return the response
 
 **Proxy Read from S3 directly**
 

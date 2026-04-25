@@ -4,7 +4,7 @@
 
 An ID gives a unique identity to any object - a row, document, or event. 
 
-**Problem Statement**: Assign a globally unique ID to *anything*. Write a function that spits out something unique every-time it is invoked !
+**Problem Statement**: Assign a globally unique ID to *anything*. Write a function that spits out something unique every time it is invoked!
 
 Crucially, this function lives in **application logic**, not a central service.
 
@@ -16,9 +16,9 @@ func get_id() int64 {
 }
 ```
 
-Everytime the function invoked the time would have moved forward, hence it seems unique, so whats the catch ?
+Every time the function is invoked the time would have moved forward, hence it seems unique, so what's the catch?
 
-The ID generation logic words fine when there is just *one machine* and the code is *not* invoked *twice within one*.
+The ID generation logic works fine when there is just *one machine* and the code is *not* invoked *twice within one*.
 
 ### Evolution and Building Towards a Solution
 
@@ -77,13 +77,13 @@ func get_id() string {
 }
 ```
 
-But whats the catch ? This will not work once counter reaches *INT_MAX*, but there is another issue, if machine reboots then counter will reset and start from *zero*.
+But what's the catch? This will not work once counter reaches *INT_MAX*, but there is another issue, if machine reboots then counter will reset and start from *zero*.
 
 #### Problem 3: Counter Reset on Reboot
 
 An in-memory counter is **volatile** - it resets to zero on crash or restart, causing ID collisions. 
 
-Fix : Store counter to disk (*non-volatile*). Everytime *counter++*, we store it to disk. (Fault Tolerance)
+Fix : Store counter to disk (*non-volatile*). Every time *counter++*, we store it to disk. (Fault Tolerance)
 
 ```go
 var counter int64 = load() // restore from disk on startup
@@ -143,7 +143,7 @@ The trick: put **time on the left** (most significant bits). If two IDs share th
 
 ![](assets/Pasted%20image%2020250913190513.png)
 
-Although a good solution, but it doesn't guarantee *monotonicity*. Because clocks across machines can go out of sync.
+Although a good solution, it doesn't guarantee *monotonicity*. Because clocks across machines can go out of sync.
 
 #### The Clock Skew Problem
 
@@ -188,7 +188,7 @@ So, the solutions we see out there have *relaxed constraints*. (either non-integ
 
 ![](assets/Pasted%20image%2020250914001056.png)
 
-Anytime a server of a service wants IDs, it makes a call to ID generation service and asks for a batch (500,1000, etc), it re asks when *exhausted*.
+Anytime a server of a service wants IDs, it makes a call to ID generation service and asks for a batch (500,1000, etc), it re-asks when *exhausted*.
 
 Simulation
 
@@ -326,7 +326,7 @@ Go-based open-source implementation. Uses 39-bit timestamp (10ms resolution inst
 
 Available on GitHub: [github.com/sony/sonyflake](https://github.com/sony/sonyflake).
 
-Twitter and other products scales because of this decentralised ID generation.
+Twitter and other products scale because of this decentralized ID generation.
 
 The logic is handled by API servers which is excellent
 

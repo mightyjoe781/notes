@@ -26,11 +26,7 @@ Load balancers are one of the most important components in any system - and one 
 
 **Load balancing algorithms:**
 
-- **Round Robin** - distributes load iteratively across servers; assumes uniform infrastructure
-- **Weighted Round Robin** - same as above but assigns weights per server; suited for non-uniform infrastructure
-- **Least Connection** - routes to the server with fewest active connections; best when response times vary significantly (e.g., analytics workloads)
-
-![](assets/Pasted%20image%2020250912105111.png)
+![](assets/Pasted%20image%2020260425191835.png)
 
 ## Designing Load Balancer
 
@@ -112,7 +108,7 @@ A **Remote Lock** is a lock managed by a centralized Lock Manager, used to coord
 
 ![](assets/Pasted%20image%2020250913133352.png)
 
-The 3 machines co-ordinate through a central lock manager.
+The 3 machines coordinate through a central lock manager.
 
 - Threads synchronize via mutexes and semaphores
 - Processes synchronize via disk (e.g., `apt-get upgrade` cannot run twice concurrently)
@@ -120,12 +116,12 @@ The 3 machines co-ordinate through a central lock manager.
 
 ### Motivating Example: Synchronizing Multiple Consumers
 
-To understand remote locks better, lets synchronise *multiple consumers* over an *unprotected remote queue*.
+To understand remote locks better, let's synchronize *multiple consumers* over an *unprotected remote queue*.
 
 
 ![](assets/Pasted%20image%2020250913134116.png)
 
-Queue is remote & unprotected. We want one consumer to make call to the queue at a time. We need to make sure all consumer co-ordinate via shared lock.
+Queue is remote & unprotected. We want one consumer to make call to the queue at a time. We need to make sure all consumers coordinate via shared lock.
 
 ```
 ACQ_LOCK()
