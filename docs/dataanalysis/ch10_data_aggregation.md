@@ -244,10 +244,10 @@ grouped["data"].nsmallest(2)
 
 ### defining custom aggregation function
 def peak_to_peak(arr):
-    return arr.max - arr.min
+    return arr.max() - arr.min()
     
 grouped.agg(peak_to_peak)
-grouped.described() # not an aggregation
+grouped.describe() # not an aggregation
 ```
 
 ### Column-Wise and Multiple Function Application

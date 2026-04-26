@@ -85,7 +85,7 @@ dtype: float64
 # ------
 ts.index # all datetime objects have been put into DatetimeIndex
 
-# Like other series arithematic operations beteween differently indexed time series automatically align on dates
+# Like other series arithmetic operations, differently indexed time series automatically align on dates
 ts + ts[::2] # every second element in ts
 
 # ---------
@@ -232,7 +232,7 @@ ts
 dtype: float64
 
 # sampler
-resampler = ts.reshample("D")
+resampler = ts.resample("D")
 resampler # D ~ daily frequency
 
 ```
@@ -254,7 +254,7 @@ pd.date_range(start="2012-04-01", periods=20) # 20 next periods after the start
 
 pd.date_range(end="2012-06-01", periods=20) # 20 periods before the end
 
-pd.date_range("2000-01-01", "2000-12-01", freq="BM") # Business end of month
+pd.date_range("2000-01-01", "2000-12-01", freq="BME") # Business end of month
 ```
 
 ```python
@@ -264,7 +264,7 @@ pd.date_range("2012-05-02 12:56:31", periods=5, normalize=True) # time is normal
 
 ### Frequencies and Date Offsets
 
-Frequencies in pandas are composed of base frequencies and a multiplier. Examples of base frequencies : "H" (hourly), "M" (monthly)
+Frequencies in pandas are composed of base frequencies and a multiplier. Examples of base frequencies: `"h"` (hourly), `"ME"` (month end)
 
 ```python
 from pandas.tseries.offsets import Hour, Minute
@@ -272,7 +272,7 @@ from pandas.tseries.offsets import Hour, Minute
 hour = Hour()
 four_hours = Hour(4)
 
-pd.date_range("2000-01-01", "2000-01-03 23:59", freq="4H") # mostly explicit offsets are not required
+pd.date_range("2000-01-01", "2000-01-03 23:59", freq="4h") # mostly explicit offsets are not required
 
 # combining offsets
 Hour(2) + Minute(30)
@@ -293,7 +293,7 @@ list(monthly_dates)
 
 ```python
 ts = pd.Series(np.random.standard_normal(4),
-               index=pd.date_range("2000-01-01", periods=4, freq="M"))
+               index=pd.date_range("2000-01-01", periods=4, freq="ME"))
 ts
 
 # ----
@@ -301,7 +301,7 @@ ts
 2000-02-29    0.838639
 2000-03-31   -0.117388
 2000-04-30   -0.517795
-Freq: M, dtype: float64
+Freq: ME, dtype: float64
 # -----            
 ts.shift(2)
 
@@ -320,7 +320,7 @@ ts / ts.shift(1) - 1
 
 # naive shift usually shifts data not indexes
 # to shift indexes
-ts.shift(2, freq="M") # passing freq, shifts the index
+ts.shift(2, freq="ME") # passing freq, shifts the index
 
 2000-03-31   -0.066748
 2000-04-30    0.838639
@@ -732,7 +732,7 @@ frame.head()
 2000-04 -1.040816  0.426419  0.312945 -1.115689
 2000-05  1.234297 -1.893094 -1.661605 -0.005477
 
-annual_frame = frame.resample("A-DEC").mean()
+annual_frame = frame.resample("Y-DEC").mean()
 
 annual_frame
 # ------

@@ -15,7 +15,7 @@ plt.plot(data)
 
 ### Figures and Subplots
 
-Plots in matplotlib reside within a `Frame` object. You can create a new figure with `plt.figure`.
+Plots in matplotlib reside within a `Figure` object. You can create a new figure with `plt.figure`.
 
 ```python
 fig = plt.figure()
@@ -217,7 +217,7 @@ plt.rcdefaults()
 
 ## Plotting with Pandas and Seaborn
 
-`matplotlib` is a low-level tool. We assemble are base components to make a plot.
+`matplotlib` is a low-level tool. We assemble our base components to make a plot.
 
 `seaborn` is a high-level statistical graphics library built-on matplotlib simplifying common visualization types.
 ### Line Plots

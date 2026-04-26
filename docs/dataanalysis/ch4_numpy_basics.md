@@ -92,8 +92,8 @@ arr2.ndim # 2
 Other than above method there are 4 more methods to create arrays
 
 ```python
-np.zeroes(10) # array([0., 0., ....])
-np.zeroes((3, 6)) # 3x6 array of zeroes
+np.zeros(10) # array([0., 0., ....])
+np.zeros((3, 6)) # 3x6 array of zeroes
 
 np.empty((2, 3, 2)) # 2 3x2 arrays of uninitialized memory
 
@@ -139,9 +139,9 @@ int_arr.astype(flt_arr.dtype)
 We can use shorthand as well
 
 ```python
-zeroes_uint32 = np.zeroes(8, dtype="u4")
+zeros_uint32 = np.zeros(8, dtype="u4")
 
-zeroes_uint32 # array([0, 0, 0, 0, 0, 0, 0, 0], dtype=uint32)
+zeros_uint32 # array([0, 0, 0, 0, 0, 0, 0, 0], dtype=uint32)
 ```
 
 ### Arithmetic with NumPy Arrays
@@ -198,7 +198,7 @@ print(arr2 > arr)
 
 ### Basic Indexing and Slicing
 
-Evaluating operations between differently sized arrays is called as *broadcasting*
+Evaluating operations between differently sized arrays is called *broadcasting*
 
 ```python
 
@@ -211,7 +211,7 @@ arr[5:8] = 12 # arr[5:8] = [12, 12, 12]
 print(arr) # [ 0  1  2  3  4 12 12 12  8  9]
 ```
 
-NOTE: An important first distinction from Python's built-in lists is that array slices are views on the original array. Meaning data is not copies, and changes to view are reflected in original array.
+NOTE: An important first distinction from Python's built-in lists is that array slices are views on the original array, meaning data is not copied, and changes to the view are reflected in the original array.
 
 ```python
 arr_slice = arr[5:8]
@@ -224,7 +224,7 @@ arr_slice[:] = 64
 print(arr) # [ 0 1 2 3 4 64 64 64 8 9]
 ```
 
-To create a copy of the slice rather than view, you should explicitly need to use copy the array. for example, `arr[5:8].copy()`
+To create a copy of the slice rather than a view, you should explicitly copy the array, for example `arr[5:8].copy()`.
 
 With multiple dimensional arrays, you have many more options to access nested list elements, each dimensional array is indicated by index.
 
@@ -263,11 +263,11 @@ arr3d[1, 0]
 # array([7, 8, 9])
 ```
 
-NOTE: all these subsection of array that have been selected are views in array.
+NOTE: all these subsections of an array that have been selected are views into the array.
 
 ### Indexing with slices
 
-Like one-dimensional objects such as Python lists, `ndarrays` can be slices with the familiar syntax
+Like one-dimensional objects such as Python lists, `ndarrays` can be sliced with the familiar syntax
 
 ```python
 arr # array([ 0, 1, 2, 3, 4, 12, 12, 12, 8, 9])
@@ -401,14 +401,14 @@ np.dot(arr.T, arr)
 arr.T @ arr
 ```
 
-NOTE: `.T` simple transpose is special case of swapping axes. `ndarray` has the method *swapaxes*, which takes a pair of axis numbers and switches the indicated axes to rearrange data.
+NOTE: `.T` simple transpose is a special case of swapping axes. `ndarray` has the method *swapaxes*, which takes a pair of axis numbers and switches the indicated axes to rearrange data.
 
 ```python
 arr = np.arange(10).reshape((2, 5)) # [[0 1 2 3 4] [5 6 7 8 9]]
 print(arr)
 arr.swapaxes(1, 0) # [[0 5] [1 6] [2 7] [3 8] [4 9]]
 ```
-## Pseduorandom Number Generation
+## Pseudorandom Number Generation
 
 The `numpy.random` module supplements the built-in Python `random` module with functions for efficiently generating whole arrays of sample values from many kinds of probability distributions.
 
@@ -511,7 +511,7 @@ np.where(arr > 0, 2, arr)
 
 A set of mathematical functions that compute statistics about an entire array or about the data along an axis are accessible as methods of the array class.
 
-You can use aggregation (sum, mea, std) *(reductions)* either by calling array instacne or using top-level NumPy functions.
+You can use aggregation (sum, mean, std) *(reductions)* either by calling the array instance method or using top-level NumPy functions.
 
 ```python
 arr = rng.standard_normal((5, 4))
@@ -531,7 +531,7 @@ arr.mean(axis = 1)
 Accumulation functions like `cumsum` return an array of the same size but with partial aggregates computed along the indicated axis according to each lower dimensional slice
 
 ```python
-arr = np.array([[0, 1. 2], [3, 4, 5], [6, 7, 8]])
+arr = np.array([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
 
 arr.cumsum(axis = 0)
 arr.cumsum(axis = 1)
@@ -627,8 +627,8 @@ x.dot(y) # same as np.dot(x, y)
 
 from numpy.linalg import inv, qr # inverse, determinants
 
-x = rng.standard_noarml((5, 5))
-mat = X.T @ X 
+x = rng.standard_normal((5, 5))
+mat = x.T @ x
 
 inv(mat)
 

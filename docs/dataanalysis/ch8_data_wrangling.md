@@ -94,7 +94,7 @@ frame.index.nlevels # prints levels
 
 ### Reordering and Sorting Levels
 
-`swaplevel` method takes two levels numbers or names, returns new object with levels interchanges.
+`swaplevel` method takes two level numbers or names and returns a new object with the levels interchanged.
 
 ```python
 frame.swaplevel("key1", "key2")

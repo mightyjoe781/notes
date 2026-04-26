@@ -17,7 +17,7 @@
 | `read_xml`       | Read data from XML file                                                                    |
 Other important functions are : `read_stata` , `read_sas`, `read_spss`, `read_orc`, `read_feather`, etc.
 
-Optional arguments for these fall in following catagories
+Optional arguments for these fall in the following categories
 
 - Indexing : Can treat one or more columns as the returned DataFrame, and whether to get column names from the file, arguments you provide, or not at all.
 - Type inference and data conversion : Includes the user-defined value conversions and custom list of missing value markers
@@ -184,8 +184,7 @@ with open("ex7.csv") as f:
     lines = list(csv.reader(f))
     
     header, values = lines[0], lines[1:]
-    
-    data_dict = {h: v for h,v zip(*values)}
+    data_dict = {h: v for h, v in zip(*values)}
     
 ```
 
@@ -232,9 +231,8 @@ xlsx.parse(sheet_name = "Sheet1", index_col=0)
 frame = pd.read_excel("example/ex1.xlsx", sheet_name="Sheet1")
 
 # writing
-writer = pd.ExcelWriter("examples/ex2.xlsx")
-frame.to_excel(writer, "Sheet1")
-writer.save()
+with pd.ExcelWriter("examples/ex2.xlsx") as writer:
+    frame.to_excel(writer, "Sheet1")
 
 # or just use following
 frame.to_excel("examples/ex2.xlsx")
@@ -250,7 +248,7 @@ This requires following package : `pytables`
 
 ```python
 frame = pd.DataFrame({"a": np.random.standard_normal(100)})
-store = frame.HDFStore("examples/mydata.h5")
+store = pd.HDFStore("examples/mydata.h5")
 
 store["obj1"] = frame
 store["obj1_col"] = frame["a"]

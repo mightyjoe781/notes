@@ -1,8 +1,8 @@
 # Introduction to Pandas
 
-*Pandas* has abstraction which allow to make data cleaning and analysis fast and convenient in Python. 
+*Pandas* has abstractions that allow data cleaning and analysis to be fast and convenient in Python.
 
-*Pandas* is designed for working with tabular or heterogenous data. NumPy by contrast, is best suited with working with homogeneously typed numerical data.
+*Pandas* is designed for working with tabular or heterogeneous data. NumPy, by contrast, is best suited for working with homogeneously typed numerical data.
 ### Series
 
 A series is a one-dimensional array-like object containing a sequence of values of the same type and an associated array of data labels called its *index*
@@ -57,7 +57,7 @@ dtype: int64
 obj2 * 2
 
 import numpy as np
-np.exp(obj2) # this alwso works
+np.exp(obj2) # this also works
 ```
 
 Simple dictionary like operations also work
@@ -76,12 +76,14 @@ obj3.to_dict()
 ## generally when creating series, dictionary order (keys in insertion order) is preserved, to reorder the dictionary, pass custom index
 states = ["California", "Ohio", "Oregon", "Texas"]
 obj4 = pd.Series(sdata, index=states)
+obj4
 
-California        NaN
-Ohio          35000.0
-Oregon        16000.0
-Texas         71000.0
-dtype: float64
+# ----
+# California        NaN
+# Ohio          35000.0
+# Oregon        16000.0
+# Texas         71000.0
+# dtype: float64
 ```
 
 Notice how California didn't map to any of the values, NaN (Not a Number)
@@ -97,13 +99,15 @@ Both series and index have a `name` attribute
 ```python
 obj4.name = "population"
 obj4.index.name = "state"
+obj4
 
-state
-California        NaN
-Ohio          35000.0
-Oregon        16000.0
-Texas         71000.0
-Name: population, dtype: float64
+# ----
+# state
+# California        NaN
+# Ohio          35000.0
+# Oregon        16000.0
+# Texas         71000.0
+# Name: population, dtype: float64
 ```
 
 Index can be altered in place by assignment
@@ -111,19 +115,22 @@ Index can be altered in place by assignment
 ```python
 obj
 
-0    4
-1    7
-2   -5
-3    3
-dtype: int64
+# ----
+# 0    4
+# 1    7
+# 2   -5
+# 3    3
+# dtype: int64
 
 obj.index = ["Bob", "Steve", "Jeff", "Ryan"]
+obj
 
-Bob      4
-Steve    7
-Jeff    -5
-Ryan     3
-dtype: int64
+# ----
+# Bob      4
+# Steve    7
+# Jeff    -5
+# Ryan     3
+# dtype: int64
 ```
 ### DataFrame
 
@@ -176,7 +183,7 @@ frame2.columns
 # Index(['year', 'state', 'pop', 'debt'], dtype='str')
 ```
 
-A column in a DataFrame can be retrieved as a Series either by dictionary like notation of using dot attribute
+A column in a DataFrame can be retrieved as a Series either by dictionary-like notation or using dot attribute
 
 ```python
 frame2["state"]
@@ -281,7 +288,7 @@ array([[2.4, 1.7],
 ```
 ### Index Objects
 
-panda's index objects are responsible for holding the axis labels (including DataFrames's column names) and other metadata (axis name or names).
+pandas index objects are responsible for holding the axis labels (including DataFrames's column names) and other metadata (axis name or names).
 
 ```python
 obj = pd.Series(np.arange(3), index=["a", "b", "c"])
@@ -296,7 +303,7 @@ idx
 ```python
 label = pd.Index(np.arange(3))
 
-labels # Int64Index([0, 1, 2], dtype="int64")
+label # Index([0, 1, 2], dtype='int64')
 
 obj2 = pd.Series([1.4, 5.2, 0], index=labels)
 
@@ -307,12 +314,12 @@ obj2.index is labels # True
 
 In addition to being array-like, an Index also behaves like a fixed-size set. Unlike Python sets, a pandas Index can contain duplicate labels.
 
-Selection with duplicate labels will select all occurrences of that label. Each index has a number of methods and properties for set logic, which answers common questions about the data it contains. Ex - `append(), differnce(), intersections(), union(), isin(), delete(), drop(), insert(), is_monotonic(), is_unique(), unique()`
+Selection with duplicate labels will select all occurrences of that label. Each index has a number of methods and properties for set logic, which answers common questions about the data it contains. Ex - `append(), difference(), intersection(), union(), isin(), delete(), drop(), insert(), is_monotonic(), is_unique(), unique()`
 ## Essential Functionality
 
 ### Reindexing
 
-`reindex` on a Series rearranges the data according to a new windex, introducing missing values if any index values were not already present.
+`reindex` on a Series rearranges the data according to a new index, introducing missing values if any index values were not already present.
 
 ```python
 obj = pd.Series(range(3), index=["b", "c", "a"])
@@ -327,7 +334,7 @@ d    NaN
 dtype: float64
 ```
 
-Use Case : during interpolation or filling of values when reindexing, `ffill` can hep forward-fill values.
+Use Case: during interpolation or filling of values when reindexing, `ffill` can help forward-fill values.
 
 ```python
 obj3 = pd.Series(["blue", "purple", "yellow"], index=[0, 2, 4])
@@ -481,8 +488,8 @@ Colorado	0	5	6	7
 Utah	8	9	10	11
 New York	12	13	14	15
 # ----------
-data.loc["Colarado"] # column selection
-data.loc[["Colarado", "New York"]]
+data.loc["Colorado"] # column selection
+data.loc[["Colorado", "New York"]]
 
 # -- row and column selection
 data.loc["Colorado", ["two", "three"]]
@@ -514,7 +521,7 @@ data.loc[data.three == 5, "three"] = 6
 ```
 ### Arithmetic and Data Alignment
 
-pandas makes it simpler to work with objects with different indices. Putting NaN on indeterministic operations.
+pandas makes it simpler to work with objects that have different indices, placing NaN for undefined (indeterminate) operations.
 
 ```python
 s1 = pd.Series([7.3, -2.5, 3.4, 1.5], index=["a", "c", "d", "e"])
@@ -586,7 +593,7 @@ frame = pd.DataFrame(np.random.standard_normal((4, 3)),
                         columns = list("bde"),
                         index=["Utah", "Ohio", "Texas", "Oregon"])
                         
-np.abs(fram) # applies on all elements of frame
+np.abs(frame) # applies on all elements of frame
 
 # ex - one dimensional function applied to each row/col
 # returns - series having columns of frame as its index
@@ -599,7 +606,7 @@ frame.apply(f1, axis="columns") # to apply on columns
 # NOTE f1(x) --> doesn't need to return scalar, it can return Series with multiple values
 
 def f2(x):
-    return pd.Series([x.min(), x.max], index=["min", "max"])
+    return pd.Series([x.min(), x.max()], index=["min", "max"])
     
 frame.apply(f2)
 
@@ -607,8 +614,8 @@ frame.apply(f2)
 def my_format(x):
     return f"{x:.2f}"
     
-frame.applymap(my_format) # frame
-frame["e"].map(my_fromat) # Series has map function
+frame.map(my_format) # frame
+frame["e"].map(my_format) # Series has map function
 ```
 ### Sorting and Ranking
 
@@ -643,7 +650,7 @@ obj.rank(method="first") # assign based on order its seen in data
 pandas by default doesn't put restriction of unique indexes
 
 ```python
-obj = pd.Series(np.arange(5), index=list(aabbc))
+obj = pd.Series(np.arange(5), index=list("aabbc"))
 
 obj.index.is_unique # False
 

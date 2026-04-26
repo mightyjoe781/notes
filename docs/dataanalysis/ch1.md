@@ -7,7 +7,7 @@ This is a book about the parts of the Python language and libraries you’ll nee
 - Most popular dynamic language along with Perl, Ruby and others.
 - Large and active scientific community.
 - Adoption of language in research and industry has increased significantly.
-- Improved library support (primarly pandas) has made it strong for data manipulation tasks.
+- Improved library support (primarily pandas) has made it strong for data manipulation tasks.
 
 #### Python as a Glue
 
@@ -19,13 +19,13 @@ See [Cython](http://cython.org) project.
 
 Usually in many organizations, it is common to research, prototype, and test new ideas on a domain-specific computing language like MATLAB, or R then port these ideas to be part of larger production systems written in Java, C# or C++.
 
-Python effectively servers both the purposes of research and prototying but also building the production systems.
+Python effectively serves both the purposes of research and prototyping but also building the production systems.
 
 #### Why not Python ?
 
-As python is interpreted language, in general most Python code will run substantially slower than code written in a compiled language like Java or C++. As *programmer time* is more valuable than *CPU Time*, many are happy to make this tradeoff. Application those require very low latency ( for example high frequency trading ), C++ is more preffered.
+As python is interpreted language, in general most Python code will run substantially slower than code written in a compiled language like Java or C++. As *programmer time* is more valuable than *CPU Time*, many are happy to make this tradeoff. Applications that require very low latency (for example high-frequency trading), C++ is more preferred.
 
-Python is not ideal for highly concurrent, multithreaded application, particularly application with many CPU-boun threads. The reason for this is global interpreter lock (GIL), a mechanism to prevent interpreter from executing more than one python bytecode instruction at a time.
+Python is not ideal for highly concurrent, multithreaded applications, particularly applications with many CPU-bound threads. The reason for this is global interpreter lock (GIL), a mechanism to prevent interpreter from executing more than one python bytecode instruction at a time.
 
 Note : Cython project features easy integration with OpenMP, a C framework for parallel computing, in order to do parallelize loops and thus significantly speed up numerical algorithms.
 
@@ -35,7 +35,7 @@ Note : Cython project features easy integration with OpenMP, a C framework for p
 
 foundational package for scientific computing in Python.
 
-- a fast and effiecient multidimensional array object *ndarray*
+- a fast and efficient multidimensional array object *ndarray*
 - function for performing element-wise computation with arrays or mathematical operations between arrays
 - tools for reading and writing array-based data sets to disk
 - linear algebra, fourier transform and random number generation
@@ -45,19 +45,19 @@ Beyond array processing capabilities it acts as primary container for data to be
 
 #### pandas
 
-pandas provide rich data structures and functions designed to make working with structured data fast, easy, and expressive. It is, as you will see, one of the critical ingridients enabling Python to be a powerful and productive data analysis environment.
+pandas provides rich data structures and functions designed to make working with structured data fast, easy, and expressive. It is, as you will see, one of the critical ingredients enabling Python to be a powerful and productive data analysis environment.
 
 Primary object in pandas that will be used in this book is the `DataFrame`, a two dimensional tabular, column-oriented data structure with both row and column labels: Basically pandas combine high performance array-computing features of NumPy with flexible data manipulation capabilities of spreadsheets and relation databases.
 
-For financial users, pandas features rich, high-performance time series functionality and tools well-suited for working with financial data. Infact it was designed to be an ideal toll for financial data analysis applications.
+For financial users, pandas features rich, high-performance time series functionality and tools well-suited for working with financial data. In fact it was designed to be an ideal tool for financial data analysis applications.
 
 #### matplotlib
 
-matplotlib is the most popular Python library for producing plots and other 2D data visulizations. It was originally created by John D Hunter and is now maintained by large team of developers. It is well-suited for creating plots suitable for publication.
+matplotlib is the most popular Python library for producing plots and other 2D data visualizations. It was originally created by John D Hunter and is now maintained by large team of developers. It is well-suited for creating plots suitable for publication.
 
 #### IPython
 
-Ipython is the component in standard scientific Python toolset that ties everything together. It provides a robust and productive environment for interactive and exploratory computing. It is enhanced python shell. It is primarly used for running, debuging and testing code.
+IPython is the component in the standard scientific Python toolset that ties everything together. It provides a robust and productive environment for interactive and exploratory computing. It is an enhanced Python shell, primarily used for running, debugging, and testing code.
 
 -  A Mathematica-like HTML notebook for connecting to IPython through a web browser (more on this later).
 - A Qt framework-based GUI console with inline plotting, multiline editing, and syntax highlighting
@@ -65,7 +65,7 @@ Ipython is the component in standard scientific Python toolset that ties everyth
 
 #### SciPy
 
-Collection of packages addressing a number of different standard problem domain in scientific computing.
+Collection of packages addressing a number of different standard problem domains in scientific computing.
 
 `scipy.integrate` : numerical integration routines and differential equation solvers.
 

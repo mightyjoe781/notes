@@ -65,7 +65,7 @@ data.dropna(how="all")
 
 ```
 
-NOTE: Above functions always returns new objects, does not modify original object. Define `axis="column"` to function in the columnar fashion.
+NOTE: Above functions always return new objects, they do not modify the original. Pass `axis="columns"` to operate in the columnar direction.
 
 To set custom threshold (tolerance) of NaN values in the row/column use following.
 
@@ -199,7 +199,7 @@ Categories (5, interval[int64, right]): [(0, 18] < (18, 25] < (25, 35] < (35, 60
 cats.codes
 # array([0, 0, 1, 1, 1, 3, 3, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2], dtype=int8)
 
-cat.categories
+cats.categories
 # IntervalIndex([(0, 18], (18, 25], (25, 35], (35, 60], (60, 100]], dtype='interval[int64, right]')
 
 ## ---- custom labeling cuts
@@ -259,7 +259,7 @@ df.sample(n = 3) # select any 3 rows
 
 # generate sample with replacement
 choices = pd.Series([5, 7, -1, 6 ,4])
-choices.sample(n=10, replacement = True)
+choices.sample(n=10, replace=True)
 ```
 
 ### Computing Indicator/Dummy Variables
