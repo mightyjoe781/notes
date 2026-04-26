@@ -6,9 +6,9 @@ repo_name: mightyjoe781/notes
 edit_uri: blob/main/docs/
 use_directory_urls: True
 extra_javascript:
-  - src/js/custom.js
   - https://unpkg.com/katex@0/dist/katex.min.js
   - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+  - src/js/custom.js
 extra_css:
   - https://unpkg.com/katex@0/dist/katex.min.css
   - src/css/custom.css
