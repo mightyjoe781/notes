@@ -46,7 +46,7 @@ Same as inner join, then for any rows in the right table that did not match anyt
 
 Same as inner join, then preserve left non-matched rows as in left outer join and right non-matching rows as per right outer join.
 
-`SELECT A.Colour, B.Colour FROM A RIGHT OUTER JOIN B ON A.Colour = B.Colour`
+`SELECT A.Colour, B.Colour FROM A FULL OUTER JOIN B ON A.Colour = B.Colour`
 
 ![](assets/Pasted%20image%2020260211104057.png)
 
@@ -124,7 +124,7 @@ NOTE: implementation using full-outer join : `SELECT COALESCE(A.Colour, B.Colour
 
 This is not optimal at all.
 
-Without COALESCE this would like this.
+Without COALESCE this would look like this.
 
 ![](assets/Pasted%20image%2020260211105003.png)
 ### Intersect
@@ -145,7 +145,7 @@ Returns rows from the first query that are not present in the second.
 
 ```sql
 SELECT Colour FROM A
-INTERSECT
+EXCEPT
 SELECT Colour FROM B;
 ```
 

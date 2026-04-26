@@ -20,7 +20,7 @@ NOTE : remove any already existing installation of postgresql.
 
 Visit [Postgres.app](https://postgresapp.com) and download the app.
 
-After that download [PG Admin 4](https://www.pgadmin.org/download/) , a web based tool to manage and inspect a Posters database. Can connect to local or remote server.
+After that download [PG Admin 4](https://www.pgadmin.org/download/) , a web based tool to manage and inspect a Postgres database. Can connect to local or remote server.
 
 - Open Postgres.app connect/initialize a database
 - Open PGAdmin 4 and in server -> register
@@ -32,7 +32,7 @@ After that download [PG Admin 4](https://www.pgadmin.org/download/) , a web base
 
 Data Types Available : Numbers, Date/Time, Geometric, boolean, Currency, Character, Range, XML, Binary, JSON, Arrays, UUID.
 
-Type Number can many types : smallint, integer, bigint, small serial, serial, big serial, decimal, numeric, real, double precision, float.
+Type Number can have many types : smallint, integer, bigint, small serial, serial, big serial, decimal, numeric, real, double precision, float.
 
 Type Character : CHAR (5), VARCHAR, VARCHAR(40), TEXT
 
@@ -42,7 +42,7 @@ Date Type : Date, Time, Time with Time Zone, Timestamps, Interval
 
 #### Database-Side Validation Constraints
 
-We usually create validation at a web-server level/interface and ensure integrity of data. For example if someonw inserts an item 	with negative price, certainly its implying we are going to pay the user.
+We usually create validation at a web-server level/interface and ensure integrity of data. For example if someone inserts an item 	with negative price, certainly its implying we are going to pay the user.
 
 PGAdmin 4 directly connects to table there is no validation web server present. So whatever we execute is going to happen in the database. We could add validation at a database level.
 
@@ -71,7 +71,7 @@ ALTER COLUMN price
 SET NOT NULL;
 ````
 
-NOTE : If this price already have some null value you have to remove it before applying new constraint otherwise alter table won’t work.
+NOTE : If this column already has some null values you have to remove them before applying the new constraint otherwise alter table won’t work.
 
 Alternatively we can update all null values to some value 99999 and then apply ALTER.
 
@@ -107,7 +107,7 @@ CREATE TABLE products (
 
 ````sql
 ALTER TABLE products
-ADD UNIQUE(name)
+ADD UNIQUE(name);
 ````
 
 Again you can’t apply unique constraint unless you clean up all duplicate values. To remove constraints you can use ALTER TABLE.
@@ -416,7 +416,7 @@ SELECT pg_size_pretty(pg_relation_size('users'));
 ````
 
 - can be large
-- expensive and slow insert/update/down - the index has to be updated
+- expensive and slow insert/update/delete - the index has to be updated
 - index might not actually get used !
 
 **Types of Index**
@@ -430,10 +430,10 @@ Postgres by default creates indexes for
 - primary keys
 - Unique keys
 
-These are not listed under ‘indexes’ in PGAdmin ! To check you can execure the following query.
+These are not listed under ‘indexes’ in PGAdmin ! To check you can execute the following query.
 
 ````sql
-SELECT relname, relking
+SELECT relname, relkind
 FROM pg_class
 WHERE relkind = 'i';
 ````
@@ -522,7 +522,7 @@ WHERE tags.created_at < '2010-01-07';
 
 #### Recursive CTEs
 
-Useful anytime we have a tree or graph data structure. Must use a ‘union’ keyword. Its very very challanging concept.
+Useful anytime we have a tree or graph data structure. Must use a ‘union’ keyword. Its very very challenging concept.
 
 ````sql
 WITH RECURSIVE countdown(val) AS (
@@ -537,14 +537,14 @@ FROM countdown;
 Ques - find the 2-3 degree contacts in our instagram app
 
 ````sql
-WITH RECURSIVE suggestions(leader_id, follower_id, depth) (
+WITH RECURSIVE suggestions(leader_id, follower_id, depth) AS (
 	SELECT leader_id, follower_id, 1 AS depth
-	FROM follwers
+	FROM followers
   WHERE follower_id = 1000
   UNION
-  SELECT follower.leader_id, follwers.follower_id, depth+1
-  from followers
-  JOIN suggestions ON suggesions.leader_id = follwers.follower_id
+  SELECT followers.leader_id, followers.follower_id, depth+1
+  FROM followers
+  JOIN suggestions ON suggestions.leader_id = followers.follower_id
   WHERE depth < 3
 )
 SELECT DISTINCT users.id, users.username
@@ -559,7 +559,7 @@ LIMIT 30;
 Ques : Find the most popular user ? A simple solution would be :
 
 ````sql
-SELECT
+SELECT username, COUNT(*) AS total_tags
 FROM users
 JOIN (
 	SELECT user_id FROM photo_tags
@@ -578,7 +578,7 @@ View is a like a fake table that wraps multiple tables together. We execute foll
 CREATE VIEW tags AS (
 	SELECT id, created_at, user_id, post_id, 'photo_tag' AS type FROM photo_tags
   UNION ALL
-  SELECT id, created_at, user_id, post_id, 'captions_tag' AS type FROM captions_tags
+  SELECT id, created_at, user_id, post_id, 'captions_tag' AS type FROM caption_tags
 );
 ````
 
@@ -601,7 +601,7 @@ CREATE OR REPLACE VIEW recent_views AS (
 ````
 
 ````sql
-DROP VIEW recent_posts;
+DROP VIEW recent_views;
 ````
 
 #### Materialized Views
@@ -636,8 +636,8 @@ CREATE MATERIALIZED VIEW weekly_likes AS (
   LEFT JOIN posts ON posts.id = likes.post_id
   LEFT JOIN comments ON comments.id = likes.comment_id
   GROUP BY week
-  ORDER BY week;
- ) WITH DATA;
+  ORDER BY week
+) WITH DATA;
 ````
 
 ### Handling Concurrency and Reversibility with Transaction

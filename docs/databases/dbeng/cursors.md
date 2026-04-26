@@ -8,7 +8,7 @@ Assume we are running a query like
 select * from grades; -- 12 Million records
 
 -- how about we add filters
-select * from grades where g between 90 and 100; -- 1 M recrods
+select * from grades where g between 90 and 100; -- 1 M records
 
 ```
 
@@ -45,9 +45,9 @@ fetch c; -- rows according to query plan
 
 ```python
 
-import psycopyg2
+import psycopg2
 
-con = psycopyg2.connect(host="smk",
+con = psycopg2.connect(host="smk",
                         database="smk",
                         user="postgres",
                         password = "postgres")
@@ -55,7 +55,7 @@ con = psycopyg2.connect(host="smk",
 cur = con.cursor()
 
 for i in range(100000):
-    cur.execute("insert into employees (id, name) values({i}, test{i}) ")
+    cur.execute("insert into employees (id, name) values(%s, %s)", (i, f"test{i}"))
 
 con.commit()
 
@@ -67,9 +67,9 @@ con.close()
 
 ```python
 
-import psycopyg2
+import psycopg2
 
-con = psycopyg2.connect(host="smk",
+con = psycopg2.connect(host="smk",
                         database="smk",
                         user="postgres",
                         password = "postgres")
@@ -87,9 +87,9 @@ con.close()
 
 ```python
 
-import psycopyg2
+import psycopg2
 
-con = psycopyg2.connect(host="smk",
+con = psycopg2.connect(host="smk",
                         database="smk",
                         user="postgres",
                         password = "postgres")

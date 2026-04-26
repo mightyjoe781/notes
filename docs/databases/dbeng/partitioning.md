@@ -53,7 +53,7 @@ create table grades_org (id serial not null, g int not null);
 insert into grades_org(g) select floor(random() * 100) from generate_series(0, 10000000);
 
 -- create index 
-create index grades_org_index on grades
+create index grades_org_index on grades_org(g);
 ```
 #### Execute Multiple Queries on the Tables
 
@@ -69,7 +69,7 @@ explain analyze select count(*) from grades_org where g between 50 and 80;
 create table grades_parts (id serial not null, g int not null) partition by range(g);
 
 -- manual index creations
-create table g00035 (like grades_parts including indexes);
+create table g0035 (like grades_parts including indexes);
 create table g5660 (like grades_parts including indexes);
 create table g6080 (like grades_parts including indexes);
 create table g80100 (like grades_parts including indexes);
@@ -140,7 +140,7 @@ show ENABLE_PARTITION_PRUNING;
 -- PL/pgSQL table population tool
 -- Configurable script to populate any table with test data
 
-DO $
+DO $$
 DECLARE
     -- Configuration variables - modify these as needed
     table_name TEXT := 'customers';
@@ -179,9 +179,9 @@ BEGIN
         
         -- Progress reporting
         IF verbose AND ((i + 1) % show_progress_every = 0) THEN
-            RAISE NOTICE 'Progress: %/% records (%.1%)',
+            RAISE NOTICE 'Progress: %/% records (% %%)',
                         ((i + 1) * batch_size), total_records,
-                        (((i + 1)::NUMERIC / total_batches) * 100);
+                        round((((i + 1)::NUMERIC / total_batches) * 100), 1);
         END IF;
         
         -- Commit after each batch
@@ -192,7 +192,7 @@ BEGIN
     IF verbose THEN
         RAISE NOTICE 'Completed: % records inserted into %', total_records, table_name;
     END IF;
-END $;
+END $$;
 
 ```
 

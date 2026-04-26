@@ -31,7 +31,7 @@ Users create collections (similar to tables in RDBMS), but since documents are s
 
 When we create a collection in Mongo, a primary key `_id` representing document id is created along side a B+ Tree index, so that search is optimal. Its uniquely locates a document and can be used to find it.
 
-`_id` is 12 bytes long to ensure is can be uniquely identifies across machines or shards for scalability.
+`_id` is 12 bytes long to ensure it can be uniquely identified across machines or shards for scalability.
 
 ### Secondary Indexes
 

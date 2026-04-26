@@ -50,7 +50,7 @@ Article : https://www.uber.com/en-IN/blog/postgres-to-mysql-migration/
 ### SQLite
 
 - Designed by D Richard Hipp in 2000
-- Very populate embedded database for local data
+- Very popular embedded database for local data
 - B-Tree (LSM as extension)
 - Postgres-like syntax
 - Full ACID & table locking

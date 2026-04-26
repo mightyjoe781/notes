@@ -52,14 +52,14 @@ vim master_data/pg_hba.conf
 
 
 # -- add synchronous standby names
-vim master_data/postgres.conf
+vim master_data/postgresql.conf
 # synchronous_standby_names = 'first 1(standby1)'
 # synchronous_standby_names = 'first 2(standby1, standby2, standby3)'
 
 
 #------- replica--------
 # name the replica
-vim standby_data/postgres.conf
+vim standby_data/postgresql.conf
 # primary_conninfo = 'application_name=standby1 host=smk port=5432 user=postgres password=postgres'
 touch standby_data/standby.signal # signal file to trigger replication
 

@@ -79,7 +79,7 @@ SELECT title FROM news offset 100 limit 10;
 ```
 
 - offset by design fetches all the rows in the page/pages (heap) (let's say 110) and drop the 100 records to give limit 10
-- another problem is duplicate reading problem when new row is inserted, e.g. `select titel from news offset 110 limit 10`
+- another problem is duplicate reading problem when new row is inserted, e.g. `select title from news offset 110 limit 10`
 
 ### Connection Pooling
 

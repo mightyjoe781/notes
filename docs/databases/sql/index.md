@@ -16,7 +16,7 @@ Records : Each row represents one record.
 
 Keyword : Tell the database that we want to do something. Always written in capital letters.
 
-Indentifiers : Tell the database what thing we want to act on. Always written in lowercase letters.
+Identifiers : Tell the database what thing we want to act on. Always written in lowercase letters.
 
 #### Creating a Table
 
@@ -66,7 +66,7 @@ SELECT area, name, population, name FROM cities;
 
 Columns can be entered in any order, any number of times while selecting.
 
-We can also transform or process data before recieving it i.e. Alias and Calculations.
+We can also transform or process data before receiving it i.e. Alias and Calculations.
 
 ````postgresql
 SELECT name, population / area AS population_density
@@ -79,7 +79,7 @@ FROM cities;
 - CONCAT() : joins two strings
 - LOWER() : gives a lower case string
 - UPPER() : gives a UPPER case string
-- LENGHT(): gives number of characters in string
+- LENGTH(): gives number of characters in string
 
 ````sql
 SELECT name || country AS location FROM cities; 	  -- delhi India
@@ -115,7 +115,7 @@ SELECT name, area FROM cities WHERE area BETWEEN 2000 AND 4000;
 
 ````sql
 SELECT name, area FROM cities WHERE
-	name IN ('Delhi','Shangai');
+	name IN ('Delhi','Shanghai');
 ````
 
 We can have as many as compound checks connected using `OR` , `AND`.
@@ -256,7 +256,7 @@ SELECT contents, url FROM comments
 JOIN photos ON photos.id = comments.photo_id;
 ````
 
-An another syntax, notice the table order :P
+Another syntax, notice the table order :P
 
 ````postgresql
 SELECT comments.id AS comment_id, p.id
@@ -276,7 +276,7 @@ Notice if we use query given above, it won’t work because there is no user whi
 
 Consider two tables $A$ and $B$
 
-- Inner Join (default JOIN) : $A \and B$
+- Inner Join (default JOIN) : $A \cap B$
 
 ````sql
 SELECT url, username FROM photos
@@ -297,11 +297,11 @@ SELECT url, username FROM photos
 RIGHT JOIN users ON users.id = photos.user_id;
 ````
 
-- Outer Join : $ A \or B$ : Merge as many rows as possible.
+- Full Outer Join : $A \cup B$ : Merge as many rows as possible.
 
 ````sql
 SELECT url, username FROM photos
-OUTER JOIN users ON users.id = photos.user_id;
+FULL OUTER JOIN users ON users.id = photos.user_id;
 ````
 
 Now we know that these are different join, it must be clear ORDER of tables in JOIN matters!
@@ -335,7 +335,7 @@ GROUP BY user_id;
 
 Notice the selected column, we can only selected grouped column.
 
-Aggregates : reduces many values down to one. Done by using `aggregate fucntions`.
+Aggregates : reduces many values down to one. Done by using `aggregate functions`.
 
 Examples : COUNT, SUM, AVG, MIN, MAX
 
@@ -369,7 +369,7 @@ GROUP BY photo_id;
 
 **Having Keyword**
 
-Ques : find the number of components for each photo where the photo_id is < 3 and Photo has more than 2 comments.
+Ques : find the number of comments for each photo where the photo_id is < 3 and Photo has more than 2 comments.
 
 Note : mostly we use aggregate function inside Having
 
@@ -459,12 +459,12 @@ UNION
 (
   SELECT *
 	FROM products
-	ORDER BY price/weight DESC;
+	ORDER BY price/weight DESC
 	LIMIT 4
 );
 ````
 
-NOTE : parenthesis are optional but they are useful for precendence errors. Also selected columns must be same and named same.
+NOTE : parenthesis are optional but they are useful for precedence errors. Also selected columns must be same and named same.
 
 Keywords : `UNION, UNION ALL, INTERSECT, INTERSECT ALL, EXCEPT, EXCEPT ALL `
 
@@ -489,7 +489,7 @@ WHERE price > (
 Subqueries can be used as A source of a value, A source of rows, Source of a column but we must be careful of the structure of data that comes back from Subquery.
 
 ````sql
-SELECT p1.name, (SELECT COUNT(name) FROM PRODUCTS) -- type : value
+SELECT p1.name, (SELECT COUNT(name) FROM products) -- type : value
 FROM (SELECT * FROM products) AS p1 -- alias is a must -- type : source of rows
 JOIN (SELECT * FROM products) AS p2 ON p1.id = p2.id
 WHERE p1.id IN (SELECT id FROM products);			-- type : source of column
@@ -504,7 +504,7 @@ Ques : Show the name, department and price of the most expensive product in each
 ````sql
 SELECT name, department, price
 FROM products AS p1
-WHERE price p1.price = (
+WHERE p1.price = (
 	SELECT MAX(price)
   FROM products AS p2
   -- notice how we relate to value from p1 :P co-related :P

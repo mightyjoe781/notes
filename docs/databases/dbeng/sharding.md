@@ -53,8 +53,8 @@ EOF
 docker build -t pgshard .
 
 docker run --name pgshard1 -p 5432:5432 -d pgshard
-docker run --name pgshard1 -p 5433:5433 -d pgshard
-docker run --name pgshard1 -p 5434:5434 -d pgshard
+docker run --name pgshard2 -p 5433:5432 -d pgshard
+docker run --name pgshard3 -p 5434:5432 -d pgshard
 
 # npm init
 npm init -y
@@ -79,21 +79,21 @@ const clients = {
         "host": "smk",
         "port": "5432",
         "user": "postgres",
-        "password:": "postgres",
+        "password": "postgres",
         "database": "postgres"
     }),
     "5433": new Client({
         "host": "smk",
-        "port": "5432",
+        "port": "5433",
         "user": "postgres",
-        "password:": "postgres",
+        "password": "postgres",
         "database": "postgres"
     }),
     "5434": new Client({
         "host": "smk",
-        "port": "5432",
+        "port": "5434",
         "user": "postgres",
-        "password:": "postgres",
+        "password": "postgres",
         "database": "postgres"
     }),
 }
@@ -105,30 +105,28 @@ async function connect() {
     await clients["5434"].connect();
 }
 
-app.get("/:urlId", (req, res) => {
+app.get("/:urlId", async (req, res) => {
     const urlId = req.params.urlId;
-    const server = hr.get(urlId)
-    cosnt res = await clients[server].query("SELECT * FROM URL_TABLE WHERE URL_ID = $1", [urlId]);
+    const server = hr.get(urlId);
+    const result = await clients[server].query("SELECT * FROM URL_TABLE WHERE URL_ID = $1", [urlId]);
     
-    if(res.rowCount > 0) {
+    if (result.rowCount > 0) {
         res.send({
             "urlId": urlId,
-            "url": url,
+            "url": result.rows[0].url,
             "server": server
         })
+    } else {
+        res.sendStatus(400);
     }
-    else
-        ress.sendStatus(400)
-    
-    
 })
 
-app.post("/", (req, res) => {
+app.post("/", async (req, res) => {
 
 
     const url = req.query.url;
     // consistent hash url to get a port !
-    const hash = crypto.createHash("shar256").update(url).digest("base64")
+    const hash = crypto.createHash("sha256").update(url).digest("base64")
     // take first 5 characteres and put them in database
     const urlId = hash.substr(0, 5);
     
