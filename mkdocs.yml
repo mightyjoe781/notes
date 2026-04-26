@@ -89,7 +89,6 @@ extra:
 nav:
   - About: about.md
   - TOC: toc.md
-  - Tags: tags.md
   - Blog(upcoming) : ...
 
 copyright: Copyright &copy; smk
