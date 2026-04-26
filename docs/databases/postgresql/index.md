@@ -1,19 +1,9 @@
 ## PostgreSQL
 
-
-
-
-
-
-
 ### Resources
 
 [Online PostgreSQL Queries](https://pg-sql.com)
-
 ### Notes
-
-
-
 #### Setup on MacOS
 
 NOTE : remove any already existing installation of postgresql.
@@ -479,7 +469,7 @@ Cost : Amount of time to execute some part of our query plan.
 
 Note : Loading data from random spots off a hard drive usually takes more time than loading data sequentially. So indexes use random fetch of maybe 2 pages while direct searching is doing fetch of 100 pages sequentially. So it may seem quantity wise that indexes are more efficient but random fetch comes with its own penalty.
 
-$ cost = (\# pages)*1.0 + (\#rows)*0.01$
+$cost = (\# pages)*1.0 + (\#rows)*0.01$
 
 a row costs like 1 % of the how much 1 page costs.
 

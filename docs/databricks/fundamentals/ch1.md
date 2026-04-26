@@ -1,36 +1,43 @@
 ## Databricks SQL
 
-- Can directly excuted SQL Statements on Data Lakehouse
-- Visualization tool
-- Develop Agile Dashboards & Collaborate Easily
-- Track APIs using automated alerts on data refresh
-- Supports multiple BI Tools
+- Execute SQL statements directly on the Data Lakehouse
+- Built-in visualization tool
+- Develop agile dashboards and collaborate easily
+- Set up automated alerts on data refresh
+- Supports multiple BI tools
 
-Various Steps followed in Databricks SQL Query Lifecycle :
+### Query Lifecycle
 
-- Databricks SQL/BI Tools -> Drivers -> Routing Service (Load Balancing) -> Query Planning(Spark) -> Query Execution (Photon)
+Databricks SQL → BI Tools → Drivers → Routing Service (load balancing) → Query Planning (Spark) → Query Execution (Photon)
 
-Before Querying a Data Administrator needs to setup 3 things
+**Photon** is Databricks' native vectorized query engine written in C++. It accelerates SQL and DataFrame workloads, especially for scans, aggregations, and joins on large datasets — providing significant speedups over standard Spark execution.
 
-1. SQL Endpoint : Computation resource that powers queries.
-   - Classic Endpoint : resides in a users cloud account
-   - Serverless Endpoints : managed by databricks
-2. Access to a Data Catalog
-   - Catalog : first layer of unity catalog’s 3-level namespace, used to organise data assets. Catalogs contain databases.
-3. Access to a Database
-   - Database : Collection of Tables/Schemas, 2nd layer of unity catalog’s 3-lvl namespace.
+### Setup Requirements
 
-**Querying Basics**
+Before querying, a data administrator needs to configure three things:
 
-- An active endpoint is required to query the database.
+1. **SQL Warehouse** (formerly called SQL Endpoint): the compute resource that powers queries.
+   - **Classic Warehouse**: resides in the user's cloud account
+   - **Serverless Warehouse**: fully managed by Databricks; starts in seconds with no infrastructure to manage
+   - **Pro Warehouse**: supports queries needing extra features like Photon and larger result sets
+2. **Access to a Data Catalog**
+   - Catalog: first layer of Unity Catalog's 3-level namespace (`catalog.schema.table`); used to organise data assets
+3. **Access to a Database (Schema)**
+   - Schema: collection of tables; the second layer of Unity Catalog's 3-level namespace
 
-**Automate Workflows**
+### Querying Basics
 
-- you can use schedule to set up query schedule and then can setup alert to get notified.
+- An active SQL Warehouse is required to run queries.
+- The query editor supports auto-complete, syntax highlighting, and query history.
+- Results can be saved as visualizations or pinned to dashboards.
 
-**Connect BI Tools**
+### Automate Workflows
 
-- Some BI Tools will require drivers and needs to authenticate with databricks compute resources(Personal Access Token).
-- Access to SQL Endpoints is a must.
-- You can utlize partner connect for popular solutions.
+- Schedule queries to run on a set interval
+- Configure alerts to notify via email or webhooks when query results meet a threshold
 
+### Connect BI Tools
+
+- Some BI tools require drivers and authentication with a Databricks personal access token (PAT) or OAuth
+- Access to a running SQL Warehouse is required
+- Partner Connect simplifies integration with popular solutions like Tableau, Power BI, and Looker
