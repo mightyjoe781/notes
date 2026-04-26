@@ -6,6 +6,9 @@ var katexConfig = {
     { left: "\\[", right: "\\]", display: true },
   ],
   throwOnError: false,
+  macros: {
+    "\\tag": "\\notag",
+  },
 };
 
 function renderMath() {
