@@ -46,6 +46,7 @@ markdown_extensions:
   pymdownx.smartsymbols:
 plugins:
   - glightbox
+  - tags
   - search:
       lang: en
       separator: '[\s\-\.]+'
@@ -61,7 +62,7 @@ theme:
   features:
     - content.code.copy
     - navigation.tabs
-    # - navigation.path
+    - navigation.path
     - navigation.top
     # - navigation.sections
     - search.suggest
@@ -88,6 +89,7 @@ extra:
 nav:
   - About: about.md
   - TOC: toc.md
+  - Tags: tags.md
   - Blog(upcoming) : ...
 
 copyright: Copyright &copy; smk
