@@ -5,6 +5,7 @@
 Decision Problem is a computation problem that can be posed as *yes* or *no* problem on a set of inputs.
 
 ![](assets/Pasted%20image%2020260215123951.png)
+
 A *decision procedure* for a decision problem is an algorithmic method that answers the yes-no question on all inputs, and a decision problem is called decidable if there is a decision procedure for it.
 
 Example : given two numbers _x_ and _y_, does _x_ evenly divide _y_ ? Yes there is a procedure called as long division.
@@ -62,6 +63,7 @@ If we had a solver which could solve the problem in linear or quadratic time, th
 Similar to above, 3-coloring problem can be reduced into SAT Problem. Verifying 3-coloring is easy, but solving it is difficult.
 
 ![](assets/Pasted%20image%2020260215130354.png)
+
 We can reduce these problems into SAT Problem in Polynomial Time, So solving SAT problem in Polynomial Time effectively solves all these class of problem in Polynomial Time.
 
 A problem is $NP$ complete if

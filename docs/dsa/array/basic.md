@@ -77,7 +77,7 @@ A very simple approach is to use `deque`, and move items around. `Deque` already
 
 ```python
 
-from collections import deuqe
+from collections import deque
 def rotate(self, nums: List[int], k: int) -> None:
     dq = deque(nums)
     dq.rotate(k)

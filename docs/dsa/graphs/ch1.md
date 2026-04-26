@@ -35,7 +35,7 @@ Two graphs are *isomorphic* if we can change the vertex labels on one to make it
 
 Sometimes we refer *cyclic paths* to refer to a path whose first and last vertices are same; and we use term *tour* to refer to a cyclic path that includes every vertex.
 
-Two simple paths are *disjoint* if they have non vertices in common other than, possibly, their endpoints.
+Two simple paths are *disjoint* if they have no vertices in common other than, possibly, their endpoints.
 
 ![image-20210106120526277](./graphs.assets/image-20210106120526277.png)
 

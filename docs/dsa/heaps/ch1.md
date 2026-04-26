@@ -1,6 +1,6 @@
 # Priority Queue & HeapSort
 
-*A priority queue is a data structure of items with keys that supports two basic operation*
+*A priority queue is a data structure of items with keys that supports two basic operations*
 
 * insert a new item
 * remove the item with the largest key
@@ -13,12 +13,12 @@ Applications
 
 NOTE: [Linear Implementation](https://algo.minetest.in/3-Sorting/9-Priority_Queues_and_Heapsort/2-Heap_Data_Structure/) , [Tree Implementation](https://algo.minetest.in/3-Sorting/9-Priority_Queues_and_Heapsort/3-Algorithms_on_heap/)
 
-The PQ algorithms on heaps all work by first making a simple modification that could violate the heap condition and them traversing  the and restoring the heap condition everywhere. This is known as ***Heapifying*** or ***fixing*** the heap.
+The PQ algorithms on heaps all work by first making a simple modification that could violate the heap condition and then traversing the heap and restoring the heap condition everywhere. This is known as ***Heapifying*** or ***fixing*** the heap.
 
 There are 2 possibilities
 
 1. Priority of some node is increased : To fix it node should swim up the tree
-2. Priority of some node in decreased : To fix it node should swim down the tree
+2. Priority of some node is decreased : To fix it node should swim down the tree
 
 ## STL & Python Usage
 

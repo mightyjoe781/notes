@@ -140,7 +140,7 @@ def reverseList(head):
 
 ## Doubly Linked List
 
-* Its not asked very commonly, but its better understand it.
+* It's not asked very commonly, but it's better to understand it.
 
 ````c++
 // constructor implementation

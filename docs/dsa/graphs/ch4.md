@@ -188,7 +188,7 @@ for(int i = 0; i < V; i++)
 for(int k = 0; k < V; k++)
   for(int i = 0; i < V; i++)
     for(int j = 0; j < V; j++)
-      if(adj[i][k] + adj[k][j] < adj[i][j) {
+      if(adj[i][k] + adj[k][j] < adj[i][j]) {
         adj[i][j] = adj[i][k] + adj[k][j];
         p[i][j] = p[k][j];
       }
@@ -211,7 +211,7 @@ After running Floyd’s Algorithm we can check if any two vertices are connected
 for(int k = 0; k < V; k++)
   for(int i = 0; i < V; i++)
     for(int j = 0; j < V; j++)
-      adj[i][j] != (adj[i][k] & adj[k][j]);
+      adj[i][j] |= (adj[i][k] & adj[k][j]);
 ````
 
 #### Minimax and Maximin

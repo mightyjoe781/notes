@@ -4,7 +4,7 @@
 
 **Basic Stack Operations**
 
-* Push - *Insert and element on top of the stack*
+* Push - *Insert an element on top of the stack*
 * Pop - *Remove the top element from the stack*
 * Peek/Top - *View the top element without removing it*
 * isEmpty - *Check whether stack is empty*

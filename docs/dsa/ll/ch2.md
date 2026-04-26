@@ -21,14 +21,13 @@ ListNode* middleNode(ListNode* head) {
 ````c++
 // suppose a struct node exists. and link is just typedef on *node
 link isCycle(link head){
-    link slow = head , fast = head;
-    while(!fast && !fast->next && slow!=fast){
-        slow = slow -> next;
-        fast = fast -> next -> next;
+    link slow = head, fast = head;
+    while(fast && fast->next){
+        slow = slow->next;
+        fast = fast->next->next;
+        if(slow == fast) return slow; // cycle detected, return meeting point
     }
-    // the moment loop ends we hit the point at which both meet
-    if(!fast || !fast->next) return nullptr;
-    return slow;
+    return nullptr; // no cycle
 }
 // above function returns null if there is no cycle else it return the point where the cycle exists.
 ````

@@ -446,7 +446,7 @@ def cutRod(prices, n):
 
         res = 0
         for cut in range(1, rem + 1):
-            res = max(res, price[cut - 1] + solve(rem - cut))
+            res = max(res, prices[cut - 1] + solve(rem - cut))
 
         return res
 

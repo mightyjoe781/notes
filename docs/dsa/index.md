@@ -16,7 +16,7 @@
     * [Linked List Techniques](ll/ch2.md)
 
 
-* Stack & Queues
+- Stack & Queues
 
     * [Stack Operations & Applications](stknq/stack_and_ops.md)
     * [Queue & Deque Implementations](stknq/queue_and_deque.md)
@@ -25,12 +25,12 @@
     * [Implementation Problems](stknq/implementations.md)
 
 
-* Heaps & Priority Queues
+- Heaps & Priority Queues
 
     * [Min-Heaps & Max-Heaps](heaps/ch1.md)
     * [Applications](heaps/ch2.md)
-    - [Interval Problems](heaps/intervals.md)
-    - [Greedy Algorithms & Strategies](paradigm/greedy.md)
+    * [Interval Problems](heaps/intervals.md)
+    * [Greedy Algorithms & Strategies](paradigm/greedy.md)
 
 
 * [Disjoint Set Union (DSU)(Union-Find)](dsu.md)

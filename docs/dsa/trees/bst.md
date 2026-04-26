@@ -7,7 +7,7 @@ Binary Search Trees, popularly known as BST, are the category of Binary Trees us
 For every given node in a Binary Search Tree if a left or a right child exists then:
 
 ```
-left_child < root < root_child
+left_child < root < right_child
 ```
 
 BST lay down the foundation for Heaps.
@@ -244,7 +244,7 @@ def isValidBST(self, root: Optional[TreeNode]) -> bool:
         if node.val <= cmin or node.val >= cmax:
             return False
         
-        return (check(node.left, cmin, node.val) and check(node.right, node.val, cmax)
+        return (check(node.left, cmin, node.val) and check(node.right, node.val, cmax))
 
     return check(root, float('-inf'), float('inf'))
 

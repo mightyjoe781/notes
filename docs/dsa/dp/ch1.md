@@ -126,8 +126,8 @@ def frog_jump(heights, k):
             return 0
         
         res = float('inf')
-        for j in range(1, k):
-            res = min(jump(i + j) + abs(heights[i] - heights[i + j]))
+        for j in range(1, k + 1):
+            res = min(res, jump(i + j) + abs(heights[i] - heights[i + j]))
         return res
 
     return jump(0)

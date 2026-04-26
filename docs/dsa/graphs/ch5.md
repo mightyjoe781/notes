@@ -8,13 +8,13 @@ To satisfy connectivity criteria
 
 - MST can be solved with several well known algorithms
     - Prim's
-    - Krushkal's
+    - Kruskal's
 
 Application of MSTs
 
 * Network Design : Minimize cost of laying cable networks
 * Clustering and Machine Learning to remove expensive edges in tree
-* TSP (Travelling Saleman Problem): used for approximation solution
+* TSP (Travelling Salesman Problem): used for approximation solution
 * Pathfinding Algorithms in Games often use MST.
 
 ## Prim’s Algorithm

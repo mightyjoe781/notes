@@ -29,7 +29,7 @@ Python simplifies string matching with built-in methods:
 * `find()`: Returns the index of the first occurrence of a substring or -1 if not found.
 * `in` **operator**: Checks for substring presence.
 
-````c++
+````python
 text = "hello world"
 pattern = "world"
 if pattern in text:
@@ -194,8 +194,7 @@ int strStr(string haystack, string needle) {
     vector<int> lps = compute_prefix_function(needle);
 
     // Perform the KMP search
-    int i = 0; 
-    j = 0; 
+    int i = 0, j = 0;
     while (i < haystack.size()) {
         if (haystack[i] == needle[j]) {
             i++;

@@ -100,7 +100,7 @@ vector<int> topologicalSort(int V, vector<vector<int>>& adj) {
     // Perform DFS for each unvisited node
     for (int i = 0; i < V; i++)
         if (!visited[i])
-            dfs(i, adj, visited, order)
+            dfs(i, adj, visited, order);
 
     // Reverse to get topological sort order
     reverse(order.begin(), order.end());
@@ -278,7 +278,7 @@ public:
 
               if(graph[words[i][k]].find(words[j][l]) == 
                                          graph[words[i][k]].end()) {
-                  // undirected graph!
+                  // directed graph!
                    graph[words[i][k]].insert(words[j][l]);
                   indegree[words[j][l]]++;
               }
