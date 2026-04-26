@@ -59,8 +59,8 @@ Consumer can consume data using two methods
 
 - Ability to read from streams in real time and do aggregation and analysis on data while it is in motion
 - leverages SQL Queries (Firehose) or Apache Flink (Data Streams)
-    - Uses Java/Scala to do time series analytics, feed real time dashboard & metrices
-- Use Cases ETL, generation of const metrices and doing real-time analytics
+    - Uses Java/Scala to do time series analytics, feed real time dashboard & metrics
+- Use Cases ETL, generation of const metrics and doing real-time analytics
 - No free tiers
 
 ### Fundamentals of Stream Processing
@@ -106,7 +106,7 @@ Consumer can consume data using two methods
 #### A Streaming Framework :
 
 - Common use cases of streaming data : Industrial Automation, Smart Home, log analytics, datalakes, IOT
-- Events : Search result, financial transactions, user activity, Telemetry data, log files, application metrices.
+- Events : Search result, financial transactions, user activity, Telemetry data, log files, application metrics.
 - data is processed in motion
     - MI/AI applications
     - trigger other events
@@ -158,7 +158,7 @@ Other important flags : `--describe-stream-summary`
     - Max Size of 1 MB (for Records)
     - Shard can accept 1k records/s
     - default retention : 24hrs
-    - size of data records cannot be increased but retention period can be extended upto 7 days for additional charge upto a year
+    - size of data records cannot be increased but retention period can be extended up to 7 days for additional charge up to a year
 - Producer(writes) ----> Shard
     - limitation : 1MB/s per shard
     - returns : `ProvisionedThroughputExceededException`

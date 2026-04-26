@@ -4,13 +4,13 @@
 
 - window to monitor (Health, Operation Performance) of your (Apps & Infra).
 - By window ---> Meaningful data ---> Insights on Manual or Automated responses (changes/modification to apps or Infra)
-- Cost : 5 min free metrices for EC2
+- Cost : 5 min free metrics for EC2
 - Every minute insights costs fee
 
 Different Services
 
 - CloudWatch Dashboards
-- CloudWatch Metrices and Anomaly Detection : One of the reasons AWS is famous !!
+- CloudWatch Metrics and Anomaly Detection : One of the reasons AWS is famous !!
 - CloudWatch Alarms (automated action based on several condition) : SNS, SQS, SQE
 - CloudWatch EventBridge (Connect ot other AWS services based of events), Rules(event bus) ---> Target
 - CloudWatch Logs (Real Time Monitoring)
@@ -27,7 +27,7 @@ Different Services
 Best Practice
 
 - Large Graphs for important graphs
-- Keep all metrices in single screen
+- Keep all metrics in single screen
 - Display Timezones (UTC) - Teams may be in different TZ
 - Annotate but not point entire ROME on it
 

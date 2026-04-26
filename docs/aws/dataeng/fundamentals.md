@@ -110,7 +110,7 @@
     - Ensure data integrity during extraction phase
     - can be done in real-time or in batches, depending on requirements
 - Transform
-    - convert the extracted data into a format suitable for the largest data warehouse
+    - convert the extracted data into a format suitable for the target data warehouse
     - can involve various operations such as
         - Data cleansing
         - Data enrichment
@@ -166,14 +166,14 @@
         - flexible schema or nested data structure
     - Systems : web browsers, javascript, RESTful APIs, NoSQL database, etc.
 - Avro
-    - binary format that stored both data & its schema allowing it to be processed later with different systems without needing the original system's  context
+    - binary format that stores both data & its schema, allowing it to be processed later with different systems without needing the original system's context
     - Use Cases
         - big-data & real-time processing systems
         - when schema evolution is needed
         - Efficient serialization for data transport between systems
     - Systems : Apache Kafka, Apache Spark, Apache Flink, Hadoop ecosystem.
 - Parquet
-    - columnar storage format optimized for anlaytics, allowing for efficient compression and encoding schemas
+    - columnar storage format optimized for analytics, allowing for efficient compression and encoding schemas
     - Use Cases
         - analyzing large datasets with analytics engines
         - reading specific columns rather than records
@@ -229,7 +229,7 @@ This sort of diagram is an Entity Relationship Diagram
 ## Data Sampling Techniques 
 
 - Random Sampling
-    - Everything has an equal change
+    - Everything has an equal chance
 - Stratified Sampling
     - divide population into homogenous subgroups (strata)
     - Random sample within each stratum
@@ -251,7 +251,7 @@ This sort of diagram is an Entity Relationship Diagram
 
 - *Adaptive Partitioning* : Dynamically adjust partitioning based on data characteristics to ensure a more balanced distribution
 - *Salting* : introduce a random factor or `salt` to data to distribute it more uniformly
-- *Repartitioning* : regularly redistribute the data based on its current distribution characterstics
+- *Repartitioning* : regularly redistribute the data based on its current distribution characteristics
 - *sampling* : use a sample of the data to determine the distribution characteristics.
 - *Custom Partitioning* - Define custom rules/functions for partitioning based on Domain Knowledge.
 
@@ -262,7 +262,7 @@ This sort of diagram is an Entity Relationship Diagram
 - Consistency
     - ensures data values are consistent across datasets and do not contradict each other
 - Accuracy
-    - data is correct, reliable, and represents what its supposed to
+    - data is correct, reliable, and represents what it's supposed to
 - Integrity
     - ensures data maintains its correctness and consistency over its lifecycle across systems
 
@@ -311,7 +311,7 @@ Grouping, Nested Grouping, Sorting
 SELECT department_id, COUNT(*) AS number_of_employees
 FROM employees
 WHERE join_date > '2020-01-01'
-GROUP BY department id:
+GROUP BY department_id;
 
 -- department_id | number_of_employees
 -- HR  | 6
@@ -319,9 +319,9 @@ GROUP BY department id:
 
 -- nested grouping/sorting
 
-SELECT YEAR(sale_date) AS sale_year, product_id, SUM(amount) AS total sales
+SELECT YEAR(sale_date) AS sale_year, product_id, SUM(amount) AS total_sales
 FROM sales
-GROUP BY sale-year,
+GROUP BY sale_year,
 product_id
 ORDER BY sale_year,
 total_sales DESC;
@@ -335,19 +335,19 @@ Pivoting
 
 ```postgresql
 
-SELECT salesporson, [Jan] AS Jan_sales, [Feb] AS Feb_sales
+SELECT salesperson, [Jan] AS Jan_sales, [Feb] AS Feb_sales
 FROM
 (SELECT salesperson, month, sales FROM sales) AS sourceTable
 PIVOT (
-    SUM(sarlies
-    FOR month IN (Jan), [Feb))
-) As PivotTable:
+    SUM(sales)
+    FOR month IN ([Jan], [Feb])
+) AS PivotTable;
 
 
 -- without pivot
 SELECT
 salesperson,
-SUM(CASE WHEN month = 'Jan' THEN sales ELSE O END) AS Jan_sales,
+SUM(CASE WHEN month = 'Jan' THEN sales ELSE 0 END) AS Jan_sales,
 SUM(CASE WHEN month = 'Feb' THEN sales ELSE 0 END) AS Feb_sales
 FROM sales
 GROUP BY salesperson;

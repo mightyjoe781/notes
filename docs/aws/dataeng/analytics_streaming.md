@@ -263,7 +263,9 @@
 - Client side encryption must be manually implemented (harder)
 - VPC Endpoints available for Kinesis to access within VPC
 
-## AWS Data Firehose
+## Amazon Data Firehose
+
+> Formerly "Amazon Kinesis Data Firehose" — renamed February 2024. No API/endpoint changes.
 
 ![](assets/Pasted%20image%2020251111000813.png)
 
@@ -370,7 +372,7 @@
 
 ### Reference Tables
 
-- nexpensive way to “join” data for quick lookups
+- Inexpensive way to “join” data for quick lookups
     - i.e., look up the city associated with a zip code
     - Mapping is stored in S3 which is very inexpensive
     - Just use a “JOIN” command to use the data in your queries
@@ -502,6 +504,18 @@
 
 ![](assets/Pasted%20image%2020251111082632.png)
 
+### MSK Express Brokers
+
+> GA November 2024. A new broker type alongside Standard brokers.
+
+- Up to **3x more throughput** per broker vs Standard brokers
+- Scales up to **20x faster**, recovers **90% faster**
+- Unlimited elastic storage — no sizing or provisioning needed
+- No maintenance windows; AWS updates hardware automatically
+- Intelligent Rebalancing enabled by default — auto-redistributes partitions on scale events
+- In KRaft mode, supports up to **60 brokers** per cluster (vs 30 for ZooKeeper-based)
+- Best practices guardrails applied by default (throughput quotas, capacity reservations)
+
 ### MSK Serverless
 
 - Run Apache Kafka on MSK without managing the capacity
@@ -631,7 +645,7 @@
 ### OpenSearch Stability
 
 - 3 dedicated master nodes is best
-    - *Avoid splits brain*
+    - *Avoid split-brain*
 - Don't run out of disk space
     - Min storage requirement is roughly: Source Data * (1 + number of replicas) * 1.45
 - Choosing the number of shards

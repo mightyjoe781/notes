@@ -6,7 +6,7 @@
 
 - oldest offering (10yrs old)
 - fully managed
-- scales from 1 message per second to 15,000/s
+- Standard queues have virtually unlimited throughput; FIFO queues support up to 3,000 messages/second (with batching)
 - Default Retention of 4 days, max 14 days
 - No limit on number of messages in the queue
 - Low Latency (< 10ms on publish & receive)
@@ -56,11 +56,11 @@
 - decouple applications (ex ~ handling payments asynchronously)
 - Buffer writes to a database
 - Handle large loads of messages coming in
-- SQS can be integrated with Auto Scaling through Cloud Watch
+- SQS can be integrated with Auto Scaling through CloudWatch
 
 ### SQS Limits
 
-- Max of 120, 000 in-flight messages being processed by consumers
+- Max of 120,000 in-flight messages being processed by consumers
 - Batch Request has a maximum of 10 messages - max 1024KB
 - Message content is XML, JSON, Unformatted text
 - Standard queues have an unlimited TPS
@@ -127,8 +127,8 @@
 - The *event producer* only sends message to one SNS topic
 - As many *event receivers* (subscriptions) as we want to listen to SNS topic
 - Each subscriber to topic will get all the messages (NOTE: new features to filter messages)
-- Up to 12,50,000 subscriptions per topic
-- 100, 000 topics limit
+- Up to 12,500,000 subscriptions per topic (12.5 million)
+- 100,000 topics limit
 - Many AWS services can send data directly to SNS for notifications
 
 ![](assets/Pasted%20image%2020251112221750.png)

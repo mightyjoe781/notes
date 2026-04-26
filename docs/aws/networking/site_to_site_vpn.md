@@ -166,7 +166,7 @@ This works because of ENI in the VPC.
 
 ## VPN Monitoring
 
-### VPN Monitoring with Cloud Watch
+### VPN Monitoring with CloudWatch
 
 - TunnelState: The state of the tunnel. 0 indicates DOWN and 1 indicates UP. Value between 0 and 1 indicates that at least 1 tunnel is not UP.
 - TunnelDataIn: The bytes received through the VPN tunnel

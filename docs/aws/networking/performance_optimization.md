@@ -96,9 +96,9 @@ MTU Optimization Guidelines
 NOTE: For Enhanced Networking, it requires support from both EC2 operating system (AMI) and Instance Type that is flagged for Enhanced Networking
 #### Supported Instance Types
 
-- Instances supporting Elastic Network Adapter (ENA) for speed upto 100GBps
+- Instances supporting Elastic Network Adapter (ENA) for speed up to 100GBps
     - A1, C5, C5a, C5d, C5n, C6g, F1, G3, G4, H1, I3, I3en etc
-- Instances supporting Intel 82599 Virtual Function (VF) interface for speed upto 10Gbps
+- Instances supporting Intel 82599 Virtual Function (VF) interface for speed up to 10Gbps
     - C3, C4, D2, I2, M4 (excluding m4.16xlarge), and R3 etc
 
 #### Default Networking EC2

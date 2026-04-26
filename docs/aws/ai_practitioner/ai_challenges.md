@@ -42,7 +42,7 @@ Responsible AI ~ AWS Services
 - SageMaker Data Wranglers
     - Fix bias by balancing datasets
 - SageMaker Model Monitor : quality analysis in production
-- Amazon Augmented AI (A2I) : human review of ML Prediciton
+- Amazon Augmented AI (A2I) : human review of ML Prediction
 - Governance: SageMaker Role Manager, Model Cards, Model Dashboards.
 
 #### Human Centered Design (HCD) for Explainable AI

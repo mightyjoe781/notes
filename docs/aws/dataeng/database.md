@@ -2,7 +2,7 @@
 
 - Database are of two types
     - RDBS ~ MySQL, PostgreSQL, etc.
-    - Non-RDBS ~ MongoDB, Cassandra, GraphQL, etc.
+    - Non-RDBS ~ MongoDB, Cassandra, DynamoDB, etc.
 - RDBS are very good for joins, aggregations, and complex computations utilising SQL Query Language for easier access. 
 - Traditionally easier to scale vertically (CPU/RAM/IO), with Horizontal Scaling (read capacity increase by using EC2/RDS Read Replicas)
 - NoSQL Databases don't support *joins* (limited), perform well with aggregations but are *distributed* by design.
@@ -89,7 +89,7 @@
 
 #### Calculation for WCU
 
-- One WCU ~ one-write per second for an item upto 1KB in size
+- One WCU ~ one-write per second for an item up to 1KB in size
 - If the items are larger than 1 KB, more WCUs are consumed
 - Ex ~ 10 items/second with 2KB ~ 10 * (2/1) ~ 20WCUs
 - Ex ~ 6 items/second with 4.5KB ~ 6 * (5/1) ~ 30WCUs
@@ -107,7 +107,7 @@
 
 #### Calculations for RCUs
 
-- One Read Capacity Unit (RCU) represents one *1 Strongly Consistent Read/sec* or *2 Eventually Consistent Reads/sec*  for an item upto *4KB* in size
+- One Read Capacity Unit (RCU) represents one *1 Strongly Consistent Read/sec* or *2 Eventually Consistent Reads/sec* for an item up to *4KB* in size
 - If items > 4KB, more RCUs are consumed
 - Ex ~ 10 strongly consistent reads/sec for item with size 4KB ~ 10 RCUs
 - Ex ~ 16 eventual consistent reads/sec for items with size 12 KB ~ 24 RCUs
@@ -122,13 +122,13 @@
 To compute the number of partitions
 
 $$
-\# \text{ of partitions}_{\text{by capcity}} = \frac{\text{RCUs}_\text{Total}}{3000}
+\# \text{ of partitions}_{\text{by capacity}} = \frac{\text{RCUs}_\text{Total}}{3000}
  + \frac{\text{WCUs}_\text{Total}}{1000} $$
 $$
 \# \text{ of partitions}_{\text{by size}} = \frac{\text{Total Size}}{10 GB}
 $$
 $$
-\# \text{of partitions} = \text{ceil}(\max (\# \text{ of partitions}_{\text{by capcity}}, \# \text{ of partitions}_{\text{by size}}))
+\# \text{of partitions} = \text{ceil}(\max (\# \text{ of partitions}_{\text{by capacity}}, \# \text{ of partitions}_{\text{by size}}))
 $$
 
 - WCUs & RCUs are spread evenly across partitions
@@ -324,7 +324,7 @@ ORDER BY OrderID DESC
 
 - You need to define an *Event Source Mapping* to read from a Dynamo DB
 - You need to ensure the Lambda function has appropriate permissions
-- Your lambda function is invoke synchronously
+- Your Lambda function is invoked synchronously
 
 ![](assets/Pasted%20image%2020251108192603.png)
 
@@ -380,15 +380,17 @@ Example Policy
 {
     "Version": "2012-10-17",
     "Statement": [
-        "Effect": "Allow" ,
-        "Action": [
-            "dynamodb: GetIem", "dynamodb:BatchGetItem", "dynamodb: Query" ,
-            "dynamodb: PutItem", "dynamodb:UpdateItem", "dynamodb:DeleteItem",
-            "dynamodb: BatchWriteItem"
-            "Resource": "arn:aws: dynamodb: us-west-2: 123456789012: table/MyTable",
-        "Condition": {
-            "ForAllValues:StringEquals": {
-                "dynamodb: LeadingKeys": ["${cognito-identity.amazonaws.com: sub}"]
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:GetItem", "dynamodb:BatchGetItem", "dynamodb:Query",
+                "dynamodb:PutItem", "dynamodb:UpdateItem", "dynamodb:DeleteItem",
+                "dynamodb:BatchWriteItem"
+            ],
+            "Resource": "arn:aws:dynamodb:us-west-2:123456789012:table/MyTable",
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "dynamodb:LeadingKeys": ["${cognito-identity.amazonaws.com:sub}"]
                 }
             }
         }
@@ -794,7 +796,7 @@ What is Redshift ?
 - Easy ad-hoc business analysis
 - You get back a serverless endpoint, JDBC/ODBC connection, or just query via the console’s query editor
 
-### Redshift Serverless
+### Redshift Serverless - Configuration
 
 - Need an IAM role with this policy
 - Define your
@@ -818,7 +820,7 @@ What is Redshift ?
     - Can set a usage limit to control costs
     - Or, increase it to improve throughput
 
-### Redshift Serverless
+### Redshift Serverless - Limitations
 
 - Does everything Redshift can, except:
     - Parameter Groups
@@ -891,7 +893,7 @@ What is Redshift ?
         - Call other services (AI?)
         - Access external systems
         - Integrate with location service
-- Register with CREAT EXTERNAL FUNCTION
+- Register with CREATE EXTERNAL FUNCTION
 - Must GRANT USAGE ON LANGUAGE EXFUNC for permissions
 - Redshift communicates with Lambda using JSON
 

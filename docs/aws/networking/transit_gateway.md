@@ -108,7 +108,7 @@ With appliance mode disabled, Appliance B, will drop entire traffic because it n
 ![](assets/Pasted%20image%2020251027104607.png)
 ![](assets/Pasted%20image%2020251027104142.png)
 
-- The inter-Region traffic is encrypted, traverses the AWS global network and is not exposed to public internet. Supports bandwidth upto 50Gbps
+- The inter-Region traffic is encrypted, traverses the AWS global network and is not exposed to public internet. Supports bandwidth up to 50Gbps
 - Use unique ASNs for peered transit gateway (as much as possible)
 
 ![](assets/Pasted%20image%2020251027104253.png)

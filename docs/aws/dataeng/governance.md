@@ -114,8 +114,7 @@
 - To test alarms and notifications, set the alarm state to Alarm using CLI
 
 ```bash
-aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-
-value ALARM --state-reason "testing purposes"
+aws cloudwatch set-alarm-state --alarm-name "myalarm" --state-value ALARM --state-reason "testing purposes"
 ```
 
 ## Amazon CloudTrail

@@ -126,7 +126,7 @@
     - Endpoint Monitoring
     - Other Health Checks
     - CloudWatch Alarms monitoring
-- Health Checks are integrated with CW Metrices
+- Health Checks are integrated with CW Metrics
 
 ### Monitor an Endpoint
 

@@ -111,9 +111,9 @@ Builtin into the API Gateways, useful for speed and costs. TTL can be setup betw
 
 Only Rest API version can access this feature.
 
-#### Monitoring Metrices
+#### Monitoring Metrics
 
-These metrices can be sent to Cloud Watch where it can visualised, set and alarm and do multiple things with the exam.
+These metrics can be sent to CloudWatch where it can visualised, set and alarm and do multiple things with the exam.
 
 - CacheHitCount
 - CacheMissCount

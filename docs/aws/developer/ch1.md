@@ -64,7 +64,7 @@ Skipped question = Incorrect questions. There is no penality for guessing.
 
    - Write code that can be monitores
    - Perform root cause analysis on faults found in testing or production
-   - Tools/Services like Amazon Cloud Watch, Amazon Cloud Trail, AWS X-ray.
+   - Tools/Services like Amazon CloudWatch, Amazon CloudTrail, AWS X-ray.
 
 
 

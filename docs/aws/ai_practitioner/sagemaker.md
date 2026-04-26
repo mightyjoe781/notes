@@ -10,7 +10,7 @@
 - SageMaker - Built-in Algorithm (extract)
     - Supervised Algorithms
         - Linear Regression and Classification
-        - KNN Algorithm (for classication)
+        - KNN Algorithm (for classification)
     - Unsupervised Algorithms
         - Principle Component Analysis (PCA) ~ dimensionality reduction
         - K-means ~ find grouping within data
@@ -20,7 +20,7 @@
 
 ### SageMaker - AMT (Automatic Model Tuning)
 
-- Define the Objective Matric
+- Define the Objective Metric
 - AMT automatically chooses hyperparameter ranges, search strategy, maximum runtime of a tuning job, and early stop condition
 - Saves you time and money
 - Helps you not wasting money on suboptimal configurations
@@ -84,7 +84,7 @@
 
 - Ability to detect and explain biases in your datasets and models
 - Measure bias using statistical metrics
-- Specify input features and bais will be automatically detected
+- Specify input features and bias will be automatically detected
 
 Different Types of Biases
 

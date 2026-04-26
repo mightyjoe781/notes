@@ -32,7 +32,7 @@
 
 - Objects (files) have a Key
 - The *key* is FULL path:
-    - `s3://my-bucket/my_file.txt
+    - `s3://my-bucket/my_file.txt`
     - `s3://my-bucket/dir1/my_file.txt`
 - The *key* is composed of *prefix + object_name*
 - Keys are long names consisting of `/`
@@ -265,7 +265,7 @@
 
 ![](assets/Pasted%20image%2020251105120916.png)
 
-- Parallelize GETs by request specific bytes ranges
+- Parallelize GETs by requesting specific byte ranges
 - Better resilience in case of failure
 
 ## S3 Encryption
@@ -282,7 +282,7 @@
 ![](assets/Pasted%20image%2020251106114951.png)
 
 - Encryption using keys handled, managed, and owned by AWS
-- Object is encrypted server-sice
+- Object is encrypted server-side
 - Encryption type is AES-256
 - Must set header *"x-amz-server-side-encryption":"AES256"* 
 - Enabled by default for new buckets & objects
@@ -292,7 +292,7 @@
 ![](assets/Pasted%20image%2020251106115006.png)
 
 - Encryption using keys handled and managed by AWS KMS (Key Management Service)
-- KMS advantages: user control + audit key usage using Cloud Trail
+- KMS advantages: user control + audit key usage using CloudTrail
 - Object is encrypted server side
 - Must set header `"x-amz-server-side-encryption": "aws:kms"`
 - Limitations of using KMS
@@ -359,7 +359,7 @@
 
 ### Metrics
 
-- Summary Metrices
+- Summary Metrics
 - Cost-Optimization Metrics
 - Data Protection Metrics
 - Access-management Metrics

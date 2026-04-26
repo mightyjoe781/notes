@@ -33,9 +33,17 @@
 ![](assets/Pasted%20image%2020251112230858.png)
 ## Key Scaling
 
-
+- KMS supports automatic annual key rotation for symmetric keys
+- Customer-managed keys can have rotation enabled; AWS-managed keys rotate every year automatically
+- Key aliases allow you to rotate the underlying key material without updating application code
+- Use different keys for different data classifications (e.g., PII vs. general logs) to limit blast radius
 
 ## Preventing Backups or Replication to Disallowed AWS Regions
+
+- Use IAM policies with `aws:RequestedRegion` condition key to deny backup or replication API calls targeting unauthorized regions
+- S3 replication rules can be restricted to specific destination regions via bucket policy
+- AWS Backup plans can be scoped to allowed regions; use SCPs (Service Control Policies) in AWS Organizations to enforce org-wide restrictions
+- AWS Config rule `s3-bucket-replication-enabled` can be used to audit cross-region replication configuration
 
 ## IAM Introduction: Users, Groups, Policies
 

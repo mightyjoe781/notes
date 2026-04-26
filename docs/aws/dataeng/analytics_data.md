@@ -50,7 +50,9 @@
     - SSL (in transit)
 - Can be event driven
 - Can provision additional DPU's (data processing units) to increase performance of underlying Spark jobs
-    - always observe past metrices to predict require DPUs.
+    - always observe past metrics to predict required DPUs.
+    - Worker types: G.1X (1 DPU, 4 vCPUs, 16 GB), G.2X (2 DPU, 8 vCPUs, 32 GB), G.4X (4 DPU, 16 vCPUs, 64 GB), G.8X (8 DPU, 32 vCPUs, 128 GB)
+    - G.025X (0.25 DPU, 2 vCPUs, 4 GB) for low-volume streaming jobs only
 - Errors also reported to CloudWatch
     - could tie into SNS for notification
 - Transform data, Clean data, Enrich Data (before analysis)
@@ -272,7 +274,7 @@
     - ORC
     - Parquet
     - Avro
-    - Snappy, Zlin, LZO, Gzip compression
+    - Snappy, Zlib, LZO, Gzip compression
 - Unstructured, semi-structured or structured
 
 ### Examples
@@ -423,13 +425,13 @@
 - Distributed Processing Framework for big data
 - In-Memory Caching, optimized query execution
 - Supports Java, Scala, Python, and R
-- Supports code reuse acroos
+- Supports code reuse across
     - Batch Processing
     - Interactive Queries ~ SparkSQL
     - Real-Time Analytics
     - Machine Learning
         - MLLib
-    - Graph Processsing
+    - Graph Processing
 - Spark Streaming
     - Integrated with Kinesis, Kafka, on EMR
 - Spark is NOT meant for OLTP
@@ -621,10 +623,10 @@ inputDF.groupBy($"action", window($"time", "1 hour")).count()
 - Hive communication between Glue Metastore and EMR uses TLS
 - Force HTTPS (TLS) on S3 policies with aws:`SecureTransport`
 
-### EMR on KMS
+### EMR on EKS
 
 ![](assets/Pasted%20image%2020251110201106.png)
 
-- Allows submitting Spark job on Elastic Kubernetes Service without provisioning clusters
+- Allows submitting Spark jobs on Elastic Kubernetes Service without provisioning clusters
 - Fully managed
 - Share resources between Spark and other apps on Kubernetes

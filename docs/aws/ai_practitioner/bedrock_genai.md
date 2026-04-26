@@ -30,7 +30,7 @@ NOTE: Before using models in the Bedrock, you need to enable models.
 - How to choose ?
     - Model types, performance requirements, capabilities, constraints, compliance
     - Level of customization, model size, inference options, licensing agreements, context windows, latency
-    - Multimodal models (varies types of input and otuputs)
+    - Multimodal models (various types of inputs and outputs)
 - Amazon Titan
     - High-performing foundational models from AWS
     - Image, text, multi-modal choices via a fully-managed APIs
@@ -41,7 +41,7 @@ https://aws.amazon.com/bedrock/model-choice/
 ### Fine-Tuning a Model
 
 - Adapt a copy of a foundation model with your own data
-- Fine-tuning will change the weights of the base foudational model
+- Fine-tuning will change the weights of the base foundational model
 - Training data must
     - adhere to a specific format
     - be stored in Amazon S3
@@ -64,7 +64,7 @@ Types of Fine Tuning
 - Multi-Turn Messaging
     - provide instruction based fine tuning for a conversation
     - chatbots
-    - must alternative between *user* and *assistant* roles
+    - must alternate between *user* and *assistant* roles
 
 NOTE:
 
@@ -97,7 +97,7 @@ Automatic Evaluation
     - open-ended text generation...
 - Bring your own prompt dataset or use built-in curated prompt datasets
 - Scores are calculated automatically
-- Model scores are calculated using various statistical methods (e.g. BERTScore, Fl...)
+- Model scores are calculated using various statistical methods (e.g. BERTScore, F1...)
 
 
 ![](assets/Pasted%20image%2020251008104944.png)
@@ -128,7 +128,7 @@ RAG Vector Databases
 - Amazon OpenSearch Service (service & Managed Clusters)
 - Amazon Aurora PostgresSQL - relational database, proprietary on AWS
 - Amazon Neptune Analytics - graph database that support GraphRAG
-- Amazon S3 Vectors - cost effective and durable storage with sub-second query peformance
+- Amazon S3 Vectors - cost effective and durable storage with sub-second query performance
 
 RAG Data Sources
 
@@ -168,7 +168,7 @@ Online Tokenizer : https://platform.openai.com/tokenizer
 
 - Model Invocation Logging
     - Can include text, images and embeddings
-    - Analyze further and build alerting thanks to Cloud Watch Logs Insights
+    - Analyze further and build alerting thanks to CloudWatch Logs Insights
 - CloudWatch Metrics
     - Published metrics from Bedrock to CloudWatch
         - Including ContentFilteredCount, which helps to see if Guardrails are functioning

@@ -19,7 +19,7 @@
 ### IAM Policies Structure
 
 - Consists of
-    - version: policy language version, always include `2012-1017`
+    - version: policy language version, always include `2012-10-17`
     - `Id` : an identifier for the policy (optional)
     - *Statement* : one or more individual statements (required)
 - Statements consist of
@@ -189,7 +189,7 @@ Lambda Pricing : https://aws.amazon.com/lambda/pricing/
 
 ## AWS Macie
 
-- Amazon Macie is a fully managed data security and data piracy service that uses machine learning and pattern matching to discover and protect sensitive data in AWS
+- Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect sensitive data in AWS
 - Macie helps identify and alert you to sensitive data, such as PII Data.
 
 ## AWS Config

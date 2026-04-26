@@ -85,7 +85,7 @@ Reflects on how Elastic Beanstalk provisions resources based on what the applica
 - A host manager is installed on every EC2 Instance
 - **Host manager** responsibilities includes
     - Aid in deployment of application
-    - Collecting different metrices and different events from EC2 instances which can be reviewed from within the console, or vial AWS CLI or API
+    - Collecting different metrics and different events from EC2 instances which can be reviewed from within the console, or vial AWS CLI or API
     - It generates instance level events
     - It monitors both the application log files and application server itself
     - It can be used to patch instance components
@@ -115,7 +115,7 @@ Reflects on how Elastic Beanstalk provisions resources based on what the applica
 - Basic Health Reporting
 
     - High level overview of how environment is performing
-    - resources will send metrices to Amazon CloudWatch in 5 minutes interval
+    - resources will send metrics to Amazon CloudWatch in 5 minutes interval
     - 4 colors within AWS Elastic Beanstalk dashboard that show the health status
     - Every 10s ELB will send a health check request to every instance in the auto scaling group and wait for response to confirm health status
 
@@ -129,8 +129,8 @@ Reflects on how Elastic Beanstalk provisions resources based on what the applica
 
     - Enhanced health monitoring display additional information to that over basic
     - AMIs used for EC2 instances have a health agent installed and running
-    - Health Agent Captures additional Information about system metrices & logs
-    - Metrices can be sent to AWS CloudWatch as custom metrices, for additional cost
+    - Health Agent Captures additional Information about system metrics & logs
+    - Metrics can be sent to AWS CloudWatch as custom metrics, for additional cost
 
 ### AWS Lambda
 
