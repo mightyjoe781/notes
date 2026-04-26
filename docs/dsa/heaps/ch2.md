@@ -101,7 +101,24 @@ class KthLargest:
 ```
 
 
-## Median Maintenance
+## Two Heaps Pattern
+
+Use this pattern when you need to efficiently track both the **lower half** and **upper half** of a dynamic dataset.
+
+**Setup:**
+- `left` = max-heap (stores the smaller half, use negatives in Python)
+- `right` = min-heap (stores the larger half)
+- Invariant: every element in `left ≤` every element in `right`, and `|len(left) - len(right)| ≤ 1`
+
+**After every insert, rebalance:**
+1. Push to `left`, then move `left`'s max to `right`
+2. If `right` is bigger than `left`, move `right`'s min back to `left`
+
+This gives O(log n) insert and O(1) median.
+
+**Problems using Two Heaps:** Find Median from Data Stream, Sliding Window Median, IPO (maximize capital).
+
+### Median Maintenance (Find Median from Data Stream)
 
 * Maintain the median of a dynamic data stream efficiently
 * Use two-heaps
@@ -149,6 +166,61 @@ class MedianFinder:
 
 ```
 
+
+### Sliding Window Median
+
+[Leetcode 480](https://leetcode.com/problems/sliding-window-median/)
+
+*Median of every window of size k in array.*
+
+Same two-heap idea, but we also need to **remove** elements leaving the window. Python's `heapq` doesn't support removal, so we use lazy deletion: mark removed elements and skip them when they reach the top.
+
+```python
+import heapq
+
+def medianSlidingWindow(nums, k):
+    left = []   # max-heap (negatives)
+    right = []  # min-heap
+    removed = {}  # val -> count of lazy deletions
+
+    def balance():
+        while right and removed.get(right[0], 0):
+            removed[right[0]] -= 1
+            heapq.heappop(right)
+        while left and removed.get(-left[0], 0):
+            removed[-left[0]] -= 1
+            heapq.heappop(left)
+        # keep left size == right size or left one bigger
+        if len(left) > len(right) + 1:
+            heapq.heappush(right, -heapq.heappop(left))
+        if len(right) > len(left):
+            heapq.heappush(left, -heapq.heappop(right))
+
+    def add(val):
+        if not left or val <= -left[0]:
+            heapq.heappush(left, -val)
+        else:
+            heapq.heappush(right, val)
+        balance()
+
+    def remove(val):
+        removed[val] = removed.get(val, 0) + 1
+        balance()
+
+    def get_median():
+        if k % 2 == 1:
+            return float(-left[0])
+        return (-left[0] + right[0]) / 2.0
+
+    res = []
+    for i, num in enumerate(nums):
+        add(num)
+        if i >= k:
+            remove(nums[i - k])
+        if i >= k - 1:
+            res.append(get_median())
+    return res
+```
 
 ## Heap-based Sorting & Merging
 

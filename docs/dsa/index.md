@@ -42,8 +42,7 @@
 * [Quicksort](sorting/ch2.md)
 * [Mergesort](sorting/ch3.md)
 * [Priority Queues & Heapsort](heaps/ch1.md)
-* Counting Sort, Radix Sort & Bucket Sort
-* Special Sorting Techniques
+* [Counting Sort, Radix Sort, Bucket Sort & Cyclic Sort](sorting/ch4.md)
 
 ## Search
 

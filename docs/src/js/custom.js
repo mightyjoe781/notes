@@ -1,6 +1,10 @@
-$(window).load(function() {
-  $('body').each(function () {
-    var $spy = $(this).scrollspy('refresh')
-  })
-  $('table.js-file-line-container').removeClass('table table-striped table-hover');
+document.addEventListener("DOMContentLoaded", function () {
+  renderMathInElement(document.body, {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false },
+      { left: "\\(", right: "\\)", display: false },
+      { left: "\\[", right: "\\]", display: true },
+    ],
+  });
 });

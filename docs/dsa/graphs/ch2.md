@@ -48,6 +48,72 @@ void dfs(int u) {
 
 [GFG BFS Problem](https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1)
 
+## Multi-Source BFS
+
+Standard BFS finds shortest distances from **one** source. Multi-source BFS seeds the queue with **multiple sources at distance 0** and expands outward simultaneously. Every cell gets the distance to its *nearest* source.
+
+**When to use:** "distance to nearest X", "minimum steps to spread from all starting points", "walls that enclose all reachable cells".
+
+```python
+from collections import deque
+
+def multi_source_bfs(grid, sources):
+    rows, cols = len(grid), len(grid[0])
+    dist = [[-1] * cols for _ in range(rows)]
+    q = deque()
+
+    for r, c in sources:
+        dist[r][c] = 0
+        q.append((r, c))
+
+    dirs = [(0,1),(0,-1),(1,0),(-1,0)]
+    while q:
+        r, c = q.popleft()
+        for dr, dc in dirs:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols and dist[nr][nc] == -1:
+                dist[nr][nc] = dist[r][c] + 1
+                q.append((nr, nc))
+
+    return dist
+```
+
+**Classic problems:**
+
+*Rotting Oranges* - seed all rotten oranges (value 2) at t=0, BFS spreads to fresh (value 1). Answer is max distance reached; if any fresh remains at distance -1 → return -1.
+
+*01 Matrix* - seed all 0-cells at distance 0, BFS gives nearest 0 for every cell.
+
+*Walls and Gates* - seed all gates (0) at distance 0, BFS fills each empty room with minimum steps to nearest gate.
+
+```python
+def orangesRotting(grid):
+    rows, cols = len(grid), len(grid[0])
+    q = deque()
+    fresh = 0
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == 2:
+                q.append((r, c, 0))
+            elif grid[r][c] == 1:
+                fresh += 1
+
+    time = 0
+    dirs = [(0,1),(0,-1),(1,0),(-1,0)]
+    while q:
+        r, c, t = q.popleft()
+        for dr, dc in dirs:
+            nr, nc = r + dr, c + dc
+            if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 1:
+                grid[nr][nc] = 2
+                fresh -= 1
+                time = t + 1
+                q.append((nr, nc, t + 1))
+
+    return time if fresh == 0 else -1
+```
+
 ## Connected Components
 
 - Can be done using Union-Find and BFS also.

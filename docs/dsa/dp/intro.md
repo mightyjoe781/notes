@@ -6,6 +6,76 @@ Identify problems related to Dynamic Programming by determining whether the prob
 
 If the problem cannot be solved using another technique, dynamic programming must be applied. Only when problem is still hard due to enumeration, DP fails and methods like MITM come saving.
 
+## How to Approach a DP Problem
+
+Follow these steps every time. The bottleneck is always step 2 - everything else is mechanical once the state is clear.
+
+**Step 1 - Verify DP applies**
+Does the problem ask for a count, max/min, or yes/no over a combinatorial space? Can the problem be broken into overlapping sub-problems? If yes, DP likely applies.
+
+**Step 2 - Define the state**
+Ask: *"What information do I need to fully describe a sub-problem?"*
+This becomes your function signature / dp table indices. Keep the state minimal - every extra dimension multiplies time and space.
+
+**Step 3 - Write the recurrence**
+Express `dp[state]` in terms of smaller states. Think about the last decision made before reaching this state (last element picked, last step taken).
+
+**Step 4 - Identify base cases**
+Smallest valid states that can be answered directly without recursion (empty array, index out of bounds, target = 0).
+
+**Step 5 - Choose implementation order**
+Top-down (memoization): write recursion + `@cache`, easier to reason about.
+Bottom-up (tabulation): fill a table iteratively, usually faster in practice.
+
+### Worked Example - House Robber
+
+*"Given houses with values, rob non-adjacent houses for max total."*
+
+**Step 2** - What info do I need? Only the current index `i` (which house I'm deciding on). State: `dp(i)` = max money from house `i` to end.
+
+**Step 3** - At house `i`, either rob it (skip `i+1`) or skip it:
+```
+dp(i) = max(nums[i] + dp(i+2),  dp(i+1))
+```
+
+**Step 4** - `dp(n) = 0`, `dp(n-1) = nums[n-1]`
+
+**Step 5** - Top-down:
+```python
+from functools import cache
+
+def rob(nums):
+    n = len(nums)
+
+    @cache
+    def dp(i):
+        if i >= n:
+            return 0
+        return max(nums[i] + dp(i + 2), dp(i + 1))
+
+    return dp(0)
+```
+
+Bottom-up (space-optimised - only need last two values):
+```python
+def rob(nums):
+    prev2, prev1 = 0, 0
+    for num in nums:
+        prev2, prev1 = prev1, max(prev1, prev2 + num)
+    return prev1
+```
+
+### Common State Identification Patterns
+
+| What varies between sub-problems | State to use |
+|---|---|
+| Position in 1D array | `i` |
+| Two strings / two arrays | `(i, j)` |
+| Remaining capacity / budget | `(i, remaining)` |
+| Set of visited items | `(i, bitmask)` |
+| Range of array | `(l, r)` |
+| Digit position + tight constraint | `(pos, tight, ...)` |
+
 ### Types of DP Problems
 
 | **Type**               | **Dimension** | **Core Idea / State**                 | **Common Examples**                          | **Techniques**                        |

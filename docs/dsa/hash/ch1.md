@@ -92,8 +92,92 @@ int main() {
 
 
 
+## Core Interview Patterns
+
+### Pattern 1 - Complement Lookup (Two Sum)
+
+The most fundamental hashmap pattern. Instead of checking all pairs O(n²), store what you've *seen* and look up what you *need*.
+
+```python
+def twoSum(nums, target):
+    seen = {}  # value -> index
+    for i, num in enumerate(nums):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+```
+
+**Generalisation:** any problem asking "does X + Y = target?" can use this. Also works for "does X - Y = k?" by storing differences.
+
+Related problems: 4Sum, Subarray Sum Equals K (use prefix sums as keys).
+
+### Pattern 2 - Group by Key (Anagrams / Bucketing)
+
+When items that look different should be treated as equivalent, hash them to the same key.
+
+```python
+from collections import defaultdict
+
+def groupAnagrams(strs):
+    groups = defaultdict(list)
+    for s in strs:
+        key = tuple(sorted(s))   # canonical form
+        groups[key].append(s)
+    return list(groups.values())
+```
+
+**Key insight:** the canonical form (sorted string, character count tuple, etc.) is the hash key. Everything that maps to the same key belongs in the same bucket.
+
+Related problems: Group Shifted Strings, Find Duplicate File in System.
+
+### Pattern 3 - Frequency Map + Sliding Window
+
+Combine a hashmap tracking counts with a sliding window to answer "longest/shortest subarray with property P".
+
+```python
+def lengthOfLongestSubstring(s):
+    freq = {}
+    left = res = 0
+    for right, ch in enumerate(s):
+        freq[ch] = freq.get(ch, 0) + 1
+        while freq[ch] > 1:          # window constraint violated
+            freq[s[left]] -= 1
+            left += 1
+        res = max(res, right - left + 1)
+    return res
+```
+
+**Template:** expand right → if constraint violated, shrink left → update answer.
+
+Related problems: Minimum Window Substring, Longest Substring with At Most K Distinct Characters, Fruit Into Baskets.
+
+### Pattern 4 - Prefix Sum + Hashmap (Subarray with Target Sum)
+
+Store prefix sums as you go. `prefix[j] - prefix[i] = target` means subarray `[i+1..j]` sums to target.
+
+```python
+from collections import defaultdict
+
+def subarraySum(nums, k):
+    count = defaultdict(int)
+    count[0] = 1   # empty prefix
+    prefix = res = 0
+    for num in nums:
+        prefix += num
+        res += count[prefix - k]
+        count[prefix] += 1
+    return res
+```
+
+Related problems: Contiguous Array (equal 0s and 1s), Subarray Sum Divisible by K.
+
 ### Problems
 
 * Top K frequent Elements
 * Sort Characters by Frequency
 * First Unique Character
+* Two Sum
+* Group Anagrams
+* Longest Substring Without Repeating Characters
+* Subarray Sum Equals K

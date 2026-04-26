@@ -1,5 +1,123 @@
 # Backtracking
 
+## The Backtracking Template
+
+Backtracking = try a choice → recurse → undo the choice.
+
+```python
+def backtrack(state, choices):
+    if is_solution(state):
+        result.append(copy of state)
+        return
+
+    for choice in choices:
+        if is_valid(state, choice):
+            make_choice(state, choice)    # choose
+            backtrack(state, next_choices)  # recurse
+            undo_choice(state, choice)    # unchoose
+```
+
+Three questions to answer before coding:
+1. **What is the state?** (current path, board, remaining target)
+2. **What are the choices?** (indices to pick, cells to fill)
+3. **What makes a choice invalid?** (constraints to prune)
+
+---
+
+## Combination Sum
+
+[Leetcode 39](https://leetcode.com/problems/combination-sum/)
+
+*Find all combinations of candidates that sum to target. Each number can be reused.*
+
+- **State:** current combination, remaining target, start index (to avoid duplicates)
+- **Choices:** candidates from `start` onward
+- **Invalid:** candidate > remaining (prune)
+
+```python
+def combinationSum(candidates, target):
+    res = []
+
+    def backtrack(start, path, remaining):
+        if remaining == 0:
+            res.append(path[:])
+            return
+        for i in range(start, len(candidates)):
+            c = candidates[i]
+            if c > remaining:
+                break          # prune: candidates sorted, rest are larger too
+            path.append(c)
+            backtrack(i, path, remaining - c)   # i not i+1, reuse allowed
+            path.pop()
+
+    candidates.sort()
+    backtrack(0, [], target)
+    return res
+```
+
+**Combination Sum II** (no reuse, `i+1` instead of `i`, skip duplicates at same level):
+```python
+def combinationSum2(candidates, target):
+    res = []
+    candidates.sort()
+
+    def backtrack(start, path, remaining):
+        if remaining == 0:
+            res.append(path[:])
+            return
+        for i in range(start, len(candidates)):
+            if i > start and candidates[i] == candidates[i - 1]:
+                continue       # skip duplicate at same recursion level
+            if candidates[i] > remaining:
+                break
+            path.append(candidates[i])
+            backtrack(i + 1, path, remaining - candidates[i])
+            path.pop()
+
+    backtrack(0, [], target)
+    return res
+```
+
+---
+
+## Word Search
+
+[Leetcode 79](https://leetcode.com/problems/word-search/)
+
+*Find if word exists in grid following adjacent cells (no reuse).*
+
+- **State:** current position `(r, c)`, index into word
+- **Choices:** 4 neighbors
+- **Invalid:** out of bounds, already visited, wrong character
+
+```python
+def exist(board, word):
+    rows, cols = len(board), len(board[0])
+    visited = set()
+
+    def backtrack(r, c, idx):
+        if idx == len(word):
+            return True
+        if r < 0 or r >= rows or c < 0 or c >= cols:
+            return False
+        if board[r][c] != word[idx] or (r, c) in visited:
+            return False
+
+        visited.add((r, c))
+        found = (backtrack(r+1, c, idx+1) or backtrack(r-1, c, idx+1) or
+                 backtrack(r, c+1, idx+1) or backtrack(r, c-1, idx+1))
+        visited.remove((r, c))
+        return found
+
+    for r in range(rows):
+        for c in range(cols):
+            if backtrack(r, c, 0):
+                return True
+    return False
+```
+
+---
+
 ## N-Queens Problem
 
 [Leetcode Link](https://leetcode.com/problems/n-queens/)

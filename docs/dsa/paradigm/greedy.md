@@ -9,6 +9,20 @@
 
 - Proving Greedy Stays Ahead : [Link](https://www.cs.cornell.edu/courses/cs482/2007su/ahead.pdf)
 
+### How to Verify Greedy Works (Exchange Argument)
+
+In an interview, you can justify greedy with this reasoning pattern:
+
+1. **Assume an optimal solution differs from the greedy solution** at some position.
+2. **Show that swapping** the non-greedy choice with the greedy choice does not make the solution worse (it stays optimal or improves).
+3. **Conclude** that the greedy solution can always be transformed into an optimal solution without loss - so greedy IS optimal.
+
+**Example - Activity Selection (interval scheduling):**
+Greedy: always pick the activity that *finishes earliest*.
+Proof sketch: Suppose optimal picks activity A before greedy's choice B, and B finishes before A. Swapping A→B leaves all later activities still compatible and we finish the first slot earlier, so we can never do *worse*. ∴ greedy is optimal.
+
+**Quick heuristic:** if sorting by one attribute (deadline, end time, ratio) and then greedily picking produces correct small examples - try exchange argument mentally. If swapping two adjacent choices never hurts, greedy works.
+
 * **Coin Change**
 
     * Problem Statement:
