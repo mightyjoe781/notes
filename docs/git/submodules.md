@@ -105,4 +105,4 @@ Partial clones are transparent: all normal Git commands work the same way.
 
 ## Large File Storage (LFS)
 
-See [Hooks and Config](hooks.md#git-lfs) for LFS setup. LFS is the right tool when your repo contains large binaries (video, audio, datasets, compiled artifacts) that do not need to be diffed.
+See [Hooks and Config](hooks.md#git_lfs) for LFS setup. LFS is the right tool when your repo contains large binaries (video, audio, datasets, compiled artifacts) that do not need to be diffed.
