@@ -48,8 +48,8 @@
 ### Connection Establishment
 
 - App1 on `10.0.0.1` want to send data to AppX on `10.0.0.7`
-- App1 sends SYN to AppX to synchronous sequence numbers
-- AppX sends SYN/ACK to synchronous its sequence number
+- App1 sends SYN to AppX to synchronize sequence numbers
+- AppX sends SYN/ACK to synchronize its sequence number
 - App1 ACKs AppX SYN
 - Three way handshake
 
@@ -58,7 +58,7 @@
 ### Sending Data
 
 - App sends data to AppX
-- App1 encapsulate the data in a segment and send it
+- App1 encapsulates the data in a segment and sends it
 - AppX acknowledges the segments
 - Hint: Can App1 send a new segment before ack of old segment arrives ?
 
@@ -67,7 +67,7 @@
 ### Acknowledgement
 
 - App1 sends segment 1, 2, 3 to AppX
-- AppX acknowledges all of then with single ACK3
+- AppX acknowledges all of them with single ACK3
 
 ![](assets/Pasted%20image%2020250930073815.png)
 
@@ -92,7 +92,7 @@
 
 - TCP segment Header is 20 bytes and can go up to 60 bytes
 - TCP segments slide into an IP packet as *data*
-- Port are 16 bit (0 to 65535)
+- Ports are 16-bit (0 to 65535)
 - Sequences, Acknowledgement, flow control and more
 
 ![](assets/Pasted%20image%2020250930074439.png)
@@ -121,7 +121,7 @@
 
 ![](assets/Pasted%20image%2020250930075712.png)
 
-- A can send multiple segments and B can acknowledges all in 1 ACK
+- A can send multiple segments and B can acknowledge all in 1 ACK
 - The question is ... how much A can send ? (or B can handle)
 - This is called flow control
 
@@ -144,7 +144,7 @@
 ### Sliding Window
 
 - Can't keep waiting for receiver to acknowledge all segments
-- Whatever gets acknowledge moves
+- Whatever gets acknowledged moves
 - We *slide* the window
 - Sender maintains the sliding window for receiver
 
@@ -212,7 +212,7 @@
 
 ### Summary
 
-- Why the receiver may handle large data middle boxes might not
+- While the receiver may handle large data, middle boxes might not
 - Middle routers buffers may fill up
 - Need to control the congestion in network
 - Sender can send segment up to CWND or RWND without ACK
@@ -237,7 +237,7 @@
 - E.g. 192.168.x.x , 10.0.0.x is private not routable in the Internet
 - Internal hosts can be assigned private addresses
 - Only your router need public IP address
-- Router need to translate requests, it swaps the private IP/Port in the packet with its own public IP, and then transmit request back to the machine (AAA).
+- Router needs to translate requests, it swaps the private IP/Port in the packet with its own public IP, and then transmits the request back to the machine.
 - Router in NAT mode acts as both layer 3, layer 4 device.
 
 ![](assets/Pasted%20image%2020250930095742.png)
@@ -272,7 +272,7 @@ NOTE: Notice how client doesn't immediately close its file descriptor.
 ### Pros
 
 - Guarantee delivery
-- No one can send data priori knowledge
+- No one can send data without prior knowledge
 - Flow Control and Congestion Control
 - Ordered Packets no corruption or app level work
 - Secure and can't be easily spoofed
@@ -346,7 +346,7 @@ Details :
 
 ### Socket Sharding
 
-- Normally listening on active port/ ip fails
+- Normally listening on an active port/ip fails
 - But you can override it with `SO_REUSEPORT`
 - Two distinct sockets different processes on the same ip/port pair
 - used by *nginx*
@@ -359,7 +359,7 @@ Details :
 import net from 'net';
 
 const server = net.createServer( socket => {
-    console.log("TCP handshake successful with " + socket.remoteAddress + ":" socket.remotePort);
+    console.log("TCP handshake successful with " + socket.remoteAddress + ":" + socket.remotePort);
     socket.write("hello client!");
     
     socket.on("data", data=> {

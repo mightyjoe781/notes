@@ -94,7 +94,7 @@ Important Article : https://blog.cloudflare.com/sad-dns-explained/
 
 - Causes delays in some client that may lead to timeout and retransmission
 - Noticeable performance degradation
-- Combine with Nagle's algorithm can lead to 400ms delays !
+- Combined with Nagle's algorithm can lead to 400ms delays!
 - Each party is waiting on each other
 
 ## Cost of Connection Establishment
@@ -102,7 +102,7 @@ Important Article : https://blog.cloudflare.com/sad-dns-explained/
 - TCP three way handshake
 - The further apart the peers, the slower it is to segments
 - Slow start keeps the connection from reaching its potential right away
-- Congestion control and Nigel Algorithm can further slow down
+- Congestion control and Nagle's Algorithm can further slow down
 - Destroying the connection is also expensive
 
 ### Connection Pooling
@@ -165,7 +165,7 @@ Wait can I send data during handshake ?
 ### There is an exception
 
 - There is a configuration that allows more than one process to listen on the same port
-- `SO_PORTREUSE`
+- `SO_REUSEPORT`
 - Operating System balance segments among processes
 - OS create a hash source ip/source port/ dest ip/ dest port
 - Guarantees always go to same process if the pair match

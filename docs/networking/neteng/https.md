@@ -58,7 +58,7 @@ Pipelining Example
 
 ### HTTP/2
 
-- Multiplexing over Signal Connection (save resources) (SPDY)
+- Multiplexing over Single Connection (save resources) (SPDY)
 - Compression
 - Multiplexing
 - Server Push
@@ -91,7 +91,7 @@ Pipelining Example
 - Pros
     - QUIC has many other benefits
     - Merge connection setup + TLS in one handshake
-    - Hash congestion control at stream level
+    - Has congestion control at stream level
     - Connection Migration (connection ID)
     - Why not HTTP/2 over QUIC ?
         - Header Compression algorithm
@@ -129,7 +129,7 @@ Pipelining Example
 
 ### HTTPS over QUIC (HTTP/3)
 
-- Protocol is changes from TCP to QUIC
+- Protocol changes from TCP to QUIC
 - Smart Enough to do Handshake and Sharing of Encryption keys etc in the same request
 - Client sends the encrypted request to server
 
@@ -141,14 +141,14 @@ Pipelining Example
 
 ![](assets/Pasted%20image%2020251004193945.png)
 
-### HTTPS over TCP with TLS 1.3 and ORTT
+### HTTPS over TCP with TLS 1.3 and 0RTT
 
-- GET request along with the ACK, 0 RTT using preshared keys between client server
+- GET request along with the ACK, 0-RTT using preshared keys between client and server
 - Use preshared keys to encrypt the data.
 
 ![](assets/Pasted%20image%2020251004193905.png)
 
-### HTTPS over QUIC with ORTT
+### HTTPS over QUIC with 0RTT
 
 - In same request send Handshake, with TCP Fast Open and zero Round Trip
 - Fastest you can send the request

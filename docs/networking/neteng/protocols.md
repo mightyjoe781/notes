@@ -4,7 +4,7 @@
 
 ### Why DNS ?
 
-- People. can't remember IPs
+- People can't remember IPs
 - A domain is a text points to an IP or a collection of IPs
 - Additional layer of abstraction is good
 - IP can change while the domain remain
@@ -112,12 +112,12 @@ At each end
 - Party 2 takes `X` value and raises it to `Y`
     - $(g^x \mod n)^y = g^{xy} \mod n$
 - Both now has the same value : $g^{xy} \mod n$
-- This is the used as a seed for the key, and can be used to generate symmetric key.
+- This is used as a seed for the key, and can be used to generate a symmetric key.
 
 #### MITM
 
-- above strategy solves secrecy problem
-- but if someone intercepts and puts their own DH Keys >
+- The above strategy solves the secrecy problem
+- But if someone intercepts and puts their own DH Keys:
 - MITM replaces Y's parameter with their own
 - X doesn't know that happened (its just numbers)
 

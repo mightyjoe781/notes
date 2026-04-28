@@ -84,7 +84,7 @@ arp -a
 
 - 192.168.1.4 wants to talk to 192.168.1.5 (It only knows the IP)
 - Checks if its in the same network
-    - 192.168.1.5 × 255.255.255.0 = 192.168.1.0, same network
+    - 192.168.1.5 AND 255.255.255.0 = 192.168.1.0, same network
     - Means we can directly communicate with data link (MAC Addresses)
     - 192.168.1.4 needs the MAC address of 192.168.1.5 (Sends ARP)
 - ARP gets to the switches, sends it to all ports
@@ -106,7 +106,7 @@ arp -a
     - 192.168.1.0 != 10.0.0.0
 - Only way is the gateway (default)
     - We will learn later that routing rules are critical here
-- 192.168.1.5 needs to talk to the gateway which is 192.168.1.1
+- 192.168.1.4 needs to talk to the gateway which is 192.168.1.1
 - 192.168.1.5 and 192.168.1.1 in the same network
 - We do ARP to get the gateway's MAC
 - The gateway reply that 192.168.1.1 = X
@@ -315,21 +315,21 @@ Still ping from `s1, s2` will not work for both of them.
 # sudo ip route add 10.0.0.0/24 via 10.0.1.3
 
 docker stop s1
-dokcer stop s2
+docker stop s2
 docker rm s1 s2
 
 docker run --name s1 --network backend --cap-add=NET_ADMIN -d nhttp
-dokcer run --name s2 --network frontend --cap-add=NET_ADMIN -d nhttp
+docker run --name s2 --network frontend --cap-add=NET_ADMIN -d nhttp
 
-# s1 container, add route thru gw
+# s1 container, add route to frontend via gw's backend IP
 docker exec -it s1 bash
-> ip route add 10.0.0.0/24 via 10.0.1.3
+> ip route add 10.0.1.0/24 via 10.0.0.3
 > 
 
-# s2 container, add route thru gw
+# s2 container, add route to backend via gw's frontend IP
 
-docker exect -it s2 bash
-> ip route add 10.0.1.0/24 via 10.0.0.3
+docker exec -it s2 bash
+> ip route add 10.0.0.0/24 via 10.0.1.3
 > 
 
 ping 10.0.1.2 # works

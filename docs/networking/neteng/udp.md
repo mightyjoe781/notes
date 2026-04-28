@@ -40,7 +40,7 @@
 
 ### UDP Datagram
 
-- UDP Header is 7 bytes only (IPv4)
+- UDP Header is 8 bytes (IPv4)
 - Datagram slides into an IP packet as *data*
 - Port are 16 bit (0 to 65535)
 
@@ -78,17 +78,17 @@ const socket = dgram.createSocket("udp4")
 socket.bind(5500, "127.0.0.1")
 
 socket.on("message", (msg, info) => {
-    console.log(`my server got a datagram ${msg}, from: ${infor.address}:${info.port`)
+    console.log(`my server got a datagram ${msg}, from: ${info.address}:${info.port}`)
 })
 
 ```
 
 ```bash
-npm install dgram
-npm index.js
+# dgram is a built-in Node.js module, no install needed
+node index.js
 
 # use nc to udp
-nc -u 127.0.0.1.5500
+nc -u 127.0.0.1 5500
 > hi
 > my name is smk
 
@@ -114,18 +114,18 @@ int main(int argc, char **argv) {
     char buffer[1024];
     socklen_t addr_size;
     
-    socketfd = socket(AF_INET, SOCK_DGRAM, 0);
+    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     
     memset(&myaddr, '\0', sizeof(myaddr));
     myaddr.sin_family = AF_INET;
     myaddr.sin_port = htons(port);
-    myaddr.sin_addr.s_addr = inet_adr("127.0.0.1")
+    myaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
     
-    bind(sockfd, (struct sockaddr*)& myaddr, sizeof(myaddr));
-    addr_size. = sizeof(remoteAddr);
+    bind(sockfd, (struct sockaddr*)&myaddr, sizeof(myaddr));
+    addr_size = sizeof(remoteAddr);
     
-    recvfrom(sockfd, bugger, 1024, 0, (struct sockaddr*)& remoteAddr, &addr_size);
-    print("got data from %s", buffer);
+    recvfrom(sockfd, buffer, 1024, 0, (struct sockaddr*)&remoteAddr, &addr_size);
+    printf("got data from %s", buffer);
     
     return 0;
 }

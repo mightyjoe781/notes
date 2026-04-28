@@ -81,7 +81,7 @@
 - Any communication protocol needs client library for the language of choice
     - SOAP Library
     - HTTP Client Library
-- Hards to maintain and patch client libraries
+- Hard to maintain and patch client libraries
     - HTTP/1.1 HTTP/2, new features, security etc.
 #### Why gRPC was invented ?
 
@@ -258,11 +258,12 @@ Video : https://www.youtube.com/watch?v=FExZvpVvYxA
 #### Create your own STUN & TURN server
 
 - COTURN open source project
-- https: //github. com/coturn/coturn
+- https://github.com/coturn/coturn
 
 - Public STUN servers
-    - stunl.1.google.com: 19302
-    - stun2.1.google.com: 19302
-    - stun3.1.google.com: 19302
-    - stun4.1.google.com: 19302
-    - stun.stunprotocol.org: 3478
+    - stun.l.google.com:19302
+    - stun1.l.google.com:19302
+    - stun2.l.google.com:19302
+    - stun3.l.google.com:19302
+    - stun4.l.google.com:19302
+    - stun.stunprotocol.org:3478

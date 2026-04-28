@@ -33,7 +33,7 @@ ssh -L local_port:remote_address:remote_port username@sshserver
 To do a remote port forwarding in SSH
 
 ```bash
-ssh -L remote_port:local_adress:local_port username@sshserver
+ssh -R remote_port:local_address:local_port username@sshserver
 ```
 
 

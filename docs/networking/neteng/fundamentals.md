@@ -46,7 +46,7 @@ Mnemonic : *Please do not throw pizza sausage away* or *All people seem to need 
 ![](assets/Pasted%20image%2020250928233602.png)
 ### The OSI Layers - an Example (Sender)
 
-- Example sending a POST request. to HTTPS webpage
+- Example sending a POST request to an HTTPS webpage
 - Layer 7 - Application
     - POST request with JSON data to HTTPs server
 - Layer 6 - Presentation
@@ -58,7 +58,7 @@ Mnemonic : *Please do not throw pizza sausage away* or *All people seem to need 
 - Layer 3 - Network
     - SYN is placed an IP packet(s) and adds source/destination IPs
 - Layer 2 - Data Link
-    - Each packet. goes into a single frame and adds the source/destination MAC Address
+    - Each packet goes into a single frame and adds the source/destination MAC Address
 - Layer 1 - Physical
     - Each frame becomes string of bits which converted into either a radio wave, electric signal or light.
 
@@ -68,7 +68,7 @@ Mnemonic : *Please do not throw pizza sausage away* or *All people seem to need 
 - Layer 1 - Physical
     - Radio, electric or light is received and converted into digital bits
 - Layer 2 - Data Link
-    - The bis from Layer 1 are assembled into frames
+    - The bits from Layer 1 are assembled into frames
 - Layer 3 - Network
     - The frames from layer 2 are assembled into IP packet
 - Layer 4 - Transport
@@ -136,8 +136,8 @@ Mnemonic : *Please do not throw pizza sausage away* or *All people seem to need 
 
 ![](assets/Pasted%20image%2020250929083117.png)
 
-But my host have many apps !
+But my host has many apps!
 
 - It's not enough to just address the host
-- The host is running many apps each with different requirements ~ *Ports
+- The host is running many apps each with different requirements ~ *Ports*
 - You can send an HTTP request on port 80, a DNS request on port 53 and an SSH request on port 22 all running on the same server!

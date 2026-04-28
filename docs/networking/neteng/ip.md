@@ -12,7 +12,7 @@
 - `a.b.c.d/x` (`a.b.c.d` are integers) x is the network bits and remaining are host
 - Example `192.168.254.0/24`
 - The first 24 bits (3 bytes) are network, the rest 8 are for the host
-- This means we can have $2^{24} = 16777216$ network and each network has $2^8 = (255)$  hosts
+- This means we can have $2^{24} = 16777216$ networks and each network has $2^8 = 256$ addresses (254 usable hosts)
 - Also called a subnet
 
 ### Subnet Mask
@@ -40,7 +40,7 @@
 ![](assets/Pasted%20image%2020250929090938.png)
 
 - Version ~ The protocol version
-- Internet Header Length(ILH) - Defines the Options length
+- Internet Header Length (IHL) - Defines the Options length
 - Total Length ~ 16 bit data + header
 - Fragmentation ~ Jumbo Packets
 - TTL - How many hops packet can survive
