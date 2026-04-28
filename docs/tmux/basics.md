@@ -4,12 +4,13 @@
 
 - mac : `brew install tmux`
 
-- On linux : build from source.
+- On linux : `sudo apt-get install tmux` (most distros). To build from source:
 
 ````bash
 sudo apt-get install build-essential libevent-dev libncurses-dev
-tmux -zxvf tmux-2.6.tar.gz
-cd tmux-2.6
+wget https://github.com/tmux/tmux/releases/download/3.5/tmux-3.5.tar.gz
+tar -zxvf tmux-3.5.tar.gz
+cd tmux-3.5
 ./configure
 make
 sudo make install
@@ -53,7 +54,7 @@ Try `<C-b>t` : this should display time.
 
 - To go to next window : `PREFIX n`
 - To go to previous window : `PREFIX p`
-- To go to nth window : `PREFIX n`
+- To go to nth window : `PREFIX [0-9]`
 - To display visual menu of window : `PREFIX w`
 - To search window that contains some text : `PREFIX f`
 - To close a window : `exit` or `PREFIX &`

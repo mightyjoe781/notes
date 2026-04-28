@@ -46,7 +46,7 @@ Make the binding same as vim
 ````.tmux.conf
 bind Escape copy-mode
 bind-key -T copy-mode-vi v send -X begin-selection
-bind-key -T copy-mode-vi v send -X copy-selection
+bind-key -T copy-mode-vi y send -X copy-selection
 unbind p
 bind p paste-buffer
 ````
@@ -91,7 +91,7 @@ or paste the contents of clipboard : `tmux set -buffer $(pbpaste); tmux paste-bu
 bind C-c run "tmux save-buffer - | pbcopy"
 
 # y in copy mode takes selection and sends it to system clipboard via pbcopy
-bind-key -T copy-mode-vi y send-keys -X coyp-pipe-and-cancel "pbcopy"
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
 
 # prefix ctrl-v fills tmux buffer from clipboard via pbpaste then pastes from buffer into tmux window
 bind C-v run "tmux set-buffer \"$(pbpaste)\"; tmux paste-buffer"

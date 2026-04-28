@@ -8,11 +8,11 @@ TIP 2 : Don’t repeat yourself ! Use Two for Price of one.
 
 TIP 3 : Take One step back, Then Three Forward.
 
-- (Inserting spaces in front and back of a character). Use `s` like this to enter spaces. `f+s<space>+<space>`. We can do this with all occurances using `;` to go to next occurance and use `.` to execute above instruction again.
+- (Inserting spaces around a character). Use `s` like this to enter spaces: `f+s<space>+<space>`. We can do this for all occurrences using `;` to go to the next occurrence and `.` to repeat the change.
 
 TIP 4 : Act, Repeat, Reverse
 
-- `@:` or `&` : can repeat last `:` command which could be a `:substitute`. Remember u can always use `u` to reverse unwanted changes.
+- `@:` repeats the last Ex command. `&` repeats the last `:substitute` command. Remember `u` can always reverse unwanted changes.
 
 TIP 5 : Find and Replace by Hand
 
@@ -80,7 +80,7 @@ TIP 26 : Append After a ragged Visual Block
 
 TIP 27 : Meet Vim’s Command Line : `:` to invoke command lines, refer [Link](notes.md) (Ex Commands Strike far and wide than normal mode)
 
-TIP 28 : Execute a command on one or more cosecutive lines. `:{start},{end}` for selection text
+TIP 28 : Execute a command on one or more consecutive lines. `:{start},{end}` for selecting a range
 
 TIP 29 : Duplicate or Move lines using `:t` or `:m` commands
 
@@ -177,7 +177,7 @@ TIP 59 : Snap Between Files Using Global Marks. Always set global marks before e
 
 TIP 60 : Delete, Yank, and Put with Vim’s Unnamed Registers.
 
-- Conecpt of Transposing Characters `xp` , Lines `ddp` and `yyp`
+- Concept of Transposing Characters `xp`, Lines `ddp` and `yyp`
 
 TIP 61 : Grok vim’s registers
 
@@ -187,7 +187,7 @@ TIP 61 : Grok vim’s registers
 
 TIP 62 : Replace a Visual Selection with Register. (Useful for swapping values inplace in unnamed register).
 
-TIP 63 : Paste from a register. (Remember this nmenonic : `puP` and `Pup`) We can use `<C-r>0` to paste registers in insert mode.
+TIP 63 : Paste from a register. (Remember the mnemonic: `puP` and `Pup`) We can use `<C-r>0` to paste from a register in insert mode.
 
 TIP 64 : Interact with the System Clipboard. (Pasting in windows and linux messes up formatting if autoindent is enabled)
 
@@ -197,9 +197,9 @@ TIP 65 : Record and Execute a Macro. (Record : `q{register}` and to stop recordi
 
 TIP 66 : Normalize cursor position (`0`) , Strike (Use correct motions like `p`, `w`, text-objects), Abort (vim stops macro execution if it encounters a motion that can’t be replayed).
 
-TIP 67 : Playback with a count. (`qq;.q` to store last command in macro and then executing dot command multiple times.)
+TIP 67 : Playback with a count. (`qq;.q` stores the last command in a macro; then execute the dot command multiple times.)
 
-TIP 68 : Reapeat a Change on Contigous Lines. (Use parallel execution `Select ---> Apply Macro`) (Select the lines then `:'<,'>normal @a`)
+TIP 68 : Repeat a Change on Contiguous Lines. (Use parallel execution: select lines, then `:'<,'>normal @a` to apply macro to all selected lines.)
 
 TIP 69 : Append Commands to a Macro. (`q{capital-register}`)
 
@@ -280,13 +280,13 @@ TIP 83 : Offset the Cursor to the End of a Search Match
 
 TIP 84 : Operate on a Complete Search Match. Utilise `gn` to jump to next word as well and condense the DOT formula.
 
-- Improved dot formula requires only 1 step `.` command only, by default it jumps to next occurance.
+- Improved dot formula requires only one keystroke: `.` jumps to the next occurrence and applies the change in one step.
 
 TIP 85 : Create Complex Pattern by Iterating upon Search History. Utilise `q/` to prepopulated search history to revise our search patterns. Then we can use `:%s//"\1"/g` (empty search field defaults to last search, and `\1` register stores current match word)
 
 TIP 86 : Count the Matches for the Current Pattern
 
-- `/{text-to-search}` then `:%s///gn ` (mathes last search and counts its occurence)
+- `/{text-to-search}` then `:%s///gn` (matches last search and counts occurrences without substituting)
 - `/{text-to-search}` then `:vimgrep //g %` , you can then navigate using `n` , `N` or `:cnext`, `:cprev`
 
 TIP 87 : Search for Current Visual Selection
@@ -296,7 +296,7 @@ TIP 87 : Search for Current Visual Selection
 TIP 88 : Meet the Substitution Command
 
 - `:[range]s[ubstitute]/{pattern}/{string}/[flags]` : General format for substitution phrase.
-- Flags : `g` : globally, `c` : confirm/reject choice, `n` : usual substitute behaviour with reporting # occurances that will be affected, `&` : reuse same flags from previous substitute command
+- Flags: `g` : globally (all matches on each line), `c` : confirm/reject each substitution, `n` : report the number of occurrences without substituting, `&` : reuse flags from the previous substitute command
 - Special Characters for Replacement String : `\r` , `\t` , `\\` , `\1` , `\2`, `\0` ,`&`,`~` and `\={vim-script}`
 
 TIP 89 : Find and Replace Every Match in a File
@@ -360,15 +360,15 @@ TIP 100 : Collect TODO Items in a Register. (Combining the `:global` and `:yank`
 
 - Lets assume file has text `// TODO : {some-todo}`
 - Collect all those files that have TODO text : `:g/TODO `(default cmd is :print so it actually prints the lines)
-- Yanking all lines that contain TODO text in a register. First clear the reigster `qaq`. Now `:g/TODO/yank A`
+- Yanking all lines that contain TODO text into a register. First clear the register: `qaq`. Now `:g/TODO/yank A`
 - We could combine the `:global` command with either `:bufdo` or `:argdo` to collect all TODO items from a set of files.
 - We could also copy text to end of file : `:g/TODO/t$` 
 
 TIP 101 : Alphabetize the properties of Each Rule in a CSS File.
 
-- `:g/{pattern}/[range][cmd]` : limits the execution of gloabl command
-- A generalised form of this `:global` command goes like this `:g/{start}/ .,{finish} [cmd]`
-- Sorting all blocks of rules with this trick `:g/{/ .+1,/}/-1 sort` or we could indent all properties inside blocks `:g/{/ .+1,/}/-1 >` to silent `:>` prints use `:sil` command like this `:g/{/sil . +1,/}/-1 >`
+- `:g/{pattern}/[range][cmd]` : limits the execution of the global command
+- A generalised form: `:g/{start}/ .,{finish} [cmd]`
+- Sorting all blocks of CSS rules: `:g/{/ .+1,/}/-1 sort` — or indent all properties inside blocks: `:g/{/ .+1,/}/-1 >`. To suppress the `:>` output, use `:sil`: `:g/{/sil .+1,/}/-1 >`
 
 ### Part 6 : Tools
 
@@ -376,13 +376,14 @@ TIP 101 : Alphabetize the properties of Each Rule in a CSS File.
 
 TIP 102 : Meet ctags
 
-- Installing Exuberant Ctag
+- Exuberant Ctags is no longer maintained. Use **Universal Ctags**, its actively maintained fork.
 
   ```bash
-  sudo apt-get install exuberant-ctags
+  # Debian/Ubuntu
+  sudo apt-get install universal-ctags
+  # macOS (macOS ships a limited BSD ctags — install the full version via Homebrew)
+  brew install universal-ctags
   ```
-
-  MacOS user already have BSD version of ctags.
 
 - Indexing a Codebase with ctags : `ctags *.rb`, Now directory contains a plain text file called as `tags`
 
@@ -428,13 +429,12 @@ TIP 107 : Recall Results from a Previous Quickfix List
 
 - Use `:colder` to get old quickfix list and `:cnewer` to get to new quickfixlist.
 
-TIP 108 : Customize the External Compiler. (vim’s definition of external compiler is loose)
+TIP 108 : Customize the External Compiler. (Vim’s definition of external compiler is loose)
 
-- Customize so that `:make` calls node lint on your machine.
-- Install nodelint : `npm install nodelint -g`
-- Configure `:make` to invoke Nodelint : `:setlocal makeprg=NODE_DISABLE_COLORS=1\ nodelint\ %`
-- Populate the Quickfix List Using Nodelint’s Output : `:setglobal errorformat?` list current error format. Let’s correct it according to Nodelint. `:setlocal efm=%A%f\,\ line\ %l\,\ character\ %c:%m,%Z%.%#,%-G%.%#`
-- Setup `makeprg` and `erroformat` with a single command. `:compiler nodelint`
+- Customize so that `:make` calls a linter. The book uses `nodelint` (now deprecated); modern projects use `eslint` or other linters.
+- For ESLint: `:setlocal makeprg=npx\ eslint\ --format\ unix\ %`
+- Set the error format to match the linter output: `:setlocal efm=%f:%l:%c:\ %m`
+- Alternatively, set up `makeprg` and `errorformat` together using a compiler plugin: `:compiler {name}`
 
 #### Chapter 18 : Search Project-Wide with grep, vimgrep, and Others
 
@@ -454,7 +454,7 @@ TIP 110 : Customize the grep Program
    	grepprg="grep -n $* /dev/null"
    	grepformat="%f:%l:%m,%f:%l%m,%f  %l%m"
 
-- Make `:grep` call `ack`. Visit this link for details.[Link](https://betterthangrep.com). `:set grepprg=ack\ --nogroup\ $*`
+- Make `:grep` call `ack`. See [beyondgrep.com](https://beyondgrep.com) for details. `:set grepprg=ack\ --nogroup\ $*`
 
 - To make ack store columns also set this :
 
@@ -532,11 +532,11 @@ TIP 122 : Add words to the Spell File
 
 - Create a spell file for specialist Jargon. 
 
-  ````vimscript
+  ```vim
   setlocal spelllang=en_us
   setlocal spellfile=~/.vim/spell/en.utf-8.add
   setlocal spellfile+=~/books/practical_vim/jargon.utf-8.add
-  ````
+  ```
 
 TIP 123 : Fix Spelling errors from insert mode. 
 
@@ -561,14 +561,14 @@ TIP 123 : Fix Spelling errors from insert mode.
 
 - Apply Customization to Certain Types of Files
 
-  ````vimscript
+  ```vim
   if has("autocmd")
-  	filetype on
-  	autocmd FileType ruby setlocal ts=2 sts=2 sw=2 et
-  	autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noet
-  	autocmd FileType javascript compiler nodelint
+      filetype on
+      autocmd FileType ruby setlocal ts=2 sts=2 sw=2 et
+      autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noet
+      autocmd FileType javascript compiler eslint
   endif
-  ````
+  ```
 
   We could put these customization in a separate files also in `~/vim/after/ftplugin/javascript.vim` (ftplugin meaning filetype plugins)
 

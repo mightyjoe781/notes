@@ -2,7 +2,7 @@
 
 My dotfiles : [Link](https://raw.githubusercontent.com/mightyjoe781/.dotfiles/master/vim/.vimrc)
 
-````.vimrc
+```vim
 "---------------------------------------------------------------------
 " File     : .vimrc
 " Purpose  : config file for vim
@@ -130,6 +130,7 @@ Plug 'morhetz/gruvbox'
 " Plug 'altercation/vim-colors-solarized'
 
 " Syntax and AutoCompletion
+" Note: syntastic is largely superseded by ALE (dense-analysis/ale) or native LSP (vim 8.1+/neovim)
 Plug 'scrooloose/syntastic'
 Plug 'leafgarland/typescript-vim'
 " YCM requires python3.8 and cmake
@@ -145,5 +146,5 @@ if has("autocmd")
     au BufNewFile,BufRead *.sgml,*.ent,*.xsl,*.xml call Set_SGML()
     au BufNewFile,BufRead *.[1-9] call ShowSpecial()
 endif " has(autocmd)
-````
+```
 

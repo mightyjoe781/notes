@@ -34,7 +34,7 @@ To save and exit the file `:wq`
 ### Navigation in Vim
 
 - Always use `h, j, k, l` for navigation instead of arrow keys.
-- `Ctrl-f` : Page up and `Ctrl-b` : Page Down
+- `Ctrl-f` : Page Down and `Ctrl-b` : Page Up
 - `w` : move forward one word, `W`: move forward one word (ignore punctuation)
 - `b` : move backward one word, `B`: move backward one word (ignore punctuation)
 - `e` : jumps to end of current work, and move forward to the end of next word, similar as above with `E`
@@ -42,7 +42,7 @@ To save and exit the file `:wq`
 - `0` or `^` : jump to start of line , `$` : jump to end of line
 - `gg` : to move top of file, `G` or `:$` : move to bottom of file
 - `Ngg` or `:N` : to jump to Nth line
-- `Ctrl-g` : view file info, like status etc, to enable this automatic `set ruler` (Note to disable this : `set ruler!` or `set noruler`)
+- `Ctrl-g` : view file info like current file name, line count, and position. To always show position, `set ruler` (disable with `set ruler!` or `set noruler`)
 
 ### Deleting Text and “Thinking in Vim”
 
@@ -66,9 +66,9 @@ To save and exit the file `:wq`
 
 ### Deleting, Yanking and Putting
 
-- Register is clipboard like storage location
-- All deletes are stored in `p` *put* command via **unnamed/default** register
-- `p` : put text after cursor, `P` : puts before the cursor
+- A register is a clipboard-like storage location.
+- Text deleted with `d`, `c`, `s`, or `x` is stored in the **unnamed/default** register and can be retrieved with `p`.
+- `p` : put text after cursor, `P` : put text before the cursor
 - Copy is usually performed by using yank `y` command puts the text in register.
 - cut-copy-paste : delete-yank-put
 - `yw, y$, y^` : command + motion
@@ -94,7 +94,7 @@ To save and exit the file `:wq`
 
 ### Transforming and Substituting text in Vim
 
-- `i` : put your in insert mode.  `I` command puts you in insert mode and towards start of line.
+- `i` : puts you in insert mode. `I` puts you in insert mode at the start of the line.
 - `a` : appends(puts in insert) after the current character on cursor , `A` : append at the end of line
 - `o` : start new line and puts in insert mode. `O` : start new line above and put in insert mode.
 - `80i*` : can create a line with 80 asterisk. (Count) + operation
@@ -102,23 +102,23 @@ To save and exit the file `:wq`
 - `R` invokes ‘REPLACE’ mode that overwrites the characters it encounters
 - `r` : invokes replace for only 1 character and keeps you in normal mode
 - `cw` : change the entire word, `c$` or `C` : change till end of line (insert mode), `cc` change entire line
-- `~` : change the case of character. `g~w` for changing case of entire word, `g~~` or `g~$` change case on entire line.
-- `gUU` changes the case the case to upper for entire line, `guu` changes the case to lower for entire line
+- `~` : toggle the case of the character under the cursor. `g~w` changes the case of the entire word, `g~~` changes the case of the entire line, `g~$` changes from cursor to end of line.
+- `gUU` converts the entire line to uppercase, `guu` converts the entire line to lowercase.
 - `J` joins two lines together with a space. `gJ`  joins two lines without space, `NJ` : to join N lines
 
 ### Search, Find and Replace
 
-- `f{char}` : find the first occurance of x towards right of line, `F{char}` : find the first occurance of x towards left of line (Note : both case sensitive) (can combine count also)
-- use `;` to repeat `fx` search forwards and `,` for searching backwards
-- `tx` and `Tx` : similar to `fx` put cursor before the search hit
-- `dfx` : deletes till character x (including x) `dtx` : deletes till charcater x (doesn’t delete x)
+- `f{char}` : find the first occurrence of `{char}` to the right on the current line, `F{char}` : find the first occurrence to the left (both are case-sensitive; can combine with a count)
+- use `;` to repeat `f{char}` search forwards and `,` to repeat it backwards
+- `t{char}` and `T{char}` : similar to `f`/`F` but places cursor just before the match
+- `df{char}` : deletes up to and including `{char}`; `dt{char}` : deletes up to but not including `{char}`
 - use `/{key}` to search for key in file. `n` : cycle next occurrence and `N` : cycle previous occurence
 - Enable incremental search its very useful `set is` also disable highlight search `set nohls`
 - A Trick : use `/{key}` to search key and `cw` to change it to `lock` and then `n` to next occurence and `.` to repeat previous command. you could also use `:%s/key/lock/gc` it takes time to type this ;)
 - To reverse direction of search `?{key}`
 - `*` : searches word under cursor and use normal cycle keys `n` and `N`. or use `#` a reversed search
-- To yank all the text from start to first occurance of x in register a  `“ay/x`
-- search and replace (substitute) : `:[range]s/old/new/flag` : flags : `g` : global, `gc` : global confirm. Note this works on current line. Now here usually `:%g/old/new` is used for entire file, you could also use some specific line like `:1/x/old/new`. for changing from line 1-5 : `:1,5s/g/old/new`. `$` represent last line in file while `.` represents first line in file. range could also a searchword `:/firstword/,/secondword/s/old/new` 
+- To yank all the text from start to first occurrence of x into register a: `”ay/x`
+- search and replace (substitute) : `:[range]s/old/new/[flags]` — flags: `g` : global (all matches on each line), `c` : confirm each substitution. Without a range, this works on the current line only. Use `%` as the range for the entire file: `:%s/old/new/g`. To operate on specific lines: `:1,5s/old/new/g`. `$` represents the last line; `.` represents the current line. Range can also use search patterns: `:/firstword/,/secondword/s/old/new/g`
 - For linux user they need to change directory location it maybe difficult to write all escaping `\` characters they can use **pattern separator**. `:%s#/local/mail#/usr/local/mail`
 
 ### Text Objects
@@ -169,12 +169,12 @@ To save and exit the file `:wq`
 ### vimrc
 
 - rc = `run commands`
-- system-wide vimrc and personal virmc
+- system-wide vimrc and personal vimrc
 - each line is executed as a command
 - To check which vim files are being sourced `:version`
 - To check value of some option or its disabled or enabled : `:set {option}?`
 
-````vimrc
+```vim
 " keep 1000 items in history
 set history=1000
 
@@ -210,16 +210,16 @@ map <F2> iJohn Smith<CR>123 Main Street<CR>London, UK<CR><ESC>
 
 let mapleader=","
 map <leader>w :w!<CR>
-````
+```
 
 ### Vim Buffers
 
-- Temporary area where memory is stored while its being processed
-- original file remained unchanged until you write that buffer to file
-- `set hidden` : because vim always warns about open unsaved buffer which may be trouble when you wanna switch buffers quickly without saving
-- `:buffers` or `:ls`: lists all open buffers
-- `:b3` : switches to buffer 3, `:b smk.txt` : switched to buffers assiociated with file `smk.txt`
-- `:bn` or `:bnext` : switches to next buffer , `:bp` or `:bpreviouse` : switches to previous buffers (cyclic wrap)
+- Temporary area where file contents are stored while being processed.
+- The original file remains unchanged until you write the buffer to disk.
+- `set hidden` : allows switching between unsaved buffers without Vim warning you each time.
+- `:buffers` or `:ls` : lists all open buffers
+- `:b3` : switches to buffer 3, `:b smk.txt` : switches to the buffer associated with file `smk.txt`
+- `:bn` or `:bnext` : switches to next buffer, `:bp` or `:bprevious` : switches to previous buffer (cyclic wrap)
 - `Ctrl-^` or `:b#` : switches to last opened buffer (represented by `#` in `:ls` list)
 - `+` flag means changes of buffer has not been saved
 - `h` or `a` : are hidden and active buffers. Buffers that do not have any flag are not loaded into memory
@@ -247,7 +247,7 @@ map <leader>w :w!<CR>
     - leverage some features which are not available in command line version of vim
     - scrolling, text selection using mouse and copy-paste, etc.
 - Vim usually maintains its own register systems for system clipboard, if you copy something in system, it can be accessed uses vims `“*` register and `“+` registers
-- To make vim share system clipboard rather than using its own system `:set clipboard=unnamedplus` (operates on `+` register, for only using `*` register use `:set clipboard=unnamed`
+- To make Vim share the system clipboard instead of its own register system: `:set clipboard=unnamedplus` (operates on the `+` register; use `:set clipboard=unnamed` to use the `*` register instead)
 - `commandKey+v` : works in MacVim because it behind the scenes pastes the `*` register using  `“*gP`
 - gvimrc file is used to apply some specific settings to gvim versions.
     - `:set gfn=*` : font-selector for gvim

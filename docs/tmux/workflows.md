@@ -21,7 +21,7 @@
 ````bash
 tmux new-session -s servers -d "ssh deploy@burns"
 tmux split-window -v "ssh dba@smithers"
-tmux atttach -t servers
+tmux attach -t servers
 ````
 
 Note there is a handy side that when pipe breaks and server disconnects, panes will autoclose.
@@ -131,8 +131,6 @@ With pipe-pane, you can toggle it on and off at will and you can start it after 
 
 To activate this : `PREFIX :pipe-pane -o "cat >>mylog.txt"`
 
-fix the tmux conf
-
 ````.tmux.conf
 # log output to a text file on demand
 bind P pipe-pane -o "cat >> ~/#W.log" \; display "Toggled logging to ~/#w.log"
@@ -143,10 +141,10 @@ Now you can use `PREFIX P` to toggle logging in file.
 #### Adding Battery Life to Status Line
 
 ````bash
-wget --no-check-certificate https://raw.github.com/richo/battery/bin/battery
-chmod +x ~/batter
+wget --no-check-certificate https://raw.github.com/richo/battery/master/bin/battery
+chmod +x ~/battery
 # check if its working
-~/batter Discharging
+~/battery Discharging
 ````
 
 Adding it to tmux config
@@ -181,7 +179,7 @@ Bruno Sutic developed a solution TPM (tmux plugin manager to deal with the confi
 Let’s install `tmux-resurrect` to restore tmux session even after a reboot!!!
 
 ```bash
-git clone https://github.com/tmux-plugin/tpm ~/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 Add following Lines to .tmux.conf

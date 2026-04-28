@@ -106,26 +106,26 @@ setw -g pane-border-style fg=green,bg=black
 setw -g pane-active-border-style fg=white,bg=yellow
 
 # active pane normal, other shaded out
-setw -g window-style fg=colour240;bg=colour235
+setw -g window-style fg=colour240,bg=colour235
 setw -g window-active-style fg=white,bg=black
 
 # Command / mesage line
-set -g message-style fs=white,bold,bg=black
+set -g message-style fg=white,bold,bg=black
 ````
 
 #### Customizing the Status Line‘s Content
 
 | Variable         | Description                                |
 | ---------------- | ------------------------------------------ |
-| #H               | Hostname                                   |
-| #h               | Hostname of local host without domain name |
-| #F               | current window flag                        |
-| #l               | current windwo index                       |
-| #P               | current pane index                         |
-| #S               | current session name                       |
-| #T               | current window title                       |
-| #W               | current window name                        |
-| ##               | a literal #                                |
+| `#H`             | Hostname                                   |
+| `#h`             | Hostname of local host without domain name |
+| `#F`             | current window flag                        |
+| `#I`             | current window index                       |
+| `#P`             | current pane index                         |
+| `#S`             | current session name                       |
+| `#T`             | current window title                       |
+| `#W`             | current window name                        |
+| `##`             | a literal #                                |
 | #{shell-command} | First line of shell command                |
 | #[attributes]    | color/attribute change                     |
 
@@ -147,7 +147,7 @@ set -g status-interval 60
 set -g status-justify centre
 
 # enable activity alerts
-setw -g monitor activity on
+setw -g monitor-activity on
 set -g visual-activity on
 ````
 

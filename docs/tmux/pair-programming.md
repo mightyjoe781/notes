@@ -35,19 +35,19 @@ There are two ways to work with remote user
 #### Using a Shared Account and Grouped Sessions
 
 - You can create normal session : `tmux new-session -s groupedsession`
-- Another person can attach to session in grouped way : `tmux new-session -t groupedsession -s my sesion`
+- Another person can attach to session in grouped way : `tmux new-session -t groupedsession -s mysession`
 
 This gives freedom to second user to easily make changes to windows and panes without affecting the first users presentation.
 
 #### Quickly Pairing with tmate
 
-tmat is a fork of tmux designed to make pair programming painless.
+tmate is a fork of tmux designed to make pair programming painless.
 
 Installation : 
 
 ````bash
 sudo apt-get install software-properties-common
-sudo add-apt-repostiory ppa:tmate.io/archive
+sudo add-apt-repository ppa:tmate.io/archive
 sudo apt-get update && sudo apt-get install tmate
 ````
 
