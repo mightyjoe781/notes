@@ -1,143 +1,131 @@
 # OpenSSL
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md)
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
+
+Swiss-army knife for TLS/SSL: generate keys, create certificates, inspect and convert cert formats, encrypt files.
 
 ### Installation
 
-````bash
-sudo apt update
+```bash
 sudo apt install openssl
-````
+openssl version
+```
 
-### Common Usage
+### Generate Keys
 
-#### Generate a Private Key
+```bash
+# RSA (2048 or 4096 bit)
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:4096 -out private.key
 
-````bash
-# RSA Key
-openssl genpkey -algorithm RSA -out private.key
-
-# EC Key
+# ECDSA (smaller, faster - recommended)
 openssl ecparam -genkey -name secp384r1 -out ec.key
-````
 
-#### Generate a CSR (Certificate Signing Request)
+# View key info
+openssl rsa -in private.key -text -noout
+openssl ec -in ec.key -text -noout
+```
 
-````bash
-openssl req -new -key private.key -out request.csr
-````
+### Self-Signed Certificate
 
-#### Create a self-signed Certificate
+```bash
+# Key + self-signed cert in one command
+openssl req -x509 -newkey rsa:4096 \
+  -keyout key.pem -out cert.pem \
+  -days 365 -nodes \
+  -subj "/C=US/ST=State/L=City/O=Org/CN=example.com"
 
-````bash
-openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
-````
+# With Subject Alternative Names (required by modern browsers)
+openssl req -x509 -newkey rsa:4096 \
+  -keyout key.pem -out cert.pem \
+  -days 365 -nodes \
+  -subj "/CN=example.com" \
+  -addext "subjectAltName=DNS:example.com,DNS:www.example.com"
+```
 
-#### Convert Certificate Formats
+### Certificate Signing Request (CSR)
 
-````bash
+```bash
+# Generate CSR from existing key
+openssl req -new -key private.key -out request.csr \
+  -subj "/CN=example.com/O=My Org/C=US"
+
+# View CSR content
+openssl req -in request.csr -text -noout
+```
+
+### Inspect Certificates
+
+```bash
+# View cert details
+openssl x509 -in cert.pem -text -noout
+
+# Check expiry date
+openssl x509 -in cert.pem -noout -enddate
+
+# Verify cert chain
+openssl verify -CAfile ca.crt cert.pem
+
+# Check remote server certificate
+openssl s_client -connect example.com:443 -showcerts </dev/null
+
+# Check cert and key match (modulus must be same)
+openssl x509 -noout -modulus -in cert.pem | md5sum
+openssl rsa -noout -modulus -in key.pem | md5sum
+```
+
+### Convert Formats
+
+```bash
 # PEM to DER
 openssl x509 -in cert.pem -outform DER -out cert.der
 
 # DER to PEM
 openssl x509 -inform DER -in cert.der -out cert.pem
-````
 
-#### Verify a Certificate
-
-````bash
-# verify details
-openssl x509 -in cert.pem -text -noout
-
-# verify cert chain
-openssl verify -CAfile ca.crt cert.pem
-````
-
-#### Encrypt and Decrypt Files
-
-````bash
-# encrypt a file
-openssl enc -aes-256-cbc -salt -in file.txt -out file.enc
-
-# decrypt a file
-openssl enc -d -aes-256-cbc -in file.enc -out file.txt
-````
-
-### Advanced Usage
-
-#### Create a PKCS#12 Bundle
-
-````bash
-# bundle cert and key
+# Create PKCS#12 bundle (cert + key)
 openssl pkcs12 -export -in cert.pem -inkey key.pem -out bundle.p12
 
-# extract from pkcs#12
+# Extract from PKCS#12
 openssl pkcs12 -in bundle.p12 -out cert.pem -nodes
-````
 
-#### Generate DH (Diffie-Hellman) Params file
+# PEM to PKCS#7
+openssl crl2pkcs7 -nocrl -certfile cert.pem -out cert.p7b
+```
 
-````bash
+### Encrypt and Decrypt Files
+
+```bash
+# Encrypt with AES-256
+openssl enc -aes-256-cbc -pbkdf2 -salt -in plaintext.txt -out encrypted.bin
+
+# Decrypt
+openssl enc -d -aes-256-cbc -pbkdf2 -in encrypted.bin -out plaintext.txt
+```
+
+### Diffie-Hellman Params
+
+```bash
 openssl dhparam -out dhparam.pem 2048
-````
+```
 
-### Example
+### Hashing
 
-#### Block unwanted DNS resolution by port scanners
-
-Issue a fake certificate with `example.com` to prevent Censys like services to resolve domain names from nginx-default redirects.
-
-````bash
-# 100 yrs self-signed valid certificate
-sudo openssl req -x509 -nodes -days 36500 -newkey rsa:2048 \
-  -keyout /etc/ssl/nginx/self-signed.key \
-  -out /etc/ssl/nginx/self-signed.crt \
-  -subj "/C=US/ST=State/L=City/O=Organization/OU=Department/CN=example.com"
-````
-
-Edit `/etc/nginx/sites-available/default`
-
-````nginx
-## save following contents to /etc/nginx/sites-available/default
-# this prevent domain name leak and default forwarding from ip
-server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-	root /var/www/html;
-  
-	# Add index.php to the list if you are using PHP
-	index index.html index.htm index.nginx-debian.html;
-	server_name _;
-
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-	}
-}
-
-server {
-    listen 443 ssl default_server;
-    listen [::]:443 ssl default_server;
-
-    server_name _;
-
-    ssl_certificate /etc/nginx/ssl/self-signed.crt;
-    ssl_certificate_key /etc/nginx/ssl/self-signed.key;
-
-    access_log /var/log/nginx/default_ssl_access.log;
-    error_log /var/log/nginx/default_ssl_error.log;
-
-    return 444;  # Drop the connection
-}
-````
-
-### Resources
-
-* https://www.feistyduck.com/library/openssl-cookbook/
+```bash
+openssl dgst -sha256 file.txt
+openssl dgst -sha256 -sign key.pem -out sig.bin file.txt   # sign
+openssl dgst -sha256 -verify pub.pem -signature sig.bin file.txt  # verify
+```
 
 ### Tips
 
-* Automate Cert Generation : Use Scripts to automate CSR and certificate generation
-* Use *Let’s Encrypt* : provides free SSL/TLS certificates
-* Monitor Cert Expiry: Use tools like `certbot renew` or `cron` to automate renewal
+- Use `Let's Encrypt / certbot` for public-facing sites instead of self-signed certs
+- Always add `-nodes` when generating test keys to skip passphrase (for automation)
+- Use `-days 36500` for long-lived internal certs (100 years)
+- Modern TLS: prefer TLSv1.2 / TLSv1.3, avoid SSLv3/TLSv1.0
+- Check if a port is open with TLS: `openssl s_client -connect host:443`
+
+### See Also
+
+- [Nginx](nginx.md) for SSL/TLS termination
+- [SSH](ssh.md) for key-based auth
+- Also: [certbot](https://certbot.eff.org) for Let's Encrypt automation, cfssl (Cloudflare PKI toolkit), step-cli

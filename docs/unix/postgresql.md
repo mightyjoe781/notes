@@ -2,216 +2,188 @@
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)
 
+Object-relational database. ACID-compliant, supports JSON, full-text search, and advanced indexing.
+
 ### Installation
 
-Debian/Ubuntu
-
-````bash
-sudo apt update
+```bash
 sudo apt install postgresql postgresql-contrib
+sudo systemctl enable --now postgresql
+sudo -u postgres psql                # connect as postgres superuser
+```
 
-# check service status
-sudo systemctl status postgresql
-````
+macOS:
 
-macOS
+```bash
+brew install postgresql@16
+brew services start postgresql@16
+```
 
-````bash
-brew install postgresql
+### Connect
 
-# start the service
-brew services start postgresql
-````
-
-### Setup
-
-NOTE: Ideally you should not expose your database to public network.
-
-Edit `pg_hba.conf` (usually located at `/etc/postgresql/<version>/main/pg_hba.conf`)
-
-````bash
-host    all             all             0.0.0.0/0               md5
-````
-
-Edit `postgresql.conf` to listen on all interfaces
-
-````bash
-listen_addresses = "*"
-````
-
-````bash
-sudo systemctl restart postgresql
-````
-
-### Security
-
-* Change default password
-
-````bash
-ALTER USER postgres WITH PASSWORD 'newpassword';
-````
-
-* Restrict Access: Use `pg_hba.conf` to control access
-
-````bash
-# Allow only specific IPs  
-host    all             all             192.168.1.0/24          md5  
-````
-
-* Enable SSL: Edit `postgresql.conf`
-
-````bash
-ssl = on
-ssl_cert_file = '/etc/ssl/certs/ssl-cert-snakeoil.pem'  
-ssl_key_file = '/etc/ssl/private/ssl-cert-snakeoil.key'
-````
-
-* Audit Logging
-
-````bash
-log_statement = 'all'  
-log_directory = 'pg_log'  
-log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'
-````
-
-* Regular Backup: Use `pg_dump` for backup
-
-````bash
-pg_dump -U myuser -d mydb -f mydb_backup.sql
-````
-
-
-
-### Useful Commands
-
-#### 1. Connecting to PostgreSQL
-
-````postgresql
-# login
+```bash
 psql -U username -d dbname
+psql -h 127.0.0.1 -U username -d dbname
+psql postgresql://username:password@host:5432/dbname
+```
 
-# switching database
-\c dbname
+### psql Meta-commands
 
-# list databases
-\l
-````
+| Command | Description |
+|---|---|
+| `\l` | list databases |
+| `\c dbname` | connect to database |
+| `\dt` | list tables |
+| `\d tablename` | describe table (columns, indexes) |
+| `\di` | list indexes |
+| `\du` | list roles/users |
+| `\x` | toggle expanded output |
+| `\timing` | show query execution time |
+| `\e` | open query in editor |
+| `\q` | quit |
+| `\! cmd` | run shell command |
 
-#### 2. Managing a Database
+### Database and User Management
 
-````postgresql
-# creation
-CREATE DATABASE dbname;
+```sql
+CREATE DATABASE mydb;
+DROP DATABASE mydb;
+CREATE USER alice WITH PASSWORD 'secret';
+GRANT ALL PRIVILEGES ON DATABASE mydb TO alice;
+REVOKE ALL PRIVILEGES ON DATABASE mydb FROM alice;
+ALTER USER postgres WITH PASSWORD 'newpassword';
+```
 
-# deletion
-DROP DATABASE dbname;
+### Tables
 
-# Backup a Database
-pg_dump -U username -d dbname -f backup.sql
+```sql
+CREATE TABLE users (
+    id      SERIAL PRIMARY KEY,
+    name    TEXT NOT NULL,
+    email   TEXT UNIQUE NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
 
-# Restoring a Backup
-psql -U username -d dbname -f backup.sql
-````
+ALTER TABLE users ADD COLUMN active BOOLEAN DEFAULT true;
+ALTER TABLE users DROP COLUMN active;
+DROP TABLE users;
+TRUNCATE TABLE users;                -- delete all rows, keep structure
+```
 
-#### 3. Managing Tables
+### CRUD
 
-````postgresql
-CREATE TABLE users (  
-    id SERIAL PRIMARY KEY,  
-    name TEXT NOT NULL,  
-    email TEXT UNIQUE  
-);  
+```sql
+-- Insert
+INSERT INTO users (name, email) VALUES ('Alice', 'alice@example.com');
+INSERT INTO users (name, email) VALUES
+    ('Bob', 'bob@example.com'),
+    ('Charlie', 'charlie@example.com');
 
-# list tables
-\dt
+-- Select
+SELECT * FROM users;
+SELECT name, email FROM users WHERE id = 1;
+SELECT * FROM users ORDER BY created_at DESC LIMIT 10;
+SELECT * FROM users WHERE name ILIKE '%ali%';  -- case-insensitive
 
-# describe a table
-\d tablename
+-- Update
+UPDATE users SET email = 'new@example.com' WHERE id = 1;
 
-# delete a table
-DROP TABLE tablename;
-````
-
-#### 4. Querying Data
-
-````postgresql
-SELECT * FROM users;  
-
-SELECT * FROM users WHERE id = 1;  
-
-SELECT * FROM users ORDER BY name ASC;  
-
-SELECT * FROM users LIMIT 10;
-````
-
-#### 5. Inserting and Updating and Deleting Data
-
-````postgresql
-INSERT INTO users (name, email) VALUES ('John', 'john@example.com');
-
-UPDATE users SET email = 'john.doe@example.com' WHERE id = 1;
-
+-- Delete
 DELETE FROM users WHERE id = 1;
-````
+```
 
-#### 6. Indexes
+### Indexes
 
-````postgresql
+```sql
 CREATE INDEX idx_users_email ON users (email);
-
-# list indices
-\di
-
-# dropping indices
+CREATE INDEX idx_users_created ON users (created_at DESC);
+CREATE UNIQUE INDEX idx_users_email_unique ON users (email);
 DROP INDEX idx_users_email;
-````
+```
 
-#### 7. User and Permission
+### Transactions
 
-````postgresql
-# create a user
-CREATE USER username WITH PASSWORD 'password';
-GRANT ALL PRIVILEGES ON DATABASE dbname TO username;
-REVOKE ALL PRIVILEGES ON DATABASE dbname FROM username;
+```sql
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
 
-# list users
-\du
-````
+-- Rollback on error
+BEGIN;
+-- ...
+ROLLBACK;
+```
 
-#### 8. Troubleshooting
+### Useful Queries
 
-````postgresql
-# check active connections
-SELECT * FROM pg_stat_activity;  
+```sql
+-- Active connections
+SELECT pid, usename, datname, state, query
+FROM pg_stat_activity WHERE state != 'idle';
 
-# kill a connection
-SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid = 12345;
+-- Kill a connection
+SELECT pg_terminate_backend(12345);
 
-# check locks
-SELECT * FROM pg_locks;
-````
+-- Table sizes
+SELECT relname, pg_size_pretty(pg_total_relation_size(oid))
+FROM pg_class WHERE relkind = 'r' ORDER BY pg_total_relation_size(oid) DESC;
 
-#### 9. Exporting and Importing Data
+-- Slow queries (requires pg_stat_statements)
+SELECT query, mean_exec_time, calls
+FROM pg_stat_statements ORDER BY mean_exec_time DESC LIMIT 10;
 
-````postgresql
-# export
-\copy (SELECT * FROM users) TO 'users.csv' CSV HEADER;
+-- Explain query plan
+EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'alice@example.com';
+```
 
-# import 
-\copy users FROM 'users.csv' CSV HEADER; 
-````
+### Backup and Restore
 
-#### 10. Transactions
+```bash
+# Dump single database
+pg_dump -U username dbname > backup.sql
+pg_dump -U username -Fc dbname > backup.dump   # custom format (faster restore)
 
-````postgresql
-BEGIN;  
-UPDATE users SET email = 'new@example.com' WHERE id = 1;  
-COMMIT; 
-````
+# Restore
+psql -U username dbname < backup.sql
+pg_restore -U username -d dbname backup.dump
 
-#### 11. Analyzing Query Performance
+# Dump all databases
+pg_dumpall -U postgres > all.sql
+```
 
-````postgresql
-EXPLAIN ANALYZE SELECT * FROM users WHERE id = 1;
-````
+### Configuration
 
+Edit `/etc/postgresql/<version>/main/postgresql.conf`:
+
+```
+max_connections = 100
+shared_buffers = 256MB
+work_mem = 4MB
+log_statement = 'all'
+```
+
+Edit `pg_hba.conf` for access control:
+
+```
+# TYPE  DATABASE  USER  ADDRESS       METHOD
+host    all       all   127.0.0.1/32  md5
+host    all       all   192.168.1.0/24 md5
+```
+
+```bash
+sudo systemctl reload postgresql
+```
+
+### Tips
+
+- Use connection pooling (PgBouncer) for high-concurrency apps
+- `EXPLAIN ANALYZE` shows actual vs estimated row counts - mismatches indicate stale stats, run `ANALYZE`
+- Prefer `TIMESTAMPTZ` over `TIMESTAMP` to avoid timezone issues
+- Use `COPY` instead of `INSERT` for bulk data loading (much faster)
+
+### See Also
+
+- [Redis](redis.md) for caching
+- [SQLite](sqlite.md) for embedded/lightweight use
+- Also: MySQL/MariaDB, TimescaleDB (time-series on Postgres), pgvector (vector search)

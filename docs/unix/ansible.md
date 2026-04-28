@@ -1,240 +1,203 @@
 # Ansible
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md)
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
 
-Automate IT infrastructure with ease
-
-### Introduction
-
-Ansible is an **automation tool** that helps you manage servers, deploy applications, and configure systems. It uses **YAML** for its playbooks, making it easy to read and write.
-
-Key Features:
-
-- **Agentless**: No software needed on managed nodes.
-- **Idempotent**: Running the same playbook multiple times won’t break things.
-- **Declarative**: You describe the desired state, and Ansible figures out how to get there.
-
-### Installation
-
-Install Ansible on your control machine
-
-````bash
-sudo apt update  
-sudo apt install ansible  
-
-# verify 
-ansible --version
-````
+Agentless configuration management and automation. Push-based: runs tasks over SSH, no software needed on managed nodes.
 
 ### Key Concepts
 
-1. **Inventory**: A file that lists the servers (nodes) you want to manage.
+| Concept | Description |
+|---|---|
+| Inventory | list of hosts to manage |
+| Playbook | YAML file describing what to do |
+| Task | single action (install package, copy file, start service) |
+| Module | built-in function that performs a task (`apt`, `copy`, `service`) |
+| Role | reusable collection of tasks, handlers, templates |
+| Handler | task triggered by `notify`, runs once at end of play |
+| Vault | encrypted secrets storage |
 
-   ````ini
-   [webservers]  
-   web1.example.com  
-   web2.example.com  
-   
-   [dbservers]  
-   db1.example.com  
-   ````
+### Installation
 
-2. **Playbooks**: YAML files that define tasks to be executed.
+```bash
+sudo apt install ansible
+pip install ansible                  # or via pip
+ansible --version
+```
 
-   ````yaml
-   - hosts: webservers  
-     tasks:  
-       - name: Ensure Apache is installed  
-         apt:  
-           name: apache2  
-           state: present  
-   ````
+### Inventory
 
-3. **Modules**: Pre-built functions (e.g., `apt`, `copy`, `service`) to perform tasks.
+```ini
+# inventory.ini
+[web]
+web1.example.com
+web2.example.com ansible_user=ubuntu ansible_port=2222
 
-4. **Ad-Hoc Commands**: One-liners for quick tasks.
+[db]
+db1.example.com
 
-````bash
-ansible webservers -m ping
-````
+[production:children]
+web
+db
 
-### Getting Started
+[production:vars]
+ansible_ssh_private_key_file=~/.ssh/deploy
+```
 
-* Create an Inventory File: Save this as `inventory.ini`
+```yaml
+# inventory.yaml (alternative)
+all:
+  children:
+    web:
+      hosts:
+        web1.example.com:
+        web2.example.com:
+    db:
+      hosts:
+        db1.example.com:
+```
 
-````ini
-[webservers]
-192.168.1.10
-192.168.1.11
+```bash
+ansible -i inventory.ini all -m ping          # test connectivity
+ansible -i inventory.ini web -m command -a "uptime"
+```
 
-[dbservers]  
-192.168.1.20
-````
+### Playbook Structure
 
-* Test Connectivity
+```yaml
+- name: Configure web servers
+  hosts: web
+  become: true                       # run as root (sudo)
+  vars:
+    http_port: 80
 
-````bash
-ansible all -i inventory.ini -m ping
-````
+  tasks:
+  - name: Install Nginx
+    apt:
+      name: nginx
+      state: present
+      update_cache: true
 
-* Write Your First Playbook: Save as `webserver.yml`
+  - name: Copy config
+    template:
+      src: nginx.conf.j2
+      dest: /etc/nginx/nginx.conf
+    notify: restart nginx
 
-````bash
-- hosts: webservers  
-  become: yes  # Run tasks as root  
-  tasks:  
-    - name: Install Apache  
-      apt:  
-        name: apache2  
-        state: present  
+  - name: Start and enable Nginx
+    service:
+      name: nginx
+      state: started
+      enabled: true
 
-    - name: Start Apache service  
-      service:  
-        name: apache2  
-        state: started  
-        enabled: yes  
-````
+  handlers:
+  - name: restart nginx
+    service:
+      name: nginx
+      state: restarted
+```
 
-* Run the Playbook
+```bash
+ansible-playbook -i inventory.ini site.yml
+ansible-playbook -i inventory.ini site.yml --check  # dry run
+ansible-playbook -i inventory.ini site.yml --diff    # show file diffs
+ansible-playbook -i inventory.ini site.yml --tags "nginx"
+ansible-playbook -i inventory.ini site.yml --limit web1.example.com
+```
 
-````bash
-ansible-playbook -i inventory.ini webserver.yml
-````
+### Common Modules
 
-### Common Use Cases
+```yaml
+# apt / yum / dnf - package management
+- apt: name=nginx state=present update_cache=true
+- apt: name=nginx state=absent
 
-#### Copy Files
+# file - manage files and directories
+- file: path=/opt/app state=directory owner=app mode="0755"
 
-````yaml
-- name: Copy index.html  
-  copy:  
-    src: files/index.html  
-    dest: /var/www/html/index.html  
-````
+# copy - copy file to remote
+- copy: src=files/app.conf dest=/etc/app/app.conf mode="0644"
 
-#### Create Users
+# template - Jinja2 template
+- template: src=templates/nginx.conf.j2 dest=/etc/nginx/nginx.conf
 
-````yaml
-- name: Add user 'deploy'  
-  user:  
-    name: deploy  
-    shell: /bin/bash  
-    groups: sudo  
-    append: yes  
-````
+# command / shell - run commands
+- command: /usr/bin/my-script.sh
+- shell: "echo {{ message }} > /tmp/msg.txt"
 
-#### Install Packages
+# user - manage users
+- user: name=deploy shell=/bin/bash groups=sudo append=true
 
-````yaml
-- name: Install required packages  
-  apt:  
-    name:  
-      - git  
-      - curl  
-      - unzip  
-    state: present  
-````
+# git - clone repository
+- git: repo=https://github.com/org/app.git dest=/opt/app version=main
 
-#### Restart Services
+# systemd - manage services
+- systemd: name=nginx state=restarted enabled=true daemon_reload=true
 
-````yaml
-- name: Restart Nginx  
-  service:  
-    name: nginx  
-    state: restarted  
-````
+# lineinfile - manage lines in files
+- lineinfile: path=/etc/hosts line="10.0.0.5 db.internal"
+```
 
-### Best Practices
+### Variables
 
-#### 1. Organize Playbooks
+```yaml
+# In playbook
+vars:
+  db_host: "localhost"
 
-* Use **roles** to group related tasks (e.g., `webserver`, `database`).
-* Example structure:
+# In vars file
+- include_vars: vars/prod.yaml
 
-````yaml
-playbooks/  
-├── inventory.ini  
-├── webserver.yml  
-└── roles/  
-    └── webserver/  
-        ├── tasks/  
-        │   └── main.yml  
-        ├── handlers/  
-        │   └── main.yml  
-        └── templates/  
-            └── index.html.j2  
-````
+# In inventory group_vars/web.yaml
+# In inventory host_vars/web1.example.com.yaml
 
-#### 2. Use Variables
+# Pass on command line
+ansible-playbook site.yml -e "version=1.2.3"
 
-* Define variables in `group_vars` or `host_vars`
+# Variable precedence (highest wins): extra vars > task vars > block vars > play vars > host vars > group vars > defaults
+```
 
-````yaml
-# group_vars/webservers.yml  
-http_port: 80  
-````
+### Ansible Vault
 
-#### 3. Idemptotency
+```bash
+# Encrypt a file
+ansible-vault encrypt secrets.yaml
 
-* Always check if a task idempotent. For Example
+# Edit encrypted file
+ansible-vault edit secrets.yaml
 
-````yaml
-- name: Ensure directory exists  
-  file:  
-    path: /var/www/html  
-    state: directory  
-````
+# Use vault in playbook run
+ansible-playbook site.yml --ask-vault-pass
+ansible-playbook site.yml --vault-password-file ~/.vault_pass
+```
 
-#### 4. Error Handling
+### Roles
 
-````yaml
-- block:  
-    - name: Try risky task  
-      command: /bin/false  
-  rescue:  
-    - name: Handle failure  
-      debug:  
-        msg: "Task failed, but we're recovering!"  
-````
+```
+roles/
+  nginx/
+    tasks/main.yaml
+    handlers/main.yaml
+    templates/nginx.conf.j2
+    defaults/main.yaml     # overridable defaults
+    vars/main.yaml         # non-overridable vars
+    files/
+    meta/main.yaml
+```
 
-### Troubleshooting
+```bash
+ansible-galaxy init my_role          # scaffold a role
+ansible-galaxy install geerlingguy.nginx  # install from Galaxy
+```
 
-| Issue                   | Solution                                                 |
-| ----------------------- | -------------------------------------------------------- |
-| "SSH connection failed" | Check SSH keys and `ansible_user` in inventory.          |
-| "Permission denied"     | Use `become: yes` to run tasks as root.                  |
-| "Module not found"      | Ensure the module is installed (e.g., `apt` for Debian). |
-|                         |                                                          |
+### Tips
 
-### Pro Tips
-
-* Dry Run: Test Playbooks without making changes
-
-````bash
-ansible-playbook --check webserver.yml  
-````
-
-* Tagging Tasks: Run specific tasks using tags
-
-````yaml
-- name: Install Apache  
-  apt:  
-    name: apache2  
-    state: present  
-  tags: install  
-````
-
-````bash
-ansible-playbook webserver.yml --tags "install"  
-````
-
-* Use Vault for Secrets: Encrypt sensitive data
-
-````bash
-ansible-vault create secrets.yml  
-````
+- Use `--check` (dry run) with `--diff` to preview changes before applying
+- Break large playbooks into roles for reusability
+- Use handlers for service restarts - they run once regardless of how many tasks notify them
+- `when: ansible_os_family == "Debian"` for conditional tasks
+- `serial: 1` on a play applies changes one host at a time (rolling update)
 
 ### See Also
 
-* [Ansible Documentation](https://docs.ansible.com/)
-* [Ansible Galaxy](https://galaxy.ansible.com/) (pre-built roles)
+- [Terraform](terraform.md) for provisioning infrastructure before configuration
+- Also: Pulumi, Salt, Chef, Puppet, Fabric (Python-based)

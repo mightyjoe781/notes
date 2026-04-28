@@ -1,152 +1,174 @@
-# SQLite3
+# SQLite
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)
 
+Serverless, file-based SQL database. Great for local apps, scripts, mobile, and development. The database is a single `.db` file.
+
 ### Installation
 
-Debian/Ubuntu
-
-````bash
-sudo apt update
+```bash
 sudo apt install sqlite3
 sqlite3 --version
-````
 
-macOS
-
-````bash
-# usually sqlite is preinstalled
+# macOS (pre-installed)
 sqlite3 --version
-# or 
-brew install sqlite
-````
+```
 
-### Setup
+### Getting Started
 
-````bash
-# creating a database
-sqlite3 mydb.db
+```bash
+sqlite3 mydb.db                      # open or create database
+sqlite3 :memory:                     # in-memory database (lost on exit)
 
-# exit the sqlite shell
-.exit
+# Basic usage
+sqlite3 mydb.db "SELECT * FROM users;"
+sqlite3 mydb.db < schema.sql          # run SQL file
+```
 
-# import data from CSV
-CREATE TABLE mytable (id INTEGER PRIMARY KEY, name TEXT, age INTEGER);  
-.mode csv  
-.import data.csv mytable
+### sqlite3 Shell Meta-commands
 
-# Export data to CSV
-.headers on  
-.mode csv  
-.output data.csv  
-SELECT * FROM mytable;  
+| Command | Description |
+|---|---|
+| `.tables` | list tables |
+| `.schema tablename` | show CREATE statement |
+| `.headers on` | show column headers |
+| `.mode column` | aligned column output |
+| `.mode csv` | CSV output |
+| `.output file.csv` | redirect output to file |
+| `.import file.csv table` | import CSV |
+| `.read file.sql` | run SQL from file |
+| `.dump` | dump entire database as SQL |
+| `.exit` | quit |
 
-````
+### SQL Reference
 
-### Security
+```sql
+-- Create table
+CREATE TABLE users (
+    id      INTEGER PRIMARY KEY AUTOINCREMENT,
+    name    TEXT NOT NULL,
+    email   TEXT UNIQUE,
+    created TEXT DEFAULT (datetime('now'))
+);
 
-#### File Permissions
+-- Insert
+INSERT INTO users (name, email) VALUES ('Alice', 'alice@example.com');
 
-SQLite databases are files. Use file system permissions to restrict access
-
-````bash
-chmod 600 mydb.db
-````
-
-#### Encryption
-
-We can use extensions like SQLCipher for encryption
-
-````bash
-sqlcipher mydb.db
-PRAGMA key = mysecretkey
-````
-
-#### Backup
-
-````bash
-sqlite3 mydb ".dump" > backup.sql
-````
-
-### Meta-Commands
-
-````sqlite
-# list tables
-.tables
-
-# describe a table
-.schema users
-
-# export data
-.mode csv  
-.output users.csv  
+-- Select
 SELECT * FROM users;
+SELECT * FROM users WHERE name LIKE '%Ali%';
+SELECT * FROM users ORDER BY created DESC LIMIT 10;
 
-# import data
-.mode csv  
-.import users.csv users  
-````
+-- Update and Delete
+UPDATE users SET email = 'new@example.com' WHERE id = 1;
+DELETE FROM users WHERE id = 1;
+
+-- Indexes
+CREATE INDEX idx_email ON users (email);
+DROP INDEX idx_email;
+
+-- Transactions
+BEGIN;
+UPDATE accounts SET balance = balance - 100 WHERE id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE id = 2;
+COMMIT;
+-- ROLLBACK;
+```
+
+### JSON Support
+
+```sql
+-- Store JSON
+INSERT INTO events (data) VALUES ('{"type":"login","user":"alice"}');
+
+-- Query JSON fields
+SELECT json_extract(data, '$.user') FROM events;
+SELECT * FROM events WHERE json_extract(data, '$.type') = 'login';
+```
 
 ### Advanced Features
 
-#### Transaction
+```sql
+-- Views
+CREATE VIEW active_users AS
+    SELECT * FROM users WHERE active = 1;
 
-````bash
-BEGIN;  
-UPDATE users SET email = 'new@example.com' WHERE id = 1;  
-COMMIT;  
-````
+-- Triggers
+CREATE TRIGGER update_ts AFTER UPDATE ON users
+BEGIN
+    UPDATE users SET updated_at = datetime('now') WHERE id = NEW.id;
+END;
 
-#### Indexes
+-- Full-text search (FTS5)
+CREATE VIRTUAL TABLE docs USING fts5(title, body);
+INSERT INTO docs VALUES ('Hello', 'world content here');
+SELECT * FROM docs WHERE docs MATCH 'hello';
 
-```bash
-CREATE INDEX idx_users_email ON users (email);
+-- Window functions
+SELECT name, salary,
+    RANK() OVER (ORDER BY salary DESC) as rank
+FROM employees;
 ```
 
-#### Views
+### Backup and Export
 
-````bash
-CREATE VIEW active_users AS SELECT * FROM users WHERE active = 1;
-````
+```bash
+# Dump to SQL
+sqlite3 mydb.db ".dump" > backup.sql
 
-#### Triggers
+# Restore from dump
+sqlite3 newdb.db < backup.sql
 
-Automate actions with triggers
+# Export table to CSV
+sqlite3 -header -csv mydb.db "SELECT * FROM users;" > users.csv
 
-````bash
-CREATE TRIGGER update_timestamp AFTER UPDATE ON users  
-BEGIN  
-    UPDATE users SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;  
-END;  
-````
+# Compressed backup
+sqlite3 mydb.db ".dump" | gzip > backup_$(date +%F).sql.gz
 
-### Troubleshooting
+# Online backup (safe for live databases)
+sqlite3 mydb.db ".backup backup.db"
+```
 
-````bash
-# check database integrity
-PRAGMA integrity_check
+### Encryption (SQLCipher)
 
-# recover data from `.dump` to recover data from a corrupted database
-sqlite3 corrupted.db ".dump" | sqlite3 new.db
+```bash
+sudo apt install sqlcipher
+sqlcipher encrypted.db
+PRAGMA key = 'mysecretpassword';
+CREATE TABLE test (id INTEGER PRIMARY KEY);
+```
 
-# debug queries
-EXPLAIN QUERY PLAN SELECT * FROM users WHERE email = 'john@example.com';
-````
+### Performance
+
+```sql
+-- Write-Ahead Logging (better concurrency)
+PRAGMA journal_mode = WAL;
+
+-- Reduce fsync calls (faster, slightly less safe)
+PRAGMA synchronous = NORMAL;
+
+-- In-memory temp tables
+PRAGMA temp_store = MEMORY;
+
+-- Increase cache
+PRAGMA cache_size = -64000;         -- 64MB
+
+-- Check integrity
+PRAGMA integrity_check;
+
+-- Explain query plan
+EXPLAIN QUERY PLAN SELECT * FROM users WHERE email = 'alice@example.com';
+```
 
 ### Tips
 
-````bash
-# use in-memory databases
-sqlite3 :memory:
+- Use `WAL` mode for any concurrent read/write use case
+- SQLite is single-writer; for high write concurrency, use PostgreSQL
+- File permissions are the security boundary: `chmod 600 mydb.db`
+- Use `VACUUM` to reclaim space after large deletes
+- [Litestream](https://litestream.io) enables continuous S3 replication for SQLite
 
-# backup automatically
-sqlite3 mydb.db ".dump" | gzip > backup_$(date +%F).sql.gz
+### See Also
 
-# optimizations
-RAGMA journal_mode = WAL;  # Write-Ahead Logging  
-PRAGMA synchronous = NORMAL;
-````
-
-### Resources
-
-* https://www.sqlitetutorial.net
+- [PostgreSQL](postgresql.md) for multi-user server deployments
+- Also: DuckDB (analytics on SQLite-style files), libSQL (SQLite fork with replication)

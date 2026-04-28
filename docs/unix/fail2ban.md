@@ -1,141 +1,117 @@
-# fail2ban
+# Fail2ban
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md)
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
+
+Scans log files for failed login attempts and bans offending IPs using iptables/nftables. Commonly used to protect SSH.
 
 ### Installation
 
-````bash
-sudo apt update
+```bash
 sudo apt install fail2ban
-````
+sudo systemctl enable --now fail2ban
+```
 
-````bash
-# check fail2ban service
-systemctl status fail2ban.service
-````
+### Configuration
 
-### Setup
+Never edit `jail.conf` directly - it gets overwritten on upgrades. Use `jail.local`:
 
-* Create a local configuration : `jail.local`
+```bash
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+sudo nano /etc/fail2ban/jail.local
+```
 
-````bash
-cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-````
+Key settings in `[DEFAULT]`:
 
-* Edit Configuration file `/etc/fail2ban/jail.local`
+```ini
+[DEFAULT]
+ignoreip = 127.0.0.1/8 192.168.1.0/24   # never ban these IPs
+bantime  = 1h                             # how long to ban (use -1 for permanent)
+findtime = 10m                            # window for counting failures
+maxretry = 5                              # failures before ban
+banaction = ufw                           # use ufw instead of iptables directly
+```
 
-````ini
-[DEFAULT]  
-ignoreip = 127.0.0.1/8 192.168.1.0/24  
-bantime = 600  
-findtime = 600  
-maxretry = 3 
-````
+Enable SSH jail:
 
-* Enable Jails
+```ini
+[sshd]
+enabled  = true
+port     = 2222          # match your SSH port
+maxretry = 3
+bantime  = 24h
+```
 
-````ini
-[sshd]  
-enabled = true  
-````
-
-````bash
-systemctl enable fail2ban
-````
+```bash
+sudo systemctl restart fail2ban
+```
 
 ### Commands
 
-* Check Status
+```bash
+# Status
+sudo fail2ban-client status              # list active jails
+sudo fail2ban-client status sshd        # jail details (banned IPs, stats)
 
-  ````bash
-  fail2ban-client status
-  ````
+# Ban / Unban
+sudo fail2ban-client set sshd banip 203.0.113.5
+sudo fail2ban-client set sshd unbanip 203.0.113.5
 
-* Unban an IP
+# Reload config
+sudo fail2ban-client reload
 
-  ````bash
-  fail2ban-client set sshd unbanip 192.168.1.100
-  ````
+# Test a filter against a log file
+sudo fail2ban-regex /var/log/auth.log /etc/fail2ban/filter.d/sshd.conf
+```
 
-* Ban an IP Manually
+### Custom Jail (Nginx)
 
-  ````bash
-  fail2ban-client set sshd banip 192.168.1.100  
-  ````
+```ini
+# /etc/fail2ban/jail.local
 
-* Reload Configuration
+[nginx-http-auth]
+enabled  = true
+port     = http,https
+filter   = nginx-http-auth
+logpath  = /var/log/nginx/error.log
+maxretry = 5
 
-  ````bash
-  fail2ban-client reload
-  ````
+[nginx-limit-req]
+enabled  = true
+port     = http,https
+filter   = nginx-limit-req
+logpath  = /var/log/nginx/error.log
+maxretry = 10
+```
 
-### Advanced Use-Cases
+### Custom Filter
 
-* Create a custom filter in `/etc/fail2ban/filter.d/`
+```ini
+# /etc/fail2ban/filter.d/myapp.conf
+[Definition]
+failregex = ^<HOST> .* "POST /login" 401
+ignoreregex =
+```
 
-  ````ini
-  [custom-filter]  
-  enabled = true  
-  filter = custom-filter  
-  action = iptables[name=Custom, port=http, protocol=tcp]  
-  logpath = /var/log/custom.log  
-  maxretry = 3  
-  bantime = 600
-  ````
+```ini
+# /etc/fail2ban/jail.local
+[myapp]
+enabled  = true
+port     = http,https
+filter   = myapp
+logpath  = /var/log/myapp/access.log
+maxretry = 10
+bantime  = 1h
+```
 
-* Email Notifications: Configure mail alerts in `jail.local`
+### Tips
 
-  ````ini
-  [DEFAULT]  
-  destemail = admin@example.com  
-  sender = fail2ban@example.com  
-  action = %(action_mwl)s 
-  ````
+- Check `sudo fail2ban-regex` to verify your filter works before enabling
+- Use `bantime = -1` for permanent bans on known malicious IPs
+- Combine with `ufw`: set `banaction = ufw` in `[DEFAULT]`
+- Set `ignoreip` to include your own IP to avoid locking yourself out
+- View banned IPs: `sudo iptables -L f2b-sshd -n`
 
-### Example Configurations
+### See Also
 
-#### Securing MailCow Mailserver
-
-Create a new filter : ` /etc/fail2ban/filter.d/mailcow.conf`
-
-````ini
-[Definition] 
-failregex = LOGIN authenticator failed for .+ \[<HOST>\]:.* 
-            NOQUEUE: reject: RCPT from \[<HOST>\].* Auth failure: 535 
-
-````
-
-Add `[mailcow]` jail in `/etc/fail2ban/jail.conf`
-
-````ini
-[mailcow] 
-enabled = true 
-port = smtp, submission, imap, imaps, pop3, pop3s 
-filter = mailcow 
-logpath = /opt/mailcow-dockerized/mailcow.conf 
-maxretry = 3 
-bantime = 3600
-````
-
-#### Securing Nextcloud with Fail2Ban
-
-Create a new filter : ` /etc/fail2ban/filter.d/nextcloud.conf`
-
-````ini
-[Definition] 
-failregex = Login failed.*REMOTE_ADDR=<HOST>
-````
-
-Add `[nextcloud]` jail in `/etc/fail2ban/jail.conf`
-
-````ini
-[nextcloud] 
-enabled = true 
-port = http, https 
-filter = nextcloud 
-logpath = /path/to/nextcloud.log 
-maxretry = 3 
-bantime = 3600
-````
-
-#### 
+- [UFW](ufw.md) for general firewall rules
+- [SSH](ssh.md) for hardening SSH config

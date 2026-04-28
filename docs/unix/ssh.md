@@ -1,166 +1,163 @@
 # SSH
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md) 
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
 
-Secure Shell (SSH) configuration for remote access and security.
+Secure Shell. Encrypted remote login, file transfer, and port forwarding.
 
-***Warning:*** Always test SSH changes in a **second terminal** before disconnecting!
+!!! warning
+    Always test SSH config changes from a second terminal before closing your current session.
 
-## Basic Configuration
+### Key-Based Authentication
 
-Edit `/etc/ssh/sshd_config`
-
-````bash
-# Change default port
-Port 23415
-# Disable root login
-PermitRootLogin no
-# Allow specific users
-AllowUsers smk deploy
-# Key authentication only
-PasswordAuthentication no
-````
-
-````bash
-# Reload SSH
-sudo systemctl reload ssh
-````
-
-## Key-Based Authentication
-
-````bash
-# Generate ED25519 key (client)
-ssh-keygen -t ed25519 -C "smk@vps" -f ~/.ssh/vps_key
+```bash
+# Generate ED25519 key (preferred)
+ssh-keygen -t ed25519 -C "comment" -f ~/.ssh/my_key
 
 # Copy public key to server
-ssh-copy-id -i ~/.ssh/vps_key.pub smk@your-server -p 23415
+ssh-copy-id -i ~/.ssh/my_key.pub user@server
+# or manually:
+# cat ~/.ssh/my_key.pub >> ~/.ssh/authorized_keys   (on server)
 
-# SSH config shortcut (~/.ssh/config)
-Host vps
-  HostName your-server.com
-  User smk
-  Port 23415
-  IdentityFile ~/.ssh/vps_key
-  IdentitiesOnly yes
-````
+# Connect
+ssh -i ~/.ssh/my_key user@server
+```
 
-## Security Hardening
+### ~/.ssh/config
 
-````bash
-# Edit /etc/ssh/sshd_config
-ClientAliveInterval 300
-ClientAliveCountMax 2
-MaxAuthTries 3
-LoginGraceTime 1m
-````
+Define aliases and per-host settings:
 
-## Fail2Ban Setup
+```
+Host myserver
+    HostName 203.0.113.10
+    User deploy
+    Port 2222
+    IdentityFile ~/.ssh/my_key
+    IdentitiesOnly yes
 
-````bash
-sudo apt install fail2ban
-sudo cp /etc/fail2ban/jail.{conf,local}
-````
-
-Edit `/etc/fail2ban/jail.local`:
-
-````bash
-[sshd]
-enabled = true
-port = 23415
-filter = sshd
-logpath = /var/log/auth.log
-maxretry = 3
-bantime = 1h
-ignoreip = 127.0.0.1/8
-````
-
-````bash
-sudo systemctl restart fail2ban
-````
-
-## Useful Commands
-
-````bash
-# SSH tunnel
-ssh -L 8080:localhost:80 vps
-
-# SCP file transfer
-scp -P 23415 file.txt vps:/path/
-
-# Check active sessions
-ss -tnp | grep 'ssh'
-````
-
-## Troubleshooting
-
-````bash
-# Check SSH status
-sudo systemctl status ssh
-
-# Test config syntax
-sshd -t
-
-# Verbose connection test
-ssh -vvv vps
-
-````
-
-
-
-#### Reference: Full `~/.ssh/config` Setup
-
-````yaml
-Host *
-Protocol 2
-Compression no
-StrictHostKeyChecking no
-#-------- GIT COMMITS ----------
-Host github gh github.com
+Host github
     HostName github.com
     User git
     IdentityFile ~/.ssh/id_ed25519
 
-#-------- Proxy Example ---------
-# Host smk.minetest.ca 1.1.1.1
-    ProxyCommand ssh -xaqW%h:22195 minetest.in
-
-# -------- Proxy SSH Example --------
-Host bsdimp.com 1.1.1.1
-    User smk
-    HostName bsdimp.com
-    Port 8798
-    IdentityFile ~/.ssh/id_ed25519
-    ProxyCommand ssh -xaqW%h:8792 minetest.in
-
-# -------- remote ssh config --------
-Host code
-    HostName 1.1.1.1
-    Port 22199
-    User code
-    IdentityFile ~/.ssh/smk.prvkey
-    # useful for keeping vscode connected
+Host *
+    Protocol 2
     ServerAliveInterval 60
-    ServerAliveCountMax 20
-    # localhost forwarding settings
-    ForwardAgent yes
-    ExitOnForwardFailure no
-    LogLevel QUIET
-    LocalForward 3000 localhost:3000
-    LocalForward 3001 localhost:3001
-    LocalForward 4321 localhost:4321
-    LocalForward 5000 localhost:5000
-    LocalForward 8000 localhost:8000
-    LocalForward 8385 localhost:8384
+    ServerAliveCountMax 3
+```
 
-# ------------ Example SSH for FreeBSD ------
-Host freebsd-vm
-    HostName 192.168.69.3
-    Port 22
-    User smk
-    IdentityFile /Users/smk/.ssh/id_ed25519
-    RemoteCommand /compat/debian/bin/bash
-    RequestTTY force
-    SetEnv BASH_ENV=".bash_debian"
+Then just `ssh myserver` instead of the full command.
 
-````
+### Server Hardening
 
+Edit `/etc/ssh/sshd_config`:
+
+```
+Port 2222                            # change default port
+PermitRootLogin no
+PasswordAuthentication no            # keys only
+PubkeyAuthentication yes
+AllowUsers deploy alice
+MaxAuthTries 3
+LoginGraceTime 30
+ClientAliveInterval 300
+ClientAliveCountMax 2
+```
+
+```bash
+sudo sshd -t                         # test config syntax
+sudo systemctl reload ssh
+```
+
+### Port Forwarding / Tunnels
+
+```bash
+# Local forward: access remote service locally
+# Visit localhost:8080 to reach server:80
+ssh -L 8080:localhost:80 myserver
+
+# Local forward to a different host
+ssh -L 5432:db.internal:5432 jumphost
+
+# Remote forward: expose local port on remote server
+ssh -R 9000:localhost:3000 myserver
+
+# Dynamic SOCKS proxy
+ssh -D 1080 myserver
+# then configure browser to use SOCKS5 proxy at localhost:1080
+
+# Keep tunnel open (no shell)
+ssh -fNT -L 8080:localhost:80 myserver
+```
+
+### Jump Hosts (ProxyJump)
+
+```bash
+# Connect to internal server through a bastion
+ssh -J bastion user@internal.host
+
+# In ~/.ssh/config
+Host internal
+    HostName 10.0.0.5
+    User app
+    ProxyJump bastion
+
+Host bastion
+    HostName bastion.example.com
+    User jump
+    IdentityFile ~/.ssh/bastion_key
+```
+
+### File Transfer
+
+```bash
+# SCP (simple, single files or directories)
+scp file.txt myserver:/tmp/
+scp -P 2222 file.txt user@host:/path/
+scp -r ./dir myserver:/backup/
+
+# SFTP (interactive)
+sftp myserver
+# then: ls, get file, put file, cd, lcd, quit
+```
+
+### Useful Commands
+
+```bash
+# Check active SSH sessions
+ss -tnp | grep ssh
+who
+
+# SSH agent (avoid typing passphrase repeatedly)
+eval $(ssh-agent)
+ssh-add ~/.ssh/my_key
+ssh-add -l                           # list loaded keys
+```
+
+### Troubleshooting
+
+```bash
+ssh -vvv myserver                    # verbose debug output
+sudo sshd -t                         # validate config
+sudo systemctl status ssh
+sudo journalctl -u ssh -f
+```
+
+| Issue | Likely cause |
+|---|---|
+| `Permission denied (publickey)` | wrong key, wrong user, `authorized_keys` permissions |
+| Connection refused | SSH not running, wrong port, firewall |
+| Timeout | firewall blocking, server unreachable |
+| `WARNING: REMOTE HOST IDENTIFICATION` | server key changed, update `~/.ssh/known_hosts` |
+
+### Tips
+
+- `ssh -o StrictHostKeyChecking=no` disables host key check (use only in automation/trusted environments)
+- Add `ForwardAgent yes` to pass your local keys to the remote host for onward SSH
+- Use `~.` to force-disconnect a hung SSH session
+- `LocalForward` in `~/.ssh/config` persists tunnels without extra flags
+
+### See Also
+
+- [UFW](ufw.md) for firewall rules
+- [Fail2ban](fail2ban.md) for blocking brute-force attempts
+- Also: mosh (mobile shell, UDP-based, handles roaming), autossh (auto-reconnecting SSH tunnel)

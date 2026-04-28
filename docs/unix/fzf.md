@@ -1,107 +1,120 @@
 # fzf
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md)
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
 
-A command-line fuzzy finder for filtering and selecting files, commands, and more.
+Interactive fuzzy finder for the terminal. Filters any list: files, history, processes, git branches.
 
 ### Installation
 
-````bash
-sudo apt install fzf  # Debian/Ubuntu
-brew install fzf      # macOS
-````
+```bash
+sudo apt install fzf
+brew install fzf
+
+# Shell integrations (key bindings + completion)
+$(brew --prefix)/opt/fzf/install     # macOS
+/usr/share/doc/fzf/examples/install  # Debian
+```
 
 ### Basic Usage
 
-* Basic Files
-
-````bash
-fzf
-````
-
-* Search Command History
-
 ```bash
-history | fzf
+fzf                                  # search files in current directory
+ls | fzf                             # filter any list
+history | fzf                        # search history
+cat /etc/passwd | fzf                # filter passwd entries
 ```
 
-* Search and open files
+### Key Bindings (after shell integration)
 
-````bash
+| Binding | Action |
+|---|---|
+| `Ctrl+r` | fuzzy search command history |
+| `Ctrl+t` | insert selected file path into command line |
+| `Alt+c` | cd into selected directory |
+
+### Flags Reference
+
+| Flag | Description |
+|---|---|
+| `--preview CMD` | show preview panel |
+| `--multi` / `-m` | multi-select with Tab |
+| `--query STR` | start with initial query |
+| `--select-1` | auto-select if only one match |
+| `--exit-0` | exit if no match |
+| `--height N%` | compact mode |
+| `--layout=reverse` | show list below prompt |
+| `--ansi` | parse ANSI color codes |
+| `--bind KEY:ACTION` | custom key binding |
+| `-0` | null-delimited input |
+
+### Common Patterns
+
+```bash
+# Open file in editor
 vim $(fzf)
-````
+vim $(fzf --preview 'bat --color=always {}')
 
-### Advanced Features
-
-#### Preview Files
-
-````bash
-fzf --preview 'cat {}'
-````
-
-#### Multi-Select
-
-````bash
-fzf --multi
-````
-
-#### Integration with `cd`
-
-````bash
+# cd into directory
 cd $(find . -type d | fzf)
-````
 
-#### Other
+# Kill process
+kill $(ps aux | fzf | awk '{print $2}')
 
-* Use `Ctrl+T` to insert selected files into the command line
-* Bind `fzf` to `Ctrl+R` for interactive history search
+# Checkout git branch
+git checkout $(git branch -a | fzf | tr -d ' ')
 
-#### Example ZSH Functions
+# Preview file contents
+fzf --preview 'cat {}'
+fzf --preview 'bat --color=always --style=numbers {}'
 
-````bash
-#!/usr/local/env zsh
+# Preview with syntax highlight (requires bat)
+rg --files | fzf --preview 'bat --color=always {}'
 
-# Open file
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
-#   - Bypass fuzzy finder if there's only one match (--select-1)
-#   - Exit if there's no match (--exit-0)
-function fe {
-  local files
-  IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+# Multi-select and delete files
+find . -name "*.log" | fzf -m | xargs rm
+```
+
+### Shell Functions
+
+```zsh
+# fe - fuzzy open file in $EDITOR
+fe() {
+    local files
+    IFS=$'\n' files=($(fzf --multi --select-1 --exit-0 --query="$1"))
+    [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
 }
 
-# fcd - cd to selected directory
-function fcd {
-  local dir
-  dir=$(fd . "${1:-.}" --type=d | fzf --no-multi --layout=reverse --height=40%) &&
-  cd "$dir"
+# fcd - fuzzy cd
+fcd() {
+    local dir
+    dir=$(fd . "${1:-.}" --type=d 2>/dev/null | fzf --no-multi --height=40%) &&
+    cd "$dir"
 }
 
-# fcda - including hidden directories
-function fcda {
-  local dir
-  dir=$(fd . "${1:-.}" --hidden --type=d | fzf --no-multi --layout=reverse --height=40%) &&
-  cd "$dir"
+# fta - fuzzy tmux attach
+fta() {
+    local session
+    session=$(tmux list-sessions -F "#{session_name}" |
+        fzf --height=20% --select-1 --exit-0 --query="$1") &&
+    tmux attach -t "$session"
 }
 
-# cdf - cd into the directory of the selected file
-function cdf {
-  local file
-  local dir
-  file=$(fzf --query "$1" --no-multi --layout=reverse --height=40%) && dir=$(dirname "$file") && cd "$dir"
+# flog - fuzzy git log browser
+flog() {
+    git log --oneline --color=always |
+    fzf --ansi --preview 'git show --color=always {1}' |
+    awk '{print $1}'
 }
+```
 
+### Tips
 
-# Tmux
-function fta {
-  local session
-  session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --layout=reverse --height=20% --query="$1" --select-1 --exit-0) &&
-  tmux -CC attach -d -t "$session"
-}
-````
+- Combine with `rg` for live grep: `rg --color=always "" | fzf --ansi`
+- Set `FZF_DEFAULT_COMMAND='rg --files --hidden'` to use rg instead of find
+- Set `FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'` for compact UI
+- `fd` is faster than `find` for the directory listing source
 
-### Resources
+### See Also
 
-* https://thevaluable.dev/practical-guide-fzf-example/
+- [ripgrep](ripgrep.md) for the search backend
+- Also: skim (fzf clone in Rust), peco, fzy

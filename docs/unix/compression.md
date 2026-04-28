@@ -1,149 +1,120 @@
-# tar/gzip/zstd
+# tar / gzip / zstd
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md)
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
 
-## tar (tape archive)
+`tar` bundles files into archives. Compression (`gzip`, `bzip2`, `zstd`, `xz`) reduces size.
 
-used to bundle files into a single archive
+### Quick Reference
 
-### Basic Usage
+| Task | Command |
+|---|---|
+| Create `.tar.gz` | `tar -czf archive.tar.gz dir/` |
+| Extract `.tar.gz` | `tar -xzf archive.tar.gz` |
+| Create `.tar.zst` | `tar -cf archive.tar.zst --zstd dir/` |
+| Extract `.tar.zst` | `tar -xf archive.tar.zst --zstd` |
+| List contents | `tar -tf archive.tar.gz` |
+| Extract to dir | `tar -xzf archive.tar.gz -C /path/` |
 
-#### 1. Create and Archive
+### tar
 
-````bash
-tar -cvf archive.tar file1 file2
-````
+```bash
+# Common flags
+# -c  create
+# -x  extract
+# -t  list contents
+# -f  specify filename (always last before filename)
+# -v  verbose
+# -z  gzip compression
+# -j  bzip2 compression
+# -J  xz compression
+# --zstd  zstd compression
 
-* `-c`: create archive
-* `-v`: verbose output
-* `-f`: specify archive filename
+# Create archive
+tar -cf archive.tar file1 file2 dir/
+tar -czf archive.tar.gz dir/         # with gzip
+tar -cjf archive.tar.bz2 dir/        # with bzip2
+tar -cf archive.tar.zst --zstd dir/  # with zstd
 
-#### 2. Extract an Archive
+# Extract
+tar -xf archive.tar
+tar -xzf archive.tar.gz
+tar -xf archive.tar.gz -C /tmp/      # extract to specific directory
 
-````bash
-tar -xvf archive.tar
-````
+# List contents without extracting
+tar -tf archive.tar.gz
 
-* `-x`: Extract files
-* files are extracted into current directory by default
+# Exclude patterns
+tar -czf archive.tar.gz dir/ --exclude='*.log' --exclude='node_modules'
 
-#### 3. List Archive Contents
+# Extract specific files
+tar -xzf archive.tar.gz dir/file.txt
+tar -xzf archive.tar.gz --wildcards '*.txt'
 
-````bash
-tar -tvf archive.tar
-````
+# Append to existing archive
+tar -rf archive.tar newfile.txt
 
-### Common Scenarios
+# Combine with find
+find . -name "*.py" | tar -czf python_files.tar.gz -T -
+```
 
-1. Extract to a Specific Directory
+### gzip
 
-   ````bash
-   tar -xvf archive.tar -C /path/to/dir
-   ````
+```bash
+gzip file.txt                        # compress (replaces original)
+gzip -k file.txt                     # compress, keep original
+gzip -d file.txt.gz                  # decompress
+gunzip file.txt.gz                   # same as gzip -d
 
-2. Create and archive from a Directory
+gzip -9 file.txt                     # maximum compression
+gzip -1 file.txt                     # fastest compression
 
-   ````bash
-   tar -cvf archive.tar /path/to/dir
-   ````
+zcat file.txt.gz                     # view without decompressing
+zcat file.txt.gz | grep "error"
 
-3. Exclude file
+# Compress multiple files
+gzip *.log
 
-   ````bash
-   tar -cvf archive.tar --exclude="*.log" /path/to/dir
-   ````
+# Check integrity
+gzip -t archive.tar.gz
+```
 
-4. Extracting only `txt` files
+### zstd (Zstandard)
 
-   ````bash
-   tar -xvf archive.tar --wildcards "*.txt"
-   ````
+Faster than gzip with better compression. Good for large files and real-time use.
 
-5. Combine with `find` archive specific files
+```bash
+zstd file.txt                        # compress (creates file.txt.zst)
+zstd -k file.txt                     # keep original
+zstd -d file.txt.zst                 # decompress
+unzstd file.txt.zst                  # same as zstd -d
 
-   ````bash
-   find . -name "*.txt" | tar -cvf archive.tar -T -
-   ````
+zstd -19 file.txt                    # maximum compression (slow)
+zstd -1 file.txt                     # fastest
+zstd -T0 file.txt                    # multi-threaded (use all cores)
 
-## gzip
+# Stream compress / decompress
+cat large.log | zstd > large.log.zst
+zstdcat large.log.zst | grep "error"
+```
 
-Compress files using `.gz` format
+### Comparison
 
-### Basic Usage
+| Tool | Speed | Ratio | Best for |
+|---|---|---|---|
+| `gzip` | medium | good | universal compatibility |
+| `bzip2` | slow | better | small files, text |
+| `xz` | very slow | best | distribution packages |
+| `zstd` | very fast | excellent | large files, real-time |
+| `lz4` | fastest | low | streaming, speed-critical |
 
-#### 1. Compress a file
+### Tips
 
-````bash
-gzip file.txt
-````
+- Use `.tar.gz` for cross-platform compatibility (universally supported)
+- Use `zstd` for local backups and fast transfers on modern systems
+- `pigz` is a parallel gzip drop-in: `tar -cf - dir/ | pigz -p 4 > archive.tar.gz`
+- Use `tar -P` to preserve absolute paths (use carefully - can overwrite system files on extract)
 
-#### 2. Decompress a file
+### See Also
 
-````bash
-gzip -d file.txt.gz
-````
-
-#### 3. Compress and Archive
-
-````bash
-tar -czvf archive.tar.gz file1 file2
-````
-
-#### 4. Extract `.tar.gz`
-
-````bash
-tar -xzvf archive.tar.gz
-````
-
-#### 5. View Compressed files without extraction
-
-````bash
-zcat file.txt.gz
-````
-
-* Use `gunzip` as an alias for `gzip -d`
-
-## Zstd (Z Standard)
-
-A modern compression tool with better speed and ratios
-
-### Basic Usage
-
-#### 1. Compress a File
-
-````bash
-zstd file.txt
-````
-
-#### 2. Decompress a File
-
-````bash
-zstd -d file.txt.zst
-````
-
-#### 3. Compress and Archive
-
-````bash
-tar -cvf archive.tar.zst --zstd file1 file2
-````
-
-#### 4. Extract `.tar.zst`
-
-````bash
-tar -xvf archive.tar.zst --zstd
-````
-
-You can adjust compression level : `zstd -19 file.txt`
-
-Use `unzstd` as alias for `zstd -d`
-
-### Comparison between gzip and zstd
-
-| Tool   | Speed  | Compression Ratio | Common Use Cases           |
-| ------ | ------ | ----------------- | -------------------------- |
-| `gzip` | Medium | Good              | General-purpose            |
-| `zstd` | Fast   | Excellent         | Modern systems, large data |
-
-#### Notes
-
-* take a look at `pigz` (parallel implementation of gzip)
+- [rsync](rsync.md) for incremental file sync/backup
+- Also: zip/unzip (Windows-compatible), 7z (high compression), zlib (library)

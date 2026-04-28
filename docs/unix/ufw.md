@@ -1,172 +1,128 @@
-# ufw
+# UFW (Uncomplicated Firewall)
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md) 
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
 
-NOTE: Do not copy paste these commands except you understand each of them.
+Frontend for iptables. Simpler syntax for managing common firewall rules on Linux.
+
+!!! warning
+    Always allow your SSH port before enabling UFW or you will lock yourself out.
 
 ### Installation
 
-````bash
-apt -y install ufw
-systemctl enable ufw
-````
+```bash
+sudo apt install ufw
+sudo systemctl enable ufw
+```
 
-### Setup
+### Initial Setup
 
-````bash
-ufw allow 22/tcp
-ufw allow 80/tcp
-ufw allow 443/tcp
-ufw allow 22195
-ufw allow from <EDGE_NODE_IP> to any port 8000	# connect edge agents to portainer
+```bash
+# 1. Allow necessary ports first
+sudo ufw allow 22/tcp                # SSH (change if using non-default port)
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
 
-ufw default reject incoming
-ufw default allow outgoing
-ufw default deny routed
+# 2. Set default policies
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw default deny routed        # drop forwarded packets
 
-ufw show added
-ufw show listening
-````
+# 3. Review and enable
+sudo ufw show added
+sudo ufw --force enable
+sudo ufw status verbose
+```
 
-After reviewed. Activate your firewall
+### Allow and Deny Rules
 
-````bash
-ufw --force enable
-ufw status verbose
-````
+```bash
+# By port/protocol
+sudo ufw allow 8080/tcp
+sudo ufw deny 8080/tcp
 
-### Chain Default Action
+# By service name (from /etc/services)
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
 
-````bash
-ufw [--dry-run] default allow|deny|reject [incoming|outgoing|routed]
-````
+# By application profile
+sudo ufw allow 'Nginx Full'          # HTTP + HTTPS
+sudo ufw app list                    # show available profiles
 
-#### Safe Mode (Allow all chain)
+# From specific IP or range
+sudo ufw allow from 192.168.1.100
+sudo ufw allow from 192.168.1.0/24 to any port 5432
+sudo ufw deny from 10.0.0.5
 
-````bash
-ufw default allow incoming
-ufw default allow outgoing
-ufw default allow routed
-````
+# On specific interface
+sudo ufw allow in on eth0 to any port 80
 
-#### Recommended
+# Rate limiting (brute-force protection)
+sudo ufw limit 22/tcp
+```
 
-````bash
-ufw default reject incoming
-ufw default allow outgoing
-ufw default deny routed	# drop forward chain
-````
+### Managing Rules
 
-### Firewall Rules
+```bash
+sudo ufw status numbered             # list rules with numbers
+sudo ufw delete 3                    # delete rule by number
+sudo ufw delete allow 80/tcp         # delete by specification
+sudo ufw insert 1 allow from 203.0.113.0/24  # insert at position 1
 
-#### Rule Syntax
+sudo ufw disable
+sudo ufw enable
+sudo ufw reload
+sudo ufw reset                       # clear all rules (use with caution)
+```
 
-````bash
-ufw [rule]
-  [delete] [insert NUM] [prepend]
-  allow|deny|reject|limit
-  [in|out [on INTERFACE]]
-  [log|log-all]
-  [proto PROTOCOL]
-  [from ADDRESS [port PORT | app APPNAME ]]
-  [to ADDRESS [port PORT | app APPNAME ]]
-  [comment COMMENT]
-````
+### Status and Reporting
 
-#### Abbreviated allow syntax using Port/Protocol
+```bash
+sudo ufw status                      # enabled/disabled + active rules
+sudo ufw status verbose              # includes default policies
+sudo ufw status numbered
+sudo ufw show listening              # listening ports and their rules
+sudo ufw show added                  # pending rules not yet active
+sudo ufw show raw                    # underlying iptables rules
+```
 
-````bash
-ufw allow 22/tcp
-ufw allow 80/tcp
-ufw allow 443/tcp
-````
+### Logging
 
-#### Abbreviated allow syntax using Service Name
+```bash
+sudo ufw logging on                  # enable logging
+sudo ufw logging medium              # low, medium, high, full
+sudo tail -f /var/log/ufw.log
+```
 
-````bash
-ufw allow ssh
-ufw allow http
-ufw allow https
-````
+### Common Setups
 
-Check service name from `/etc/services` and replace port/protocol with it.
+#### Web server
 
-````bash
-cat /etc/services | head -35 | tail -10
-````
+```bash
+sudo ufw allow ssh
+sudo ufw allow 'Nginx Full'
+sudo ufw default deny incoming
+sudo ufw --force enable
+```
 
-#### Abbreviated allow syntax using UFW Application Profile
+#### Database server (allow only app server)
 
-````bash
-ufw allow OpenSSH
-ufw allow 'Nginx Full'
-````
+```bash
+sudo ufw allow from 10.0.1.50 to any port 5432 proto tcp  # PostgreSQL
+sudo ufw allow from 10.0.1.50 to any port 6379 proto tcp  # Redis
+sudo ufw default deny incoming
+sudo ufw --force enable
+```
 
-````bash
-# check available app profiels
-ufw app list
+### Tips
 
-# app profile info
-ufw app info <appname>
+- Use `ufw limit 22/tcp` to auto-block IPs with too many failed SSH attempts
+- Check `/etc/ufw/applications.d/` to see or add custom app profiles
+- `ufw allow in on lo` ensures loopback traffic is allowed if needed
+- `ufw show listening` helps identify services that need rules
 
-# app profiles directory : /etc/ufw/applications.d/
-````
+### See Also
 
-#### Full allow incoming connection syntax
-
-````bash
-## using port/protocol
-ufw allow in proto tcp to any port 22## using service name
-ufw allow in to any port ssh## using application profile
-ufw allow in to any app OpenSSH
-````
-
-#### Allow incoming connection from specific source
-
-- **Network Interface**: add `in on <interface>` after `ufw`
-- **Source IP/CIDR**: add `from <IP/CIDR>` after `ufw allow`
-
-````bash
-## specific incoming interface
-ufw allow in on eth0 proto tcp to any port 22
-ufw allow in on eth0 to any port ssh## specific source ip
-ufw allow from 192.168.1.0/24 proto tcp to any port 22
-ufw allow from 172.16.1.10 proto tcp to any port 80
-ufw allow from 172.16.1.10 proto tcp to any port 443## or both
-ufw allow in on eth0 from 192.168.1.0/24 to any port 22
-````
-
-### Show Report
-
-#### Report Syntax
-
-````bash
-ufw show raw
-ufw show builtins|before-rules|user-rules|after-rules|logging-rules
-ufw show listening
-ufw show added
-````
-
-#### Show listening ports along with firewall rules
-
-````bash
-ufw show listening
-````
-
-NOTE: if some service doesn’t have any rules then default chain action is executed.
-
-#### Show added rules
-
-````bash
-ufw show added
-````
-
-### Control your Firewall
-
-- `ufw enable` — Activate ufw by adding all ufw iptables rules
-- `ufw disable` — Remove all ufw iptables rules
-- `ufw reload` — Reload config (e.g. `/etc/default/ufw` `/etc/ufw/*` )
-
-### Status — Check UFW Status
-
-Syntax: `ufw status [verbose|numbered]`
+- [Fail2ban](fail2ban.md) for rate-limiting and ban-on-failure
+- [SSH](ssh.md) for hardening SSH access
+- Also: iptables (underlying tool), nftables (modern replacement for iptables), firewalld

@@ -9,100 +9,112 @@ hide:
 
 <div class="grid cards" markdown>
 
--   __Terminal & Shell Tools__
+-   __Terminal & Shell__
 
     ---
 
-    :simple-fishshell:{ .lg .middle } [Bash/Zsh/Fish](shell.md)
-    
+    :simple-fishshell:{ .lg .middle } [Bash/Zsh](shell.md)
+
     :simple-git:{ .lg .middle } [Git](git.md)
-    
+
     :material-ssh:{ .lg .middle } [SSH](ssh.md)
-    
+
     :simple-tmux:{ .lg .middle } [Tmux](tmux.md)
-    
+
     :simple-neovim:{ .lg .middle } [Vim](../vim/index.md)
-    
+
     :simple-gnu:{ .lg .middle } [GNU Coreutils](gnu.md)
-  
+
+    *Also: fish, starship, zoxide, direnv*
+
+-   __Text & Data Processing__
+
+    ---
+
+    :octicons-terminal-16:{ .lg .middle } [sed / awk / jq](text-processing.md)
+
+    :octicons-search-16:{ .lg .middle } [ripgrep](ripgrep.md)
+
+    :fontawesome-regular-face-dizzy:{ .lg .middle } [fzf](fzf.md)
+
+    *Also: bat, eza, delta, miller (mlr), dasel*
+
 -   __System & Monitoring__
 
     ---
-    
+
     :fontawesome-solid-terminal:{ .lg .middle } [Systemd](systemd.md)
 
     :material-recycle-variant:{ .lg .middle } [Cron](cron.md)
 
-    :simple-htop:{ .lg .middle } [Htop/Glances/Btop]
+    :simple-htop:{ .lg .middle } Htop / Btop / Glances
 
-    :octicons-log-16:{ .lg .middle } [Logrotate]
+    *Also: ps, top, lsof, ss, iostat, vmstat, logrotate*
 
-    :material-sync:{ .lg .middle } [rsync](rsync.md)
-  
 -   __Networking & Security__
 
     ---
-    
-    :simple-nginx:{ .lg .middle } [Nginx](nginx.md)
+
+    :octicons-terminal-16:{ .lg .middle } [curl](curl.md)
 
     :material-router:{ .lg .middle } [UFW](ufw.md)
-
-    :octicons-terminal-16:{ .lg .middle } [Curl/Wget](curl.md)
 
     :simple-openssl:{ .lg .middle } [OpenSSL](openssl.md)
 
     :material-hammer:{ .lg .middle } [Fail2ban](fail2ban.md)
-  
--   __Development & DevOps__
+
+    *Also: dig, nmap, tcpdump, iptables, nftables, wireguard*
+
+-   __Web & Proxy__
 
     ---
-    
-    :simple-docker:{ .lg .middle } [Docker/Podman](docker.md)
-    
+
+    :simple-nginx:{ .lg .middle } [Nginx](nginx.md)
+
+    *Also: Caddy, Traefik, HAProxy, Apache, certbot*
+
+-   __Containers & Orchestration__
+
+    ---
+
+    :simple-docker:{ .lg .middle } [Docker](docker.md)
+
     :simple-kubernetes:{ .lg .middle } [Kubernetes](kubernetes.md)
-    
-    :simple-terraform:{ .lg .middle } [Terraform](terraform.md)
-    
-    :simple-ansible:{ .lg .middle } [Ansible](ansible.md)
-  
--   __Productivity__
+
+    *Also: Helm, Podman, k3s, kind, containerd, kustomize*
+
+-   __Infrastructure as Code__
 
     ---
-    
-    :fontawesome-regular-face-dizzy:{ .lg .middle } [fzf](fzf.md)
 
-    :octicons-terminal-16:{ .lg .middle } [ripgrep(rg)](ripgrep.md)
+    :simple-terraform:{ .lg .middle } [Terraform](terraform.md)
 
-    :material-zip-box:{ .lg .middle } [tar/gzip/zstd](compression.md)
+    :simple-ansible:{ .lg .middle } [Ansible](ansible.md)
 
-    :simple-cmake:{ .lg .middle } [Taskfile/Makefile](makefile.md)
-
-    :material-information:{ .lg .middle } [tldr](tldr.md)
-
-    :octicons-terminal-16:{ .lg .middle } [cheat.sh](cheat.md)
+    *Also: Pulumi, OpenTofu, Packer, Salt*
 
 -   __Databases__
 
     ---
-    
+
     :simple-postgresql:{ .lg .middle } [PostgreSQL](postgresql.md)
 
     :simple-redis:{ .lg .middle } [Redis](redis.md)
 
-    :simple-sqlite:{ .lg .middle } [sqlite](sqlite.md)
+    :simple-sqlite:{ .lg .middle } [SQLite](sqlite.md)
 
--   __Miscellaneous__
+    *Also: MySQL, MongoDB, DuckDB, ClickHouse, TimescaleDB*
+
+-   __Productivity & Automation__
 
     ---
-    
-    :material-file-document:{ .lg .middle } [Pandoc]
 
-    :material-image:{ .lg .middle } [ImageMagick]
+    :material-sync:{ .lg .middle } [rsync](rsync.md)
 
-    :simple-ffmpeg:{ .lg .middle } [FFmpeg]
+    :material-zip-box:{ .lg .middle } [tar / gzip / zstd](compression.md)
 
-    :material-git:{ .lg .middle } [lazygit]
-    
-    
+    :simple-cmake:{ .lg .middle } [Taskfile / Makefile](makefile.md)
+
+    *Also: lazygit, bat, eza, stow, hyperfine, rclone*
 
 </div>

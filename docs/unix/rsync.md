@@ -1,99 +1,104 @@
 # rsync
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md) 
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
+
+Fast incremental file transfer. Only copies changed parts of files; works locally and over SSH.
 
 ### Installation
 
-````bash
-apt update
-apt install rsync
-
-# verify
-rsync --version
-````
+```bash
+sudo apt install rsync
+```
 
 ### Basic Usage
 
-#### Copy Files
+```bash
+# Local copy (trailing slash on source = copy contents, not the directory itself)
+rsync -av src/ dst/                  # copy contents of src into dst
+rsync -av src  dst/                  # copy src directory into dst/src
 
-````bash
-rsync -av /src/ /dst/
-# -a : archive mode
-# -v : verbose
-````
+# Dry run - preview what would change
+rsync -avn src/ dst/
 
-#### Dry Run
+# Delete files in dst that no longer exist in src
+rsync -av --delete src/ dst/
 
-````bash
-rsync -av --dry-run /source/ /destination/ 
-````
+# Remote: push to server
+rsync -av src/ user@server:/dst/
 
-#### Delete Extraneous Files
+# Remote: pull from server
+rsync -av user@server:/src/ dst/
 
-````bash
-rsync -av --delete /source/ /destination/
-````
+# Use specific SSH port
+rsync -av -e "ssh -p 2222" src/ user@server:/dst/
+```
 
-#### Copy to Remote Server
+### Common Flags
 
-````bash
-rsync -av /source/ user@remote:/destination/
-````
+| Flag | Description |
+|---|---|
+| `-a` | archive mode: `-rlptgoD` (recursive, preserve links/perms/times/owner/group) |
+| `-v` | verbose |
+| `-z` | compress during transfer |
+| `-n` | dry run |
+| `-P` | show progress + resume partial transfers (`--partial --progress`) |
+| `--delete` | remove destination files not in source |
+| `--exclude PATTERN` | skip matching files |
+| `--exclude-from FILE` | read exclusions from file |
+| `--checksum` | compare by checksum instead of size+time |
+| `--bwlimit=KBPS` | limit bandwidth |
+| `--backup` | keep copies of overwritten files |
+| `--backup-dir DIR` | directory for backup copies |
+| `--link-dest DIR` | hard-link unchanged files from DIR (for incremental backups) |
 
-#### Copy from Remote Server
+### Exclude Patterns
 
-````bash
-rsync -av user@remote:/source/ /destination/
-````
+```bash
+rsync -av --exclude='*.log' src/ dst/
+rsync -av --exclude={'*.log','*.tmp','node_modules/'} src/ dst/
 
-#### Use SSH
+# Exclude file
+echo '*.log' > .rsyncignore
+echo 'node_modules/' >> .rsyncignore
+rsync -av --exclude-from='.rsyncignore' src/ dst/
+```
 
-````bash
-rsync -av -e ssh /source/ user@remote:/destination/
-````
+### Incremental Backups with --link-dest
 
-### Exclude Files
+```bash
+# First backup
+rsync -av --link-dest=/backups/latest src/ /backups/$(date +%F)/
 
-````bash
-rsync -av --exclude='*.log' /source/ /destination/
-rsync -av --exclude={'*.log','*.tmp'} /source/ /destination/
+# Update "latest" symlink
+ln -sfn /backups/$(date +%F) /backups/latest
+```
 
-# using exclude files
-echo '*.log' > exclude.txt  
-echo '*.tmp' >> exclude.txt  
-rsync -av --exclude-from='exclude.txt' /source/ /destination/ 
-````
+Each daily backup uses hard links for unchanged files, so it takes nearly no extra space but appears as a full copy.
+
+### Common Examples
+
+```bash
+# Sync a website
+rsync -avz --delete ./site/ user@server:/var/www/html/
+
+# Backup home directory (exclude cache)
+rsync -av --exclude='.cache/' ~ /mnt/backup/
+
+# Mirror with progress
+rsync -avzP src/ user@server:/dst/
+
+# Cron backup job
+0 2 * * * rsync -az --delete /data/ /backup/data/ >> /var/log/rsync.log 2>&1
+```
 
 ### Tips
 
-#### Automate Backups
+- Always do a dry run first with `-n` before using `--delete`
+- The trailing slash on source matters: `src/` copies contents, `src` copies the directory
+- Use `-z` on slow connections, omit it on fast LAN/local transfers (CPU overhead not worth it)
+- Combine with `ssh-agent` for passwordless remote syncing in cron
 
-````bash
-# cron to schedule regular backups
-0 2 * * * rsync -av /source/ /backup/ 
-````
+### See Also
 
-#### Use `--backup` for Versioning
-
-````bash
-# keep copies of overwritten files
-rsync -av --backup --backup-dir=backup-$(date +%F) /source/ /destination/ 
-````
-
-#### Combine with Tar
-
-````bash
-# compress files before syncing
-tar czf - /source/ | rsync -av -e ssh - user@remote:/destination/backup.tar.gz
-````
-
-### Example
-
-#### rsync using ssh remote
-
-````bash
-#!/bin/sh
-mkdocs build && rsync -avz --delete site/ smkroot:/var/www/notes/
-exit 0
-````
-
+- [Compression](compression.md) for archiving before transfer
+- Also: rclone (like rsync for cloud storage: S3, GCS, Dropbox), borgbackup (dedup + encryption), restic

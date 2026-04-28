@@ -1,58 +1,119 @@
 # Tmux
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md) | [Detailed Guide](../tmux/index.md)
+[:octicons-arrow-left-24:{ .icon } Back](index.md) | [Detailed Guide](../tmux/index.md)
 
-## Installation
+Terminal multiplexer. Keeps sessions alive after SSH disconnect, splits the terminal into panes and windows.
 
-````bash
+**Hierarchy:** Server > Sessions > Windows > Panes
+
+### Installation
+
+```bash
 sudo apt install tmux
-````
+brew install tmux               # macOS
+```
 
 ### Configuration
 
-Edit `~/.tmux.conf`
+Edit `~/.tmux.conf`:
 
-````bash
-# Remap prefix to Ctrl-a  
-unbind C-b  
-set -g prefix C-a  
+```bash
+set -g prefix C-a               # remap prefix from C-b to C-a
+unbind C-b
+bind C-a send-prefix
 
-# Mouse support  
-set -g mouse on  
+set -g mouse on
+set -g history-limit 10000
+set -g base-index 1             # windows start at 1
+set -g pane-base-index 1
+set -g renumber-windows on
 
-# Split panes  
-bind | split-window -h  
-bind - split-window -v  
+# Splits that open in current directory
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
 
-# Status bar  
-set -g status-bg cyan  
-````
+# Vim-like pane navigation
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
 
-* [Configuration Guide](../tmux/configuration.md)
-* [Example .conf](https://raw.githubusercontent.com/mightyjoe781/.dotfiles/refs/heads/master/tmux/.tmux.conf)
+# Vi keys in copy mode
+set -g mode-keys vi
 
-Reload Config
+set -g status-style bg=colour235,fg=colour136
+```
 
-````bash
-tmux source-file ~/.tmux.conf
-````
+Reload config without restarting:
 
-### Key Workflows
+```bash
+tmux source ~/.tmux.conf
+# or inside tmux: Prefix :source ~/.tmux.conf
+```
 
-| Command              | Workflow            |
-| -------------------- | ------------------- |
-| `tmux new -s <name>` | Start named Session |
-| `Ctrl-a d`           | Detach Session      |
-| `tmux ls`            | List Session        |
-| `Ctrl-a c`           | New Window          |
+### Sessions
 
-#### Pro Tips
+| Command / Binding | Action |
+|---|---|
+| `tmux new -s name` | create named session |
+| `tmux ls` | list sessions |
+| `tmux attach -t name` | attach to session |
+| `tmux kill-session -t name` | kill session |
+| `Prefix d` | detach from session |
+| `Prefix $` | rename current session |
+| `Prefix s` | interactive session picker |
+| `Prefix (` / `Prefix )` | previous / next session |
 
-* Persist sessions with `tmux-resurrect`
+### Windows
 
-````bash
-git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux/plugins/tmux-resurrect  
-````
+| Binding | Action |
+|---|---|
+| `Prefix c` | new window |
+| `Prefix ,` | rename current window |
+| `Prefix &` | close window (with confirm) |
+| `Prefix n` / `Prefix p` | next / previous window |
+| `Prefix 0-9` | jump to window by number |
+| `Prefix w` | interactive window picker |
+| `Prefix .` | move window to index |
 
-* Use `ssh-agent` in tmux for shared keys.
-* https://tmuxcheatsheet.com/
+### Panes
+
+| Binding | Action |
+|---|---|
+| `Prefix %` | split vertically (default) |
+| `Prefix "` | split horizontally (default) |
+| `Prefix \|` | split vertically (if configured) |
+| `Prefix -` | split horizontally (if configured) |
+| `Prefix arrow` | navigate panes |
+| `Prefix z` | toggle pane zoom (fullscreen) |
+| `Prefix x` | close pane |
+| `Prefix q` | show pane numbers |
+| `Prefix {` / `Prefix }` | swap pane position |
+| `Prefix Space` | cycle pane layouts |
+| `Prefix !` | move pane to new window |
+
+### Copy Mode
+
+| Binding | Action |
+|---|---|
+| `Prefix [` | enter copy mode |
+| `q` | exit copy mode |
+| `/` | search forward |
+| `?` | search backward |
+| `v` | begin selection (vi mode) |
+| `y` | copy selection |
+| `Prefix ]` | paste |
+
+### Tips
+
+- Persist sessions across reboots with `tmux-resurrect` plugin
+- `ssh server -t tmux attach` resumes remote session in one command
+- `Prefix :setw synchronize-panes on` broadcasts keystrokes to all panes - useful for multi-server tasks
+- Rename windows to reflect what is running: `Prefix ,`
+- Use named sessions per project: `tmux new -s backend`, `tmux new -s frontend`
+
+### See Also
+
+- [tmuxcheatsheet.com](https://tmuxcheatsheet.com)
+- [Config example](https://raw.githubusercontent.com/mightyjoe781/.dotfiles/refs/heads/master/tmux/.tmux.conf)
+- Also: zellij (modern Rust alternative), screen (older alternative)

@@ -1,118 +1,110 @@
-# cron
+# Cron
 
-allows users to schedule the execution.
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
 
-### Installation
-
-````bash
-sudo apt update && sudo apt install cron
-sudo systemctl enable cron
-````
-
-Cron is mostly installed in all the systems and consists of two things
-
-* `cron` or `crond` : daemon
-* `crontab` : command interface for interacting with daemon
+Schedule recurring commands. The `crond` daemon checks every minute and runs matching jobs.
 
 ### Cron Syntax
 
-````bash
-*    *    *    *    *   /home/user/bin/somecommand.sh
-|    |    |    |    |            |
-|    |    |    |    |    Command or Script to execute
+```
+*    *    *    *    *   /path/to/command
 |    |    |    |    |
-|    |    |    | Day of week(0-6 | Sun-Sat)
-|    |    |    |
-|    |    |  Month(1-12)
-|    |    |
-|    |  Day of Month(1-31)
-|    |
-|   Hour(0-23)
-|
-Min(0-59)
-````
-
-`*`: matches all values, so above script runs every minute
-
-### Usage
-
-* add crontab entry
-
-````bash
-crontab -e
-````
-
-NOTE: crontab entries do not source `~/.bashrc` so always use full script path and environment variable. Either hardcode or source in the executing script
-
-NOTE: Make sure your script is executible
-
-* cron logs
-
-  ````bash
-  tail -f /var/log/cron
-  ````
-
-  
-
-### Example crons entries
-
-* Use https://crontab.guru to validate your cron
-
-If you want to run four times a day between Monday and Friday, you can use the *step operator* ( **/** ) and the *range operator* ( **-** ).
-
-````bash
-0 */6 * * Mon-Fri /home/user/somejob.sh
-````
-
-#### **Run Every Hour at Minute 15**
-
-```
-15 * * * * /path/to/script.sh 
+|    |    |    |    +-- Day of week (0-7, Sun=0 or 7, or Mon-Sun)
+|    |    |    +------- Month (1-12)
+|    |    +------------ Day of month (1-31)
+|    +----------------- Hour (0-23)
++---------------------- Minute (0-59)
 ```
 
-#### **Run Every Day at 2 AM**
+Operators:
 
-````bash
-0 2 * * * /path/to/script.sh
-````
+| Operator | Meaning | Example |
+|---|---|---|
+| `*` | every | `* * * * *` - every minute |
+| `,` | list | `0 8,12,18 * * *` - at 8am, 12pm, 6pm |
+| `-` | range | `0 9-17 * * *` - every hour 9am-5pm |
+| `/` | step | `*/15 * * * *` - every 15 minutes |
 
-#### **Run Every Sunday at 3 PM**
+### Managing Crontabs
 
-````bash
-0 15 * * 0 /path/to/script.sh
-````
+```bash
+crontab -e                           # edit current user's crontab
+crontab -l                           # list current user's crontab
+crontab -r                           # remove current user's crontab
+sudo crontab -u alice -e             # edit another user's crontab
 
-#### **Run Every Month on the 1st at 4 AM**
+# System crontabs (include username field)
+/etc/crontab
+/etc/cron.d/                         # drop-in files
+/etc/cron.hourly/ /etc/cron.daily/ /etc/cron.weekly/ /etc/cron.monthly/
+```
 
-````bash
-0 4 1 * * /path/to/script.sh
-````
+### Special Strings
 
-### Advanced Features
+```bash
+@reboot     /path/to/script.sh       # run once at startup
+@hourly     /path/to/script.sh       # equivalent to 0 * * * *
+@daily      /path/to/script.sh       # equivalent to 0 0 * * *
+@weekly     /path/to/script.sh       # equivalent to 0 0 * * 0
+@monthly    /path/to/script.sh       # equivalent to 0 0 1 * *
+```
 
-#### Environment Variable
+### Common Examples
 
-````bash
-SHELL=/bin/bash  
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-* * * * * /path/to/script.sh
-* * * * * /path/to/script.sh >> /var/log/script.log 2>&1
-````
+```bash
+# Every 5 minutes
+*/5 * * * * /usr/local/bin/check.sh
 
-#### Special Strings
+# Every day at 2:30am
+30 2 * * * /usr/local/bin/backup.sh
 
-Use predefined schedules:
+# Every Monday at 9am
+0 9 * * 1 /usr/local/bin/report.sh
 
-- `@reboot`: Run at startup.
-- `@daily`: Run once a day.
-- `@weekly`: Run once a week.
-- `@monthly`: Run once a month.
-- `@yearly`: Run once a year.
+# Every weekday (Mon-Fri) at 8am
+0 8 * * 1-5 /usr/local/bin/sync.sh
 
-````bash
-@daily /path/to/script.sh
-````
+# First day of every month at midnight
+0 0 1 * * /usr/local/bin/monthly.sh
 
-### Pro Tips
+# Every 6 hours
+0 */6 * * * /usr/local/bin/fetch.sh
 
-**Use `cron.d` for System Jobs**: Place system-wide cron jobs in `/etc/cron.d/`
+# Capture output to log
+0 2 * * * /usr/local/bin/backup.sh >> /var/log/backup.log 2>&1
+```
+
+### Environment Gotchas
+
+Cron runs with a minimal environment - `$PATH` is short and `~/.bashrc` is not sourced.
+
+```bash
+# Set PATH at the top of crontab
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Or use full paths in scripts
+0 2 * * * /usr/bin/python3 /home/alice/scripts/backup.py
+
+# Or source environment in a wrapper
+0 2 * * * bash -l -c '/path/to/script.sh'
+```
+
+### Viewing Logs
+
+```bash
+grep CRON /var/log/syslog            # Debian/Ubuntu
+journalctl -u cron                   # systemd systems
+tail -f /var/log/cron                # RHEL/CentOS
+```
+
+### Tips
+
+- Use [crontab.guru](https://crontab.guru) to validate expressions
+- Make scripts executable: `chmod +x /path/to/script.sh`
+- Always redirect output: `cmd >> /var/log/cmd.log 2>&1` or jobs silently fail
+- Consider `systemd timers` for better logging and dependency control
+- Use `flock` to prevent overlapping runs: `0 * * * * flock -n /tmp/job.lock job.sh`
+
+### See Also
+
+- [Systemd Timers](systemd.md) for more powerful scheduling with logging

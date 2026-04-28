@@ -1,116 +1,136 @@
-# cURL/Wget
+# curl
 
- [:octicons-arrow-left-24:{ .icon } Back](index.md)
+[:octicons-arrow-left-24:{ .icon } Back](index.md)
+
+Command-line HTTP client. Essential for testing APIs, downloading files, and scripting HTTP workflows.
 
 ### Installation
 
-````bash
-apt update
-apt install curl wget
-````
-
-## cURL
-
-### Basic Commands
-
-#### Download a file
-
-````bash
-curl -O https://example.com/file.txt
-````
-
-#### Send a GET Request
-
-````bash
-curl https://example.com/api
-````
-
-#### Send a POST Request
-
-````bash
-curl -X POST -d "param1=value1" https://example.com/api
-````
-
-#### Follow Redirects
-
-````bash
-curl -L https://example.com
-````
-
-#### Include Custom Headers
-
-````bash
-curl -H "Authorization: Bearer token" https://example.com/api
-````
-
-#### Save output to a File
-
-````bash
-curl -o output.txt https://example.com/file.txt
-````
-
-#### Upload a File
-
 ```bash
-curl -F "file=@localfile.txt" https://example.com/upload
+sudo apt install curl
 ```
 
-#### Use a Proxy for connection
+### Common Options
 
-````bash
-curl -x http://proxy.example.com:8080 https://example.com
-````
+| Flag | Description |
+|---|---|
+| `-X METHOD` | HTTP method (GET, POST, PUT, DELETE, PATCH) |
+| `-H "Header: val"` | add request header |
+| `-d "data"` | request body (implies POST) |
+| `-o file` | save output to file |
+| `-O` | save with remote filename |
+| `-s` | silent (no progress bar) |
+| `-v` | verbose (request and response headers) |
+| `-I` | fetch headers only (HEAD request) |
+| `-L` | follow redirects |
+| `-u user:pass` | basic auth |
+| `-k` | skip TLS certificate verification |
+| `-w "%{http_code}"` | print response code |
+| `--compressed` | request gzip-compressed response |
+| `-x proxy:port` | use proxy |
 
-#### Use `curljson` alias
+### Basic Requests
 
-````bash
-alias curljson='curl -H "Content-Type: application/json"'
-curljson https://example.com
-````
+```bash
+# GET
+curl https://example.com/api/users
 
-## Wget
+# Follow redirects, show response code
+curl -Ls -o /dev/null -w "%{http_code}" https://example.com
 
-### Basic Commands
+# HEAD - check if URL exists
+curl -I https://example.com
 
-#### Download a File
+# POST with JSON body
+curl -X POST https://api.example.com/users \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Alice","email":"alice@example.com"}'
 
-````bash
-wget https://example.com/file.txt
-````
+# POST form data
+curl -X POST https://example.com/login \
+  -d "username=alice&password=secret"
 
-#### Download in Background
+# PUT
+curl -X PUT https://api.example.com/users/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Alice Updated"}'
 
-````bash
-wget -b https://example.com/file.txt
-````
+# DELETE
+curl -X DELETE https://api.example.com/users/1
 
-#### Resume a Download
+# With Bearer token
+curl https://api.example.com/me \
+  -H "Authorization: Bearer eyJhbGci..."
 
-````bash
-wget -c https://example.com/file.txt 
-````
+# With API key header
+curl https://api.example.com/data \
+  -H "X-API-Key: abc123"
+```
 
-#### Download Recursively
+### File Operations
 
-````bash
-wget -r https://example.com
-````
+```bash
+# Download file
+curl -O https://example.com/file.tar.gz
 
-#### Limit Download Speed
+# Download and rename
+curl -o myfile.tar.gz https://example.com/file.tar.gz
 
-````bash
-wget --limit-rate=100k https://example.com/file.txt
-````
+# Download with progress bar
+curl --progress-bar -O https://example.com/large.iso
 
-#### Download with Auth
+# Resume interrupted download
+curl -C - -O https://example.com/large.iso
 
-````bash
-wget --user=username --password=password https://example.com/file.txt
-````
+# Upload file (multipart form)
+curl -F "file=@/path/to/local/file.txt" https://example.com/upload
 
-#### Mirror a website
+# Upload raw binary
+curl -X PUT --data-binary @file.bin https://example.com/upload
+```
 
-````bash
-wget -mk https://example.com
-````
+### Debugging
 
+```bash
+# Verbose - shows request and response headers
+curl -v https://example.com
+
+# Show only response code
+curl -s -o /dev/null -w "%{http_code}" https://example.com
+
+# Measure timing
+curl -s -o /dev/null -w "
+  dns:   %{time_namelookup}s
+  conn:  %{time_connect}s
+  ttfb:  %{time_starttransfer}s
+  total: %{time_total}s
+" https://example.com
+
+# Write response and headers to files separately
+curl -s -D headers.txt -o body.json https://api.example.com
+```
+
+### Config and Aliases
+
+```bash
+# ~/.curlrc - default options
+--silent
+--show-error
+--location
+
+# Useful aliases
+alias curljson='curl -H "Content-Type: application/json" -H "Accept: application/json"'
+alias curltime='curl -s -o /dev/null -w "total: %{time_total}s\n"'
+```
+
+### Tips
+
+- Use `-s --show-error` in scripts: no progress bar but errors still print
+- Pipe to `jq` for readable JSON: `curl -s api.example.com | jq .`
+- `curl -K credentials.txt` reads flags from a file (keep secrets out of shell history)
+- For large downloads consider `wget -c` or `aria2c` (parallel chunks)
+
+### See Also
+
+- [OpenSSL](openssl.md) for TLS certificate generation
+- Also: httpie (`http`), wget (simpler downloads), aria2 (parallel downloads), xh (fast httpie alternative)
