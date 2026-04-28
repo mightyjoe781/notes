@@ -1,32 +1,32 @@
 # Data Security
 
-Data security encompasses protecting information throughout its lifecycle - from creation and storage to transmission and disposal. It involves multiple layers of protection including encryption, access controls, and privacy-preserving techniques.
+Data security protects information throughout its lifecycle — from creation and storage to transmission and disposal — through encryption, access controls, and privacy-preserving techniques.
 
-Key Data Security Principles
+**Key principles:**
 
-- Confidentiality: Ensure data is accessible only to authorized parties
-- Integrity: Maintain data accuracy and prevent unauthorized modification
-- Availability: Ensure data is accessible when needed by authorized users
-- Privacy: Protect personally identifiable information (PII)
-- Compliance: Meet regulatory requirements (GDPR, HIPAA, SOX)
+- **Confidentiality**: data accessible only to authorized parties
+- **Integrity**: data accuracy maintained; unauthorized modification prevented
+- **Availability**: data accessible when needed by authorized users
+- **Privacy**: protection of personally identifiable information (PII)
+- **Compliance**: adherence to regulations (GDPR, HIPAA, SOX)
 
 ### Data Classification
 
-**Classification Levels:**
+**Levels:**
 
-- Public: Information intended for public consumption
-- Internal: Information for internal organizational use
-- Confidential: Sensitive information requiring protection
-- Restricted: Highly sensitive information with strict access controls
+- Public: intended for public consumption
+- Internal: for internal organizational use only
+- Confidential: sensitive, requires protection
+- Restricted: highly sensitive, strict access controls
 
-**Classification Factors:**
+**Classification factors:**
 
-- Sensitivity: Impact of unauthorized disclosure
-- Regulatory requirements: Legal obligations for data protection
-- Business value: Economic impact of data compromise
-- Personal information: Presence of PII or sensitive personal data
+- Sensitivity: impact of unauthorized disclosure
+- Regulatory obligations
+- Business value
+- Presence of PII or sensitive personal data
 
-------
+---
 
 ## Encryption at Rest
 
@@ -36,40 +36,39 @@ Encryption at rest protects stored data from unauthorized access when systems ar
 
 #### Full Disk Encryption (FDE)
 
-Characteristics :
+- Encrypts the entire disk including the OS
+- Transparent to the operating system (auto encryption/decryption)
+- Minimal performance overhead with hardware acceleration
+- Key typically tied to user authentication
 
-- Transparent operation: Automatic encryption/decryption
-- Boot-level protection: Entire disk including OS encrypted
-- Performance impact: Minimal overhead with hardware acceleration
-- Key management: Typically tied to user authentication
+**Technologies:** BitLocker, FileVault (macOS), LUKS, self-encrypting drives (SEDs)
 
-Examples of Technologies for FDE : BitLocker, FileVault (macOS), LUKS, SEDS (self-encrypting discs).
-
-FDE is often used in work laptops or phones, and to store encrypted backups.
+Common use cases: work laptops, mobile devices, encrypted backups.
 
 #### File-Level Encryption
 
-File-Level Encryption is selective in the sense we can specify files and folders for encryption and different keys for different files. Encryption is tied to file permissions, and is very optimal for the rest of OS Usage.
+- Selectively encrypts specific files or folders
+- Supports different keys per file
+- Encryption tied to file permissions
+- Minimal impact on the rest of OS operation
 
-Examples ~ OS Features (EFS, Encrypted file systems), Cryptographic filesystems (EncFS, eCryptfs), Cloud Storage Encryption, etc.
+**Examples:** EFS (Windows), EncFS, eCryptfs, cloud storage encryption
 
 #### Database Encryption
 
-Database-Level Protection:
+**Transparent Data Encryption (TDE):**
 
-Transparent Data Encryption (TDE):
+- Database engine handles encryption automatically
+- Encrypts data pages on disk
+- Minimal application changes required
+- CPU overhead for encryption/decryption
 
-- Automatic encryption: Database engine handles encryption
-- Page-level encryption: Encrypt data pages on disk
-- Minimal application changes: Transparent to applications
-- Performance considerations: CPU overhead for encryption/decryption
+**Column-Level Encryption:**
 
-Column-Level Encryption:
-
-- Selective protection: Encrypt specific sensitive columns
-- Granular access: Different keys for different columns
-- Application awareness: Applications must handle encrypted data
-- Search limitations: Encrypted data not easily searchable
+- Encrypts specific sensitive columns
+- Supports different keys per column
+- Application must handle encrypted data explicitly
+- Encrypted columns are not easily searchable
 
 | Database       | TDE Support      | Column Encryption | Key Features            |
 | -------------- | ---------------- | ----------------- | ----------------------- |
@@ -81,101 +80,60 @@ Column-Level Encryption:
 
 ### Encryption Algorithms and Standards
 
-#### Symmetric Encryption
+#### Symmetric Encryption — AES
 
-**Advanced Encryption Standard (AES):**
+- Key sizes: 128, 192, 256 bits
+- Fast encryption/decryption with hardware support (AES-NI)
+- No known practical attacks
 
-- **Key sizes**: 128, 192, 256 bits
-- **Performance**: Fast encryption/decryption
-- **Security**: No known practical attacks
-- **Hardware support**: CPU acceleration available
+**Modes of operation:**
 
-**AES Modes of Operation:**
-
-- **ECB (Electronic Codebook)**: Simple but not recommended
-- **CBC (Cipher Block Chaining)**: Requires initialization vector
-- **CTR (Counter)**: Stream cipher mode, parallelizable
-- **GCM (Galois/Counter Mode)**: Authenticated encryption
-- **XTS**: Designed for disk encryption
+- **ECB**: simple, not recommended
+- **CBC**: requires an initialization vector
+- **CTR**: stream cipher mode, parallelizable
+- **GCM**: authenticated encryption (preferred for most uses)
+- **XTS**: designed for disk encryption
 
 #### Key Derivation
 
-**Password-Based Key Derivation:**
+- **PBKDF2**: widely supported, configurable iterations
+- **scrypt**: memory-hard, resistant to GPU attacks
+- **Argon2**: winner of the Password Hashing Competition; recommended for new systems
+- **bcrypt**: adaptive, widely used for password hashing
 
-- **PBKDF2**: Password-Based Key Derivation Function 2
-- **scrypt**: Memory-hard key derivation function
-- **Argon2**: Modern password hashing algorithm
-- **bcrypt**: Adaptive hash function for passwords
-
-**Key Stretching Benefits:**
-
-- **Slow brute force attacks**: Computationally expensive
-- **Salt usage**: Prevent rainbow table attacks
-- **Configurable work factors**: Adjust difficulty over time
-- **Memory hardness**: Resist hardware-based attacks
+Key stretching benefits: computationally expensive to brute-force, salt prevents rainbow table attacks, work factor is adjustable over time.
 
 ### Cloud Storage Encryption
 
 #### Server-Side Encryption (SSE)
 
-Cloud Provider Managed:
-
-- SSE-S3: Amazon S3 managed keys
-- SSE-KMS: AWS Key Management Service
-- SSE-C: Customer-provided keys
-- Automatic encryption: Transparent to applications
-
-Benefits:
-
-- No application changes: Encryption handled by cloud provider
-- Performance optimization: Hardware acceleration
-- Compliance: Meets regulatory requirements
-- Key management: Integrated with cloud services
+- **SSE-S3**: Amazon S3 managed keys
+- **SSE-KMS**: AWS Key Management Service
+- **SSE-C**: customer-provided keys
+- Transparent to applications; encryption handled by the cloud provider
 
 #### Client-Side Encryption (CSE)
 
-Customer Managed:
+- Data encrypted on the client before upload
+- Keys never leave the customer environment (zero-knowledge)
+- Cloud provider cannot decrypt data
+- Requires encryption libraries in the application
 
-- Encrypt before upload: Data encrypted on client side
-- Customer key control: Keys never leave customer environment
-- Zero-knowledge: Cloud provider cannot decrypt data
-- Application integration: Requires encryption libraries
+**Patterns:**
 
-Implementation Patterns:
+- Envelope encryption: encrypt data with a data key; encrypt that key with a master key
+- Hybrid encryption: combine symmetric and asymmetric encryption
+- Key versioning: support key rotation while remaining backward-compatible
 
-- Envelope encryption: Encrypt data with data key, encrypt data key with master key
-- Hybrid encryption: Combine symmetric and asymmetric encryption
-- Key versioning: Support for key rotation and backwards compatibility
+### Encryption Best Practices
 
-### Performance Considerations
+- Use established libraries — do not implement crypto yourself
+- Use cryptographically secure random number generators for key generation
+- Store keys separately from encrypted data
+- Rotate encryption keys regularly
+- Securely delete old keys and temporary plaintext
 
-#### Encryption Overhead
-
-Performance Factors:
-
-- CPU usage: Encryption/decryption processing
-- Memory usage: Key storage and crypto operations
-- I/O impact: Additional reads/writes for metadata
-- Network overhead: Encrypted data may be larger
-
-Optimization Strategies:
-
-- Hardware acceleration: AES-NI CPU instructions
-- Bulk operations: Encrypt large chunks of data
-- Compression first: Compress before encryption
-- Caching: Cache frequently accessed decrypted data
-
-#### Encryption Best Practices
-
-Implementation Guidelines:
-
-- Use established libraries: Don't implement crypto yourself
-- Strong key generation: Use cryptographically secure random number generators
-- Proper key storage: Separate keys from encrypted data
-- Regular key rotation: Change encryption keys periodically
-- Secure deletion: Properly wipe encryption keys and temporary data
-
-------
+---
 
 ## Encryption in Transit
 
@@ -183,301 +141,207 @@ Encryption in transit protects data as it moves between systems, preventing eave
 
 ### Transport Layer Security (TLS)
 
-#### TLS Protocol Overview
+**TLS versions:**
 
-TLS Versions:
+- TLS 1.0/1.1: deprecated, vulnerable
+- TLS 1.2: widely supported; secure with correct configuration
+- TLS 1.3: recommended; improved security and reduced handshake latency
 
-- TLS 1.0/1.1: Deprecated due to security vulnerabilities
-- TLS 1.2: Widely supported, secure with proper configuration
-- TLS 1.3: Latest version with improved security and performance
-#### Certificate Management
+#### Certificate Types
 
-Certificate Types:
+- **DV (Domain Validated)**: basic domain ownership verification
+- **OV (Organization Validated)**: extended organization verification
+- **EV (Extended Validation)**: highest validation level
+- **Wildcard**: covers multiple subdomains
+- **SAN (Subject Alternative Name)**: multiple domains in one certificate
 
-- Domain Validated (DV): Basic domain ownership verification
-- Organization Validated (OV): Extended organization verification
-- Extended Validation (EV): Highest level of validation
-- Wildcard: Covers multiple subdomains
-- Subject Alternative Name (SAN): Multiple domains in one certificate
 #### TLS Configuration Best Practices
 
-Cipher Suite Selection:
+**Cipher suite selection:**
 
-- Perfect Forward Secrecy (PFS): Use ephemeral key exchange
-- Strong encryption: AES-256, ChaCha20-Poly1305
+- Use Perfect Forward Secrecy (PFS) via ephemeral key exchange (ECDHE)
+- Strong encryption: AES-256-GCM, ChaCha20-Poly1305
 - Secure hashing: SHA-256 or better
-- Disable weak ciphers: RC4, 3DES, MD5
+- Disable: RC4, 3DES, MD5, anonymous ciphers
 
-Security Headers:
+**Security headers:**
 
-- HTTP Strict Transport Security (HSTS): Force HTTPS connections
-- Certificate pinning: Pin expected certificates
-- OCSP stapling: Efficient certificate status checking
-- Secure cookie flags: HttpOnly, Secure, SameSite
+- **HSTS**: force HTTPS connections
+- **OCSP stapling**: efficient certificate status checking
+- **Secure cookie flags**: `HttpOnly`, `Secure`, `SameSite`
 
 ### Application-Level Encryption
 
-#### End-to-End Encryption
+#### End-to-End Encryption (E2E)
 
-E2E Encryption Characteristics:
+- Data is encrypted on the sender's device
+- Server stores ciphertext without holding decryption keys
+- Only the recipient can decrypt
+- Provider has zero knowledge of plaintext
 
-- Client-side encryption: Data encrypted on sender's device
-- Server-side storage: Server stores encrypted data without keys
-- Client-side decryption: Only recipient can decrypt data
-- Zero-knowledge: Service provider cannot access plaintext
-
-Implementation Patterns:
-
-- Signal Protocol: Forward secrecy and break-in recovery
-- Double Ratchet: Key derivation for secure messaging
-- Noise Protocol: Framework for secure communication protocols
+**Protocols:** Signal Protocol, Double Ratchet, Noise Protocol Framework
 
 #### API Encryption
 
-Request/Response Encryption:
+- HTTPS: standard for web API encryption
+- Message-level encryption: encrypt specific fields within a message
+- JWE (JSON Web Encryption): encrypted JWT payloads
+- Application-specific encryption schemes where needed
 
-- HTTPS: Standard web API encryption
-- Message-level encryption: Encrypt specific message fields
-- JWT encryption: Encrypted JSON Web Tokens
-- Custom encryption: Application-specific encryption schemes
 ### Database Connection Encryption
 
-#### Database SSL/TLS
+**Database SSL/TLS support:**
 
-Database Encryption Support:
+- MySQL: SSL/TLS with certificate validation
+- PostgreSQL: SSL modes from `require` to `verify-full`
+- Oracle: native network encryption and SSL
+- SQL Server: forced encryption with certificate validation
+- MongoDB: TLS/SSL for client and replica set communication
 
-- MySQL: SSL/TLS connections with certificate validation
-- PostgreSQL: SSL modes from require to verify-full
-- Oracle: Native network encryption and SSL
-- SQL Server: Force encryption and certificate validation
-- MongoDB: TLS/SSL for client-server and replica set communication
+**Connection security levels:**
 
-Connection Security Levels:
+- Encrypted: basic encryption, no certificate validation
+- Authenticated: verify server certificate
+- Mutually authenticated: both client and server present certificates
+- Certificate pinning: pin expected server certificates
 
-- Encrypted: Basic encryption without certificate validation
-- Authenticated: Verify server certificate
-- Mutually authenticated: Both client and server certificates
-- Certificate pinning: Pin expected server certificates
+### Microservices Communication Security
 
-### Micro-Services Communication Security
+#### mTLS (Mutual TLS)
 
-#### Service-to-Service Encryption
+- Services authenticate each other via certificates
+- All inter-service communication is encrypted
+- Certificates rotated automatically
 
-mTLS (Mutual TLS):
+#### Service Mesh Security
 
-- Client authentication: Services authenticate to each other
-- Encrypted communication: All inter-service communication encrypted
-- Certificate management: Each service has its own certificate
-- Automatic rotation: Certificates rotated regularly
-
-Service Mesh Security:
-
-- Automatic mTLS: Service mesh handles encryption automatically
-- Identity management: Service identity and authentication
-- Policy enforcement: Communication policies between services
-- Observability: Encrypted communication monitoring
+- Automatic mTLS managed by the mesh (e.g., Istio, Linkerd)
+- Service identity and authentication built in
+- Communication policies enforced centrally
+- Encrypted traffic observable for monitoring
 
 #### Message Queue Encryption
 
-Queue Encryption Patterns:
+- Transport encryption: TLS on the connection
+- Message encryption: encrypt the payload itself
+- Key distribution: securely share encryption keys
 
-- Transport encryption: TLS for message transmission
-- Message encryption: Encrypt message payload
-- Key distribution: Securely distribute encryption keys
-- Dead letter queues: Handle encryption failures
+**Examples:**
 
-Implementation Examples:
-
-- Apache Kafka: SSL/TLS and SASL authentication
-- RabbitMQ: TLS connections and message encryption
-- Amazon SQS: Server-side encryption with KMS
+- Apache Kafka: SSL/TLS with SASL authentication
+- RabbitMQ: TLS connections and message-level encryption
+- Amazon SQS: server-side encryption with KMS
 - Azure Service Bus: TLS and message-level encryption
 
-------
+---
 
 ## Key Management
 
-Effective key management is critical for encryption security. Poor key management can render strong encryption useless.
+Effective key management is critical. Weak key management renders strong encryption useless.
 
 ### Key Management Lifecycle
 
 #### Key Generation
 
-Key Generation Requirements:
+- Use cryptographically secure random number generators
+- Select appropriate key sizes for the required security level
+- Ensure keys are unique and not reused
 
-- Cryptographically secure random number generators: High entropy sources
-- Appropriate key sizes: Match key size to security requirements
-- Secure generation environment: Protected key generation process
-- Key uniqueness: Ensure keys are not reused or predictable
+**Key types:**
 
-Key Types:
-
-- Symmetric keys: Same key for encryption and decryption
-- Asymmetric key pairs: Public/private key pairs
-- Key encryption keys (KEK): Keys used to encrypt other keys
-- Data encryption keys (DEK): Keys used to encrypt actual data
+- Symmetric keys: same key for encryption and decryption
+- Asymmetric key pairs: public/private
+- KEK (Key Encryption Keys): used to encrypt other keys
+- DEK (Data Encryption Keys): used to encrypt actual data
 
 #### Key Distribution
 
-Secure Key Distribution Methods:
-
-- Manual distribution: Physical delivery of keys
-- Automated distribution: Secure protocols for key exchange
-- Key agreement protocols: Establish shared keys through communication
-- Public key infrastructure (PKI): Certificate-based key distribution
-
-Key Exchange Protocols:
-
-- Diffie-Hellman: Establish shared secret over insecure channel
-- ECDH: Elliptic curve Diffie-Hellman
-- RSA key transport: Encrypt symmetric key with public key
-- Key wrapping: Encrypt keys with key encryption keys
+- Manual: physical delivery
+- Automated: secure key exchange protocols
+- Key agreement: Diffie-Hellman, ECDH
+- PKI: certificate-based distribution
+- Key wrapping: encrypt keys with KEKs
 
 #### Key Storage
 
-Hardware Security Modules (HSMs):
+**HSMs (Hardware Security Modules):**
 
-- Tamper-resistant hardware: Physical protection against attacks
-- Secure key generation: Hardware random number generators
-- Cryptographic processing: Perform crypto operations in hardware
-- Compliance: Meet FIPS 140-2 Level 3/4 requirements
+- Tamper-resistant hardware
+- Hardware random number generation
+- Cryptographic operations performed inside the module
+- FIPS 140-2 Level 3/4 compliant
 
-Software Key Storage:
-
-- Key stores: Secure software-based key storage
-- Operating system keystores: Platform-provided secure storage
-- Application keystores: Application-specific key storage
-- Cloud key management: Managed key storage services
+**Software storage:** OS keystores, application keystores, cloud key management services
 
 #### Key Rotation
 
-Key Rotation Benefits:
+**Benefits:** limits exposure window if a key is compromised, meets compliance requirements, supports forward secrecy
 
-- Limit exposure: Reduce impact of key compromise
-- Compliance requirements: Meet regulatory rotation requirements
-- Cryptographic hygiene: Regular key refresh
-- Forward secrecy: Protect past communications
+**Strategies:**
 
-Rotation Strategies:
-
-- Time-based rotation: Rotate keys on schedule
-- Usage-based rotation: Rotate after certain amount of use
-- Event-based rotation: Rotate after security events
-- Gradual rotation: Support multiple key versions during transition
+- Time-based: rotate on a schedule
+- Usage-based: rotate after a threshold of operations
+- Event-based: rotate after a security incident
+- Gradual: support multiple key versions during transition
 
 ### Cloud Key Management Services
 
-#### AWS Key Management Service (KMS)
+#### AWS KMS
 
-KMS Features:
-
-- Customer Master Keys (CMKs): Master keys for encryption
-- Data keys: Generated for envelope encryption
-- Key policies: Fine-grained access control
-- CloudTrail integration: Audit key usage
-- Multi-region keys: Keys replicated across regions
-
-KMS Integration Patterns:
-
-- Direct encryption: KMS encrypts data directly (up to 4KB)
-- Envelope encryption: KMS encrypts data encryption keys
-- AWS service integration: Automatic encryption for AWS services
-- Cross-account access: Share keys across AWS accounts
+- Customer Managed Keys (CMKs) for envelope encryption
+- Data keys generated for encrypting data directly
+- Fine-grained key policies and CloudTrail audit logging
+- Multi-region key replication
+- Direct encryption up to 4 KB; envelope encryption for larger data
 
 #### Azure Key Vault
 
-Key Vault Capabilities:
-
-- Keys: Store and manage cryptographic keys
-- Secrets: Store connection strings, passwords
-- Certificates: Manage SSL/TLS certificates
-- Hardware security: HSM-backed key protection
-- Access policies: Role-based access control
+- Keys, secrets, and certificates in one service
+- HSM-backed key protection
+- RBAC-based access control
 
 #### Google Cloud KMS
 
-Cloud KMS Features:
-
-- Key rings: Organize related keys
-- Key versions: Support key rotation
-- IAM integration: Identity and access management
-- Audit logging: Cloud Audit Logs integration
-- Hardware security: Cloud HSM integration
-
-### Enterprise Key Management
-
-#### Key Management Infrastructure
-
-Centralized Key Management:
-
-- Key management servers: Dedicated key management infrastructure
-- Policy enforcement: Centralized key usage policies
-- Audit and compliance: Comprehensive key usage logging
-- High availability: Redundant key management services
-
-Distributed Key Management:
-
-- Local key caches: Cache frequently used keys locally
-- Key synchronization: Distribute keys to multiple locations
-- Offline operations: Support for disconnected operations
-- Conflict resolution: Handle key conflicts and updates
-
-#### PKCS#11 Integration
-
-PKCS#11 Standard:
-
-- Cryptographic token interface: Standard API for crypto devices
-- HSM integration: Common interface for hardware security modules
-- Application portability: Applications work with different HSMs
-- Key management: Standardized key management operations
+- Key rings to organize related keys
+- Key versions for rotation support
+- IAM integration and Cloud Audit Logs
+- Cloud HSM for hardware-backed protection
 
 ### Key Management Best Practices
 
-#### Security Practices
+- Separation of duties: require multiple parties for critical key operations
+- Least privilege: minimize who can access which keys
+- Key escrow: maintain secure backups of critical keys
+- Secure deletion: properly destroy old keys
+- Audit logging: record all key access and operations
+- Regular audits and disaster recovery planning
 
-Key Protection:
+---
 
-- Separation of duties: Multiple people required for key operations
-- Least privilege: Minimum necessary key access
-- Key escrow: Secure backup of critical keys
-- Secure deletion: Properly destroy old keys
-- Access logging: Audit all key access and operations
+## Data Anonymization and Masking
 
-Operational Practices:
-
-- Regular audits: Review key usage and access
-- Disaster recovery: Plan for key management system failures
-- Performance monitoring: Track key management system performance
-- Compliance validation: Ensure regulatory compliance
-- Training: Educate staff on key management procedures
-
-------
-
-## Data Anonymization & Masking
-
-Data anonymization and masking protect privacy by removing or obscuring personally identifiable information while preserving data utility for legitimate purposes.
+Data anonymization and masking protect privacy by removing or obscuring PII while preserving data utility for legitimate purposes.
 
 ### Privacy Regulations
 
-GDPR Compliance:
+**GDPR:**
 
-- Lawful basis: Legal justification for data processing
-- Consent management: Obtain and manage user consent
-- Data protection by design: Build privacy into systems
-- Impact assessments: Evaluate privacy risks
-- Breach notification: Report data breaches within 72 hours
+- Requires lawful basis for processing
+- Consent management
+- Privacy by design
+- Privacy impact assessments
+- Breach notification within 72 hours
 
-CCPA (California Consumer Privacy Act):
+**CCPA:**
 
-- Consumer rights: Right to know, delete, opt-out
-- Business obligations: Disclosure and data protection requirements
-- Sale of personal information: Restrictions on data selling
+- Consumer rights: right to know, delete, opt-out
+- Restrictions on selling personal data
 
-HIPAA (Health Insurance Portability and Accountability Act):
+**HIPAA:**
 
-- Protected health information (PHI): Medical and health data
-- Security safeguards: Administrative, physical, technical safeguards
-- Business associate agreements: Third-party data handling requirements
+- Protects PHI (Protected Health Information)
+- Administrative, physical, and technical safeguards required
+- Business associate agreements for third-party data handling
 
 ### Data Anonymization Techniques
 
@@ -485,21 +349,17 @@ HIPAA (Health Insurance Portability and Accountability Act):
 
 **K-Anonymity:**
 
-- Definition: Each record is indistinguishable from at least k-1 other records
-- Quasi-identifiers: Attributes that can identify individuals when combined
-- Generalization: Replace specific values with general categories
-- Suppression: Remove identifying attributes entirely
-
-**Example:**
+- Each record is indistinguishable from at least k−1 other records
+- Achieved through generalization (replacing specific values with ranges) and suppression (removing identifying attributes)
 
 ```
-Original Data:
+Original:
 Age | Zip Code | Salary
 25  | 12345    | $50,000
 26  | 12346    | $55,000
 27  | 12347    | $60,000
 
-3-Anonymous Data:
+3-Anonymous:
 Age Range | Zip Prefix | Salary Range
 25-27     | 123**      | $50,000-$60,000
 25-27     | 123**      | $50,000-$60,000
@@ -508,141 +368,104 @@ Age Range | Zip Prefix | Salary Range
 
 **L-Diversity:**
 
-- Enhanced privacy: Addresses homogeneity attacks on k-anonymous data
-- Sensitive attribute diversity: Ensure diversity in sensitive attributes
-- Implementation: Each equivalence class has at least l distinct values
+- Addresses homogeneity attacks on k-anonymous data
+- Each equivalence class must have at least l distinct values for sensitive attributes
 
 **T-Closeness:**
 
-- Distribution similarity: Sensitive attribute distribution matches overall distribution
-- Enhanced protection: Prevents attribute disclosure attacks
-- Implementation complexity: More difficult to implement than k-anonymity
+- Sensitive attribute distribution within each group must match the overall distribution
+- Stronger protection than l-diversity but more complex to implement
 
 #### Differential Privacy
 
-Differential Privacy Principles:
+- Formal mathematical guarantee of privacy
+- Calibrated random noise added to query results
+- Privacy budget limits total information leakage across queries
 
-- Mathematical guarantee: Formal privacy protection guarantee
-- Noise addition: Add calibrated random noise to query results
-- Privacy budget: Limit total privacy loss over multiple queries
-- Composition: Understand privacy loss from multiple operations
+**Implementation approaches:**
 
-Implementation Approaches:
-
-- Local differential privacy: Noise added on client side
-- Global differential privacy: Noise added on server side
-- Synthetic data generation: Create privacy-preserving synthetic datasets
-- Federated learning: Train models without centralizing data
+- Local differential privacy: noise added on the client side
+- Global differential privacy: noise added on the server side
+- Federated learning: train models without centralizing raw data
+- Synthetic data generation: create privacy-preserving datasets
 
 ### Data Masking Techniques
 
 #### Static Data Masking
 
-Production Data Masking:
+Applied to data at rest (e.g., production data copied to non-production environments):
 
-- Consistent masking: Same values always masked the same way
-- Referential integrity: Maintain relationships between tables
-- Format preservation: Keep original data format and type
-- Irreversible masking: Cannot recover original values
+- Consistent masking: same input always produces the same masked output
+- Referential integrity maintained across tables
+- Format preserved (same type and structure)
+- Irreversible: original values cannot be recovered
 
-Masking Methods:
-
-- Substitution: Replace with realistic but fake values
-- Shuffling: Randomly redistribute values within column
-- Number variance: Add random variation to numeric values
-- Date shifting: Shift dates by random but consistent amounts
+**Methods:** substitution, shuffling, numeric variance, date shifting
 
 #### Dynamic Data Masking
 
-Real-time Masking:
+Applied at query time:
 
-- Query-time masking: Mask data as it's retrieved
-- Role-based masking: Different masking based on user roles
-- Context-aware masking: Mask based on query context
-- Performance considerations: Minimal impact on query performance
-
-Implementation Patterns:
-
-- Database-level masking: Built into database engine
-- Application-level masking: Implemented in application layer
-- Proxy-based masking: Intercept and mask database queries
-- View-based masking: Use database views with masking logic
+- Role-based: different masking rules per user role
+- Context-aware: masking based on query context
+- Implemented at database level, application layer, or via proxy
 
 ### Tokenization
 
-#### Format-Preserving Tokenization
+Replaces sensitive data with a non-sensitive token. The mapping is stored in a secure token vault.
 
-Tokenization Characteristics:
+**Characteristics:**
 
-- Token format: Tokens match original data format
-- Irreversible mapping: Cannot derive original value from token
-- Consistent tokenization: Same value always gets same token
-- Referential integrity: Maintain data relationships
-
-**Tokenization vs Encryption:**
+- Format-preserving: tokens match the original data format
+- Consistent: same value always maps to the same token
+- Irreversible without the vault
 
 | Aspect             | Tokenization                     | Encryption                     |
 | ------------------ | -------------------------------- | ------------------------------ |
 | **Reversibility**  | Irreversible without token vault | Reversible with key            |
 | **Format**         | Preserves original format        | May change format              |
-| **Performance**    | Fast lookup operations           | Crypto operations overhead     |
+| **Performance**    | Fast lookup                      | Crypto overhead                |
 | **Key management** | Centralized token vault          | Distributed key management     |
-| **Compliance**     | Often removes data from scope    | Data still in compliance scope |
+| **Compliance**     | Often removes data from scope    | Data remains in compliance scope |
 
 ### Synthetic Data Generation
 
-Use Cases:
+**Use cases:** development/testing, analytics, ML model training, cross-organization data sharing
 
-- Development and testing: Realistic data without privacy risks
-- Analytics and research: Statistical analysis on privacy-safe data
-- Machine learning: Train models without exposing sensitive data
-- Data sharing: Share data between organizations safely
+**Statistical methods:**
 
-#### Generation Techniques
+- Parametric models: generate data based on statistical distributions
+- Non-parametric models: use empirical distributions
+- Copula-based generation: preserve correlation structures
+- Bootstrap sampling
 
-Statistical Methods:
+**ML methods:**
 
-- Parametric models: Generate data based on statistical distributions
-- Non-parametric models: Use empirical data distributions
-- Copula-based generation: Preserve correlation structures
-- Bootstrap sampling: Generate variations of existing data
-
-Machine Learning Methods:
-
-- Generative Adversarial Networks (GANs): Generate realistic synthetic data
-- Variational Autoencoders (VAEs): Learn data distributions for generation
-- Synthetic data platforms: Commercial tools for synthetic data generation
+- GANs (Generative Adversarial Networks): generate realistic synthetic data
+- VAEs (Variational Autoencoders): learn data distributions for generation
 
 ### Implementation Strategies
 
 #### Data Discovery and Classification
 
-Automated Discovery:
+- Pattern matching (regex) to identify PII
+- ML-based classification
+- Database schema and content scanning
+- Data lineage tracking
 
-- Pattern matching: Identify PII using regular expressions
-- Machine learning: Classify data using trained models
-- Database scanning: Analyze database schemas and content
-- Data lineage: Track data flow through systems
-
-Classification Frameworks:
-
-- Sensitivity levels: Public, internal, confidential, restricted
-- Data types: PII, PHI, financial, intellectual property
-- Regulatory scope: GDPR, HIPAA, PCI DSS coverage
-- Processing requirements: Retention, anonymization, encryption needs
+**Classification dimensions:** sensitivity level, data type (PII/PHI/financial), regulatory scope, processing requirements (retention, anonymization, encryption)
 
 #### Privacy Engineering
 
-Privacy by Design:
+**Privacy by design:**
 
-- Early integration: Build privacy into system design
-- Default privacy: Strongest privacy settings by default
-- Embedded privacy: Privacy integral to system functionality
-- Transparency: Clear visibility into privacy practices
+- Integrate privacy into system design from the start
+- Strongest privacy settings as the default
+- Transparency about privacy practices
 
-Privacy Impact Assessments:
+**Privacy impact assessments:**
 
-- Risk identification: Identify privacy risks in data processing
-- Mitigation strategies: Develop risk reduction measures
-- Compliance validation: Ensure regulatory compliance
-- Ongoing monitoring: Continuous privacy risk assessment
+- Identify privacy risks in data processing
+- Develop risk mitigation strategies
+- Validate compliance
+- Monitor continuously

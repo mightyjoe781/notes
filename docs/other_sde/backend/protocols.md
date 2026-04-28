@@ -1,44 +1,41 @@
 # Protocols
 
-## What is a protocol
+## What Is a Protocol
 
-- A system that allows two parties to communicate
-- A protocol is designed with a set of properties
-- Depending on the purpose of the protocol
-- TCP, uDP, HTTP, gRPC, FTP
+A system that defines how two parties communicate, designed around a specific set of properties depending on its purpose. Examples: TCP, UDP, HTTP, gRPC, FTP.
 
 ## Protocol Properties
 
-- Data Format
-    - Text based (plain text, JSON, XML)
-    - Binary (protobuff, RESP, h2, h3)
-- Transfer Mode
-    - Message Based (UDP, HTTP)
-    - Stream (TCP, WebRTC)
-- Addressing System
+- **Data Format**
+    - Text-based: plain text, JSON, XML
+    - Binary: Protobuf, RESP, HTTP/2, HTTP/3
+- **Transfer Mode**
+    - Message-based: UDP, HTTP
+    - Stream: TCP, WebRTC
+- **Addressing System**
     - DNS name, IP, MAC
-- Directionality
-    - Bidirectional (TCP)
-    - Unidirectional (HTTP)
-    - Full/Half Duplex
-- State
-    - Stateful (TCP, gRPC, apache thrift)
-    - Stateless (UDP, HTTP)
-- Routing
-    - proxies, gateways
-- Flow & Congestion Control
-    - TCP (Flow & Congestion)
-    - UDP (No Control)
-- Error Management
-    - Error Code
+- **Directionality**
+    - Bidirectional: TCP
+    - Unidirectional: HTTP
+    - Full / half duplex
+- **State**
+    - Stateful: TCP, gRPC, Apache Thrift
+    - Stateless: UDP, HTTP
+- **Routing**
+    - Proxies, gateways
+- **Flow & Congestion Control**
+    - TCP: both flow and congestion control
+    - UDP: no control
+- **Error Management**
+    - Error codes
     - Retries and timeouts
 
-## Important Topics (Pre-requisites)
+## Prerequisites
 
-[OSI Layer](../../networking/neteng/fundamentals.md)
-[IP](../../networking/neteng/ip.md)
-[UDP](../../networking/neteng/udp.md)
-[TCP](../../networking/neteng/tcp.md)
-[DNS & TLS](../../networking/neteng/protocols.md)
-[HTTP & its versions](../../networking/neteng/https.md)
+[OSI Layer](../../networking/neteng/fundamentals.md)  
+[IP](../../networking/neteng/ip.md)  
+[UDP](../../networking/neteng/udp.md)  
+[TCP](../../networking/neteng/tcp.md)  
+[DNS & TLS](../../networking/neteng/protocols.md)  
+[HTTP & its versions](../../networking/neteng/https.md)  
 [More Protocols](../../networking/neteng/protocols2.md)

@@ -1,185 +1,137 @@
 # Authorization
 
-Authorization determines what authenticated users can access and what actions they can perform. It's the second critical component of security after authentication, controlling resource access based on policies, roles, and attributes.
+Authorization determines what authenticated users can access and what actions they can perform. It is the second critical security component after authentication, controlling resource access based on policies, roles, and attributes.
 
-Some of the Key Principles for Authorization
+**Key principles:**
 
-- Principle of least privilege: Grant minimum necessary access
-- Defense in depth: Multiple layers of access control
-- Separation of duties: Distribute critical operations across multiple roles
-- Need-to-know basis: Access only to required information
-- Regular access reviews: Periodic permission audits
+- Least privilege: grant only the minimum necessary access
+- Defense in depth: multiple layers of access control
+- Separation of duties: distribute critical operations across roles
+- Need-to-know: access only to required information
+- Regular access reviews: periodic permission audits
 
-Overview of Authorization Models
+**Authorization models:**
 
-- Discretionary Access Control (DAC): Owner controls access
-- Mandatory Access Control (MAC): System enforces access policies
-- Role-Based Access Control (RBAC): Access based on user roles
-- Attribute-Based Access Control (ABAC): Dynamic access based on attributes
+- **DAC** (Discretionary Access Control): owner controls access
+- **MAC** (Mandatory Access Control): system enforces access policies
+- **RBAC** (Role-Based Access Control): access based on user roles
+- **ABAC** (Attribute-Based Access Control): dynamic access based on attributes
 
 ## Role-Based Access Control (RBAC)
 
-NOTE: most important, as it is the industry standard in general.
-
-RBAC assigns permissions to roles rather than individual users, simplifying access management by grouping users with similar access needs into roles.
+RBAC is the industry standard. It assigns permissions to roles rather than individual users, simplifying access management by grouping users with similar needs.
 
 ### RBAC Core Components
 
 #### Role
 
-Role Definition:
+- Reflects a job function or organizational responsibility
+- A named collection of related permissions
+- Can inherit from parent roles (hierarchical)
+- Should have clear separation of concerns
 
-- Job function: Roles reflect organizational responsibilities
-- Permission sets: Collections of related permissions
-- Hierarchical structure: Roles can inherit from other roles
-- Separation of concerns: Distinct roles for different functions
-
-Common Role Examples:
-
-- Admin: Full system access and configuration
-- Manager: Department-level access and user management
-- Employee: Standard user access to assigned resources
-- Guest: Limited read-only access to public resources
-- Service Account: Automated system access
+**Common examples:** Admin, Manager, Employee, Guest, Service Account
 
 #### Permissions
 
-Permission Granularity:
+**Granularity:**
 
-- Coarse-grained: High-level operations (read, write, delete)
-- Fine-grained: Specific actions (update_profile, approve_invoice)
-- Resource-specific: Permissions tied to specific resources
-- Operation-based: Actions users can perform
+- Coarse-grained: high-level operations (read, write, delete)
+- Fine-grained: specific actions (`update_profile`, `approve_invoice`)
+- Resource-specific: permissions tied to particular resources
+- Operation-based: what actions a user can perform
 
-Permission Categories:
+**Categories:** data, functional, administrative, API
 
-- Data permissions: Access to specific data types
-- Functional permissions: Access to application features
-- Administrative permissions: System configuration and management
-- API permissions: Access to specific endpoints or services
+#### Role Assignment Strategies
 
-#### Role Assignments Strategies
-
-- **Direct assignment**: User directly assigned to role
-- **Group-based assignment**: Users inherit roles through group membership
-- **Automatic assignment**: Rules-based role assignment
-- **Temporary assignment**: Time-limited role access
+- **Direct assignment**: user explicitly assigned to a role
+- **Group-based**: users inherit roles through group membership
+- **Automatic**: rules-based role assignment
+- **Temporary**: time-limited role access
 
 ### RBAC Implementation Patterns
 
-There are 3 types of models for RBAC implementation
+Three models:
 
-- Flat RBAC Model : simple role structure
-- Hierarchical RBAC Model : Child roles inherit parent permissions
-- Constraint RBAC Model : conflicting roles are not assigned to users and can't be active simultaneously
+- **Flat RBAC**: simple structure, no hierarchy
+- **Hierarchical RBAC**: child roles inherit parent permissions
+- **Constrained RBAC**: conflicting roles cannot be simultaneously assigned or active
 
-#### Flat RBAC Model
+#### Flat RBAC
 
-**Characteristics:**
+- Simple, direct user-to-role mapping
+- Easy to understand and audit
+- Becomes unwieldy with many roles
+- Best for small organizations or applications with clear job function boundaries
 
-- **Simple role structure**: No role hierarchy
-- **Direct user-role assignment**: Straightforward mapping
-- **Easy to understand**: Clear permission boundaries
-- **Limited scalability**: Can become complex with many roles
+#### Hierarchical RBAC
 
-**Use Cases:**
-
-- Small organizations
-- Simple applications
-- Clear job function boundaries
-- Limited permission requirements
-
-#### Hierarchical RBAC Model
-
-**Role Hierarchy Benefits:**
-
-- **Permission inheritance**: Child roles inherit parent permissions
-- **Reduced redundancy**: Common permissions defined once
-- **Organizational alignment**: Reflects company structure
-- **Simplified management**: Easier role maintenance
+- Child roles inherit parent permissions
+- Reduces redundancy by defining common permissions once
+- Mirrors organizational structure
 
 ![](assets/Pasted%20image%2020251229192730.png)
 
-#### Constrained RBAC Model
+#### Constrained RBAC
 
 **Separation of Duties (SoD):**
 
-- **Static SoD**: Conflicting roles cannot be assigned to same user
-- **Dynamic SoD**: Conflicting roles cannot be active simultaneously
-- **Conflict resolution**: Policies for handling role conflicts
+- **Static SoD**: conflicting roles cannot be assigned to the same user
+- **Dynamic SoD**: conflicting roles cannot be active in the same session
 
-**Constraint Examples:**
+**Examples:**
 
-- **Financial controls**: Separate roles for expense approval and payment
-- **Development controls**: Separate roles for code development and deployment
-- **Administrative controls**: Separate roles for user creation and permission assignment
+- Finance: separate roles for expense approval and payment processing
+- Development: separate roles for code authoring and deployment
+- Admin: separate roles for user creation and permission assignment
 
 ### RBAC Architecture Patterns
 
 #### Centralized RBAC
 
-Central Authorization Service:
+A central authorization service acts as the single source of truth:
 
-- Single source of truth: All authorization decisions centralized
-- Consistent policies: Uniform access control across systems
-- Simplified auditing: Central logging and monitoring
-- Performance considerations: Network latency for authorization calls
+1. **Policy Decision Point (PDP)**: evaluates access requests
+2. **Policy Information Point (PIP)**: provides contextual data
+3. **Policy Enforcement Point (PEP)**: enforces decisions
+4. **Policy Administration Point (PAP)**: manages policies
 
-Implementation Approach:
-
-1. Policy Decision Point (PDP): Evaluates access requests
-2. Policy Information Point (PIP): Provides contextual information
-3. Policy Enforcement Point (PEP): Enforces authorization decisions
-4. Policy Administration Point (PAP): Manages policies and rules
+**Trade-offs:** consistent policies and centralized auditing, but introduces network latency and a potential single point of failure.
 
 #### Distributed RBAC
 
-Distributed Authorization:
+- Services cache role and permission data locally
+- Authorization decisions are made independently per service
+- Reduced latency, but requires synchronization
 
-- Local caching: Cache role and permission data locally
-- Eventual consistency: Accept temporary inconsistencies
-- Service autonomy: Services make independent authorization decisions
-- Reduced latency: No network calls for authorization
+**Synchronization strategies:**
 
-Synchronization Strategies:
-
-- Event-driven updates: Push changes to distributed services
-- Pull-based refresh: Periodic synchronization
-- Hybrid approach: Critical changes pushed, routine changes pulled
+- Event-driven: push policy changes to services
+- Pull-based: periodic synchronization
+- Hybrid: critical changes pushed, routine changes pulled
 
 ### RBAC Best Practices
 
-#### Role Design Guidelines
+**Role design:**
 
-Effective Role Modeling:
+- Align roles to actual business functions
+- Grant minimum necessary permissions per role
+- Define clear boundaries between roles
+- Review roles periodically
 
-- Business alignment: Roles reflect actual job functions
-- Minimal privilege: Each role has minimum necessary permissions
-- Clear boundaries: Distinct responsibilities between roles
-- Regular review: Periodic assessment of role relevance
+**Common mistakes:**
 
-Common Role Design Mistakes:
+- Role explosion: too many fine-grained roles
+- Permission creep: roles accumulating unnecessary permissions
+- Overlapping roles: multiple roles with redundant permissions
+- Generic roles that don't reflect actual needs
 
-- Role explosion: Too many fine-grained roles
-- Permission creep: Roles accumulate unnecessary permissions
-- Overlapping roles: Multiple roles with similar permissions
-- Generic roles: Roles that don't reflect actual needs
+**Permission naming:**
 
-#### Permission Management
-
-Permission Lifecycle:
-
-- Creation: Define new permissions as features develop
-- Assignment: Associate permissions with appropriate roles
-- Review: Regular assessment of permission necessity
-- Retirement: Remove obsolete permissions
-
-Permission Naming Conventions:
-
-- Resource-action format: `user:read`, `invoice:approve`
-- Namespace organization: Group related permissions
-- Consistent terminology: Standardized action names
-- Hierarchical structure: Support permission inheritance
+- Use `resource:action` format (`user:read`, `invoice:approve`)
+- Group related permissions by namespace
+- Use consistent, standardized action names
 
 ## Attribute-Based Access Control (ABAC)
 
@@ -189,83 +141,55 @@ ABAC makes authorization decisions based on attributes of users, resources, acti
 
 #### Attributes
 
-**Subject Attributes (User):**
+**Subject (user):** identity, role, clearance level, location, device type
 
-- **Identity attributes**: User ID, email, department
-- **Role attributes**: Current roles and responsibilities
-- **Clearance attributes**: Security clearance level
-- **Contextual attributes**: Current location, device type
+**Resource:** classification (public/internal/confidential/secret), owner, sensitivity
 
-**Resource Attributes:**
+**Action:** operation type (read/write/delete), risk level, audit requirement
 
-- **Classification**: Public, internal, confidential, secret
-- **Owner**: Resource creator or responsible party
-- **Creation date**: When resource was created
-- **Sensitivity**: Data sensitivity level
-
-**Action Attributes:**
-
-- **Operation type**: Read, write, update, delete
-- **Risk level**: Low, medium, high risk operations
-- **Audit requirement**: Operations requiring audit trails
-
-**Environment Attributes:**
-
-- **Time**: Current time, business hours
-- **Location**: Geographic location, network zone
-- **Risk context**: Current threat level
-- **System state**: Maintenance mode, emergency status
+**Environment:** time, geographic location, threat level, system state
 
 #### Policies
 
-**Policy Structure:**
-
 ```
-IF (subject.department == "Finance" AND 
-    resource.classification == "Financial" AND 
-    action == "read" AND 
+IF (subject.department == "Finance" AND
+    resource.classification == "Financial" AND
+    action == "read" AND
     environment.time WITHIN business_hours)
 THEN PERMIT
 ELSE DENY
 ```
 
-**Policy Categories:**
-
-- **Access policies**: Basic resource access rules
-- **Obligation policies**: Required actions after access granted
-- **Advice policies**: Recommendations for access decisions
-- **Delegation policies**: Rules for delegating permissions
+**Policy categories:** access policies, obligation policies (required actions post-grant), advice policies, delegation policies
 
 ### ABAC Implementation Patterns
 
 #### XACML (eXtensible Access Control Markup Language)
 
-**XACML Architecture:**
+**Architecture components:**
 
-- **Policy Administration Point (PAP)**: Creates and manages policies
-- **Policy Decision Point (PDP)**: Evaluates access requests
-- **Policy Enforcement Point (PEP)**: Enforces decisions
-- **Policy Information Point (PIP)**: Provides attribute values
+- **PAP** (Policy Administration Point): creates and manages policies
+- **PDP** (Policy Decision Point): evaluates access requests
+- **PEP** (Policy Enforcement Point): enforces decisions
+- **PIP** (Policy Information Point): provides attribute values
 
-**XACML Request Flow:**
+**Request flow:**
 
-1. **Access request**: User attempts resource access
-2. **PEP intercepts**: Enforcement point captures request
-3. **Attribute gathering**: PIP provides relevant attributes
-4. **Policy evaluation**: PDP evaluates applicable policies
-5. **Decision response**: PERMIT, DENY, or INDETERMINATE
-6. **Enforcement**: PEP enforces the decision
+1. User attempts resource access
+2. PEP intercepts the request
+3. PIP gathers relevant attributes
+4. PDP evaluates applicable policies
+5. Decision returned: PERMIT, DENY, or INDETERMINATE
+6. PEP enforces the decision
 
 #### Policy Languages
 
-**Common Policy Languages:**
-
-- **XACML**: XML-based standard policy language
-- **Cedar**: Amazon's policy language for authorization
+- **XACML**: XML-based standard
+- **Cedar**: Amazon's policy language
 - **Rego**: Open Policy Agent's policy language
-- **Custom DSLs**: Domain-specific policy languages
+- **Custom DSLs**: domain-specific policy languages
 
-**Policy Example (Cedar-style):**
+**Example (Cedar-style):**
 
 ```
 permit (
@@ -281,30 +205,25 @@ permit (
 
 ### ABAC Use Cases
 
-#### Dynamic Access Control
+**Dynamic access control:**
 
-**Contextual Authorization:**
+- Time-based: different permissions during business hours
+- Location-based: geographic restrictions
+- Device-based: different permissions per device type
+- Risk-based: dynamic permissions based on current risk level
 
-- **Time-based access**: Different permissions during business hours
-- **Location-based access**: Access restrictions based on geographic location
-- **Device-based access**: Different permissions for different device types
-- **Risk-based access**: Dynamic permissions based on risk assessment
+**Example scenarios:**
 
-**Example Scenarios:**
+- Healthcare: doctor access to patient records based on assignment
+- Financial services: trading permissions based on market conditions
+- Government: clearance-based access to classified information
+- Enterprise: project-based access to confidential documents
 
-- **Healthcare**: Doctor access to patient records based on assignment
-- **Financial services**: Trading permissions based on market conditions
-- **Government**: Clearance-based access to classified information
-- **Enterprise**: Project-based access to confidential documents
+**Fine-grained control:**
 
-#### Fine-Grained Permissions
-
-**Granular Control Examples:**
-
-- **Document sharing**: Author can read/write, reviewers can comment only
-- **Database access**: Different query permissions based on data sensitivity
-- **API access**: Rate limiting based on user tier and resource type
-- **Feature access**: Beta features available to specific user segments
+- Document sharing: author can read/write; reviewers can comment only
+- API access: rate limiting based on user tier and resource type
+- Feature flags: beta features available to specific user segments
 
 ## OAuth 2.0 Flow Patterns
 
@@ -312,304 +231,207 @@ OAuth 2.0 is an authorization framework that enables applications to obtain limi
 
 ### OAuth 2.0 Roles
 
-#### Core Roles
-
-**Resource Owner:**
-
-- **Definition**: Entity that owns the protected resource (typically the user)
-- **Capabilities**: Can grant access to protected resources
-- **Examples**: End users, system accounts
-
-**Client:**
-
-- **Definition**: Application requesting access to protected resources
-- **Types**: Confidential clients, public clients
-- **Examples**: Web applications, mobile apps, SPA applications
-
-**Authorization Server:**
-
-- **Definition**: Server that authenticates the resource owner and issues access tokens
-- **Responsibilities**: Token issuance, refresh, and revocation
-- **Examples**: Google OAuth, Auth0, Okta
-
-**Resource Server:**
-
-- **Definition**: Server hosting protected resources
-- **Capabilities**: Accepts and validates access tokens
-- **Examples**: API servers, microservices
+- **Resource Owner**: entity that owns the protected resource (typically the user)
+- **Client**: application requesting access (web app, mobile app, SPA)
+- **Authorization Server**: authenticates the resource owner and issues tokens (e.g., Google OAuth, Auth0, Okta)
+- **Resource Server**: hosts protected resources; validates access tokens
 
 ### OAuth 2.0 Grant Types
 
 #### Authorization Code Grant
 
-**Use Case:** Server-side web applications with secure backend
+**Use case:** server-side web applications with a secure backend
 
 ![](assets/Pasted%20image%2020251229193437.png)
 
-**Flow Steps:**
+**Flow:**
 
-1. **Client redirects user** to authorization server
-2. **User authenticates** and grants permission
-3. **Authorization server redirects back** with authorization code
-4. **Client exchanges code** for access token (backend)
-5. **Client uses access token** to access resources
+1. Client redirects user to the authorization server
+2. User authenticates and grants permission
+3. Authorization server redirects back with an authorization code
+4. Client exchanges the code for an access token (server-to-server)
+5. Client uses the access token to access resources
 
-**Security Characteristics:**
+**Security characteristics:**
 
-- **Authorization code** never exposed to user agent
-- **Client authentication** required for token exchange
-- **PKCE extension** recommended for additional security
-- **Suitable for** confidential clients
+- Authorization code is never exposed to the user agent
+- Client authentication required for token exchange
+- PKCE recommended for additional security
+- Suitable for confidential clients
 
 #### Implicit Grant
 
-**Use Case:** Single-page applications (legacy pattern)
+**Use case:** single-page applications (legacy — deprecated)
 
-**Flow Steps:**
-
-1. **Client redirects user** to authorization server
-2. **User authenticates** and grants permission
-3. **Authorization server redirects back** with access token in URL fragment
-4. **Client extracts token** from URL fragment
-5. **Client uses access token** to access resources
-
-**Security Considerations:**
-
-- **Access token exposed** in URL fragment
-- **No client authentication** possible
-- **Deprecated** in OAuth 2.1
-- **Replaced by** Authorization Code + PKCE
+- Access token returned directly in the URL fragment
+- No client authentication possible
+- Replaced by Authorization Code + PKCE in OAuth 2.1
 
 #### Client Credentials Grant
 
-**Use Case:** Machine-to-machine communication
+**Use case:** machine-to-machine communication
 
 ![](assets/Pasted%20image%2020251229193800.png)
 
-**Flow Steps:**
+**Flow:**
 
-1. **Client authenticates** with authorization server
-2. **Authorization server validates** client credentials
-3. **Authorization server issues** access token
-4. **Client uses access token** to access resources
+1. Client authenticates with the authorization server
+2. Authorization server validates client credentials
+3. Authorization server issues an access token
+4. Client uses the token to access resources
 
-**Characteristics:**
-
-- **No user interaction** required
-- **Client acts on own behalf** not on behalf of user, there is a OBO flow for that
-- **Suitable for** backend services, APIs
-- **Requires** client authentication
+No user interaction. Client acts on its own behalf (not on behalf of a user — see On-Behalf-Of flow for that). Suitable for backend services and APIs.
 
 #### Resource Owner Password Credentials Grant
 
-**Use Case:** Highly trusted applications (legacy pattern)
+**Use case:** highly trusted first-party applications (legacy — deprecated)
 
 ![](assets/Pasted%20image%2020251229194023.png)
 
-**Flow Steps:**
-
-1. **User provides credentials** directly to client
-2. **Client forwards credentials** to authorization server
-3. **Authorization server validates** and issues access token
-4. **Client uses access token** to access resources
-
-**Security Concerns:**
-
-- **Client handles user credentials** directly
-- **Risk of credential exposure**
-- **Deprecated** in favor of other flows
-- **Only for** highly trusted applications
+- User provides credentials directly to the client
+- Client forwards credentials to the authorization server
+- High risk of credential exposure; deprecated in favor of other flows
 
 ### Modern OAuth 2.0 Patterns
 
 #### Authorization Code + PKCE
 
-More Here : [Link](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce)
+Reference: https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce
 
 **PKCE (Proof Key for Code Exchange):**
 
-- **Code verifier**: Cryptographically random string
-- **Code challenge**: SHA256 hash of code verifier
-- **Challenge method**: S256 or plain
-- **Verification**: Authorization server verifies challenge matches verifier
+- **Code verifier**: cryptographically random string generated by the client
+- **Code challenge**: SHA-256 hash of the code verifier
+- **Verification**: authorization server checks that the challenge matches the verifier at token exchange time
 
-**Enhanced Security:**
-
-- **Protection against** code interception attacks
-- **Suitable for** public clients (mobile apps, SPAs)
-- **Recommended for** all OAuth 2.0 clients
-- **Required in** OAuth 2.1
+Protects against authorization code interception. Mandatory for public clients (mobile apps, SPAs); recommended for all OAuth 2.0 clients; required in OAuth 2.1.
 
 #### Device Authorization Grant
 
-More Here : [Link](https://auth0.com/docs/get-started/authentication-and-authorization-flow/device-authorization-flow)
+Reference: https://auth0.com/docs/get-started/authentication-and-authorization-flow/device-authorization-flow
 
-**Use Case:** Input-constrained devices (smart TVs, IoT devices)
+**Use case:** input-constrained devices (smart TVs, IoT)
 
-**Flow Steps:**
+**Flow:**
 
-1. **Device requests** device code from authorization server
-2. **Authorization server returns** device code and user code
-3. **Device displays** user code and verification URL
-4. **User visits URL** on another device and enters user code
-5. **User authenticates** and grants permission
-6. **Device polls** for access token
-7. **Authorization server issues** access token when authorized
+1. Device requests a device code from the authorization server
+2. Authorization server returns a device code and a user code
+3. Device displays the user code and verification URL
+4. User visits the URL on another device and enters the user code
+5. User authenticates and grants permission
+6. Device polls for an access token
+7. Authorization server issues the token once authorized
 
 ### OAuth 2.0 Security Best Practices
 
-#### Token Security
+**Access token protection:**
 
-**Access Token Protection:**
+- Short expiration (typically ≤ 1 hour)
+- Minimal scope (least privilege)
+- Always use HTTPS
+- Store in HttpOnly cookies or secure storage APIs
 
-- **Short expiration times**: Typically 1 hour or less
-- **Minimal scope**: Principle of least privilege
-- **Secure transmission**: Always use HTTPS
-- **Secure storage**: HttpOnly cookies or secure storage APIs
+**Refresh token security:**
 
-**Refresh Token Security:**
+- Longer validity (days to months)
+- Rotation: issue a new refresh token on each use
+- Bind to specific client instance
+- Support immediate revocation
 
-- **Longer validity**: Days to months
-- **Rotation**: Issue new refresh token with each use
-- **Binding**: Tie to specific client instance
-- **Revocation**: Immediate invalidation capability
+**Confidential clients:**
 
-#### Client Security
+- Strong client authentication
+- Rotate client secrets regularly
+- Protect secrets in secure storage
 
-**Confidential Client Security:**
+**Public clients:**
 
-- **Client authentication**: Strong client credentials
-- **Secret rotation**: Regular client secret updates
-- **Secure storage**: Protect client secrets
-- **Certificate-based authentication**: Enhanced security
-
-**Public Client Security:**
-
-- **PKCE mandatory**: Always use PKCE for public clients
-- **Dynamic client registration**: Avoid hardcoded credentials
-- **App attestation**: Verify app integrity
-- **Certificate pinning**: Prevent man-in-the-middle attacks
+- Always use PKCE
+- Use dynamic client registration where possible
+- Consider app attestation and certificate pinning
 
 ### OAuth 2.0 Implementation Patterns
 
 #### API Gateway Integration
 
-**Gateway-based Authorization:**
-
-- **Centralized token validation**: Gateway validates all tokens
-- **Token introspection**: Real-time token validation
-- **Scope enforcement**: Gateway enforces token scopes
-- **Rate limiting**: Per-token rate limiting
-
-**Benefits:**
-
-- **Simplified services**: Services don't handle token validation
-- **Consistent enforcement**: Uniform authorization across APIs
-- **Centralized logging**: Single point for access logs
-- **Policy management**: Central authorization policies
+- Gateway validates all tokens centrally (introspection or local validation)
+- Gateway enforces token scopes and rate limits
+- Services are simplified — no token validation logic required
+- Centralized access logs and policy management
 
 #### Microservices Authorization
 
-**Token Propagation Patterns:**
+**Token propagation patterns:**
 
-- **Token relay**: Forward original token between services
-- **Token exchange**: Exchange tokens for service-specific tokens
-- **Service-to-service tokens**: Separate tokens for internal communication
+- **Token relay**: forward the original token between services
+- **Token exchange**: exchange for a service-specific token (RFC 8693)
+- **Service-to-service tokens**: separate tokens for internal communication
 
-**Service Mesh Integration:**
+**Service mesh integration:**
 
-- **Automatic token injection**: Sidecar proxy handles tokens
-- **mTLS for service communication**: Encrypted service-to-service communication
-- **Policy enforcement**: Mesh enforces authorization policies
+- Sidecar proxy handles token injection automatically
+- mTLS for encrypted service-to-service communication
+- Mesh enforces authorization policies
 
 ### OAuth 2.0 Extensions
 
 #### OpenID Connect Integration
 
-**ID Token Addition:**
+OIDC adds an authentication layer on top of OAuth 2.0:
 
-- **Authentication layer**: Built on top of OAuth 2.0
-- **User identity**: ID token contains user information
-- **Standard claims**: Predefined user attributes
-- **Token validation**: Additional validation requirements
+- **ID token**: JWT containing user identity information
+- **Standard claims**: predefined user attributes
+- Additional token validation requirements
 
 #### Token Exchange (RFC 8693)
 
-**Token Exchange Use Cases:**
+Use cases:
 
-- **Service delegation**: Exchange user token for service token
-- **Token adaptation**: Convert between token formats
-- **Scope reduction**: Obtain tokens with reduced scope
-- **Context modification**: Add context to existing tokens
+- Delegation: exchange a user token for a service-specific token
+- Token format conversion
+- Scope reduction: obtain a token with narrower permissions
+- Context modification: add context to an existing token
 
-------
+---
 
 ## Authorization Architecture Patterns
 
 ### Centralized Authorization
 
-#### Authorization Service Architecture
+A dedicated authorization service as the single source of truth:
 
-**Components:**
+**Components:** policy engine, policy repository, decision cache, audit service
 
-- **Policy engine**: Evaluates authorization policies
-- **Policy repository**: Stores authorization rules
-- **Decision cache**: Caches frequent authorization decisions
-- **Audit service**: Logs authorization events
+**Benefits:** consistent policies, centralized management, complete audit trail, easier policy updates
 
-**Benefits:**
-
-- **Consistent policies**: Single source of truth for authorization
-- **Centralized management**: Easier policy administration
-- **Audit trail**: Complete authorization logging
-- **Policy evolution**: Easier to update authorization logic
-
-**Challenges:**
-
-- **Single point of failure**: Authorization service availability critical
-- **Performance impact**: Network latency for authorization calls
-- **Scalability concerns**: All services depend on authorization service
+**Challenges:** single point of failure, network latency on every authorization check, scalability bottleneck
 
 ### Distributed Authorization
 
-#### Service-Level Authorization
-
 **Patterns:**
 
-- **Embedded authorization**: Each service handles its own authorization
-- **Shared libraries**: Common authorization logic across services
-- **Event-driven updates**: Push policy changes to services
-- **Local caching**: Cache authorization data locally
+- Embedded authorization: each service handles its own logic
+- Shared libraries: common authorization code across services
+- Event-driven policy updates: push changes to all services
+- Local caching: cache authorization data per service
 
-**Trade-offs:**
+**Trade-offs:** faster local decisions and service autonomy, but risk of policy divergence and distributed management complexity.
 
-- **Performance**: Faster local authorization decisions
-- **Autonomy**: Services independently manage authorization
-- **Consistency**: Potential for policy divergence
-- **Complexity**: Distributed policy management
+### Multi-Layer Authorization
 
-### Hybrid Authorization Patterns
+**Authorization layers:**
 
-#### Multi-Layer Authorization
+1. Network layer: firewall and network ACLs
+2. Gateway layer: API gateway authorization
+3. Service layer: service-specific authorization
+4. Data layer: database-level access control
 
-**Authorization Layers:**
-
-1. **Network layer**: Firewall and network access control
-2. **Gateway layer**: API gateway authorization
-3. **Service layer**: Service-specific authorization
-4. **Data layer**: Database-level access control
-
-**Defense in Depth:**
-
-- **Multiple checkpoints**: Authorization at multiple layers
-- **Fail-safe defaults**: Deny access by default
-- **Redundant controls**: Backup authorization mechanisms
-- **Audit everywhere**: Comprehensive authorization logging
+Defense in depth: deny by default, redundant controls, audit at every layer.
 
 ### Common Authorization Mistakes
 
-- **Overprivileged roles**: Roles with unnecessary permissions
-- **Missing authorization checks**: Unprotected resources or operations
-- **Client-side authorization**: Relying on client-side access control
-- **Hardcoded permissions**: Authorization logic embedded in code
-- **Insufficient auditing**: Poor visibility into access patterns
+- Overprivileged roles with unnecessary permissions
+- Missing authorization checks on resources or operations
+- Client-side authorization (can be bypassed)
+- Hardcoded permissions in application code
+- Insufficient auditing and visibility into access patterns

@@ -1,6 +1,4 @@
-# Content
-
-
+# Security
 
 ### Authentication Patterns
 
@@ -8,18 +6,19 @@ Authentication is the process of verifying the identity of users, systems, or en
 
 [Authentication Notes](authentication.md)
 
-- SSO (Single Sign On)
+- SSO (Single Sign-On)
     - SAML
     - OIDC
     - Enterprise SSO Patterns
-- MFA (MultiFactor Authentication)
+- MFA (Multi-Factor Authentication)
     - TOTP
-    - SMS-Based
+    - SMS-based
     - Hardware Security Keys
     - Biometric
-- Token Based Authentication
+- Token-Based Authentication
     - JWT
--  Stateless vs Stateful Authentication
+- Stateless vs Stateful Authentication
+
 ### Authorization Patterns
 
 [Authorization Notes](authorization.md)

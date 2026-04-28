@@ -31,11 +31,11 @@ hide:
 
     ---
 
-    :octicons-terminal-16:{ .lg .middle } [sed / awk / jq](text-processing.md)
+    :material-text-search:{ .lg .middle } [sed / awk / jq](text-processing.md)
 
-    :octicons-search-16:{ .lg .middle } [ripgrep](ripgrep.md)
+    :material-magnify:{ .lg .middle } [ripgrep](ripgrep.md)
 
-    :fontawesome-regular-face-dizzy:{ .lg .middle } [fzf](fzf.md)
+    :material-filter:{ .lg .middle } [fzf](fzf.md)
 
     *Also: bat, eza, delta, miller (mlr), dasel*
 
@@ -43,7 +43,7 @@ hide:
 
     ---
 
-    :fontawesome-solid-terminal:{ .lg .middle } [Systemd](systemd.md)
+    :material-cog:{ .lg .middle } [Systemd](systemd.md)
 
     :material-recycle-variant:{ .lg .middle } [Cron](cron.md)
 
@@ -55,7 +55,7 @@ hide:
 
     ---
 
-    :octicons-terminal-16:{ .lg .middle } [curl](curl.md)
+    :material-web:{ .lg .middle } [curl](curl.md)
 
     :material-router:{ .lg .middle } [UFW](ufw.md)
 

@@ -1,72 +1,64 @@
 # Authentication
 
-Authentication is the process of verifying the identity of users, systems, or entities attempting to access resources. Modern applications require robust authentication patterns that balance security, usability, and scalability.
+Authentication is the process of verifying the identity of users, systems, or entities attempting to access resources.
 
-What is difference between Authentication & Authorization
+- **Authentication**: "Who are you?" — verifying identity
+- **Authorization**: "What can you do?" — determining permissions
 
-- Authentication: "Who are you?" - Verifying identity
-- Authorization: "What can you do?" - Determining permissions
-
-Key principles involved in Authentication are identity validation & management, session management, scalability and user experience.
+Key principles: identity validation, session management, scalability, and user experience.
 
 ## Single Sign-On (SSO)
 
-SSO allows users to authenticate once and gain access to multiple applications or services without re-entering credentials. It improves user experience while centralizing authentication management.
+SSO allows users to authenticate once and gain access to multiple applications without re-entering credentials. It centralizes authentication management and is widely used in production and enterprise systems.
 
-This is very common form of authentication used in Production Systems and Corporate Systems.
+**Benefits:**
 
-Some benefits of SSO are
+- Improved user experience — fewer passwords to manage
+- Centralized security policies, easier to administer
+- Unified audit trail from a single auth source
 
-- Improved user experience due to avoiding remembering multiple passwords.
-- Centralized security policies which are easy to administer.
-- Enhanced Security along with full audit trail from one auth source.
+**Challenges:**
 
-Challenges of using SSO
+- Single point of failure
+- A compromised credential grants access to all connected systems
+- Vendor lock-in
 
-- Single Point of Failure
-- Potential Cascading Security Flaw, hacking one of the credentials, gets you all the access.
-- Vendor Lock-in, dependence on SSO provider
-
-There are multiple SSO Implementation Patterns
-
-- SAML
-- OIDC
-- Enterprise SSO Patterns
+SSO implementation patterns: SAML, OIDC, Enterprise SSO.
 
 ### SAML (Security Assertion Markup Language)
 
-SAML Components:
+**Components:**
 
-- Identity Provider (IdP): Authenticates users and issues assertions
-- Service Provider (SP): Consumes assertions and grants access
-- Assertions: XML-based security tokens containing user information
+- **Identity Provider (IdP)**: Authenticates users and issues assertions
+- **Service Provider (SP)**: Consumes assertions and grants access
+- **Assertions**: XML-based security tokens containing user information
 
-A SAML assertion is an XML document issued by an Identity Provider (IdP) that asserts facts about a user to a Service Provider (SP).
+A SAML assertion is an XML document issued by the IdP that asserts facts about a user to the SP.
 
-SAML Assertion Flow,
+**SAML Assertion Flow:**
 
 ![](assets/Pasted%20image%2020251229181926.png)
 
-Use Cases for SAML Assertion are : Enterprise Applications, B2B integrations, Federated Identity across Organizations, etc.
+Use cases: enterprise applications, B2B integrations, federated identity across organizations.
 
-### OIDC
+### OIDC (OpenID Connect)
 
-Components of OIDC Authentication
+**Components:**
 
-- OpenID Provider (OP): Issues ID tokens after authentication
-- Relying Party (RP): Application requesting authentication
-- ID Token: JWT containing user identity information
-- UserInfo Endpoint: Additional user profile information
+- **OpenID Provider (OP)**: Issues ID tokens after authentication
+- **Relying Party (RP)**: Application requesting authentication
+- **ID Token**: JWT containing user identity information
+- **UserInfo Endpoint**: Additional user profile data
 
 ![](assets/Pasted%20image%2020251229182522.png)
 
-NOTE: Above diagram is for code_authorization_flow in oidc, there are many more authentication patterns which are not covered here :)
+The diagram above shows the Authorization Code flow. OIDC defines additional flows not covered here.
 
-Notice how both (SAML and OIDC) are quite similar in the pattern of authentication, only the claims and identities are returned in different ways and formats.
+Both SAML and OIDC follow a similar pattern — the key differences are in the token format (XML vs JSON) and how claims are returned.
 
-Main Advantage that OIDC Provides are its simplicity.
+**OIDC advantages over SAML:**
 
-- Built on OAuth 2.0 foundation
+- Built on OAuth 2.0
 - JSON-based (simpler than XML)
 - Better mobile and API support
 - Standardized discovery mechanisms
@@ -79,7 +71,7 @@ Main Advantage that OIDC Provides are its simplicity.
 - Integrates with Active Directory
 - Supports SAML, WS-Federation, OAuth
 
-**Lightweight Directory Access Protocol (LDAP):**
+**LDAP (Lightweight Directory Access Protocol):**
 
 - Directory-based authentication
 - Centralized user store
@@ -91,188 +83,167 @@ Main Advantage that OIDC Provides are its simplicity.
 - Ticket-based authentication
 - Strong security for internal networks
 
-### SSO Important Considerations
+### SSO Considerations
 
 #### Session Management
 
-There could be multiple session strategy for maintaining a session, Global Session, Local Session, combination of both.
+Session strategies include global sessions, local sessions, or a hybrid of both.
 
-Session Lifecycle
+Session lifecycle:
 
-- Session Establishment
-- Session Refresh
-- Session Termination
-- Session timeout
+- Establishment
+- Refresh
+- Termination
+- Timeout
 
-#### Security Consideration
+#### Security Considerations
 
-SAML
+**SAML:**
 
-- Assertion encryption : protect sensitive user data
-- signature verification : Ensure assertion integrity
-- Replay attack prevention: Time-based validation
-- Assertion audience restriction: Limit token scope
+- Assertion encryption: protect sensitive user data
+- Signature verification: ensure assertion integrity
+- Replay attack prevention: time-based validation
+- Audience restriction: limit token scope
 
-OIDC
+**OIDC:**
 
-- Token validation: Verify signature and claims
-- HTTPS enforcement: Protect token transmission
-- State parameter: Prevent CSRF attacks
-- Nonce validation: Prevent replay attacks
+- Token validation: verify signature and claims
+- HTTPS enforcement: protect token transmission
+- State parameter: prevent CSRF attacks
+- Nonce validation: prevent replay attacks
 
-## Multi-Factor Authentication
+## Multi-Factor Authentication (MFA)
 
-Multi-Factor Authentication requires users to provide multiple forms of evidence to verify their identity, significantly enhancing security beyond password-only authentication.
+MFA requires users to provide multiple forms of evidence to verify identity, significantly improving security beyond passwords alone.
 
 ### Authentication Factors
 
 #### Knowledge Factor (Something You Know)
 
-- **Passwords**: Traditional text-based secrets
-- **PINs**: Numeric personal identification numbers
-- **Security questions**: Personal information verification
-- **Passphrases**: Longer, sentence-like passwords
-#### Possession Factor (Something you have)
+- Passwords
+- PINs
+- Security questions
+- Passphrases
 
-- **Mobile devices**: SMS, authenticator apps
-- **Hardware tokens**: Physical security keys
-- **Smart cards**: Chip-based authentication devices
-- **Digital certificates**: Cryptographic credentials
+#### Possession Factor (Something You Have)
 
-#### Inherence Factor (Something you are)
+- Mobile devices (SMS, authenticator apps)
+- Hardware tokens
+- Smart cards
+- Digital certificates
 
-- **Fingerprints**: Biometric finger scanning
-- **Facial recognition**: AI-based face analysis
-- **Voice recognition**: Speech pattern analysis
-- **Iris scanning**: Eye pattern recognition
-- **Behavioral biometrics**: Typing patterns, gait analysis
+#### Inherence Factor (Something You Are)
+
+- Fingerprints
+- Facial recognition
+- Voice recognition
+- Iris scanning
+- Behavioral biometrics (typing patterns, gait)
 
 #### Contextual Factor
 
-- **Location**: Geographic or network-based verification
-- **Device characteristics**: Known device identification
-- **Time-based**: Authentication within expected time windows
-- **Risk assessment**: Behavioral pattern analysis
+- Location (geographic or network-based)
+- Known device characteristics
+- Time-based validation
+- Risk assessment via behavioral analysis
 
 ### MFA Implementation Patterns
 
-#### Time-based One-Time Passwords (TOTP)
+#### TOTP (Time-based One-Time Passwords)
 
-**TOTP Characteristics:**
+**Characteristics:**
 
-- **Algorithm**: Based on HMAC-SHA1 and current time
-- **Validity**: Typically 30-60 second windows
-- **Synchronization**: Requires time sync between client and server
-- **Standard**: RFC 6238 specification
+- Based on HMAC-SHA1 and current time (RFC 6238)
+- Codes valid for 30–60 second windows
+- Requires time synchronization between client and server
 
-**TOTP Implementation Flow:**
+**Flow:**
 
 1. Shared secret established during enrollment
-2. User generates code using authenticator app
-3. Server generates expected code using same algorithm
-4. Codes compared for authentication
-5. Used tokens marked to prevent replay
+2. User generates a code via authenticator app
+3. Server independently generates the expected code
+4. Codes are compared
+5. Used tokens are marked to prevent replay
 
-**Popular TOTP Applications:**
+**Popular TOTP apps:** Google Authenticator, Microsoft Authenticator, Authy, 1Password
 
-- Google Authenticator
-- Microsoft Authenticator
-- Authy
-- 1Password
+#### SMS-Based Authentication
 
-#### SMS-based Authentication
-
-**SMS MFA Process:**
+**Flow:**
 
 1. User enters username and password
-2. System sends verification code via SMS
-3. User enters received code
-4. System validates code and grants access
+2. System sends a verification code via SMS
+3. User enters the code
+4. System validates and grants access
 
-**SMS Security Considerations:**
+**Security considerations:**
 
-- **SIM swapping attacks**: Attacker takes control of phone number
-- **SMS interception**: Network-level message capture
-- **Delivery reliability**: Network and carrier dependencies
-- **International limitations**: Cross-border delivery issues
+- SIM-swapping attacks
+- SMS interception at the network level
+- Delivery reliability issues
+- International delivery limitations
 
-**SMS Alternatives:**
-
-- Voice calls for code delivery
-- Push notifications to registered devices
-- In-app notifications
+**Alternatives:** voice call delivery, push notifications, in-app codes
 
 #### Hardware Security Keys
 
-**FIDO (Fast Identity Online) Standards:**
+**FIDO Standards:**
 
-- **FIDO U2F**: Universal 2nd Factor authentication
+- **FIDO U2F**: Universal 2nd Factor
 - **FIDO2/WebAuthn**: Passwordless authentication standard
 - **CTAP**: Client to Authenticator Protocol
 
-**Hardware Key Benefits:**
+**Benefits:**
 
-- **Phishing resistance**: Domain-bound authentication
-- **No shared secrets**: Public key cryptography
-- **Offline capability**: No network dependency
-- **Standardization**: Cross-platform compatibility
+- Phishing-resistant (domain-bound)
+- No shared secrets (public key cryptography)
+- Works offline
+- Cross-platform standardization
 
-**Hardware Key Types:**
-
-- **USB keys**: YubiKey, Google Titan
-- **NFC keys**: Near-field communication enabled
-- **Bluetooth keys**: Wireless connectivity
-- **Lightning/USB-C**: Mobile device compatibility
+**Key types:** USB (YubiKey, Google Titan), NFC, Bluetooth, Lightning/USB-C
 
 #### Biometric Authentication
 
-**Biometric Implementation Considerations:**
+**Implementation considerations:**
 
-- **Template storage**: Local vs cloud storage
-- **Liveness detection**: Prevent spoofing attacks
-- **Accuracy metrics**: False accept/reject rates
-- **Privacy protection**: Biometric data handling
+- Template storage: local vs cloud
+- Liveness detection: prevent spoofing
+- Accuracy metrics: false accept/reject rates
+- Privacy: biometric data handling regulations
 
-**Biometric Challenges:**
+**Challenges:**
 
-- **Irrevocability**: Cannot change compromised biometrics
-- **Template attacks**: Reverse engineering attempts
-- **Presentation attacks**: Spoofing with fake biometrics
-- **Environmental factors**: Lighting, positioning effects
+- Irrevocability: compromised biometrics cannot be changed
+- Template attacks and presentation attacks (spoofing)
+- Environmental factors (lighting, positioning)
 
-Often these MFA generation methods force users to create backup codes (pre-generated single-use codes), and user should register multiple authenticators.
+MFA implementations should support backup codes (pre-generated single-use codes), multiple registered authenticators, and account recovery procedures.
 
-A good application should allow user to have account recovery procedures.
+## Token-Based Authentication
 
-## Token-based Authentication
+Token-based authentication uses cryptographically signed tokens to verify identity and maintain session state across stateless HTTP requests.
 
-Token-based authentication uses cryptographically signed tokens to verify user identity and maintain session state across stateless HTTP requests.
+### JWT (JSON Web Token)
 
-### JWT
+- Completely stateless
+- Three parts: `<header>.<payload>.<signature>`
+    - **Header**: algorithm and token type
+    - **Payload**: claims about the user and session
+    - **Signature**: cryptographic integrity verification
+- Symmetric signing: same key signs and validates
+- Asymmetric signing: private key signs, public key validates
 
-- JSON Web Token
-- Completely Stateless
-- 3 Parts 
-    - **Header**: Algorithm and token type information
-    - **Payload**: Claims about the user and session
-    - **Signature**: Cryptographic verification of token integrity
-- Signature Encryption can be symmetrical or asymmetrical
-- Symmetrical require same key to generate JWT and validate
-- Asymmetrical private Key creates the JWT, public key validates
-
-Example : https://www.jwt.io/
+Reference: https://jwt.io/
 
 ![](assets/Pasted%20image%2020251006225843.png)
 
-JWT Format : `<claims>.<payload>.<signature>`
-
-```jwt
+```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30
 ```
 
-### JWT Based Auth
+### JWT-Based Auth
 
-Symmetric Key
+**Symmetric key flow:**
 
 ![](assets/Pasted%20image%2020251006232323.png)
 
@@ -280,59 +251,59 @@ Symmetric Key
 
 ### JWT Claims
 
-Standard Claims:
+**Standard claims:**
 
-- `iss` (Issuer): Token issuing authority
-- `sub` (Subject): User identifier
-- `aud` (Audience): Intended token recipients
-- `exp` (Expiration): Token expiration time
-- `iat` (Issued At): Token creation time
-- `nbf` (Not Before): Token validity start time
+- `iss` — Issuer
+- `sub` — Subject (user identifier)
+- `aud` — Audience (intended recipients)
+- `exp` — Expiration time
+- `iat` — Issued at
+- `nbf` — Not before
 
-Custom Claims:
+**Custom claims:**
 
-- User roles: Authorization information
-- Permissions: Specific access rights
-- Tenant ID: Multi-tenant identification
-- Session data: Application-specific information
+- User roles and permissions
+- Tenant ID (multi-tenant systems)
+- Application-specific session data
 
 ### JWT Security Considerations
 
-Token Security Best Practices:
+**Best practices:**
 
-- Short expiration times: Limit token validity window
-- Secure storage: HttpOnly cookies or secure storage
-- HTTPS enforcement: Protect token transmission !! most common attacks
-- Signature verification: Always validate token integrity
-- Algorithm restrictions: Whitelist allowed algorithms
+- Short expiration times
+- Store in HttpOnly cookies (preferred over localStorage)
+- Always use HTTPS
+- Always verify the signature
+- Restrict allowed signing algorithms
 
-Common JWT Vulnerabilities:
+**Common vulnerabilities:**
 
-- Algorithm confusion: None algorithm attacks
-- Key confusion: RSA/HMAC algorithm substitution
-- Token replay: Reusing valid tokens maliciously
-- Information disclosure: Sensitive data in payload
+- Algorithm confusion (`alg: none` attacks)
+- RSA/HMAC algorithm substitution
+- Token replay
+- Sensitive data in the payload (it is only base64-encoded, not encrypted)
+
 ### Refresh Tokens
 
-- Once Stolen we can't do anything
-- So we must make it short-lived
-- But can't force users to login every 15 minutes
-- Need a way to get new JWT every 15 minutes
+Short-lived access tokens limit the impact of theft, but logging users out every 15 minutes is impractical. Refresh tokens solve this:
+
+- Access token expires quickly (e.g., 15 minutes)
+- Refresh token is longer-lived and stored securely
+- Client exchanges the refresh token for a new access token silently
 
 ![](assets/Pasted%20image%2020251006233110.png)
 
-### Asymmetric JWT
+### Asymmetric JWT in Microservices
 
-Symmetric Keys are difficult to share in Microservices Architecture making them unsuitable for a firm level operations.
-Usually we deploy IdP servers (Identity Providers). These servers handle issuing of the token and have the private keys. Any client ask for token from these servers and then can use that token to query another microservice, which can either decrypt the token and verify signature using public keys of auth servers, or can request IdP servers to validate the token.
+Symmetric keys are difficult to distribute safely across many services. The standard solution is a dedicated **Identity Provider (IdP)**:
+
+- IdP holds the private key and issues tokens
+- Services verify tokens using the IdP's public key
+- Alternatively, services can call the IdP to validate tokens
 
 ![](assets/Pasted%20image%2020251006233627.png)
 
-### Token Management Patterns
-
-#### Token Storage Strategies
-
-Client-Side Storage Options:
+### Token Storage Strategies
 
 | Storage Method   | Security | Persistence  | XSS Vulnerability |
 | ---------------- | -------- | ------------ | ----------------- |
@@ -341,108 +312,76 @@ Client-Side Storage Options:
 | HttpOnly Cookies | High     | Configurable | Low               |
 | Memory Only      | High     | Low          | Low               |
 
-Server-Side Storage:
+**Server-side storage options:** database, cache, distributed cache, token introspection
 
-- Database storage: Persistent token management
-- Cache storage: Fast token validation
-- Distributed cache: Scalable token sharing
-- Token introspection: Centralized validation
+### Token Validation Patterns
 
-#### Token Validation Patterns
+**Local validation:**
 
-Local Validation:
+- Verify signature and claims (expiration, audience)
+- No network calls — fast
+- Suitable for stateless microservices
 
-- Signature verification: Cryptographic validation
-- Claims validation: Expiration and audience checks
-- No network calls: Fast validation process
-- Suitable for: Stateless microservices
+**Remote validation (introspection):**
 
-Remote Validation:
+- Server-side validation with real-time revocation support
+- Requires network connectivity
+- Suitable for high-security applications
 
-- Token introspection: Server-side validation
-- Real-time revocation: Immediate token invalidation
-- Network dependency: Requires connectivity
-- Suitable for: High-security applications
+## Stateless vs Stateful Authentication
 
-### Stateless vs Stateful Authentication
-
-#### Stateless Authentication
-
-Characteristics:
+### Stateless Authentication
 
 - No server-side session storage
 - Token contains all necessary information
-- Horizontal scalability
-- Reduced server memory usage
+- Horizontally scalable
+- Lower server memory usage
+- Revocation is complex (tokens remain valid until expiry)
 
-Implementation Considerations:
+### Stateful Authentication
 
-- Token size: Balance information vs payload size
-- Secret management: Secure key distribution
-- Revocation complexity: Immediate invalidation challenges
-- Clock synchronization: Time-based claims validation
-
-#### Stateful Authentication
-
-Characteristics:
-
-- Server-side session storage
-- Token references server-side data
-- Centralized session management
-- Easier revocation and updates
-
-Implementation Considerations:
-
-- Storage scaling: Session store performance
-- High availability: Session replication
-- Memory usage: Session data size
-- Cleanup processes: Expired session removal
+- Server stores session data
+- Token is a reference to server-side data
+- Easier revocation and session updates
+- Requires session store scaling and high availability
 
 ## Authentication Architecture Patterns
 
-### MicroServices Authentication
+### Centralized Authentication Service
 
-#### Centralized Authentication Service
+Responsibilities:
 
-Authentication Service Responsibilities:
-
-- User credential verification
+- Credential verification
 - Token issuance and validation
 - Session management
 - Security policy enforcement
 
-Service Integration Patterns:
+Integration patterns:
 
-- API Gateway integration: Central authentication point
-- Service-to-service authentication: Machine-to-machine tokens
-- Token propagation: Pass user context between services
-- Authorization delegation: Service-specific permissions
+- API gateway integration (single auth entry point)
+- Service-to-service tokens (machine-to-machine)
+- Token propagation (user context passed between services)
+- Authorization delegation (service-specific permissions)
 
-#### Distributed Authentication
+### Distributed Authentication (JWT-based)
 
-JWT-based Distributed Authentication:
-
-- Self-contained tokens: No central validation needed
-- Service independence: Each service validates tokens
-- Reduced latency: No network calls for validation
-- Consistent key management: Shared signing keys
+- Self-contained tokens — no central validation needed per request
+- Each service independently validates tokens
+- Reduced latency
+- Consistent key management via shared signing keys or public key distribution
 
 ### Security Best Practices
 
-#### General Authentication Security
+- Enforce password strength requirements
+- Account lockout on repeated failures (brute-force protection)
+- Audit logging for all authentication events
+- Rate limiting on login endpoints
+- Fail-safe defaults (deny on error)
 
-Implementation Guidelines:
+**Common pitfalls:**
 
-- Password policies: Strength requirements and rotation
-- Account lockout: Brute force protection
-- Audit logging: Authentication event tracking
-- Rate limiting: Prevent automated attacks
-- Secure defaults: Fail-safe security configurations
-
-Common Security Pitfalls:
-
-- Weak session management: Predictable session IDs
-- Inadequate logout: Incomplete session cleanup
-- Token exposure: Logging or error message leaks
-- Timing attacks: Information disclosure through response times
-- Privilege escalation: Insufficient authorization checks
+- Predictable session IDs
+- Incomplete logout (sessions not fully cleaned up)
+- Tokens leaked in logs or error messages
+- Timing attacks that reveal valid usernames
+- Insufficient authorization checks after authentication
