@@ -84,8 +84,8 @@ df.select(sum("Quantity")).show() # 5176450
 ### sumDistinct
 
 ````python
-from pyspark.sql.functions import sumDistinct
-df.select(sumDistinct("Quantity")).show() # 29310
+from pyspark.sql.functions import sum_distinct
+df.select(sum_distinct("Quantity")).show() # 29310
 ````
 
 ### avg
@@ -301,7 +301,7 @@ moving_avg_employees.show()
 Example : we would like to get the total quantity of all stock codes and customers.
 
 ````python
-dfNoNull = dfWithDate.drop()
+dfNoNull = dfWithDate.na.drop()
 dfNoNull.createOrReplaceTempView("dfNoNull")
 ````
 

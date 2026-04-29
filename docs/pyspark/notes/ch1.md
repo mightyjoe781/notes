@@ -76,7 +76,7 @@ from pyspark.sql import SparkSession
 spark = SparkSession.builder.appName('example').getOrCreate()
 
 data = [("Java", "20000"), ("Python", "100000"), ("Scala", "3000")]
-columns = ["launguage", "user_count"]
+columns = ["language", "user_count"]
 
 df = spark.createDataFrame(data).toDF(*columns)
 df.show()

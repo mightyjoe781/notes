@@ -144,7 +144,7 @@ transformedTraining.cache()	# put a copy of intermediately transformed dataset i
 from pyspark.ml.clustering import KMeans
 kmeans = KMeans()\
   .setK(20)\
-  .setSeed(1L)
+  .setSeed(1)
 ````
 
 - There are always two types for every algorithm in MLlib’s DataFrame API. They follow the naming pattern of `Algorithm`, for the untrained version, and `AlgorithmModel` for the trained version. In our example, this is `KMeans` and then `KMeansModel`.
@@ -154,11 +154,14 @@ kmeans = KMeans()\
 kmModel = kmeans.fit(transformedTraining)
 
 # we can find compute cost
-kmModel.computeCost(transformedTraining)
+print(kmModel.summary.trainingCost)
 
 transformedTest = fittedPipeline.transform(testDataFrame)
 
-kmModel.computeCost(transformedTest)
+from pyspark.ml.evaluation import ClusteringEvaluator
+evaluator = ClusteringEvaluator()
+silhouette = evaluator.evaluate(kmModel.transform(transformedTest))
+print("Silhouette:", silhouette)
 # we can keep on improving this model more using hyper-parameter tuning
 ````
 

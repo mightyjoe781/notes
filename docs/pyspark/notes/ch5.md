@@ -186,8 +186,8 @@ df.selectExpr(
 
 ````python
 df.selectExpr("avg(count)", "count(distinct(DEST_COUNTRY_NAME))").show(2)
-#
-SELECT avg(count), count(distinct(DEST_COUNTRY_NAME)) FROM dfTable LIMIT 2
+# SQL equivalent:
+# SELECT avg(count), count(distinct(DEST_COUNTRY_NAME)) FROM dfTable LIMIT 2
 ````
 
 ### Converting to Spark Types (Literals)
@@ -306,8 +306,8 @@ dataFrames[0].count() > dataFrames[1].count() # False
 from pyspark.sql import Row
 schema = df.schema
 newRows = [
-  Row("New Country", "Other Country", 5L),
-  Row("New Country 2", "Other Country 3", 1L)
+  Row("New Country", "Other Country", 5),
+  Row("New Country 2", "Other Country 3", 1)
 ]
 parallelizedRows = spark.sparkContext.parallelize(newRows)
 newDF = spark.createDataFrame(parallelizedRows, schema)

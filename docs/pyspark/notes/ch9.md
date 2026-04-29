@@ -205,7 +205,8 @@ tablename = "flight_info"
 
 After defining connection property we can test database connection.
 
-````python
+````scala
+// This connection test is Scala/Java — use JDBC driver jar on classpath
 import java.sql.DriverManager
 val connection = DriverManager.getConnection(url)
 connection.isClosed()
@@ -293,8 +294,8 @@ If you specify predicates that are not disjoint, you can end up with lots of dup
 
 ````python
 colName = "count"
-lowerBound = 0L
-upperBound = 348113L # this is the max count in our database
+lowerBound = 0
+upperBound = 348113  # this is the max count in our database
 numPartitions = 10
 
 spark.read.jdbc(url, tablename, column=colName, properties=props,
@@ -387,10 +388,11 @@ This is probably the lowest-hanging optimization that you can use when  you have
 - This means that the data is prepartitioned according to how you expect  to use that data later on, meaning you can avoid expensive shuffles when joining or aggregating.
 - Rather than partitioning on a specific column (which might write out a  ton of directories), it’s probably worthwhile to explore bucketing the  data instead. This will create a certain number of files and organize  our data into those “buckets”
 
-`````scala
-val numberBuckets = 10
-val columnToBucketBy = "count"
-csvFile.write.format("parquet").mode("overwrite")
+`````python
+# Bucketing requires saving as a managed table (Hive metastore)
+numberBuckets = 10
+columnToBucketBy = "count"
+csvFile.write.format("parquet").mode("overwrite")\
   .bucketBy(numberBuckets, columnToBucketBy).saveAsTable("bucketedFiles")
   
   

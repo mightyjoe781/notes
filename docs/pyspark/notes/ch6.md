@@ -36,8 +36,8 @@ df.where(col("InvoiceNo") != 536365)\
   .show(5, False)
 
 # more cleaner approach is to specify predicate as expression string
-df.where("InvoiceNo = 536365")
-  .show(5, false)
+df.where("InvoiceNo = 536365")\
+  .show(5, False)
 ````
 
 - In Spark, you should always chain together `and` filters as a sequential filter. Because even if they are expressed serially, spark will flatten all of these filters into one statement and perform the filter at a time.
@@ -503,14 +503,14 @@ df.select(create_map(col("Description"), col("InvoiceNo")).alias("complex_map"))
 - We can query map by using a proper key. A missing key return `null`
 
 ````python
-df.select(map(col("Description"), col("InvoiceNo")).alias("complex_map"))\
+df.select(create_map(col("Description"), col("InvoiceNo")).alias("complex_map"))\
   .selectExpr("complex_map['WHITE METAL LANTERN']").show(2)
 ````
 
 - We can explode map types into columns
 
 ````python
-df.select(map(col("Description"), col("InvoiceNo")).alias("complex_map"))\
+df.select(create_map(col("Description"), col("InvoiceNo")).alias("complex_map"))\
   .selectExpr("explode(complex_map)").show(2)
 
 +--------------------+------+
@@ -533,8 +533,9 @@ jsonDF = spark.range(1).selectExpr("""
 - we can use `get_json_object` to inline query a JSON Object be it a dictionary or array. Or we can use `json_tuple` if this object has only one level of nesting.
 
 ````python
+from pyspark.sql.functions import get_json_object, json_tuple
 jsonDF.select(
-    get_json_object(col("jsonString"), "$.myJSONKey.myJSONValue[1]") as "column",
+    get_json_object(col("jsonString"), "$.myJSONKey.myJSONValue[1]").alias("column"),
     json_tuple(col("jsonString"), "myJSONKey")).show(2)
 
 +------+--------------------+
