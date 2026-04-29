@@ -27,11 +27,11 @@ print(codes)
 #		codes.append(ord(symbol))
 ````
 
-NOTE : use list comprehension when you are building a list but doing a lot of more than that always use for loops as they are more readible.
+NOTE: use list comprehensions when you are building a list, but if you are doing more than that always use `for` loops as they are more readable.
 
 **Local Scope in List Comprehension**
 
-If we use `:=` (walrus operator) while assigning value then its accesible even after list comprehension or generator expression.
+If we use `:=` (walrus operator) while assigning a value, then it's accessible even after the list comprehension or generator expression.
 
 ````python
 x = 'ABC'
@@ -40,17 +40,17 @@ print(codes) 	# [65, 66, 67]
 print(last)		# 67
 ````
 
-*NOTE: listcomps are as fast as map/filter/reduce operation sometimes outperforming them*.
+*NOTE: listcomps are as fast as `map`/`filter`/`reduce` operations, sometimes outperforming them.*
 
 #### Catersian Products
 
 ````python
 colors = ['black', 'white']
-size = ['S', 'M', 'L']
+sizes = ['S', 'M', 'L']
 
 tshirts = [(color, size) for color in colors for size in sizes]
-# it does cartesion product of colors x size
-# ouptut : [('black', 'S'), ('black', 'M'), ('black', 'L'), ('white', 'S'),
+# it does cartesian product of colors x sizes
+# output : [('black', 'S'), ('black', 'M'), ('black', 'L'), ('white', 'S'),
 # ('white', 'M'), ('white', 'L')]
 ````
 
@@ -65,8 +65,8 @@ import array
 array.array('I', ord(symbol) for symbol in symbols)
 
 # in previous catesian product lets say if we had 1000 records then its would be very memory heavy to generate all those lists
-for tshirts in (f'{c}{s}' for c in colors for s in sizes):
-	print(tshirt)
+for tshirt in (f'{c}{s}' for c in colors for s in sizes):
+    print(tshirt)
 ````
 
 ### Tuples
@@ -123,9 +123,9 @@ q, r = divmod(*t)
 #### Using `*` to Grab Excess Items
 
 `````python
-a, b, *rest = range(5)	# (1, 2, [3,4,5])
-a, *mid, c = range(5)		# (1, [2, 3, 4], 5)
-*s , b, c = range(5)		# ([1, 2, 3, 4, 5])
+a, b, *rest = range(5)	# a=0, b=1, rest=[2, 3, 4]
+a, *mid, c = range(5)		# a=0, mid=[1, 2, 3], c=4
+*s , b, c = range(5)		# s=[0, 1, 2], b=3, c=4
 `````
 
 #### Unpacking with `*` in Function Calls and Sequence Literals
@@ -136,9 +136,9 @@ def fun(a, b, c, d, *rest):
   
 fun(*[1,2], 3, *range(4,7)) # (1, 2, 3, 4, (5, 6))
 
-tupl = *range(4), 4		# (1,2,3,4)
-lst = [*range(4), 4]	# [1,2,3,4]
-st = {*range(4), 4, *(5,6,7)} # {1, 2, 3, 4, 5, 6, 7}
+tupl = *range(4), 4		# (0, 1, 2, 3, 4)
+lst = [*range(4), 4]	# [0, 1, 2, 3, 4]
+st = {*range(4), 4, *(5,6,7)} # {0, 1, 2, 3, 4, 5, 6, 7}
 ````
 
 ### Pattern Matching with Sequences
@@ -167,7 +167,7 @@ metro_areas = [
     ('Delhi NCR', 'IN', 21.935, (28.613889, 77.208889)),
 ]
 def func():
-  for record in metro_ares:
+  for record in metro_areas:
     match record:
       case [name, _, _, (lat, lon)] if lon <= 0:
         print(f"{name:15} | {lat:9.4f} | {lon:9.4f}")
@@ -275,7 +275,7 @@ Once sorted you can efficiently search using binary search using `bisect` module
 
 #### Array
 
-`array.array` is more efficient for storing same type of data. it supports all mutable sepquence operations as well as additional methods for fast loading and saving like `.frombytes` and `.tofile`
+`array.array` is more efficient for storing the same type of data. It supports all mutable sequence operations as well as additional methods for fast loading and saving like `.frombytes` and `.tofile`.
 
 ````python
 from array import array
@@ -296,7 +296,7 @@ fp.close()
 floats2[-1]
 ````
 
-NOTE: `array` doesn’t support in-place sort method like `list.sort()`, we will need to use built-in `sorted` function to rebuild array
+NOTE: `array` doesn’t support an in-place sort method like `list.sort()`. Use the built-in `sorted` function to rebuild the array:
 
 `a = array.array(a.typecode, sorted(a))`
 
@@ -308,12 +308,12 @@ The built-in `memoryview` class is a shared memory sequence type that lets you h
 
 ````python
 from array import array
-octets array('B', range(6))
+octets = array('B', range(6))
 m1 = memoryview(octets)
 m1.tolist()	# [0, 1, 2, 3, 4, 5]
 m2 = m1.cast('B', [2,3])
 m2.tolist() # [[0, 1, 2], [3, 4, 5]]
-m3 = m1.case('B', [3,2])
+m3 = m1.cast('B', [3,2])
 m3.tolist() # [[0,1],[2,3],[4,5]]
 ````
 
@@ -348,7 +348,7 @@ when you try to insert in a full bounded deque, it discards item from opposite e
 Besides deque there are some other Python standard library implementations of queues
 
 ````python
-from collection import deque
+from collections import deque
 dq = deque(range(10), maxlen = 10)
 print(dq)
 dq.rotate(3)
@@ -365,4 +365,4 @@ dq.extendleft([10,20,30]) # notice how items on other end are discarded
 - `queue` : This provides the synchronized(thread-safe) classes `SimpleQueue`, `Queue`, `LifoQueue` and `PriorityQueue`. These can be used for safe communication between threads. All except `SimpleQueue` can be bounded by providing a `maxsize` argument greater than 0 to the constructor. However they don’t discard items to make room as `deque` does. Instead it blocks the inserts of a new item until some thread makes room in the queue for items by taking from queue. It is usefull for implement n-worker threads models etc.
 - `multiprocessing` : Implements its own `SimpleQueue` and bounded `Queue` but designed for interprocess communication. A specialized `multiprocessing.JoinableQueue` is provided for task management.
 - `asyncio` : Provides `Queue`, `LifoQueue`, `PriorityQueue` and `JoinableQueue` with APIs inspired by the class in `queue` and `multiprocessing` modules but adapted for asynchronous programming.
-- `headpq` : doesn’t implement queue class instead provide functions like `heappush` and `heappop` that lets you use mutable sequence as heap queue or priority queue.
+- `heapq` : doesn’t implement a queue class, instead provides functions like `heappush` and `heappop` that let you use a mutable sequence as a heap queue or priority queue.

@@ -12,7 +12,7 @@ Strategy is a good example of a design pattern that can be simpler in Python if 
 
 ### Classic Strategy
 
-![Order discount calculations as strategies](./ch2_10.assets/flpy_1001.png)
+![Order discount calculations as strategies](./assets/flpy_1001.png)
 
 Strategy pattern in summarized like this in Designed Patterns:
 
@@ -274,7 +274,7 @@ def large_order(order: Order) -> Decimal:
 
 ## The Command Pattern
 
-![Command pattern application to text editor](./ch2_10.assets/flpy_1002.png)
+![Command pattern application to text editor](./assets/flpy_1002.png)
 
 The goal of Command is to decouple an object that invokes an operation  (the invoker) from the provider object that implements it (the  receiver). In the example from *Design Patterns*, each invoker is a menu item in a graphical application, and the receivers are the  document being edited or the application itself.
 

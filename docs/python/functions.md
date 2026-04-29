@@ -140,7 +140,7 @@ print(tag('p', 'hello', 'world'))
 # <p>hello</p>
 # <p>world</p>
 tag('p', 'hello', id=33)  # <p id="33">hello</p>'
-print(tag('p', 'hello', 'world', class_='sidebar'))  4
+print(tag('p', 'hello', 'world', class_='sidebar'))
 # <p class="sidebar">hello</p>
 # <p class="sidebar">world</p>
 tag(content='testing', name="img")  # '<img content="testing" />'

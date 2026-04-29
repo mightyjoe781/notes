@@ -55,7 +55,7 @@ hide:
 
     ---
 
-    :material-web:{ .lg .middle } [curl](curl.md)
+    :octicons-terminal-16:{ .lg .middle } [curl](curl.md)
 
     :material-router:{ .lg .middle } [UFW](ufw.md)
 

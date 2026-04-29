@@ -338,7 +338,7 @@ Callable[[ParamType1, ParamType2], ReturnType]
 ```
 
 ```py
-def repl(input_fn: Callable[[Any], str] = input]) -> None:
+def repl(input_fn: Callable[[Any], str] = input) -> None:
 ```
 
 - during normal usage, the `repl` function uses Python’s `input` built-in to read expression from user. However for automated testing with other input sources, `repl` accepts an optional `input_fn` parameter (Callable) with same parameter and return types as input

@@ -243,7 +243,7 @@ type Incrementor interface {
 }
 
 var myStringer fmt.Stringer
-var myIncrementer Incrementer
+var myIncrementer Incrementor
 pointerCounter := &Counter{}
 valueCounter := Counter{}
 
@@ -251,7 +251,7 @@ myStringer = pointerCounter    // ok
 myStringer = valueCounter      // ok
 myIncrementer = pointerCounter // ok
 myIncrementer = valueCounter   // compile-time error
-// last-line fails because Counter does not implement Incrementer
+// last-line fails because Counter does not implement Incrementor
 ```
 ## Interfaces Are Type-Safe Duck Typing
 * Go's interfaces are special because they are implemented implicitly
@@ -330,7 +330,7 @@ func(c Client) Program() {
     c.L.Process(data)
 }
 
-main() {
+func main() {
     c := Client{
         L: LogicProvider{}, // we can swap out implementations
     }
@@ -460,7 +460,6 @@ var dis2 = DoubleIntSlice{1, 2, 3}
 fmt.Println(dis == dis2) // Runtime panic!
 ```
 * **Interfaces as Map Keys**
-   	* Map keys must be **comparable**.
    	* Map keys must be **comparable**.
    	* If a non-comparable type is used as a key, a **runtime panic** occurs.
 ```go

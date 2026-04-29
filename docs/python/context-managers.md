@@ -89,10 +89,10 @@ def looking_glass():
     sys.stdout.write = original_write # undo monkey patch
     
 # A feature of @contextmanager is the generators decorated can also be used as decorators
-@looking_glass():
-  def verse():
+@looking_glass()
+def verse():
     print("The time has come")
-    
+
 # Output
 verse()
 # emoc sah emit ehT

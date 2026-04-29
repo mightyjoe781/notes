@@ -14,7 +14,7 @@ Operator overloading is necessary to support infix operator notation with user-d
 ## Unary Operators
 
 - `-`, implemented by `__neg__`
-- `+`, implemented by `__add__`
+- `+`, implemented by `__pos__`
 - `~`, implemented by `__invert__`
 
 The “Data Model” chapter of The Python Language Reference also lists the `abs()` built-in function as a unary operator. The associated special method is `__abs__`, as we’ve seen before.

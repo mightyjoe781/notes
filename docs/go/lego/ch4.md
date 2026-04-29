@@ -152,13 +152,13 @@ evenVals := []int{2, 4, 6, 8, 10, 12}
 for i, v := range evenVals {
     fmt.Println(i, v)
 }
-// or equivalent, index is optional
-for v := range evenVals {
+// to iterate values only, use _ to discard the index
+for _, v := range evenVals {
     fmt.Println(v)
 }
 ````
 
-- note while unpacking range, `i` var is optional
+- NOTE: `for v := range slice` gives the *index* as `v`, not the value; use `_` to skip the index when you only need values
 
 ````go
 // map iteration

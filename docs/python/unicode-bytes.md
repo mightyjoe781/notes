@@ -1,6 +1,6 @@
 # Unicode Text Versus Bytes
 
-Python3 introduced a sharp disctinction between string of human text and sequences of raw bytes.
+Python 3 introduced a sharp distinction between strings of human text and sequences of raw bytes.
 
 ## Character Issues
 
@@ -230,7 +230,7 @@ sorted_fruits  # ['açaí', 'acerola', 'atemoia', 'cajá', 'caju']
 
 The `unicodedata` module has functions to retrieve character metadata, including `unicodedata.name()`, which returns a character’s official name in the standard.
 
-| ![image-20240502001002209](./ch1_4.assets/image-20240502001002209.png) |
+| ![image-20240502001002209](./assets/image-20240502001002209.png) |
 | ------------------------------------------------------------ |
 
 ## Dual-Mode str and bytes APIs

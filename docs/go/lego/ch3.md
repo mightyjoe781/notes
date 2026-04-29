@@ -50,7 +50,7 @@ var x [][]int
 - declaring slices : usual way is to create a nil slice and then add data to it.
 
 ````go
-var data[] int // a nil slice
+var data []int // a nil slice
 // var x = []int{} : this is slice with zero length and capacity (not a nil slice). It is used in converting slice to JSON :)
 
 data := []int{2,4,6,8}
@@ -111,7 +111,7 @@ num := copy(y, x) // (dst, src) format, returns size of the y
 fmt.Println(y, num)
 ````
 
-- convertin arrays to slices
+- converting arrays to slices
 
 ````go
 xArray := [4]int{5, 6, 7, 8}

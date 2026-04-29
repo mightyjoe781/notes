@@ -10,7 +10,7 @@ Python is a cross-platform programming language, which means it runs on all majo
 
 Checking python version : Execute `python` or `python3` and notice its version. Now you are in `>>>` prompt where you can start executing Python commands. To exit type `exit()` or `ctrl+D`. Alternatively you could execute `python3 --version` on terminal.
 
-In case you have python version 2.x then try again installing latest verision.
+In case you have python version 2.x then try again installing the latest version.
 
 #### Running hello_world.py
 

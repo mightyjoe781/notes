@@ -288,7 +288,7 @@ Subclassing any complex class and overriding its methods is error-prone because 
 
 
 
-he PEP introduces a [`@final`](https://fpy.li/14-34) decorator that can be applied to classes or individual methods, so that IDEs or type checkers can report misguided attempts to subclass those classes or override those methods.
+The PEP introduces a [`@final`](https://fpy.li/14-34) decorator that can be applied to classes or individual methods, so that IDEs or type checkers can report misguided attempts to subclass those classes or override those methods.
 
 ### Avoid Subclassing from Concrete Classes
 

@@ -46,12 +46,12 @@ func MyFunc(opts MyFuncOpts) error {
 
 func main() {
   MyFunc(MyFuncOpts{
-    LastName: 'patel',
+    LastName: "patel",
     Age: 50,
   })
   MyFunc(MyFuncOpts{
-    FirstName: 'Joe',
-    LastName: 'Smith',
+    FirstName: "Joe",
+    LastName:  "Smith",
   })
 }
 ````
@@ -85,11 +85,11 @@ func main() {
 ### Multiple Return Values
 
 ````go
-func divMod(num, denom int) (int, int, error) {
+func divAndRemainder(num, denom int) (int, int, error) {
   if denom == 0 {
     return 0, 0, errors.New("cannot divide by zero")
   }
-  return num/denom, num % denom, nil
+  return num / denom, num % denom, nil
 }
 
 func main() {

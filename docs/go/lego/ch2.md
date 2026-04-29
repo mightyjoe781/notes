@@ -66,7 +66,7 @@ var sum2 int = x + int(y)
 fmt.Println(sum1, sum2)
 ````
 
-NOTE: but go allows integer multiplication on floats
+NOTE: untyped numeric constants (like `10` and `5`) are compatible with any numeric type, so they can appear in expressions alongside `float64` variables without an explicit conversion.
 
 ````go
 var x float64 = 10

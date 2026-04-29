@@ -15,7 +15,7 @@
 - Concurrency: ability of handle multiple tasks at once, make progress parallely or one at a time.
 - Parallelism: ability to execute computation at the same time. Requires multicore CPU, multiple CPUs, GPU, clusters.
 - Execution Unit: general term for objects that execute code concurrently, each with independent state and call stack. e.g. processes, threads, and coroutines.
-- Process: An instance of computer program while it is running uses memory and slice of CPU Time. Processes communicate via pipes, sockets or memory mapped files all of which can only carry raw bytes. Python objects must be serialized into raw bytes to pass from one process to antoher. This is costly and not all python objects are serializable, A process can spawn subprocess called as child process. Processes allow preemptive multitasking i.e. OS Scheduler can suspend processes to allow running other processes.
+- Process: An instance of computer program while it is running uses memory and slice of CPU Time. Processes communicate via pipes, sockets or memory mapped files all of which can only carry raw bytes. Python objects must be serialized into raw bytes to pass from one process to another. This is costly and not all python objects are serializable, A process can spawn subprocess called as child process. Processes allow preemptive multitasking i.e. OS Scheduler can suspend processes to allow running other processes.
 - Thread: An execution unit within single process. When a process starts it uses a single thread (main). A process can create more threads to operate concurrently by calling operating system APIs. Threads within a process share same memory space allowing easy data sharing between threads but beware it can also cause corrupting when threads update same memory space. Threads are also enable preemptive multitasking
 - Coroutine: A fucntion that can suspend itself and resume later. In python classic couroutine are build from generator functions, and antive coroutines are defined with `async def`.
 - Queue: A data structure that lets us put and get items in FIFO order. Queues allow separate execution units to exchange application data and control messages such as error codes and signals to terminate. Implementation of queue varies according to underlying concurrency model. The `queue` in standard library provides queue classes to support thread, while multiprocessing and asyncio packages have their own queue classes.
@@ -52,8 +52,8 @@ def spin(msg: str, done: Event) -> None:	# will run in a separate thread. done a
         print(status, end ='', flush=True)	# flush and clean the line
         if done.wait(.1):	# returns True when event is set by another thread. if the timeout elapses, it runs False. # effectively sets frame rate
             break
-    blanks = '' * len(status)
-    print(f'\r{blanks}\r', end = '')
+    blanks = ' ' * len(status)
+    print(f'\r{blanks}\r', end='')
 
 
 def slow()->int:
@@ -129,8 +129,8 @@ async def spin(msg: str) -> None:
             await asyncio.sleep(.1)	# sleep without blocking other coroutines.
         except asyncio.CancelledError:
             break
-    blanks = '' * len(status)
-    print(f'\r{blanks}\r', end = '')
+    blanks = ' ' * len(status)
+    print(f'\r{blanks}\r', end='')
 
 
 async def slow()->int:

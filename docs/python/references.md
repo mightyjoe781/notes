@@ -12,7 +12,7 @@ a.append(4)
 print(b)	# [1, 2, 3, 4]
 ````
 
-- `b=a` doesn’t copy contents of array instead attaches `b` as a antoher label to array
+- `b=a` doesn’t copy contents of the array; instead it attaches `b` as another label to the same array
 - objects are created before assignment
 
 ````python

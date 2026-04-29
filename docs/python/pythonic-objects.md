@@ -113,7 +113,7 @@ The Format Specification Mini-Language is extensible because each class gets to 
 ````python
 from datetime import datetime
 now = datetime.now()
-format(now, "%H%M:%s")
+format(now, "%H:%M:%S")
 "It's now {:%I:%M %p}".format(now)
 ````
 
@@ -350,7 +350,7 @@ cp.flavor = 'banana'	# raises attribute error
 
 - you must remember to redeclare `__slots__` in each subclass to prevent their instance having `__dict__`
 - instances will only be able to have attributes listed in `__slots__`, unless we include `__dict__` in slots.
-- Classes using `__slots__` can’t use `@chached_property` decorator, unless they explicitly name `__dict__` in `__slots__`
+- Classes using `__slots__` can’t use `@cached_property` decorator, unless they explicitly name `__dict__` in `__slots__`
 - Instances can’t be targets of weak references unles you add `__weakref__` in `__slots__`
 
 
@@ -365,8 +365,8 @@ cp.flavor = 'banana'	# raises attribute error
 
 ````python
 from vector2d_v3 import Vector2d
-class ShortVector2d(Vector2d)
-	typecode = 'f'
+class ShortVector2d(Vector2d):
+    typecode = 'f'
 ````
 
 - Another thing to note is following function which doesn’t hardcodes class name in its representation

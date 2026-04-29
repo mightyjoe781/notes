@@ -130,7 +130,7 @@ func main() {
 ````go
 // don't do this
 func MakeFoo(f *Foo) error {
-  f.Field1 = 'val'
+  f.Field1 = "val"
   f.Field2 = 20
   return nil
 }
@@ -198,7 +198,7 @@ for {
   count, err := file.Read(data)
   process(data[:count])
   if err != nil {
-    if errors.ls(err, io.EOF) {
+    if errors.Is(err, io.EOF) {
       return nil
     }
     return err

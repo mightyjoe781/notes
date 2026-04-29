@@ -57,7 +57,7 @@ Monkey patching is dynamically changing a module, class or function at runtime t
 from random import shuffle
 l = list(range(10))
 shuffle(l)
-l	@ [1, 3, 4, 9, 7, 8, 2, 5, 6]
+l	# [1, 3, 4, 9, 7, 8, 2, 5, 6]
 
 # but if we try to shuffle FrenchDeck class it fails
 shuffle(deck)
@@ -219,7 +219,7 @@ class FrenchDeck2(abc.MutableSequence):
 
 Since Python 2.6, the standard library provides several ABCs. Most are defined in the `collections.abc` module, but there are others. You can find ABCs in the `io` and `numbers` packages, for example. But the most widely used are in `collections.abc`.
 
-![UML for collections.abc](./ch3_13.assets/flpy_1304.png)
+![UML for collections.abc](./assets/flpy_1304.png)
 
 ### Defining and Using an ABC
 
@@ -398,11 +398,11 @@ from typing import TypeVar, Protocol
 
 T = TypeVar('T')
 
-class Reapeatable(Protocol):
-  def __mul__(self, T, repeat_count: int) -> T: ... # self is not annotated, assumed to be of type class.
-  
-RT = TypeVar('RT', bound = Repeatable)->RT:
-  
+class Repeatable(Protocol):
+  def __mul__(self: T, repeat_count: int) -> T: ...
+
+RT = TypeVar('RT', bound=Repeatable)
+
 def double(x: RT) -> RT:	# Now type checker can verify x can be multiplied by scalar, return value of same type
   return x * 2
 ````

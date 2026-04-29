@@ -20,12 +20,12 @@ func calcRemainderAndMod(numerator, denominator int) (int, int, error) {
 // example of checking error
 num := 20
 den := 3
-rem, mod, err := calcRemaindereAndMod(num, den)
+rem, mod, err := calcRemainderAndMod(num, den)
 if err != nil {
   fmt.Println(err)
   os.Exit(1)
 }
-fmt.Println(remainder, mod)
+fmt.Println(rem, mod)
 ````
 
 - `error` is a built-in interface that defines a single method.

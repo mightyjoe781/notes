@@ -206,9 +206,9 @@ class Checked:
 
 ````python
 class Movie(Checked):
-	title: str
-  year: int
-  box_office : float
+    title: str
+    year: int
+    box_office: float
   
   
 movie = Movie(title='The Godfather', year=1972, box_office=137)
@@ -412,7 +412,7 @@ The next snippet shows that the class of `collections.Iterable` is `abc.ABCMeta`
 
 - Ultimately, the class of `ABCMeta` is also `type`. Every class is an instance of `type`, directly or indirectly, but only metaclasses are also subclasses of `type`.
 
-![UML class diagrams with `Iterable` and `ABCMeta` relationships.](./ch5_24.assets/flpy_2403.png)
+![UML class diagrams with `Iterable` and `ABCMeta` relationships.](./assets/flpy_2403.png)
 
 ### How a Metaclass Customizes a Class
 

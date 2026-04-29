@@ -94,7 +94,7 @@ class FrozenJSON:
 student = FrozenJSON({'name': 'Jim Bo', 'class': 1982})
 student.class # invalid syntax error
 
-# but this words
+# but this works
 getattr(student, 'class')
 ````
 

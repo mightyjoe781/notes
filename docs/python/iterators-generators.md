@@ -31,7 +31,7 @@ class Sentence:
 whenever python needs to iterate over an object `x` it calls `iter(x)`
 
 - Calls `__iter__` on the object `x`
-- if `__iter__` is not implemented but `__get__` is, then `iter()` creates an iterator that tries to fetch items by index, from `0`
+- if `__iter__` is not implemented but `__getitem__` is, then `iter()` creates an iterator that tries to fetch items by index, from `0`
 - if above all fails python raises `TypeError`, saying `C Object is not iterable`, where `C` is a class or target object.
 
 all python sequences are iterable by definition since they all implement `__getitem__`. This is an extreme form of duck typing. An object is considered iterable not only when it implements the special method `__iter__`, but also when it implements `__getitem__`
@@ -156,8 +156,7 @@ class Sentence:
 
     def __iter__(self):
         for word in self.words:
-            yield word # yield current word
-		# explicit return in not required
+            yield word  # explicit return is not required
 ````
 
 ### How a generator Works
@@ -207,7 +206,7 @@ def gen_AB():
   yield 'B'
   print('end.')
   
-res1 = [x*3 for x in gen_AB()]	# list comprehension immideatily evaluates
+res1 = [x*3 for x in gen_AB()]	# list comprehension immediately evaluates
 # start
 # continue
 # end
@@ -326,13 +325,13 @@ def aritprog_gen(begin, step, end=None):
 
 ````python
 def vowel(c):
-	return c.lower() in 'aeiou'
+    return c.lower() in 'aeiou'
 
 list(filter(vowel, 'Aardvark'))
 # ['A', 'a', 'a']
 list(itertools.filterfalse(vowel, 'Aardvark'))
 # ['r', 'd', 'v', 'r', 'k']
-list(itertools.dropwhile(vowel, 'Aardvardk')
+list(itertools.dropwhile(vowel, 'Aardvark'))
 # ['r', 'd', 'v', 'a', 'r', 'k']
 list(itertools.takewhile(vowel, 'Aardvark'))
 # ['A', 'a']
@@ -489,9 +488,9 @@ for x in gen():
 
 ````python
 def chain(*iterables):
-	for it in iterables:
-    for i in it:
-      yield i
+    for it in iterables:
+        for i in it:
+            yield i
 ````
 
 ### Traversing a Tree (Printing python’s Exception Hierarchy)
@@ -520,20 +519,20 @@ from collections.abc import Iterable
 
 FromTo = tuple[str, str]
 
-def zip_replace(text: str, changes: Iterable[FromTo])-> str:
-  for from_, to in changes:
-    text = text.replace(from_, to)
-	return text
+def zip_replace(text: str, changes: Iterable[FromTo]) -> str:
+    for from_, to in changes:
+        text = text.replace(from_, to)
+    return text
 ````
 
 ````python
 from collections.abc import Iterator
 
-def fib() -> Iterator[int]	# return type for generators coded as functions with yield
-	a, b = 0, 1
-  while True:
-    yield a
-    a, b = b, a+b
+def fib() -> Iterator[int]:  # return type for generators coded as functions with yield
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
 ````
 
 - Note for generators there is a `collections.abc.Generator` type.

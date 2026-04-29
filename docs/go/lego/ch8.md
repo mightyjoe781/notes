@@ -398,7 +398,7 @@ func NewTree[T any](f OrderableFunc[T]) *Tree[T] {
 func (t *Tree[T]) Add(v T) {
 	t.root = t.root.Add(t.f, v)
 }
-func (t *Tree[T]) Contains(v T) {
+func (t *Tree[T]) Contains(v T) bool {
 	return t.root.Contains(t.f, v)
 }
 ```

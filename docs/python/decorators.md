@@ -174,7 +174,7 @@ class Averager():
 ````
 
 ````python
-avg = Average()
+avg = Averager()
 avg(10)
 avg(11)
 avg(12)
@@ -195,7 +195,7 @@ def make_averager():
 ````
 
 ````python
-avg = make_average()
+avg = make_averager()
 avg(10)
 avg(11)
 avg(12)
@@ -205,7 +205,7 @@ avg(12)
 - `series` is a local variable of make_averager, because its assigned inside body of it. its local scope should be gone with each call but it somehow persists.
 - Within `make_average`, we call `series` is a *free variable*. This is a technical term meaning its not bound in the local scope anymore.
 
-![Closure diagram](./ch2_9.assets/flpy_0901.png)
+![Closure diagram](./assets/flpy_0901.png)
 
 We can inspect by using following commands
 
@@ -246,7 +246,7 @@ def make_averager():
   total = 0
   
   def averager(new_value):
-    nonlocal count, total
+    nonlocal cnt, total
     cnt += 1
     total += new_value
     return total/cnt
@@ -425,8 +425,8 @@ registry = set()
 
 def register(active=True):
   def decorate(func):
-    print('running register'f'(active={active})->decorate({func})')
-   	if active:
+    print(f'running register(active={active})->decorate({func})')
+    if active:
       registry.add(func)
     else:
       registry.discard(func)
@@ -436,13 +436,13 @@ def register(active=True):
 @register(active=False)
 def f1():
   print('running f1()')
-  
+
 @register()
 def f2():
   print('running f2()')
 
-def f3()
-	print('running f3()')
+def f3():
+  print('running f3()')
   
 # Output
 # running register(active=False)->decorate(<function f1 at 0x10063c1e0>)

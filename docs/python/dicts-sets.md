@@ -30,7 +30,7 @@ def dump(**kwargs):
 # {'a': 0, 'x': 4, 'y': 2, 'z': 3}
 ````
 
-NOTE: in case of duplicate args are overwritten by later occurances.
+NOTE: in case of duplicate keys, values are overwritten by later occurrences.
 
 ### Merge Mappings with |
 
@@ -63,10 +63,10 @@ def get_creators(record: dict)->list:
 - We can handle semi-structured data like JSON records
 
 ````python
-from collection import OrderedDict
-b1 = dict(api=1, author'Temp Book', type='book', title='unknown')
+from collections import OrderedDict
+b1 = dict(api=1, author='Temp Book', type='book', title='unknown')
 get_creators(b1)	# ['unknown']
-b2 = OrderedDict(api=2, type='book', title='Mystery of Python', authors:'smk hmk vib'.split())	
+b2 = OrderedDict(api=2, type='book', title='Mystery of Python', authors='smk hmk vib'.split())
 get_creators(b2) # ['smk', 'hmk', 'vib']
 
 # notice how order doesn't matter, only keys need to be present correctly
@@ -121,7 +121,7 @@ get_creators(b2) # ['smk', 'hmk', 'vib']
 
 ````python
 # example from zen of python
-# we calculate occurances of a word and store it in dict (k,v) : (string, List[int])
+# we calculate occurrences of a word and store it in dict (k,v) : (string, List[int])
 # skipped irrelevant code
 occ = index.get(word, [])	# search dict if the word exists or not
 occ.append(location)	# update the list
@@ -144,7 +144,7 @@ my_dict.setdefault(key, []).append(new_value)
 
 ````python
 # above code can be fixed now as
-index = collections.defaultdict(list)	# calls list() function for deafult value
+index = collections.defaultdict(list)	# calls list() function for default value
 # now code doesn't need to check for missing keys
 ````
 
@@ -177,7 +177,7 @@ NOTE: its much better to subclass `UserDict` than `dict`. Above example is bad :
 - `move_to_end()` method to efficiently reposition element to endpoint
 - `OrderedDict` can handle frequent reordering operation better than `dict`. Suitable for tracking recent accesses (LRU Cache)
 
-NOTE: dict was designed primarily for fast access, maintaing order is secondary while Ordered dict was designed for reordering operations.
+NOTE: `dict` was designed primarily for fast access, maintaining order is secondary, while `OrderedDict` was designed for reordering operations.
 
 #### collections.ChainMap
 
@@ -186,10 +186,10 @@ NOTE: dict was designed primarily for fast access, maintaing order is secondary 
 ````python
 d1 = dict(a=1, b= 3)
 d2 = dict(a=2, b= 4, c=6)
-from collection import ChainMap
+from collections import ChainMap
 chain = ChainMap(d1, d2)
-chain['a']	# output 1
-chain['a']	# output 6
+chain['a']	# output 1  (found in d1 first)
+chain['c']	# output 6  (only in d2)
 ````
 
 - ChainMap instance doesn’t copy input mapping but holds references to them. Updates or insertions affect first input mapping only.
