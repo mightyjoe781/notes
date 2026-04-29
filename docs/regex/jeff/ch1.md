@@ -1,8 +1,8 @@
 ## Introduction to Regular Expression
 
-- You are tasked with checking all pages of a web server for double words !
+- You are tasked with checking all pages of a web server for double words!
     - accept any number of files, report each line of each file that has doubled words, results nicely formatted
-    - word of the end of a line is repeated at the beginning of next line
+    - word at the end of a line is repeated at the beginning of next line
     - ignore Capitalization
     - find doubled words even when separated by HTML tags.
 - Above tasks could be done using Regular Expression with some effort but significantly less than traditional solutions
@@ -11,8 +11,8 @@
 
 #### Solving Real Problems
 
-- to check a lot of files (70 per say) for whether each file container `SetSize` exactly as often as it contained `ResetSize`. To complicate matters consider capitalization optional.
-- find pair of send and recieve emails from few hundred of emails without actually digging thru content :P
+- to check a lot of files (70 or so) for whether each file contains `SetSize` exactly as often as it contained `ResetSize`. To complicate matters consider capitalization optional.
+- find pairs of sent and received emails from a few hundred emails without actually digging through content
 
 #### Regular Expressions as a Language
 
@@ -53,7 +53,7 @@ NOTE : `-` is metacharacter only when used in character classes otherwise its a 
 
 **Negated Character Classes**
 
-- Using `[^...]` negates the range defined in the character class meaning all charcters except specified.
+- Using `[^...]` negates the range defined in the character class meaning all characters except specified.
 
 **Matching Any Characters with Dot**
 
@@ -97,7 +97,7 @@ phrased differently
 
 NOTE: `...?` or `...*` always succeeds as they match none also
 
-NOTE : `.?` means a single space while `.*` means everything.
+NOTE : `.?` means any single character (optional), while `.*` means everything.
 
 A direct consequence of above is that lets say you want to match 15 or any number : one way is `[0-9][0-9]` (which is wrong) another is just `[0-9]+`
 
@@ -127,7 +127,7 @@ Other interesting Examples :
 - Variable Names : doesn’t start with digit. they are matched by `[a-zA-Z_]*`. If there is limit on size of varible name you can replace that by `{0,32}` or something else.
 - A string within double quotes : `"[^"]*"` inner `^"` prevents matching of unbalanced quotes :P
 - Dollar amount with optional cents : `\$[0-9]+(\.[0-9][0-9])?`
-- An HTTP/HTML URL : `\<http://[-a-z0-9_.:]+/[-a-z0-9_:@&?=+,.!/~*%$]*\.html?\>` this could be simplified to `\<http://[^ ]*\.html?\>`
+- An HTTP/HTML URL : `\<https?://[-a-z0-9_.:]+/[-a-z0-9_:@&?=+,.!/~*%$]*\.html?\>` this could be simplified to `\<https?://[^ ]*\.html?\>`
 - Knowing the data you’ll be searching is an important aspect of finding the balance between complexity and completeness.
 - An HTML Tag : `<.*>` (little incorrect but this is simpler)
 - Time of day such as “9:17am” or “12:30pm” : `[0-9]?[0-9]:[0-9][0-9] (am|pm)` This is very generic but we know time is maximum till 12:00 am/pm. Further simplifying : `(1[012]|[1-9]):[0-5][0-9] (am|pm)`

@@ -106,25 +106,25 @@ To make matching case insensitive we can use `i` modifier like this `m/regexp/i`
 
 ### Modifying Text with Regular Expression
 
-We will use `$var=~ s/regex/replacement` is used to replace matches.
+We will use `$var =~ s/regex/replacement/` to replace matches.
 
 Example : replace Jeff with Jeffrey in the text :
 
-`$var =~ s/\bJeff\b/Jeffrey`
+`$var =~ s/\bJeff\b/Jeffrey/`
 
 Example of form letter with references left for later substitution based on input from other script or same program is best. You can use `/g` flag to make perl keep on making substitutions
 
-#### Example: Prettyfying a Stock Price
+#### Example: Prettifying a Stock Price
 
-Let’s price of a stock is `9.050000003723` but we want to display it as `9.05`. We could do so by some fancy printf. So our choice is take two fraction digit only if third one is 0 or else take all 3 digits.
+Say the price of a stock is `9.050000003723` but we want to display it as `9.05`. We could do so with some fancy printf. Our choice: keep two decimal digits, plus a third only if it’s non-zero.
 
 ```perl
-$price =~ s/(\.\d\d[1-9]?)/$1/			# see we used captured value :)
+$price =~ s/(\.\d\d[1-9]?)\d*/$1/    # keep meaningful decimal digits, drop trailing zeros
 ```
 
 #### Automated Editing
 
-So let’s say we want to replace all occurances of word `sysread` with `read`, we can do so just by using perl command line
+So let’s say we want to replace all occurrences of word `sysread` with `read`, we can do so just by using perl command line
 
 ```perl
 perl -p -i -e 's/sysread/read/g' file
@@ -181,17 +181,17 @@ So our new expression using above becomes, by anchoring last character being not
 $text =~ s/(?<=\d)(?=(\d\d\d))+(?!\d)/,/g;
 ````
 
-**Commaficatin without lookbehind**
+**Commafication without lookbehind**
 
-lookbehind is not supported as widely as lookahead. so solution with lookahead only.
+Lookbehind is not supported as widely as lookahead. Here is a lookahead-only solution.
 
 ````perl
-$text =~ s/(\d)(?=(\d\d\d)+(?d!\d))/$1,/g;
+$text =~ s/(\d)(?=(\d\d\d)+(?!\d))/$1,/g;
 ````
 
 Here note we are not capturing position, instead every digit that is fourth from end and just replacing that with itself and a comma.
 
 Other fun examples : Convert txt to HTML, Matching the username and hostname.
 
-Tip with enought knowledge of perl seek out understanding double word problem mentioned in the start of the chapter.
+Tip: with enough knowledge of Perl, seek out understanding of the double word problem mentioned at the start of the chapter.
 

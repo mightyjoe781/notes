@@ -1,6 +1,7 @@
 # Regular Expressions
 
-> Use regex wisely - it’s power and pain in one package.
+> Use regex wisely — it’s power and pain in one package.
+
 ## Notes
 
 - Mastering Regular Expressions

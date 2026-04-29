@@ -14,17 +14,17 @@ Writing good regex involves striking balance among several concerns:
 
 Four numbers separated by dots such as : `1.2.3.4`, often padded with 0 and can be maximum of 3 digit.
 
-Most simplest regex would be `[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*`, but it looks vague and matches incorrectly as it only matches 3 dots. Let’s fix this : first let’s change * with + because there should be atleast one number between dots. Next we ensure entire string is IP address only using `^` and `$`.
+The simplest regex would be `[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*`, but it’s too vague and allows empty groups between dots. Let’s fix this: first, change `*` to `+` because there should be at least one digit between dots. Next, anchor the entire string as an IP address using `^` and `$`.
 
-Now regex becomes `^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$`. let’s simplify more using `\d` for `[0-9]`. New regex `^\d+\.d+\.d+\d+$` but its still wrong as it can match any number of digits, let’s fix the range.
+Now the regex becomes `^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$`. Let’s simplify further using `\d` for `[0-9]`. New regex: `^\d+\.\d+\.\d+\.\d+$` — but it’s still wrong as it allows any number of digits, so let’s fix the range.
 
-New regex `^\d{1,3}\.d{1,3}\.d{1,3}\d{1,3}$` or we could use following if range is not available `\d\d?\d?`
+New regex: `^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$`, or use `\d\d?\d?` if interval syntax is unavailable.
 
-Still this is not correct because above matches IP address `999.999.999.999` so let’s limit that range. One silly approach might be `[1|2|...|254|255]` if we include zero padding things become worse :P and for FNA altercation can be expensive.
+Still not correct, because the above matches IP addresses like `999.999.999.999`. A naïve approach like `[1|2|...|254|255]` gets messy with zero-padding, and for NFA engines, alternation can be expensive.
 
-A realistic approach would be focusing on digits. If a number is only one or two digits long, there is no worry as to whether the value is within range, so `\d|\d\d` takes care of that. more refined approach is `[01]\d\d` further on same lines `\d|\d\d|[01]\d\d` this is good for limit of 000-199 with allowing padding zeroes.
+A realistic approach focuses on digit count. For one or two digits there is no range concern, so `\d|\d\d` handles those. A more refined approach is `[01]\d\d` for 000–199, giving `\d|\d\d|[01]\d\d` with zero-padding support.
 
-Let’s apply above solutino for 000-255. `\d|\d\d|[01]\d\d|2[0-4]\d|25[0-5]`, actually now we can combine first 3 alternation into `[01]?\d\d?|2[0-4]\d|25[0-5]`. Repeating this 3 times would make a correct original regex.
+For the full 000–255 range: `\d|\d\d|[01]\d\d|2[0-4]\d|25[0-5]`. We can collapse the first three alternatives into `[01]?\d\d?|2[0-4]\d|25[0-5]`. Repeating this pattern four times (joined by `\.`) gives a correct IP regex.
 
 But above is still incorrect as it allows `0.0.0.0` which could be removed using lookahead. `(?!^0+\.0+\.0+\.0+$)`. So with this, we can see choosing how much details you need for your pattern totally depends on the potential text you are going to get :). Know your context.
 
@@ -40,11 +40,11 @@ Another approach is bypass the filepath and just match the file name. `[^/]*$`. 
 
 **Both leading path and filename**
 
-We could do something like this to capture `$1, $2` using `^(.*)/(.*)$` we know first `.*` is greedy and does what we want but never leave same for $2, here it works fine but not always so rather use this. `^(.*)([^/]*)$`
+We could capture both with `^(.*)/(.*)$`. The first `.*` is greedy and correctly grabs the longest path, but the second `.*` can also match `/`, which is not ideal. A better approach is `^(.*)/([^/]*)$`, explicitly excluding `/` from the filename group.
 
 **Matching Balanced Sets of Parentheses**
 
-Its a very interest C problem but could be done using regex as well. Its useful problem while defining configuration files, programs or such.
+This is a very interesting problem in C, but it can be approached with regex as well. It is a useful pattern when parsing configuration files, programs, or similar structured text.
 
 First ignoring the fact that there could be nested `[]` we could come up with `\bfoo\([^)]*\)` but it won’t work. here we used foo for C function like `foo(somevar,2,7)`
 
@@ -68,9 +68,9 @@ $regex = '\(('.'(?:[^()]|\('x $depth .'[^()]*'.'\))*'x $depth .\)';
 
 - Matching a C comment enclose in `/* -- code -- */`
 - Matching an HTML tag, which is text wrapped by `<...>`
-- Extracting items between HTML tags, such as ‘super exciting’ of HTML `a<i>super exciting</i> offer!`
-- Matching a line in .mailrc file. This file gives email aliases, where each line is in format : `alias shorthand fulladdress` (delimiter is whitespace lol)
-- Matching a quoted string but allowing it ot contain quotes if they are escaped
+- Extracting items between HTML tags, such as ‘super exciting’ from `a<i>super exciting</i> offer!`
+- Matching a line in a `.mailrc` file. This file gives email aliases, where each line has the format: `alias shorthand fulladdress` (delimiter is whitespace)
+- Matching a quoted string but allowing it to contain quotes if they are escaped
 - parsing CSV files
 
 We here have three requirements
@@ -89,6 +89,6 @@ Example : Ten Thousand, 10000, 2710 ,,”10,000”, “It’s ”“10 Grand”�
 
 Above row is 7 fields separated by `,` but not inside quotes. So we will need an expression to cover each two types of fields. The non-quoted ones are easy- they contain anything except commas and quotes so `[^",]+`
 
-A double quoted field can contain commas, spaces and in fact anything except a double quote. It can also contain two quotes in a row that represent one quote in the final value. So a double-quoted field is matched by any number of `[^ "]` between `“..."`, which gives us `"(?:[^ "] | "")*"`. Putting together both pieces we get `[^",]+ | "(?:[^"] | "")*"`
+A double-quoted field can contain commas, spaces, and in fact anything except a bare double quote. It can also contain two quotes in a row, which represent one literal quote in the final value. So a double-quoted field is matched by any number of non-quote characters or escaped-quote pairs between `”...”`, giving us `”(?:[^”] | “”)*”`. Combining both field types: `[^”,]+ | “(?:[^”] | “”)*”`
 
 We missed something subtle tho, that is we missed empty field :P

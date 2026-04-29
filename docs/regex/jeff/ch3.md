@@ -10,18 +10,18 @@ when looking at regex in context of host language or tool there are 3 broad issu
 
 #### The Origins
 
-- first described by 1940 by two neuro-physiologists, Warren McCulloch and Walter Pitts, who developed models of how they believed the nervous system worked at the neuron level. Later few years down the road mathematician Stephen Kleene formally described these models in an algebra he called regular sets. He devised a simple notation to express these regular sets, and called them *regular expression*.
-- The first computaional use of regex we could find is Ken Thompson’s 1968 article Regular Expression Search Algorithm in which he describes a regular expression compiler that produced IBM 7094 object code. This let to his work on *qed*, an editor formed basis for Unix editor *ed*
+- first described in 1943 by two neurophysiologists, Warren McCulloch and Walter Pitts, who developed models of how they believed the nervous system worked at the neuron level. A few years later, mathematician Stephen Kleene formally described these models in an algebra he called regular sets, devising a simple notation he called *regular expressions*.
+- The first computational use of regex we can find is Ken Thompson’s 1968 article "Regular Expression Search Algorithm", in which he describes a regular expression compiler that produced IBM 7094 object code. This led to his work on *qed*, an editor that formed the basis for the Unix editor *ed*.
 - ed was the editor that made use of regular expression widespread.
 
-##### Grep’s metcharacters
+##### Grep’s metacharacters
 
-- only `*` was supported early on along with line anchors. Altercation or `+` or `?` was not supported at that time.
-- later (30 yrs from now) grep evolved and got new features at Bell Labs adding new features like `\{min,max}` syntax and many basic functionality we take granted for.
+- only `*` was supported early on along with line anchors. Alternation or `+` or `?` was not supported at that time.
+- later, grep evolved and got new features at Bell Labs, adding `\{min,max\}` syntax and many basic features we now take for granted.
 
 ##### Egrep evolves
 
-- Alfred Aho (also at AT&T Bell Labs) had written egrep, which provided most of the richer set of metacharacters, More importantly he implemented them in a completely different way (better). Not only `+` and `?` added, but could be applied to parenthesized expressions, later altercation was also implemented.
+- Alfred Aho (also at AT&T Bell Labs) had written egrep, which provided a richer set of metacharacters. More importantly, he implemented them in a completely different (and better) way. Not only were `+` and `?` added, but they could be applied to parenthesized expressions, and alternation was also implemented.
 
 ##### Other species evolve
 
@@ -34,14 +34,14 @@ when looking at regex in context of host language or tool there are 3 broad issu
 
 ##### Henry Spencer’s regex package
 
-- appeared in 1986 completely written in C, which could be freely incorportated by other into their own programs.
+- appeared in 1986, completely written in C, and could be freely incorporated by others into their own programs.
 
 ##### Perl evolves
 
-- Larry wall started developing a tool that would later become the language Perl, he already greatly enhaced distributed software development with his *patch* program.
-- Larry released its version 1 in Dec 1987. Perl was immediate hit because it blended so many useful features of other languages.
-- Perl2 releases 1988, Larry replaces regex code entirely using enhance version of Henry Spencers package.
-- later on more features added to perl, and advanced were perfectly timed for the WWW revolution. Perl was built for text processing, and the building of web pages is just that, so Perl quickly become language of web development.
+- Larry Wall started developing a tool that would later become the language Perl; he had already greatly enhanced distributed software development with his *patch* program.
+- Larry released version 1 in December 1987. Perl was an immediate hit because it blended so many useful features from other languages.
+- Perl 2 was released in 1988; Larry replaced the regex code entirely using an enhanced version of Henry Spencer's package.
+- More features were added to Perl over time, and its advances were perfectly timed for the WWW revolution. Perl was built for text processing, and building web pages is just that, so Perl quickly became the language of web development.
 
 ### Care and Handling of Regular Expressions
 
@@ -68,7 +68,7 @@ if (m.find()) {
 ````
 
 - Java does provide procedural approach too, using Pattern.matches(...)
-- Sun has occasionally integrated regular expressions into other parts of language like `if(! line.matches("\\s*")){}` (test for blank lines :P)
+- Java has occasionally integrated regular expressions into other parts of the language, like `if (!line.matches("\\s*")) {}` (test for blank lines)
 
 ##### PHP
 
@@ -80,11 +80,11 @@ if (preg_match('/^Subject: (.*)/i', $line, $matches))
 ##### Python
 
 ````python
-import re;
+import re
 
-R = re.compile("^Subject: (.*)", re.IGNORECASE);
+R = re.compile("^Subject: (.*)", re.IGNORECASE)
 M = R.search(line)
 if M:
-  subject = M.group(1)
+    subject = M.group(1)
 ````
 
