@@ -1,64 +1,82 @@
 ## Securing Microservices
 
-Not all data is sensitive. For eg Catalog Service is not sensitive while Ordering Service is highly sensitive data and requires encryption.
+Not all data is equally sensitive. For example, the Catalog Service is largely public, while the Ordering Service contains highly sensitive financial data and requires strict protection.
 
-#### Encrypting Data
+#### Encrypting Data in Transit
 
-Encryption should be present in transit. Use standard algorithms and never try to write your own encrytion schemes. For HTTP we use Transport Layer Security and SSL certificates. We usually need to manage Certificates, which could be done by Cloud Service provider or we can use LEGO tool for certificates.
+Encryption must be present in transit. Use standard, well-vetted algorithms — never implement your own encryption scheme.
 
- Also data needs to Encrypted at rest. Disk Encryption requires a proper key management and requires encrypted backups.
+For HTTP, use **TLS (Transport Layer Security)** with valid certificates. Certificates can be managed by:
+
+- Your cloud provider (e.g., AWS Certificate Manager, Azure-managed certificates)
+- The [**lego**](https://go-acme.github.io/lego/) CLI tool — an ACME client for Let's Encrypt, written in Go
+- cert-manager (for Kubernetes environments)
+
+#### Encrypting Data at Rest
+
+Data stored on disk also needs encryption. This requires:
+
+- Proper encryption key management (e.g., AWS KMS, Azure Key Vault, HashiCorp Vault)
+- Encrypted backups
 
 #### Authentication
 
 *We need to know who is calling our service.*
 
-with HTTP we have many options, auth header can have main option is 
+HTTP authentication options:
 
-- Basic Authentication (username & password) : Only issue is Requires all microservices requires password storage.
-- API Key : key/client and requires client management
-- Client certificate : public-key cryptography but require very complex management.
+| Method | Notes |
+|---|---|
+| **Basic Auth** (username & password) | Requires every microservice to manage credential storage — not recommended |
+| **API Key** | Simple client identification; requires client lifecycle management |
+| **Client Certificate** | Strong mutual TLS (mTLS); complex to manage at scale |
 
-Better Approach is use an Identity Server and use industry standard protocols:  OAuth 2.0 & OpenID Connect.
+The recommended approach is to use a dedicated **Identity Server** with industry-standard protocols: **OAuth 2.0** and **OpenID Connect**.
 
-Recommendation : Getting Started with OAuth2.0 (Scott Brady).
+How it works:
+1. The client authenticates with the Identity Server
+2. The Identity Server issues a short-lived **access token** (JWT)
+3. Every request from the client to a microservice includes the token
+4. Microservices validate the token without managing credentials themselves
 
-Once identity server verifies client auth info, it provides access token (Short lived) to client. Then every request from client to microservice will contain this token and makes life easy for microservices by not making them manage authentication.
+Common Identity Server implementations: [Keycloak](https://www.keycloak.org/), [Auth0](https://auth0.com/), [Duende IdentityServer](https://duendesoftware.com/products/identityserver), or cloud-native options like AWS Cognito and Azure Entra ID.
+
+> **Recommended reading**: *OAuth 2.0 in Action* by Justin Richer & Antonio Sanso
 
 #### Authorization
 
-*If authenticated then limit what they can do, role based management.*
+*Authentication establishes who the caller is; authorization limits what they can do.*
 
-Authorization Frameworks : 
+Authorization frameworks:
 
-- Makes decisions based on “roles”
-- consider carefully what callers should be allowed to do
+- Make decisions based on **roles** or **claims** in the access token
+- Consider carefully what each caller type should be permitted to do
 
-![image-20220717194653437](ch5.assets/image-20220717194653437.png)
-
-Role based authentication systems helps fight the problem of confused deputy.
+**Role-based access control (RBAC)** helps prevent the [confused deputy problem](https://en.wikipedia.org/wiki/Confused_deputy_problem) — where a service with elevated privileges is tricked into performing unauthorized actions on behalf of a less-privileged caller.
 
 #### Securing the Network
 
-Always put all microservices inside a virtual network and don’t allow others access them. Implement an API Gateway that accepts requests from public network and passes on incoming request to Microservices.
+Place all microservices inside a **virtual network (VNet/VPC)** and block direct public access. Expose services only through an **API Gateway** that:
 
-This allows us to have single point of entry and configured with Firewall and guarded with DDOS defense.
-
-![image-20220717195103400](ch5.assets/image-20220717195103400.png)
+- Accepts requests from the public network
+- Enforces authentication and authorization at the edge
+- Acts as a single point of entry, hardened with a firewall and DDoS protection
 
 #### Defense in Depth
 
-*Avoid relying on single layer of security.*
+*Don't rely on a single layer of security.*
 
-- Encryption in transit
-- Access tokens
-- Virtual Networks and whitelists for network security.
+Apply multiple overlapping layers:
 
-Apply multiple layers of protection to remove the possibility of breach.
+- Encryption in transit (TLS)
+- Encryption at rest
+- Short-lived access tokens
+- Virtual network isolation and allowlists
+- API Gateway as the single public entry point
 
-Additional Defensive Measures : 
+Additional defensive measures:
 
-- Penetration testing : performed by infosec experts and get their advice.
-- Automated security testing : prove APIs reject unauthorized callers
-- Attack detection : port scanning, sql-injection detects and react quickly when you are under attack.
-- Auditing : know exactly who did what and when.
-
+- **Penetration testing**: Performed by security experts; get their recommendations
+- **Automated security testing**: Prove that APIs correctly reject unauthorized callers (e.g., with tools like OWASP ZAP)
+- **Attack detection**: Detect port scanning, SQL injection attempts; alert and respond quickly
+- **Auditing**: Maintain a complete, tamper-resistant record of who did what and when

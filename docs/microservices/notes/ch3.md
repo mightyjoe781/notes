@@ -1,87 +1,90 @@
 ## Building Microservices
 
- 
-
 #### Hosting Microservices
 
-- Development : Developers wants to debug the application locally.
-- Staging : Testers want to try out the application in a production like environment.
-- Production : We also need to host application for end users.
+- **Development**: Developers want to debug the application locally
+- **Staging**: Testers want to try out the application in a production-like environment
+- **Production**: Host the application for end users
 
-Hosting Options :
+Hosting Options:
 
-1. Virtual Machines
-   - Traditional approach is Virtual Machines with one VM per microservice. But it can be costly and if we try to put more microservices on same VM then there maybe Operation challanges. Service discovery is another problem to deal with in VMs.
+1. **Virtual Machines**
+   - Traditional approach: one VM per microservice. Can be costly. Placing multiple microservices on one VM introduces operational challenges. Service discovery is another problem to solve.
 
-2. Platform as a Service
+2. **Platform as a Service (PaaS)**
+   - Automatic scale-out
+   - DNS address per microservice
+   - Built-in load balancing
+   - Security and monitoring included
+   - Serverless options available
 
-   - Automatic scale-out, DNS address for each microservices
+3. **Containers**
+   - Portable: run anywhere
+   - Easy to run locally
+   - Orchestrate with Docker Compose or Kubernetes
 
-   - Load Balacing builtin
+#### Running Microservices Locally in Containers
 
-   - Security, Monitoring
-
-   - Serverless
-
-3. Containers
-
-   - Portable : Run anywhere
-
-   - Easily run locally
-
-   - Docker compose
-
-#### Demo : Running Microservices Locally in Containers
-
-Development Environment Setup : 
+Development Environment Setup:
 
 - Install Docker Desktop
-- Clone eShopOnContainers source code
-- Enable the WSL2 based engine in Docker Desktop [Optional : Windows]
-- Configure Windows firewall rules (using supplied PowerShell script) [Optional : Windows].
+- Clone the reference application source code
+- Enable the WSL2-based engine in Docker Desktop (Windows only)
+- Configure Windows firewall rules via the supplied PowerShell script (Windows only)
 
-Clone the repo : 
+> **Note**: The original `dotnet-architecture/eShopOnContainers` repository has been archived. The updated reference app is at [dotnet/eShop](https://github.com/dotnet/eShop).
+
+Clone the repo:
 
 ```bash
-git close https://github.com/dotnet-architecture/eShopOnContainers
+git clone https://github.com/dotnet/eShop
 ```
 
-To build the application execute : `docker-compose build`
+Build the application:
 
-To run application : `docker-compose up`
+```bash
+docker compose build
+```
 
-Navigate : `host.docker.internal:5100`
+Run the application:
 
-#### Creating a New Microservices
+```bash
+docker compose up
+```
 
-- Source Control repository per microservice because avoids tight coupling between services.
-- Continous integration build and run automated tests
+Navigate to the URL printed by `docker compose up` (typically `http://localhost:<port>`) to access the app. Check the repo README for the current port, as it differs from the original eShopOnContainers (which used port 5100).
+
+> **Note**: `docker-compose` (with hyphen) is the legacy standalone CLI. Docker v2 bundles `docker compose` (no hyphen) as a plugin — prefer the new form.
+
+#### Creating a New Microservice
+
+- Use a **separate source control repository per microservice** to avoid tight coupling between services
+- Set up a **continuous integration build** that runs automated tests on every push
 
 #### Testing Microservices
 
-Types of Tests
+Types of tests:
 
-- Unit Tests : Operate at Code level and Fast to run. TDD : Test Driven Development and High code coverage on buisiness application.
-- Service-Level Tests :  Test a single service in isolation and use mocked collaborators.
-- End to end Tests : Production like environment and can be fragile.
+- **Unit Tests**: Operate at the code level; fast to run. TDD (Test-Driven Development) gives high code coverage on business logic.
+- **Service-Level Tests**: Test a single service in isolation using mocked collaborators.
+- **End-to-End Tests**: Run in a production-like environment; can be fragile and slow.
 
-#### Mircoservices Templates
+#### Microservice Templates
 
-*Consider using a mircoservice template or exemplar.*
+*Consider using a microservice template or exemplar to standardize new services.*
 
-Standardizing Microservices : 
+Standardizing microservices across:
 
-- Logging : Consistent and Sending it to centralized location.
-- Health Checks : Each microservice is able to check its health and status
-- Configuration : Accessing secrets and configuration
-- Authentication : Middleware which sets up standard approach for providing security
-- Build Script : Use standard build scripts be it makefile or docker-compose.ymls
+- **Logging**: Consistent format, sent to a centralized location
+- **Health Checks**: Each microservice exposes a health/status endpoint
+- **Configuration**: Standard approach for accessing secrets and config (e.g., environment variables, secret stores)
+- **Authentication**: Middleware that sets up a standard security approach
+- **Build Script**: Consistent build scripts (Makefile, `docker compose`, etc.)
 
-Benefits of Service Templates
+Benefits of service templates:
 
 - Reduced time to create a new microservice
-- Consistent Tooling (but still allow for best tool for job)
-- Increased developer production
+- Consistent tooling across teams (while still allowing the best tool for the job)
+- Increased developer productivity
 - Ability to run the microservice in isolation
-
-- Run in context of full application - Locally (eg Docker Compose) or Connect to shared services.
+- Ability to run in the context of the full application — locally (e.g., Docker Compose) or connected to shared services

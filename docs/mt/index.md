@@ -1,19 +1,19 @@
-## Minetest
+## Luanti (formerly Minetest)
 
-Minetest is a free and open-source sandbox video game and game creation system developed by a team of volunteers, with significant contributions from the community.It was created by Perttu Ahola, and released on Web in November 2010.
+Luanti (formerly Minetest) is a free and open-source voxel game engine and game creation system developed by a team of volunteers, with significant contributions from the community. It was created by Perttu Ahola and released online in November 2010. The project was renamed from Minetest to Luanti in October 2024.
 
-Minetest is programmed in C++ using the Irrlicht Engine. Minetest provides an API for users to create their own games and mods written in Lua.
+Luanti is programmed in C++ and provides an API for users to create their own games and mods written in Lua.
 
 #### Server
 
-- [Creating a Minetest Server](server.md) 
+- [Creating a Minetest Server](server.md)
 - [Setting up a server for Minetest](vpssetup.md)
 - [Server Scripts](scripts.md)
 - [Managing Server Backend](luanti_db.md)
 
 #### Resources
 
-- [Minetest: Official Website](https://www.minetest.net/)
-- [Minetest API Documentation](https://minetest.gitlab.io/minetest/)
-- [Official Forum](https://forum.minetest.net)
-- [Minetest Modding Book](https://rubenwardy.com/minetest_modding_book/en/index.html)
+- [Luanti: Official Website](https://www.luanti.org/)
+- [Luanti API Documentation](https://api.luanti.org/)
+- [Official Forum](https://forum.luanti.org)
+- [Luanti Modding Book](https://rubenwardy.com/minetest_modding_book/en/index.html)

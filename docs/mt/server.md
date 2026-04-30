@@ -1,6 +1,6 @@
 ### Minetest Server
 
-Minetest is an open source voxel game engine.It requires a game which utilises engine API to provide a gameplay.By default it ships with a devtest game which is mostly used for development puporses. A better playable game called as Minetest Game is also available.
+Minetest (now renamed to Luanti) is an open source voxel game engine. It requires a game which utilises the engine API to provide gameplay. By default it ships with a devtest game which is mostly used for development purposes. A better playable game called Minetest Game is also available.
 
 #### Considerations
 
@@ -33,9 +33,9 @@ Created by Maksym as an attempt to develop a “ready-made” game that has a ni
 
 Most of famous servers currently run on multicraft because of availability of players and support for both 0.4 and 5.x clients. Most of mods may require little bit of tweaking for working with multicraft.
 
-##### **Mineclone** 2 Game
+##### **VoxeLibre** (formerly MineClone2)
 
-Created by Wuzzy, as the name suggests game attempts to provide a gameplay similar to MineCraft. It has really come quite far and its very stable.
+Created by Wuzzy, as the name suggests the game attempts to provide gameplay similar to Minecraft. It has come quite far and is very stable. The project was renamed from MineClone2 to VoxeLibre.
 
 ##### Final Minetest
 

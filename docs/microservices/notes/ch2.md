@@ -2,99 +2,101 @@
 
 #### Evolving Towards Microservices
 
-Augment a monolith
+Augment a monolith:
 
-- Add new microservices
+- Add new microservices alongside the existing system
 
-Decompose a monolith
+Decompose a monolith:
 
-- Extract Microservices
+- Extract microservices incrementally
 
-You don’t need to get started with microservices, Its hard to get service boundaries right. Its better to let it evolve a little bit before switching to microservices.
+You don't need to start with microservices. It's hard to get service boundaries right. It's better to let the domain evolve a little before switching to microservices.
 
-Definig Microservice responsibilities
+Defining microservice responsibilities:
 
 - Public Interface
 
 #### Microservices Own Their Own Data
 
-Microservices are independently deployable which ultimately requires them to own their own data. All microservices should not share data from a single pool, instead each of microservices have their own data store.
+Microservices are independently deployable, which requires them to own their own data. Microservices should not share data from a single pool; each microservice has its own data store.
 
-If a microservices wants to access data store of another microservice, it needs to interact with the public API of that microservice that owns data.
+If a microservice needs data from another microservice, it must interact through that service's public API.
 
-Some limitation comes with this issues.
+Some limitations come with this approach:
 
-- Database Joins are no longer possible
-- Single Transactions are not possible and distributed transaction are very complex.
-- Eventual Consistency : All transaction and database will come to consistent state eventually if service boundries are defined carefully.
+- Database joins are no longer possible
+- Single transactions are not possible; distributed transactions are very complex
+- **Eventual consistency**: All data will converge to a consistent state eventually, provided service boundaries are defined carefully
 
-Mitigating Data Ownership Limitation.
+Mitigating data ownership limitations:
 
-- Define service boundaries well, Minimize need to aggregate data
-- Caching : improved performance and availability, no need to communicate again and again with other microservices
+- Define service boundaries well to minimize the need to aggregate data across services
+- **Caching**: Improves performance and availability; reduces repeated inter-service calls
 
-#### EShopOnContainers Architecture
+#### eShopOnContainers Architecture
 
-![img](https://github.com/dotnet-architecture/eShopOnContainers/raw/dev/img/eShopOnContainers-architecture.png)
+The reference architecture uses separate data stores per microservice. The Catalog and Ordering microservices use a relational database (MySQL/SQL Server) independently — they do not share resources. The Basket microservice uses Redis cache.
 
-Notice how Catalog and ordering microservices are mysql database but it doesn’t need to share resources. Basket Microservice uses Redis cache.
+On apparent data duplication: consider the Ordering and Catalog microservices. It may seem that both duplicate product and price data, but in practice we only care about the price at the time an order was placed — not the current catalog price. This is intentional denormalization for consistency.
 
-Two microservices eventually have issues of duplicating data. Direct database join between two microservices is might not be a problem as it seemed to be. Consider ordering and catalog microservices. It may seem ordering and catalog may have duplication of products and prices, but in actually in reality we only care about the time we ordered something is different from what catalog shows. So data is in reality consistent and we use denormalization to reach consistent states after an order goes through.
+> **Note**: The original `dotnet-architecture/eShopOnContainers` repository has been archived. The updated reference app is at [dotnet/eShop](https://github.com/dotnet/eShop).
 
 #### Components of a Microservice
 
-Microservices is not a single service running on simple one host. If we scale out then there are multiple replica’s of microservices running on multiple hosts. A microservices may have scheduler that requires to perform some kind of data maintenance. 
+A microservice is not a single service running on one host. When scaled out, there are multiple replicas running across multiple hosts. A microservice may also include a scheduler for background data maintenance tasks.
 
-So in reality a single microservices has many components and together they form a closed microservice in which component can communicate to each other only if they belong to same microservice.
-
-Microservices should have a clear defined public interface and its data can only be accessed thorugh that public interface.\
+In practice, a single microservice has many internal components. These components communicate freely with each other, but the microservice as a whole exposes only a well-defined public interface. Its data can only be accessed through that public interface.
 
 #### Microservices are Independently Deployable
 
-*Miroservices can be upgraded without their clients need to upgrade.*
+*Microservices can be upgraded without requiring their clients to upgrade.*
 
-This requires care and never push breaking changes to public interface. To achieve this we use Microservices Contracts like :
+This requires care — never push breaking changes to a public interface. To achieve this, follow microservice contract conventions:
 
-- Make additive changes : New endpoints and properties on DTOs
-- Introduce version 2 API : Version 1 client must still be supported
-- Easily forgotten in development. (Upgrade both at same time).
+- **Make additive changes**: New endpoints, new optional properties on DTOs
+- **Introduce a v2 API**: v1 clients must still be supported during the transition
+- Don't fall into the trap of upgrading both client and service simultaneously in development
 
-Avoiding Upgrade Issues
+Avoiding upgrade issues:
 
-- Team ownership of microservices (Add new feature, then deploy updated microservices, update clients then)
-- Create automated tests (Ensure older clients are supported, run as part of a CI build process).
-- Beware of shared Codebase, results in tightly coupled client and services.
+- Team ownership of microservices (add the new feature, deploy the updated service, then update clients)
+- Create automated contract tests (ensure older clients are still supported; run as part of CI)
+- Beware of shared codebases — they result in tightly coupled clients and services
 
-#### Identifying Microservices Boundries
+#### Identifying Microservice Boundaries
 
-Getting it wrong can be costly : Poor performance, Hard to change
+Getting boundaries wrong is costly: poor performance, hard to change.
 
-Start from existing monolith system :
+Starting from an existing monolith:
 
 - Identify loosely coupled components
 - Identify database seams
 
-A helpful guideline is : *Organize microservices around business capabilities*.
+A helpful guideline: *Organize microservices around business capabilities*.
 
-Domain Driven design (Courses by Vladimir are quire good) can be utilised here :
+Domain-Driven Design (DDD) can be applied here:
 
-- Identify “bounded contexts”
+- Identify "bounded contexts"
 - Break up large domains
 - Microservices do not share models
-- “Ubiquitous language”
-- Sketch on paper to get more idea about potential problems
+- Use a "ubiquitous language" within each service
+- Sketch on paper to discover potential boundary issues early
 
-Pitfalls in Microservice Boundaries : 
+Pitfalls in microservice boundaries:
 
-- Don’t turn every noun into a microservices
-- Anemic CRUD microservices
-- Thin wrappers around databases
-- Logic distributed Everywhere
-- **Avoid circular dependency**
-- Avoid chatty communication (too much communication among microservices, takes a toll on performance and can be costly).
+- Don't turn every noun into a microservice
+- Avoid anemic CRUD microservices — thin wrappers around a database with no logic
+- Avoid logic distributed everywhere across many tiny services
+- **Avoid circular dependencies**
+- Avoid chatty communication (excessive inter-service calls hurt performance and increase costs)
 
-#### EShopOnContainers Service Boundries
+#### eShopOnContainers Service Boundaries
 
-There are 3 microservices : Catalog, Basket and Ordering microservices.
+There are three core microservices: Catalog, Basket, and Ordering.
 
-These are 3 distinct parts of shopping experience. It helps in resilience, scalability. Catalog is very large datasets and focus on flexible querying (MySQL). Basked service is short-lived data and redis cache is good. Ordering reqruires to always required to write new data and its very vital and highly sensitive data. Identify requires Authentication database.
+These represent three distinct parts of the shopping experience, each with different data characteristics:
+
+- **Catalog**: Large dataset, optimized for flexible querying (relational DB)
+- **Basket**: Short-lived session data, well-suited for Redis cache
+- **Ordering**: Write-heavy, highly sensitive financial data requiring durability
+- **Identity**: Authentication and user management database

@@ -16,8 +16,9 @@
 (7 rows)
 ```
 
-Usually `sqlite` is best for `modstorage` in Luanti. Rest all could be stored on PostgreSQL.
-https://niklp.net/posts/minetest-postgresql-benchmark/
+Usually `sqlite` is best for `modstorage` in Luanti. Everything else can be stored on PostgreSQL.
+[Minetest PostgreSQL benchmark](https://niklp.net/posts/minetest-postgresql-benchmark/)
+
 ## Running Migrations
 
 `world.mt` state before migration
@@ -33,7 +34,7 @@ world_name = prismo
 mod_storage_backend = sqlite3
 ```
 
-Add postgresql details for each tables
+Add PostgreSQL connection details for each backend:
 
 ```mt
 enable_damage = true
@@ -62,7 +63,7 @@ Source : https://forum.luanti.org/viewtopic.php?t=16689
 
 ## Accessing the Database
 
-Essentially internally Postgres versions each row do get rid of ghost writes using Versioning. Eventually all these dangling version needs to be cleaned up every now and then (usually postgres cleans it eventually).
+Postgres internally versions each row to implement MVCC (Multi-Version Concurrency Control), which avoids write conflicts. Over time, dead row versions accumulate and need to be cleaned up periodically via `VACUUM` (Postgres does this automatically, but manual runs help reclaim space faster).
 
 ```bash
 
@@ -73,10 +74,10 @@ psql -h hostname -p port -U username -d database_name
 > \dt
 > SELECT pg_size_pretty(pg_total_relation_size('public.blocks')) AS size;
 
-# vaccum a table, marks deletes to be collected
+# vacuum a table, marks dead rows for collection
 VACUUM VERBOSE schema_name.table_name;
 
-# vaccum entire db
+# vacuum entire db
 VACUUM;
 
 # real-vacuum, reduces actual storage space

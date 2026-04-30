@@ -82,13 +82,13 @@ Save above config to `~/multicraft/multicraft.conf`.
 
 By default all the worlds go into `~/multicraft/worlds/worldname/`. All the logs gets written into `~/multicraft/debug.txt` and config file read is `~/multicraft/multicraft.conf`.
 
-For Installing mods we can either utilise `~/multicraft/mods/` or `~/multicraft/worlds/worldname/worldmods/`. Later is preffered because we can use same engine installation to host multiple worlds which use different modsets and we don’t have to define a `enable_modname=true` for every mod we install.
+For installing mods we can either utilise `~/multicraft/mods/` or `~/multicraft/worlds/worldname/worldmods/`. The latter is preferred because we can use the same engine installation to host multiple worlds with different modsets and we don’t have to define `enable_modname=true` for every mod we install.
 
 - World files : `~/multicraft/worlds/worldname`
 - Logs files : `~/multicraft/debug.txt`
 - Config files : `~/multicraft/multicraft.conf`
 
-So Idea now is to redefine and make this structured for maintaining multiple worlds and its much easier to debug the server crashes when we have smaller log files with dates written on them rather than a long debug.txt file.
+The idea is to restructure this for maintaining multiple worlds. It is much easier to debug server crashes with smaller log files named by date rather than one long debug.txt file.
 
 ````bash
 cd ~
@@ -105,6 +105,6 @@ if [ -z "$STY" ]; then exec screen -dm -S mc /bin/bash "$0"; fi
 while sleep 3; do $HOME/multicraft/bin/multicraftserver --world $HOME/worlds/prismo --terminal --logfile $HOME/logs/`date +"%m%d"`.txt --config $HOME/config/prismo.conf; done
 ````
 
-Above script attaches a screen session in behind and executes multicraftserver in it. To access screen session do `screen -rx`.To come back to console from screen session you can type `^ A + d`. See `screen(1)` man page for more details.
+The above script attaches a screen session in the background and executes multicraftserver in it. To attach to the screen session run `screen -rx`. To detach from the screen session press `Ctrl+A` then `d`. See `screen(1)` man page for more details.
 
 Replace `prismo` with appropriate server name.
