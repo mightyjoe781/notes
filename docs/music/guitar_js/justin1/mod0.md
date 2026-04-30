@@ -1,45 +1,39 @@
-### Module 0
+# Module 0 - Setup & Basics
 
-#### How to Tune A Guitar
+## How to Tune a Guitar
 
-- Poly-tuner or Snark
-- GuitarTuna app
-- Tuner/Apps only work if guitar is roughly out of tune or else we might need to listen to sound and tunes while replacing strings.
-- Learn how to use your ear to tune a guitar
-- Always use one-string at a time ! Look up Rest Stroking in Classical Guitar.
+- Use a clip-on tuner (Snark) or app (GuitarTuna) for everyday tuning.
+- Tuners work well when the guitar is slightly out of tune - if replacing strings, you may need to use your ear first to get close.
+- Tune one string at a time. Look up **rest stroking** in classical guitar for right-hand technique while tuning.
+- Long-term goal: develop ear tuning (relative tuning by matching intervals between strings).
 
-#### How to Hold Your Guitar
+## How to Hold Your Guitar
 
-- put the guitar on right leg as a beginner, experts use left leg to easy access to higher notes
-- use your right rest on the guitar, in case of electric guitar rest the wrist
-- guitar is held in place by right hand and leg and back straight
-- don’t lean over the guitar ! don’t look at strings.
+- As a beginner, rest the guitar on your **right leg**; advanced players use the left leg for easier access to higher frets.
+- Rest your right forearm on the body of the guitar. For electric, rest the wrist near the bridge.
+- The guitar is held in place by your right arm, your leg, and your body - keep your back straight.
+- Don't lean over to look at the strings.
 
-#### Positive Finger Placement
+## Positive Finger Placement
 
-- first few weeks your finger will hurt
-- how much pressure applied on a portion of fret changes the sounds
-- to play a note more clearer keep fingers towards end of fret, requires less pressure/pain
+- Your fingertips will hurt for the first few weeks - this is normal and will pass.
+- Pressing harder doesn't always help; pressing *closer to the fret* (towards the body side of the fret) produces a cleaner note with less pressure.
 
-#### Reading Guitar Boxes
+## Reading Chord Boxes
 
-![image-20230501104821814](mod0.assets/image-20230501104821814.png)
+![Chord diagram guide](../../guitar/assets/img_00_Chord_name.png)
 
-- Let’s take chord D for Example
-    - Horizontal Lines : fret
-    - Vertical Lines : Strings
-    - Dark first Horizontal Line : Nut
-    - 1, 2, 3 : which fingers where (T-thumb, 1-index, 2-driving, 3-ring, 4-pinky) [Note in piano : 1-thumb...]
-    - X - won’t play that string
-    - 0 - play that string openly
+- Horizontal lines = frets; top thick line = nut
+- Vertical lines = strings (low E on left, high e on right)
+- Numbered dots = which finger to use (1=index, 2=middle, 3=ring, 4=pinky)
+- **X** = don't play that string; **0** = play it open
 
+## How to Hold a Guitar Pick
 
-#### How to Hold Guitar Pick
+- Using a pick helps when learning strumming patterns and playing songs.
+- Start with the **thinnest pick** you can find - it's more forgiving and easier to strum with.
 
-- using a pick is helpful while learning strumming pattern and song playing
-- use absolute thinnest pick
+## How to Strum Without a Pick
 
-#### How to Strum Without Pick
-
- 
-
+- Use the nail of your index finger for downstrokes, the flesh of your thumb for upstrokes.
+- Alternatively, use all four fingers brushing downward (folk/classical style).

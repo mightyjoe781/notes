@@ -1,50 +1,59 @@
-### Module 4
+# Module 4 - Rhythm & Technique
 
-#### Beginner Finger Stretches
+## Beginner Finger Stretches
 
-- difficulty varies according to anatomy
-- not a speed exercise but do it slowly and strecthing
-- keep your fingers parallel to one another and keep fingers roughly where they should be
-- This Is A Finger Stretch Exercise, Not A Finger Pain Exercise
-- bar chord : n, n+1, n+2, n+3 fret (probably called spider ig)
+- Not a speed exercise - do it slowly with intention.
+- Keep fingers parallel to one another and roughly where they should be on the fret.
+- The exercise is a **stretch**, not a pain exercise. Back off if it hurts.
+- Spider exercise: fret four consecutive frets (n, n+1, n+2, n+3) across all six strings.
 
-#### The Dm Chord
+## The Dm Chord
 
-- ![img](mod4.assets/OD-Dm-chord-f4.png)
-- Many guitarist use 1-2-3 for the Dm, but for beginner 1-2-4 because 4 helps develop pinky finger
-- practice : One Minute Change Exercise & Perfect Chord Exercise
+![Dm chord diagram](assets/OD-Dm-chord-f4.png)
 
-#### [Metronome](https://www.justinguitar.com/guitar-lessons/meet-the-metronome-b1-403)
+- Many players use fingers 1-2-3, but beginners should try **1-2-4** - using the pinky helps develop it early.
+- Exercises: **One Minute Changes** (Dm ↔ other chords) and **Perfect Chord Exercise** (check every string rings clean).
 
-- enable to play in a steady, consistent rhythm - one of the vital skills for being a great guitarist.
-- If you practice with a metronome regularly, you’ll develop your inner sense of rhythm!
-- ability to play at a consistent tempo even when the click is off
-- Rules :
-  1. FIRST RULE : Practice different Tempo
-  2. SECOND RULE : Accentuate the beat!
-  3. THIRD RULE : Accuracy
-- Try this metronome : https://geni.us/jgtr-time
+## Using a Metronome
 
-#### [THE Strumming Pattern](https://www.justinguitar.com/guitar-lessons/the-strumming-pattern-b1-404)
+[JustinGuitar lesson on metronome](https://www.justinguitar.com/guitar-lessons/meet-the-metronome-b1-403)
 
-- Step 1 : Start off with a simple pattern of four down-strums per bar. Then, while you strum, you should count aloud – 1, 2, 3, 4…
+A metronome develops your **internal sense of rhythm** - the ability to keep steady time even without a click.
 
-- Step 2 
+**Three Rules:**
 
-- ```
-  1 2+ 3+ 4
-  
-  D DU DU D
-  ```
+1. **Practice at different tempos** - not just fast.
+2. **Accentuate the beat** - feel the pulse, don't just follow it.
+3. **Accuracy over speed** - clean is always better than fast.
 
-- Step 3
+Try: [JustinGuitar metronome](https://geni.us/jgtr-time)
 
-- ```
-  1 2+ + 4
-  
-  D Du u D
-  ```
+## The Strumming Pattern
 
-- 80-100 BPM on metronome is a good idea
+[JustinGuitar lesson](https://www.justinguitar.com/guitar-lessons/the-strumming-pattern-b1-404)
 
-- 
+**Step 1** - Four even downstrokes per bar, count aloud: 1, 2, 3, 4
+
+**Step 2**
+
+```
+Count:   1   2 + 3 + 4
+Pattern: D   D U D U D
+```
+
+**Step 3** (introduce gaps - keep your hand moving but miss the strings on muted beats)
+
+```
+Count:   1   2 + + 4
+Pattern: D   D U u D
+```
+
+- Target tempo: **80-100 BPM** on the metronome.
+- Keep your strumming arm moving even on rests - the motion stays constant, only the contact changes.
+
+---
+
+## Not Yet Covered
+
+- Module 4 songs
+- Modules 5-9 (Grade 1)
