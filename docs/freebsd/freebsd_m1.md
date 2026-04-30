@@ -8,7 +8,7 @@ WiFi support on FreeBSD has been a lot shaky mostly due to manufactures not shar
 
 Later Warner arranged a Jail running on his bare metal server rack for me to connect via ssh. This was a temporary arrangement for me to proceed with the summer. And I always wanted to develop things locally. I tried various methods to get VSCode running on FreeBSD remotely but could not make it work. Finally for the entire summer project I was working on my local and pushing my changes to git, then logging into the server via ssh, and pulling in the changes from git. A long tiring process.
 
-After this struggle I was keen on finding the solution for this problem so I found this article online by John Grafton (https://www.jrgsystems.com/) who seems to share similar interest in MacBook developement Environments as me. So I set out to emulate his development environment across my M1. Following Steps are more of personal note for me to remember what I did to make this work.
+After this struggle I was keen on finding the solution for this problem so I found this article online by John Grafton (https://www.jrgsystems.com/) who seems to share similar interest in MacBook developement Environments as me. So I set out to replicate his development environment on my M1. Following Steps are more of personal note for me to remember what I did to make this work.
 
 ### 1. Creating a FreeBSD QEMU VM
 

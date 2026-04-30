@@ -1,4 +1,4 @@
-## Swimming Strokes (Core 4)
+# Swimming Strokes (Core 4)
 
 ## **Freestyle (Front Crawl)**
 

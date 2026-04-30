@@ -1,10 +1,10 @@
-## Setting up VSCode for RCE on M1 
+## Setting up VSCode Remote Development on M1
 
 This method assumes you have working QEMU machine running on M1. Following steps prepare vm for running VSCode Remote Extension which is useful in case you wish to use debugger and run commands easily.
 
 NOTE : this doesn’t work for ssh to root because vscode assumes its in linuxulator root
 
-**NOTE : This setup can’t run `make buildworld buildkernel` becuase while changing `.profile` we change priority of many binaries. To run buildworld or buildkernel disable path export in `.profile`**
+**NOTE: This setup can’t run `make buildworld buildkernel` because while changing `.profile` we change priority of many binaries. To run buildworld or buildkernel disable path export in `.profile`**
 
 NOTE : its possible you are connecting to wrong host, as it might very on system restarts. Use `ifconfig` to check ip to ssh.
 
@@ -84,11 +84,11 @@ sudo whoami
 ````bash
 sysrc linux_enable="YES"
 service linux start
-pkg install linux_base-c7
+pkg install linux_base-rl9
 
 # check installation
 /compat/linux/usr/bin/uname -a
-# sometimes first install don't work fine until reboot
+# sometimes first install doesn't work until reboot
 reboot
 
 # more : https://docs.freebsd.org/en/books/handbook/linuxemu/

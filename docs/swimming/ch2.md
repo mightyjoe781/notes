@@ -17,7 +17,7 @@
 
 ## Safe pool entry and exit
 
-* Steps or ladders**: Always enter slowly using handrails.**
+* **Steps or ladders**: Always enter slowly using handrails.
 * **Sitting or kneeling entry**: Safer for beginners and helps adjust to water temperature. Alternately you can walk around the pool.
 * **Walk, don’t jump** unless you’re certain of depth and safety.
 * Use **pool walls or grab rails** for exiting — avoid pulling on lane ropes or other swimmers.

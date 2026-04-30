@@ -33,4 +33,4 @@
 * Freestyle: Inhale as one arm recovers, exhale underwater.
 * Breaststroke: Breathe during arm pull, glide before next stroke.
 * Backstroke: Breathe naturally as face stays out of water.
-* Butterfly: Inhale during pull phase, exhale during recovery.
+* Butterfly: Inhale as arms push past hips and head rises, exhale during underwater pull phase.

@@ -1,4 +1,4 @@
-## Body Position & Balance
+# Body Position & Balance
 
 ## Horizontal body alignment
 

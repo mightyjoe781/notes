@@ -1,6 +1,6 @@
-Swimming is a very important life-saving skill that should be known all folks. Some people grew up in suburban areas with no accessibility to pools or water areas should try to learn it from a certified coach.
+Swimming is a vital life-saving skill that should be known by all. People who grew up in areas without access to pools or open water should try to learn it from a certified coach.
 
-I always wanted to learn swimming, atleast enough to come to shore in emergency situations :) or maybe just played too many games. This guide documents important aspects of swimming and correct techniques often neglected by beginners. This content should be usable for beginner & intermediate swimmers.
+I always wanted to learn swimming, at least enough to make it to shore in an emergency :) or maybe I just played too many games. This guide documents important aspects of swimming and correct techniques often neglected by beginners. This content is aimed at beginner and intermediate swimmers.
 
 # 🏊‍♂️ Swimming Notes
 
@@ -43,7 +43,7 @@ I always wanted to learn swimming, atleast enough to come to shore in emergency 
 - Basic breath control & timing
 - Side breathing for freestyle
 - Exhaling underwater
-- 2-3-2 breathing pattern
+- Bilateral breathing pattern (every 3 strokes, alternating sides)
 - Nose clip vs. no clip usage
 
 ---

@@ -21,13 +21,13 @@
 * Use bubbles as a cue — no bubbles = no breathing!
 * Helps you stay calm and reduces CO₂ buildup.
 
-## 2-3-2 breathing pattern
+## Bilateral breathing pattern
 
-* A useful rhythm for beginners:
-    * Inhale → swim 2 strokes → exhale
-    * Inhale → swim 3 strokes → exhale
-    * Inhale → swim 2 strokes → exhale
-* Helps you learn to **control breathing pace** and avoid panic.
+* Breathe every 3 strokes (alternating sides) for balanced technique.
+* Or use a 2-3-2 pattern to ease into it:
+    * Breathe every 2 strokes → breathe every 3 strokes → breathe every 2 strokes
+* Helps you learn to **control breathing pace**, develop both sides equally, and avoid panic.
+* Bilateral breathing prevents shoulder/neck imbalance common in one-side breathers.
 
 ## Nose clip vs. no clip usage
 

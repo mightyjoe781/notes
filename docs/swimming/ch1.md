@@ -2,9 +2,9 @@
 
 ## Why learn swimming?
 
-- Swimming is a essential life skill - it can save your life or someone else’s
+- Swimming is an essential life skill — it can save your life or someone else’s
 - Opens up opportunities for other kinds of water sports : snorkeling, surfing, diving, boating etc.
-- Builds overall body co-ordination and motor control
+- Builds overall body coordination and motor control
 - Helps conquer fear of water and builds self-confidence
 
 ## Benefits of swimming (fitness, safety, fun)
@@ -32,8 +32,8 @@
 
 ## Basic pool etiquette
 
-* Shower Before entering in pool
-* No running on pool deck - its damn slippery
+* Shower before entering the pool
+* No running on the pool deck — it's very slippery
 * Avoid blocking lane or swimming across others
 * Be mindful of splash and space, especially in shared pools
 * Wait for your turn to dive

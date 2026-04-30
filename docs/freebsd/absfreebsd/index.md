@@ -8,7 +8,7 @@
 - Chapter 6. Kernel Games
 - Chapter 7. The Network
 - Chapter 8. Configuring Network
-- [Chapter 9. Securing you System](ch9.md)
+- [Chapter 9. Securing your System](ch9.md)
 - Chapter 10. Disks, Partitions, and GEOM
 - Chapter 11. The UNIX File System
 - [Chapter 12. The Z File System](ch12.md)

@@ -1,22 +1,28 @@
 ## Tools Tips & Tricks
 
+### Window Manager
+- i3
+- Aerospace
 
+### Editors
+- [Typora](typora/index.md)
+- Vim
+- NeoVim
+- VSCode
 
+### Terminal
+- iTerm2
+- Ghostty
 
+### AI
+- GitHub Copilot
+- Claude
 
-* Window Manager (i3)
-* Personal Notes
-    * Apple Notes
-* Reminders
-* Calendar
-* Editors
-    - [Typora](typora/index.md)
-    - ViM
-    - NeoViM
-    - VSCode
-* Terminal
-    * iTerm2
-    * Ghostty
+### Notes
+- Apple Notes
+- Notion
+- Obsidian
 
-- Productivity
-    - Raycast
+### Productivity
+- Raycast
+- Tick Tick

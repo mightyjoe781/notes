@@ -69,7 +69,7 @@ fstyp /dev/md0s2a			# this should be required ufs partition
 mount -t ufs /dev/md0s2a /mnt/armv7
 
 # cleanup: unmount & delete virtual device
-unmount /mnt/armv7
+umount /mnt/armv7
 mdconfig -d -u 0
 
 # reference
@@ -82,7 +82,7 @@ Creating ISO
 
 ````bash
 # install cdutils
-pkg install sysutils/cdrtools
+pkg install cdrtools
 
 # in qemu cd-writer needs to configured so rather let's write the folder into iso
 # method-1 directly make iso from /mnt/armv7
@@ -100,7 +100,7 @@ cdrecord dev=md0 imagefile.iso
 
 ````bash
 # armv7 requires
-pkg install sysutils/u-boot-qemu-arm
+pkg install u-boot-qemu-arm
 ````
 
 

@@ -36,8 +36,8 @@ FreeBSD supports multiple architectures, file systems, and  disk-partitioning sc
 ### Weekly Check-in
 
 - [Week 1 (29 May) ](week/week1.md)
-    - Successfully deployed a FreeBSD server and established build sytem on Racknerd VPS
-    - Acquired foundation knowledge of Lua programming and explored the design principles of the project, include module systems.
+    - Successfully deployed a FreeBSD server and established build system on Racknerd VPS
+    - Acquired foundational knowledge of Lua programming and explored the design principles of the project, including module systems.
     - Deliberated and finalized the syntax for the project, as well as devised a robust approach to process user inputs effectively and efficiently.
 - Week 2 (4 Jun)
     - Developed `combination.lua`, a script that computes and parses regex strings in the specified format: `<arch>-<file-system>-<boot-partition>-<encryption>`
@@ -59,13 +59,13 @@ FreeBSD supports multiple architectures, file systems, and  disk-partitioning sc
 
 - Week 6 (3 July)
     - Wrote `test.lua` script, ensuring its successful design and completion.
-    - Evaluated and streamlines the consicise reporting process for all build runs.
-    - substantially progressed with the coding tasks, meeting expected milestones.
+    - Evaluated and streamlined the concise reporting process for all build runs.
+    - Substantially progressed with the coding tasks, meeting expected milestones.
 - Week 7 (10 July) - MidTerm Evaluations [Week Off Work]
 - Week 8 (17 July)
 
-    - Enhacned code styling and resolved potential design issues to improve overall script.
-    - Conducted in-depth testing to ensure robutstness of script and addressing several small issues.
+    - Enhanced code styling and resolved potential design issues to improve overall script.
+    - Conducted in-depth testing to ensure robustness of script and addressed several small issues.
 
 - [Week 9 (24 July)](week/week9.md)
     - Start working on externalising as much as freebsd related stuff to a `freebsd-util` script while generalising the functionality of `build` script.

@@ -4,9 +4,9 @@ Securing your system means ensuring that your computer’s resources are used on
 
 Many folks who think their systems were too unimportant for anyone to bother breaking into found themselves an unwitting relay for an attack that disabled a major corporation. See Botnets.
 
-Generally, OS are not broken into; the program running on OS are. Even the most paranoiac, secure-by-default OS in the world can’t protect badly written programs from themselves. Occasionally, one of those program can interact with OS in a way as to actually compromise OS. The most well-know of these are *buffer overflows*, where an intruder’s program is dumped straight into CPU’s execution space and the OS runs it. FreeBSD has undergone extensive auditing to eliminate buffer overflows as wells as myraid other well-understood security issues, but that’s no guarantee that they have been eradicated.
+Generally, OS are not broken into; the program running on OS are. Even the most paranoiac, secure-by-default OS in the world can’t protect badly written programs from themselves. Occasionally, one of those program can interact with OS in a way as to actually compromise OS. The most well-know of these are *buffer overflows*, where an intruder’s program is dumped straight into CPU’s execution space and the OS runs it. FreeBSD has undergone extensive auditing to eliminate buffer overflows as well as myriad other well-understood security issues, but that’s no guarantee that they have been eradicated.
 
-FreeBSD provides many tools to help secure your system against attacker, both internal and external. While no one of these tools are sufficient, all are desirable. Treat everything you learn about system security as a tool in a kit, not as the answer to all your problems.
+FreeBSD provides many tools to help secure your system against attackers, both internal and external. While no one of these tools are sufficient, all are desirable. Treat everything you learn about system security as a tool in a kit, not as the answer to all your problems.
 
 ### Who is the Enemy ?
 
@@ -34,7 +34,7 @@ If you can make the intruder’s break-in plan resemble a Hollywood script no ma
 
 ### FreeBSD Security Announcements
 
-The FreeBSD Project includes volunteers who specialize in auditing source code and watching for security issues with both the base operating system and add-on software. These developers maintain a very low-volume mailing list, FreeBSD-security-notifications@FreeBSD.org, and subscribing is a good idea. While you can monitor other mailing lists for general announcements, the security notifications list is a single source forFreeBSD-specific information. To subscribe to the security notifications mailing list, see the instructions on http://lists.freebsd.org/. The FreeBSD security team releases advisories on that mailing list as soon as they’re available.
+The FreeBSD Project includes volunteers who specialize in auditing source code and watching for security issues with both the base operating system and add-on software. These developers maintain a very low-volume mailing list, FreeBSD-security-notifications@FreeBSD.org, and subscribing is a good idea. While you can monitor other mailing lists for general announcements, the security notifications list is a single source for FreeBSD-specific information. To subscribe to the security notifications mailing list, see the instructions on http://lists.freebsd.org/. The FreeBSD security team releases advisories on that mailing list as soon as they’re available.
 
 ### User Security
 
@@ -44,11 +44,11 @@ FreeBSD has a variety of ways to allow users to do their work without giving the
 
 FreeBSD uses standard UNIX user management programs such as `passwd(1)`, `pw(8)`, and `vipw(8)`. FreeBSD also includes a friendly interactive user-adding program, `adduser(8)`. Only *root* may add users, of course.
 
-![image-20220329002843030](ch9.assets/image-20220329002843030.png)
+![image-20220329002843030](assets/image-20220329002843030.png)
 
 The username is the name of account. FreeBSD lets you choose a numerical user ID (UID). FreeBSD starts numbering UIDs at 1,000; while you can change this, all UIDs below 1000 are reserved for system use. Just press enter to take next available UID.
 
-![image-20220329003048086](ch9.assets/image-20220329003048086.png)
+![image-20220329003048086](assets/image-20220329003048086.png)
 
 The user’s default group is important. The FreeBSD default of having each user in their own group is usually the sensible way for most setups. Any of big thick books on system administration offers several grouping schemes.
 
@@ -76,21 +76,21 @@ Any time any standard user management program changes the account information in
 
 Use `passwd(1)` to change passwords.
 
-![image-20220329004438328](ch9.assets/image-20220329004438328.png)
+![image-20220329004438328](assets/image-20220329004438328.png)
 
-**Changing Accoutns with chpass(1)**
+**Changing Accounts with chpass(1)**
 
-if you use `chpass`, you will get an editro with following text : 
+If you use `chpass`, you will get an editor with the following text:
 
-![image-20220329004548626](ch9.assets/image-20220329004548626.png)
+![image-20220329004548626](assets/image-20220329004548626.png)
 
 If you use `chpass <username>` as root you will get even more options to modify.
 
-**The Big Hammer : vipw(8)**
+**The Big Hammer: vipw(8)**
 
-`vpiw` helps edit multiple user at a time. A FreeBSD system considers `/etc/master.passwd` in case of conflicts with other password files.
+`vipw` helps edit multiple users at a time. A FreeBSD system considers `/etc/master.passwd` in case of conflicts with other password files.
 
-Each line in `/etc/master.passwd` is a single account record containing 10 colon-sepearated fields. These fields are the following : 
+Each line in `/etc/master.passwd` is a single account record containing 10 colon-separated fields. These fields are the following : 
 
 Username;Encrypted Password, UserID, Group ID, User’s Class, Password Expiration; Account Expiration; Personal Data; User’ Home Directory; User’s Shell.
 
@@ -108,11 +108,11 @@ Very useful command to lock users and while account is locked, account is active
 
 ### Shells and /etc/shells
 
-The *shell* is the program that provides the user’s command prompt. The file `/etc/shells` contains a list of all legitimate user shells. If you compile your own shell without using a FreeBSD port, you must list the shsell by its complete path in `/etc/shells`.
+The *shell* is the program that provides the user’s command prompt. The file `/etc/shells` contains a list of all legitimate user shells. If you compile your own shell without using a FreeBSD port, you must list the shell by its complete path in `/etc/shells`.
 
 The FTP daemon won’t allow a user to login via FTP if his shell isn’t listed in `/etc/shells`
 
-### root, Groups, an Management
+### root, Groups, and Management
 
 #### The root Password
 
@@ -125,7 +125,7 @@ One of the simplest ways to reduce the need for root access is the proper use of
 #### Groups of Users
 
 - A *group* is a way to classify users with similar administrative functions.
-- A *sysadmin* can define a group *webmasters*, and add accounts of people with privilages to edit web-related files or create a group *email* and add email administrators to that group.
+- A *sysadmin* can define a group *webmasters*, and add accounts of people with privileges to edit web-related files or create a group *email* and add email administrators to that group.
 - To check your group type `id` on a console.
 
 **/etc/group**
@@ -151,7 +151,7 @@ One of the simplest ways to reduce the need for root access is the proper use of
 
 #### System Accounts
 
-- FreeBSD reserves some user account names for integrated programs. e.g. nameserver runs under the user account bind and group bind. If an intruter compromises the nameserver, she can access the system only with privileges of the user bind.
+- FreeBSD reserves some user account names for integrated programs. e.g. nameserver runs under the user account bind and group bind. If an intruder compromises the nameserver, they can access the system only with privileges of the user bind.
 - Don’t have user log in as these users. They are not setup as interactive accounts by design.
 - Create a separate user and group to own program files. That way, our hypothetical intruder can’t even edit the files used by DNS server, minimizing potential damage.
 - Similarly database should not be allowed to edit its own config files.
@@ -160,7 +160,7 @@ One of the simplest ways to reduce the need for root access is the proper use of
 
 Simplest way to create a group that owns files is to employ `adduser` to make a user that owns them and then to utilize that user’s primary group as the group for the files. Because we already have a user called `bind`, we will create an administrative user `dns`. Username isn’t important, but you can choose a name that everyone will recognise.
 
-Give you administrative user a shell of `nologin`, which sets a shell of `/sbin/nologin`. This prevents anyone from actually loggin in as the administrative user.
+Give your administrative user a shell of `nologin`, which sets a shell of `/sbin/nologin`. This prevents anyone from actually logging in as the administrative user.
 
 Do not add this administrative user to any other groups. Under no circumstances add this user to a privileged group, such as wheel !
 
@@ -264,7 +264,7 @@ Users in the wheel group can login from the fileserver, but nobody else can.
 Host addresses work like hostnames except they are immune to DNS failures or spoofing.
 
 ```
--:ALL EXCEPT wheel : 203.0.11.345
+-:ALL EXCEPT wheel : 203.0.113.45
 ```
 
 A network number is truncated IP Address, like this : 
@@ -285,7 +285,7 @@ Anyone who owns a block of IP addresses can give their addresses any desired rev
 
 **Tie It All Together**
 
-The point of these rules is to build a login policy that matches your real-world policies. If you provide generic services but only allow your sysadmin to log on remotely, a one-line `login.access` prevents any other users from loggin in.
+The point of these rules is to build a login policy that matches your real-world policies. If you provide generic services but only allow your sysadmin to log on remotely, a one-line `login.access` prevents any other users from logging in.
 
 Generally this configuration is quite used at several ISPs
 

@@ -4,7 +4,7 @@
 
 ## Submerging face & blowing bubbles
 
-* NOTE: A very basic beginner mistake is holding the breath underwater which is incorrect way for swimmers. Its usually taught to increase lung capacity initially, but some people think thats the way.
+* NOTE: A very common beginner mistake is holding the breath underwater — this is incorrect for swimmers. It is sometimes taught initially to build confidence, but the correct technique is to continuously exhale while submerged.
 * First step to overcoming water fear and gaining control over breathing.
 * Start by standing in shallow water and gently lower your face.
 * Exhale through the **nose and mouth** to make bubbles.
@@ -53,4 +53,4 @@
     * Legs should stay relatively straight and relaxed.
     * Start in the shallow end or with a floatation aid.
     * Goal is to stay vertical with head above water using minimal effort.
-* Video - https://www.youtube.com/watch?v=NlBAm2WLrvE&pp=ygUOdHJlYWRpbmcgd2F0ZXI%3D
+* [Video: Treading Water](https://www.youtube.com/watch?v=NlBAm2WLrvE)
