@@ -33,7 +33,7 @@ hide:
 
     :material-laptop:{ .lg .middle } [OS](os/index.md) [WIP]
 
-    :simple-openai:{ .lg .middle } [ML, AI & LLMs](llm/index.md)
+    :simple-openai:{ .lg .middle } [LLM & Agents](llm/index.md)
 
     :material-apps:{ .lg .middle } [More](other_sde/index.md) :octicons-arrow-right-24:{ .icon }
 

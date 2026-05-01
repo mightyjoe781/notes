@@ -6,7 +6,7 @@
 
 ### Editors
 - [Typora](typora/index.md)
-- Vim
+- [Vim](../vim/index.md)
 - NeoVim
 - VSCode
 
@@ -15,8 +15,8 @@
 - Ghostty
 
 ### AI
-- GitHub Copilot
-- Claude
+- [GitHub Copilot](../llm/tooling/copilot.md)
+- [Claude](../llm/tooling/claude_code.md)
 
 ### Notes
 - Apple Notes

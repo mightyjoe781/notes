@@ -1,28 +1,32 @@
 # Claude Code
 
-Following is a very brief guide on feature in claude code ! Refer to full documentation for latest updates!
+A brief guide to Claude Code features. Refer to the [official docs](https://docs.anthropic.com/en/claude-code/) for the latest updates.
 
 ## Setup
 
 ### Installation
 
-```
+```bash
+# CLI via npm (recommended)
+npm install -g @anthropic-ai/claude-code
+
+# macOS desktop app
 brew install --cask claude-code
 ```
 
-Platform Specific Installation : [Official Docs](https://code.claude.com/docs/en/quickstart#native-install-recommended)
+Platform-specific installation: [Official Docs](https://docs.anthropic.com/en/claude-code/quickstart)
 
-Install Claude Code Plugin in VS-Code. Open terminal and type `claude` for terminal interface. There is another interaction using Claude Code Chat window where you can attach files and images as well (Similar to Desktop App)
+Install the Claude Code extension in VS Code. Open a terminal and type `claude` for the terminal interface. The Claude Code Chat window also supports attaching files and images (similar to the desktop app).
 
 ### Configuration
 
-There are two levels of configuration : `global` (`~/.claude/settings.json` dir) and `local` to the project.
+There are two levels of configuration: `global` (`~/.claude/settings.json`) and `local` to the project.
 
-Use `claude` CLI itself to make config changes using `/config` command.
+Use the `claude` CLI to make config changes with the `/config` command.
 
-Full Configuration : https://code.claude.com/docs/en/settings
+Full configuration reference: [Official Docs](https://docs.anthropic.com/en/claude-code/settings)
 
-A very important setting is not allowing claude to read secrets.
+An important setting is preventing Claude from reading secrets:
 
 ```json
 {
@@ -36,75 +40,78 @@ A very important setting is not allowing claude to read secrets.
             "Write(**/.env)"
         ]
     },
-    "model": "opus",
-    "alwaysThinkingEnabled": "false"
+    "model": "claude-sonnet-4-5"
 }
-
 ```
 
-Create a `.claude` local to project and create `.claude/settings.json` in the project and add additional override using `.claude/settings.local.json`
+Create a `.claude` directory local to the project with `.claude/settings.json`, and add project-specific overrides in `.claude/settings.local.json`.
 
-### Slash Command
+### Slash Commands
 
-- `/clear` : clears the session and clears the context memory. Very useful to manage tokens.
-- `/context` : Prints context usage, System Prompts usage, MCP tools Usage etc, autocompact buffer usage etc,
-- `/usage` : shows remaining usage for the claude code
+- `/clear` — clears the session and context memory; useful for managing token budget
+- `/status` — prints context usage, system prompt usage, MCP tool usage, autocompact buffer status, etc.
+- `/usage` — shows remaining Claude Code usage quota
+- `/resume` — resume a previous session
+- `/compact` — compact context to free up token space
+- `/rewind` — undo the last change Claude made
 
-Claude can be invoked directly using a prompt or in a headless mode
+Claude can be invoked directly with a prompt or in headless (non-interactive) mode:
 
 ```bash
 claude "explain this project"
 
-# headless
+# headless / non-interactive
 claude -p "explain this project"
 ```
 
-- `/resume` : resume old sessions
-- `claude -c` : for last session,
-- `shift+tab` : accept edits mode, its only allowed to create edits, not the command. (default it will ask all edits)
-- For risk takers :) - start claude with following command : `claude --dangerously-skip-permissions`
-
-A safer approach is to use docker-sandbox to run above command or native sandbox
+Other useful flags:
 
 ```bash
-# docker sandbox
-docker sandbox run claude # default is dangerous-skip-permissions
-
-# built-in sandbox, in a session
-/sandbox : auto-allow mode is preferred!
+claude -c          # resume last session
 ```
 
-Reverting the changes to a previous state,
+- `Shift+Tab` — toggle auto-accept edits mode (accepts file edits without prompting, but still prompts for shell commands)
+- For trusted environments: `claude --dangerously-skip-permissions`
+
+A safer approach is to use the built-in sandbox or a Docker container:
 
 ```bash
-# using git
-# TIP: create commits frequently !
+# built-in sandbox (in a session)
+/sandbox   # auto-allow mode is recommended
 
-# Esc-Esc (twice) to revert last change
-# or /rewind command
+# Docker: run Claude in an isolated container
+docker run -it --rm -v $(pwd):/workspace ghcr.io/anthropics/claude-code:latest \
+  --dangerously-skip-permissions
+```
+
+Reverting changes:
+
+```bash
+# /rewind — undo last Claude change
+# TIP: commit frequently so you can git reset to a known-good state
 ```
 
 ## Usage
 
 ### Prompts & Context
 
-Generally its a good idea to have your prompts as clear/crisp as possible, Concise & Precise. Good Prompts are just a combination of : Specific Instructions + Relevant Information/Extra Information.
+Keep prompts concise and precise. Good prompts combine: **specific instructions** + **relevant context**.
 
-When working from scratch its alway a better idea to have detailed spec document, which could be refined using LLM itself, get the technical document in detail from LLM and use it guide Claude Code.
+When starting from scratch, write a detailed spec document first — refine it with an LLM, get a technical breakdown, then use it to guide Claude Code. Always let Claude review and update the spec to reflect what it can actually do.
 
-Always let Claude Code revise the spec, to improve and conform document to its capability. To specify use `@filename` in chats.
+Reference files inline with `@filename` in the chat to attach them as context.
 
-### Memory & System Instruction
+### Memory & System Instructions
 
-Claude uses `claude.MD` for the persistent instructions/long-term memory to define session information which is always loaded. There could be many `claude.MD` files.
+Claude uses `CLAUDE.md` for persistent instructions and long-term memory — it is always loaded into the context. Multiple `CLAUDE.md` files can exist at different directory levels (project root, subdirectories), and they are all loaded when Claude operates in those directories.
 
-Claude also has Auto-Memory for this as well. This is stored at `~/.claude/projects/project/memory/MEMORY.md`. Usually claude loads parts of the memory for every new conversation and there could many Memory files even for multiple skills or conversation claude finds useful to store.
+Claude also has an auto-memory system stored at `~/.claude/projects/<project>/memory/MEMORY.md`. Claude selectively loads relevant memory entries at the start of each conversation and can maintain multiple memory files organized by topic or skill.
 
 ### Plan Mode
 
-Now most of the agents already follow the paradigm of Think, Plan, Prompt out of box like Github Copilot.
+Plan Mode (`/plan`) puts Claude into a think-first workflow: it produces a structured plan and waits for approval before executing. This mirrors the Think → Plan → Act paradigm common in modern coding agents.
 
-Usually it sets the path for operation of the claude code. A better example of the repo is copilot-orchestra.
+Use it for non-trivial tasks where you want to review the approach before any files are changed. Claude will outline steps, identify files it intends to touch, and surface trade-offs.
 
 ### Built-in Tools (MCP, Agent, Skill)
 
@@ -113,11 +120,11 @@ Let's say you want to include context about best practices from docs website, th
 - Include context by using files or pasting links to docs
 - Add MCP servers related to docs, and it can search whenever needed. Example - `context7`
 
-Use `/mcp` to manage MCP servers, and MCP servers can be installed locally/globally.
+Use `/mcp` to manage MCP servers. MCP servers can be installed locally (project-scoped) or globally.
 
-Even better approach is create an Agent for this task of searching Docs, helping you to avoid specifying these things again and again
+An even better approach is to create a dedicated Agent for a recurring task (e.g. searching docs), so you don't have to re-specify context each time.
 
-Create Agent Skills are extra, dynamically loaded, context. Example : React Component Best Practices.
+**Agent Skills** are extra, dynamically loaded context bundles. Example: React Component Best Practices. Skills are only loaded when relevant, keeping baseline context lean.
 
 ```
 SKILL.md
@@ -127,21 +134,21 @@ SKILL.md
 [+ assets/ folder]
 ```
 
-Use `anthropics/skills` repo to find useful skills, and use `skill-creator to create skills`. For skills only metadata is loaded and they are loaded only when required.
+Find community skills at the [`anthropics/claude-code`](https://github.com/anthropics/claude-code) repo and at [skills.sh](https://skills.sh/). Use the built-in `skill-creator` skill to scaffold new ones.
 
-Another famous repo is https://skills.sh/
-
-NOTE: claude-code has image vision, so you can paste images as well.
+> Claude Code has image vision — you can paste screenshots directly into the chat.
 
 ### Hooks
 
-Hooks enable you to execute custom shell commands at key lifecycle points during agent sessions. You can use HTTP endpoints, or LLM prompts as well.
+Hooks execute custom shell commands at key lifecycle points during a Claude Code session. Targets can be shell commands, HTTP endpoints, or LLM sub-prompts.
 
-Example : `gofmt` or `tflint` etc for formatting the code.
+Examples: run `gofmt` or `tflint` automatically after every file edit.
 
-More on Hooks here : https://code.claude.com/docs/en/hooks
+More on Hooks: [Official Docs](https://docs.anthropic.com/en/claude-code/hooks)
 
 ### Automated Iterative Loops
 
-Read more on Ralph Loop here -  https://github.com/snarktank/ralph
+The `/loop` command (or the `loop` skill in Claude Code) lets you run a prompt repeatedly on a schedule or in a continuous cycle. Useful for things like "keep running tests until they pass" or polling a build.
+
+External inspiration: [Ralph](https://github.com/snarktank/ralph) — an early looped LLM development pattern that influenced how modern coding agents handle iterative task execution.
 
