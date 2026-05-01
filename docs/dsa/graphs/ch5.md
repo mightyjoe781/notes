@@ -1,159 +1,137 @@
 # Minimum Spanning Trees
 
-Given a connected, undirected, and weighted graph G, select a subset $E' \in G $ such that graph G is (still) connected and weight of selected edge E' is minimal !!
+Given a connected, undirected, weighted graph G, select a subset $E' \subseteq G$ such that the graph G is still connected and the total weight of selected edges $E'$ is minimal.
 
-To satisfy connectivity criteria
+To satisfy the connectivity requirement:
 
-- we need at least V-1 edges that form a tree and this tree must span all $V \in G$.
+- We need at least V-1 edges that form a tree spanning all $V$ vertices.
 
-- MST can be solved with several well known algorithms
-    - Prim's
-    - Kruskal's
+MST can be solved with several well-known algorithms:
+- Prim's
+- Kruskal's
 
-Application of MSTs
+Applications of MSTs:
 
-* Network Design : Minimize cost of laying cable networks
-* Clustering and Machine Learning to remove expensive edges in tree
-* TSP (Travelling Salesman Problem): used for approximation solution
-* Pathfinding Algorithms in Games often use MST.
+* **Network Design:** Minimize cost of laying cable networks.
+* **Clustering and Machine Learning:** Remove expensive edges in a tree structure.
+* **TSP (Travelling Salesman Problem):** Used for approximation solutions.
+* **Pathfinding Algorithms in Games:** Often use MST-based approaches.
 
-## Prim’s Algorithm
+## Prim's Algorithm
 
-This algorithm takes a starting vertex and flags it as taken and enqueues a pair of information into a priority queue. The weight `w` and the other end point `u` of edge 0->u that is not taken yet.
+Start from any vertex, flag it as visited, and push its adjacent edges into a min-heap. Greedily pick the minimum-weight edge whose destination hasn't been visited (to prevent cycles), add its weight to the MST, and enqueue the new vertex's edges.
 
-These pairs are sorted in the priority queue based on increasing weight, and if tie, by increasing vertex number. Then Prim's algorithm greedily selects pair (w,u) in front of priority queue which has the minimum weight w - if the end point of this edge - which is u has not been taken before. ( to prevent cycle).
+- Time: $O(E \log E) = O(E \log V)$
 
-- O(process each edge once x cost of enqueue/dequeue) = $O(E \log E)$ = $O(E \log V)$
+```python
+import heapq
 
-````c++
-int primsMST(int V, vector<vector<pair<int, int>>>& adj) {
-    vector<bool> visited(V, false);
-    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<>> pq;
-    int mstWeight = 0;
-    pq.push({0, 0});  // Start with node 0, weight 0
-    while (!pq.empty()) {
-        auto [w, u] = pq.top(); pq.pop();
-        if (visited[u]) continue;
-        visited[u] = true;
-      	// take weight and process adjacent edges
-        mstWeight += w;
-        for (auto& [v, wt] : adj[u]) {
-            if (!visited[v]) {
-                pq.push({wt, v});
-            }
-        }
-    }
-    return mstWeight;
-}
-````
+def prims_mst(n, adj):
+    # adj[u] = [(v, weight), ...]
+    visited = [False] * n
+    pq = [(0, 0)]  # (weight, vertex), start from vertex 0
+    mst_weight = 0
 
-## Krushkal’s Algorithm
+    while pq:
+        w, u = heapq.heappop(pq)
+        if visited[u]:
+            continue
+        visited[u] = True
+        mst_weight += w
+        for v, wt in adj[u]:
+            if not visited[v]:
+                heapq.heappush(pq, (wt, v))
 
-This algorithm first sorts E edges based on non-decreasing weight. Then greedily try to add each edge into MST as long as such addition doesn't form a cycle. This check can be done using lightweight Union-Find Disjoint Sets implementation.
+    return mst_weight
+```
 
-- Runtime O(sorting + trying to add each edge x Cost of Union-Find)
-- $O(E \log E + E \times (\approx 1)) = O(E\log E) = O(E \log {V^2} = O(E\log V))$
+## Kruskal's Algorithm
 
-````c++
-bool compareEdges(const Edge& a, const Edge& b) {
-    return a.weight < b.weight;
-}
+Sort all edges by weight in non-decreasing order. Greedily add each edge to the MST as long as it doesn't form a cycle (checked via Union-Find).
 
-int kruskalMST(int V, vector<Edge>& edges) {
-    sort(edges.begin(), edges.end(), compareEdges);
-    DSU dsu(V);
-    int mstWeight = 0;
+- Time: $O(E \log E + E \cdot \alpha(V)) \approx O(E \log V)$
 
-    for (auto& edge : edges) {
-        if (dsu.unite(edge.u, edge.v)) {
-            mstWeight += edge.weight;
-        }
-    }
+```python
+def kruskals_mst(n, edges):
+    # edges = [(weight, u, v), ...]
+    uf = UnionFind(n)
+    edges.sort()
+    mst_weight = 0
 
-    return mstWeight;
-}
-````
+    for w, u, v in edges:
+        if uf.union(u, v):
+            mst_weight += w
 
-## Union-Find (Fastest Implementation)
+    return mst_weight
+```
 
-````c++
-#include <bits/stdc++.h>
-using namespace std;
+## Union-Find
 
-typedef vector<int> vi;
+See [Union-Find](../dsu.md) for the full Python implementation with path compression and union by rank.
 
-class UnionFind {                                // OOP style
-private:
-  vi p, rank, setSize;                           // vi p is the key part
-  int numSets;
-public:
-  UnionFind(int N) {
-    p.assign(N, 0); for (int i = 0; i < N; ++i) p[i] = i;
-    rank.assign(N, 0);                           // optional speedup
-    setSize.assign(N, 1);                        // optional feature
-    numSets = N;                                 // optional feature
-  }
+Quick reference for MST use:
 
-  int findSet(int i) { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
-  bool isSameSet(int i, int j) { return findSet(i) == findSet(j); }
+```python
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))
+        self.rank = [0] * n
 
-  int numDisjointSets() { return numSets; }      // optional
-  int sizeOfSet(int i) { return setSize[findSet(i)]; } // optional
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
 
-  bool unionSet(int i, int j) {
-    if (isSameSet(i, j)) return false;           // i and j are in same set
-    int x = findSet(i), y = findSet(j);          // find both rep items
-    if (rank[x] > rank[y]) swap(x, y);           // keep x 'shorter' than y
-    p[x] = y;                                    // set x under y
-    if (rank[x] == rank[y]) ++rank[y];           // optional speedup
-    setSize[y] += setSize[x];                    // combine set sizes at y
-    --numSets;                                   // a union reduces numSets
-    return true;
-  }
-};
-````
+    def union(self, x, y):
+        px, py = self.find(x), self.find(y)
+        if px == py:
+            return False
+        if self.rank[px] < self.rank[py]:
+            px, py = py, px
+        self.parent[py] = px
+        if self.rank[px] == self.rank[py]:
+            self.rank[px] += 1
+        return True
+```
 
 ## Famous Variants of MST Applications
 
-- ##### 'Maximum' Spanning Tree
+#### Maximum Spanning Tree
 
-The solution for this is very simple : Modify Kruskal's algorithm a bit, we no simply sort the edges based on non-increasing weight.
+Modify Kruskal's: sort edges in **non-increasing** weight order instead.
 
-- ##### 'Minimum' Spanning Subgraph
+#### Minimum Spanning Subgraph
 
-In this variant, we do not start with a clean slate. Some edges in the given graph have already been fixed and must be taken as part of the solution. These default edges may form a non-tree in the first place. Our task is to continue selecting the remaining edges (if necessary) to make the graph connected in the least cost way. The resulting Spanning Subgraph may not be a tree and even if its a tree, it may not be the MST. That's why we put term 'Minimum' in quotes and use the term 'subgraph' rather than `tree`.
+Some edges are already fixed and must be included. Add the fixed edges first (and their costs), then continue running Kruskal's on the remaining free edges until the graph is connected. The result may not be a tree, hence "subgraph" rather than "tree".
 
-After taking into account all the fixed edges and their cost we can continue running Kruskal's algorithm on the remaining free edges until we have a spanning subgraph (or spanning tree).
+#### Minimum Spanning Forest
 
-- ##### Minimum 'Spanning Forest'
+Build a forest of exactly K connected components at minimum cost. Run Kruskal's normally, but terminate as soon as the number of connected components equals K.
 
-In this variant, we want to form a forest of K connected components (k subtrees) in the least cost way where K is given beforehand.
+#### Second Best Spanning Tree
 
-To get the minimum spanning forest is simple. Run Kruskal's algorithm as normal, but as soon as the number of connected components equals to the desired pre-determined number K, we can terminate the algorithm.
+1. Sort edges in $O(E \log V)$.
+2. Find the MST using Kruskal's in $O(E)$.
+3. For each edge in the MST, temporarily exclude it and find the best spanning tree without it in $O(E)$.
+4. The best result across all exclusions is the second-best ST.
 
-- ##### Second Best Spanning Tree
+Total: $O(E \log V + E + VE) = O(EV)$
 
-A solution for this variant is a modified Kruskal's: sort the edges in $O(E\log E) = O(E\log V)$ then find MST using Kruskal's in $O(E)$. Next for each edge in the MST, temporarily flag it so that it can't be chosen, then try to find MST again in $O(E)$ but now excluding that flagged edge. Note that we do not have to resort the edges at this point. The best spanning tree found after this process is the second best ST.
+#### Minimax (and Maximin)
 
-O(sort the edges once + find the original MST + find the second best ST) = $O(E\log V + E + VE) = O(EV)$
+The minimax path problem: find the path from i to j that minimizes the maximum edge weight along the path.
 
-- ##### Minimax (and Maximin)
+This maps directly to an MST problem. The MST already captures paths with low individual edge weights. The minimax path between any two vertices i and j is the maximum edge weight on the unique path between them in the MST.
 
-The minimax path problem is a problem of finding he minimum of maximum edge weight among all possible paths between two vertices i to j. The cost of a path from i to j is determined by maximum edge weight along this path. Among all these possible paths from i to j, pick the one with the minimum max-edge weight.
-
-The problem can be modeled as MST problem. With a rationale that path with low individual edge weights even if the path is longer in terms of number of vertices/edges involved, then having the MST of given weighted graph is correct step. The MST is connected thus ensuring a path between any two vertices. The minimax path solution is thus the max edge weight along the unique path between vertex i and j in this MST.
-
-The overall complexity is O(build MST + one traversal on the resulting tree.)  As E = V-1 in a tree, any traversal is just O(V).
-
-Total Complexity : O(E log V + V) = O(E log V)
+Total complexity: $O(E \log V + V) = O(E \log V)$
 
 ## Problems
 
-1. https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1 implement prim’s algorithm with negative weights to simulate min-heap.
-2. https://www.geeksforgeeks.org/problems/disjoint-set-union-find/1 Recursive Find Implementation
-3. https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1 Same Problem and use simplified UFs and unpack adjacency graph into edges, make sure to use undirected edges only once.
-4. https://leetcode.com/problems/number-of-operations-to-make-network-connected/ Use Union-Find to find out the components in the graph, rest can be simple calculations around that.
-5. https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/  This solution is complicated better to read discussion on the platform.
-6. https://leetcode.com/problems/accounts-merge/description/ In this problem you basically have to track owners separately and try to build union set on strings (emails) and then print those back with owner.
-7. https://leetcode.com/problems/number-of-islands-ii/ This problem makes u think of 2d array as flattened array list to simplify the UnionFind implementation, so there is a trade off :)
-8. https://leetcode.com/problems/swim-in-rising-water/ This time we will use MST to solve this problem.
+1. https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1 — Implement Prim's algorithm.
+2. https://www.geeksforgeeks.org/problems/disjoint-set-union-find/1 — Recursive Find implementation.
+3. https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1 — Same problem, use Kruskal's. Unpack the adjacency graph into edges, using each undirected edge only once.
+4. https://leetcode.com/problems/number-of-operations-to-make-network-connected/ — Use Union-Find to count components; rest is arithmetic.
+5. https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/ — Complex; recommended to read discussion.
+6. https://leetcode.com/problems/accounts-merge/description/ — Track owners separately, build union-find on email strings, then reconstruct with owner names.
+7. https://leetcode.com/problems/number-of-islands-ii/ — Treat the 2D array as a flattened 1D array to simplify the Union-Find implementation.
+8. https://leetcode.com/problems/swim-in-rising-water/ — Solvable with MST (Kruskal's) as an alternative to Dijkstra.
