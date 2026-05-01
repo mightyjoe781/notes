@@ -25,36 +25,36 @@
 
 - Longest Common Subsequence (LCS)
 
-````c++
+```python
 if s1[i-1] == s2[j-1]:
     dp[i][j] = 1 + dp[i-1][j-1]
 else:
     dp[i][j] = max(dp[i-1][j], dp[i][j-1])
-````
+```
 
 - Longest Palindromic Subsequence
 
-````c++
+```python
 if s[i] == s[j]:
     dp[i][j] = 2 + dp[i+1][j-1]
 else:
     dp[i][j] = max(dp[i+1][j], dp[i][j-1])
-````
+```
 
 - Longest Palindromic Substring
 
-````c++
+```python
 dp[i][j] = (s[i] == s[j]) and dp[i+1][j-1]
-````
+```
 
 - Edit Distance
 
-````c++
+```python
 if s1[i-1] == s2[j-1]:
     dp[i][j] = dp[i-1][j-1]
 else:
     dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
-````
+```
 
 ### Advance Patterns
 
@@ -63,21 +63,21 @@ else:
     - `is_pal[i][j]` = True/False for checking palindromes
     - `dp[i]` = min cuts for `s[0..i]`
 
-````c++
+```python
 if is_pal[j][i]:
     dp[i] = min(dp[i], 1 + dp[j-1])
-````
+```
 
 - Count Distinct Subsequences
-    - **Problem**: Count how many times t occurs as a subsequence of s
+    - **Problem**: Count how many times `t` occurs as a subsequence of `s`
     - State: `dp[i][j]` = ways to form `t[0..j-1]` using `s[0..i-1]`
 
-````c++
+```python
 if s[i-1] == t[j-1]:
     dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
 else:
     dp[i][j] = dp[i-1][j]
-````
+```
 
 ### Longest Palindromic Subarray
 

@@ -4,7 +4,7 @@
 
 - Information Processing
 - Genomics
-- Communication Books
+- Communication Systems
 - Programming Systems
 
 **Rules of the Game**
@@ -40,49 +40,53 @@ Not all languages provide same implementation of String for e.g. in C it may tak
     * Building Substrings
 * Structural Analysis
 
-## C++/Python Strings
+## Python Strings
 
-| Feature                  | Python                               | C++                                       |
-| ------------------------ | ------------------------------------ | ----------------------------------------- |
-| **String Mutability**    | Immutable strings (must create new)  | Mutable with std::string or char[].       |
-| **Indexing**             | 0-based; supports negative indexing. | 0-based; no negative indexing.            |
-| **Length**               | O(1) via len().                      | O(1) via string.size().                   |
-| **Substring Extraction** | O(1) with slicing (s[start:end]).    | O(n), substr() creates a copy.            |
-| **Concatenation**        | O(n) due to creation of new strings. | O(n) via + or append().                   |
-| **Character Arrays**     | Not used, strings directly used.     | Commonly used with char[] or std::string. |
+| Feature                  | Python                               | Notes                                              |
+| ------------------------ | ------------------------------------ | -------------------------------------------------- |
+| **String Mutability**    | Immutable (must create new string)   | Use `list` + `''.join()` for in-place-style edits. |
+| **Indexing**             | 0-based; supports negative indexing  | `s[-1]` is the last character.                     |
+| **Length**               | O(1) via `len(s)`                    | Cached at object creation.                         |
+| **Substring Extraction** | O(k) slicing `s[start:end]`          | k = slice length; very ergonomic.                  |
+| **Concatenation**        | O(n) due to creation of new strings  | Prefer `''.join(parts)` inside loops.              |
+| **Character Arrays**     | Use `list(s)` for mutable char array | Convert back with `''.join(chars)`.                |
 
 ## Common String Operations
 
 ### Checking Palindrome
 
-* Python : `s == s[::-1]` (Read about python slices)
-* C++ : use std::reverse() and compare
+```python
+s == s[::-1]          # whole string
+s[l:r+1] == s[l:r+1][::-1]  # substring s[l..r]
+```
 
 ### Converting Case
 
-* Python : `s.upper(), s.lower()`
-* C++: Use `transform()` from `<algorithms>`
+```python
+s.upper()   # "hello" → "HELLO"
+s.lower()   # "HELLO" → "hello"
+```
 
-### Sorting Characters:
+### Sorting Characters
 
-* Python: `sorted(s)` returns a list
-* C++: `sort(s.begin(), s.end())`
+```python
+sorted(s)          # returns a list of chars
+''.join(sorted(s)) # back to a string
+```
 
 ### Counting Frequency
 
-* Python: `collections.Counter(s)` or `s.count(ch)`
-* C++: Use a frequency array for faster processing
+```python
+from collections import Counter
+freq = Counter(s)       # Counter({'a': 3, 'b': 2, ...})
+s.count('a')            # count single character
+```
 
-### NOTES on String Efficiency
+### String Efficiency Notes
 
-* Avoid concatenation in loops
-    * in python `join()` is faster
-    * Use `ostringstream` or `stringstream ` in C++ for efficient appending
-* Use Substrings Sparingly
-    * python slices are efficient
-    * but avoid using `substr` in C++ to avoid copy overhead
-* Precompute lengths
-    * repeated calls to `len` or `size` are unnecessary, better to cache in a variable.
+* **Avoid concatenation in loops** - use `''.join(parts)` instead of `result += char`.
+* **Slicing is O(k)** (k = slice length), not O(1); avoid inside tight loops when possible.
+* **Precompute `len(s)`** outside loops if called repeatedly - although Python's `len()` is O(1), it avoids attribute lookups inside hot paths.
 
 ## Problems
 

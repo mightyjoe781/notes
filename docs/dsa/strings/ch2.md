@@ -2,41 +2,20 @@
 
 ## Library Solution
 
-Modern programming languages provide library solutions for basic string matching. These solutions are highly optimized and can be used directly for simple problems
+Python's built-in string methods handle most basic matching needs efficiently.
 
-### C++
+* `str.find(sub)` - returns the index of the first occurrence, or `-1` if not found.
+* `sub in s` - O(n) membership test; clearest way to check presence.
+* `str.index(sub)` - like `find()` but raises `ValueError` on miss.
 
-C++ offers several built-in functions in the `<string>` library for string matching:
-
-* `find()`: Returns the index of the first occurrence of a substring.
-* `substr()`: Extracts a portion of the string.
-
-```c++
-string text = "hello world";
-string pattern = "world";
-size_t pos = text.find(pattern);
-if (pos != string::npos) {
-    cout << "Pattern found at index " << pos << endl;
-} else {
-    cout << "Pattern not found" << endl;
-}
-```
-
-### Python
-
-Python simplifies string matching with built-in methods:
-
-* `find()`: Returns the index of the first occurrence of a substring or -1 if not found.
-* `in` **operator**: Checks for substring presence.
-
-````python
+```python
 text = "hello world"
 pattern = "world"
 if pattern in text:
     print(f"Pattern found at index {text.find(pattern)}")
 else:
     print("Pattern not found")
-````
+```
 
 ## String Hashing
 
@@ -52,17 +31,17 @@ Algorithm
 
 * Use **prefix hashes** to compute substring hashes efficiently.
 
-````c++
-vector<long long> compute_hash(string s, int base, int mod) {
-    vector<long long> hash(s.size() + 1, 0);
-    long long power = 1;
-    for (int i = 0; i < s.size(); i++) {
-        hash[i + 1] = (hash[i] * base + (s[i] - 'a' + 1)) % mod;
-        power = (power * base) % mod;
-    }
-    return hash;
-}
-````
+```python
+def compute_hash(s: str, base: int = 31, mod: int = 10**9 + 7) -> list[int]:
+    h = [0] * (len(s) + 1)
+    for i, c in enumerate(s):
+        h[i + 1] = (h[i] * base + (ord(c) - ord('a') + 1)) % mod
+    return h
+
+# Substring hash: hash(s[l..r]) in O(1) using prefix hashes + powers
+def get_substring_hash(h: list[int], powers: list[int], l: int, r: int, mod: int) -> int:
+    return (h[r + 1] - h[l] * powers[r - l + 1]) % mod
+```
 
 ## Rabin-Karp
 
@@ -83,42 +62,29 @@ Algorithm
     * Birthday Paradox - The **Birthday Paradox** refers to the counterintuitive probability result that in a group of just 23 people, there is about a 50% chance that at least two people share the same birthday. Shows the vulnerability of hash functions to collisions, leading to the "birthday attack" where finding two inputs that hash to the same output is easier than expected.
 
 
-````c++
-bool rabin_karp(string text, string pattern) {
-    int n = text.size(), m = pattern.size();
-    if (m > n) return false;  // Pattern longer than text
+```python
+def rabin_karp(text: str, pattern: str) -> bool:
+    n, m = len(text), len(pattern)
+    if m > n:
+        return False
 
-    int base = 31;
-    int mod = 1000000007;
-    long long pattern_hash = 0, text_hash = 0, power = 1;
+    base, mod = 31, 10**9 + 7
+    char_val = lambda c: ord(c) - ord('a') + 1
+    power = pow(base, m - 1, mod)
 
-    // Precompute power = base^(m-1) % mod
-    for (int i = 0; i < m - 1; i++) {
-        power = (power * base) % mod;
-    }
+    p_hash = t_hash = 0
+    for i in range(m):
+        p_hash = (p_hash * base + char_val(pattern[i])) % mod
+        t_hash = (t_hash * base + char_val(text[i])) % mod
 
-    // Compute initial hashes for pattern and first window of text
-    for (int i = 0; i < m; i++) {
-        pattern_hash = (pattern_hash * base + (pattern[i] - 'a' + 1)) % mod;
-        text_hash = (text_hash * base + (text[i] - 'a' + 1)) % mod;
-    }
-
-    for (int i = 0; i <= n - m; i++) {
-        // Check hash match and then verify substring to avoid false positives
-        if (pattern_hash == text_hash && text.substr(i, m) == pattern) {
-            return true;
-        }
-
-        // Compute hash for next window (if any)
-        if (i < n - m) {
-            text_hash = (text_hash - ((text[i] - 'a' + 1) * power) % mod + mod) % mod;  // Remove leading char
-            text_hash = (text_hash * base + (text[i + m] - 'a' + 1)) % mod;            // Add trailing char
-        }
-    }
-    return false;
-}
-
-````
+    for i in range(n - m + 1):
+        if p_hash == t_hash and text[i:i + m] == pattern:
+            return True
+        if i < n - m:
+            t_hash = (t_hash - char_val(text[i]) * power) % mod
+            t_hash = (t_hash * base + char_val(text[i + m])) % mod
+    return False
+```
 
 ## Z-Function
 
@@ -140,23 +106,20 @@ Algorithm
     * Otherwise, compute Z[i] directly
 * Complexity: O(N)
 
-````c++
-vector<int> compute_z(string s) {
-    int n = s.size();
-    vector<int> z(n, 0);
-    int l = 0, r = 0;
-
-    for (int i = 1; i < n; i++) {
-        if (i <= r) z[i] = min(r - i + 1, z[i - l]);
-        while (i + z[i] < n && s[z[i]] == s[i + z[i]]) z[i]++;
-        if (i + z[i] - 1 > r) {
-            l = i;
-            r = i + z[i] - 1;
-        }
-    }
-    return z;
-}
-````
+```python
+def compute_z(s: str) -> list[int]:
+    n = len(s)
+    z = [0] * n
+    l = r = 0
+    for i in range(1, n):
+        if i < r:
+            z[i] = min(r - i, z[i - l])
+        while i + z[i] < n and s[z[i]] == s[i + z[i]]:
+            z[i] += 1
+        if i + z[i] > r:
+            l, r = i, i + z[i]
+    return z
+```
 
 ## Prefix Function (KMP) Algorithm
 
@@ -171,48 +134,38 @@ Algorithm
 * Use $\text{pi}[]$ to skip unnecessary comparisons
 * Complexity: O(N + M).
 
-````c++
-vector<int> compute_prefix_function(string pattern) {
-    int m = pattern.size();
-    vector<int> pi(m, 0);
+```python
+def compute_prefix_function(pattern: str) -> list[int]:
+    m = len(pattern)
+    pi = [0] * m
+    j = 0
+    for i in range(1, m):
+        while j > 0 and pattern[i] != pattern[j]:
+            j = pi[j - 1]
+        if pattern[i] == pattern[j]:
+            j += 1
+        pi[i] = j
+    return pi
+```
 
-    for (int i = 1, j = 0; i < m; i++) {
-        while (j > 0 && pattern[i] != pattern[j]) j = pi[j - 1];
-        if (pattern[i] == pattern[j]) j++;
-        pi[i] = j;
-    }
-    return pi;
-}
-````
-
-````c++
-// using above function to perform KMP Search
-int strStr(string haystack, string needle) {
-    int n = needle.size();
-    if (n == 0) return 0;
-
-    vector<int> lps = compute_prefix_function(needle);
-
-    // Perform the KMP search
-    int i = 0, j = 0;
-    while (i < haystack.size()) {
-        if (haystack[i] == needle[j]) {
-            i++;
-            j++;
-        }
-        if (j == n) {
-            return i - n; // Pattern found at index (i - n)
-        }
-        if (i < haystack.size() && haystack[i] != needle[j]) {
-            if (j > 0) {
-                j = lps[j - 1];
-            } else {
-                i++;
-            }
-        }
-    }
-
-    return -1; // Pattern not found
-}
-````
+```python
+def str_str(haystack: str, needle: str) -> int:
+    n = len(needle)
+    if n == 0:
+        return 0
+    lps = compute_prefix_function(needle)
+    i = j = 0
+    while i < len(haystack):
+        if haystack[i] == needle[j]:
+            i += 1
+            j += 1
+        if j == n:
+            return i - n
+        elif i < len(haystack) and haystack[i] != needle[j]:
+            if j > 0:
+                j = lps[j - 1]
+            else:
+                i += 1
+    return -1
+```
 
