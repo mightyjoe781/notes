@@ -15,55 +15,33 @@
 * Recursion : `f(n) = f(n-1) + f(n-2)`
 * Base cases: `f(1) = 1, f(2) = 2`
 
-````c++
-int climbStairsHelper(int n, vector<int>& dp){
-    // base case
-    if(n == 1) return 1;
-    if(n == 2) return 2;
-
-    // recursive step
-    // check the table
-    if(dp[n] != -1)
-        return dp[n];
-
-    // if not solved
-    // solve now and store in table
-    dp[n] = climbStairsHelper(n-1,dp) + climbStairsHelper(n-2,dp);
-    return dp[n];
-}
-int climbStairs(int n) {
-    vector<int> dp(n+1,-1);
-    return climbStairsHelper(n,dp); 
-}
-````
-
 ```python
+from functools import cache
 
-@cache
-def fib(i):
-    if i <= 1: return 1
-    
-    return fib(i-1) + fib(i-2)
-
-return solve(n)
-
+def climbStairs(n):
+    @cache
+    def solve(i):
+        if i <= 1:
+            return 1
+        return solve(i-1) + solve(i-2)
+    return solve(n)
 ```
 
 Recurrence: $O(n^2)$, Memoization: $O(n)$
 
 Now we could have solved same problem from smallest solution to largest then, we don’t even have to check anything. `dp[n]` would simply be the answer
 
-````c++
-int climbStairs(int n) {
-    if(n == 1) return 1;
-    vector<int> dp(n+1,-1);
-    dp[1] = 1;
-    dp[2] = 2;
-    for(int i = 3; i < n+1; i++)
-        dp[i] = dp[i-1]+dp[i-2];
-    return dp[n];
-}
-````
+```python
+def climbStairs(n):
+    if n == 1:
+        return 1
+    dp = [0] * (n + 1)
+    dp[1] = 1
+    dp[2] = 2
+    for i in range(3, n + 1):
+        dp[i] = dp[i-1] + dp[i-2]
+    return dp[n]
+```
 
 Further Optimization can be done upon recognizing that we are using only 2 variables to store states. (State Compression)
 
@@ -150,74 +128,31 @@ def frog_jump(heights, k):
 - Base Cases: while solving for last 2 elements its nothing but $max{A(n-1), A(n-2)}$ or we can last element `A(n-2)`
 - Order of filling could be either direction, problem just flips to prefix in that case.
 
-````c++
-//<data-type of ans> f(<Subproblem representation>,<DP table>)
-int robHelper(vector<int>& nums,int start,vector<int>& dp){
-    int n = nums.size();
-    // base cases
-    if(start == n-1)
-        return nums[n-1];
-    if(start == n)
-        return 0;
-    // check the dp table
-    if(dp[start] != -1)
-        return dp[start];
-    // recursive call
-    dp[start] = max(nums[start]+robHelper(nums,start+2,dp),
-                    robHelper(nums,start+1,dp));
-    return dp[start];  }
-int rob(vector<int>& nums) {
-    int n = nums.size();
-    vector<int> dp(n+1,-1);
-    return robHelper(nums,0,dp); }
-
-````
-
-**Second Approach**
-
-````c++
-int rob(vector<int>& nums) {
-    int n = nums.size();
-    vector<int> dp(n+1,-1);
-    dp[n] = 0, dp[n-1] = nums[n-1];
-    for(int i = n-2; i >= 0; i--)
-        dp[i] = max(nums[i]+dp[i+2], dp[i+1]);
-    return dp[0]; 
-}
-````
-
-**Second Approach (State Space Optimization)**
-
-````c++
-int rob(vector<int>& nums) {
-    int n = nums.size();
-    vector<int> dp(2,-1);
-    
-    dp[n%2] = 0, dp[(n-1)%2] = nums[n-1];
-    for(int i = n-2; i >= 0; i--)
-        dp[i%2] = max(nums[i]+dp[(i+2)%2], dp[(i+1)%2]);
-    return dp[0%2];
-}
-````
-
-Solution of Climbing Stairs using this approach : http://p.ip.fi/a6qS
-
-Pythonic Approach :
-
 ```python
 def rob(nums):
     n = len(nums)
 
     @cache
     def solve(i):
-        if i >= n: return 0
-
-        return max(
-            nums[i] + solve(i+2),
-            solve(i+1)
-        )
+        if i >= n:
+            return 0
+        return max(nums[i] + solve(i+2), solve(i+1))
 
     return solve(0)
+```
+
+**Tabulation**
+
+```python
+def rob(nums):
+    n = len(nums)
+    dp = [0] * (n + 2)
+    dp[n-1] = nums[n-1]
+
+    for i in range(n-2, -1, -1):
+        dp[i] = max(nums[i] + dp[i+2], dp[i+1])
+
+    return dp[0]
 ```
 
 ### Problems
@@ -238,53 +173,6 @@ def rob(nums):
     * $s_2$ : $P(S, 2)$
 * Recurrence Relation: $P(s, 0) = P(s, 1) + P(s, 2)$
 * NOTE: $s_2$ can be pruned while solving the problem as numbers greater than 26 are invalid.
-
-**Bottom Up Solution**
-
-````c++
-int numDecodings(string s) {
-    int n = s.size();
-    vector<int> dp(n);
-    dp[n-1] = (s[n-1] == '0') ? 0 : 1;
-
-    for(int i = n-2; i >= 0; i--){
-        dp[i] = 0;
-        // 2 cases
-        // single digit
-        if(s[i] != '0')
-            dp[i] += dp[i+1];
-
-        // double digit
-        if(s[i] =='1' || (s[i] == '2' && s[i+1] <= '6')){
-            if(i == n-2)
-                dp[i] += 1;
-            else 
-                dp[i] += dp[i+2];
-        }
-    }
-    return dp[0]; 
-}
-````
-
-**Simplified Code**
-
-````c++
-int numDecodings(string s) {
-    int n = s.size();
-    vector<int> dp(n+1, 0);
-    dp[n] = 1;
-    dp[n-1] = (s[n-1] == '0') ? 0 : 1;
-
-    for(int i = n-2; i >= 0; i--){
-        if(s[i] != '0')
-            dp[i] += dp[i+1];
-        if(s[i] =='1' || (s[i] == '2' && s[i+1] <= '6'))
-            dp[i] += dp[i+2];
-    }
-    return dp[0];
-}
-````
-
 
 ```python
 
@@ -316,6 +204,25 @@ def numDecodings(s: str) -> int:
     return solve(0)
 
 ```
+
+**Tabulation**
+
+```python
+def numDecodings(s):
+    n = len(s)
+    dp = [0] * (n + 1)
+    dp[n] = 1
+    dp[n-1] = 0 if s[n-1] == '0' else 1
+
+    for i in range(n-2, -1, -1):
+        if s[i] != '0':
+            dp[i] += dp[i+1]
+        if s[i] == '1' or (s[i] == '2' and s[i+1] <= '6'):
+            dp[i] += dp[i+2]
+
+    return dp[0]
+```
+
 ## Advanced 1D DP Problems
 
 * These problems either have Nested Loops, or more than 1 degree of freedom but in a limited capacity (second dimension is small enough to enumerate) 
@@ -332,20 +239,18 @@ Up until we have looked at subarrays, subsequences are different that subarray, 
 4. Checking DP, Prefix Array with dimension 1, size <- n
 5. Base case : `dp[0] = 1`
 
-````c++
-int lengthOfLIS(vector<int>& nums) {
-    int n = nums.size(),i,j, res = 1;
-    vector<int> dp(n,1);
+```python
+def lengthOfLIS(nums):
+    n = len(nums)
+    dp = [1] * n
 
-    for(i = 1; i < n; i++){
-        // compute dp[i]
-        for(j = i-1; j >= 0; j--)
-            if(nums[i] > nums[j])
-                dp[i] = max(dp[i],1+dp[j]);
-        res = max(res,dp[i]);
-    }     return res;  
-}
-````
+    for i in range(1, n):
+        for j in range(i):
+            if nums[j] < nums[i]:
+                dp[i] = max(dp[i], 1 + dp[j])
+
+    return max(dp)
+```
 
 * Solve Longest Arithmetic Subsequence After this problem
 
@@ -369,27 +274,39 @@ given : `catsanddog`, we could split at `[1, 4, 7]` or `[3, 6, 8]` and more...
 - $D = \{w_1, w_2, w_1w_2\}$
 - Order to fill : in backwards, for $j < i$
 
-````c++
-bool wordBreak(string s, vector<string>& wordDict) {
-    unordered_set<string> dict(wordDict.begin(), wordDict.end());
-    int i, j, n = s.size();
-    vector<bool> dp(n+1,false);
-    dp[n] = true;
-    string temp = "";
-    for(i = n-1; i >= 0 ; i--){
-        //compute s_i
-        temp = "";
-        for(j = i; j <n; j++){
-            temp += s[j];
-            if(dict.find(temp) == dict.end())
-                continue;
-            dp[i] = dp[i] || dp[j+1];
+```python
+def wordBreak(s, wordDict):
+    word_set = set(wordDict)
+    n = len(s)
 
-            if(dp[i])
-                break;
-        }
-    }     return dp[0]; 
-}
-````
+    @cache
+    def solve(i):
+        if i == n:
+            return True
+        for j in range(i + 1, n + 1):
+            if s[i:j] in word_set and solve(j):
+                return True
+        return False
+
+    return solve(0)
+```
+
+**Tabulation**
+
+```python
+def wordBreak(s, wordDict):
+    word_set = set(wordDict)
+    n = len(s)
+    dp = [False] * (n + 1)
+    dp[n] = True
+
+    for i in range(n - 1, -1, -1):
+        for j in range(i + 1, n + 1):
+            if s[i:j] in word_set and dp[j]:
+                dp[i] = True
+                break
+
+    return dp[0]
+```
 
 * Word - Break II 

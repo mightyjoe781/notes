@@ -7,12 +7,12 @@
 
 ***Factorial function (recursive implementation)***
 
-````c++
-int factorial(int N){
-    if (N == 0) return 1;
-    return N*factorial(N-1);
-}
-````
+```python
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+```
 
 A care should be taken while writing programs related to recursion
 
@@ -21,41 +21,45 @@ A care should be taken while writing programs related to recursion
 
 ***A questionable recursive program***
 
-````c++
-int puzzle(int N)
-{
-    if (N == 1) return 1;
-    if (N % 2 == 0)
-        return puzzle(N/2);
-    else return puzzle(3 * (N+1));	// unbounded N
-}
-````
+```python
+def puzzle(n):
+    if n == 1:
+        return 1
+    if n % 2 == 0:
+        return puzzle(n // 2)
+    else:
+        return puzzle(3 * (n + 1))  # unbounded n
+```
 
 ***Euclid’s algorithm***
 
-````c++
-int gcd(int m,int n ){
-    if(n==0) return m;
-    return gcd(n,m%n);
-}
-````
+```python
+def gcd(m, n):
+    if n == 0:
+        return m
+    return gcd(n, m % n)
+```
 
 ***Recursive program to evaluate prefix expressions***
 
-````c++
-char *a; int i;		// passed globally, rather than parameters
-int eval(){
-    int x=0;
-    while(a[i] == " ") i++;
-    if(a[i] == "+")
-    {	i++; return eval() + eval();}
-    if(a[i] == "*")
-    {	i++; return eval() * eval();}
-    while((a[i]>="0")&&( a[i]<="9"))
-        x=10*x+(a[i++]-'0');
-    return x;
-}
-````
+```python
+def eval_prefix(expr):
+    tokens = expr.split()
+    i = [0]  # mutable index via list (simulates global state)
+
+    def eval():
+        tok = tokens[i[0]]
+        i[0] += 1
+        if tok == '+':
+            return eval() + eval()
+        if tok == '*':
+            return eval() * eval()
+        return int(tok)
+
+    return eval()
+
+eval_prefix("+ * 2 3 4")  # => 10  i.e. (2*3)+4
+```
 
 ***Examples of recursive functions for linked lists***
 
@@ -64,29 +68,37 @@ int eval(){
 - `traverseR` - It calls `visit` for every node but in reverse order.
 - `remove` - Removes all nodes from a given item value from the list.
 
-````c++
-int count(link x)
-{
-    if(x==0) return 0;
-    return 1 + count(x->next);
-}
-void traverse(link h, void visit(link)){
-    if(h==0) return ;
-    visit(h);
-    traverse(h->next,visit);
-}
-void traverseR(link h, void visit(link)){
-    if(h==0) return;
-    traverseR(h->next,visit);
-    visit(h);
-}
-void remove(link& x,Item v)
-{
-    while(x!=0 && x->item == v)
-    {	link t = x ; x = x->next ; delete t;}
-    if (x!=0) remove(x->next,v);
-}
-````
+```python
+class Node:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def count(node):
+    if node is None:
+        return 0
+    return 1 + count(node.next)
+
+def traverse(node, visit):
+    if node is None:
+        return
+    visit(node)
+    traverse(node.next, visit)
+
+def traverse_r(node, visit):
+    if node is None:
+        return
+    traverse_r(node.next, visit)
+    visit(node)
+
+def remove(node, val):
+    if node is None:
+        return None
+    if node.val == val:
+        return remove(node.next, val)
+    node.next = remove(node.next, val)
+    return node
+```
 
 #### Call by value
 

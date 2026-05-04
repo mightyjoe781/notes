@@ -35,20 +35,35 @@
 
 - Base Case: We can fill principle diagonal before using `i=j` we can do `A[i]`
 
-````c++
-bool stoneGame(vector<int>& piles) {
-    int n = piles.size(), i, j;
-    vector<vector<int>> dp(n,vector<int>(n,0));
-    // diagonal
-    for(i = 0; i <n ; i++) dp[i][i] = piles[i];
+```python
+def stoneGame(piles):
+    n = len(piles)
 
-    for(i = n-2; i >= 0; i--)
-        for( j = i+1; j <n; j++)
-            dp[i][j] = max(piles[i]-dp[i+1][j],
-                           piles[j] - dp[i][j-1]);
-    return dp[0][n-1] > 0; 
-}
-````
+    @cache
+    def solve(i, j):
+        if i > j: return 0
+        if i == j: return piles[i]
+        return max(piles[i] - solve(i+1, j), piles[j] - solve(i, j-1))
+
+    return solve(0, n-1) > 0
+```
+
+**Tabulation**
+
+```python
+def stoneGame(piles):
+    n = len(piles)
+    dp = [[0] * n for _ in range(n)]
+
+    for i in range(n):
+        dp[i][i] = piles[i]
+
+    for i in range(n-2, -1, -1):
+        for j in range(i+1, n):
+            dp[i][j] = max(piles[i] - dp[i+1][j], piles[j] - dp[i][j-1])
+
+    return dp[0][n-1] > 0
+```
 
 - NOTE : this table can be filled diagonally as well :)
 
@@ -73,30 +88,42 @@ bool stoneGame(vector<int>& piles) {
 * Recurrence : $dp(i, j) = max_{i \le k \le j} dp(i, k-1) + dp(k-1, j) + A[k]$
 * Note: Solution is $O(n^3)$
 
-````c++
-int maxCoins(vector<int>& nums) {
-    int n = nums.size(), len, i, k, left=1, right=1, left_term, right_term;
-    vector<vector<int>> dp(n,vector<int> (n,0));
-    // dp
-    for(len = 1; len <= n; len++){
-        for(i = 0; i+len-1 < n; i++){
-            // nums[i][i+len-1]
-            for(k = i; k <= i+len-1; k++){
-                left = right = 1;
-                if(i-1 >= 0) left = nums[i-1];
-                if(i+len-1+1 < n) right = nums[i+len-1+1];
-                left_term = right_term = 0;
-                if(k-1 >= 0) left_term = dp[i][k-1];
-                if(k+1 < n) right_term = dp[k+1][i+len-1];
-                dp[i][i+len-1] = max(dp[i][i+len-1],
-                                     left_term+right_term+
-                                     left*nums[k]*right);
-            }
-        }
-    }     
-  	return dp[0][n-1]; 
-}
-````
+```python
+def maxCoins(nums):
+    nums = [1] + nums + [1]
+    n = len(nums)
+
+    @cache
+    def solve(i, j):
+        if j - i < 2:
+            return 0
+        return max(
+            nums[i] * nums[k] * nums[j] + solve(i, k) + solve(k, j)
+            for k in range(i+1, j)
+        )
+
+    return solve(0, n-1)
+```
+
+**Tabulation**
+
+```python
+def maxCoins(nums):
+    nums = [1] + nums + [1]
+    n = len(nums)
+    dp = [[0] * n for _ in range(n)]
+
+    for length in range(2, n):
+        for i in range(n - length):
+            j = i + length
+            for k in range(i+1, j):
+                dp[i][j] = max(
+                    dp[i][j],
+                    nums[i] * nums[k] * nums[j] + dp[i][k] + dp[k][j]
+                )
+
+    return dp[0][n-1]
+```
 
 ### Minimum Deletions to make Palindrome
 
@@ -109,7 +136,7 @@ int maxCoins(vector<int>& nums) {
     - Transition : if `s[i] == s[j]` then problem is same as solving `dp[i+1][j-1]`
 - There are two possibilities to get answer, either delete left character or right character & get minimum
 
-````c++
+```python
 def minDeletions(s):
     n = len(s)
     dp = [[0]*n for _ in range(n)]
@@ -122,8 +149,6 @@ def minDeletions(s):
                 dp[i][j] = 1 + min(dp[i+1][j], dp[i][j-1])
 
     return dp[0][n-1]
-    
-# The question of whether machines can think is about as relevant as the question of whether submarines can swim" Edsger Dijkstra
-````
+```
 
 

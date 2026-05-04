@@ -181,132 +181,60 @@ def coinChange(self, coins: List[int], amount: int) -> int:
 
 ```
 
-````c++
-// recursive solution
-#include <vector>
-#include <climits>
-using namespace std;
+**Tabulation**
 
-int coinChangeHelper(const vector<int>& coins, int i, int target, vector<vector<int>>& dp) {
-    // base cases
-    if (target == 0) return 0;
-    if (target < 0 || i >= coins.size()) return INT_MAX;
+```python
+def coinChange(coins, amount):
+    dp = [float(‘inf’)] * (amount + 1)
+    dp[0] = 0
 
-    if (dp[i][target] != -1)
-        return dp[i][target];
+    for j in range(1, amount + 1):
+        for coin in coins:
+            if j >= coin and dp[j - coin] != float(‘inf’):
+                dp[j] = min(dp[j], 1 + dp[j - coin])
 
-    int skip = coinChangeHelper(coins, i + 1, target, dp);
-    int take = coinChangeHelper(coins, i, target - coins[i], dp);
-    if (take != INT_MAX) take += 1;
-
-    return dp[i][target] = min(skip, take);
-}
-
-int coinChange(const vector<int>& coins, int target) {
-    int n = coins.size();
-    vector<vector<int>> dp(n, vector<int>(target + 1, -1));
-    int res = coinChangeHelper(coins, 0, target, dp);
-    return (res == INT_MAX ? -1 : res); // -1 if not possible
-}
-````
-
-**Tabulation Solution**
-
-- From the recurrence we can observe that we can fill 2D Table by filling bottom row, and a column somewhere behind the current element. Bottom to Top & Left to Right.
-
-````c++
-int coinChange(vector<int>& coins, int amount) {
-    int n = coins.size(), i, j;
-    vector<vector<int>> dp(n+1, vector<int>(amount+1,INT_MAX));
-
-    dp[n][0] = 0;
-    for(i = n-1; i>= 0; i--){
-        for(j = 0; j <= amount; j++){
-            dp[i][j] = dp[i+1][j];
-            if(j-coins[i] >= 0 && dp[i][j-coins[i]] != INT_MAX)
-                dp[i][j] = min(dp[i][j], 1+dp[i][j-coins[i]]);
-        }
-    }    
-  	return dp[0][amount] == INT_MAX ? -1: dp[0][amount];
-}
-````
-
-* Notice how, `[i]` in the recurrence doesn’t change, that means that it can be state optimized, because we only need one previous row not the entire table.
-* [Example Solution](https://algo.minetest.in/Practice_DP/DP_4/)
-
-Further Optimization on Space State could be done using only 1 dimensional table, since states does not depend on some far away row.
-
-````c++
-int coinChange(vector<int>& coins, int amount) {
-    int n = coins.size(), i, j;
-    vector<int> dp(amount+1,INT_MAX);
-    dp[0] = 0;
-    for(i = n-1; i>= 0; i--)
-        for(j = 0; j <= amount; j++)
-            if(j-coins[i] >= 0 && dp[j-coins[i]] != INT_MAX)
-                dp[j] = min(dp[j], 1+dp[j-coins[i]]);
-    return dp[amount] == INT_MAX ? -1: dp[amount];
-}
-````
+    return -1 if dp[amount] == float(‘inf’) else dp[amount]
+```
 
 **Follow Up**
 
 - Now Try to solve the same problem using following split criteria
-
     * $s_1$ : picking 1st coin & finding solution
-
     * $s_2$ : picking 2nd coin & finding solution
-
     * ...
-
     * $s_n$
 
 - Recurrence : $P(target) = 1 + \min_{0 \le i \le n}{P(target - A[i])}$
 - Base Case:
     - P(0) = 0 (No coins needed to make amount 0)
-    - If target < 0, return INT_MAX to signify impossible state
+    - If target < 0, return impossible state
 
-````c++
-int coinChangeHelper(const vector<int>& coins, int target, vector<int>& dp) {
-    // base cases
-    if (target == 0) return 0;
-    if (target < 0) return INT_MAX;
+```python
+def coinChange(coins, amount):
+    @cache
+    def solve(target):
+        if target == 0: return 0
+        if target < 0: return float(‘inf’)
+        return min(1 + solve(target - c) for c in coins)
 
-    if (dp[target] != -1)
-        return dp[target];
-
-    int ans = INT_MAX;
-    for (int i = 0; i < coins.size(); ++i) {
-        int res = coinChangeHelper(coins, target - coins[i], dp);
-        if (res != INT_MAX)
-            ans = min(ans, 1 + res);
-    }
-    return dp[target] = ans;
-}
-
-int coinChange(vector<int>& coins, int amount) {
-    vector<int> dp(amount + 1, -1);
-    int res = coinChangeHelper(coins, amount, dp);
-    return res == INT_MAX ? -1 : res;
-}
-````
+    res = solve(amount)
+    return -1 if res == float(‘inf’) else res
+```
 
 Tabulation of Above Method
 
-````c++
-int coinChange(vector<int>& coins, int amount) {
-    vector<int> dp(amount + 1, INT_MAX);
-    dp[0] = 0;
+```python
+def coinChange(coins, amount):
+    dp = [float(‘inf’)] * (amount + 1)
+    dp[0] = 0
 
-    for (int j = 1; j <= amount; ++j) {
-        for (int i = 0; i < coins.size(); ++i) {
-            if (j - coins[i] >= 0 && dp[j - coins[i]] != INT_MAX)
-                dp[j] = min(dp[j], 1 + dp[j - coins[i]]);
-        }
-    }
-    return dp[amount] == INT_MAX ? -1 : dp[amount];
-}
-````
+    for j in range(1, amount + 1):
+        for coin in coins:
+            if j >= coin and dp[j - coin] != float(‘inf’):
+                dp[j] = min(dp[j], 1 + dp[j - coin])
+
+    return -1 if dp[amount] == float(‘inf’) else dp[amount]
+```
 
 Follow Up : Could you count number of such combinations.
 ### Target Sum
@@ -402,24 +330,20 @@ def main(n, W, wt, val):
     * Value = same as weight
     * Maximize total weight <= capacity C
 
-````c++
-int maxSubsetSumWithinLimit(const vector<int>& tasks, int capacity) {
-    vector<bool> dp(capacity + 1, false);
-    dp[0] = true;  // zero sum is always achievable
+```python
+def maxSubsetSumWithinLimit(tasks, capacity):
+    dp = [False] * (capacity + 1)
+    dp[0] = True
 
-    for (int task : tasks) {
-        for (int c = capacity; c >= task; --c) {
-            dp[c] = dp[c] || dp[c - task];
-        }
-    }
+    for task in tasks:
+        for c in range(capacity, task - 1, -1):
+            dp[c] = dp[c] or dp[c - task]
 
-    for (int i = capacity; i >= 0; --i) {
-        if (dp[i]) return i;
-    }
-
-    return 0; // no subset possible (should not happen with dp[0] = true)
-}
-````
+    for i in range(capacity, -1, -1):
+        if dp[i]:
+            return i
+    return 0
+```
 
 - If n is up to **40** and capacity can be up to **1e9 or more**, use **meet-in-the-middle**
 

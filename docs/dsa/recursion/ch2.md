@@ -16,64 +16,6 @@
 * Recurrence : `f(arr, 0, n-1) = f(arr, 1, n-1)` $\text{ or }$ `f(arr, 1, n-1) + {arr[0]}`
 * Base Case: `f(arr, n-1, n-1) = { {}, {arr[n-1]}}`
 
-````c++
-vector<vector<int>> f(vector<int>& nums, int i, int r) {
-  // Base Case
-  if(i == r) {
-    return {{}, {nums[r]}}
-  }
-  // Recursive Step
-  // Get C2
-  vector<vector<int>> c1 = f(nums, i+1, r);
-  
-  // Get C1
-  vector<vector<int>> c2 = c1;
-  for(int j = 0; j < c2.size(); j++)
-    	c1[j].push_back(nums[i]);
-  
-  // combine both solution
-  vector<vector<int>> res = c2;
-  for(int j = 0; j < c1.size(); j++) {
-    res.push_back(c1[j]);
-  }
-  return res;
-}
-
-vector<vector<int>> subsets(vector<int>& nums) {
-  return f(nums, 0, nums.size() - 1);
-}
-````
-
-* more space optimal approach is to track current recursion calls using `contribution` arr.
-
-````c++
-void f(vector<int>& nums, int i, int end, vector<int> contri, vector<vector<int>> & res){
-    if(i == end){
-        res.push_back(contri);
-        
-        contri.push_back(nums[end]);
-        res.push_back(contri);
-        return;
-    }
-    
-    // Recursive
-    // C2.
-    f(nums,i+1,end, contri,res);
-    
-    // C1.
-    // Contribution at this step is nums[i], ideally should be passed as reference
-   	contri.push_back(nums[i]);
-    f(nums,i+1,end, contri, res);
-}
-vector<vector<int>> subsets(vector<int>& nums){
-    vector<vector<int>> res;
-    
-    // Implicit return
-    f(nums, 0, nums.size()-1, {}, res);
-    return res;
-}
-````
-
 Below are two quite interesting approach to above problem.
 
 NOTE: Python never copies objects automatically, 
@@ -139,13 +81,14 @@ def subsets(nums):
     n = len(nums)
     
     # for 2 elements : Mask 00, 01, 10, 11
+    res = []
     for mask in range(1 << n):
         curr = []
         for j in range(n):
             if mask & (1 << j):
-                curr.append(nums[j]) 
+                curr.append(nums[j])
         res.append(curr)
-        
+
     return res
 
 ```
@@ -168,91 +111,24 @@ Solution Set would be : `{[1,2] , [2,3], [3,4], [1,4] , [2,4], [1,3] }`
     - `s <= e`
         - `k = 0` : `{{}}`
 
-````c++
-vector<vector<int>> f(int start, int end, int k){
-    // Base Case.
-    if(k == 0)
-        return {{}};
-    if(start > end)
-        return {};
-    
-    // Recursive Step
-    // C2
-    // Doesn't include the first element
-    vector<vector<int>> c2 = f(start+1,end,k);
-
-    // C1
-    // Include the first element
-    vector<vector<int>> temp = f(start+1, end, k-1);
-
-    // Append the first element
-    vector<vector<int>> c1 = temp;
-    for(int i = 0; i < temp.size(); i++)
-        c1[i].push_back(start+1);
-
-    // Merge
-    // Res is c1 U c2
-    vector<vector<int>> res = c2;
-    for(int i = 0 ; i < c1.size(); i++)
-        res.push_back(c1[i]);
-    return res;
-}
-vector<vector<int>> combine(int n, int k) {
-    return f(0,n-1,k);
-}
-````
-
-````c++
-// space optimized solution
-void f(int start, int end, int k, vector<int>& contri, vector<vector<int>> & res ){
-    // Base Case.
-    if(k == 0){
-        res.push_back(contri);
-        return ;
-    }
-    if(start > end)
-        return ;
-
-    // Recursive Step
-    // C2. Doesn't include the first element
-    f(start+1,end,k, contri, res);
-
-    // C1. Include the first element
-    contri.push_back(start+1);
-    f(start+1, end, k-1,contri, res);
-  	// restore recursion stack
-  	contri.pop_back();		// notice now its even better then previous solutions
-}
-vector<vector<int>> combine(int n, int k) {
-    vector<vector<int>> res;
-    f(0,n-1,k,{},res);
-    return res;
-}
-````
-
-Pythonic Solution
-
 ```python
-
-def combinationSum(candidates, target):
-
-    n = len(candidates)
+def combine(n, k):
     res = []
 
-    def solve(i, curr):
-        if sum(curr) == target:
-            res.append(curr[:]) # always prefer to copy here
+    def dfs(start, path):
+        if len(path) == k:
+            res.append(path[:])
             return
+        for i in range(start, n + 1):
+            path.append(i)
+            dfs(i + 1, path)
+            path.pop()
 
-        if i >= n or sum(curr) > target:
-            return
-        
-        solve(i+1, curr)
-        solve(i, curr + [candidates[i]]) # notice its passing copy
-
-    solve(0, [])
+    dfs(1, [])
     return res
 ```
+
+* Pruning: `if n - start + 1 < k: return` (not enough elements left to form a combination of size k)
 
 ## Combination Sum
 
@@ -274,33 +150,25 @@ Representation : Suffix Array
         * `sum == 0`: `{{}}` | result
         * `sum < 0` : `{}`
 
-````c++
-void f(vector<int>& arr, int start, int end, int target, vector<int>& contri, vector<vector<int>>& res){
-    //Base Setps
-    if(target == 0) {
-        res.push_back(contri);
-        return;
-    }
-    if(target < 0 || start > end)
-        return;
-    
-    //solve c2
-    //not including first element
-    f(arr,start+1,end,target,contri,res);
-    //solve c1 include first element atleast once
-    contri.push_back(arr[start]);
-    f(arr,start, end, target-arr[start],contri, res);
-    contri.pop_back();
-}
-vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-    vector<vector<int>> res;
-    vector<int> contri;
-    f(candidates, 0, candidates.size()-1,target, contri, res);
-    return res;
-}
-````
+```python
+def combinationSum(candidates, target):
+    res = []
 
-* Above solution can be pruned further: `if (rem < k) return;` i.e. `if(end-start+1 < k) return;`
+    def dfs(start, path, remaining):
+        if remaining == 0:
+            res.append(path[:])
+            return
+        for i in range(start, len(candidates)):
+            if candidates[i] > remaining:
+                break  # pruning: candidates sorted, rest are larger
+            path.append(candidates[i])
+            dfs(i, path, remaining - candidates[i])  # i not i+1, reuse allowed
+            path.pop()
+
+    candidates.sort()
+    dfs(0, [], target)
+    return res
+```
 
 ### Combination Sum - II
 
@@ -308,39 +176,8 @@ vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
 
 * NOTE: Only change is finite consumption of numbers. So out $c_2$ from previous solution changes as follows.
 
-````c++
-void f(vector<int>& candidates, int start, int end, int target,vector<int>& contri, vector<vector<int>>& res){
-    //base step
-    if(target == 0) {
-        res.push_back(contri);
-        return;
-    }
-
-    if( target < 0 || start > end) return;
-    //recursive step
-
-    //Not include the smallest ele. at all
-    //find the first occurence of number > ar[start]
-    int j = start + 1;
-    while(j <= end && candidates[j] == candidates[start]) j++;
-
-    f(candidates, j, end, target , contri , res);
-    contri.push_back(candidates[start]);
-    f(candidates,start + 1, end, target - candidates[start], contri, res);
-    contri.pop_back();
-}
-vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-    vector<int> contri;
-    vector<vector<int>> res;
-    vector<int> suffix(candidates.size(),0);
-    sort(candidates.begin(), candidates.end());
-    f(candidates, 0 , candidates.size() -1 , target, contri, res);
-    return res;
-}
-````
-
 ```python
-def combinationSum2(self, target):
+def combinationSum2(candidates, target):
 
     candidates.sort()
     res = []
@@ -375,46 +212,6 @@ Given string digit from `2-9`, return all possible letter combination that could
 
 * So for a digit `3`: there could be 3 possibility `d, e, f`
 * Problem reduces to precisely same as suffix array.
-
-````c++
-vector<string> digitToAlphabet;
-void initializeMap(){
-    digitToAlphabet.resize(10);
-    digitToAlphabet[2] = "abc";
-    digitToAlphabet[3] = "def";
-    digitToAlphabet[4] = "ghi";
-    digitToAlphabet[5] = "jkl";
-    digitToAlphabet[6] = "mno";
-    digitToAlphabet[7] = "pqrs";
-    digitToAlphabet[8] = "tuv";
-    digitToAlphabet[9] = "wxyz";
-}
-void f(string& digits, int start, string& contri, vector<string>& res){
-
-    //Base Case
-    if(start == digits.size()){
-        res.push_back(contri);
-        return;
-    }
-
-    // recursion
-    for(int i=0; i< digitToAlphabet[digits[start] -'0'].size(); i++){
-        contri.push_back(digitToAlphabet[digits[start] - '0'][i]);
-        f(digits,start+1,contri,res);
-        contri.pop_back();
-    }
-}
-vector<string> letterCombinations(string digits) {
-    if(digits.size() == 0) return vector<string>();
-    vector<string> res;
-    string contri;
-    initializeMap();
-    f(digits,0,contri,res);
-    return res;
-}
-````
-
-Python Solution
 
 ```python
 
@@ -460,90 +257,33 @@ def letterCombinations(digits):
     * Keeping a visited array will be helpful to represent the subproblems.
     * Or we can always send the element not to be included to be swapped with  the first element and that way we have a continuous suffix array as a subproblem
 
-#### Keeping visited array (Optimized) 
+#### Keeping visited array
 
-````c++
-void f(vector<int>& nums, vector<bool>& visited, vector<int>& contri, vector<vector<int>>& res){
-    //Base Step
-    //When everything is visited
-    int i;
-    for(i=0; i <nums.size(); i++){
-        if(!visited[i])
-            break;
-    }
-    if(i == nums.size()){
-        res.push_back(contri);
-        return;
-    }
-    //Recursive Step
-    //Iterate over all possibilities for current position
-    for( i = 0; i< nums.size(); i++)
-    {
-        //consider the ones that aren't visited
-        if(!visited[i]) {
-            //Passdown the contri
-            //Try for this elt at the current position
-            contri.push_back(nums[i]);
-            visited[i] = true;
-            f(nums,visited,contri, res);
-            contri.pop_back(); // important step
-            visited[i] = false;
-        } 
-    }
-}
-vector<vector<int>> permute(vector<int>& nums) {
-    vector<bool> visited(nums.size(),false);
-    vector<vector<int>> res;
-    vector<int> contri;
-    f(nums, visited, contri, res);
-    return res;
-}
-````
+```python
+def permute(nums):
+    n = len(nums)
+    res = []
+    visited = [False] * n
 
-Base Case Pruning
+    def dfs(path):
+        if len(path) == n:
+            res.append(path[:])
+            return
+        for i in range(n):
+            if not visited[i]:
+                visited[i] = True
+                path.append(nums[i])
+                dfs(path)
+                path.pop()
+                visited[i] = False
 
-````c++
-if(contri.size() == nums.size()){
-    res.push_back(contri);
-    return;
-}
-````
+    dfs([])
+    return res
+```
 
 #### Swapping based solution (creates explicit suffix array)
 
-````c++
-void f(vector<int>& nums,int j, vector<int>& contri, vector<vector<int>>& res){
-    //Base Step
-    //When everything is visited
-    if(j == nums.size()){
-        res.push_back(contri);
-        return;
-    }
-
-    //Recursive Step
-    //Iterate over all possibilities for current position
-    for(int i = j; i< nums.size(); i++)
-    {
-        //consider the ones that aren't visited
-        //Passdown the contri
-        //Try for this elt at the current position
-        contri.push_back(nums[i]);
-        swap(nums[j],nums[i]);
-        f(nums,j+1,contri, res);
-        //undo operation to maintain tree validity
-        contri.pop_back();
-        swap(nums[j],nums[i]);
-    }
-}
-vector<vector<int>> permute(vector<int>& nums) {
-    vector<vector<int>> res;
-    vector<int> contri;
-    f(nums, 0, contri, res);
-    return res;
-}
-````
-
-You don't even need `curr` and just swap the array in place
+Swap in place - no need for a separate `curr` array
 
 ```python
 def permutations(arr):
@@ -582,44 +322,21 @@ $$
 * then calculate offset how far this item is away from that `chunk_id`
 * hmmm can we do that recursively ! yes :D
 
-````c++
-int fact(int n){
-    int i, res = 1;
-    for(i = 1; i<= n; i++)
-        res = res * i;
-    return res;
-}
-//Return the pos and unvisited number
-int getNumber(vector<int>& visited, int pos){
-    int count = 0;
-    for(int i = 1; i<= 9; i++){
-        if(visited[i]) continue;
-        count++;
-        if(count == pos)
-            return i;
-    }
-    //NF-won't reach here
-    return -1;
-}
-string getPermutation(int n, int k) {
-    int i,chunk_id, pos, curr_digit;
-    int copy_n = n;
-    vector<int> visited(10,0); 
-    string res = "";
-    for( i = 1; i <= copy_n; i++){
-        chunk_id = (k-1)/fact(n-1); 
-        // get corresponding digit
-        pos = chunk_id +1;
-        curr_digit = getNumber(visited, pos);
-        res = res + to_string(curr_digit);
+```python
+from math import factorial
 
-        // mark visited
-        visited[curr_digit] = 1;
-        // update k and n;
-        k = k - (chunk_id*fact(n-1));
-        n--;
-    }
-    return res;
-}
-````
+def getPermutation(n, k):
+    digits = list(range(1, n + 1))
+    res = ""
+    k -= 1  # convert to 0-indexed
+
+    while digits:
+        f = factorial(len(digits) - 1)
+        chunk_id = k // f
+        res += str(digits[chunk_id])
+        digits.pop(chunk_id)
+        k %= f
+
+    return res
+```
 

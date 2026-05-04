@@ -137,10 +137,10 @@ print(count_sum_divisible("5234", 3))
 
 To count in range `[L, R]`
 
-````c++
+```python
 def solve(L, R, k):
     return count_sum_divisible(R, k) - count_sum_divisible(str(int(L) - 1), k)
-````
+```
 
 ## Common Use Cases
 

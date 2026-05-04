@@ -169,25 +169,38 @@ def minFallingPathSum(matrix):
     * `n(buy)` : all suffix arrays
     * `n(sell)` : all prefix arrays
 
-````c++
-int maxProfit(vector<int>& prices, int fee) {
-    int n = prices.size();
-    vector<vector<int>> dp(n,vector<int>(2,0));
+```python
+def maxProfit(prices, fee):
+    n = len(prices)
 
-    // base case
-    // 0-> sell
-    // 1-> buy
-    dp[n-1][0] = prices[n-1] - fee;
-    dp[n-1][1] = max(0,-prices[n-1]);
+    @cache
+    def solve(i, holding):
+        if i == n:
+            return 0
+        if holding:  # have stock, can sell or hold
+            return max(prices[i] - fee + solve(i+1, False), solve(i+1, True))
+        else:  # no stock, can buy or skip
+            return max(-prices[i] + solve(i+1, True), solve(i+1, False))
 
-    for(int i = n-2; i >= 0; i--){
-            dp[i][0] = max(prices[i] - fee + dp[i+1][1] , dp[i+1][0]);
-            dp[i][1] = max(dp[i+1][1], -prices[i]+dp[i+1][0]);
-    }
+    return solve(0, False)
+```
 
-    return dp[0][1];
-}
-````
+**Tabulation**
+
+```python
+def maxProfit(prices, fee):
+    n = len(prices)
+    # hold[i] = max profit from day i onward when holding stock
+    # cash[i] = max profit from day i onward when not holding
+    hold = [0] * (n + 1)
+    cash = [0] * (n + 1)
+
+    for i in range(n - 1, -1, -1):
+        hold[i] = max(prices[i] - fee + cash[i+1], hold[i+1])
+        cash[i] = max(-prices[i] + hold[i+1], cash[i+1])
+
+    return cash[0]
+```
 
 ## Longest Arithmetic Subsequence
 
@@ -200,44 +213,20 @@ int maxProfit(vector<int>& prices, int fee) {
 4. Dimensions - Prefix Array, Common Difference
 5. Data Structure -> use `unordered_map<int,int> `: key -> cd , value -> length of longest chain.
 
-````c++
-int longestArithSeqLength(vector<int>& A) {
-    int n = A.size(), i, j, cd, res = 0;
-    vector<unordered_map < int, int >> dp(n);
+```python
+def longestArithSeqLength(nums):
+    n = len(nums)
+    dp = [dict() for _ in range(n)]  # dp[i][diff] = length ending at i with common diff
+    res = 0
 
-    for(i = 0; i < n; i++){
-        // compute dp[i]
-        for(j = 0; j < i; j++){
-            cd = A[i] - A[j];
-            if(dp[j].find(cd) == dp[j].end())
-                dp[i][cd] = 2;
-            else
-                dp[i][cd] =  1+dp[j][cd];
+    for i in range(n):
+        for j in range(i):
+            d = nums[i] - nums[j]
+            dp[i][d] = dp[j].get(d, 1) + 1
+            res = max(res, dp[i][d])
 
-            res = max(res,dp[i][cd]); }
-    }     return res;  }
-
-````
-
-Above gives TLE : one quick fix is the line after calculating cd , second way using a vector of 1000 size because its possible to get small common  difference .
-
-Maps were giving TLE because , maps are not always O(1) , instead its average case performance.
-
-````c++
-int longestArithSeqLength(vector<int>& A) {
-    int n = A.size(), i, j, cd, res = 0;
-    vector<vector<int>> dp(n, vector<int> (1001,0));
-
-    for(i = 0; i< n; i++){
-        // compute dp[i]
-        for(j = 0; j < i; j++){
-            cd = A[i] - A[j];
-            dp[i][cd+500] = max(2,1+dp[j][cd+500]);
-            res = max(res,dp[i][cd+500]);
-        }
-    }     return res; 
-}
-````
+    return res
+```
 
 ## Target Sum
 
@@ -252,31 +241,36 @@ int longestArithSeqLength(vector<int>& A) {
 * To understand the order of filling the table, try to put some value on above recurrence
 * Base Case : `n-1` row where the `1` where `target == A[n-1]` otherwise `0`, or using n
 
-````c++
-int findTargetSumWays(vector<int>& nums, int target) {
-    int n = nums.size(), i, j;
-    vector<vector<int>> dp(n+1, vector<int> (2001,0));
-    // sum = 0
-    // -1000 to 1000 => [0,2000]
-    // 0 to 1000
-    dp[n][1000] = 1;
+```python
+def findTargetSumWays(nums, target):
+    n = len(nums)
 
-    for(i = n-1; i >= 0; i--){
-        for( j = -1000; j <= 1000; j++){
-            // two cases
-            // +ve sign
-            if(j+1000-nums[i] >= 0)
-                dp[i][j+1000] += dp[i+1][j+1000-nums[i]];
+    @cache
+    def solve(i, curr):
+        if i == n:
+            return 1 if curr == target else 0
+        return solve(i+1, curr + nums[i]) + solve(i+1, curr - nums[i])
 
-            // -ve sign
-            if(j+1000+nums[i] <= 2000)
-                dp[i][j+1000] += dp[i+1][j+1000+nums[i]];
-        }
-    }     return dp[0][target+1000]; 
-}
-````
+    return solve(0, 0)
+```
 
-* A further state space optimization is possible here by using a 2x(2001) size array
+**Tabulation**
+
+```python
+def findTargetSumWays(nums, target):
+    from collections import defaultdict
+    dp = defaultdict(int)
+    dp[0] = 1
+
+    for num in nums:
+        next_dp = defaultdict(int)
+        for curr, ways in dp.items():
+            next_dp[curr + num] += ways
+            next_dp[curr - num] += ways
+        dp = next_dp
+
+    return dp[target]
+```
 
 ## Edit Distance
 
@@ -294,20 +288,37 @@ int findTargetSumWays(vector<int>& nums, int target) {
 * Base Case : to  transform [a] into [ab….] if there is a in second word then $n-1$ deletion otherwise $n$. Simpler base case is by shifting everything by one. :)
 * we add a row above the table and column of left side too. just to make the base case simpler.
 
-````c++
-int minDistance(string word1, string word2) {
-    int m = word1.length(),n = word2.length(),i,j;
-    vector<vector<int>> dp(m+1, vector<int> (n+1,0));
-    // base cases
-    for(i = 0 ; i <= n ; i++) dp[0][i] = i;
-    for(j = 0 ; j <= m ; j++) dp[j][0] = j;
-    // actual DP implemenation
-    for(int i = 1 ; i <= m ; i++)
-        for(int j = 1 ; j<= n ; j++)
-            if(word1[i-1] == word2[j-1]) 
-                dp[i][j] = dp[i-1][j-1];
-            else
-                dp[i][j] = 1 + min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]});
-	return dp[m][n]; 
-}
-````
+```python
+def minDistance(word1, word2):
+    m, n = len(word1), len(word2)
+
+    @cache
+    def solve(i, j):
+        if i == m: return n - j
+        if j == n: return m - i
+        if word1[i] == word2[j]:
+            return solve(i+1, j+1)
+        return 1 + min(solve(i+1, j), solve(i, j+1), solve(i+1, j+1))
+
+    return solve(0, 0)
+```
+
+**Tabulation**
+
+```python
+def minDistance(word1, word2):
+    m, n = len(word1), len(word2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+
+    for i in range(m + 1): dp[i][0] = i
+    for j in range(n + 1): dp[0][j] = j
+
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if word1[i-1] == word2[j-1]:
+                dp[i][j] = dp[i-1][j-1]
+            else:
+                dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
+
+    return dp[m][n]
+```
