@@ -11,54 +11,50 @@
 
 ## Iterative Complete Search
 
-- Problem UVa 725 - Division (Two Nested Loops)
-- Problem UVa 441 - Lotto (Many Nested Loops)
-- Problem UVa 11565 - Simple Equations ( Loops + Pruning)
-- Problem UVa 11742 - Social Constraints( Permutations)
-- Problem UVa 12455 - Bars (Subsets)
+- Problem UVa 725 - Division (Two Nested Loops) - find pairs (fghij / abcde = N) where all 10 digits are distinct
+- Problem UVa 441 - Lotto (Many Nested Loops) - print all size-6 combinations from a chosen set of numbers
+- Problem UVa 11565 - Simple Equations (Loops + Pruning) - find x, y, z satisfying A = x+y+z, B = x*y*z, C = x²+y²+z²
+- Problem UVa 11742 - Social Constraints (Permutations) - count seating arrangements satisfying given min/max distance constraints
+- Problem UVa 12455 - Bars (Subsets) - determine if any subset of bars sums to a target length
 
 ## Recursive Complete Search
 
 - UVa 750 8 Queens Chess Problem
-- This code basically checks for all different possibilities of proper non conflicting solution and checks whether given pair is part of the  placement or not. It recursively does backtracking to save time.
+- This code basically checks for all different possibilities of proper non-conflicting solutions and checks whether a given pair is part of the placement or not. It recursively does backtracking to save time.
 
-````c++
-#include <cstdlib>
-#include <cstdio>
-#include <cstrings>
-using namespace std;
+````python
+row = [0] * 8
+line_counter = 0
 
-int row[8] , TC , a , b, lineCounter;
+def place(r, c):
+    for prev in range(c):
+        if row[prev] == r or abs(row[prev] - r) == abs(prev - c):
+            return False
+    return True
 
-bool place(int r,int c){
-    for (int prev=0; prev<c ; prev++)
-        if(row[prev] == r || (abs(row[prev]-r) == abs(prev - c)))
-            return false;
-    return true;
-}
-void backtrack(int c){
-    if(c==8 && row[b] == a){
-        printf("%2d		%d", ++lineCounter , row[0]+1);
-        for(int j=1;j<8; j++) printf(" %d",row[j] +1);
-        printf("\n");     }
-    for (int r =0; r< 8 ; r++)
-        if(place(r,c)){
-            row[c] = r; backtrack(c+1);
-        }
-}
+def backtrack(c, a, b):
+    global line_counter
+    if c == 8 and row[b] == a:
+        line_counter += 1
+        cols = ' '.join(str(row[j] + 1) for j in range(8))
+        print(f"{line_counter:2d}      {cols}")
+        return
+    for r in range(8):
+        if place(r, c):
+            row[c] = r
+            backtrack(c + 1, a, b)
 
-int main(){
-    scanf("%d",&TC);
-    while(TC--){
-        scanf("%d %d", &a,&b); a--;b--; //switching to zero basesd indexing
-        memset(row,0,sizeof row); lineCounter = 0;
-        printf("SOLN		COLUMN\n");
-        printf(" # 		1 2 3 4 5 6 7 8\n\n");
-        backtrack(0);	//generates all possible 8! candidates
-        if (TC) 
-          printf("\n");            
-    } 
-}
+TC = int(input())
+for t in range(TC):
+    a, b = map(int, input().split())
+    a -= 1; b -= 1  # switch to zero-based indexing
+    row[:] = [0] * 8
+    line_counter = 0
+    print("SOLN      COLUMN")
+    print(" #        1 2 3 4 5 6 7 8\n")
+    backtrack(0, a, b)
+    if t < TC - 1:
+        print()
 ````
 
 ### Tips:

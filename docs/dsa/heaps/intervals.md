@@ -77,10 +77,7 @@ def insert(intervals, newInterval):
 
     # insert intervals after the merging
     res.append([start, end])
-
-    while i < n:
-        res.append(intervals[i])
-        i += 1
+    res.extend(intervals[i:]) # copy rest of intervals
     
     return res
 

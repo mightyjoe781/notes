@@ -8,14 +8,14 @@
 
 * function divides array into two halves and then finds the maximum
 
-````c++
-Item max(Item a[],int l, int r){
-    if (l==r) return a[l];
-    item m = (l+r)/2;
-    Item u = max(a,l,m);
-    Item v = max(a,m+1,r);
-    if(u>v) return u; else return v;
-}
+````python
+def max_val(a, l, r):
+    if l == r:
+        return a[l]
+    m = (l + r) // 2
+    u = max_val(a, l, m)
+    v = max_val(a, m + 1, r)
+    return u if u > v else v
 ````
 
 * *Property* - A recursive function that divides a problem of size N into two independent (non empty) parts that it solves recursively calls itself less than N times.
@@ -33,23 +33,23 @@ given 3 pegs and N disks that fit onto the pegs.  Disks differ in  size and are 
 
 The task is to move the stack of disks to the right one position(peg), while obeying the following rules
 
-1. only one disk mat be shifted at a time
+1. only one disk may be shifted at a time
 2. no disk may be placed on top of smaller one
 
-*The recursive divide-and-conquer algorithm for the towers of Hanoi problem produces a solution that has $2^{N^{-1}}$ moves.*
+*The recursive divide-and-conquer algorithm for the towers of Hanoi problem produces a solution that has $2^N - 1$ moves.*
 
-* $T_N = 2 T_{N-1} + 1, for N \ge \text{ with } T_1 = 1$
+* $T_N = 2 T_{N-1} + 1, \text{ for } N \ge 2 \text{ with } T_1 = 1$
 
 ***Solution to the towers of Hanoi problem***
 
-````c++
-void hanoi(int N,int d){
-    if(N==0) return;
-    hanoi(N-1,-d);
-    shift(N,d);
-    hanoi(N-1,-d);
-}
-````
+```python
+def hanoi(N, d):
+    if N == 0:
+        return
+    hanoi(N - 1, -d)
+    shift(N, d)
+    hanoi(N - 1, -d)
+```
 
 there is a  correspondence with n-bit numbers is a simple algorithm  for the task. We can move the pile one peg to right by iterating the  following two steps until done:
 
@@ -66,6 +66,8 @@ there is a  correspondence with n-bit numbers is a simple algorithm  for the tas
 
 ### Binary Search on Uncommon Data Structures
 
+Binary search applies wherever a monotonic property exists - not just sorted arrays. Examples include root-to-leaf paths in min-heap trees, rotated sorted arrays, and implicit answer spaces where values above a threshold all satisfy the condition.
+
 ### Bisection Method
 
 * also known as binary search on answer space
@@ -79,22 +81,24 @@ there is a  correspondence with n-bit numbers is a simple algorithm  for the tas
 
 * All these problems rely on a simple concept. Consider a solution space from 0 to 100000. Usually, a solution exists at some point X within this range, such that every number greater than X is also a solution. Finding X becomes a problem solvable using binary search.
 
-````c++
+````python
 # gas station problem
-#define EPS 1e-9
+EPS = 1e-9
 
-bool can(double f){	//simulation portion
-    //return true if jeep reaches to its goal 
-    //return false otherwise
-}
-//inside int main
-// Binary Search the answer, then simulate
-double lo =0.0, hi=1000.0, mid =0.0 ans =0.0;
-while(fabs(hi-lo)>EBS){
-    mid = (lo+hi)/2.0;
-    if(can(mid)) { ans = mid ; hi = mid;}
-    else 			lo=mid;
-}
- printf("%.31f\n",ans);
+def can(f):
+    # return True if jeep reaches its goal, False otherwise
+    pass
+
+# binary search the answer, then simulate
+lo, hi, ans = 0.0, 1000.0, 0.0
+while abs(hi - lo) > EPS:
+    mid = (lo + hi) / 2.0
+    if can(mid):
+        ans = mid
+        hi = mid
+    else:
+        lo = mid
+
+print(f"{ans:.3f}")
 ````
 
