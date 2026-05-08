@@ -31,6 +31,7 @@ for i, v in enumerate(nums):
     stack.append(i)
 ````
 
+Practice Problem : [Daily Temperature](https://leetcode.com/problems/daily-temperatures/description/)
 ### Previous Smaller Element
 
 NOTE: This is monotonically increasing stack
@@ -77,6 +78,8 @@ def calculateSpan(prices):
     return span
 
 ```
+
+Try the online variant of the same problem : [Online Stock Span](https://leetcode.com/problems/online-stock-span/)
 ### Maximal Area in Histogram
 
 This can be solved using the above concept on monotonically decreasing stack.

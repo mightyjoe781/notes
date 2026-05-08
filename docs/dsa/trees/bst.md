@@ -112,6 +112,22 @@ def insertIntoBST(root, val):
         return TreeNode(val)
     
     return root
+    
+## recursive
+
+def insertIntoBST(root, val):
+
+    def insert(node):
+
+        if node == None:
+            return TreeNode(val)
+
+        if node.val > val: node.left = insert(node.left)
+        else: node.right = insert(node.right)
+        
+        return node
+        
+    return insert(root)
 
 ```
 

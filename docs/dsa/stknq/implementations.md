@@ -43,7 +43,7 @@ def maxSlidingWindow(nums, k):
 ````
 
 NOTE: Time complexity is $O(2n) \cong O(n)$
-## Stock-Span Problem
+## Online Stock-Span Problem
 
 Problem Link - 901 - [Link](https://leetcode.com/problems/online-stock-span/description/)
 

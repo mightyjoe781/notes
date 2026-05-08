@@ -37,7 +37,7 @@ markdown_extensions:
   pymdownx.highlight:
     anchor_linenums: true
     use_pygments: true
-    # line_spans: __span
+    line_spans: __span
     pygments_lang_class: true
   pymdownx.inlinehilite:
   pymdownx.snippets:
