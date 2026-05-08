@@ -4,73 +4,50 @@
 
 ## Simple Max-Heap Implementation
 
-````c++
-#include <vector>
-#include <iostream>
-using namespace std;
+```python
 
-class MaxHeap {
-private:
-    vector<int> heap;
+class MaxHeap:
+    def __init__(self, arr=None):
+        self.heap = list(arr or [])
+        for i in range(len(self.heap) // 2 - 1, -1, -1):
+            self._sink(i)
 
-    int parent(int i) { return (i - 1) / 2; }
-    int left(int i)   { return 2 * i + 1; }
-    int right(int i)  { return 2 * i + 2; }
+    def _parent(self, i): return (i - 1) // 2
+    def _left(self, i):   return 2 * i + 1
+    def _right(self, i):  return 2 * i + 2
 
-    // Swim Up (Heapify Up)
-    void swim(int i) {
-        while (i > 0 && heap[parent(i)] < heap[i]) {
-            swap(heap[i], heap[parent(i)]);
-            i = parent(i);
-        }
-    }
+    def _swim(self, i):
+        while i > 0 and self.heap[self._parent(i)] < self.heap[i]:
+            p = self._parent(i)
+            self.heap[i], self.heap[p] = self.heap[p], self.heap[i]
+            i = p
 
-    // Sink Down (Heapify Down)
-    void sink(int i) {
-        int n = heap.size();
-        while (left(i) < n) {
-            int j = left(i);
-            if (right(i) < n && heap[right(i)] > heap[j])
-                j = right(i); // pick the larger child
-            if (heap[i] >= heap[j])
-                break;
-            swap(heap[i], heap[j]);
-            i = j;
-        }
-    }
+    def _sink(self, i):
+        n = len(self.heap)
+        while self._left(i) < n:
+            j = self._left(i)
+            if self._right(i) < n and self.heap[self._right(i)] > self.heap[j]:
+                j = self._right(i)
+            if self.heap[i] >= self.heap[j]:
+                break
+            self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
+            i = j
 
-public:
-    MaxHeap() {}
+    def insert(self, val):
+        self.heap.append(val)
+        self._swim(len(self.heap) - 1)
 
-    MaxHeap(const vector<int>& arr) {
-        heap = arr;
-        for (int i = (int)heap.size() / 2 - 1; i >= 0; --i)
-            sink(i); // heapify
-    }
+    def get_max(self):
+        return self.heap[0] if self.heap else -1
 
-    void insert(int val) {
-        heap.push_back(val);
-        swim((int)heap.size() - 1);
-    }
+    def remove_max(self):
+        if not self.heap: return -1
+        self.heap[0] = self.heap[-1]
+        self.heap.pop()
+        self._sink(0)
+        return self.heap[0] if self.heap else -1
 
-    int getMax() {
-        return heap.empty() ? -1 : heap[0];
-    }
-
-    void removeMax() {
-        if (heap.empty()) return;
-        heap[0] = heap.back();
-        heap.pop_back();
-        sink(0);
-    }
-
-    void printHeap() {
-        for (int x : heap)
-            cout << x << ' ';
-        cout << '\n';
-    }
-};
-````
+```
 
 ### Summary of Operations
 
@@ -81,9 +58,11 @@ public:
 | Peek max            | getMax()     | O(1)           |
 | Build heap from arr | MaxHeap(arr) | O(n)           |
 
-### Min - Heap Implementation
+### Min-Heap Implementation
 
-To convert Max-Heap Implementation into a Min-Heap one
+To convert Max-Heap into a Min-Heap:
 
-* In `swim()` : change `<` to `>`
-* In `sink()` : change `>` to `<`
+* In `_swim()` : change `<` to `>`
+* In `_sink()` : change `>` to `<`
+
+In practice, Python's `heapq` module is a min-heap by default. For a max-heap, negate values on push/pop.

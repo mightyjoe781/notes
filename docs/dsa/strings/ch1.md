@@ -12,7 +12,7 @@
 For clarity there are several assumptions and definitions that we will make use of ahead.
 
 - *Characters* : A `String` is a sequence of characters. Characters are of type `char`.
-- *Immutability* : String objects are immutable. Their values doesn't change while assigning statements and as arguments and return values.
+- *Immutability* : String objects are immutable. Their values don't change during assignment, or when passed as arguments and return values.
 - *Indexing* : Operation to extract a specified character from a string.
 - *Length* : Size of the string
 - *Substring* : extract a specified substring operation. We expect a constant time implementation of this.
@@ -90,7 +90,7 @@ s.count('a')            # count single character
 
 ## Problems
 
-1. https://leetcode.com/problems/roman-to-integer/description/ 
-2. https://leetcode.com/problems/string-to-integer-atoi/ painful to process question :)
-3. https://leetcode.com/problems/encode-and-decode-strings/description/
-4. https://leetcode.com/problems/string-compression/description/
+1. [Roman to Integer](https://leetcode.com/problems/roman-to-integer/description/) - Convert a Roman numeral string to its integer value using symbol-to-value mapping and handle the subtraction rule (e.g. IV = 4).
+2. [String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi/) - Parse a string into a 32-bit signed integer, handling leading whitespace, optional sign, non-digit characters, and overflow. Painful to process :)
+3. [Encode and Decode Strings](https://leetcode.com/problems/encode-and-decode-strings/description/) - Design an algorithm to encode a list of strings into a single string and decode it back, handling edge cases like empty strings and strings containing delimiters.
+4. [String Compression](https://leetcode.com/problems/string-compression/description/) - Compress a character array in-place by replacing consecutive repeated characters with the character followed by its count. Modify the array in-place and return the new length.

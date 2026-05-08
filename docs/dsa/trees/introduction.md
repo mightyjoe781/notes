@@ -19,14 +19,13 @@
 
 ## Implementation
 
-````c++
-struct TreeNode {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-};
-````
+```python
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+```
 
 ## Tree Traversal
 
@@ -39,89 +38,39 @@ struct TreeNode {
 
 ### Traversal Implementation
 
-````c++
-void preorder(TreeNode* root) {
-    if (!root) return;
-  	cout << root->val << " ";
-    preorder(root->left);
-    preorder(root->right);
-}
+```python
+def preorder(root):
+    if not root: return
+    print(root.val)
+    preorder(root.left)
+    preorder(root.right)
 
-void inorder(TreeNode* root) {
-    if (!root) return;
-    inorder(root->left);
-    cout << root->val << " ";
-    inorder(root->right);
-}
+def inorder(root):
+    if not root: return
+    inorder(root.left)
+    print(root.val)
+    inorder(root.right)
 
-void postorder(TreeNode* root) {
-    if (!root) return;
-    postorder(root->left);
-    postorder(root->right);
-    cout << root->val << " ";
-}
+def postorder(root):
+    if not root: return
+    postorder(root.left)
+    postorder(root.right)
+    print(root.val)
 
-void levelOrderTraversal(TreeNode* root) {
-    if (!root) return;
-    queue<TreeNode*> q;
-    q.push(root);
-    while (!q.empty()) {
-        TreeNode* node = q.front(); q.pop();
-        cout << node->val << " ";
-        if (node->left) q.push(node->left);
-        if (node->right) q.push(node->right);
-    }
-}
-````
+from collections import deque
+def level_order(root):
+    if not root: return
+    q = deque([root])
+    while q:
+        node = q.popleft()
+        print(node.val)
+        if node.left: q.append(node.left)
+        if node.right: q.append(node.right)
+```
 
 ## Binary Search Trees
 
 * NOTE: Inorder traversal of the BST returns a sorted list
-
-````c++
-#include <iostream>
-using namespace std;
-
-class BST {
-private:
-    struct Node {
-        int key;
-        Node *left, *right;
-        Node(int k) : key(k), left(nullptr), right(nullptr) {}
-    };
-
-    Node* root;
-
-    // Recursive search
-    Node* search(Node* node, int key) {
-        if (node == nullptr || node->key == key)
-            return node;
-        if (key < node->key)
-            return search(node->left, key);
-        else
-            return search(node->right, key);
-    }
-
-    // Recursive insert
-    void insert(Node*& node, int key) {
-        if (node == nullptr) {
-            node = new Node(key);
-            return;
-        }
-        if (key < node->key)
-            insert(node->left, key);
-        else
-            insert(node->right, key);
-    }
-
-public:
-    BST() : root(nullptr) {}
-
-    // Public API
-    void insert(int key) { insert(root, key); }
-    bool search(int key) { return search(root, key) != nullptr; }
-};
-````
 
 ### Iterative Approach to Above Traversals
 

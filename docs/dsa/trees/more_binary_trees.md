@@ -47,24 +47,24 @@
     - Node’s value + max. sum from right subtree
     - Node’s Value + max. sum including both subtree
 
-````c++
-int maxSum = INT_MIN;
-int solve(TreeNode* node) {
-    if(!node)
-        return 0;
-    int left = max(solve(node->left), 0);
-    int right = max(solve(node->right), 0);
-    int rooted = node->val + left + right;
+```python
 
-    maxSum = max(maxSum, rooted); // no need to check other 3 condition
+def maxPathSum(root):
+    ans = float('-inf')
 
-    return node->val + max(left, right);
-}
-int maxPathSum(TreeNode* root) {
-    solve(root);
-    return maxSum;
-}
-````
+    def dfs(node):
+        nonlocal ans
+        if not node:
+            return 0
+        left = max(dfs(node.left), 0)
+        right = max(dfs(node.right), 0)
+        ans = max(ans, node.val + left + right)
+        return node.val + max(left, right)
+
+    dfs(root)
+    return ans
+
+```
 
 ### Root to Node Path in Binary Trees
 
@@ -92,7 +92,7 @@ def getPath(root, x):
         if node.val == x:
             return True
         
-        if dfs(node, x, arr) or (node.right, x, arr):
+        if dfs(node.left, x, arr) or dfs(node.right, x, arr):
             return True
             
         arr.pop()

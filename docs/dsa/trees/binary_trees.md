@@ -165,12 +165,14 @@ def isSameTree(p, q) -> bool:
         return False
     if p.val != q.val:
         return False
-    return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+    return isSameTree(p.left, q.left) and isSameTree(p.right, q.right)
     
 ```
 
 
 ### Vertical Order Traversal
+
+Given the `root` of a binary tree, return the _vertical order traversal_ of its nodes' values (from top to bottom, column by column). For nodes in the same position, sort by row then by value.
 
 ```python
 

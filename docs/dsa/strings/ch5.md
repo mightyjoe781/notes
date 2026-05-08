@@ -79,13 +79,13 @@ else:
     dp[i][j] = dp[i-1][j]
 ```
 
-### Longest Palindromic Subarray
+### Longest Palindromic Substring
 
 Given a string `s`, return the longest substring of `s` that is a _palindrome_.
 
 A **palindrome** is a string that reads the same forward and backward.
 
-This is *two-pointer* approach to problem.
+This is a *two-pointer* approach to the problem.
 
 ```python
 

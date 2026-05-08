@@ -341,7 +341,7 @@ class TrieNode:
         node["$"] = True
 
 class Solution:
-    def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+    def findWords(self, board: list[list[str]], words: list[str]) -> list[str]:
         trie = TrieNode()
         for w in words:
             trie.addWord(w)
