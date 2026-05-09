@@ -52,7 +52,7 @@ Given any integer A, and a positive integer B, there exist unique integers Q and
 $$
 A = B \cdot Q + R \text{ where } 0 \le R < B
 $$
-From this form actually imerges **A mod B = R**.
+From this form actually emerges **A mod B = R**.
 
 ### Modular Properties
 

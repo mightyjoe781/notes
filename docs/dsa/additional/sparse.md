@@ -184,7 +184,7 @@ $$
 
 **Offline Queries with Sparse Table**
 
-- Useful in offline query prolems (given queries beforehand)
+- Useful in offline query problems (given queries beforehand)
 - Sort queries and answer with Sparse Table in O(1)
 - Common Usecases
     - Mo’s Algorithm

@@ -8,18 +8,16 @@
 - Approach : `gcd(a, b) = gcd(b, a % b)`
 - Time: $O(\log \min(a, b))$
 
-````c++
+````python
 # recursive
-int gcd(int a, int b) {
-  return b == 0 ? a : gcd(b, a % b);
-}
+def gcd(a, b):
+    return a if b == 0 else gcd(b, a % b)
 
 # iterative
-int gcd(int a, int b) {
-  while(b)
-    a %= b, swap(a, b);
- 	return a;
-}
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 ````
 
 * Properties
@@ -119,16 +117,15 @@ Calculate using spf (implemented below) or trial division
 
 * Sieve of Eratosthenes generates primes in $O(n \log \log n)$ 
 
-````c++
-// sieve implmentation to generate primes
-vector<int> sieve(int N) {
-		int i, a[N];
-  	for(i = 2; i < N; i++) a[i] = 1;	// set entire array
-    for(i=2;i<N;i++) 
-        if(a[i])	//takes jumps of j to remove every multiple
-            for(int j=i;j*i<N;j++) a[i*j]=0;
-    return a;
-}
+````python
+def sieve(N):
+    is_prime = [True] * N
+    is_prime[0] = is_prime[1] = False
+    for i in range(2, N):
+        if is_prime[i]:
+            for j in range(i*i, N, i):
+                is_prime[j] = False
+    return [i for i in range(N) if is_prime[i]]
 ````
 
 ### Segmented Sieve

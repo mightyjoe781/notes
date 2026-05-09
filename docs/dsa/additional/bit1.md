@@ -13,157 +13,123 @@ XORs have 2 important property other than commutative & associativity
 
 ### Basic Bit Operations
 
-````c++
-// Correct bit manipulation operations
-bool checkBit(int n, int i) { return n & (1 << i); }
-int setBit(int n, int i) { return n | (1 << i); }
-int clearBit(int n, int i) { return n & ~(1 << i); }
-int toggleBit(int n, int i) { return n ^ (1 << i); }
-int getRightmostSetBit(int n) { return n & -n; } // used for subset iteration
-int clearRightmostSetBit(int n) { return n & (n - 1); }
+````python
+def check_bit(n, i): return bool(n & (1 << i))
+def set_bit(n, i): return n | (1 << i)
+def clear_bit(n, i): return n & ~(1 << i)
+def toggle_bit(n, i): return n ^ (1 << i)
+def get_rightmost_set_bit(n): return n & -n  # two's complement trick; undefined if n=0
+def clear_rightmost_set_bit(n): return n & (n - 1)
 ````
 
 ### Counting Bits
 
 - Count total set Bits (Hamming Weight)
 
-````c++
-// Loop method
-int count = 0;
-for (int i = 0; i < 32; ++i)
-    if (n & (1 << i)) ++count;
-
-// Built-in (GCC/Clang) : NOTE these are invalid for n = 0
-int count = __builtin_popcount(n);
-int countll = __builtin_popcountll(n);  // For long long
-````
-
-```python
+````python
 x = 13
-set_bits = bin(x).count('1')  # 3
-```
+set_bits = bin(x).count('1')   # 3
+set_bits = x.bit_count()       # Python 3.10+
+````
 
 - Count trailing zeroes (rightmost 0s)
 
-````cpp
-int tz = __builtin_ctz(n);	// Undefined if n == 0
+````python
+tz = (x & -x).bit_length() - 1  # undefined if x == 0
 ````
-
-```python
-tz = len(bin(x)) - len(bin(x).rstrip('0')) - 2 # remove(0b)
-```
 
 - Count leading zeroes :
 
-
-````cpp
-int lz = __builtin_clz(n);  // Undefined if n == 0
+````python
+lz = 32 - x.bit_length()  # undefined if x == 0
 ````
-
-```python
-bit_length = x.bit_length()
-lz = 32 - bit_length
-```
 
 ### Bit Tricks
 
 - Get Rightmost set bit : Used for iterating over subsets
 
-````c++
-// bit manipulation
-int r = n & -n  // Two's complement trick // doesn't work if n=0
-// OR
-int r = n & (~n + 1)  // Explicit two's complement
+````python
+r = n & -n          # two’s complement trick; doesn’t work if n=0
+# OR
+r = n & (~n + 1)    # explicit two’s complement
 ````
 
 - Remove Rightmost set bit :
 
-````cpp
-// Useful for counter number of set bits : (Kernighan’s Algorithm)
-n = n & (n-1)
+````python
+# Useful for counting set bits (Kernighan’s Algorithm)
+n = n & (n - 1)
 ````
 
 - Reverse Bits (Manually)
 
-````c++
-unsigned int reverseBits(unsigned int n) {
-    unsigned int rev = 0;
-    for (int i = 0; i < 32; ++i)
-        rev = (rev << 1) | ((n >> i) & 1);
-    return rev;
-}
+````python
+def reverse_bits(n, bits=32):
+    rev = 0
+    for _ in range(bits):
+        rev = (rev << 1) | (n & 1)
+        n >>= 1
+    return rev
 ````
 
 - Iterate over all subsets of a Bitmask. Useful in DP on subsets
 
-````c++
-int mask = ...;
-for (int sub = mask; sub; sub = (sub - 1) & mask) {
-    // process sub
-}
-````
-
 ```python
-
 mask = ...  # define your mask value here
 sub = mask
 while sub:
     # process sub
     sub = (sub - 1) & mask
-
 ```
 
 - XOR Trick : Detect Single Number
     - Find the number that appears odd number of times, given there is only one such number.
 
-````c++
-int xor_all = 0;
-for (int a : arr) xor_all ^= a;
+````python
+xor_all = 0
+for a in arr:
+    xor_all ^= a
 ````
 
 - Swap without temporary variable
-    - avoid in production, not readable, not safe with references to same memory if `a` and `b` refers to same memory location
+    - avoid in production, not readable, not safe when `a` and `b` refer to same memory location
 
-````c++
-a ^= b;
-b ^= a;
-a ^= b;
+````python
+a ^= b
+b ^= a
+a ^= b
 ````
 
 - Check power of two
 
-````c++
-bool isPowerOfTwo(int n) {
-    return n > 0 && (n & (n - 1)) == 0;
-}
+````python
+def is_power_of_two(n):
+    return n > 0 and (n & (n - 1)) == 0
 ````
 
 - Difference Bits Sum Pairwise
     - Efficiently calculates total XOR difference over all pairs
 
-````c++
-// A - array of numbers
-long long total = 0;
-int n = A.size();
-for (int i = 0; i < 32; ++i) {
-    int count = 0;
-    for (int x : A)
-        if (x & (1 << i)) count++;
-    total += 2LL * count * (n - count);
-}
+````python
+# A - array of numbers
+total = 0
+n = len(A)
+for i in range(32):
+    count = sum(1 for x in A if x & (1 << i))
+    total += 2 * count * (n - count)
 ````
 
 - Binary String Representation
 
-````c++
-bitset<32> bs(n);
-cout << bs.to_string() << "\n";
+````python
+bs = format(n, '032b')
+print(bs)
 ````
 
-- Turn Off Last Consectuive Set Bits : `x = x & (x + 1);`
-- Turn On Last Zero Bit : `x = x | (x + 1);`
-- Log Base 2 : `int highestSetBit = 31 - __builtin_clz(n);  // Position of MSB (0-indexed)`
-- Parity (Even or Odd Number of Set Bits) : `bool evenParity = __builtin_parity(n) == 0;`
+- Turn Off Last Consecutive Set Bits : `x = x & (x + 1)`
+- Turn On Last Zero Bit : `x = x | (x + 1)`
+- Log Base 2 : `highest_set_bit = n.bit_length() - 1  # Position of MSB (0-indexed)`
+- Parity (Even or Odd Number of Set Bits) : `even_parity = bin(n).count('1') % 2 == 0`
 
 ## Builtins
 
@@ -182,7 +148,7 @@ cout << bs.to_string() << "\n";
 
 ### Python Custom Helper Functions
 
-````c++
+````python
 def count_trailing_zeroes(x):
     return (x & -x).bit_length() - 1 if x != 0 else 32
 
@@ -257,7 +223,7 @@ def minBitFlips(start, goal):
 
 Given a **non-empty** array of integers `nums`, every element appears _twice_ except for one. Find that single one.
 
-Straightforward XOR application, similar numbers cancel out, leaving only the number occuring once.
+Straightforward XOR application, similar numbers cancel out, leaving only the number occurring once.
 
 ```python
 def singleNumber(nums):
@@ -307,14 +273,14 @@ If we take xor of both groups separately, then we will be able to restore the nu
 def main(nums):
     
     xor_xy = reduce(xor, nums)
-    # xor set i th bit 0 if different, find that
-    i = (~xor_xy) & (xor_xy + 1)
+    # find rightmost set bit - position where A and B differ
+    bit = xor_xy & (-xor_xy)
 
     x, y = 0, 0
 
     for num in nums:
-        # check group membership
-        if num & (1 << i):
+        # split into two groups by the differing bit
+        if num & bit:
             x ^= num
         else:
             y ^= num

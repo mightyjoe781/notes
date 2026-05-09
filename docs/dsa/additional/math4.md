@@ -13,7 +13,7 @@ $$
 Approach:
 
 - Use a continued fraction to find its minimal solution
-- Once smalled solution $(x_1, y_1)$ is known rest can be generated using
+- Once the smallest solution $(x_1, y_1)$ is known, the rest can be generated using
 
 $$
 x_{k+1} + y_{k+1}\sqrt D = (x_1 + y_1\sqrt D)^{k+1}

@@ -17,7 +17,7 @@
 
 Check if two segments $p1p2$ and $q1q2$ intersect
 
-- Orientation Test: Use oreintation function on all combinations
+- Orientation Test: Use orientation function on all combinations
     - o1 = orientation(p1, p2, q1)
     - o2 = orientation(p1, p2, q2)
     - o3 = orientation(q1, q2, p1)
@@ -27,10 +27,9 @@ Check if two segments $p1p2$ and $q1q2$ intersect
     - Check if one point lies on the other segment using bounding box
 
 ````python
-bool onSegment(Point p, Point q, Point r) {
-    return q.x <= max(p.x, r.x) && q.x >= min(p.x, r.x) &&
-           q.y <= max(p.y, r.y) && q.y >= min(p.y, r.y);
-}
+def on_segment(p, q, r):
+    return (min(p[0], r[0]) <= q[0] <= max(p[0], r[0]) and
+            min(p[1], r[1]) <= q[1] <= max(p[1], r[1]))
 ````
 
 ## Point in Triangle & Point in Polygon
@@ -40,13 +39,12 @@ bool onSegment(Point p, Point q, Point r) {
 Use **Barycentric Coordinates** or check if point lies on the **same side** of each triangle edge.
 
 ````python
-bool point_in_triangle(Point a, Point b, Point c, Point p) {
-    double A = triangle_area(a, b, c);
-    double A1 = triangle_area(p, b, c);
-    double A2 = triangle_area(a, p, c);
-    double A3 = triangle_area(a, b, p);
-    return abs((A1 + A2 + A3) - A) < EPS;
-}
+def point_in_triangle(a, b, c, p, eps=1e-9):
+    A = triangle_area(a, b, c)
+    A1 = triangle_area(p, b, c)
+    A2 = triangle_area(a, p, c)
+    A3 = triangle_area(a, b, p)
+    return abs((A1 + A2 + A3) - A) < eps
 ````
 
 ### Point in Polygon
@@ -92,19 +90,18 @@ Video for Explanation : [Video Link](https://www.youtube.com/watch?v=RSXM9bgqxJM
 - Based on angle the polygon wraps around the point.
 - Winding number $\ne 0 \implies$ point is inside.
 
-````c++
-// Ray-casting method
-bool isInside(vector<Point> &polygon, Point p) {
-    int n = polygon.size(), cnt = 0;
-    for (int i = 0; i < n; i++) {
-        Point a = polygon[i], b = polygon[(i+1)%n];
-        if (a.y > b.y) swap(a, b);
-        if (p.y > a.y && p.y <= b.y && 
-            (b.y - a.y) * (p.x - a.x) < (b.x - a.x) * (p.y - a.y))
-            cnt ^= 1;
-    }
-    return cnt;
-}
+````python
+def is_inside_winding(polygon, p):
+    n = len(polygon)
+    cnt = 0
+    for i in range(n):
+        a, b = polygon[i], polygon[(i+1) % n]
+        if a[1] > b[1]:
+            a, b = b, a
+        if p[1] > a[1] and p[1] <= b[1]:
+            if (b[1]-a[1]) * (p[0]-a[0]) < (b[0]-a[0]) * (p[1]-a[1]):
+                cnt ^= 1
+    return bool(cnt)
 ````
 
 ## Convex vs Concave Polygon
@@ -113,23 +110,19 @@ bool isInside(vector<Point> &polygon, Point p) {
 - All cross products of consecutive edges should have the **same sign**.
 
 ````python
-bool isConvex(vector<Point>& poly) {
-    int n = poly.size();
-    int sign = 0;
-    for (int i = 0; i < n; i++) {
-        Point a = poly[i];
-        Point b = poly[(i+1)%n];
-        Point c = poly[(i+2)%n];
-        int cp = cross({b.x - a.x, b.y - a.y}, {c.x - b.x, c.y - b.y});
-        if (cp != 0) {
-            if (sign == 0)
-                sign = (cp > 0 ? 1 : -1);
-            else if ((cp > 0 ? 1 : -1) != sign)
-                return false;
-        }
-    }
-    return true;
-}
+def is_convex(poly):
+    n = len(poly)
+    sign = 0
+    for i in range(n):
+        a, b, c = poly[i], poly[(i+1)%n], poly[(i+2)%n]
+        cp = cross((b[0]-a[0], b[1]-a[1]), (c[0]-b[0], c[1]-b[1]))
+        if cp != 0:
+            s = 1 if cp > 0 else -1
+            if sign == 0:
+                sign = s
+            elif s != sign:
+                return False
+    return True
 ````
 
 ## Polygon Perimeter & Area
@@ -137,28 +130,21 @@ bool isConvex(vector<Point>& poly) {
 ### Perimeter
 
 ````python
-double polygon_perimeter(vector<Point> &pts) {
-    double perim = 0;
-    int n = pts.size();
-    for (int i = 0; i < n; i++) {
-        perim += dist(pts[i], pts[(i + 1) % n]);
-    }
-    return perim;
-}
+def polygon_perimeter(pts):
+    n = len(pts)
+    return sum(dist(pts[i], pts[(i+1)%n]) for i in range(n))
 ````
 
 ### Area (Shoelace Method)
 
 ````python
-double polygon_area(vector<Point> &pts) {
-    int n = pts.size();
-    double area = 0;
-    for (int i = 0; i < n; i++) {
-        int j = (i + 1) % n;
-        area += (pts[i].x * pts[j].y) - (pts[j].x * pts[i].y);
-    }
-    return abs(area) / 2.0;
-}
+def polygon_area(pts):
+    n = len(pts)
+    area = 0
+    for i in range(n):
+        j = (i + 1) % n
+        area += pts[i][0] * pts[j][1] - pts[j][0] * pts[i][1]
+    return abs(area) / 2.0
 ````
 
 ## Convexity Detection

@@ -2,95 +2,47 @@
 
 ## Matrix Traversal
 
-- SSince travel is possible from any (i, j) position in four/eight directions, use a direction vector to solve the problem of traversing the matrix efficiently.
+- Since travel is possible from any (i, j) position in four/eight directions, use a direction vector to solve the problem of traversing the matrix efficiently.
 
 ### DFS
 
-````c++
-vector<vector<int>> dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+````python
+dirs = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
-void dfs(vector<vector<int>>& grid, int i, int j, vector<vector<int>>& vis) {
-  vis[i][j] = true;
-  for(auto dir: dirs) {
-    int x = i + dir[0];
-    int y = j + dir[1];
-    
-    if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size())
-      	continue;
-    if(vis[x][y])
-      	continue;
-    dfs(grid, x, y, vis);
-  }
-}
+def dfs(grid, i, j, vis):
+    vis[i][j] = True
+    for dx, dy in dirs:
+        x, y = i + dx, j + dy
+        if x < 0 or y < 0 or x >= len(grid) or y >= len(grid[0]):
+            continue
+        if vis[x][y]:
+            continue
+        dfs(grid, x, y, vis)
 ````
 
 ### BFS
 
-````c++
-vector<vector<int>> dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
-queue<pair<int, int>> q;
-q.push({sr, sc});
+````python
+from collections import deque
+dirs = [(1, 0), (0, 1), (-1, 0), (0, -1)]
 
-while(!q.empty()) {
-  auto const &[i, j] = q.front(); q.pop();
-	vis[i][j] = true;
-  for(auto dir: dirs) {
-    int x = i + dir[0];
-    int y = j + dir[1];
-    
-    if(x < 0 || y < 0 || x >= grid.size() || y >= grid[0].size())
-      	continue;
-    if(vis[x][y])
-      	continue;
-    q.push({x, y});
-  }
-}
+def bfs(grid, sr, sc):
+    n, m = len(grid), len(grid[0])
+    vis = [[False] * m for _ in range(n)]
+    q = deque([(sr, sc)])
+    vis[sr][sc] = True
+    while q:
+        i, j = q.popleft()
+        for dx, dy in dirs:
+            x, y = i + dx, j + dy
+            if 0 <= x < n and 0 <= y < m and not vis[x][y]:
+                vis[x][y] = True
+                q.append((x, y))
 ````
 
 ### Spiral
 
-````c++
-vector<int> spiralOrder(vector<vector<int>>& matrix) {
-    if(matrix.empty()) return {};
-    int m = matrix.size(), n = matrix[0].size();
-    int top = 0, bottom = m - 1;
-    int left = 0, right = n - 1;
-    vector<int> result;
-
-    while (top <= bottom && left <= right) {
-        // Traverse from left to right
-        for (int j = left; j <= right; j++) {
-            result.push_back(matrix[top][j]);
-        }
-        top++;
-
-        // Traverse downwards
-        for (int i = top; i <= bottom; i++) {
-            result.push_back(matrix[i][right]);
-        }
-        right--;
-
-        if (top <= bottom) {
-            // Traverse from right to left
-            for (int j = right; j >= left; j--) {
-                result.push_back(matrix[bottom][j]);
-            }
-            bottom--;
-        }
-
-        if (left <= right) {
-            // Traverse upwards
-            for (int i = bottom; i >= top; i--) {
-                result.push_back(matrix[i][left]);
-            }
-            left++;
-        }
-    }
-    return result;
-}
-````
-
-A more elegant python solution is to rotate array and consume first row.
+A clean approach is to rotate the matrix and consume the first row.
 
 ````python
 def spirallyTraverse(self, matrix):
@@ -98,7 +50,7 @@ def spirallyTraverse(self, matrix):
     while matrix:
         result += matrix.pop(0)
         matrix = list(zip(*matrix))[::-1]
-    return resul
+    return result
 ````
 
 ### Zig-Zag
@@ -123,20 +75,16 @@ def spirallyTraverse(self, matrix):
 
 ## Prefix 2D Sum
 
+````python
+m, n = len(matrix), len(matrix[0])
+prefix = [[0] * n for _ in range(m)]
 
-````c++
-int m = matrix.size();
-int n = matrix[0].size();
-vector<vector<int>> prefix(m, vector<int>(n, 0));
-
-for (int i = 0; i < m; i++) {
-    for (int j = 0; j < n; j++) {
-        int top = (i > 0) ? prefix[i-1][j] : 0;
-        int left = (j > 0) ? prefix[i][j-1] : 0;
-        int diag = (i > 0 && j > 0) ? prefix[i-1][j-1] : 0;
-        prefix[i][j] = matrix[i][j] + top + left - diag;
-    }
-}
+for i in range(m):
+    for j in range(n):
+        top = prefix[i-1][j] if i > 0 else 0
+        left = prefix[i][j-1] if j > 0 else 0
+        diag = prefix[i-1][j-1] if i > 0 and j > 0 else 0
+        prefix[i][j] = matrix[i][j] + top + left - diag
 ````
 
 ### Querying Submatrix Sum
@@ -258,7 +206,7 @@ https://codeforces.com/blog/entry/67776
 
 - Powerful technique that can be used compute the terms of linear recurrence relations efficiently.
 - General Recurrence relation looks like : $f_n = \Sigma^{k}_{i=1} c_i * f_{n-i}$, where $c_i$ could be zero, implying no dependence on that term.
-- Let’s consider simple case of $f_n = \Sigma^{k}_{i=n} c_k * f_{n-k}$
+- Let’s consider simple case of $f_n = \Sigma^{k}_{i=1} c_i * f_{n-i}$
 - Consider this matrix
 
 $$
@@ -295,7 +243,7 @@ C = T * F = \begin{bmatrix}
 $$
 
 - Its straightforward to see first $k-1$ entries of $C = T * F$. The $k^{th}$ entry is just the calculation of recurrence relation using the past *k* values of the sequence.So, when we obtain $C=T*F$, the first entry gives $f_1$. It is easy to see that $f_n$ is the first entry of the vector: $C_n = T^n * F$(Here $T^n$ is the matrix multiplication of T with itself *n* times).
-- Example Matrix for Finbonacci sequence
+- Example Matrix for Fibonacci sequence
 
 $$
 T = \begin{bmatrix}

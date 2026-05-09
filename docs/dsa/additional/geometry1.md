@@ -21,9 +21,8 @@ Formulae : `val = (b.y - a.y) * (c.x - b.x) - (b.x - a.x)*(c.y - b.y)`
 - Using determinant
 
 ````python
-double triangle_area(Point a, Point b, Point c) {
-    return abs((a.x*(b.y - c.y) + b.x*(c.y - a.y) + c.x*(a.y - b.y)) / 2.0);
-}
+def triangle_area(a, b, c):
+    return abs((a[0]*(b[1]-c[1]) + b[0]*(c[1]-a[1]) + c[0]*(a[1]-b[1])) / 2.0)
 ````
 
 ### Polygon Area - Shoelace Formula
@@ -31,15 +30,13 @@ double triangle_area(Point a, Point b, Point c) {
 - For a polygon with vertices in order $p_0$, $p_1$, ..., $p_{n-1}$, use
 
 ````python
-double polygon_area(vector<Point> &pts) {
-    int n = pts.size();
-    double area = 0;
-    for (int i = 0; i < n; i++) {
-        int j = (i + 1) % n;
-        area += (pts[i].x * pts[j].y) - (pts[j].x * pts[i].y);
-    }
-    return abs(area) / 2.0;
-}
+def polygon_area(pts):
+    n = len(pts)
+    area = 0
+    for i in range(n):
+        j = (i + 1) % n
+        area += pts[i][0] * pts[j][1] - pts[j][0] * pts[i][1]
+    return abs(area) / 2.0
 ````
 
 ## Distance
@@ -49,31 +46,31 @@ double polygon_area(vector<Point> &pts) {
 - Euclidean Distance
 
 ````python
-double dist(Point a, Point b) {
-    return sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
-}
+import math
+
+def dist(a, b):
+    return math.hypot(a[0]-b[0], a[1]-b[1])
 ````
 
 * point to Line `(Ax + By + C = 0)`
 
 ````python
-double point_line_distance(Point p, double A, double B, double C) {
-    return abs(A*p.x + B*p.y + C) / sqrt(A*A + B*B);
-}
+def point_line_distance(p, A, B, C):
+    return abs(A*p[0] + B*p[1] + C) / math.sqrt(A*A + B*B)
 ````
 
 - Point to Segment
 - Use projection method or brute-force checking
 
 ````python
-double dist_point_to_segment(Point p, Point a, Point b) {
-    double len2 = dist(a, b)*dist(a, b);
-    if (len2 == 0.0) return dist(p, a);
-    double t = ((p.x - a.x)*(b.x - a.x) + (p.y - a.y)*(b.y - a.y)) / len2;
-    t = max(0.0, min(1.0, t));
-    Point proj = {a.x + t*(b.x - a.x), a.y + t*(b.y - a.y)};
-    return dist(p, proj);
-}
+def dist_point_to_segment(p, a, b):
+    len2 = dist(a, b) ** 2
+    if len2 == 0:
+        return dist(p, a)
+    t = ((p[0]-a[0])*(b[0]-a[0]) + (p[1]-a[1])*(b[1]-a[1])) / len2
+    t = max(0.0, min(1.0, t))
+    proj = (a[0] + t*(b[0]-a[0]), a[1] + t*(b[1]-a[1]))
+    return dist(p, proj)
 ````
 
 ## Dot & Cross Product
@@ -87,9 +84,8 @@ double dist_point_to_segment(Point p, Point a, Point b) {
     - `= 0` : orthogonal
 
 ````python
-double dot(Point a, Point b) {
-    return a.x * b.x + a.y * b.y;
-}
+def dot(a, b):
+    return a[0]*b[0] + a[1]*b[1]
 ````
 
 ### Cross Product
@@ -98,20 +94,18 @@ double dot(Point a, Point b) {
 - Useful for area, orientation, convex hulls
 
 ````python
-double cross(Point a, Point b) {
-    return a.x * b.y - a.y * b.x;
-}
+def cross(a, b):
+    return a[0]*b[1] - a[1]*b[0]
 ````
 
 ## Angle between vectors
 
 ````python
-double angle(Point a, Point b) {
-    return acos(dot(a, b) / (hypot(a.x, a.y) * hypot(b.x, b.y)));
-}
+def angle(a, b):
+    return math.acos(dot(a, b) / (math.hypot(a[0], a[1]) * math.hypot(b[0], b[1])))
 ````
 
-Result is in **radians**. Use `angle * 180.0 / M_PI` to convert to degrees.
+Result is in **radians**. Use `angle * 180.0 / math.pi` to convert to degrees.
 
 ## Floating-point precision issues & techniques
 

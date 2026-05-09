@@ -106,7 +106,7 @@ for mask in range(1 << N):
 - Space Complexity : $O(n \times 2^n)$
 
 
-````c++
+````python
 n = 4
 INF = float('inf')
 dp = [[INF] * n for _ in range(1 << n)]
@@ -351,7 +351,7 @@ dp[mask] = min. incompatibility to cover elements in `mask`
 - Always pick the first unused element p
 - Only Consider subsets that
     - include p
-    - are disjoin from *mask*
+    - are disjoint from *mask*
 
 ```
 dp[mask | subset] = min(dp[mask | subset], dp[mask] + valid[subset])
@@ -595,22 +595,25 @@ def maxStudents(seats):
 
 - Set/Unset/Toggle Bit
 
-````c++
-mask | (1 << i)    // set i-th bit
-mask & ~(1 << i)   // unset i-th bit
-mask ^ (1 << i)    // toggle i-th bit
+````python
+mask | (1 << i)    # set i-th bit
+mask & ~(1 << i)   # unset i-th bit
+mask ^ (1 << i)    # toggle i-th bit
 ````
 
 - Count Set Bits
 
-````c++
-__builtin_popcount(mask)    // Count 1's in binary (GCC/Clang)
+````python
+bin(mask).count('1')    # count 1's in binary
 ````
 
 - Iterate Subsets of a Mask
 
-````c++
-for (int sub = mask; sub; sub = (sub - 1) & mask)
+````python
+sub = mask
+while sub:
+    # process sub
+    sub = (sub - 1) & mask
 ````
 
 ## Common Scenarios to Use Bitmask DP
