@@ -104,15 +104,15 @@ Optional Topics in Trees
 * [Digraphs & DAGs (Topological Sorting)](graphs/ch3.md)
 * [Shortest Paths](graphs/ch4.md) (Dijkstra, Bellman-Ford, Floyd-Warshall)
 * [Minimum Spanning Trees](graphs/ch5.md) (Kruskal, Prim)
-* Network Flow Algorithm (Ford-Fulkerson, Edmond-Karp) (Optional)
-* [Other Algorithms](graphs/ch6.md) (SCC, Bridges, Articulation Points)
+* [Network Flow Algorithm](graphs/ch7.md) (Ford-Fulkerson, Edmonds-Karp) (**Optional**)
+* [Other Algorithms](graphs/ch6.md) (SCC, Bridges, Articulation Points) (**Optional**)
 
 ## Strings
 
 * [Basic String Processing](strings/ch1.md)
 * [String Matching](strings/ch2.md) (KMP, Rabin-Karp, Z-Algorithm)
 * [Trie Data Structures & Application](strings/ch3.md)
-* [Suffix Tree & Suffix Arrays](strings/ch4.md) (Optional)
+* [Suffix Tree & Suffix Arrays](strings/ch4.md) (**Optional**)
 * [String Processing with DP](strings/ch5.md)
 * [String Tasks](strings/ch6.md)
 * [Compression & Encoding Techniques](strings/ch7.md)
@@ -123,7 +123,7 @@ Optional Topics in Trees
     * [Mathematics & Number Theory](additional/math1.md)
     * [Modular Arithmetic & Exponentiation](additional/math2.md)
     * [Combinatorics & Probability](additional/math3.md)
-    * [Advanced Math Topics](additional/math4.md) (Optional)
+    * [Advanced Math Topics](additional/math4.md) (**Optional**)
 * Binary Manipulation
     * [Bit Manipulation](additional/bit1.md)
     * [Subset Generation & Bitmask DP](additional/bit2.md)

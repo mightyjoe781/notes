@@ -136,8 +136,6 @@ Variants:
 - **Matrix Exponentiation**: for Fibonacci/DP transitions in O(log n)
 - **Modular Exponentiation**: use when modulus is large (1e9+7)
 
-
-
 ## Theorems & Advanced Techniques
 
 ### Fermat’s Little Theorem

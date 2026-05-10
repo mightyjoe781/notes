@@ -42,8 +42,6 @@ $$
 
 - To find the size of the union of sets
 
-
-
 ## Derangements
 
 - Permutation where no element appears in its original position
@@ -89,7 +87,7 @@ $$
 
 |                                                              |
 | ------------------------------------------------------------ |
-| ![image-20250520101004237](./math3.assets/image-20250520101004237.png) |
+| ![image-20250520101004237](./assets/image-20250520101004237.png) |
 
 ### Expected Value
 
@@ -99,8 +97,6 @@ $$
 E[X] = \Sigma x_i P(X=x_i)
 $$
 
-
-
 ### Linearity of Expectation
 
 - For any random variables $X, Y$:
@@ -108,8 +104,6 @@ $$
 $$
 E[X+Y] = E[X] + E[Y]
 $$
-
-
 
 - Holds even if $X, Y$ are dependent
 

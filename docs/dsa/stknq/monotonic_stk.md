@@ -19,6 +19,8 @@ NOTE: Notice we are storing indices in the stack
 
 NOTE: Here its a monotonically decreasing stack,
 
+![](assets/Pasted%20image%2020260510152009.png)
+
 ````python
 # Next Greater Element
 nums = [2, 1, 2, 4, 3]
@@ -34,7 +36,7 @@ for i, v in enumerate(nums):
 Practice Problem : [Daily Temperature](https://leetcode.com/problems/daily-temperatures/description/)
 ### Previous Smaller Element
 
-NOTE: This is monotonically increasing stack
+NOTE: This is monotonically increasing stack. As a result previous smaller element is assigned during append operation, not pop operation in contrast to above simulation.
 
 ```python
 

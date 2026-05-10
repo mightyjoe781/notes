@@ -1,70 +1,35 @@
 # DSU
 
+Disjoint Set Union (DSU), also called Union-Find, is a data structure that tracks elements partitioned into disjoint (non-overlapping) sets. Supports two operations:
+
+- **find(x)** - find the representative (root) of the set containing x
+- **union(x, y)** - merge the sets containing x and y
+
 ## Union-Find (Simple)
 
-````c++
-class UnionFind {
-private:
-  vector<int> p;
-public:
-  UnionFind(int N) {
-    p.assign(N, 0); 
-    for (int i = 0; i < N; ++i) 
-      p[i] = i;
-  }
+Path compression only. $O(\log N)$ amortized per operation.
 
-  int findSet(int i) { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
-  bool unionSet(int i, int j) {
-    int x = findSet(i), y = findSet(j);
-    if(x == y) return false;
-    p[x] = y;
-    return true;
-  }
-};
-````
+```python
+class UnionFind:
+    def __init__(self, n):
+        self.parent = list(range(n))
 
+    def find(self, x):
+        if self.parent[x] != x:
+            self.parent[x] = self.find(self.parent[x])  # path compression
+        return self.parent[x]
 
+    def union(self, x, y):
+        px, py = self.find(x), self.find(y)
+        if px == py:
+            return False
+        self.parent[px] = py
+        return True
+```
 
-## Union-Find (Fastest Implementation)
+## Union-Find (Full)
 
-````c++
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef vector<int> vi;
-
-class UnionFind {                                // OOP style
-private:
-  vi p, rank, setSize;                           // vi p is the key part
-  int numSets;
-public:
-  UnionFind(int N) {
-    p.assign(N, 0); for (int i = 0; i < N; ++i) p[i] = i;
-    rank.assign(N, 0);                           // optional speedup
-    setSize.assign(N, 1);                        // optional feature
-    numSets = N;                                 // optional feature
-  }
-
-  int findSet(int i) { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
-  bool isSameSet(int i, int j) { return findSet(i) == findSet(j); }
-
-  int numDisjointSets() { return numSets; }      // optional
-  int sizeOfSet(int i) { return setSize[findSet(i)]; } // optional
-
-  bool unionSet(int i, int j) {
-    if (isSameSet(i, j)) return false;           // i and j are in same set
-    int x = findSet(i), y = findSet(j);          // find both rep items
-    if (rank[x] > rank[y]) swap(x, y);           // keep x 'shorter' than y
-    p[x] = y;                                    // set x under y
-    if (rank[x] == rank[y]) ++rank[y];           // optional speedup
-    setSize[y] += setSize[x];                    // combine set sizes at y
-    --numSets;                                   // a union reduces numSets
-    return true;
-  }
-};
-````
-
-## Python Implementation
+Path compression + union by rank + set size tracking. Near $O(\alpha(N))$ amortized per operation (inverse Ackermann - effectively constant).
 
 ```python
 class UnionFind:
@@ -103,6 +68,8 @@ class UnionFind:
 
 ### Cycle Detection in Undirected Graph
 
+**Problem:** Given n nodes and a list of edges, determine if the graph contains a cycle.
+
 If `union(u, v)` returns `False`, the edge `(u, v)` creates a cycle (both endpoints already in the same set).
 
 ```python
@@ -116,6 +83,8 @@ def has_cycle(n, edges):
 
 ### Count Connected Components
 
+**Problem:** Given n nodes and a list of undirected edges, return the number of connected components.
+
 ```python
 def count_components(n, edges):
     uf = UnionFind(n)
@@ -125,6 +94,8 @@ def count_components(n, edges):
 ```
 
 ### Largest Component Size
+
+**Problem:** Given n nodes and a list of undirected edges, return the size of the largest connected component.
 
 ```python
 def largest_component(n, edges):

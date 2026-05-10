@@ -55,7 +55,7 @@ def extended_gcd(a, b):
 
 * A prime number is a number greater than 1 that has no positive divisors other than 1 and itself.
 * 2 is the only prime-even number
-* If n is not prime, then it has a factor $ \lt= \sqrt{n}$
+* If n is not prime, then it has a factor $\lt= \sqrt{n}$
 * There are infinitely many prime numbers
 * Naive Implementation take $O(n\sqrt n)$ time
 
@@ -72,11 +72,8 @@ def prime_factors(n):
 ````
 
 * Applications
-
     * Cryptography (RSA, etc)
-
     * Number theory Problems
-
     * Factorization, divisibility problems
 
 ### Count & Sum of Divisors

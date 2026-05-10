@@ -1,6 +1,6 @@
 # Special Sorting Techniques
 
-NOTE: Its good to know these techniques rather than understanding in great detail.
+NOTE: It's good to know these techniques rather than understanding in great detail.
 
 ## Batcher’s Odd-Even Mergesort
 
@@ -126,6 +126,8 @@ def cyclic_sort(nums):
 
 ### Find the Missing Number
 
+**Problem:** Given an array of size `n` containing numbers in range `[0, n]` (one number missing), find the missing number.
+
 After cyclic sort, any index where `nums[i] != i + 1` is the missing number.
 
 ```python
@@ -146,6 +148,8 @@ def findMissingNumber(nums):
 ```
 
 ### Find All Duplicates / All Missing Numbers
+
+**Problem:** Given an array of size `n` containing numbers in range `[1, n]`, find all numbers that appear twice (or all numbers missing from the array).
 
 Same cyclic sort pass, then scan for mismatches:
 

@@ -12,9 +12,9 @@
 
 Two core operations are applied repeatedly:
 
-*Edge relaxation* — test whether traveling along a given edge gives a new shortest path to its destination vertex.
+*Edge relaxation* - test whether traveling along a given edge gives a new shortest path to its destination vertex.
 
-*Path relaxation* — test whether traveling through a given vertex gives a new shortest path connecting two other vertices.
+*Path relaxation* - test whether traveling through a given vertex gives a new shortest path connecting two other vertices.
 
 **Property:** *If vertex x is on a shortest path from s to t, then that path consists of a shortest path from s to x followed by a shortest path from x to t.*
 

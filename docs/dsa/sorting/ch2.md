@@ -1,58 +1,53 @@
 # Quicksort
 
-* Quicksort is most widely used sorting algorithm than any other algorithm.
-
+* Quicksort is the most widely used sorting algorithm.
 * Invented in 1960 by C.A.R. Hoare.
-
     - easy to implement
     - resource efficient in many cases
 
-* features
-
+* Features
     - in-place
     - $N \log{N}$ on avg case
 
-* drawbacks
-
+* Drawbacks
     - Not stable
-
     - $N^2$ in worst case
     - fragile ( any small mistake in implementation can go un-noticed and cause bad performance)
 
-* STL library uses `qsort` function.
+* Python's built-in `sorted()` uses Timsort, a hybrid of merge sort and insertion sort.
+* Performance of quicksort is highly dependent on the input.
 
-* Performance of the quicksort is highly dependent on the input.
+![](assets/Pasted%20image%2020260510152630.png)
 
-![image-20201020142048564](https://algo.minetest.in/1-The_Basic_Algorithm.assets/image-20201020142048564.png)
+```python
+def partition(arr, l, r):
+    i, j = l - 1, r
+    v = arr[r]
+    while True:
+        i += 1
+        while arr[i] < v:
+            i += 1
+        j -= 1
+        while v < arr[j]:
+            if j == l:
+                break
+            j -= 1
+        if i >= j:
+            break
+        arr[i], arr[j] = arr[j], arr[i]
+    arr[i], arr[r] = arr[r], arr[i]
+    return i
 
-````c++
-// Partition function
-template <typename Item>
-int partition(Item a[], int l, int r) {
-    int i = l - 1, j = r;
-    Item v = a[r];
-    for (;;) {
-        while (a[++i] < v);         // move i right
-        while (v < a[--j]) if (j == l) break; // move j left
-        if (i >= j) break;
-        swap(a[i], a[j]);           // swap a[i] and a[j]
-    }
-    swap(a[i], a[r]);               // place pivot at its final position
-    return i;                       // return pivot index
-}
+def quicksort(arr, l, r):
+    if r <= l:
+        return
+    i = partition(arr, l, r)
+    quicksort(arr, l, i - 1)
+    quicksort(arr, i + 1, r)
+```
 
-// Quicksort main function
-template <typename Item>
-void quicksort(Item a[], int l, int r) {
-    if (r <= l) return;
-    int i = partition(a, l, r);
-    quicksort(a, l, i - 1);
-    quicksort(a, i + 1, r);
-}
-````
-
-* Dynamic Characterstics
-    * Nearly ordered files perform worst.
+* Dynamic Characteristics
+    * Nearly ordered arrays perform worst.
     * Because they have many partitions.
 
 ## Quick-Select
@@ -61,27 +56,27 @@ void quicksort(Item a[], int l, int r) {
 * Can be used to find median without sorting
 * Time Complexity : $O(N)$ in avg case, $O(N^2)$ in worst case
 
-````c++
-// Recursive
-template <typename Item>
-void quickselect(Item a[], int l, int r, int k) {
-    if (r <= l) return;
-    int i = partition(a, l, r);
-    if (i > k) quickselect(a, l, i - 1, k);
-    else if (i < k) quickselect(a, i + 1, r, k);
-}
-````
+```python
+# recursive
+def quickselect(arr, l, r, k):
+    if r <= l:
+        return
+    i = partition(arr, l, r)
+    if i > k:
+        quickselect(arr, l, i - 1, k)
+    elif i < k:
+        quickselect(arr, i + 1, r, k)
+```
 
-````c++
-// Iterative Approach
-template <typename Item>
-void quickselect(Item a[], int l, int r, int k) {
-    while (r > l) {
-        int i = partition(a, l, r);
-        if (i > k) r = i - 1;
-        else if (i < k) l = i + 1;
-        else break;
-    }
-}
-````
-
+```python
+# iterative
+def quickselect(arr, l, r, k):
+    while r > l:
+        i = partition(arr, l, r)
+        if i > k:
+            r = i - 1
+        elif i < k:
+            l = i + 1
+        else:
+            break
+```

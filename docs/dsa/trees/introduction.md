@@ -96,6 +96,3 @@ def preorderTraversal(root):
     return res
 ```
 
-## Problems
-
-

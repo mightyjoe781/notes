@@ -1,122 +1,136 @@
 # Mergesort
 
-* Biggest Advantage is guaranted runtime : $O(N \log{N})$ (Independent of Input)
-* Requires Additional Space : $O(N)$ (disadvantage)
-* Guaranted Runtime can become liability. Some linear sorts can take take advantage of array properties.
+* Biggest advantage is guaranteed runtime : $O(N \log{N})$ (independent of input)
+* Requires additional space : $O(N)$ (disadvantage)
+* Guaranteed runtime can become a liability. Some linear sorts can take advantage of array properties.
 * Stable (NOTE: Quicksort & Heapsort are not)
-* Choice for Sorting Linked List
-* Proper Example of Divide & Conquer
+* Choice for sorting linked lists
+* Proper example of Divide & Conquer
 
 ## Two-Way Merging
 
-````c++
-// two-way merging: given two ordered files (a, b), merge them into one (c)
-template <class Item>
-void mergeAB(Item c[], Item a[], int N, Item b[], int M){
-    for(int i = 0, j = 0, k = 0; k < (M+N); k++){
-        if(i == N){ c[k] = b[j++]; continue;}
-        if(j == M){ c[k] = a[i++]; continue;}
-        c[k] = (a[i] < b[j]) ? a[i++] : b[j++];
-    }
-}
-````
+Given two sorted arrays `a` and `b`, merge them into a single sorted array.
+
+```python
+def merge_ab(a, b):
+    c = []
+    i = j = 0
+    while i < len(a) and j < len(b):
+        if a[i] < b[j]:
+            c.append(a[i]); i += 1
+        else:
+            c.append(b[j]); j += 1
+    c.extend(a[i:])
+    c.extend(b[j:])
+    return c
+```
 
 ## Inplace Merge
 
 * Stable
+* Copies second half in reverse back-to-back with the first, creating a bitonic sequence - so two pointers from both ends always converge correctly without sentinel checks.
 
-````c++
-// merge without sentinels, copy second array aux in reverse back to back with the first (putting aux in bitonic order)
-template <class Item>
-void merge(Item a[], int l, int m, int r){
-    int i , j;
-    static Item aux[maxN];
-    for(i = m+1; i > l; i--) aux[i-1] = a[i-1];
-    for(j = m; j < r ; j++) aux[r+m-j] = a[j+1];
-    for(int k = l; k <= r ; k++)
-				if(aux[j] < aux[i]) 
-          a[k] = aux[j--]; 
-  			else a[k] = aux[i++];
-}
-````
+```python
+def merge(arr, l, m, r):
+    # left half forward + right half reversed = bitonic sequence
+    aux = arr[l:m+1] + arr[m+1:r+1][::-1]
+    i, j = 0, len(aux) - 1
+    for k in range(l, r + 1):
+        if aux[j] < aux[i]:
+            arr[k] = aux[j]; j -= 1
+        else:
+            arr[k] = aux[i]; i += 1
+```
 
-````c++
-// top-down merge sort
-template <class Item>
-void mergesort(Item a[],int l , int r)
-{
-    if(r <= l ) return;
-    int m = (r+l)/2 ;
-    mergesort(a,l,m);
-    mergesort(a,m+1,r);
-    merge(a,l,m,r);
-}
-````
+```python
+# top-down merge sort
+def mergesort(arr, l, r):
+    if r <= l:
+        return
+    m = (l + r) // 2
+    mergesort(arr, l, m)
+    mergesort(arr, m + 1, r)
+    merge(arr, l, m, r)
+```
 
-````c++
-// bottom-up merge sort
-template <class Item>
-void mergesortBU(Item [a],int l, int r){
-    for(int m = l; m <= r-l ; m = m+m )
-        for(int i = l; i <= r-m; i += m+m)
-            merge(a, i, i+m-1, min(i+m+m-1, r));
-}
-````
+```python
+# bottom-up merge sort
+def mergesort_bu(arr, l, r):
+    m = 1
+    while m <= r - l:
+        i = l
+        while i <= r - m:
+            merge(arr, i, i + m - 1, min(i + m + m - 1, r))
+            i += m + m
+        m += m
+```
 
-* NOTE: MergeSort can be improved by adding additional check to sort smaller partition using *insertion sort*
+* NOTE: MergeSort can be improved by adding an additional check to sort smaller partitions using *insertion sort*.
 
 ## Linked List Merge Sort
 
-````c++
-// merge
-link merge(link a, link b ){
-    node dummy(0); link head = &dummy, c= head;
-    while((a!=0) && (b!=0))
-        if(a->item < b->item)
-        {c->next = a; c= a; a = a->next;}
-    	else
-        {c->next = b ;c= b ; b= b->next;}
-    c->next = (a==0) ? b :a;
-    return head->next;
-}
-// bottom-up
-link mergesort(link t){
-    QUEUE<link> Q(max);
-    if(t == 0 || t->next == 0) return t;
-    for(link u = 0 ; t != 0 ; t = u)
-    {u = t->next ; t->next = 0; Q.put(t);}
-    t = Q.get();
-    while(!Q.empty())
-    {Q.put(t); t = merge(Q.get(),Q.get());}
-    return t;
-}
+```python
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
-// top-down
-link mergesort(link c){
-    if( c==0 || c->next == 0) return c;
-    //splits link pointed by c into two lists a, b
-    //then sorting two halves recursively
-    //and finally merging them
-    link a = c, b = c->next;
-    while((b!=0) && (b->next!= 0))
-    { c = c->next; b = b->next->next;}
-    b = c->next; c->next = 0;
-    return merge(mergesort(a),mergesort(b));
-}
-````
+def merge_lists(a, b):
+    dummy = ListNode(0)
+    c = dummy
+    while a and b:
+        if a.val < b.val:
+            c.next = a; c = a; a = a.next
+        else:
+            c.next = b; c = b; b = b.next
+    c.next = a if a else b
+    return dummy.next
+```
+
+```python
+# bottom-up
+from collections import deque
+
+def mergesort_list_bu(head):
+    if not head or not head.next:
+        return head
+    q = deque()
+    node = head
+    while node:
+        nxt = node.next
+        node.next = None
+        q.append(node)
+        node = nxt
+    t = q.popleft()
+    while q:
+        q.append(t)
+        t = merge_lists(q.popleft(), q.popleft())
+    return t
+```
+
+```python
+# top-down: split list into two halves using slow/fast pointer, sort recursively, then merge
+def mergesort_list_td(head):
+    if not head or not head.next:
+        return head
+    slow, fast = head, head.next
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+    mid = slow.next
+    slow.next = None
+    return merge_lists(mergesort_list_td(head), mergesort_list_td(mid))
+```
 
 ### Count Inversions in an Array
 
-**Problem Statement:** Given an array of N integers, count the inversion of the array (using merge-sort).
+**Problem:** Given an array of N integers, count the number of inversions. An inversion is a pair `(i, j)` where `i < j` but `arr[i] > arr[j]`.
 
-Inversion of an array: for all i & j < size of array, if i < j then you have to find pair `(A[i],A[j])` such that `A[j] < A[i]`.
-
-A $O(n^2)$ strategy would be to count inversion for each element, but we can do this optimally using merge-sort.
+A $O(n^2)$ strategy would be to count inversions for each element, but we can do this optimally using merge-sort.
 
 During merge sort, when we merge two sorted halves, if an element from the right half is smaller than an element from the left half, then it forms inversions with all remaining elements in the left half.
 
 ```python
-
 def count_inversions(arr):
     def merge_sort(nums):
         if len(nums) <= 1:
@@ -146,6 +160,4 @@ def count_inversions(arr):
 
     _, count = merge_sort(arr)
     return count
-
 ```
-
