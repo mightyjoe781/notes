@@ -97,3 +97,7 @@
     - [Algorithmic System Design - II](./advanced/algorithmic_design_2.md)
         - Geo-Proximity
         - User Affinity Service
+
+## LLM & AI System Design
+
+- [LLM System Design Notes](../../llm/index.md) - RAG, Agents, Gateway, Semantic Cache, and more
