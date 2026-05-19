@@ -291,6 +291,130 @@ def is_bipartite(adj, n):
 * DFS/BFS backtracking can work for graphs up to ~25 nodes.
 * If a problem can be expressed as a digital circuit or logic gates, it can be reduced to **SAT (Boolean satisfiability)**, which can often be transformed into a **graph k-coloring** problem.
 
+## BFS vs DFS+Memo - Decision Framework
+
+The most common mistake: reaching for DFS + `@cache` when a problem asks for **minimum steps / minimum operations**. These are fundamentally different tools.
+
+| Problem asks for | Correct tool | Why |
+| --- | --- | --- |
+| Does a path exist? | DFS or BFS | Just reachability |
+| Min steps / min cost (unweighted) | BFS | Level = distance, guaranteed optimal |
+| Min cost (weighted edges) | Dijkstra | BFS with priority queue |
+| Count of paths / ways | DFS + memo | Optimal substructure, works on DAGs |
+| Any valid path | DFS | Backtracking fine |
+
+**The trigger questions:**
+1. Is the problem asking for minimum steps/operations/moves?
+2. Are edges unweighted (each step costs 1)? → **BFS. Always.**
+3. Are there cycles possible in the state graph? → DFS + memo is dangerous. Use BFS or Dijkstra.
+
+### Why DFS+memo fails on cyclic graphs
+
+DFS + `@cache` works when the problem has optimal substructure **without cycles** - like classic DP (knapsack, Fibonacci, grid paths on a DAG). In those cases the state space is a DAG: you always go from smaller to larger subproblems, so you never revisit a node mid-computation.
+
+Graph traversal problems can have cycles. When a cycle exists, `solve(X)` may call `solve(Y)` which calls `solve(X)` again - but `solve(X)` is not in the cache yet (it's mid-computation), so Python just recurses deeper until stack overflow. `@cache` doesn't protect against in-progress calls.
+
+Example: arr = [2], start = 4, end = 999
+
+```
+solve(4) → solve(8) → solve(16) → ... → solve(24) → solve(48) → ... → solve(4) again → RecursionError
+```
+
+### The `@cache` + mutable `visited` incompatibility
+
+A subtler bug: using both `@cache` and a mutable `visited` set together.
+
+`@cache` memoizes based only on the function argument `i`. But `visited` is external mutable state that changes between calls. So the cached result for `solve(3)` might have been computed when `visited={0,1}` but gets returned later when `visited={0,5}`. The memoized answer is wrong for the current state.
+
+**These two cannot coexist.** Pick one:
+- `@cache` alone: only safe on DAGs with no cycles
+- `visited` alone (BFS): correct for shortest path on any graph
+
+### Backtrack-remove also breaks shortest path
+
+The pattern `visited.add(i)` ... `visited.remove(i)` (backtracking) is correct for DFS path enumeration but **wrong for shortest path**. Removing from visited means the same node gets explored multiple times via different paths, causing infinite recursion on cyclic graphs.
+
+For shortest path: visited must be **permanent** - once marked, never un-mark.
+
+## State-Space BFS (Implicit Graphs)
+
+Many problems aren't presented as graphs but are secretly BFS over a state space. The pattern:
+
+- Each possible **state** is a node
+- Each valid **transformation** from one state to another is an edge (cost 1)
+- BFS finds minimum transformations to reach the target state
+
+**Recognition signals:** "minimum operations", "minimum steps to reach", "minimum moves to transform X into Y"
+
+The graph is implicit - you never build an adjacency list. You generate neighbors on the fly during BFS.
+
+**Template:**
+
+```python
+from collections import deque
+
+def min_steps(start, end, get_neighbors, is_valid):
+    if start == end:
+        return 0
+    visited = set([start])
+    queue = deque([start])
+    steps = 0
+    while queue:
+        steps += 1
+        for _ in range(len(queue)):
+            curr = queue.popleft()
+            for nxt in get_neighbors(curr):
+                if nxt == end:
+                    return steps
+                if is_valid(nxt) and nxt not in visited:
+                    visited.add(nxt)
+                    queue.append(nxt)
+    return -1
+```
+
+**Examples:**
+- *Jump Game IV* - state = array index, neighbors = `[i-1, i+1]` + all same-value indices
+- *Minimum Multiplications to Reach End* - state = current value mod 1000, neighbors = `(curr * x) % 1000` for each x in arr
+- *Word Ladder* - state = current word, neighbors = all valid one-letter transformations
+
+### Bucket-clearing optimization (Jump Game IV)
+
+When multiple nodes share the same "bucket" (e.g. all indices with value 7), naive BFS re-iterates the entire bucket for every node in it: O(n²) work.
+
+Fix: **clear the bucket after processing it the first time.** Safe because BFS guarantees all bucket members are already enqueued at the shortest distance.
+
+```python
+def minJumps(arr):
+    n = len(arr)
+    if n == 1:
+        return 0
+
+    graph = defaultdict(list)
+    for i, v in enumerate(arr):
+        graph[v].append(i)
+
+    visited = {0}
+    queue = deque([0])
+    steps = 0
+
+    while queue:
+        steps += 1
+        for _ in range(len(queue)):
+            i = queue.popleft()
+            neighbors = graph[arr[i]] + [i - 1, i + 1]
+            graph[arr[i]].clear()  # prevent O(n²) re-iteration
+            for j in neighbors:
+                if j == n - 1:
+                    return steps
+                if 0 <= j < n and j not in visited:
+                    visited.add(j)
+                    queue.append(j)
+
+    return -1
+```
+
+Without `.clear()`: every node with the same value re-enqueues all bucket-siblings on every visit. With n=10000 same-value nodes, that's 10000 × 10000 = 100M iterations. With `.clear()`: each bucket is iterated once total.
+
 ## Problems on DFS/BFS
 
 | **Problem**                                                                                      | **Concept**                     | **Approach**                                                                                                                                                                                                                          |

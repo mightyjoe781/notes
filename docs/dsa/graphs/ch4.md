@@ -220,6 +220,13 @@ For small graphs ($O(V^3)$): if `dist[i][j] > 0 and dist[j][i] > 0`, then vertic
 | Bellman-Ford   | Weighted (Neg.)     | $O(V \times E)$       | Handles negative weights; detects cycles |
 | Floyd-Warshall | All-Pairs / Small   | $O(V^3)$              | Solves all-pairs shortest paths          |
 
+**Choosing the right algorithm:**
+- Unweighted, minimum steps → BFS
+- Weighted, non-negative → Dijkstra
+- Weighted, negative edges → Bellman-Ford
+- All-pairs or small graph → Floyd-Warshall
+- "Minimum operations to transform X" → State-space BFS (see ch2)
+
 ## Problems
 
 1. https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1 — No need to track visited since BFS on an unweighted graph processes layer by layer.
@@ -243,7 +250,29 @@ For small graphs ($O(V^3)$): if `dist[i][j] > 0 and dist[j][i] > 0`, then vertic
 
 7. https://leetcode.com/problems/network-delay-time/ — Straightforward: find all distances, return the maximum.
 
-8. https://www.geeksforgeeks.org/problems/minimum-multiplications-to-reach-end/1 — No explicit graph needed. Think of it as a BFS over 1e5 states connected by multiplication rules.
+8. https://www.geeksforgeeks.org/problems/minimum-multiplications-to-reach-end/1 — State-space BFS. State = current value mod 1000 (only 1000 possible states). Each multiplication by an element of arr is an edge. DFS+memo fails here because mod arithmetic creates cycles (e.g. repeated multiplications can loop back to the same value). BFS over 1000 states is instant.
+
+```python
+def minSteps(arr, start, end):
+    if start == end:
+        return 0
+    visited = [False] * 1000
+    queue = deque([start])
+    visited[start] = True
+    steps = 0
+    while queue:
+        steps += 1
+        for _ in range(len(queue)):
+            curr = queue.popleft()
+            for num in arr:
+                nxt = (curr * num) % 1000
+                if nxt == end:
+                    return steps
+                if not visited[nxt]:
+                    visited[nxt] = True
+                    queue.append(nxt)
+    return -1
+```
 
 9. https://leetcode.com/problems/cheapest-flights-within-k-stops/ — Cheapest flight within K stops. This is **not** a standard Dijkstra problem because optimal cost may require more than k stops.
 
