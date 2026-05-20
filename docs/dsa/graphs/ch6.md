@@ -244,3 +244,57 @@ def kosarajus_scc(adj, n):
 | **Bridges**             | Critical edges in undirected graphs | Undirected     | Edges whose removal increases components | O(V + E)            |
 | **Kosaraju's**          | SCCs in directed graphs             | Directed       | Two-pass DFS with graph reversal         | O(V + E)            |
 | **Tarjan's**            | SCCs in directed graphs             | Directed       | Single DFS with stack-based SCCs         | O(V + E)            |
+
+## Eulerian Circuit / Path
+
+An **Eulerian circuit** visits every edge exactly once and returns to the start. An **Eulerian path** visits every edge exactly once but may start and end at different nodes.
+
+**Existence conditions:**
+
+| Graph type | Eulerian Circuit | Eulerian Path |
+| --- | --- | --- |
+| Undirected | All vertices have even degree | Exactly 2 vertices have odd degree |
+| Directed | Every vertex: in-degree = out-degree | Exactly one vertex has out - in = 1 (start), one has in - out = 1 (end) |
+
+**Algorithm - Hierholzer's (iterative DFS):** O(V + E)
+
+- Use a stack-based DFS; only add a node to the result when all its edges are exhausted.
+- Works for both directed and undirected graphs.
+
+```python
+from collections import defaultdict
+
+def eulerian_path(n, edges, directed=True):
+    graph = defaultdict(list)
+    in_deg = [0] * n
+    out_deg = [0] * n
+
+    for u, v in edges:
+        graph[u].append(v)
+        out_deg[u] += 1
+        in_deg[v] += 1
+        if not directed:
+            graph[v].append(u)
+            out_deg[v] += 1
+            in_deg[u] += 1
+
+    # find start node
+    start = edges[0][0]
+    for i in range(n):
+        if out_deg[i] - in_deg[i] == 1:
+            start = i
+            break
+
+    path = []
+    stack = [start]
+    while stack:
+        while graph[stack[-1]]:
+            stack.append(graph[stack[-1]].pop())
+        path.append(stack.pop())
+
+    return path[::-1]
+```
+
+**Interview problems:**
+- [332. Reconstruct Itinerary](https://leetcode.com/problems/reconstruct-itinerary/) - directed Eulerian path, lexicographic order
+- [753. Cracking the Safe](https://leetcode.com/problems/cracking-the-safe/) - Eulerian circuit on De Bruijn graph

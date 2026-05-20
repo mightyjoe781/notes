@@ -121,6 +121,69 @@ def compute_z(s: str) -> list[int]:
     return z
 ```
 
+## Aho-Corasick
+
+> **Optional** - multi-pattern string matching; not a standard interview topic but useful for competitive programming and some systems problems.
+
+Extends a Trie with **failure links** (like KMP's prefix function) to match all patterns simultaneously in O(n + total pattern length + matches).
+
+**Use when:** you have multiple patterns and need to find all occurrences in a text at once.
+
+```python
+from collections import deque, defaultdict
+
+class AhoCorasick:
+    def __init__(self, patterns):
+        self.goto = [defaultdict(int)]  # goto[state][char] = next_state
+        self.fail = [0]
+        self.output = [[]]              # patterns ending at each state
+        self._build(patterns)
+
+    def _build(self, patterns):
+        # insert all patterns into trie
+        for pat in patterns:
+            cur = 0
+            for c in pat:
+                if c not in self.goto[cur]:
+                    self.goto[cur][c] = len(self.goto)
+                    self.goto.append(defaultdict(int))
+                    self.fail.append(0)
+                    self.output.append([])
+                cur = self.goto[cur][c]
+            self.output[cur].append(pat)
+
+        # BFS to set failure links
+        q = deque()
+        for c, s in self.goto[0].items():
+            self.fail[s] = 0
+            q.append(s)
+
+        while q:
+            r = q.popleft()
+            for c, s in self.goto[r].items():
+                q.append(s)
+                state = self.fail[r]
+                while state and c not in self.goto[state]:
+                    state = self.fail[state]
+                self.fail[s] = self.goto[state].get(c, 0)
+                if self.fail[s] == s:
+                    self.fail[s] = 0
+                self.output[s] += self.output[self.fail[s]]
+
+    def search(self, text):
+        cur = 0
+        results = []
+        for i, c in enumerate(text):
+            while cur and c not in self.goto[cur]:
+                cur = self.fail[cur]
+            cur = self.goto[cur].get(c, 0)
+            for pat in self.output[cur]:
+                results.append((i - len(pat) + 1, pat))
+        return results
+```
+
+**Complexity:** O(total pattern length) build, O(n + matches) search.
+
 ## Prefix Function (KMP) Algorithm
 
 Very Good Explanation : [Link](https://www.youtube.com/watch?v=M9azY7YyMqI&list=PL3edoBgC7ScV9WPytQ2dtso21YrTuUSBd)

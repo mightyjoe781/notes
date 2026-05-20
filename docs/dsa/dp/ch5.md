@@ -71,6 +71,49 @@ def stoneGame(piles):
 
 ### Nim Game
 
+> **Optional** - combinatorial game theory; rarely appears in interviews but common in competitive programming.
+
+**Nim** is played with piles of stones. Two players alternate taking any number from one pile. The player who takes the last stone wins.
+
+**Key insight (Bouton's theorem):** The current player **loses** if and only if the XOR of all pile sizes is 0.
+
+- XOR = 0 → P-position (previous player wins, current player loses)
+- XOR ≠ 0 → N-position (current player wins)
+
+```python
+def nim_winner(piles):
+    return "First" if (xor := 0) or any((xor := xor ^ p) for p in piles) or xor != 0 else "Second"
+
+# cleaner version
+def nim_winner(piles):
+    xor = 0
+    for p in piles:
+        xor ^= p
+    return "First" if xor != 0 else "Second"
+```
+
+**Sprague-Grundy theorem** (optional): Every impartial game position has a **Grundy value (nimber)**. The Grundy value of a position is the minimum excludant (mex) of the Grundy values of all positions reachable in one move.
+
+- `mex({0,1,2}) = 3`, `mex({0,2}) = 1`
+- A position is losing (P-position) iff its Grundy value is 0
+- Combined game Grundy value = XOR of individual Grundy values
+
+```python
+from functools import lru_cache
+
+def grundy(n, moves):
+    @lru_cache(None)
+    def g(pos):
+        reachable = {g(pos - m) for m in moves if pos - m >= 0}
+        mex = 0
+        while mex in reachable:
+            mex += 1
+        return mex
+    return g(n)
+```
+
+**LeetCode:** [292. Nim Game](https://leetcode.com/problems/nim-game/), [877. Stone Game](https://leetcode.com/problems/stone-game/)
+
 ## Interval DP
 
 ### Burst Balloons

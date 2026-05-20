@@ -127,7 +127,7 @@ def modinv(a, m):
 - To compute: (a / b) % m, use inverse: `(a / b) % m = (a * b^(-1)) % m`
 - b must be coprime with m
 
-### Fast Exponentiation Techniques 
+### Fast Exponentiation Techniques
 
 Variants:
 
@@ -135,6 +135,57 @@ Variants:
 - **Iterative**: preferred for tight loops
 - **Matrix Exponentiation**: for Fibonacci/DP transitions in O(log n)
 - **Modular Exponentiation**: use when modulus is large (1e9+7)
+
+### Matrix Exponentiation
+
+Used to compute the n-th term of a **linear recurrence** in O(k^3 log n) where k is the state size.
+
+Core idea: express the recurrence as a matrix multiply, then use fast exponentiation.
+
+```python
+MOD = 10**9 + 7
+
+def mat_mul(A, B):
+    n = len(A)
+    C = [[0] * n for _ in range(n)]
+    for i in range(n):
+        for k in range(n):
+            if A[i][k] == 0:
+                continue
+            for j in range(n):
+                C[i][j] = (C[i][j] + A[i][k] * B[k][j]) % MOD
+    return C
+
+def mat_pow(M, p):
+    n = len(M)
+    result = [[1 if i == j else 0 for j in range(n)] for i in range(n)]  # identity
+    while p:
+        if p & 1:
+            result = mat_mul(result, M)
+        M = mat_mul(M, M)
+        p >>= 1
+    return result
+
+# Fibonacci in O(log n)
+# [F(n+1)]   [1 1]^n   [F(1)]
+# [F(n)  ] = [1 0]   * [F(0)]
+def fib(n):
+    if n == 0:
+        return 0
+    M = [[1, 1], [1, 0]]
+    result = mat_pow(M, n - 1)
+    return result[0][0]  # F(n)
+```
+
+**When to use:**
+- Recurrence depends on last k values (Fibonacci, Tribonacci, etc.)
+- Count paths of length n in a graph - raise adjacency matrix to power n
+- DP transition is fixed and repeated n times
+
+**Interview problems:**
+- [509. Fibonacci Number](https://leetcode.com/problems/fibonacci-number/) - baseline
+- [1137. N-th Tribonacci Number](https://leetcode.com/problems/n-th-tribonacci-number/) - 3-state recurrence
+- [790. Domino and Tromino Tiling](https://leetcode.com/problems/domino-and-tromino-tiling/) - linear recurrence
 
 ## Theorems & Advanced Techniques
 
