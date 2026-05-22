@@ -137,3 +137,4 @@ Optional Topics in Trees
     * [Convex Hull & Line Intersection](additional/geometry3.md)
     * [Advanced Geometry Algorithms](additional/geometry4.md)
 * [SAT, SMT & Constraint Solving](additional/constraint_solving.md)
+* [Python Standard Library for DSA](additional/python_stdlib.md)

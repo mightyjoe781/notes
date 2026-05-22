@@ -128,7 +128,7 @@ def longestWord(self, words: list[str]) -> str:
 
     # start DFS only from valid single-letter words
     for ch in sorted(trie.root.keys()):
-        if "$" in trie.root[ch]:
+        if "$" in trie.root[ch]: # make sure prefix is a word !!
             dfs(trie.root[ch], ch)
 
     return best
