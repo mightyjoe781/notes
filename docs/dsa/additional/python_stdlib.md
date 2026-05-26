@@ -322,6 +322,39 @@ math.log2(n)         # tree height, bit length
 
 ---
 
+## string module
+
+````python
+import string
+
+string.ascii_lowercase   # 'abcdefghijklmnopqrstuvwxyz'
+string.ascii_uppercase   # 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+string.ascii_letters     # all 52 letters
+string.digits            # '0123456789'
+string.punctuation       # all punctuation chars
+````
+
+**Common patterns:**
+
+````python
+# 26-slot frequency array indexed by letter
+freq = [0] * 26
+for c in s:
+    freq[ord(c) - ord('a')] += 1
+
+# char classification (no import needed)
+c.isalpha()   # a-z, A-Z
+c.isdigit()   # 0-9
+c.isalnum()   # a-z, A-Z, 0-9
+c.islower() / c.isupper()
+
+# char <-> index
+ord(c) - ord('a')   # 0-based index for lowercase
+chr(ord('a') + i)   # index back to char
+````
+
+---
+
 ## operator
 
 Useful as first-class functions instead of lambdas.
@@ -391,7 +424,8 @@ median = window[k // 2] if k % 2 else (window[k//2 - 1] + window[k//2]) / 2
 ## Quick Reference
 
 | Problem type | Tool |
-|---|---|
+| --- | --- |
+| Alphabet sets / char classification | `string` module + `str` methods |
 | Top K / priority queue | `heapq` |
 | BFS / sliding window | `collections.deque` |
 | Frequency / anagram / window | `collections.Counter` |

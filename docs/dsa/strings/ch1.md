@@ -82,6 +82,42 @@ freq = Counter(s)       # Counter({'a': 3, 'b': 2, ...})
 s.count('a')            # count single character
 ```
 
+### `string` Module Constants
+
+Useful when building character sets, frequency arrays, or alphabet-indexed maps.
+
+```python
+import string
+
+string.ascii_lowercase   # 'abcdefghijklmnopqrstuvwxyz'
+string.ascii_uppercase   # 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+string.ascii_letters     # lowercase + uppercase
+string.digits            # '0123456789'
+string.punctuation       # '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+string.whitespace        # ' \t\n\r\x0b\x0c'
+```
+
+**Common patterns:**
+
+```python
+# Alphabet-indexed frequency array (26 slots)
+freq = [0] * 26
+for c in s:
+    freq[ord(c) - ord('a')] += 1
+
+# Check if character is alpha/digit without import
+c.isalpha()     # True for a-z, A-Z
+c.isdigit()     # True for 0-9
+c.isalnum()     # True for a-z, A-Z, 0-9
+c.islower()     # True for lowercase letters
+c.isupper()     # True for uppercase letters
+
+# Character <-> index conversions
+ord('a')        # 97
+chr(97)         # 'a'
+ord(c) - ord('a')  # 0-based index for lowercase letter
+```
+
 ### String Efficiency Notes
 
 * **Avoid concatenation in loops** - use `''.join(parts)` instead of `result += char`.

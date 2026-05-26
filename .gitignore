@@ -4,3 +4,4 @@ site/
 site/mkdocs/search_index.json
 docs/.obsidian
 split/
+docs/tmp
