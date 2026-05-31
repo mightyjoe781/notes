@@ -42,7 +42,7 @@
 
 - UDP Header is 8 bytes (IPv4)
 - Datagram slides into an IP packet as *data*
-- Port are 16 bit (0 to 65535)
+- Ports are 16-bit (0 to 65535)
 
 ![](assets/Pasted%20image%2020250929232204.png)
 
@@ -55,17 +55,17 @@
 - Uses less bandwidth
 - Stateless (scales nicely)
 - Consumes less memory (no state stored in the server/client)
-- Low Latency - no handshake, order, retransmission or guaranteed delievery
+- Low Latency - no handshake, ordering, retransmission or guaranteed delivery
 
 ### UDP Cons
 
 - No acknowledgement
-- No guarantee delievery
-- Connection less - anyone can send data without prior knowledge
+- No guaranteed delivery
+- Connectionless - anyone can send data without prior knowledge
 - no flow control
 - No congestion Control
-- No order packets
-- Security - can easily spoofed
+- No ordered packets
+- Security - can be easily spoofed
 
 ## UDP server with JS
 

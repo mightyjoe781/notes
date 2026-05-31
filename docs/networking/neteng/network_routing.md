@@ -5,7 +5,7 @@
 ### Data Links
 
 - Each device has a link address (or MAC address)
-- Devices that are directly reachable devices can communicate with link address
+- Devices that are directly reachable can communicate with link address
 - Using layer 2 frames
 - Each device advertises their presence
 - Switches in the middle remember which port each device is at
@@ -15,7 +15,7 @@
 
 ### Links
 
-- A wants to send to B (How does A knows B's MAC ?)
+- A wants to send to B (How does A know B's MAC?)
 - Send it across the network
 - The switch receives it
 - Switch knows B is at P2
@@ -27,7 +27,7 @@
 - They don't scale on large networks with millions of devices
 - Need a new address system, a *routable one*
 - IP (Internet Protocol)
-- Very Similar to an Index in database
+- Very similar to an index in a database
 
 ### IP Address
 
@@ -66,13 +66,13 @@ arp -a
 ### ARP Notes
 
 - ARP only works on the same subnet
-- 192.168.1.4 cannot ask for 10.0.0.2'a MAC
+- 192.168.1.4 cannot ask for 10.0.0.2's MAC
 - no ARP request will be sent
 - How do we send the request then ?
 
 ### Gateway
 
-- For a device to talk on a device on another network needs gateway
+- For a device to talk to a device on another network, it needs a gateway
 - the gateway belongs to both networks
 - Devices are aware of their gateway (configured)
 - Router/Gateway is just another device with a MAC
@@ -83,12 +83,12 @@ arp -a
 ### Link networking example - Same Network
 
 - 192.168.1.4 wants to talk to 192.168.1.5 (It only knows the IP)
-- Checks if its in the same network
+- Checks if it's in the same network
     - 192.168.1.5 AND 255.255.255.0 = 192.168.1.0, same network
     - Means we can directly communicate with data link (MAC Addresses)
     - 192.168.1.4 needs the MAC address of 192.168.1.5 (Sends ARP)
 - ARP gets to the switches, sends it to all ports
-- The router itself is a device, and it is not 192.168.1.5 so it doesn't response
+- The router itself is a device, and it is not 192.168.1.5 so it doesn't respond
 - The ARP request is NOT sent through the other network (saving bandwidth)
 - B replies back, switch sends the message only to A (why?)
 - Now that we know the direct link address we send an IP packet
@@ -107,7 +107,7 @@ arp -a
 - Only way is the gateway (default)
     - We will learn later that routing rules are critical here
 - 192.168.1.4 needs to talk to the gateway which is 192.168.1.1
-- 192.168.1.5 and 192.168.1.1 in the same network
+- 192.168.1.4 and 192.168.1.1 are in the same network
 - We do ARP to get the gateway's MAC
 - The gateway reply that 192.168.1.1 = X
 - A now knows that X = 192.168.1.1 and prepares to send the data frame
@@ -118,10 +118,10 @@ arp -a
 - Gateway gets the frame
     - The frame is destined to gateway (X)
     - Gateway cracks the frame, sees the IP packet
-    - The destination IP is NOT same as his
+    - The destination IP is NOT the same as its own
     - IP 10.0.0.2 is not 10.0.0.1 nor 192.168.1.1, IP Forwarding kicks in..
 - IP Forwarding
-    - In normal situations the packet is dropped (nothing is there
+    - In normal situations the packet is dropped (nothing is there)
     - The OS kernel has a feature to enable IP Forwarding,
     - i.e. if you receive a frame that is for you but the IP is not for you
     - You can forward the IP packet to other interfaces
@@ -146,7 +146,7 @@ arp -a
 ### Multiple Gateways and paths ?
 
 - You can have multiple gateways
-- With one default gateway doesn't always work
+- With one default gateway, it doesn't always work
 - We need more granularity
 - Meet the routing table
 
@@ -182,7 +182,7 @@ netstat -rn
 ### Summary
 
 - Each device has a unique link address (Mac address) per network
-- Devices can talk each other via data link and mac addresses
+- Devices can talk to each other via data link and MAC addresses
 - Direct links can't scale for large number of devices
 - IP Address was invented
 - Concept of a network was born
@@ -249,7 +249,7 @@ ping 172.17.0.3 # works
 curl 172.17.0.3 # works
 
 # edit in both containers, /usr/local/apache2/htdocs/index.html
-# make then say hello from server - 1 / 2
+# make them say hello from server - 1 / 2
 ```
 
 ```bash
@@ -270,7 +270,7 @@ docker inspect s1
 docker network disconnect bridge s1
 docker network disconnect bridge s2
 
-# exec into contianer
+# exec into container
 docker exec -it s1 bash
 
 nslookup s1 # this work now
@@ -279,11 +279,11 @@ traceroute s2
 
 ```
 
-Spin up new network and put s1 in frontend
+Spin up new network and put s2 in frontend
 
 ```bash
 docker network create frontend --subnet 10.0.1.0/24
-docker disconnect backend s2
+docker network disconnect backend s2
 docker network connect frontend s2
 
 docker inspect s2
@@ -300,7 +300,7 @@ docker run --name gw --network backend -d nhttp
 docker network connect frontend gw
 
 # login into gw
-exec -it gw bash
+docker exec -it gw bash
 
 ping s1
 ping s2

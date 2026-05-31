@@ -5,16 +5,16 @@
 ### Why DNS ?
 
 - People can't remember IPs
-- A domain is a text points to an IP or a collection of IPs
+- A domain is a text that points to an IP or a collection of IPs
 - Additional layer of abstraction is good
-- IP can change while the domain remain
+- IP can change while the domain remains
 - We can serve the closest IP to a client requesting the same domain
 - Load Balancing
 ### DNS
 
 - A new addressing system means we need a mapping. Meet DNS
 - If you have an IP and you need the MAC, we use ARP
-- If you have an name and you need the IP, we use DNS
+- If you have a name and you need the IP, we use DNS
 - Built on top of UDP
 - Port 53
 - Many records (MX, TXT, A, CNAME)
@@ -95,7 +95,7 @@ Elliptic Curve DHE
 
 - Party 1 sends `g` and `n` to Party 2
 - Anyone can sniff those values , fine.
-- now both has `g` and `n`
+- now both have `g` and `n`
 
 - Party 1 takes `g` to the power of `X` `%n`
     - `g^X %n` is now a public value
@@ -103,7 +103,7 @@ Elliptic Curve DHE
 - Party 2 does same with Y
     - `g^Y %n` is now a public value
     - cannot be broken to get Y
-- Both party shares the new values
+- Both parties share the new values
 
 At each end
 
@@ -111,7 +111,7 @@ At each end
     - $(g^y \mod n)^x = g^{xy} \mod n$
 - Party 2 takes `X` value and raises it to `Y`
     - $(g^x \mod n)^y = g^{xy} \mod n$
-- Both now has the same value : $g^{xy} \mod n$
+- Both now have the same value : $g^{xy} \mod n$
 - This is used as a seed for the key, and can be used to generate a symmetric key.
 
 #### MITM
@@ -119,7 +119,7 @@ At each end
 - The above strategy solves the secrecy problem
 - But if someone intercepts and puts their own DH Keys:
 - MITM replaces Y's parameter with their own
-- X doesn't know that happened (its just numbers)
+- X doesn't know that happened (it's just numbers)
 
 #### Solution
 
@@ -129,11 +129,11 @@ At each end
 
 ## Certificates
 
-- We need a way to proof authenticity
+- We need a way to prove authenticity
 - Generate a pair of public/private key
 - Put a public key in a certificate
 - Put the website name in the certificate
-- Sign the certificate with the private
+- Sign the certificate with the private key
 - x509
 
 ![](assets/Pasted%20image%2020251001093140.png)
@@ -154,7 +154,7 @@ At each end
 
 ![](assets/Pasted%20image%2020251001093358.png)
 
-Client receives the full chain, wants to verify A.com cert signature which as been signed by
+Client receives the full chain, wants to verify A.com cert signature which has been signed by
 CA public key issuer, so it gets the CA and gets the CAPUB to verify, but also it needs to
 trust the CA cert so it, verifies that by getting the RootTrust public key and verifies it, but the
 RootTrust is self signed so it looks up its local cert store. If it is there it is trusted. Else

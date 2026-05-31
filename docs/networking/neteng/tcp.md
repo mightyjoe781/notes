@@ -17,7 +17,6 @@
 - Remote Shell
 - Database Connections
 - Web Communication
-- Web Communications
 - Any Bidirectional Communication
 
 ### TCP Connection
@@ -41,13 +40,13 @@
 - Hosts run many apps each with different requirements
 - Ports now identify the `app` or `process`
 - Sender multiplexes all its apps into TCP connections
-- Receiver multiplexes TCP segments to each app based on connection pairs
+- Receiver demultiplexes TCP segments to each app based on connection pairs
 
 ![](assets/Pasted%20image%2020250929220342.png)
 
 ### Connection Establishment
 
-- App1 on `10.0.0.1` want to send data to AppX on `10.0.0.7`
+- App1 on `10.0.0.1` wants to send data to AppX on `10.0.0.7`
 - App1 sends SYN to AppX to synchronize sequence numbers
 - AppX sends SYN/ACK to synchronize its sequence number
 - App1 ACKs AppX SYN
@@ -57,7 +56,7 @@
 
 ### Sending Data
 
-- App sends data to AppX
+- App1 sends data to AppX
 - App1 encapsulates the data in a segment and sends it
 - AppX acknowledges the segments
 - Hint: Can App1 send a new segment before ack of old segment arrives ?
@@ -75,13 +74,13 @@
 
 - App1 sends segment 1, 2, and 3 to AppX
 - Seg3 is lost, AppX acknowledges 2
-- App1 resend Seq3
+- App1 resends Seg3
 
 ![](assets/Pasted%20image%2020250930074036.png)
 
 ### Closing the Connections
 
-- App1 wants to close the application
+- App1 wants to close the connection
 - App1 sends FIN, AppX ACK
 - AppX sends FIN, App1 ACK
 - Four way handshake
@@ -100,11 +99,11 @@
 - Ports
 - Sequences and ACK numbers
 - Flow Control Window Size
-- 9 bit flags
+- 9-bit flags
 
 ### Maximum Segment Size
 
-- Segment Size depends on MTU(Maximum Transmission Unit) of the network
+- Segment Size depends on MTU (Maximum Transmission Unit) of the network
 - Usually 512 bytes can go up to 1460
 - Default MTU in the internet is 1500 (results in MSS 1460)
 - Jumbo frames MTU goes to 9000 or more
@@ -136,10 +135,10 @@
 
 ### Window Size (receiver window) RWND
 
-- 16 bit up to 64KB
+- 16-bit, up to 64KB
 - Updated with each acknowledgement
 - Tells the sender how much to send before waiting for ACK
-- Receiver can decide to decrease the Window Size (out of memory) more important stuff
+- Receiver can decrease the Window Size when under memory pressure
 ![](assets/Pasted%20image%2020250930082151.png)
 ### Sliding Window
 
@@ -171,7 +170,7 @@
 - The routers in the middle have limit
 - We don't want to congest the network with data
 - We need to avoid congestion
-- A new window :Congestion (CWND)
+- A new window: Congestion Window (CWND)
 
 ###  Two Congestion Algorithms
 
@@ -207,7 +206,7 @@
 - Meet ECN (Explicit Congestion Notification)
 - Routers and middle boxes can tag IP packets with ECN
 - The receiver will copy this bit back to the sender
-- ECN is IP Header bit
+- ECN is an IP header bit
 - So routers don't drop packets just let me know you are reaching your limit.
 
 ### Summary
@@ -232,7 +231,7 @@
 ## NAT
 
 - Network Address Translation
-- IPv4 is limited only 4 billion
+- IPv4 is limited to only ~4 billion addresses
 - Private vs Public IP Address
 - E.g. 192.168.x.x , 10.0.0.x is private not routable in the Internet
 - Internal hosts can be assigned private addresses
@@ -245,7 +244,7 @@
 ### NAT Applications
 
 - Private to Public translations
-    - so we don't run out IPv4
+    - so we don't run out of IPv4
 - Port forwarding
     - Add a NAT entry in the router to forward packets to 80 to a machine in your LAN
     - No need to have root access to listen on port 80 on your device
@@ -271,10 +270,10 @@ NOTE: Notice how client doesn't immediately close its file descriptor.
 
 ### Pros
 
-- Guarantee delivery
+- Guaranteed delivery
 - No one can send data without prior knowledge
 - Flow Control and Congestion Control
-- Ordered Packets no corruption or app level work
+- Ordered packets, no corruption or app-level work
 - Secure and can't be easily spoofed
 
 ### Cons
@@ -314,10 +313,10 @@ NOTE: Notice how client doesn't immediately close its file descriptor.
 ### Connection, Receive and Send Queue
 
 - Completed connections are placed in the accept queue
-- When a process *accepts* a connection is created
+- When a process *accepts*, a connection is created
 - Accept returns a file desc for the connection
 - Two new queues created with the connection
-- Send queues stores connection outgoing data
+- Send queue stores connection outgoing data
 - Receive queue stores incoming connection data
 
 ![](assets/Pasted%20image%2020250930114035.png)
@@ -336,19 +335,19 @@ Details :
 
 - Kernel creates a socket & two queues SYN and Accept
 - Client sends a SYN
-- Kernel adds to SYN queue replies with SYN/ACK
+- Kernel adds to SYN queue, replies with SYN/ACK
 - Client replies with ACK
-- Kernel finish the connection
-- Kernel remove SYN from SYN queue
+- Kernel finishes the connection
+- Kernel removes SYN from SYN queue
 - Kernel adds full connection to Accept Queue
-- Backend accepts a connection, remove from the Accept Queue
+- Backend accepts a connection, removes from the Accept Queue
 - A file descriptor is created for the connection
 
 ### Socket Sharding
 
 - Normally listening on an active port/ip fails
 - But you can override it with `SO_REUSEPORT`
-- Two distinct sockets different processes on the same ip/port pair
+- Two distinct sockets, different processes on the same IP/port pair
 - used by *nginx*
 
 ![](assets/Pasted%20image%2020250930115348.png)
@@ -426,7 +425,7 @@ int main(){
 ### Understanding TCP using `tcpdump`
 
 ```bash
-tcpdump -n -v -i en0 src 93.184.216.34 or dst 93.184.216.34 and port 80 # find ip of example.com using nslookup
+tcpdump -n -v -i en0 '(src 93.184.216.34 or dst 93.184.216.34) and port 80' # find ip of example.com using nslookup
 
 # open browser and go to example.com
 

@@ -2,14 +2,14 @@
 
 ## Exposing local servers locally
 
-when we build a local web server listening on a private IP on LAN, only hosts from same network can access it. To expose it to outside we require NAT.
+When we build a local web server listening on a private IP on LAN, only hosts from same network can access it. To expose it to outside we require NAT.
 
 SSH tunneling and ngrok are examples of services that allow us to do that.
 
 - Public IP Address ~ IP is routable through the internet
 - Private IP Address  ~ only hosts local to that network can access it
 
-Yet router has a public reachable ip address. You can add port forwarding rules on your router public ip and to port 8080, allowing external traffic. But this requires to be admin to modify router settings.
+Yet router has a public reachable ip address. You can add port forwarding rules on your router's public IP to port 8080, allowing external traffic. But this requires to be admin to modify router settings.
 
 Another way is using Remote Port Forwarding. If we create a VPS server, we can remotely command it to forward packets on a specific port to us on the local server. Problem still remains same, we can't receive data, so we connect to it directly.
 
@@ -22,9 +22,9 @@ Another way is using Remote Port Forwarding. If we create a VPS server, we can r
 
 SSH supports Local Port Forwarding which allows your local client to access hosts in a private network that a public agent also lives in. 
 So public agent has a public IP and it also has a private IP, using the public IP we can connect to public agent, and then public agent using the private network, it can connect to final Private Hosts.
-Useful to access a machine at work when there a public SSH server exposed.
+Useful to access a machine at work when there is a public SSH server exposed.
 
-To do a local port forwarding ing SSH:
+To do local port forwarding in SSH:
 
 ```bash
 ssh -L local_port:remote_address:remote_port username@sshserver

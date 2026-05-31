@@ -24,7 +24,7 @@
 ### Default Gateway
 
 - Most network consists of hosts and a Default Gateway
-- When host A want to talk to B directly if both are in same subnet
+- When host A wants to talk to B directly if both are in same subnet
 - Otherwise A sends it to someone who might know, the gateway
 - The Gateway has an IP Address and each host should know its gateway
 
@@ -52,7 +52,7 @@ NOTE: Packets need to get fragmented if it doesn't fit in a frame. Reassembling 
 ## ICMP
 
 - Stands for Internet Control Message Protocol
-- Designed for informational message
+- Designed for informational messages
     - Host unreachable, port unreachable, fragmentation needed
     - packet expired (infinite loop in routers)
 - Uses IP directly
@@ -83,7 +83,7 @@ ping google.com
 
 - Can you identify the entire path your IP packet takes ?
 - Clever use of TTL
-- Increment TTL slowly and you will get the route IP address for each hop (TTL 1, TTL2, TTL 3, ....)
+- Increment TTL slowly and you will get the router IP address for each hop (TTL 1, TTL 2, TTL 3, ...)
 - Doesn't always work as path changes and ICMP might be blocked
 
 ## ARP
@@ -91,7 +91,7 @@ ping google.com
 - Address Resolution Protocol
 - we need the MAC address to send frames (layer 2)
 - Most of the time we know the IP address but not the MAC
-- ARP Table is cached IP -> Mac Mapping
+- ARP Table is a cached IP -> MAC mapping
 - Attacks can be performed on ARP (ARP Poisoning)
 - VRRP can be used to create load balancer, basically 7 machines share the same IP.
 
@@ -111,7 +111,7 @@ ping google.com
 tcpdump -n -i en0 arp
 
 # ICMP
-tcpdump -n -i en0 icmp # in another term : ping exmaple.com
+tcpdump -n -i en0 icmp # in another term : ping example.com
 tcpdump -n -v -i en0 icmp # notice we can see entire packet headers
 tcpdump -n -v -i en0 icmp src 93.184.216.14 # filters
 
@@ -139,7 +139,7 @@ following IPS are reserved.
 
 Open Up your wifi and check the IP Address, Subnet Mask, Router
 
-- NOTE: often written IPs like 10.0.0.0/8 ~ meaning 8 bits are reserved for the network, so subnet mask would be 255.0.0.0. That means Hosts ID can be 24 bits giving use $2^{24}$ host in a class A network.
+- NOTE: often written IPs like 10.0.0.0/8 ~ meaning 8 bits are reserved for the network, so subnet mask would be 255.0.0.0. That means Host ID can be 24 bits giving us $2^{24}$ hosts in a class A network.
 
 
 - https://en.wikipedia.org/wiki/Private_network

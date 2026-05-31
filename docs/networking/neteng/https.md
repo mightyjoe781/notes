@@ -6,7 +6,7 @@
 
 ### Client/Server
 
-- (Client) Browser, python or javascript app, or any app that makes HTTP request
+- (Client) Browser, Python or JavaScript app, or any app that makes HTTP requests
 - (Server) HTTP Web server, e.g. IIS Apache Tomcat, NodeJS, Python Tornado, Flask, Django, etc.
 
 ### HTTP Request
@@ -114,7 +114,7 @@ Pipelining Example
 - HTTP/1.1 and HTTP/2 supports TCP
 - TCP Handshake (Unencrypted)
 - Symmetric Encryption Keys Exchange using Key Exchange Algorithm.
-- Client Hello Sends a list of algorithm supported, server replies with algorithm, AES 256 bits, ... They share parameter to generate the keys.
+- Client Hello sends a list of algorithms supported, server replies with its chosen algorithm (e.g. AES 256-bit). They share parameters to generate the keys.
 - Normal Encrypted request is sent
 
 ![](assets/Pasted%20image%2020251004192841.png)
@@ -122,7 +122,7 @@ Pipelining Example
 ### HTTPS over TCP with TLS 1.3
 
 - TCP Handshake (Unencrypted)
-- Client sends list of Algorithm it supports and picks an Algorithm along with public parameters as well, server replies
+- Client sends list of algorithms it supports and picks an algorithm along with public parameters, server replies
 - Client sends encrypted Request
 
 ![](assets/Pasted%20image%2020251004193301.png)
@@ -130,7 +130,7 @@ Pipelining Example
 ### HTTPS over QUIC (HTTP/3)
 
 - Protocol changes from TCP to QUIC
-- Smart Enough to do Handshake and Sharing of Encryption keys etc in the same request
+- Smart enough to do the handshake and share encryption keys in the same request
 - Client sends the encrypted request to server
 
 ![](assets/Pasted%20image%2020251004193526.png)
@@ -150,7 +150,7 @@ Pipelining Example
 
 ### HTTPS over QUIC with 0RTT
 
-- In same request send Handshake, with TCP Fast Open and zero Round Trip
+- In same request send handshake with 0-RTT (zero Round Trip)
 - Fastest you can send the request
 
 ![](assets/Pasted%20image%2020251004194123.png)

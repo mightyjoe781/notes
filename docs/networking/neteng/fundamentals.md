@@ -23,9 +23,9 @@ Open Systems Interconnection model
 
 - Agnostic application
     - Without a standard model, your application must have knowledge of the underlying network medium
-    - Imagine if you have to author different version of your apps so that it works on WiFi vs Ethernet vs LTE vs fiber
+    - Imagine if you have to author different versions of your apps so that it works on WiFi vs Ethernet vs LTE vs fiber
 - Network Equipment Management
-    - Without a standard model, upgrading network equipments becomes difficult
+    - Without a standard model, upgrading network equipment becomes difficult
 - Decoupled Innovation
     - Innovations can be done in each layer separately without affecting the rest of the models.
 
@@ -48,7 +48,7 @@ Mnemonic : *Please do not throw pizza sausage away* or *All people seem to need 
 
 - Example sending a POST request to an HTTPS webpage
 - Layer 7 - Application
-    - POST request with JSON data to HTTPs server
+    - POST request with JSON data to HTTPS server
 - Layer 6 - Presentation
     - Serialize JSON to flat byte strings
 - Layer 5 - Session
@@ -56,7 +56,7 @@ Mnemonic : *Please do not throw pizza sausage away* or *All people seem to need 
 - Layer 4 - Transport
     - Sends SYN request target port 443
 - Layer 3 - Network
-    - SYN is placed an IP packet(s) and adds source/destination IPs
+    - SYN is placed in an IP packet(s) and adds source/destination IPs
 - Layer 2 - Data Link
     - Each packet goes into a single frame and adds the source/destination MAC Address
 - Layer 1 - Physical
@@ -64,7 +64,7 @@ Mnemonic : *Please do not throw pizza sausage away* or *All people seem to need 
 
 ### The OSI Layers - an Example (Receiver)
 
-- Receiver computer receives the POST request other way round
+- Receiver computer receives the POST request the other way around
 - Layer 1 - Physical
     - Radio, electric or light is received and converted into digital bits
 - Layer 2 - Data Link
@@ -109,18 +109,18 @@ Mnemonic : *Please do not throw pizza sausage away* or *All people seem to need 
 
 ![](assets/Pasted%20image%2020250929081028.png)
 
-*How messages are sent between host* ~ Layer2/3 concepts
+*How messages are sent between host* ~ Layer 2-3 concepts
 
 -  I need to send a message from host A to host B
 - Usually a request to do something on host B (RPC)
 - Each host network card has a unique Media Access Control (MAC)
 - E.g. `00:00:5e:00:53:aa`
-- A send a message to B specifying MAC address
+- A sends a message to B specifying MAC address
 - Everyone in the network will `get` the message but only B will accept it.
 
 ![](assets/Pasted%20image%2020250929081927.png)
 
-- Imagine with million machine above topology of network will be inefficient
+- Imagine with a million machines, the above topology of network will be inefficient
 - We can add routing-ability to current addressing scheme to make it better ~ *IP Address*
 
 

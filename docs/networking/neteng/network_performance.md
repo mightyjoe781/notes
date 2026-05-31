@@ -41,11 +41,11 @@ Important Article : https://blog.cloudflare.com/sad-dns-explained/
 
 ### Path MTU Discovery
 
-- MTU is network property each host can have different value
+- MTU is a network property; each host can have a different value
 - You really need to use the smallest MTU in the network
 - Path MTU help determine the MTU in the network path
-- Client sends a IP packet with its MTU with a DF flag
-- The host that their MTU is smaller will have to fragment but can't
+- Client sends an IP packet with its MTU with a DF flag
+- The host whose MTU is smaller will have to fragment but can't
 - The host sends back an ICMP message fragmentation needed which will lower the MTU.
 
 ![](assets/Pasted%20image%2020251001120428.png)
@@ -58,11 +58,11 @@ Important Article : https://blog.cloudflare.com/sad-dns-explained/
 - In the telnet days sending a single byte in a segment is a waste
 - Combine small segments and send them in a single one
 - The client can wait for a full MSS before sending the segment
-- No wasted 40 bytes header (IP + TCP) for few bytes of data
+- No wasted 40-byte header (IP + TCP) for a few bytes of data
 
 - Assume MSS = 1460, A sends 500 bytes
 - 500 < 1460 client waits to fill the segments
-- A sends 960 bytes, segment fills and send
+- A sends 960 bytes, segment fills and sends
 - If there isn't anything to ACK data will be immediately sent
 
 ![](assets/Pasted%20image%2020251001120926.png)
@@ -70,9 +70,9 @@ Important Article : https://blog.cloudflare.com/sad-dns-explained/
 ### Problem with Nagle's Algorithm
 
 - Sending large data causes delay
-- A want to send 5000 bytes on 1460 MSS
+- A wants to send 5000 bytes on 1460 MSS
 - 3 full segments of 1460 with 620 bytes
-- 4 th segment will not be sent
+- 4th segment will not be sent
 - 4th not full segment are only sent when an ACK is received
 
 ### Disabling Nagle's Algorithm
@@ -83,10 +83,10 @@ Important Article : https://blog.cloudflare.com/sad-dns-explained/
 - Curl disabled this back in 2016 by default because TLS handshake was slowed down
 
 ## Delayed Acknowledgement Effect on Performance
-*Less packets are good but peformance is better*
+*Fewer packets are good but performance is better*
 
 - Waste to acknowledge segments right away
-- We can wait little more to receive more segment and ack once
+- We can wait a little more to receive more segments and ack once
 
 ![](assets/Pasted%20image%2020251001121546.png)
 
@@ -100,7 +100,7 @@ Important Article : https://blog.cloudflare.com/sad-dns-explained/
 ## Cost of Connection Establishment
 
 - TCP three way handshake
-- The further apart the peers, the slower it is to segments
+- The further apart the peers, the slower it is to send segments
 - Slow start keeps the connection from reaching its potential right away
 - Congestion control and Nagle's Algorithm can further slow down
 - Destroying the connection is also expensive
@@ -108,7 +108,7 @@ Important Article : https://blog.cloudflare.com/sad-dns-explained/
 ### Connection Pooling
 
 - Most implementation database backends and reverse proxies use pooling
-- Establish a bunch of TCP connection to the backend and keeps them running!
+- Establish a bunch of TCP connections to the backend and keep them running!
 - Any request that comes to the backend use an already opened connection
 - This way your connections will be *warm* and slow start would have already kicked in
 - Don't close the connection unless you absolutely don't need it
@@ -135,9 +135,9 @@ Wait can I send data during handshake ?
 
 ### TCP Fast Open (TFO)
 
-- client and server establishes connection 1, server sends an encrypted cookie
+- client and server establish connection 1, server sends an encrypted cookie
 - Client stores the TFO cookie
-- Client want to create another connection
+- Client wants to create another connection
 - Client sends SYN, data and TFO cookie in TCP Options
 - Server authenticates the cookie and sends response + SYN/ACK
 
