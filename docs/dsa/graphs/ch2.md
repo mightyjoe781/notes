@@ -42,6 +42,12 @@ def bfs(s, adj, n):
 
 [GFG BFS Problem](https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1)
 
+BFS fans out in all directions - always needs a guard to prevent re-enqueuing nodes. The guard varies by problem:
+
+- `visited` set - reachability
+- `dist != -1` - shortest path
+- `indegree == 0` - topological order (Kahn's)
+
 ## Multi-Source BFS
 
 Standard BFS finds shortest distances from **one** source. Multi-source BFS seeds the queue with **multiple sources at distance 0** and expands outward simultaneously. Every cell gets the distance to its *nearest* source.

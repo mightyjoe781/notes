@@ -24,6 +24,10 @@
 - [Designing a Fraud Detection System](problems/fraud_detection.md)
 - [Designing a Recommendation Engine](problems/recommendation_engine.md)
 - [Designing a Web Crawler](problems/web_crawler.md)
+- Designing a Video Streaming Platform (Netflix/YouTube) `[TODO]`
+- Designing a Live Streaming Platform (Twitch) `[TODO]`
+- Designing a Ride-sharing Platform (Uber) `[TODO]`
+- Designing a Payment System `[TODO]`
 
 **Optional (External)**
 
@@ -41,6 +45,11 @@
         - Designing : KV store on relational DB
     - [Non-Relational Databases](./advanced/non_relational_database.md)
         - Non-Relational Databases
+    - Dynamo-style Distributed KV Store `[TODO]`
+        - Consistent hashing ring, virtual nodes
+        - Vector clocks and conflict resolution
+        - Quorum reads/writes (R + W > N)
+        - Gossip protocol for failure detection
 
 - Distributed Systems
     - [Distributed Systems](./advanced/distributed_systems.md)
@@ -76,8 +85,33 @@
         - Multi-Tiered Storage
         - Designing S3
     - [High Throughput Systems - II](./advanced/high_throughput_2.md)
-        -  LSM Trees
+        - LSM Trees
         - Designing Video Processing Pipeline
+    - [Scaling to 1M req/s](./advanced/high_throughput_3.md)
+        - Language and framework benchmarks
+        - Network, DB, and Redis bottlenecks
+        - Kernel tuning, horizontal scaling, cost tradeoffs
+
+- Media & Streaming Systems
+    - Video Streaming (Netflix/YouTube VOD) `[TODO]`
+        - Adaptive bitrate streaming - HLS and DASH
+        - CDN edge caching for video chunks
+        - Seek behavior and chunk delivery
+        - Quality ladder and client-side ABR logic
+    - Audio Streaming (Spotify) `[TODO]`
+        - Client-side playlist management
+        - Offline sync and local cache
+        - CDN strategy for audio files
+    - Live Streaming (Twitch) `[TODO]`
+        - RTMP ingest and real-time transcoding
+        - Low-latency delivery vs VOD tradeoffs
+        - Chat at scale alongside stream
+
+- Observability & Monitoring `[TODO]`
+    - Logging pipeline at scale (Kafka -> ClickHouse / Elasticsearch)
+    - Metrics collection and aggregation (Prometheus-style)
+    - Distributed tracing (Jaeger / OpenTelemetry)
+    - Alerting systems
 
 - Information Retrieval Systems
     - [Building Search Engines and Retrieval Systems](./advanced/search_engines.md)
