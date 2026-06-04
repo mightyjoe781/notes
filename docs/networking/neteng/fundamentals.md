@@ -141,3 +141,7 @@ But my host has many apps!
 - It's not enough to just address the host
 - The host is running many apps each with different requirements ~ *Ports*
 - You can send an HTTP request on port 80, a DNS request on port 53 and an SSH request on port 22 all running on the same server!
+
+Resources :
+
+- Best Explanation of OSI Layer : https://www.youtube.com/watch?v=3b_TAYtzuho

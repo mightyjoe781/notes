@@ -3,8 +3,11 @@
 Following notes are sourced from multiple sources and then rewritten to sound coherent. All notes uses primarily *Python* but there maybe few usages for *Java* as well.
 
 
+* [OOP Basics](./oop_basics.md)
 * [SOLID Principles](./solid_principles.md)
-* Problem : Simple Rule Engine
+* Problem : Simple Rule Engine `[TODO]`
+* UML / Class Diagrams `[TODO]`
+
 ### Design Patterns
 
 * [Creational Patterns](creational_patterns.md)
@@ -27,6 +30,9 @@ Following notes are sourced from multiple sources and then rewritten to sound co
 * [Design Complete Chess Game](./problems/chess_game.md)
 * [Design Splitwise](./problems/splitwise.md)
 * [Design Logger](./problems/logger.md)
+* Design Elevator / Lift System `[TODO]`
+* Design Vending Machine `[TODO]`
+* Design Snake and Ladder `[TODO]`
 
 ### Extras
 
