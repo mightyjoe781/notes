@@ -25,7 +25,27 @@ Features of Message Brokers
 * Brokers help us connect different sub-systems
 * Brokers acts as a buffer for the messages, allowing consumers to consume messages at their pace. Ex - Notification service
 * Brokers can retain messages for `n` days
-* Brokers can re-queue the message if not deleted by consumer (Visibility Timeout). After multiple failed retries it maybe put into a Dead-Letter Queue
+* **ACK mechanism** - queue does not delete a message when a consumer picks it up; the consumer must explicitly ACK it after successful processing. If the consumer crashes before ACK-ing, the message is redelivered to another consumer.
+* Brokers can re-queue the message if not ACK'd in time (Visibility Timeout in SQS). After multiple failed retries, the message is put into a **Dead-Letter Queue (DLQ)**.
+* **Poisoned messages** - a message that consistently fails (e.g. corrupted payload) will keep retrying forever and block the queue. DLQ solves this: configure a max retry count, then shunt failures to DLQ for manual inspection while the main queue keeps moving.
+
+**Delivery Guarantees**
+
+- **At-most-once** - fire and forget, message deleted immediately on pickup. May be lost. Use for metrics/analytics where some loss is acceptable.
+- **At-least-once** - message guaranteed to be delivered but may be delivered more than once. Requires **idempotent consumers** (processing the same message twice must produce the same result). Almost always the right answer.
+- **Exactly-once** - very hard in distributed systems, avoid promising this in interviews unless you can defend the mechanism.
+
+**Idempotency example**: "set user's post count to 54" is idempotent (running twice is fine); "increment post count by 1" is not (running twice gives wrong result).
+
+**When NOT to use a queue**
+
+If you have strict latency requirements (e.g. sub-500ms), a queue will break that constraint - you've added the enqueue + consumer pickup + processing roundtrip. Queues are for work you can afford to do *later*.
+
+**Backpressure**
+
+If producers generate messages faster than consumers can process them, the queue grows unboundedly - it delays the capacity problem, doesn't solve it. 
+
+Options: scale consumers, or apply back pressure to producers (reject/rate-limit incoming messages).
 
 ## Message Stream (Kinesis, Kafka, etc.)
 
@@ -60,11 +80,15 @@ Message Queue vs Message Streams
 
 ### Kafka Essentials
 
-* Kafka is a message stream that holds the messages. Internally Kafka has topics, with `n` partitions
-* Message is sent to a topic, and depending on the configured hash key it is put into a partition.
-* Within that partition, messages are ordered (no order guarantee, across partitions) 
-* Limitation of Kafka : number of consumer = number of partition
-* In Kafka, each consumer can commit their checkpoints. And deletion of messages happens based on the expiry time.
+* Kafka is a message stream that holds messages. Internally Kafka has topics with `n` partitions.
+* Message is sent to a topic, and depending on the configured **partition key** it is put into a partition.
+* Within a partition, messages are ordered (no order guarantee across partitions).
+* **Consumer groups** - a pool of workers dividing partitions amongst themselves. 6 partitions + 3 consumers = each consumer handles 2 partitions. Adding a 7th consumer when you only have 6 partitions does nothing - there's no partition left for it.
+* Limitation: number of active consumers per group = number of partitions (ceiling).
+* In Kafka, each consumer commits their own checkpoint (offset). Message deletion happens based on expiry time, not consumption - so messages can be replayed.
+* **Replay** - if a consumer had a bug, point a new consumer to an earlier offset and reprocess. Consumers going offline don't lose messages; they just catch up on restart.
+
+**Partition key trade-off**: the key that gives ordering (e.g. `account_id` for bank transactions) may not give even distribution. A bad key creates a **hot partition** where one consumer is overwhelmed while others are idle (e.g. partitioning a ride-sharing app by `city` - New York gets everything, Boise gets nothing). Choose accordingly.
 
 ## Realtime Pub/Sub Systems
 

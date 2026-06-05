@@ -49,22 +49,18 @@ def upload_video_async(video_file):
     return {"task_id": task_id, "status": "processing"}
 ````
 
-**When to Use Asynchronous Processing**
+**When to Use Asynchronous Processing (Queues)**
 
 Use Cases:
 
-- **Long-running tasks**: Video processing, data imports
-- **Non-critical operations**: Email notifications, analytics
-- **Decoupling systems**: Microservices communication
-- **Load balancing**: Distribute work across multiple workers
-- **Fault tolerance**: Retry failed operations
+- **Async work** - user doesn't need an immediate result (email sending, image processing, report generation). Litmus test: does the user need the result *right now*? If no, queue it.
+- **Bursty traffic** - absorb traffic spikes without dropping requests; queue acts as a buffer, worst case is a delay not an error
+- **Decoupling** - producer and consumer have different scaling or hardware needs (e.g. lightweight upload servers vs GPU-heavy processing workers)
+- **Reliability** - can't afford to lose work; queue holds messages until a downstream service comes back online
 
-Benefits:
+**When NOT to Use Queues**
 
-- **Better user experience**: No waiting for slow operations
-- **System scalability**: Handle more concurrent requests
-- **Fault isolation**: Failures don't cascade
-- **Resource optimization**: Workers process at optimal pace
+If you have strict latency requirements (e.g. sub-500ms response), a queue will almost certainly break that constraint. You've now added the round-trip of enqueueing, the consumer picking it up, processing it, and getting the result back to the client. Don't introduce a queue into a synchronous workload - queues are for work you can afford to do *later*, even if later is a few seconds from now.
 
 ## Point-to-Point vs Publish-Subscribe Patterns
 
@@ -102,6 +98,20 @@ Benefits:
 - **Real-time updates**: Stock prices, live scores
 - **Notification systems**: Multiple services need same data
 
+## Acknowledgements & Duplicate Prevention
+
+When a consumer pulls a message, the queue does **not** delete it immediately. The consumer must send an explicit **ACK** (acknowledgement) back after successful processing. If the consumer crashes before ACK-ing, the queue redelivers the message to another consumer - nothing is lost.
+
+The problem: while worker A is processing and hasn't ACK'd yet, worker B could grab the same message and do duplicate work. Each queue system handles this differently:
+
+| System   | Approach |
+| -------- | -------- |
+| SQS      | **Visibility timeout** - message becomes invisible to all other consumers for a configurable window (e.g. 30s). If no ACK in time, becomes visible again for retry. |
+| Kafka    | Assigns each partition to **exactly one consumer** in a group - no competition in the first place. |
+| RabbitMQ | Channel-level **prefetch limits** + ACK timeouts. |
+
+The concept is always the same: only one consumer actively processes a message at a time.
+
 ## Message Brokers vs Message Streams
 
 #### Message Brokers (Traditional Queues)
@@ -115,18 +125,16 @@ Examples: RabbitMQ, ActiveMQ, Amazon SQS
 - **Transactional** semantics
 - **FIFO ordering** within queue
 
-**Dead Letter Queue**: Handle messages that cannot be processed successfully.
-
 #### Message Streams (Event Logs)
 
 **Examples**: Apache Kafka, Amazon Kinesis, Apache Pulsar
 
 **Characteristics**:
 
-- **Messages retained** for configured time
+- **Messages retained** for configured time (not deleted after consumption)
 - **Offset-based** consumption
-- **Replay capability**
-- **Partitioned** for scale
+- **Replay capability** - reprocess past messages if a consumer had a bug
+- **Partitioned** for horizontal scale
 
 | Feature             | Message Brokers            | Message Streams            |
 | ------------------- | -------------------------- | -------------------------- |
@@ -136,6 +144,28 @@ Examples: RabbitMQ, ActiveMQ, Amazon SQS
 | Scalability         | Vertical Scaling           | Horizontal Scaling         |
 | Use Cases           | Task Queues, RPC           | Event Sourcing, Analytics  |
 
+#### Technology Comparison
+
+**Kafka** - recommended default for interviews
+- Persists messages to disk, replicated across brokers (fault tolerant)
+- Configurable retention (days, weeks, forever)
+- Replay: if consumers go offline for an hour, they catch up on restart; if consumer had a bug, point a new consumer to replay from before the bug
+- Consumer groups + partitions for horizontal scale
+
+**SQS (Amazon Simple Queue Service)**
+- Fully managed, no infrastructure to worry about
+- Two flavors:
+    - **Standard queue** - best-effort ordering, very high throughput
+    - **FIFO queue** - strict ordering guaranteed, lower throughput
+- Visibility timeout prevents duplicate processing
+- Good choice when you want simplicity in the AWS ecosystem
+
+**RabbitMQ**
+- Traditional message broker
+- Supports complex **routing patterns** via exchanges and bindings
+- Less common in system design interviews
+- Useful when sophisticated message routing logic is needed
+
 ## Message Ordering & Durability
 
 ### Message Ordering
@@ -144,30 +174,63 @@ Examples: RabbitMQ, ActiveMQ, Amazon SQS
 
 - Total Ordering
     - Pros: Ensures a strict ordering
-    - Cons: Single Point of BottleNeck, No Parallelism
+    - Cons: Single point of bottleneck, no parallelism
 - Partition-Level Ordering
-    - Pros: Parallel Processing, Partition-Level Ordering
-    - Cons: No Global ordering across Partitions
+    - Pros: Parallel processing, ordering guaranteed within a partition
+    - Cons: No global ordering across partitions
 
-Different Types of Ordering Strategy that can be employed are
+**Partition Key Selection**
 
-- User-Based Partitioning (orders for same users stay ordered)
-- Time-Based Partitioning (events in time-windows)
-- Content-Based Partitioning (similar events grouped)
+The partition key determines which messages go to which partition. Two competing concerns:
+
+- **Ordering** - messages with the same key always go to the same partition, so they stay ordered. E.g. use `account_id` for bank transactions so deposit and withdrawal for the same account can't be reordered.
+- **Even distribution** - if one key has far more traffic than others you get a **hot partition** where one consumer is slammed while others are idle. E.g. partitioning a ride-sharing app by `city` puts all New York traffic on one partition while Boise sits empty.
+
+The key that gives you ordering is often not the key that gives you even distribution - this trade-off is worth discussing in an interview.
+
+**Partitioning Strategies**
+
+- User-based partitioning (orders for same users stay ordered)
+- Time-based partitioning (events in time-windows)
+- Content-based partitioning (similar events grouped)
+
+**Consumer Groups**
+
+A consumer group is a pool of workers that divides partitions amongst themselves. With 6 partitions and 3 consumers, each consumer handles 2 partitions. Adding more consumers increases throughput - but you cannot have more consumers than partitions (the extra consumer gets nothing).
 
 ### Durability Guarantees
 
 - At-Most-Once Delivery
-    - No Duplicated, but messages may be lost
-    - Metrics, Logs, where its acceptable to lose some data
+    - No duplicates, but messages may be lost
+    - Use for: metrics, logs, analytics - where losing a few data points is acceptable
 - At-Least-Once Delivery
-    - Messages delivered, but may have duplicates
-    - Most Common Pattern, Requires Idempotent Consumers
-    - Use Exponential Backoff in Retry for delivery with some limit.
+    - Messages always delivered, but may have duplicates
+    - **Most common pattern** - almost always the right answer in interviews
+    - Requires **idempotent consumers** (see below)
+    - Use exponential backoff in retry with a max retry limit, then DLQ
 - Exactly-Once Delivery
-    - Messages are delivered Once
-    - Financial transactions, critical operations.
-    - Usually people use idempotency as well with this.
+    - Every message processed exactly once
+    - Extremely hard to achieve in distributed systems
+    - Kafka supports a form of it within its own ecosystem, but with real trade-offs
+    - **Don't promise this in an interview unless you can explain the mechanism**
+
+### Idempotency
+
+An idempotent operation produces the same result no matter how many times it's run. Required when using at-least-once delivery.
+
+**Non-idempotent (bad):**
+```
+"Increment user 123's post count by 1"
+# Running twice → count goes up by 2, not 1
+```
+
+**Idempotent (good):**
+```
+"Set user 123's post count to 54"
+# Running twice → count is still 54
+```
+
+Design operations to be naturally idempotent (set vs increment), or check whether the action was already completed before executing.
 ## Retry Mechanisms Implementations
 
 [Amazing Article by Amazon on Exponential Backoff](https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/)
@@ -319,6 +382,27 @@ NOTE: below 2 topics are covered in network notes
 ### Event Sourcing Pattern
 ### CQRS (Command Query Responsibility Segregation)
 ### Backpressure Handling
+
+Happens when producers generate messages faster than consumers can process them. The queue grows indefinitely and eventually exhausts memory. **A queue delays a capacity problem - it doesn't solve it.**
+
+Example: receiving 300 msg/s but consumers handle 200 msg/s - queue grows by 100 msg/s and will never catch up.
+
+Options:
+1. **Scale consumers** - autoscale based on queue depth; add more partitions if at the consumer-per-partition ceiling
+2. **Apply back pressure to producers** - reject new messages or return an error to the client ("system busy, retry in a minute"), slowing the source down
+3. **Monitor and alert** - set alerts on queue depth so you catch this early
+
+### Poisoned Messages
+
+A message that consistently fails to process - e.g. a corrupted file that will never succeed no matter how many retries.
+
+Without guard rails: retries forever, consuming a consumer's resources indefinitely while all other messages are stuck behind it.
+
+**Solution - Dead Letter Queue (DLQ)**:
+- Configure a **max retry count** (e.g. 5 attempts)
+- After exceeding retries, shunt the message to a **separate DLQ** instead of the main queue
+- Main queue keeps processing; failed messages sit in DLQ for manual inspection or automated analysis
+- Mentioning DLQ proactively in interviews signals production experience
 
 ### Message Deduplication
 
