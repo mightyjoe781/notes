@@ -8,6 +8,7 @@ Content
 - [ACID](acid.md)
 - [Understanding Database Internals](internals.md)
 - [Database Indexing](indexing.md)
+- [Database Normalization (1NF, 2NF, 3NF, BCNF)](normalization.md)
 - [B Trees vs B+ Tree in Production DB Systems](btrees.md)
 - [Database Partitioning](partitioning.md)
 - [Database Sharding](sharding.md)

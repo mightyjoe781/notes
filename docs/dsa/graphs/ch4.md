@@ -227,6 +227,8 @@ For small graphs ($O(V^3)$): if `dist[i][j] > 0 and dist[j][i] > 0`, then vertic
 - All-pairs or small graph → Floyd-Warshall
 - "Minimum operations to transform X" → State-space BFS (see ch2)
 
+For how Dijkstra evolves further - heuristics (A*), bidirectional search, and the contraction hierarchies that let Google Maps answer in under a millisecond on a 64-million-node road network - see [Pathfinding at Scale](../../advanced_dsa/pathfinding_at_scale.md) in the advanced DSA notes.
+
 ## Problems
 
 1. https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1 — No need to track visited since BFS on an unweighted graph processes layer by layer.

@@ -2,6 +2,10 @@
 
 Excellent way to reduce one type of problem (proximity search) to another, seemingly unrelated one (string prefix matching), allowing databases to re-use their regular index data structures on these fancy new co-ordinates.
 
+This is the "encoded key" camp of proximity search - instead of building a custom spatial tree (Quadtree, R-Tree, ...), squeeze `(lat, lng)` into a single sortable integer and reuse the boring, 50-years-tuned B-Tree your database already has. See [Proximity Search & Geospatial Indexes](proximity_search.md) for how this idea sits alongside Quad/KD/R-Trees, and how it evolves further into S2 and H3.
+
+A geohash isn't really a string at all - it's a **stack of bits** (5 bits per base32 character, with lat/lng bits interleaved via the Z-order curve below). Read those same bits straight through as an integer and you keep the exact same sort order - which is why Redis can store a geohash as a 52-bit integer in a sorted set (`GEOADD` → `ZRANGEBYSCORE` is just a range scan over those integers) while Postgres stores the very same bits as text and prefix-scans it with `LIKE`. Same bits, same order, two completely different storage representations.
+
 It usually maps `(lat, lng)` to a string.
 
 ![](assets/Pasted%20image%2020260216141202.png)
@@ -297,6 +301,7 @@ Geospatial search pipeline is not just geohashing, its just a first stage accele
 
 Further Reading
 
+- [Proximity Search & Geospatial Indexes - HelloInterview (YouTube)](https://www.youtube.com/watch?v=dQXdSxn7d1g) - walks through the full evolution from B-Trees through Quad/KD/R-Trees to Geohash, S2 and H3; see [Proximity Search & Geospatial Indexes](proximity_search.md) for notes from this video
 - https://medium.com/@sylvain.tiset/breaking-down-location-based-algorithms-r-tree-geohash-s2-and-h3-explained-a65cd10bd3a9
 - https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery
 - https://eugene-eeo.github.io/blog/geohashing.html

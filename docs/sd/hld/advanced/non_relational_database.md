@@ -36,12 +36,17 @@ If you run `SELECT avg(price) WHERE ts = '_'` on a 100-column table, a row-store
 
 - This is why column-oriented DBs dominate analytics and data warehouses. Examples: _Redshift, BigQuery, Snowflake, Apache Parquet (storage format)_ 
 - Foundational paper: _C-Store: A Column-Oriented DBMS (Stonebraker et al., 2005)_
+- They're also very space-efficient, since each column holds a single, homogeneous data type (all integers, all timestamps, all strings from a small set), and homogeneous data compresses far better than the mixed bag of types you get per row.
+- Apache Parquet pushes this further with binary compression: it encodes columns as compact, type-aware binary (dictionary encoding, run-length encoding, bit-packing) rather than text, which shrinks the data on disk **and** speeds up deserialization, since decoding fixed-width binary is closer to a `memcpy` than parsing text.
+- Rough benchmark on ~10M rows of mixed int/string/float/timestamp data: CSV ~480 MB and ~38s to read, JSON ~1.1 GB and ~64s, Parquet (Snappy-compressed) ~35 MB and ~2.5s - roughly a 14x size reduction and 15x faster reads, mostly from less I/O plus cheaper binary decoding.
+- The flip side: writes are far costlier than in row-oriented storage. A single record's fields are scattered across separate column chunks, so inserting or updating one row means touching many different places on disk (and re-running compression/encoding on each affected chunk), instead of writing one contiguous block as a row-store would. This is why column stores are built for read-heavy analytics (batch loads, append-only) rather than high-frequency, single-row writes.
 
 #### Graph Databases
 
 - Nodes and edges as first-class citizens.
 - Shine when relationships between entities are the query
 - social graphs, recommendations (collaborative filtering), and especially **fraud detection** where you're looking for suspicious relationship patterns.
+- In practice, dedicated graph DBs are less common than the hype suggests - many teams just store edges as rows in a relational/NoSQL store and traverse via recursive queries or app code, since most graph needs are shallow (1-3 hops). Deep, large-scale traversal still belongs to graph DBs or batch graph-processing frameworks (Spark GraphX, Pregel).
 - Examples: _Neo4j, Amazon Neptune, TigerGraph, DGraph_
 
 #### Why non-relational DB scale

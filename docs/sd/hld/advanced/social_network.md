@@ -89,7 +89,9 @@ The client never routes the binary through your servers. Instead:
 s3://photos/<user_id>/<random_image_id>.jpg
 ```
 
-A pre-signed URL grants temporary, scoped write permission to _anyone_ who holds it - no AWS credentials needed on the client side. 3. Image Service returns the pre-signed URL and the `random_image_id` to the client. 4. **Client uploads directly to S3** using the pre-signed URL (PUT request). The file lands at the expected path.
+1. A pre-signed URL grants temporary, scoped write permission to _anyone_ who holds it - no AWS credentials needed on the client side. 
+2. Image Service returns the pre-signed URL and the `random_image_id` to the client. 
+3. **Client uploads directly to S3** using the pre-signed URL (PUT request). The file lands at the expected path.
 
 > LinkedIn, Dropbox, and most modern platforms use this exact pattern.
 

@@ -4,6 +4,10 @@
 
 A quadtree is a *tree data structures* in which each internal node has exactly four children. They are two dimensional analog of *octrees* and are most often used to partition a two-dimensional space by recursively subdividing it into four quadrants or regions.
 
+It's also the historical starting point of proximity search - the first serious attempt (Finkel & Bentley, 1974) at indexing 2D location data once people realized that a B-Tree on `lat` and another on `lng` can't preserve geographic closeness. See [Proximity Search & Geospatial Indexes](proximity_search.md) for how this idea evolved into KD-Trees, R-Trees, and eventually encoded-key indexes like Geohash, S2 and H3.
+
+Two practical weaknesses pushed the industry beyond it: splits happen at a cell's *geometric* midpoint rather than where the data actually clusters (so query latency depends heavily on *where* you look - dense areas end up deep and slow), and it's a pointer-chasing structure that's great in RAM but forces random disk reads once it doesn't fit in memory.
+
 Generally Leaf Cell represents a *unit of interesting spatial information*
 
 ![](assets/Pasted%20image%2020260216003043.png)

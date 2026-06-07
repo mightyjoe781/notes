@@ -18,6 +18,8 @@ Tree Based Indexing & Spatial Data Structures (*Hierarchical partitioning*)
 - [B-Tree](btree.md) : Disk friendly ordered indexing
 - [Quad Tree](quadtree.md) : 2D Spatial Partitioning
 - [GeoHashing](geohashing.md) : Spatial Indexing using String Prefixes
+- [Proximity Search & Geospatial Indexes](proximity_search.md) : How B-Trees give way to Quad/KD/R-Trees and Geohash/S2/H3
+- [Pathfinding at Scale](pathfinding_at_scale.md) : From BFS and Dijkstra to A* and Contraction Hierarchies
 
 
 Storage & Synchronization Structures (*Efficient Persistence & Comparisons*)

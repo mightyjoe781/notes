@@ -20,6 +20,8 @@ Every time the function is invoked the time would have moved forward, hence it s
 
 The ID generation logic works fine when there is just *one machine* and the code is *not* invoked *twice within one*.
 
+![](assets/Pasted%20image%2020260607163915.png)
+
 ### Evolution and Building Towards a Solution
 
 #### Problem 1: Multiple Machines
@@ -78,6 +80,8 @@ func get_id() string {
 ```
 
 But what's the catch? This will not work once counter reaches *INT_MAX*, but there is another issue, if machine reboots then counter will reset and start from *zero*.
+
+![](assets/Pasted%20image%2020260607164322.png)
 
 #### Problem 3: Counter Reset on Reboot
 
@@ -212,11 +216,17 @@ UUIDs (128-bit random integers) are globally unique without coordination - but t
 
 UUIDs are fine for security (unpredictable) and small-scale systems. At FAANG scale, you need something better.
 
+!!! note
+
+    Collisions are not something to worry about with UUIDv4 (122 random bits, space ≈ 2^122). Using the birthday-bound approximation, you'd need to generate roughly 2.7 × 10^18 IDs before there's even a 50% chance of a single collision. At 1 million IDs/sec, that's ~86,000 years; even at 1 billion IDs/sec, it's ~86 years. So the real problems with UUIDs are index locality and bloat - not collisions.
+
 #### MongoDB Object ID
 
 ![](assets/Pasted%20image%2020250914002204.png)
 
 **MongoDB ObjectID** (96 bits / 12 bytes) suffers from the same index bloat problem, though it puts epoch seconds on the LHS for rough sortability.
+
+- MongoDB doesn't take a raw correlation/sequential ID and index it as-is - it offers **hashed indexes**, which hash the field value before storing it in the B-tree. This spreads writes evenly across the tree (and across shards) instead of always inserting at the rightmost edge, avoiding the hot-page and rebalancing churn that monotonically increasing keys cause.
 ### Flickr's Ticket Servers
 
 Why flickr needed its own ID generation ?
