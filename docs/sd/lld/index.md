@@ -6,7 +6,7 @@ Following notes are sourced from multiple sources and then rewritten to sound co
 * [OOP Basics](./oop_basics.md)
 * [SOLID Principles](./solid_principles.md)
 * Problem : Simple Rule Engine `[TODO]`
-* UML / Class Diagrams `[TODO]`
+* [UML / Class Diagrams](./uml_class_diagrams.md)
 
 ### Design Patterns
 
