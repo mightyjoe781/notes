@@ -37,6 +37,7 @@ Following notes are sourced from multiple sources and then rewritten to sound co
 ### Extras
 
 - [Locks & Semaphores](locks.md)
+- [Asynchronous Programming](async_programming.md)
 - [Socket Programming](sockets.md)
 
 #### Resources
