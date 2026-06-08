@@ -236,6 +236,9 @@ threading.Thread(target=producer).start()
 threading.Thread(target=consumer, daemon=True).start()
 ```
 
+- NOTE: `daemon=True` -> thread runs in background; if the main program exits, daemon threads are killed immediately (no cleanup).
+- Non-daemon thread (default) -> Python waits for it to finish before the program can exit.
+
 #### One-time Initialization (call once)
 
 Goal: Only one thread should execute initialization code; others wait or skip.
@@ -340,8 +343,35 @@ with ThreadPoolExecutor(max_workers=10) as executor:
     - Too low -> underutilization.
     - Too high -> context-switch overhead, possible resource problems.
 - Difference:
-    - `submit(fn, *args)` -> returns Future.
-    - `map(fn, iter)` -> returns results in input order, not completion order.
+    - `submit(fn, *args)` -> returns a single `Future`; combine with `as_completed()` to process results as they finish.
+    - `map(fn, iter)` -> returns an iterator of results in **input order** (not completion order); blocks on the slowest-so-far result.
 - Exceptions in task:
-    - Raised when you call `future.result()`
+    - Raised when you call `future.result()` (for `submit`) or while iterating the results (for `map`)
+
+```python
+with ThreadPoolExecutor(max_workers=10) as executor:
+    for result in executor.map(fetch, urls):  # blocks until each result is ready, in order
+        print(result)
+```
+
+### ProcessPoolExecutor
+
+- From `concurrent.futures`, same interface as `ThreadPoolExecutor` (`submit`, `map`, `as_completed`)
+- Manages a pool of worker **processes** -> sidesteps the GIL
+- Best for CPU-bound tasks (number crunching, image/data processing)
+- Args/return values are pickled to move across process boundaries -> avoid large/unpicklable objects
+
+```python
+from concurrent.futures import ProcessPoolExecutor
+
+def cpu_heavy(n):
+    return sum(i * i for i in range(n))
+
+with ProcessPoolExecutor(max_workers=4) as executor:
+    for result in executor.map(cpu_heavy, [10**6, 10**6, 10**6]):
+        print(result)
+```
+
+- `max_workers` defaults to number of CPU cores (`os.cpu_count()`)
+- Higher overhead than threads (process startup, IPC/pickling) -> not worth it for small/short tasks
 
