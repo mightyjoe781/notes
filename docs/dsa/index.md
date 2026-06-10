@@ -138,3 +138,4 @@ Optional Topics in Trees
     * [Advanced Geometry Algorithms](additional/geometry4.md)
 * [SAT, SMT & Constraint Solving](additional/constraint_solving.md)
 * [Python Standard Library for DSA](additional/python_stdlib.md)
+* [C++ STL for DSA](additional/cpp_stl.md)
