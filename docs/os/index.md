@@ -6,3 +6,7 @@ Notes
 
 - [Fundamentals of Operating Systems](fundamentals/index.md)
 - [Operating System Concepts](osc/index.md)
+
+Resources:
+
+- [OS Course Notes](https://www.cs.uic.edu/~jbell/CourseNotes/OperatingSystems/)

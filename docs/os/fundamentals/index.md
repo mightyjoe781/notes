@@ -4,8 +4,8 @@
 
 * [Introduction](./introduction.md)
 * [Process](./process)
-* Memory Management
-* CPU
+* [Memory Management](./memory.md)
+* [CPU](./cpu.md)
 * Process Management
 * Storage Management
 * Socket Management

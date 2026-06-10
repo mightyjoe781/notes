@@ -1,0 +1,7 @@
+extends: existence
+message: "Use a hyphen (-) instead of an em dash."
+level: warning
+nonword: true
+tokens:
+  - '—'
+  - '–'

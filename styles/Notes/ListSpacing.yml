@@ -1,0 +1,7 @@
+extends: existence
+message: "Add a blank line before this list, otherwise MkDocs may not render it correctly."
+level: warning
+scope: raw
+nonword: true
+tokens:
+  - '(?m)^[A-Za-z0-9"''`(].*\n(?:[-*+]|\d+\.) '
