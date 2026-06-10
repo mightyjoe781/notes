@@ -482,17 +482,3 @@ def mergeBSTs(self, root1: TreeNode, root2: TreeNode) -> TreeNode:
 
 ```
 
-
-## Selecting Optimal Tree
-
-| **Data Structure**          | **Point Update** | **Point Query** | **Range Update** | **Range Query** | **Time Complexity (Update / Query)** | **Space**  | **Common Use Cases**                                         |
-| --------------------------- | ---------------- | --------------- | ---------------- | --------------- | ------------------------------------ | ---------- | ------------------------------------------------------------ |
-| **Fenwick Tree (Classic)**  | ✅                | ❌*              | ❌                | ✅ (prefix)      | O(log n) / O(log n)                  | O(n)       | Prefix sums, XORs, frequency counts                          |
-| **Fenwick Tree (Dual)**     | ❌                | ✅               | ✅                | ❌               | O(log n) / O(log n)                  | O(n)       | Range add + point read, simulation of cumulative effects     |
-| **Fenwick Tree (2-BIT)**    | ✅                | ✅               | ✅                | ✅               | O(log n) / O(log n)                  | O(n)       | Full support for sum range queries with range updates        |
-| **Segment Tree**            | ✅                | ✅               | ❌                | ✅               | O(log n) / O(log n)                  | O(4n)      | RMQ, range sum/min/max/gcd with point updates                |
-| **Segment Tree + Lazy**     | ✅                | ✅               | ✅                | ✅               | O(log n) / O(log n)                  | O(4n)      | Full range queries + range updates, e.g., add 5 over [l..r]  |
-| **Sparse Segment Tree**     | ✅                | ✅               | ✅                | ✅               | O(log n) / O(log n)                  | O(k log n) | Sparse values over large domains (e.g., up to 1e9)           |
-| **Persistent Segment Tree** | ❌ (new ver)      | ✅ (old ver)     | ❌ (immutable)    | ✅ (prev ver)    | O(log n) / O(log n)                  | O(n log n) | Time-travel queries, undo/rollback, version control          |
-| **Sqrt Decomposition**      | ✅                | ✅               | ✅* (limited)     | ✅               | O(√n) / O(√n)                        | O(n)       | Simpler implementation for mid-size n, not time-critical problems |
-| **Wavelet Tree**            | ❌                | ✅ (rank)        | ❌                | ✅ (freq)        | O(log n) / O(log n)                  | O(n log n) | K-th smallest, rank/select, frequency queries in a range     |

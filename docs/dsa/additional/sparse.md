@@ -21,6 +21,23 @@ j = log2(R - L + 1)
 answer = f(st[L][j], st[R - 2^j + 1][j])
 ````
 
+```
+Array:  [3, 1, 4, 1, 5, 9, 2, 6]
+         ─────────────
+              [l=0, r=5]  (length 6)
+
+Power of 2 ≤ 6  →  4  (2²)
+
+Block 1: [0, 3]   (starts at l)
+Block 2: [2, 5]   (ends at r)
+
+         [3, 1, 4, 1]
+               [4, 1, 5, 9]
+         ─────────────────
+         min of both = min(1, 1) = 1  ✓
+```
+
+Overlapping is fine for **idempotent** ops (min/max/gcd) - counting elements twice doesn't matter.
 ### RMQ Example
 
 ````python

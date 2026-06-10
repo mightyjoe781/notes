@@ -90,13 +90,13 @@
 Optional Topics in Trees
 
 * [Suffix Trees](strings/ch4.md)
+* [Heap Implementation](trees/heaps.md)
+* [Selecting the Optimal Structure](trees/advanced_intro.md)
 * [Fenwick Trees (Binary Indexed Trees)](trees/fenwick.md)
 * [Segment Trees & Lazy Propagation](trees/segment.md)
+* [Sparse Tables & Range Queries](additional/sparse.md)
 * [Sqrt Decomposition Techniques](trees/sqrt_decomposition.md)
-* [Heap Implementation](trees/heaps.md)
 * Advanced Trees: AVL, Red-Black Trees
-* QuadTrees, k-d Trees
-
 ## Graph
 
 * [Graph Properties and their Types](graphs/ch1.md)
