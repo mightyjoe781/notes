@@ -7,6 +7,6 @@
 * [Memory Management](./memory.md)
 * [CPU](./cpu.md)
 * [Process Management](./process_management.md)
-* Storage Management
-* Socket Management
-* More OS Concepts
+* [Storage Management](./storage_management.md)
+* [Socket Management](./socket_management.md)
+* [More OS Concepts](./more_os.md)

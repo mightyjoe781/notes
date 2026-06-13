@@ -291,6 +291,8 @@ NOTE: Notice how client doesn't immediately close its file descriptor.
 
 ## Sockets, Connections and Kernel Queues
 
+NOTE: Same section in more details here, [Link](../../os/fundamentals/socket_management.md)
+
 ### Socket
 
 - When a process listens on an IP/Port it produces a socket
