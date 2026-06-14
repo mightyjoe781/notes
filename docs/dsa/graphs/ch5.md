@@ -34,6 +34,7 @@ def prims_mst(n, adj):
 
     while pq:
         w, u = heapq.heappop(pq)
+        # stale entry - a cheaper edge to u was already processed
         if visited[u]:
             continue
         visited[u] = True
@@ -45,6 +46,7 @@ def prims_mst(n, adj):
     return mst_weight
 ```
 
+**Note:** When a cheaper edge to `v` is found later, the old `(wt, v)` entry can't be updated or removed from the heap - binary heaps don't support decrease-key efficiently. So stale entries accumulate and are discarded lazily via `if visited[u]: continue` on pop. This is the same pattern as Dijkstra's `if d > dist[u]: continue`. This can be avoided in BFS due to its directionality.
 ## Kruskal's Algorithm
 
 Sort all edges by weight in non-decreasing order. Greedily add each edge to the MST as long as it doesn't form a cycle (checked via Union-Find).
