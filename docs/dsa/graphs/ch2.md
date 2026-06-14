@@ -35,7 +35,7 @@ def bfs(s, adj, n):
         u = q.popleft()
         for v in adj[u]:
             if dist[v] == -1:
-                dist[v] = dist[u] + 1
+                dist[v] = dist[u] + 1 # mark visited on enque
                 q.append(v)
     return dist
 ```
@@ -48,6 +48,20 @@ BFS fans out in all directions - always needs a guard to prevent re-enqueuing no
 - `dist != -1` - shortest path
 - `indegree == 0` - topological order (Kahn's)
 
+As a general rule, its better mark items as visited during enqueuing to avoid wasteful pop. This is only BFS problem as nodes are sitting idle in the queue, but in DFS this doesn't happen.
+
+```
+vis = set()
+# ...
+while q:
+    u = q.popleft()
+    
+    if u in vis: # BAD, wasteful checks
+        continue
+    
+    for v in adj[u]:
+        q.append(v)
+```
 ## Multi-Source BFS
 
 Standard BFS finds shortest distances from **one** source. Multi-source BFS seeds the queue with **multiple sources at distance 0** and expands outward simultaneously. Every cell gets the distance to its *nearest* source.

@@ -40,6 +40,7 @@ def dijkstra(n, edges, src):
 
     while pq:
         d, u = heapq.heappop(pq)
+        # remove stale entry, already better path exists
         if d > dist[u]:
             continue
         for v, w in graph[u]:
@@ -49,6 +50,8 @@ def dijkstra(n, edges, src):
 
     return dist
 ```
+
+NOTE: we cannot avoid stale entries here as we could do in bfs, as its possible to find a better path later on in the traversal. In BFS traversal order is fixed so there is no risk of missing a better path.
 
 To also track and reconstruct the path:
 
@@ -148,21 +151,22 @@ Used to find shortest paths from a source node to all others, even with negative
 * Detects **negative weight cycles**.
 * Time: $O(V \times E)$
 
+A shortest path in a graph with V nodes can have at most V-1 edges. Each iteration of Bellman-Ford guarantees that shortest paths with at least one more edge are correctly computed.
+
 ```python
 def bellman_ford(n, edges, src):
-    INF = float('inf')
-    dist = [INF] * n
+    dist = [float('inf')] * n
     dist[src] = 0
 
-    for _ in range(n - 1):
-        for u, v, w in edges:
-            if dist[u] != INF and dist[u] + w < dist[v]:
+    for _ in range(n - 1):          # V-1 iterations
+        for u, v, w in edges:       # relax ALL edges, any order
+            if dist[u] + w < dist[v]:
                 dist[v] = dist[u] + w
 
-    # check for negative weight cycles
+    # V-th iteration to detect negative cycle
     for u, v, w in edges:
-        if dist[u] != INF and dist[u] + w < dist[v]:
-            return []  # negative cycle detected
+        if dist[u] + w < dist[v]:
+            return []             # negative cycle exists
 
     return dist
 ```
@@ -231,9 +235,9 @@ For how Dijkstra evolves further - heuristics (A*), bidirectional search, and th
 
 ## Problems
 
-1. https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1 — No need to track visited since BFS on an unweighted graph processes layer by layer.
-2. https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1 — A visited array is needed here for safety and efficiency.
-3. https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1 — Try implementing using a `set` instead of a priority queue.
+1. https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1 - No need to track visited since BFS on an unweighted graph processes layer by layer.
+2. https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1 - A visited array is needed here for safety and efficiency.
+3. https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1 - Try implementing using a `set` instead of a priority queue.
 
 | **Aspect**               | **Priority Queue**                              | **Set**                                                                 |
 |--------------------------|-------------------------------------------------|-------------------------------------------------------------------------|
@@ -245,14 +249,14 @@ For how Dijkstra evolves further - heuristics (A*), bidirectional search, and th
 | **Space Usage**           | May grow larger due to duplicate entries        | Minimal, keeps only one instance of each node                          |
 | **Efficiency in Practice**| Generally faster due to less overhead           | Slightly slower due to extra bookkeeping                               |
 
-4. https://leetcode.com/problems/shortest-path-in-binary-matrix/ — The question only asks for a specific target, so optimize space by not storing all distances.
-5. https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/ — Keep a `ways` array alongside `dist` and increment it each time an equal-cost path is found.
+4. https://leetcode.com/problems/shortest-path-in-binary-matrix/ - The question only asks for a specific target, so optimize space by not storing all distances.
+5. https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/ - Keep a `ways` array alongside `dist` and increment it each time an equal-cost path is found.
 
-6. https://leetcode.com/problems/path-with-minimum-effort/ — Modify Dijkstra's priority function to minimize the maximum absolute difference along the path.
+6. https://leetcode.com/problems/path-with-minimum-effort/ - Modify Dijkstra's priority function to minimize the maximum absolute difference along the path.
 
-7. https://leetcode.com/problems/network-delay-time/ — Straightforward: find all distances, return the maximum.
+7. https://leetcode.com/problems/network-delay-time/ - Straightforward: find all distances, return the maximum.
 
-8. https://www.geeksforgeeks.org/problems/minimum-multiplications-to-reach-end/1 — State-space BFS. State = current value mod 1000 (only 1000 possible states). Each multiplication by an element of arr is an edge. DFS+memo fails here because mod arithmetic creates cycles (e.g. repeated multiplications can loop back to the same value). BFS over 1000 states is instant.
+8. https://www.geeksforgeeks.org/problems/minimum-multiplications-to-reach-end/1 - State-space BFS. State = current value mod 1000 (only 1000 possible states). Each multiplication by an element of arr is an edge. DFS+memo fails here because mod arithmetic creates cycles (e.g. repeated multiplications can loop back to the same value). BFS over 1000 states is instant.
 
 ```python
 def minSteps(arr, start, end):
@@ -276,7 +280,7 @@ def minSteps(arr, start, end):
     return -1
 ```
 
-9. https://leetcode.com/problems/cheapest-flights-within-k-stops/ — Cheapest flight within K stops. This is **not** a standard Dijkstra problem because optimal cost may require more than k stops.
+9. https://leetcode.com/problems/cheapest-flights-within-k-stops/ - Cheapest flight within K stops. This is **not** a standard Dijkstra problem because optimal cost may require more than k stops.
 
 ```python
 from collections import defaultdict
@@ -302,6 +306,6 @@ def findCheapestPrice(n, flights, src, dst, k):
     return -1 if res == float('inf') else res
 ```
 
-10. https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1 — Use Bellman-Ford.
-11. https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/description/ — Use Floyd-Warshall and post-process the resulting matrix per the problem conditions.
-12. https://leetcode.com/problems/swim-in-rising-water/ — Use Dijkstra to find the path that minimizes the maximum element encountered.
+10. https://www.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/1 - Use Bellman-Ford.
+11. https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/description/ - Use Floyd-Warshall and post-process the resulting matrix per the problem conditions.
+12. https://leetcode.com/problems/swim-in-rising-water/ - Use Dijkstra to find the path that minimizes the maximum element encountered.
