@@ -96,20 +96,20 @@ Most optimal approach is to use, fast and slow pointer, slow pointer tracking th
 ```python
 
 def removeDuplicates(self, nums: List[int]) -> int:
-    # in-place
+    if not nums:
+        return 0
 
     slow, fast = 0, 1
 
-    for fast in range(len(nums)):
+    while fast < len(nums):
         if nums[slow] == nums[fast]:
             fast += 1
         else:
-            nums[slow+1] = nums[fast]
-            fast += 1
             slow += 1
-    
-    return slow + 1
+            nums[slow] = nums[fast]
+            fast += 1
 
+    return slow + 1
 ```
 
 ### Move Zeroes to the End
@@ -119,23 +119,12 @@ Given an integer array nums, move all 0's to the end of it while maintaining the
 ```python
 
 def moveZeroes(self, nums: List[int]) -> None:
-    # similar to above problem, in-place duplicate removal
-    l, r = 0, 0
-
-    while l < len(nums) and nums[l] != 0:
-        l += 1
-
-    while r < len(nums) and nums[r] == 0:
-        r += 1
-
+    l = r = 0
     while r < len(nums):
         if nums[r] != 0:
             nums[l], nums[r] = nums[r], nums[l]
             l += 1
-            r += 1
-        else:
-            r += 1
-
+        r += 1
 ```
 
 

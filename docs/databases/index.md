@@ -11,6 +11,7 @@ A database management system (DBMS) is the software that interacts with end user
 - [SQL](sql/index.md)
 - [PostgreSQL](postgresql/index.md)
 - [Joins & Set Operations](joins_n_set.md)
+- [Window Functions](./sql/window_functions.md)
 - MongoDB [Upcoming]
 - Redis [Upcoming]
 - [Database Engineering](dbeng/index.md)

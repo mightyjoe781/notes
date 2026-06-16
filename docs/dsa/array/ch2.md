@@ -290,7 +290,7 @@ def characterReplacement(s: str, k: int) -> int:
 
         # shrink window
         if r - l + 1 > maxCnt + k:
-            # notice how counter removes element automatically when they become zero
+            # no need to delete the item from map,as there is no constraint on the len of map
             mp[s[l]] -= 1
             l += 1
 

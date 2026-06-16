@@ -226,12 +226,10 @@ how does adding **one more person** change the answer?
 Recursively Build solution from base cases.
 
 $$
-
 \begin{align}
  J (1, k) &= 0 \\
  J (n, k) &= (J(n-1, k) + k) \% n
 \end{align}
-
 $$
 
 Iteratively 
