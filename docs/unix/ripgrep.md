@@ -4,6 +4,8 @@
 
 Fast alternative to `grep`. Respects `.gitignore` by default, skips binary files, searches recursively, and supports PCRE2 regex.
 
+> grep notes (flags, regex patterns): [grep.md](grep.md)
+
 ### Installation
 
 ```bash
@@ -125,5 +127,6 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 ### See Also
 
+- [grep](grep.md) - POSIX standard; useful when rg isn't available or for quick pipe filtering
 - [fzf](fzf.md) for interactive fuzzy matching
-- Also: grep (POSIX standard), ag (the silver searcher), ack
+- Also: ag (the silver searcher), ack

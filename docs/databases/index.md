@@ -9,9 +9,14 @@ A database management system (DBMS) is the software that interacts with end user
 ### Notes
 
 - [SQL](sql/index.md)
+    - [Window Functions](sql/window_functions.md)
+    - [Normalization (1NF, 2NF, 3NF, BCNF)](sql/normalization.md)
+    - [Slowly Changing Dimensions & MERGE](sql/scd.md)
+    - [Recursive CTEs](sql/recursive_cte.md)
+    - [Data Warehousing - Star, Snowflake, Data Vault](sql/data_warehousing.md)
+    - [Query Optimization & EXPLAIN](sql/query_optimization.md)
 - [PostgreSQL](postgresql/index.md)
 - [Joins & Set Operations](joins_n_set.md)
-- [Window Functions](./sql/window_functions.md)
 - MongoDB [Upcoming]
 - Redis [Upcoming]
 - [Database Engineering](dbeng/index.md)

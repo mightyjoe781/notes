@@ -33,7 +33,7 @@ hide:
 
     :material-text-search:{ .lg .middle } [sed / awk / jq](text-processing.md)
 
-    :material-magnify:{ .lg .middle } [ripgrep](ripgrep.md)
+    :material-magnify:{ .lg .middle } [ripgrep / grep](ripgrep.md)
 
     :material-filter:{ .lg .middle } [fzf](fzf.md)
 

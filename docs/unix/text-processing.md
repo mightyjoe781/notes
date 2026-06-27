@@ -75,6 +75,8 @@ awk '{sum+=$1; count++} END {print sum/count}' numbers.txt
 
 ## jq
 
+> Fuller notes with examples: [jq.md](jq.md)
+
 JSON processor for the command line.
 
 ```bash
@@ -161,5 +163,6 @@ yq '. * load("override.yaml")' base.yaml
 
 ### See Also
 
+- [jq](jq.md) - dedicated notes for JSON filtering and reshaping
 - [ripgrep](ripgrep.md), [fzf](fzf.md) for interactive search
 - Also: miller (`mlr`) for CSV/TSV/JSON pipelines, xsv for fast CSV, xmllint for XML, dasel (like jq for YAML/TOML/JSON/CSV)

@@ -18,10 +18,11 @@ sudo apt install curl
 | `-H "Header: val"` | add request header |
 | `-d "data"` | request body (implies POST) |
 | `-o file` | save output to file |
-| `-O` | save with remote filename |
+| `-O` | save with remote filename (from URL path) |
 | `-s` | silent (no progress bar) |
-| `-v` | verbose (request and response headers) |
+| `-v` | verbose (full connection detail, TLS handshake) |
 | `-I` | fetch headers only (HEAD request) |
+| `-i` | include response headers in output |
 | `-L` | follow redirects |
 | `-u user:pass` | basic auth |
 | `-k` | skip TLS certificate verification |
@@ -29,31 +30,77 @@ sudo apt install curl
 | `--compressed` | request gzip-compressed response |
 | `-x proxy:port` | use proxy |
 
+---
+
 ### Basic Requests
 
 ```bash
-# GET
-curl https://example.com/api/users
+# GET - returns raw HTML or JSON
+curl https://example.com
 
-# Follow redirects, show response code
-curl -Ls -o /dev/null -w "%{http_code}" https://example.com
-
-# HEAD - check if URL exists
+# Headers only
 curl -I https://example.com
+# HTTP/2 200
+# content-type: text/html
+
+# Follow redirects (useful when HTTP redirects to HTTPS)
+curl -L http://example.com
+
+# Verbose - shows TLS handshake, headers, everything
+curl -v https://example.com
+
+# Skip TLS verification (self-signed certs, local dev)
+curl -k https://self-signed.example.com
+```
+
+---
+
+### Save Output to File
+
+```bash
+# Save to named file
+curl -o page.html https://example.com
+
+# Save using filename from URL path
+curl -O https://example.com/index.html    # saves as index.html
+
+# Resume interrupted download
+curl -C - -O https://example.com/large.iso
+```
+
+---
+
+### Multiple URLs and Globbing
+
+```bash
+# Hit two URLs in one command
+curl https://api.example.com/users/1 https://api.example.com/users/2
+
+# Range glob - hits /users/1 through /users/5
+curl https://api.example.com/users/[1-5]
+
+# List glob
+curl https://api.example.com/users/{alice,bob,carol}
+```
+
+---
+
+### APIs
+
+```bash
+# POST with form data (default when using -d)
+curl -d "name=Alice&age=30" https://api.example.com/users
+# returns: {"status": "created"}
 
 # POST with JSON body
 curl -X POST https://api.example.com/users \
   -H "Content-Type: application/json" \
-  -d '{"name":"Alice","email":"alice@example.com"}'
-
-# POST form data
-curl -X POST https://example.com/login \
-  -d "username=alice&password=secret"
+  -d '{"name": "Alice", "age": 30}'
 
 # PUT
 curl -X PUT https://api.example.com/users/1 \
   -H "Content-Type: application/json" \
-  -d '{"name":"Alice Updated"}'
+  -d '{"name": "Alice Updated"}'
 
 # DELETE
 curl -X DELETE https://api.example.com/users/1
@@ -61,42 +108,54 @@ curl -X DELETE https://api.example.com/users/1
 # With Bearer token
 curl https://api.example.com/me \
   -H "Authorization: Bearer eyJhbGci..."
-
-# With API key header
-curl https://api.example.com/data \
-  -H "X-API-Key: abc123"
 ```
 
-### File Operations
+---
+
+### Host and DNS Manipulation
+
+Useful for testing locally before DNS propagates or behind load balancers.
 
 ```bash
-# Download file
-curl -O https://example.com/file.tar.gz
+# Fake the Host header (app expects a specific hostname)
+curl http://127.0.0.1 -H "Host: example.com"
 
-# Download and rename
-curl -o myfile.tar.gz https://example.com/file.tar.gz
+# Override DNS resolution (connect to localhost but act as if it's example.com)
+curl https://example.com --resolve example.com:443:127.0.0.1
 
-# Download with progress bar
-curl --progress-bar -O https://example.com/large.iso
-
-# Resume interrupted download
-curl -C - -O https://example.com/large.iso
-
-# Upload file (multipart form)
-curl -F "file=@/path/to/local/file.txt" https://example.com/upload
-
-# Upload raw binary
-curl -X PUT --data-binary @file.bin https://example.com/upload
+# Connect to a specific backend host (useful behind LBs)
+curl https://example.com --connect-to example.com:443:backend-1.internal:443
 ```
+
+---
+
+### Other Protocols
+
+curl supports protocols beyond HTTP.
+
+```bash
+# Test if a TCP port is open (useful when telnet isn't available)
+curl telnet://localhost:4317
+# Connected to localhost.
+
+# Dictionary lookup
+curl dict://dict.org/d:dog
+
+# Send email via SMTP
+curl smtp://mail.example.com \
+  --mail-from sender@example.com \
+  --mail-rcpt recipient@example.com \
+  --upload-file email.txt
+```
+
+---
 
 ### Debugging
 
 ```bash
-# Verbose - shows request and response headers
-curl -v https://example.com
-
 # Show only response code
 curl -s -o /dev/null -w "%{http_code}" https://example.com
+# 200
 
 # Measure timing
 curl -s -o /dev/null -w "
@@ -106,31 +165,35 @@ curl -s -o /dev/null -w "
   total: %{time_total}s
 " https://example.com
 
-# Write response and headers to files separately
+# Save response body and headers to separate files
 curl -s -D headers.txt -o body.json https://api.example.com
 ```
 
-### Config and Aliases
+---
+
+### File Uploads
 
 ```bash
-# ~/.curlrc - default options
---silent
---show-error
---location
+# Multipart form upload
+curl -F "file=@/path/to/file.txt" https://example.com/upload
 
-# Useful aliases
-alias curljson='curl -H "Content-Type: application/json" -H "Accept: application/json"'
-alias curltime='curl -s -o /dev/null -w "total: %{time_total}s\n"'
+# Raw binary upload
+curl -X PUT --data-binary @file.bin https://example.com/upload
 ```
+
+---
 
 ### Tips
 
-- Use `-s --show-error` in scripts: no progress bar but errors still print
+- `curl http://example.com` defaults to HTTP and won't follow a redirect to HTTPS - add `-L`
+- `-k` is safe for local dev/testing; never use it against production endpoints
+- Use `-s --show-error` in scripts: suppresses progress bar but still prints errors
+- `-v` shows the TLS handshake step-by-step - first place to look when SSL fails
 - Pipe to `jq` for readable JSON: `curl -s api.example.com | jq .`
-- `curl -K credentials.txt` reads flags from a file (keep secrets out of shell history)
-- For large downloads consider `wget -c` or `aria2c` (parallel chunks)
+- `curl -K credentials.txt` reads flags from a file (keeps secrets out of shell history)
 
 ### See Also
 
+- [jq](jq.md) - parse and filter JSON responses
 - [OpenSSL](openssl.md) for TLS certificate generation
-- Also: httpie (`http`), wget (simpler downloads), aria2 (parallel downloads), xh (fast httpie alternative)
+- Also: httpie (`http`), wget (simpler downloads), xh (fast httpie alternative)

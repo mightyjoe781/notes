@@ -31,6 +31,8 @@ for i, v in enumerate(nums):
         idx = stack.pop()
         res[idx] = v
     stack.append(i)
+
+# res = [4, 2, 4, -1, -1]
 ````
 
 Practice Problem : [Daily Temperature](https://leetcode.com/problems/daily-temperatures/description/)
@@ -50,6 +52,7 @@ for i, v in enumerate(nums):
     res[i] = nums[stack[-1]] if stack else -1
     stack.append(i)
 
+# res = [-1, 4, -1, 2, 2]
 ```
 
 ### Stock Span Problem
@@ -84,7 +87,24 @@ def calculateSpan(prices):
 Try the online variant of the same problem : [Online Stock Span](https://leetcode.com/problems/online-stock-span/)
 ### Maximal Area in Histogram
 
-This can be solved using the above concept on monotonically decreasing stack.
+![img-histogram](https://assets.leetcode.com/uploads/2021/01/04/histogram.jpg)
+
+This can be solved using the above concept on monotonically increasing stack and putting indices of increasing height order or bars.
+
+When we pop a bar, you're finalizing it - computing the largest rectangle for which _that popped bar is the shortest bar_.
+
+Here:
+
+- h : height of the bar we just popped (limiting height of rectangle)
+- w : when we pop `heights[stk.pop()]`, we need to know how far rectangle can stretch left/right.
+    - right boundary : `i`
+    - left boundary :  whatever is at the top of stack
+    - span : `[stk[-1] + 1, i - 1]`
+    - if-else check for left-boundary
+
+```
+w = (i - 1) - (stk[-1] + 1) + 1 = i - stk[-1] - 1
+```
 
 
 ```python
@@ -105,6 +125,8 @@ def largestRectangleArea(self, heights: List[int]) -> int:
     return max_area
 
 ```
+
+Detailed Explanation : [Link](https://www.danielleskosky.com/largest-rectangle-in-histogram/)
 ### Trapping Rainwater
 
 ![](assets/Pasted%20image%2020260111174414.png)
