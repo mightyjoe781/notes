@@ -252,6 +252,34 @@ def lengthOfLIS(nums):
     return max(dp)
 ```
 
+#### O(n log n) Approach (Patience Sorting)
+
+Idea: maintain a `tails` array, where `tails[k]` = smallest possible tail value of any increasing subsequence of length `k+1` found so far.
+
+For each new number `x`:
+
+1. Binary search (`bisect_left`) for the first position in `tails` that is `>= x`
+2. If `x` is bigger than every element in `tails` (no such position found), it extends the longest subsequence — append it
+3. Otherwise, replace `tails[idx]` with `x` - a smaller tail value is always at least as good for future extensions, since it's easier to extend later
+
+`len(tails)` at the end = LIS length. Note: `tails` is NOT a valid LIS itself, just its length is correct.
+
+```python
+from bisect import bisect_left
+
+def lengthOfLIS(nums):
+    tails = []
+    for x in nums:
+        idx = bisect_left(tails, x)
+        if idx == len(tails):
+            tails.append(x)
+        else:
+            tails[idx] = x
+    return len(tails)
+```
+
+Time: O(n log n), Space: O(n)
+
 * Solve Longest Arithmetic Subsequence After this problem
 
 ### Word Break
