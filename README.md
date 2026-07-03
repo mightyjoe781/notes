@@ -24,11 +24,17 @@ source .venv/bin/activate
 
 ## Excalidraw library
 
-`docs/excalidraw-library.json` is a hard link to `docs/.obsidian/plugins/obsidian-excalidraw-plugin/data.json`. Obsidian writes to its path, git tracks via the hard link. On a fresh clone, recreate it:
+`docs/excalidraw-library.excalidrawlib` is the importable library file. After updating the library in Obsidian, regenerate and commit it:
 
 ```bash
-rm docs/excalidraw-library.json
-ln docs/.obsidian/plugins/obsidian-excalidraw-plugin/data.json docs/excalidraw-library.json
+python3 -c "
+import json
+d = json.load(open('docs/.obsidian/plugins/obsidian-excalidraw-plugin/data.json'))
+lib = d['library2']
+out = {'type': 'excalidrawlib', 'version': 2, 'source': lib.get('source',''), 'libraryItems': lib['libraryItems']}
+json.dump(out, open('docs/excalidraw-library.excalidrawlib', 'w'), indent=2, ensure_ascii=False)
+"
+git add docs/excalidraw-library.excalidrawlib && git commit -m "update excalidraw library"
 ```
 
 ## Linting
