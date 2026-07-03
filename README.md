@@ -22,6 +22,15 @@ source .venv/bin/activate
 ./deploy.sh   # mkdocs build + rsync to remote server
 ```
 
+## Excalidraw library
+
+`docs/excalidraw-library.json` is a hard link to `docs/.obsidian/plugins/obsidian-excalidraw-plugin/data.json`. Obsidian writes to its path, git tracks via the hard link. On a fresh clone, recreate it:
+
+```bash
+rm docs/excalidraw-library.json
+ln docs/.obsidian/plugins/obsidian-excalidraw-plugin/data.json docs/excalidraw-library.json
+```
+
 ## Linting
 
 ```bash
