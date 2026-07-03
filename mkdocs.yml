@@ -57,6 +57,9 @@ plugins:
   - git-revision-date-localized:
       type: timeago
       enable_creation_date: true
+exclude_docs: |
+  **/*.excalidraw
+  **/*.excalidraw.md
 site_author: smk
 copyright: smk
 theme:
