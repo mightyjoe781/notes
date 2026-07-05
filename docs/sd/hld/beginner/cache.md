@@ -1,3 +1,10 @@
+---
+title: Caching and Optimization
+description: Overview of caching fundamentals - population strategies and caching at the client, CDN, remote, and database levels.
+tags:
+  - concept
+---
+
 # Caching and Optimization
 
 > There are only two hard things in computer science: cache invalidation and naming things. - Phil Karlton

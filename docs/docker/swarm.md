@@ -1,3 +1,10 @@
+---
+title: Docker Swarm - clustering, Raft consensus, and secrets
+description: How Swarm mode clusters Docker hosts into services and stacks, with Raft-based manager consensus, overlay networking, and secret management.
+tags:
+  - concept
+---
+
 # Docker Swarm
 
 Swarm mode turns a group of Docker hosts into a single cluster and lets you run services across them with built-in load balancing, rolling updates, and fault tolerance.
@@ -244,3 +251,6 @@ docker swarm update --autolock=true
 # After daemon restart:
 docker swarm unlock     # enter the unlock key
 ```
+
+## See Also
+- [Kubernetes Overview](../kubernetes/overview.md) - the more complex, more widely-adopted alternative orchestrator

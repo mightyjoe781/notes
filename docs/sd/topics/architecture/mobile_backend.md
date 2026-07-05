@@ -1,3 +1,10 @@
+---
+title: Mobile Backend Systems
+description: Covers Backend for Frontend (BFF) design, mobile network and caching optimizations, and offline-first data synchronization patterns.
+tags:
+  - concept
+---
+
 # Mobile Backend Systems
 
 Mobile backend systems are specialized server-side architectures designed to support mobile applications with their unique constraints and requirements. These systems must handle intermittent connectivity, limited bandwidth, battery life considerations, and diverse device capabilities.

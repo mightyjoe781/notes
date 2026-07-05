@@ -1,3 +1,10 @@
+---
+title: Slowly Changing Dimensions (SCD) and MERGE
+description: Explains SCD Types 0-6 for tracking dimension changes over time and how to implement them with MERGE/upsert in standard SQL, Postgres, and Delta Lake.
+tags:
+  - concept
+---
+
 # Slowly Changing Dimensions (SCD) and MERGE
 
 ## What is a Dimension?
@@ -189,3 +196,8 @@ You'll be given a scenario and asked which SCD type to use. Rule of thumb:
 - "Show before/after for a recent change" -> Type 3
 - "Current value needs to be super fast to join" -> Type 4
 - "We need to audit compliance at any past date" -> Type 2 or 6
+
+## See Also
+- [Data Warehouse Schema Design](data_warehousing.md)
+- [Window Functions](window_functions.md)
+- [Databricks Platform](../../databricks/fundamentals/ch4.md)

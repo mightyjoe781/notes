@@ -1,3 +1,9 @@
+---
+title: systemd
+description: Cheatsheet for systemd - service management, custom unit files, journalctl log viewing, and timers as a cron alternative.
+tags:
+  - reference
+---
 # systemd
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

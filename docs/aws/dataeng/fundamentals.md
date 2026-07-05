@@ -1,3 +1,10 @@
+---
+title: Data Engineering Fundamentals
+description: Core concepts for the AWS Data Engineer Associate exam - data types, warehouse/lake/mesh architectures, ETL, formats, modeling, performance, and a SQL/Git refresher.
+tags:
+  - concept
+---
+
 # Data Engineering Fundamentals
 
 ## Types of Data
@@ -416,3 +423,7 @@ git gc # clean up-optimize local repo
 git reflog # record when ref were updated
 
 ```
+
+## See Also
+- [Joins and Set Operation](../../databases/joins_n_set.md)
+- [Data Warehousing - Schema Design](../../databases/sql/data_warehousing.md)

@@ -1,3 +1,10 @@
+---
+title: Special Methods for Sequences
+description: Implements a custom Vector sequence type covering slicing, hashing, and formatting via sequence special methods.
+tags:
+  - concept
+---
+
 # Special Methods for Sequences
 
 ## Vector: A User-Defined Sequence Type
@@ -313,5 +320,6 @@ class Vector:
         return cls(memv)
 ````
 
-
-
+## See Also
+- [Interfaces, Protocols, and ABCs](protocols-abcs.md)
+- [Operator Overloading](operator-overloading.md)

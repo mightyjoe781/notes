@@ -1,3 +1,10 @@
+---
+title: Trie Data Structures & Application
+description: Trie implementation for word/prefix search, plus applications - counting distinct substrings, bitwise XOR tries, and Word Search II with a trie-guided DFS.
+tags:
+  - concept
+---
+
 # Trie
 
 A **Trie** (pronounced “try”) is a tree-like data structure used to store a dynamic set of strings. Each node in the Trie represents a single character, and strings are represented as paths from the root to a leaf node. It is mainly used for:

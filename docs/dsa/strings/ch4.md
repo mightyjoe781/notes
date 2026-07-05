@@ -1,3 +1,10 @@
+---
+title: Suffix Tree & Suffix Arrays
+description: Suffix tree concepts and the more practical suffix array + LCP array substitute, with an implementation supporting pattern matching and longest repeated substring.
+tags:
+  - concept
+---
+
 # Suffix Tree
 
 * A suffix tree is a compressed trie containing all the suffixes of the given text as their keys and positions in the text as their values.

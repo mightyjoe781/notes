@@ -1,3 +1,10 @@
+---
+title: Data Class Builders
+description: Compares namedtuple, typing.NamedTuple, and @dataclass for building simple field-holding classes, plus type hint basics.
+tags:
+  - concept
+---
+
 # Data Class Builders
 
 Python offers a few ways to build a simple class that is just a collection of fields, with little or no extra functionality.

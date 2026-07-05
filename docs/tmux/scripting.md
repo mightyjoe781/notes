@@ -1,3 +1,10 @@
+---
+title: Scripting tmux Environments with send-keys and tmuxinator
+description: Cheatsheet for scripting tmux session setup with send-keys, target panes, and managing layouts with tmuxinator.
+tags:
+  - reference
+---
+
 # Chapter 3 : Scripting Customized Tmux Environments
 
 `-t` switch is very useful and can be utlised to streamline our setup of development environment.

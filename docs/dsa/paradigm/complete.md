@@ -1,3 +1,10 @@
+---
+title: Complete Search (Brute Force)
+description: When to reach for brute-force/complete search with pruning, iterative vs recursive backtracking examples, and a curated list of backtracking practice problems.
+tags:
+  - concept
+---
+
 # Complete Search
 
 - aka brute force or recursive backtracking

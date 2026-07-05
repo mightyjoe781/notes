@@ -1,3 +1,10 @@
+---
+title: Array Problems
+description: Worked 1D and 2D array interview problems - rotation, majority element, Kadane's algorithm, next permutation, matrix rotation/spiral, and inversion counting.
+tags:
+  - concept
+---
+
 # Array Problems
 
 

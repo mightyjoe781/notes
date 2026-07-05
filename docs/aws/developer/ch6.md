@@ -1,3 +1,10 @@
+---
+title: Amazon Kinesis Streaming Fundamentals and Limits
+description: Covers Kinesis Data Streams, Firehose, and Data Analytics, shard capacity and scaling limits, producer/consumer patterns, and batch vs stream processing tradeoffs.
+tags:
+  - reference
+---
+
 ## Analytics
 
 - Amazon Kinesis was desinged to address complexity and costs of streaming data in AWS cloud
@@ -271,3 +278,6 @@ IAM Best Practices through 4 policies
 Kinesis Data Streams can be encrypted using HTTPs Endpoints : Using KMS
 
 - FIPS : Federal Infromation Processing Standard
+
+## See Also
+- [Message Queues & Streaming](../../sd/topics/core/queue_streaming.md)

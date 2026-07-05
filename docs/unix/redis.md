@@ -1,3 +1,9 @@
+---
+title: Redis
+description: Cheatsheet for Redis - core commands, data types, pub/sub, transactions, and configuration for caching and messaging.
+tags:
+  - reference
+---
 # Redis
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

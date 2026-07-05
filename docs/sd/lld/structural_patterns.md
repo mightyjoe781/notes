@@ -1,3 +1,10 @@
+---
+title: Structural Design Patterns
+description: Python examples of structural design patterns - Adapter, Bridge, Composite, Decorator, Facade, Flyweight, and Proxy.
+tags:
+  - reference
+---
+
 # Structural Patterns
 
 * Adapter ⭐ 

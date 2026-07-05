@@ -1,3 +1,11 @@
+---
+title: Chapter 1 - Introduction
+description: Notes on OS Concepts ch. 1 - what an operating system is, resource multiplexing, and a brief history of operating systems (many sections still unwritten).
+tags:
+  - concept
+  - draft
+---
+
 # Introduction
 
 If application programmers had to understand the detailed workings of every hardware component attached to a modern computer, and manage all of those components optimally themselves, no code would ever get written.

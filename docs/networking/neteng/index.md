@@ -1,3 +1,10 @@
+---
+title: Network Engineering
+description: Hub page listing network engineering notes on fundamentals, IP, TCP/UDP, protocols, performance, and routing.
+tags:
+  - index
+---
+
 # Network Engineering
 
 

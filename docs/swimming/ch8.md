@@ -1,3 +1,10 @@
+---
+title: The Core Four Swimming Strokes
+description: Technique breakdown of freestyle, backstroke, breaststroke, and butterfly.
+tags:
+  - reference
+---
+
 # Swimming Strokes (Core 4)
 
 ## **Freestyle (Front Crawl)**

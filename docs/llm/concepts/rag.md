@@ -1,3 +1,10 @@
+---
+title: Retrieval-Augmented Generation (RAG)
+description: How RAG grounds LLM answers in external documents - embeddings, chunking strategies, vector DBs, retrieval methods, reranking, and common failure modes.
+tags:
+  - concept
+---
+
 # Retrieval-Augmented Generation (RAG)
 
 RAG connects LLMs to external knowledge at query time. Instead of baking facts into weights (which go stale), retrieve relevant documents and include them in the prompt.

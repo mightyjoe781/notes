@@ -1,3 +1,10 @@
+---
+title: JustinGuitar Grade 1 Module 4 - Rhythm & Technique
+description: Notes on finger stretches, the Dm chord, metronome practice, and the basic strumming pattern.
+tags:
+  - reference
+---
+
 # Module 4 - Rhythm & Technique
 
 ## Beginner Finger Stretches
@@ -57,3 +64,7 @@ Pattern: D   D U u D
 
 - Module 4 songs
 - Modules 5-9 (Grade 1)
+
+## See Also
+
+- [Strumming & Picking](../../guitar/theory2.md)

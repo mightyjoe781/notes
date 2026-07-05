@@ -1,3 +1,10 @@
+---
+title: AWS Batch Analytics and ETL Services
+description: Glue crawlers/ETL/DataBrew, Lake Formation, Athena and Iceberg, Apache Spark fundamentals, and EMR cluster architecture and scaling.
+tags:
+  - concept
+---
+
 # Analytics (ETL)
 
 ## AWS Glue
@@ -630,3 +637,6 @@ inputDF.groupBy($"action", window($"time", "1 hour")).count()
 - Allows submitting Spark jobs on Elastic Kubernetes Service without provisioning clusters
 - Fully managed
 - Share resources between Spark and other apps on Kubernetes
+
+## See Also
+- [Pyspark](../../pyspark/index.md)

@@ -1,3 +1,10 @@
+---
+title: Functions
+description: Reference on declaring Go functions, variadic and multiple return values, functions as values, closures, and defer.
+tags:
+  - reference
+---
+
 # Functions
 
 ## Declaring and Calling Functions

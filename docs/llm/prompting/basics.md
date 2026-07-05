@@ -1,3 +1,10 @@
+---
+title: Prompt Engineering Basics - Zero-Shot, Few-Shot, CoT
+description: Foundational prompting techniques - system prompts, zero/few-shot, chain-of-thought, formatting, and temperature/sampling tradeoffs.
+tags:
+  - reference
+---
+
 # Prompt Engineering - Basics
 
 Prompting is the fastest way to improve model outputs. Most quality problems are prompting problems before they are model problems.

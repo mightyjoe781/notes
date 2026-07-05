@@ -1,3 +1,11 @@
+---
+title: DDIA Ch1 - Reliable, Scalable, and Maintainable Applications
+description: Foundational concepts of data-intensive systems - reliability, kinds of faults, scalability, and maintainability.
+tags:
+  - concept
+  - draft
+---
+
 # Reliable, Scalable and Maintainable Applications
 
 - Many modern applications are *data-intensive* rather than *compute-intensive*.
@@ -83,3 +91,7 @@ External factors influencing the design process include:
 *Scalability* is described as a system’s ability to cope with increased load. Its often useful to talk about questions like : if system grows in a particular way, what are our options for coping with growth. How to add more compute to handle additional load
 
 ## Maintainability
+
+## See Also
+
+- [Scalability](../../sd/topics/core/scalability.md)

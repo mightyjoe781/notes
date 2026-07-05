@@ -1,3 +1,10 @@
+---
+title: String Processing with DP
+description: DP patterns on strings - LCS, palindromic subsequence/substring, edit distance, and palindrome partitioning - plus Manacher's algorithm for O(n) longest palindromic substring.
+tags:
+  - concept
+---
+
 # String Processing with DP
 
 - String DP problems usually involve breaking a string into smaller parts and solving subproblems based on those. It includes:

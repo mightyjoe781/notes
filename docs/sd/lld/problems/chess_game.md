@@ -1,3 +1,10 @@
+---
+title: Design Chess Game
+description: LLD for a two-player chess game covering class decomposition, and the Strategy, Command, and State patterns used for moves and game lifecycle.
+tags:
+  - concept
+---
+
 # Design Chess Game
 
 ## Requirements (Locked)

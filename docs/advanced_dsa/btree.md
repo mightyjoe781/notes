@@ -1,3 +1,10 @@
+---
+title: B-Trees and B+ Trees for Disk-Friendly Indexing
+description: Why databases index with wide B/B+ Trees instead of BSTs to minimize disk I/O, and how B+ Trees improve range queries over B-Trees.
+tags:
+  - concept
+---
+
 # B Tree
 *Disk friendly ordered indexing*
 
@@ -86,5 +93,10 @@ Find rows (ID between (4 and 9))
 - B+ Trees secondary index values can either point directly to tuple (postgres) or to the primary key (MYSQL)
 - If the Primary key data type is expensive this can cause bloat in all secondary indexes for databases such as MySQL (innoDB)
 - Leaf nodes in MySQL (InnoDB) contains the full row since it's an IOT/Clustered Index.
+
+## See Also
+
+- [Relational Databases - Locking, Airline Check-in, and KV Store](../sd/hld/advanced/relational_database.md) - B-Tree indexes applied to real schema/locking case studies
+- [LSM Trees](lsm.md) - the write-optimized alternative to B-Tree indexes
 
 

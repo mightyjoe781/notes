@@ -1,3 +1,10 @@
+---
+title: User Datagram Protocol (UDP)
+description: Explains UDP's stateless, connectionless design, its header structure, use cases, pros/cons, and minimal server examples in JS and C.
+tags:
+  - concept
+---
+
 # User Datagram Protocol (UDP)
 
 ## What is UDP ?
@@ -142,3 +149,7 @@ tcpdump -n -v -i en0 src 8.8.8.8 or dst 8.8.8.8
 # another terminal
 nslookup smk.minetest.in 8.8.8.8
 ```
+
+## See Also
+- [Sockets](../../sd/lld/sockets.md)
+- [Transmission Control Protocol (TCP)](tcp.md)

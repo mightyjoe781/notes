@@ -1,3 +1,11 @@
+---
+title: FreeBSD Topics to Document
+description: Scratch outline of unwritten FreeBSD topics - device drivers, docs, testing, code analysis, dtrace/ebpf, Capsicum.
+tags:
+  - index
+  - draft
+---
+
 ### 1. Device Drivers
 
 2. ### Creating Documentation

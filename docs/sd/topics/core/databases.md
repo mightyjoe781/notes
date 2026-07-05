@@ -1,3 +1,10 @@
+---
+title: Databases & Storage
+description: Covers ACID properties, isolation levels, SQL vs NoSQL trade-offs, replication patterns, sharding, and how to choose a database for your application.
+tags:
+  - reference
+---
+
 # Databases & Storage
 
 ## Database Fundamentals

@@ -1,3 +1,10 @@
+---
+title: More Problems on Binary Trees
+description: Advanced binary tree problems - LCA, tree reconstruction from traversals, serialization, Morris traversal, and flattening a tree into a linked list.
+tags:
+  - concept
+---
+
 ## Problems on Binary Trees & BST
 
 

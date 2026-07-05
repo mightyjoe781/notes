@@ -1,3 +1,10 @@
+---
+title: Python Standard Library for DSA
+description: Quick reference for Python standard library modules (itertools, collections, heapq, bisect, functools) that remove boilerplate in DSA problem solving.
+tags:
+  - reference
+---
+
 # Python Standard Library for DSA
 
 > These tricks are Python-specific. They don't change the algorithm - they remove boilerplate so you can focus on the logic.

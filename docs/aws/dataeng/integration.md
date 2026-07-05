@@ -1,3 +1,10 @@
+---
+title: AWS Application Integration Services
+description: SQS and SNS messaging patterns (including fan-out and DLQs), Step Functions, AppFlow, EventBridge, and Amazon Managed Workflows for Apache Airflow.
+tags:
+  - reference
+---
+
 # Application Integration
 
 ## SQS
@@ -328,3 +335,6 @@
 ###  Analytics Layer
 
 ![](assets/Pasted%20image%2020251112222956.png)
+
+## See Also
+- [Message Queues & Streaming](../../sd/topics/core/queue_streaming.md)

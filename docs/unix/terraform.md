@@ -1,3 +1,9 @@
+---
+title: Terraform
+description: Cheatsheet for Terraform - HCL basics, core workflow commands, state management, workspaces, and modules.
+tags:
+  - reference
+---
 # Terraform
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md) | [Detailed Guides](../terraform/index.md)

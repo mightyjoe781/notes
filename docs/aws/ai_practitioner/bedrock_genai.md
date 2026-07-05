@@ -1,3 +1,10 @@
+---
+title: Amazon Bedrock and Generative AI Fundamentals
+description: How Amazon Bedrock works - foundation models, fine-tuning, RAG, guardrails, agents, and pricing.
+tags:
+  - concept
+---
+
 # Amazon Bedrock & Generative AI (GenAI)
 
 ![](assets/Pasted%20image%2020251008095601.png)
@@ -209,3 +216,9 @@ Online Tokenizer : https://platform.openai.com/tokenizer
 - Temperature, Top K, Top P - no impact on pricing
 - Model size - usually a smaller model will be cheaper (varies based on providers)
 - Number of Input and Output Tokens - main driver of cost
+
+## See Also
+- [Training & Fine-tuning](../../llm/concepts/training.md)
+- [Retrieval-Augmented Generation (RAG)](../../llm/concepts/rag.md)
+- [AI Agents](../../llm/concepts/agents.md)
+- [Tokenization](../../llm/concepts/tokenization.md)

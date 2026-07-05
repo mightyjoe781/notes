@@ -1,3 +1,10 @@
+---
+title: Database Engineering
+description: Hub page linking to notes on database internals - ACID, indexing, storage engines, partitioning, sharding, replication, and NoSQL architecture.
+tags:
+  - index
+---
+
 # Database Engineering
 
 Following notes dive deep in the inner workings of the databases.

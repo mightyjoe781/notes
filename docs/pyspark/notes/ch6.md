@@ -1,3 +1,10 @@
+---
+title: Working with Different Types of Data Cheatsheet
+description: Quick reference for DataFrame functions covering booleans, numbers, strings, dates, nulls, complex types (structs/arrays/maps), JSON, and UDFs.
+tags:
+  - reference
+---
+
 # Working with Different Types of Data
 
 Where to look for APIs and find functions to transform your data.

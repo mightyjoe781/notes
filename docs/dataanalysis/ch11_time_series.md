@@ -1,3 +1,10 @@
+---
+title: Time Series - Timestamps, Periods, Resampling, and Rolling Windows
+description: Timestamps vs periods, date ranges/frequencies/offsets, time zone handling, resampling (up/downsampling), and moving/expanding window functions in pandas.
+tags:
+  - concept
+---
+
 # Time Series
 
 Time series data is very important form of structured data, appearing in almost all fields of life. Any kind of measurement/experiment observed over time will always yield Time Series data.
@@ -961,3 +968,6 @@ result.plot()
 ```
 
 ![](assets/Pasted%20image%2020260308002506.png)
+
+## See Also
+- [Working with Different Types of Data (Spark) - Dates and Timestamps](../pyspark/notes/ch6.md)

@@ -1,3 +1,10 @@
+---
+title: Unbounded & Bounded (0/1) Knapsack
+description: Subset-sum and knapsack DP variants - subset sum, partition equal subset sum, coin change, 0/1 knapsack, and rod cutting, with bounded vs unbounded distinctions.
+tags:
+  - concept
+---
+
 # Subsets & Knapsack
 
 ## Subsets

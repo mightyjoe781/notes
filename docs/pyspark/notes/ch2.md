@@ -1,3 +1,10 @@
+---
+title: Spark's Basic Architecture and Execution Model
+description: Explains Spark's driver/executor architecture, DataFrames and partitions, transformations vs actions, and lazy evaluation through a worked example.
+tags:
+  - concept
+---
+
 # A Gentle Introduction to Spark
 
 

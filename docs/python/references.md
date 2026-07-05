@@ -1,3 +1,10 @@
+---
+title: Object References, Mutability, and Recycling
+description: Explains Python variable semantics, identity vs equality, shallow/deep copies, and mutable default argument pitfalls.
+tags:
+  - concept
+---
+
 # Object References, Mutability and Recycling
 
 ## Variables are not Boxes
@@ -223,3 +230,6 @@ You can use `weakref.finalize` register a callback function to be called when an
 - same behaviour can be observed with instances of `str`, `bytes` and `frozenset` (note: `fs[:]` doesn’t exist, we meant to use `fs.copy()`)
 - The sharing of string literals is an optimization technique called *interning*. CPython uses a similar technique with small integers to avoid  unnecessary duplication of numbers that appear frequently in programs  like 0, 1, –1, etc. Note that CPython does not intern all strings or integers, and the criteria it uses to do so is an undocumented implementation  detail.
 - The tricks discussed in this section, including the behavior of `frozenset.copy()`, are harmless “lies” that save memory and make the interpreter faster. Do not worry about them, they should not give you any trouble because they only apply to immutable types.
+
+## See Also
+- [Pointers (Go)](../go/lego/ch6.md)

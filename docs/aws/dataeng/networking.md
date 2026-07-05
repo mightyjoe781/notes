@@ -1,3 +1,10 @@
+---
+title: AWS VPC Networking and CloudFront CDN
+description: VPC/subnet fundamentals, NACLs vs security groups, VPC peering/endpoints/PrivateLink, Direct Connect, and CloudFront origins and caching.
+tags:
+  - reference
+---
+
 # Networking & CDN
 
 ## VPC & Subnets Primer

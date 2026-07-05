@@ -1,3 +1,10 @@
+---
+title: Luanti (Minetest) Hub
+description: Hub for Luanti/Minetest server setup, VPS deployment, backend database management, and server scripts.
+tags:
+  - index
+---
+
 ## Luanti (formerly Minetest)
 
 Luanti (formerly Minetest) is a free and open-source voxel game engine and game creation system developed by a team of volunteers, with significant contributions from the community. It was created by Perttu Ahola and released online in November 2010. The project was renamed from Minetest to Luanti in October 2024.

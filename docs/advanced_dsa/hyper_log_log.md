@@ -1,3 +1,10 @@
+---
+title: HyperLogLog for Cardinality Estimation
+description: How HyperLogLog estimates distinct-element counts over huge streams using ~1.5KB of memory, via leading-zero-count registers and harmonic-mean combination.
+tags:
+  - concept
+---
+
 # Hyper Log Log
 
 *Cardinality Estimation*
@@ -87,3 +94,9 @@ count = r.pfcount("page:visits")
 
 print(count)
 ```
+
+## See Also
+
+- [Algorithmic Design - Impression Counting](../sd/hld/advanced/algorithmic_design_2.md) - HyperLogLog applied to a real impression-counting design
+- [Bloom Filters](bloom_filters.md) - a related probabilistic structure trading space for accuracy
+- [Count-Min Sketch](count-min_sketch.md) - frequency estimation, the sibling problem to cardinality estimation

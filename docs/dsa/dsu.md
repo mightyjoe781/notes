@@ -1,3 +1,10 @@
+---
+title: Disjoint Set Union (DSU) / Union-Find
+description: Union-Find implementations (simple and with path compression + union by rank) and applications like cycle detection and counting connected components.
+tags:
+  - reference
+---
+
 # DSU
 
 Disjoint Set Union (DSU), also called Union-Find, is a data structure that tracks elements partitioned into disjoint (non-overlapping) sets. Supports two operations:

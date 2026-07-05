@@ -1,3 +1,10 @@
+---
+title: Networking
+description: Hub page linking to network engineering notes covering protocols, routing, and communication fundamentals.
+tags:
+  - index
+---
+
 # Networking
 
 A computer network is a system of interconnected devices that communicate and share resources through established protocols and communication channels. _Small networks_ can connect devices within a single location, while _large networks_ span across continents and form the backbone of the internet.

@@ -1,3 +1,10 @@
+---
+title: Managing Luanti's PostgreSQL Backend
+description: Cheatsheet for migrating a Luanti world to PostgreSQL, running VACUUM and backups, and trimming the map database.
+tags:
+  - reference
+---
+
 # Managing Postgres Backend
 
 ## Minetest Storage
@@ -142,3 +149,8 @@ Example `mapcleaner.json` for removing everything below -1000.
   "delay": 50
 }
 ```
+
+## See Also
+
+- [PostgreSQL - Setup, Design Patterns, and Internals](../databases/postgresql/index.md)
+- [MVCC and other database internals](../sd/topics/database/advanced_topics.md)

@@ -1,3 +1,10 @@
+---
+title: CPU
+description: How a CPU core is built and works - ALU/CU/registers/MMU/caches, NUMA, RISC vs CISC, the instruction life-cycle, pipelining, hyper-threading, and SIMD.
+tags:
+  - concept
+---
+
 # CPU
 
 ## CPU Components and Architecture

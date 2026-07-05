@@ -1,3 +1,9 @@
+---
+title: Ansible
+description: Cheatsheet for Ansible's agentless, push-based configuration management - inventories, playbooks, modules, vault, and roles.
+tags:
+  - reference
+---
 # Ansible
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

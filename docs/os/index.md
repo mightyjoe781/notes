@@ -1,3 +1,10 @@
+---
+title: Operating Systems
+description: Hub page for operating systems notes, linking to fundamentals and Operating System Concepts (OSC) sections.
+tags:
+  - index
+---
+
 # Operating Systems
 
 An operating system is the layer of software that manages a computer's hardware and provides a simpler, cleaner model for programs to run on. It handles processes, memory, storage, and I/O, abstracting away the complexity of the underlying hardware so that application developers can focus on solving problems rather than managing resources.

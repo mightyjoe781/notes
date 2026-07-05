@@ -1,3 +1,10 @@
+---
+title: Graph Properties and Types
+description: Core graph theory definitions and terminology - paths, cycles, connectivity, trees, bipartite graphs, digraphs - plus adjacency list/matrix representations.
+tags:
+  - concept
+---
+
 # Graph Properties and Types
 
 Major Application of Graph includes *Maps, Hypertext, Circuits, Schedules, Transactions, Matching, Networks, Program Structure(Compiler).*

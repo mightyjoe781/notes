@@ -1,3 +1,10 @@
+---
+title: tmux Workflows - Panes, Sessions, and Plugin Ecosystem
+description: Cheatsheet for advanced tmux workflows - pane/window conversion, session management, OS integration, vim navigation, and plugins like tmux-resurrect.
+tags:
+  - reference
+---
+
 # Chapter 6 : Workflows
 
 ### Working Effectively with Panes and Windows

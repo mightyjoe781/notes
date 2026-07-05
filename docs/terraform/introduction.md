@@ -1,3 +1,9 @@
+---
+title: Terraform - What It Is and How HCL Is Structured
+description: Terraform's declarative IaC model, HCL syntax basics, and the file layout of a root module.
+tags:
+  - concept
+---
 # Introduction to Terraform
 
 ## What is Terraform?

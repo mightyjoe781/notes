@@ -1,3 +1,10 @@
+---
+title: 1D DP
+description: Worked 1D dynamic programming problems - climbing stairs, frog jump, house robber, decode ways, longest increasing subsequence, and word break.
+tags:
+  - concept
+---
+
 # 1D DP
 
 ## Climbing Stairs

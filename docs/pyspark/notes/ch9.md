@@ -1,3 +1,10 @@
+---
+title: Data Sources Cheatsheet
+description: Reference for reading and writing CSV, JSON, Parquet, ORC, JDBC, and text data sources, plus partitioning, bucketing, and file-size tuning options.
+tags:
+  - reference
+---
+
 # Data Sources
 
 - goal here is to give ability to read and write from Spark’s core data sources and know enough to understand what you should look for when integrating third-party data sources like Cassandra, Hbase, MongoDB, AWS Redshift, XML, etc.

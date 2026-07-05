@@ -1,3 +1,10 @@
+---
+title: Delivering Microservices
+description: Covers automated deployment pipelines, infrastructure as code, independent upgrade strategies, and monitoring and observability.
+tags:
+  - concept
+---
+
 ## Delivering Microservices
 
 #### Automated Deployments
@@ -86,3 +93,7 @@ Upgrade strategies:
 - *Building Microservices* by Sam Newman (O'Reilly) — the definitive reference
 - *Designing Distributed Systems* by Brendan Burns (O'Reilly)
 - *Release It!* by Michael T. Nygard — resilience patterns for production systems
+
+## See Also
+- [Maintainability](../../sd/topics/core/maintainability.md)
+- [Reliability](../../sd/topics/core/reliability.md)

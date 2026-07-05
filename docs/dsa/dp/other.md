@@ -1,3 +1,10 @@
+---
+title: Misc DP Types
+description: Miscellaneous DP-on-squares problems - maximal rectangle in a binary matrix and counting square submatrices of all ones.
+tags:
+  - concept
+---
+
 # Misc. Problems
 
 ## DP on Squares

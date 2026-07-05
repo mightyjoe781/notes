@@ -1,3 +1,10 @@
+---
+title: Website Status Tracker Application
+description: Walks through building a concurrent website status checker in Go, progressively introducing goroutines and channels.
+tags:
+  - concept
+---
+
 ### Website Status Tracker Application
 
 This is an example of channels and parallelism in go.
@@ -174,4 +181,8 @@ for l := range c {
   }(l) // always pass a copy of l to function literal, if not then l might changed by the time it gets picked up by checkLink(l,c) :P
 }
 ````
+
+## See Also
+- [Concurrency in Go](../lego/ch12.md)
+- [Concurrency Models in Python](../../python/concurrency.md)
 

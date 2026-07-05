@@ -1,3 +1,10 @@
+---
+title: tmux Copy Mode and Paste Buffers
+description: Cheatsheet for tmux copy mode, paste buffer management, and integrating copy/paste with the system clipboard on Linux and macOS.
+tags:
+  - reference
+---
+
 # Chapter 4 : Working with Text And Buffer
 
 #### Scrolling Through Output with Copy Mode

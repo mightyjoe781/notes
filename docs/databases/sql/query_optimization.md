@@ -1,3 +1,10 @@
+---
+title: Query Optimization and EXPLAIN
+description: Explains how to read PostgreSQL query plans, diagnose common performance problems (seq scans, bad join strategy, stale stats), and rewrite slow queries, plus PySpark's explain().
+tags:
+  - concept
+---
+
 # Query Optimization and EXPLAIN
 
 ## How a Query Gets Executed
@@ -239,3 +246,7 @@ df = large.join(broadcast(small), "key")
 # see AQE runtime plan (after execution)
 spark.conf.set("spark.sql.adaptive.enabled", "true")
 ```
+
+## See Also
+- [Database Indexing](../dbeng/indexing.md)
+- [Understanding Database Internals](../dbeng/internals.md)

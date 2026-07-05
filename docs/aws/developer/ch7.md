@@ -1,3 +1,10 @@
+---
+title: CloudWatch, CloudFormation, and VPC Flow Logs
+description: Covers CloudWatch dashboards, alarms, and anomaly detection, CloudFormation stacks and templates, and VPC flow log scope and limitations.
+tags:
+  - reference
+---
+
 ## Management and Governance
 
 ### Amazon Cloudwatch

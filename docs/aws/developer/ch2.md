@@ -1,3 +1,10 @@
+---
+title: EC2, Elastic Beanstalk, and Lambda Compute Options
+description: Covers EC2 instance/pricing options, Elastic Beanstalk environment tiers and deployment strategies, and AWS Lambda event sources and invocation model.
+tags:
+  - reference
+---
+
 ## Compute
 
 #### What is Compute ?

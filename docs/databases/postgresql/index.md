@@ -1,3 +1,10 @@
+---
+title: PostgreSQL - Setup, Design Patterns, and Internals
+description: Covers macOS setup, validation constraints, schema design patterns (likes, tags, hashtags), storage internals, indexes, query tuning, views, transactions, and migrations.
+tags:
+  - concept
+---
+
 ## PostgreSQL
 
 ### Resources
@@ -914,4 +921,10 @@ There are 2 solution :
 - Rely on Postgres to sanitize values for us.
 
 Postgres create a `prepared` statement and executes the prepared statement. Use `$1` variable for assigning values.
+
+## See Also
+- [SQL](../sql/index.md)
+- [Database Indexing](../dbeng/indexing.md)
+- [Query Optimization and EXPLAIN](../sql/query_optimization.md)
+- [ACID Properties and Transaction Isolation](../dbeng/acid.md)
 

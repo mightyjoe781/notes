@@ -1,3 +1,10 @@
+---
+title: JustinGuitar Course Notes Hub
+description: Hub linking notes taken while working through the JustinGuitar Grade 1-3 curriculum.
+tags:
+  - index
+---
+
 # JustinGuitar Notes
 
 Notes taken while working through the [JustinGuitar](https://www.justinguitar.com/guitar-lessons/) curriculum.

@@ -1,3 +1,10 @@
+---
+title: AWS Developer Associate Notes
+description: Hub page linking Cloud Academy course notes for the AWS Certified Developer Associate (DVA-C01) exam.
+tags:
+  - index
+---
+
 ## Cloud Academy Notes
 
 

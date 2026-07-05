@@ -1,3 +1,10 @@
+---
+title: AWS Network Performance and Optimization
+description: Reference on MTU/jumbo frames, enhanced networking, EFA/DPDK, and bandwidth limits across VPC, EC2, VPN, and Direct Connect.
+tags:
+  - reference
+---
+
 # Network Performance & Optimization
 
 ## Network Performance - Basics

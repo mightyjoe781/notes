@@ -1,3 +1,10 @@
+---
+title: Scalability
+description: Covers horizontal vs vertical scaling, data scaling strategies (read replicas, sharding), and auto-scaling approaches.
+tags:
+  - reference
+---
+
 # Scalability
 
 Scalability is the capability of a system to handle a growing amount of work or its potential to accommodate growth. There are two main approaches to scaling:

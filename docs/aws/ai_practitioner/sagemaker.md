@@ -1,3 +1,10 @@
+---
+title: Amazon SageMaker Overview
+description: SageMaker's ML lifecycle tools - Studio, Data Wrangler, Feature Store, Clarify, Ground Truth, Pipelines, JumpStart, Canvas, and governance features.
+tags:
+  - reference
+---
+
 # Amazon SageMaker
 
 ## Overview

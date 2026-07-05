@@ -2,6 +2,10 @@
 hide:
   - navigation
   - toc
+title: Unix Tools
+description: Hub linking cheatsheets for shell, text processing, system, networking, containers, IaC, database, and productivity tools used on Unix/Linux.
+tags:
+  - index
 ---
 # Unix Tools
 

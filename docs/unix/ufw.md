@@ -1,3 +1,9 @@
+---
+title: UFW (Uncomplicated Firewall)
+description: Cheatsheet for UFW - initial setup, allow/deny rules, rule management, logging, and common firewall configurations.
+tags:
+  - reference
+---
 # UFW (Uncomplicated Firewall)
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

@@ -1,3 +1,10 @@
+---
+title: Pair Programming with tmux - Shared Accounts, Sockets, and tmate
+description: Cheatsheet for pairing over tmux via shared accounts, grouped sessions, separate sockets, and the tmate fork.
+tags:
+  - reference
+---
+
 # Chapter 5 : Pair Programming with Tmux
 
 There are two ways to work with remote user

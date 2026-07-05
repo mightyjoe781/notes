@@ -1,3 +1,10 @@
+---
+title: Data Cleaning and Preparation - Missing Data, Strings, Binning
+description: Reference for handling missing data, duplicates, replacing/mapping values, discretization, dummy variables, and string/regex methods in pandas.
+tags:
+  - reference
+---
+
 # Data Cleaning and Preparation
 
 ## Handling Missing Data
@@ -437,4 +444,7 @@ Wes      NaN     NaN  NaN
 ### Computations with Categoricals
 
 ### Categorical Methods
+
+## See Also
+- [Working with Different Types of Data (Spark)](../pyspark/notes/ch6.md)
 

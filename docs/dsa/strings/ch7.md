@@ -1,3 +1,10 @@
+---
+title: Compression & Encoding Techniques
+description: String compression and encoding techniques - run-length encoding, Huffman coding, trie-based compression, Burrows-Wheeler transform, and LZW dictionary encoding.
+tags:
+  - reference
+---
+
 # Compression & Encoding Techniques
 
 These are used in both practical applications (like ZIP files, web protocols) and algorithm problems (e.g. Run-Length Encoding, Huffman Coding).

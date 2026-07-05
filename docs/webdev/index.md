@@ -1,6 +1,13 @@
+---
+title: Backend Web Frameworks Comparison by Language
+description: Comparison table of backend web frameworks across Python, JS/TS, Java, Go, and Rust with strengths, weaknesses, and recommendations.
+tags:
+  - reference
+---
+
 # Web Frameworks Overview
 
-Quick reference for backend web frameworks by language — strengths, weaknesses, and docs.
+Quick reference for backend web frameworks by language - strengths, weaknesses, and docs.
 
 ---
 
@@ -53,7 +60,7 @@ Quick reference for backend web frameworks by language — strengths, weaknesses
 | **Gin** | Fast router, middleware support, good DX, most popular Go web framework | Opinionated routing style, some rough edges | [gin-gonic.com](https://gin-gonic.com) |
 | **Echo** | Clean API, high performance, built-in middleware | Smaller community than Gin | [echo.labstack.com](https://echo.labstack.com) |
 | **Fiber** | Express-like API, very fast (built on fasthttp), easy migration from Node | Not net/http compatible, fasthttp quirks | [gofiber.io](https://gofiber.io) |
-| **Chi** | Idiomatic Go, stdlib compatible, composable middleware | No extras — just routing | [github.com/go-chi/chi](https://github.com/go-chi/chi) |
+| **Chi** | Idiomatic Go, stdlib compatible, composable middleware | No extras - just routing | [github.com/go-chi/chi](https://github.com/go-chi/chi) |
 
 **Pick Gin or Chi** for most projects; stdlib `net/http` for minimal services.
 
@@ -68,4 +75,4 @@ Quick reference for backend web frameworks by language — strengths, weaknesses
 | **Rocket** | Ergonomic macros, good DX, type-safe routing | Slower to compile, opinionated | [rocket.rs](https://rocket.rs) |
 | **Warp** | Filter-based composition, async, Tokio-native | Filter combinators can be hard to read | [docs.rs/warp](https://docs.rs/warp) |
 
-**Pick Axum** for new Rust web projects — best balance of ergonomics and performance.
+**Pick Axum** for new Rust web projects - best balance of ergonomics and performance.

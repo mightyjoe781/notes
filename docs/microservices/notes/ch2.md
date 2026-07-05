@@ -1,3 +1,10 @@
+---
+title: Architecting Microservices
+description: Covers data ownership per service, independent deployability, and identifying service boundaries with domain-driven design.
+tags:
+  - concept
+---
+
 ## Architecting Microservices
 
 #### Evolving Towards Microservices
@@ -100,3 +107,7 @@ These represent three distinct parts of the shopping experience, each with diffe
 - **Basket**: Short-lived session data, well-suited for Redis cache
 - **Ordering**: Write-heavy, highly sensitive financial data requiring durability
 - **Identity**: Authentication and user management database
+
+## See Also
+- [Monolithic Architecture](../../sd/topics/paradigms/monolith.md)
+- [Microservices Architecture](../../sd/topics/paradigms/microservices.md)

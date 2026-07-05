@@ -1,3 +1,10 @@
+---
+title: A Talk with OldCoder - FOSS Developer Career and Tooling Notes
+description: Opinionated Q&A on languages, web servers, containers/VMs, CMS choices, and build systems (autotools, meson-ninja, cmake) for a FOSS developer.
+tags:
+  - concept
+---
+
 ### A talk with OldCoder aka Robert Kiraly
 
 #### Study: What should a Linux FOSS developer learn?
@@ -397,3 +404,8 @@ make && make install
 ````
 
 This is obviously simple.  The problem is that,  if a  problem such as not being able to find a library occurs, it may be difficult to figure out and fix.
+
+## See Also
+- [Developer VPS Box Setup Guide](vpssetup.md)
+- [Podman](podman.md)
+- [Docker](../unix/docker.md)

@@ -1,3 +1,10 @@
+---
+title: VSCode Remote-SSH into a FreeBSD QEMU VM on M1
+description: Configures a FreeBSD arm64 QEMU VM (user, sshd, sudo, linuxulator, bash) for VSCode Remote-SSH development.
+tags:
+  - reference
+---
+
 ## Setting up VSCode Remote Development on M1
 
 This method assumes you have working QEMU machine running on M1. Following steps prepare vm for running VSCode Remote Extension which is useful in case you wish to use debugger and run commands easily.
@@ -135,3 +142,8 @@ Host freebsd-vm
 
 
 ping on discord or connect via smk@freebsd.org | smk@minetest.in if you face any trouble
+
+## See Also
+- [FreeBSD Development Environment on M1](freebsd_m1.md)
+- [Absolute FreeBSD - Ch 9. Securing your System](absfreebsd/ch9.md)
+- [Developer VPS Box Setup](../server/vpssetup.md)

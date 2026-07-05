@@ -1,3 +1,10 @@
+---
+title: Count-Min Sketch for Frequency Estimation
+description: A quick reference for the Count-Min sketch's sub-linear-space frequency counting, its Redis commands, and how to size width/depth for a trustworthy error threshold.
+tags:
+  - reference
+---
+
 # Count-min Sketch
 
 *Frequency estimation in Data Streams*

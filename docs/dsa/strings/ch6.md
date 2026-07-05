@@ -1,3 +1,10 @@
+---
+title: String Tasks
+description: A quick reference of common string manipulation tasks - frequency maps, prefix/suffix processing, palindrome checks, sliding window, and hashing/pattern matching pointers.
+tags:
+  - reference
+---
+
 # String Tasks
 
 String tasks involve manipulation, analysis, and transformation of strings. These are frequently encountered in contests and technical interviews.

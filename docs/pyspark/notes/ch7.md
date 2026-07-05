@@ -1,3 +1,10 @@
+---
+title: Aggregations Cheatsheet
+description: Reference for Spark aggregation functions, grouping, window functions, grouping sets, rollups, cubes, and pivots.
+tags:
+  - reference
+---
+
 # Aggregations
 
 Aggregating is the act of collecting something together. Usually we define aggregations one or more columns. This function must produce one result for each group, given multiple input values.

@@ -1,3 +1,10 @@
+---
+title: What is Apache Spark
+description: Introduces Spark's philosophy as a unified computing engine, its history, and how to run PySpark locally.
+tags:
+  - concept
+---
+
 # What is Apache Spark ?
 
 Apache Spark is a *unified computing engine* and *set of libraries for parallel data processing* on computer clusters.
@@ -81,4 +88,8 @@ columns = ["language", "user_count"]
 df = spark.createDataFrame(data).toDF(*columns)
 df.show()
 ````
+
+## See Also
+
+- [Big Data](../../sd/hld/beginner/big_data.md)
 

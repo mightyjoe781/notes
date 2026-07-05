@@ -1,3 +1,10 @@
+---
+title: Python Libraries Overview
+description: Quick reference for Python's built-in data structure and algorithm libraries like collections, heapq, bisect, and itertools.
+tags:
+  - reference
+---
+
 # Python Libraries Overview
 
 Quick reference for Python's built-in data structure and algorithm libraries. Each section covers the most useful tools with the key patterns you'll reach for most often.
@@ -313,3 +320,7 @@ sl.add(0)               # SortedList([0, 1, 2, 3, 4, 5])
 sl.irange(2, 4)         # iterator over [2, 3, 4]
 sl.bisect_left(3)       # 2
 ```
+
+## See Also
+- [Dictionaries and Sets](dicts-sets.md)
+- [Python Standard Library for DSA](../dsa/additional/python_stdlib.md)

@@ -1,3 +1,10 @@
+---
+title: What is the Databricks Lakehouse Platform
+description: How the lakehouse combines data warehouse and data lake strengths, the medallion architecture, and platform security and governance via Unity Catalog.
+tags:
+  - concept
+---
+
 ## Introduction
 
 Databricks: The Data + AI Company

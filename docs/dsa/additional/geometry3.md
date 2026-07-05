@@ -1,3 +1,10 @@
+---
+title: Convex Hull and Line Intersection
+description: Convex hull construction algorithms (Graham scan, monotone chain, gift wrapping) and applications like rotating calipers and Minkowski sum.
+tags:
+  - concept
+---
+
 # Convex Hull
 
 The **Convex Hull** of a set of points is the smallest convex polygon that contains all the points. It’s like stretching a rubber band around the outermost points.

@@ -1,3 +1,10 @@
+---
+title: Serving node.js Apps over HTTPS via an Nginx Reverse Proxy
+description: Run a plain-http node.js app on localhost and let nginx terminate TLS and reverse-proxy to it.
+tags:
+  - reference
+---
+
 ### Serve `node.js` apps by `https`
 
 The best way to serve "node.js" apps by "https" (as opposed to "http") is probably as follows.
@@ -106,4 +113,9 @@ If everything is working, the  following command should now be able to access th
 Substitute the appropriate domain name for "moo.cow.milk".
 
 Chromium and other major browsers should be able to access the indicated URL as well.
+
+## See Also
+- [Setting up Nginx](nginx.md)
+- [Nginx Static Site Setup for a New Subdomain](nginx2.md)
+- [Nginx](../unix/nginx.md)
 

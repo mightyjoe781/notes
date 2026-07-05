@@ -1,3 +1,10 @@
+---
+title: DP on Trees
+description: Tree DP patterns - bottom-up post-order aggregation and top-down rerooting - with worked problems like House Robber III, tree diameter, and binary tree cameras.
+tags:
+  - concept
+---
+
 # DP on Trees
 
 Used when input is a **tree (acyclic connected graph)** and we need to calculate DP states at each node, often in a **bottom-up (post-order)** or **top-down (rerooting)** fashion.

@@ -1,3 +1,10 @@
+---
+title: Distributed Systems
+description: Covers load balancer design and health monitoring, plus remote and distributed locks (Redis SETNX and Redlock) for synchronizing machines.
+tags:
+  - concept
+---
+
 # Distributed Systems
 
 A distributed system is one where multiple components running on multiple machines work together to appear as a single coherent system solving a bigger problem.

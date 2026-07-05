@@ -1,3 +1,10 @@
+---
+title: Practical Vim - Book Tip Summary
+description: Condensed tip-by-tip summary of Drew Neil's Practical Vim, covering modes, patterns, registers, and tooling like ctags and quickfix.
+tags:
+  - reference
+---
+
 # Summary of Practical Vim
 
 TIP 1 : Meet the dot command ! Use `.` command as much as you can.
@@ -368,7 +375,7 @@ TIP 101 : Alphabetize the properties of Each Rule in a CSS File.
 
 - `:g/{pattern}/[range][cmd]` : limits the execution of the global command
 - A generalised form: `:g/{start}/ .,{finish} [cmd]`
-- Sorting all blocks of CSS rules: `:g/{/ .+1,/}/-1 sort` — or indent all properties inside blocks: `:g/{/ .+1,/}/-1 >`. To suppress the `:>` output, use `:sil`: `:g/{/sil .+1,/}/-1 >`
+- Sorting all blocks of CSS rules: `:g/{/ .+1,/}/-1 sort` - or indent all properties inside blocks: `:g/{/ .+1,/}/-1 >`. To suppress the `:>` output, use `:sil`: `:g/{/sil .+1,/}/-1 >`
 
 ### Part 6 : Tools
 
@@ -381,7 +388,7 @@ TIP 102 : Meet ctags
   ```bash
   # Debian/Ubuntu
   sudo apt-get install universal-ctags
-  # macOS (macOS ships a limited BSD ctags — install the full version via Homebrew)
+  # macOS (macOS ships a limited BSD ctags - install the full version via Homebrew)
   brew install universal-ctags
   ```
 
@@ -574,7 +581,8 @@ TIP 123 : Fix Spelling errors from insert mode.
 
 - Enable filetype plugins in vimrc `filetype plugin on`
 
-
-
-
+## See Also
+- [grep cheatsheet](../unix/grep.md)
+- [ripgrep cheatsheet](../unix/ripgrep.md)
+- [regex notes](../regex/index.md)
 

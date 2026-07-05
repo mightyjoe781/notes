@@ -1,3 +1,10 @@
+---
+title: What is the Data Science and Engineering Workspace
+description: Core Databricks workspace assets - notebooks, repos, jobs, Delta Live Tables, clusters, pools, DBFS, and Auto Loader.
+tags:
+  - concept
+---
+
 ## Databricks Data Science and Engineering Workspace
 
 Databricks Assets Map:

@@ -1,3 +1,10 @@
+---
+title: Serverless Architecture
+description: Covers Function-as-a-Service fundamentals, event-driven design, cold start optimization, and common serverless architecture patterns.
+tags:
+  - concept
+---
+
 # Serverless Architecture
 
 Serverless architecture enables developers to build and deploy applications without managing underlying infrastructure. The cloud provider handles server provisioning, scaling, and maintenance, while developers only pay for actual execution time and resources consumed.

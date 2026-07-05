@@ -1,3 +1,10 @@
+---
+title: Consensus Algorithms - Byzantine Generals and Raft
+description: Builds consensus intuition from the Byzantine Generals problem (leader-based and local voting) up to Raft's leader election and log replication.
+tags:
+  - concept
+---
+
 # Consensus Algorithm
 
 Consensus Algorithms are used to gain agreement between network of nodes in a distributed system.
@@ -138,4 +145,10 @@ Amazing Visualization : https://thesecretlivesofdata.com/raft/
 - Used by Kubernetes for cluster state storage.
 
 `HashiCorp Raft`
+
+## See Also
+
+- [Paxos](paxos.md) - the older, harder-to-understand consensus family Raft was designed to replace
+- [Consensus Algorithms](../sd/topics/consistency/consensus_algorithms.md) - broader survey of leader election, quorums, and consensus implementations
+- [CAP Theorem](../sd/topics/consistency/cap.md) - the consistency/availability trade-offs consensus protocols navigate
 

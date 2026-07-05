@@ -1,3 +1,10 @@
+---
+title: Running a Minetest/Luanti Server - Considerations, Forks, and Hosting
+description: Overview of what to weigh before running a Luanti server, the major forks and games (MultiCraft, VoxeLibre, Final Minetest), and hosting options.
+tags:
+  - concept
+---
+
 ### Minetest Server
 
 Minetest (now renamed to Luanti) is an open source voxel game engine. It requires a game which utilises the engine API to provide gameplay. By default it ships with a devtest game which is mostly used for development purposes. A better playable game called Minetest Game is also available.

@@ -1,3 +1,10 @@
+---
+title: Communication and Protocols
+description: Covers client-server communication over TCP/HTTP/WebSockets, blob storage, bloom filters, and consistent hashing basics.
+tags:
+  - concept
+---
+
 # Communication and Protocols
 
 >    Distributed systems are just computers trying their best to talk to each other.

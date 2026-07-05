@@ -1,3 +1,10 @@
+---
+title: Geohashing - Reducing Proximity Search to String Prefix Matching
+description: How geohashing encodes lat/lng into a Z-order string prefix so databases can reuse B-Tree indexes for radius search, and why S2/H3 replaced it.
+tags:
+  - concept
+---
+
 # Geohashing
 
 Excellent way to reduce one type of problem (proximity search) to another, seemingly unrelated one (string prefix matching), allowing databases to re-use their regular index data structures on these fancy new co-ordinates.
@@ -306,3 +313,9 @@ Further Reading
 - https://cloud.google.com/blog/products/data-analytics/best-practices-for-spatial-clustering-in-bigquery
 - https://eugene-eeo.github.io/blog/geohashing.html
 - https://www.uber.com/en-IN/blog/h3/
+
+## See Also
+
+- [Proximity Search & Geospatial Indexes](proximity_search.md) - how geohashing sits alongside Quad/KD/R-Trees and evolves into S2/H3
+- [Algorithmic Design - Geo-Proximity and GeoHash](../sd/hld/advanced/algorithmic_design_2.md) - GeoHash applied to a real geo-proximity architecture (Gojek)
+- [Quad Tree](quadtree.md) - the pointer-based spatial-tree alternative to encoded-key indexes

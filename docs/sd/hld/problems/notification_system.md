@@ -1,3 +1,10 @@
+---
+title: Designing a Notification System
+description: HLD for a horizontally scalable, high fan-out notification system covering templates, channels, priority queues, and duplicate prevention with bloom filters.
+tags:
+  - concept
+---
+
 # Notification System
 
 Motive : Designing an extensible system and reading unsaid requirements.

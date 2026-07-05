@@ -1,3 +1,10 @@
+---
+title: HLD Topics
+description: Hub page linking topic-wise HLD notes covering core components, databases, consistency, architectures, and design paradigms.
+tags:
+  - index
+---
+
 # HLD Topics
 
 #### Core System Components

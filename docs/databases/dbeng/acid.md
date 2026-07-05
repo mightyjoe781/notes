@@ -1,3 +1,10 @@
+---
+title: ACID Properties and Transaction Isolation
+description: Explains atomicity, consistency, isolation, and durability, including read phenomena, isolation levels, and how durability is achieved via WAL.
+tags:
+  - concept
+---
+
 # ACID
 
 ### What is a Transaction
@@ -114,4 +121,10 @@ Nature of Transactions
 
 
 Interested Take on ACID (Martin Kleppmann) ~ [Video](https://www.youtube.com/watch?v=5ZjhNTM8XU8)
+
+## See Also
+- [Concurrency Control](concurrency_control.md)
+- [Database Replication](replication.md)
+- [Consistency Models](../../sd/topics/consistency/consistency_models.md)
+- [CAP Theorem](../../sd/topics/consistency/cap.md)
 

@@ -1,3 +1,10 @@
+---
+title: AWS Database Services for Data Engineering
+description: DynamoDB internals and capacity modes, RDS/Aurora, DocumentDB, MemoryDB, Keyspaces, Neptune, Timestream, and a deep dive on Redshift architecture, performance, and APIs.
+tags:
+  - concept
+---
+
 # Database
 
 - Database are of two types
@@ -981,3 +988,9 @@ What is Redshift ?
     - GetStatementResult, CancelStatement
     - Users must have same IAM role or permissions to operate on a given statement
 - Cluster must be in a VPC
+
+## See Also
+- [Database Partitioning](../../databases/dbeng/partitioning.md)
+- [Sharding](../../databases/dbeng/sharding.md)
+- [Concurrency Control](../../databases/dbeng/concurrency_control.md)
+- [Joins and Set Operation](../../databases/joins_n_set.md)

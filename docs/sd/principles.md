@@ -1,3 +1,9 @@
+---
+title: General Software Engineering Principles
+description: Quick-reference list of SOLID, OOP, simplicity, architecture, performance, and security principles for software design.
+tags:
+  - reference
+---
 
 ## Solid Principles
 

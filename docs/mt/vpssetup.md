@@ -1,3 +1,10 @@
+---
+title: MultiCraft VPS Setup - Build, Configure, and Run
+description: Cheatsheet for building and configuring a MultiCraft server on a VPS, from dependencies through the start script.
+tags:
+  - reference
+---
+
 ### MultiCraft Server Setup
 
 #### Dependency

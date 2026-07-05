@@ -1,4 +1,14 @@
+---
+title: "Multi-Container Pod Patterns: Sidecar, Ambassador, Adapter"
+description: Explains when and how to use sidecar, ambassador, and adapter container patterns, including native sidecars in Kubernetes 1.29+.
+tags:
+  - concept
+---
+
 # Multi-Container Patterns
+
+## See Also
+- [Docker Containers](../docker/containers.md)
 
 ## Why Multiple Containers in One Pod?
 

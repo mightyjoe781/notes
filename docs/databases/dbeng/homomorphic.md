@@ -1,3 +1,10 @@
+---
+title: Homomorphic Encryption for Databases
+description: Explains symmetric vs asymmetric encryption and how homomorphic encryption allows querying encrypted data without decrypting it.
+tags:
+  - concept
+---
+
 # Homomorphic Encryption
 
 
@@ -27,3 +34,6 @@ Good Video : https://www.youtube.com/watch?v=I6Unxb-PFhs
 - Only drawback is its too slow atm (takes 3 minutes to fetch 100 records)
 
 FHE toolkit by IBM : https://github.com/IBM/fhe-toolkit-linux
+
+## See Also
+- [Database Security](security.md)

@@ -1,3 +1,10 @@
+---
+title: GSoC Week 3 - ntfy, Build Tree, and Dev Workflow
+description: Setting up ntfy notifications, building the freebsd-src tree, and configuring the dotfiles-based dev workflow on the GSoC server.
+tags:
+  - reference
+---
+
 ## Week 3
 
 Timeline : 12 Jun

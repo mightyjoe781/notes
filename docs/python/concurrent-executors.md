@@ -1,3 +1,10 @@
+---
+title: Concurrent Executors
+description: Shows how to use concurrent.futures ThreadPoolExecutor and ProcessPoolExecutor for concurrent downloads and CPU-bound work.
+tags:
+  - concept
+---
+
 # 20. Concurrent Executors
 
 - 99% of use cases application programmer is likely to run into, the following pattern
@@ -329,4 +336,8 @@ def download_many(cc_list: list[str],
 if __name__ == '__main__':
     main(download_many, DEFAULT_CONCUR_REQ, MAX_CONCUR_REQ)
 ````
+
+## See Also
+- [Concurrency Models in Python](concurrency.md)
+- [Asynchronous Programming](async.md)
 

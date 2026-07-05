@@ -1,3 +1,10 @@
+---
+title: Advanced Algorithms and Data Structures
+description: Hub for probabilistic structures, spatial indexes, storage engines, consensus protocols, and conflict resolution algorithms used at scale.
+tags:
+  - index
+---
+
 # Advanced Algorithms
 
 NOTE: Following algorithms are way too advanced for implementation, you are better off using some library implementing these algorithms optimally. It's important to understand what problems these algorithms are solving efficiently.

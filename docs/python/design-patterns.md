@@ -1,3 +1,10 @@
+---
+title: Design Patterns with First-Class Functions
+description: Shows how Python's first-class functions simplify classic design patterns like Strategy and Command.
+tags:
+  - concept
+---
+
 # Design Patterns with First-Class Functions
 
 - In software engineering, a design pattern is a general recipe for solving a common design problem.
@@ -283,3 +290,6 @@ The idea is to put a `Command` object between the two, implementing an interface
 That way the invoker does not need to know the interface of the  receiver, and different receivers can be adapted through different `Command` subclasses.
 
 Instead of giving the invoker a `Command` instance, we can simply give it a function. Instead of calling `command.execute()`, the invoker can just call `command()`. The `MacroCommand` can be implemented with a class implementing `__call__`.
+
+## See Also
+- [Decorators and Closures](decorators.md)

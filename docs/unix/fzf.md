@@ -1,3 +1,9 @@
+---
+title: fzf
+description: Cheatsheet for fzf, the interactive fuzzy finder - key bindings, flags, and shell function patterns.
+tags:
+  - reference
+---
 # fzf
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

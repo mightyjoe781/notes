@@ -1,3 +1,10 @@
+---
+title: Implementation Problems
+description: Stack/queue-based design problems commonly asked in interviews - sliding window maximum, stock span, the celebrity problem, and LRU/LFU cache implementations.
+tags:
+  - concept
+---
+
 # Implementation Problems
 
 Following problems often appear in design interviews due to application in wide range of scenarios in practical real-life.
@@ -323,3 +330,6 @@ class LFUCache:
             del self.key_map[node.key]
 
 ```
+
+## See Also
+- [Design LRU Cache](../../sd/lld/problems/cache.md)

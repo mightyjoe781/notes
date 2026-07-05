@@ -1,3 +1,9 @@
+---
+title: Terraform
+description: Hub page for Terraform notes - learning path from HCL basics through modules to Terraform Cloud/Enterprise.
+tags:
+  - index
+---
 # Terraform
 
 Terraform is an open-source Infrastructure as Code (IaC) tool by HashiCorp. It lets you define, provision, and manage cloud infrastructure using a declarative language called HCL (HashiCorp Configuration Language). Terraform is written in Go and uses graph theory to resolve resource dependencies automatically.

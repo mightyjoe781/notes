@@ -1,3 +1,10 @@
+---
+title: C++ STL for DSA
+description: Quick reference for C++ STL containers and algorithms (vector, deque, map, priority_queue, sort, lower_bound) commonly used in DSA problems.
+tags:
+  - reference
+---
+
 # C++ STL for DSA
 
 > These tricks are C++-specific. They don't change the algorithm - they remove boilerplate so you can focus on the logic. Mirrors [Python Standard Library for DSA](python_stdlib.md) for cross-reference.

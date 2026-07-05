@@ -1,3 +1,10 @@
+---
+title: Recursive CTE Patterns
+description: Recursive CTE syntax and scannable patterns for org charts, path accumulation, folder trees, sequence generation, and cycle detection.
+tags:
+  - reference
+---
+
 # Recursive CTEs
 
 A recursive CTE calls itself. Use it to traverse hierarchical or graph-structured data stored in a flat table - things like org charts, folder trees, bill of materials, or category hierarchies.
@@ -195,3 +202,7 @@ for _ in range(max_depth):
 - Finding connected components in a graph
 - Generating date spines or number sequences
 - Any "walk until you hit a base case" problem stored relationally
+
+## See Also
+- [Joins and Set Operations](../joins_n_set.md)
+- [Window Functions](window_functions.md)

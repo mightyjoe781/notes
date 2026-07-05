@@ -1,3 +1,10 @@
+---
+title: Communicating Between Microservices
+description: Covers synchronous vs asynchronous communication, the event bus, API gateway and BFF patterns, resilience, and service discovery.
+tags:
+  - concept
+---
+
 ## Communicating Between Microservices
 
 #### Microservice Communication Patterns
@@ -67,3 +74,9 @@ Use a **Service Registry** to maintain the current addresses of all services. Yo
 - **PaaS platforms** (Azure App Service, AWS ECS): built-in DNS per service
 - **Kubernetes**: built-in DNS and load balancing for internal traffic via Services and Ingress
 - **Service meshes** (e.g., Istio, Linkerd): provide advanced service discovery, load balancing, and observability
+
+## See Also
+- [Event-Driven Architecture](../../sd/topics/paradigms/event_driven.md)
+- [Messaging and Streaming Systems](../../sd/hld/beginner/messaging.md)
+- [Mobile Backend Systems](../../sd/topics/architecture/mobile_backend.md)
+- [Reliability](../../sd/topics/core/reliability.md)

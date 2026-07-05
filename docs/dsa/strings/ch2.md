@@ -1,3 +1,10 @@
+---
+title: String Matching
+description: String matching algorithms - Rabin-Karp hashing, the Z-function, Aho-Corasick multi-pattern matching, and the KMP prefix function.
+tags:
+  - concept
+---
+
 # String Matching
 
 ## Library Solution

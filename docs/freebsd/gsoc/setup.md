@@ -1,5 +1,13 @@
 
 
+---
+title: GSoC Setup Notes - Cloud and M1 arm64 VMs
+description: Quick-setup commands for arm64 FreeBSD VMs (packages, buildworld/buildkernel, toolchain) and open items across target architectures.
+tags:
+  - reference
+  - draft
+---
+
 # Setup
 
 ## Cloud VMs

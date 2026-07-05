@@ -1,3 +1,10 @@
+---
+title: Design an ATM
+description: LLD walkthrough for an ATM machine using the State pattern, covering transaction flow, state transitions, and a Python implementation.
+tags:
+  - concept
+---
+
 # Design an ATM
 
 ### Problem Clarifications

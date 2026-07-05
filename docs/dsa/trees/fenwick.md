@@ -1,3 +1,10 @@
+---
+title: Fenwick Trees (Binary Indexed Trees)
+description: Fenwick tree (BIT) implementation for prefix sums and point updates, plus range-update/range-query variants and applications like counting smaller elements after self.
+tags:
+  - concept
+---
+
 # Range Updates & Queries
 
 ## Fenwick Tree (Binary Indexed Trees)

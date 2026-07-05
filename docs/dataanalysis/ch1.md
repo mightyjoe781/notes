@@ -1,3 +1,11 @@
+---
+title: Python for Data Analysis - Preliminaries and Essential Libraries
+description: Why Python for data analysis, tradeoffs versus other languages, and a tour of the essential libraries (NumPy, pandas, matplotlib, IPython, SciPy).
+tags:
+  - concept
+  - draft
+---
+
 ### What is this Book About ?
 
 This is a book about the parts of the Python language and libraries you’ll need to effectively solve a broad set of data analysis problems. This book is not an exposition on analytical methods using Python as the implementation language.

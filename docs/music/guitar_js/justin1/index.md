@@ -1,3 +1,10 @@
+---
+title: JustinGuitar Grade 1 Modules
+description: Hub linking completed JustinGuitar Grade 1 module notes.
+tags:
+  - index
+---
+
 # Grade 1
 
 - [Module 0 - Setup & Basics](mod0.md)

@@ -1,3 +1,10 @@
+---
+title: Git History - Log, Diff, Rebase, Bisect, and Blame
+description: Commands for viewing and rewriting history - log filters, diffs, interactive rebase, cherry-pick, reflog recovery, bisect, and blame.
+tags:
+  - reference
+---
+
 # History
 
 ## Viewing History

@@ -1,3 +1,10 @@
+---
+title: Prefix Sums & Difference Arrays
+description: Using prefix sum arrays for range sum queries and difference arrays for O(1) range updates, with worked problems like subarray sum equals K.
+tags:
+  - concept
+---
+
 # Prefix Sums & Difference Arrays
 
 Prefix sums and difference arrays are fundamental tools to efficiently handle range queries and range updates on arrays. They help reduce time complexity from $(O(n \times q))$ to $(O(n + q))$ for many problems involving cumulative computations.

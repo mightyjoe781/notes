@@ -1,3 +1,9 @@
+---
+title: Terraform State Management - Local, Remote, and Locking
+description: Why local state doesn't scale for teams, how S3 + DynamoDB remote backends provide locking and encryption, and state security practices.
+tags:
+  - concept
+---
 # State Management
 
 ## What is State?
@@ -82,3 +88,6 @@ When Terraform writes to state, it acquires a lock. This prevents two people fro
 - Enable versioning on the S3 bucket so you can recover previous state
 - Audit state access via S3 access logs or CloudTrail
 - Never commit `terraform.tfstate` to version control
+
+## See Also
+- [DynamoDB Fundamentals](../aws/developer/ch4.md)

@@ -1,4 +1,14 @@
+---
+title: VPC DNS Resolution and DHCP Options
+description: Explains how the Route 53 Resolver, DHCP option sets, and hybrid DNS resolver endpoints work together to resolve names inside a VPC.
+tags:
+  - concept
+---
+
 # VPC DNS and DHCP
+
+## See Also
+- [Popular Networking Protocols](../../networking/neteng/protocols.md)
 
 ## How DNS works ?
 

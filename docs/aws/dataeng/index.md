@@ -1,3 +1,10 @@
+---
+title: AWS Data Engineer Associate Notes
+description: Hub page linking study notes for the AWS Certified Data Engineer Associate exam.
+tags:
+  - index
+---
+
 # AWS Data Engineer Associate
 
 

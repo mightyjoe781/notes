@@ -1,3 +1,10 @@
+---
+title: Learning Go (2nd Edition)
+description: Chapter index for notes on the Learning Go (2nd Edition) book, covering syntax through generics, concurrency, and reflection.
+tags:
+  - index
+---
+
 # Learning Go (2nd Edition)
 
 

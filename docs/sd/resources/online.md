@@ -1,3 +1,10 @@
+---
+title: Online Resources
+description: Curated courses, practice platforms, video channels, papers, and communities for learning system design.
+tags:
+  - reference
+---
+
 # Online Resources
 
 *Curated courses, platforms, and communities for system design learning.*

@@ -1,3 +1,10 @@
+---
+title: Relational Database Patterns
+description: Covers normalization vs denormalization, indexing strategies, query optimization techniques, and database federation patterns.
+tags:
+  - reference
+---
+
 # Relational Database Patterns
 
 Relational databases remain the backbone of most modern applications due to their ACID guarantees, mature tooling, and well-understood patterns. Understanding how to properly design, optimize, and scale relational databases is crucial for building robust systems that can handle growing data volumes and user loads while maintaining data consistency and performance.

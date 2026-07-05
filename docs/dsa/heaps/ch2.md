@@ -1,3 +1,10 @@
+---
+title: Heap Applications
+description: Heap-based problem patterns - top-K elements, the two-heaps median pattern, heap-based merging/sorting, and scheduling problems like Task Scheduler.
+tags:
+  - concept
+---
+
 # Applications
 
 ## Real-time Top-K Elements

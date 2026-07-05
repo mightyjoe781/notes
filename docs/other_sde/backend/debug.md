@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+title: Debugging Backend Requests
+description: A tiered approach to debugging slow or failing backend requests using browser DevTools, MITM proxies, and Wireshark.
+---
+
 # Debugging
 
 ## Tier 1: Browser DevTools

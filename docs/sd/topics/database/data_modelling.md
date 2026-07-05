@@ -1,3 +1,10 @@
+---
+title: Data Modeling
+description: Covers access-pattern-driven schema design, logical vs physical schemas, read/write optimization patterns, time-series data, and hot spot prevention.
+tags:
+  - concept
+---
+
 # Data Modeling
 
 Data modeling is the foundation of any successful system design. It involves understanding how data flows through your system, how it's accessed, and how it needs to scale. Unlike traditional database design that focuses on normalization and relationships, modern data modeling prioritizes access patterns, performance, and scalability requirements.

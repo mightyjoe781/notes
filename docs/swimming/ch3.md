@@ -1,4 +1,9 @@
-
+---
+title: Getting Comfortable in Water
+description: Beginner drills for submerging, breath control, floating (front/back/star), and treading water.
+tags:
+  - reference
+---
 
 # Getting Comfortable in Water
 

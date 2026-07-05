@@ -1,3 +1,10 @@
+---
+title: More OS Concepts
+description: Compilers and linkers, interpreted languages and JIT compilation, garbage collection, kernel/user mode switching, and virtualization vs containerization.
+tags:
+  - concept
+---
+
 # More OS Concepts
 
 ## Compilers and Linkers
@@ -205,3 +212,8 @@ A container can spawn any number of processes, but - thanks to the PID namespace
 - [A Postgres failure caused by a Cisco router](https://medium.com/@hnasr/a-postgres-failure-caused-by-a-cisco-router-3d285f739a4e) - a real incident where a router's TCP idle-connection timeout (default 1 hour on Cisco routers) silently dropped "idle" Postgres connections, fixed via TCP keepalives (`tcp_keepalives_idle`, etc.)
 - [socket_management.md - Send and Receive Buffers](socket_management.md#send-and-receive-buffers) - covers zero-copy I/O, referenced here as the "Zero Copy" topic
 - [Docker overlay filesystem driver docs](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) - details on the OverlayFS layering described above
+
+## See Also
+- [Docker Containers](../../docker/containers.md)
+- [Docker Networking](../../docker/networking.md)
+- [Docker Storage](../../docker/storage.md)

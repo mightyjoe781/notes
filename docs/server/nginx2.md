@@ -1,3 +1,10 @@
+---
+title: Nginx Static Site Setup for a New Subdomain
+description: Register a subdomain, configure nginx server blocks with SSL, and deploy a static site with rsync.
+tags:
+  - reference
+---
+
 ### Nginx Quickly Setup a Static Website
 
 NOTE : This guide assumes you have working nginx configuration and auto-renewal scripts setup correctly.
@@ -111,3 +118,8 @@ exit 0
 ````
 
 Note here `mtboxroot` is derived from the `.ssh/config` file.
+
+## See Also
+- [Setting up Nginx](nginx.md)
+- [Nginx](../unix/nginx.md)
+- [SSH](../unix/ssh.md)

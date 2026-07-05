@@ -1,3 +1,10 @@
+---
+title: Popular Networking Protocols
+description: Explains how DNS resolution works and how TLS establishes secure connections via Diffie-Hellman key exchange and certificate chains.
+tags:
+  - concept
+---
+
 # Popular Networking Protocols
 
 ## DNS
@@ -180,4 +187,9 @@ rejected.
 
 
 How to send a Secret Message : https://www.youtube.com/watch?v=I6Unxb-PFhs
+
+## See Also
+- [Protocols](../../other_sde/backend/protocols.md)
+- [Authentication](../../other_sde/security/authentication.md)
+- [Many ways to HTTPS](https.md)
 

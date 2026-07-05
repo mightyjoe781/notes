@@ -1,3 +1,10 @@
+---
+title: AWS Streaming Analytics Services
+description: Kinesis Data Streams producers/consumers/scaling, Data Firehose, Managed Service for Apache Flink, Amazon MSK, OpenSearch, and QuickSight.
+tags:
+  - concept
+---
+
 # Analytics
 
 ## AWS Kinesis
@@ -830,4 +837,7 @@
     - Authenticate with Active Directory / Cognito / SSO
     - QuickSight Javascript SDK / QuickSight API
     - Whitelist domains where embedding is allowed
+
+## See Also
+- [Message Queues & Streaming](../../sd/topics/core/queue_streaming.md)
 

@@ -1,3 +1,10 @@
+---
+title: Transit Gateway - Attachments, Routing, and Architectures
+description: Explains how Transit Gateway routing, attachments, AZ affinity, multicast, and centralized architectures work, with a comparison to VPC peering.
+tags:
+  - concept
+---
+
 # Transit Gateway (TGW)
 
 - Allows customers to interconnect thousands of VPCs and on-premises networks

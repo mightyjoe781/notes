@@ -1,3 +1,10 @@
+---
+title: Blocks, Shadows and Control Structure
+description: Reference on Go variable scoping and shadowing, plus if, for (all four forms), switch, and goto syntax.
+tags:
+  - reference
+---
+
 # Blocks, Shadows and Control Structure
 
 ## Blocks

@@ -1,3 +1,10 @@
+---
+title: Design Text Editor
+description: LLD for a text editor's type/delete/undo operations using the Command pattern, including macro commands and a Python implementation.
+tags:
+  - concept
+---
+
 # Design Text Editor
 
 ## Requirements

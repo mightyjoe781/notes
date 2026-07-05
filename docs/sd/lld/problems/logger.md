@@ -1,3 +1,10 @@
+---
+title: Design a Logging Framework
+description: LLD for a logging framework covering log levels, appenders, formatters, logger hierarchy, additivity, and thread safety.
+tags:
+  - concept
+---
+
 # Logging Framework
 
 Every programming language has some kind of logging framework. In an ideal scenario, you might wonder: _why do we even need a logger at all?_

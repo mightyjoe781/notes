@@ -1,3 +1,10 @@
+---
+title: Basic Structured Operations Cheatsheet
+description: Quick reference for core DataFrame operations - schemas, columns, expressions, select, filter, sort, repartition, and collecting rows.
+tags:
+  - reference
+---
+
 # Basic Structured Operations
 
 DataFrame:

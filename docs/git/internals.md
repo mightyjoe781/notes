@@ -1,3 +1,10 @@
+---
+title: Git Internals - Objects, OIDs, and the Commit DAG
+description: How Git's blob/tree/commit/tag objects, SHA-1 content addressing, refs, and the index combine into a directed acyclic graph.
+tags:
+  - concept
+---
+
 # Git Internals
 
 Understanding Git's data model makes everything else click. Git is a content-addressable storage system built on four object types and a directed acyclic graph (DAG).
@@ -134,3 +141,6 @@ git config --global commit.gpgsign true
 
 git log --show-signature         # verify signatures in the log
 ```
+
+## See Also
+- [Merkle Trees](../advanced_dsa/merkle_tree.md) - the general hashing-tree structure behind Git's content-addressable object model

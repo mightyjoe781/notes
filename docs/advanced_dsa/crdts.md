@@ -1,3 +1,10 @@
+---
+title: Conflict-Free Replicated Data Types (CRDTs) and Join Semi-Lattices
+description: The order-theory foundation (partial orders, joins, semi-lattices) behind CRDTs, and how a G-Counter uses it to converge without coordination.
+tags:
+  - concept
+---
+
 # Conflict-Free Replicated Data Types (CRDTs)
 *Convergent state without coordination*
 
@@ -256,4 +263,9 @@ Idea is that no matter when we *update()* and *merge()*, we move upwards towards
 - [CRDTs Primer](http://github.com/jtfmumm/curryon2018)
 - [dotJS 2019 - James Long - CRDTs for Mortals](https://www.youtube.com/watch?v=DEcwa68f-jY) ~ full implementation 
 - [CRDT Simpler Explanation](https://www.youtube.com/watch?v=M8-WFTjZoA0)
+
+## See Also
+
+- [Operational Transformation (OT)](ots.md) - the alternative convergence strategy that transforms operations instead of merging state
+- [Conflict Resolution](../sd/topics/consistency/conflict_resolution.md) - last-write-wins and vector clocks alongside CRDTs
 

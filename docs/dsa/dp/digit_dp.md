@@ -1,3 +1,10 @@
+---
+title: Digit DP
+description: The digit DP technique for counting numbers in a range that satisfy digit constraints, using the pos/tight/leading_zero state template.
+tags:
+  - concept
+---
+
 # Digit DP
 
 Digit DP is used to count or optimize over **numbers within a range** that satisfy certain properties.

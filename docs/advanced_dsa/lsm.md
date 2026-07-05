@@ -1,3 +1,10 @@
+---
+title: LSM Trees - From Bitcask to Write-Optimized Storage Engines
+description: Building up from an append-only Bitcask KV store to LSM Trees with SSTables, WAL durability, and Bloom-filter-accelerated compaction.
+tags:
+  - concept
+---
+
 # LSM Trees
 *Write-optimized Storage Engines*
 
@@ -212,4 +219,10 @@ Some piece of data in memory and some on disk.
 
 LSM outperform everything where you want a quickly access for recently inserted keys at scale as LSM is stored in memory before being flushed in the disk.
 Redis even though provides persistence, but requires everything to be stored in memory. LSM outshine Redis in recency data access and size bound memory.
+
+## See Also
+
+- [Storage Systems II - Word Dictionary and Bitcask KV Store](../sd/hld/advanced/storage_engines_2.md) - building the Bitcask design from scratch that this note extends into an LSM Tree
+- [Merkle Trees](merkle_tree.md) - LSM Trees solve fast writes, Merkle Trees solve verifiable reads; production systems often combine both
+- [Bloom Filters](bloom_filters.md) - used to skip SSTables that can't contain a key during compaction/lookup
 

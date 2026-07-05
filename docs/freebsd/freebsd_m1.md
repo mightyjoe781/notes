@@ -1,3 +1,10 @@
+---
+title: FreeBSD Development Environment on M1 Macs
+description: Step-by-step setup of a FreeBSD arm64 QEMU VM with NFS-shared source on Apple Silicon, for a local FreeBSD dev loop.
+tags:
+  - reference
+---
+
 ## FreeBSD Development Environment on M1 Macs
 
 

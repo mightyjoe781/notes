@@ -1,3 +1,10 @@
+---
+title: Advanced Math Topics
+description: Optional deeper math topics - Pell's equation, the Mobius function, integer partitions, base conversions, and continued fractions.
+tags:
+  - reference
+---
+
 # Advanced Math Topics
 
 ## Pell’s Equation (Basic Form)

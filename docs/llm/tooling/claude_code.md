@@ -1,3 +1,10 @@
+---
+title: Claude Code - Setup, Slash Commands, and Usage
+description: Practical guide to installing and configuring Claude Code - slash commands, CLAUDE.md memory, plan mode, MCP/skills/agents, and hooks.
+tags:
+  - reference
+---
+
 # Claude Code
 
 A brief guide to Claude Code features. Refer to the [official docs](https://docs.anthropic.com/en/claude-code/) for the latest updates.
@@ -151,4 +158,8 @@ More on Hooks: [Official Docs](https://docs.anthropic.com/en/claude-code/hooks)
 The `/loop` command (or the `loop` skill in Claude Code) lets you run a prompt repeatedly on a schedule or in a continuous cycle. Useful for things like "keep running tests until they pass" or polling a build.
 
 External inspiration: [Ralph](https://github.com/snarktank/ralph) — an early looped LLM development pattern that influenced how modern coding agents handle iterative task execution.
+
+## See Also
+- [GitHub Copilot](copilot.md) - comparable feature set in VS Code
+- [AI Agents](../concepts/agents.md) - the underlying tool-use/planning-loop concepts
 

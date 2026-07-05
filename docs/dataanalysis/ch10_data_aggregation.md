@@ -1,3 +1,10 @@
+---
+title: Data Aggregation and Group Operations - Split-Apply-Combine
+description: The split-apply-combine mental model behind pandas groupby, plus aggregation, transform, apply, pivot tables, and cross-tabulation.
+tags:
+  - concept
+---
+
 # Data Aggregation and Group Operations
 
 ## How to Think About Group Operations
@@ -848,3 +855,6 @@ Lunch  Fri     1    6    7
 All          151   93  244
 
 ```
+
+## See Also
+- [Aggregations (Spark)](../pyspark/notes/ch7.md)

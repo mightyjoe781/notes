@@ -1,3 +1,9 @@
+---
+title: Terraform Variables and Outputs - Types, Precedence, Splat Expressions
+description: Variable type reference, the precedence order for resolving variable values, and how outputs expose module values.
+tags:
+  - reference
+---
 # Variables and Outputs
 
 ## Variables

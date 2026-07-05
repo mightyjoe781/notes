@@ -1,3 +1,10 @@
+---
+title: Elementary Sorting Strategies
+description: Reference implementations and tradeoffs for elementary sorts - selection, bubble, insertion, and shell sort.
+tags:
+  - reference
+---
+
 # Elementary Sorting Techniques
 
 Below are all Elementary Sorting Techniques for Educational Purposes only. These are rarely used in production.

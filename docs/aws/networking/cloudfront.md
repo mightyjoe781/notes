@@ -1,3 +1,10 @@
+---
+title: AWS CloudFront and Global Accelerator
+description: Reference on CloudFront origins, cache behavior, origin security, HTTPS/SSL setup, edge functions, and how it compares to Global Accelerator.
+tags:
+  - reference
+---
+
 # AWS CloudFront
 
 ## Overview

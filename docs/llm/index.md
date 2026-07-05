@@ -1,3 +1,10 @@
+---
+title: LLM & AI Agents - Topic Index
+description: Hub linking notes on LLM concepts, system design patterns, prompt engineering, and coding-agent tooling.
+tags:
+  - index
+---
+
 # LLM & AI Agents
 
 Practical notes on using and building with large language models.

@@ -1,3 +1,10 @@
+---
+title: System Design Interview Guide
+description: Structured approach for tackling LLD and HLD interviews within typical time constraints, covering what interviewers evaluate.
+tags:
+  - concept
+---
+
 # Interview Guide
 
 Usually interviews for LLD/HLD are time bound, approximately 60-90 mins on average. Let's assume its only 60 min interview, then 5 mins for introduction and 10 min on running through some hiccups in your local setup, leaves you with realistically 45 min for interview.

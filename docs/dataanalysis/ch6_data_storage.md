@@ -1,3 +1,10 @@
+---
+title: Data Loading, Storage, and File Formats in Pandas
+description: Reference for reading and writing CSV, JSON, Excel, HDF5, pickle, and SQL data with pandas.
+tags:
+  - reference
+---
+
 # Data Loading, Storage, and File-Formats
 
 ## Reading and Writing Data in Text Format
@@ -296,3 +303,6 @@ import sqlalchemy as sqla
 db = sqla.create_engine("sqlite:///mydata.sqlite")
 pd.read_sql("SELECT * FROM cities", db)
 ```
+
+## See Also
+- [Data Sources (Spark)](../pyspark/notes/ch9.md)

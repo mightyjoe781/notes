@@ -1,3 +1,10 @@
+---
+title: ConfigMaps and Secrets
+description: Reference for creating and consuming ConfigMaps and Secrets as environment variables or mounted files, plus security best practices.
+tags:
+  - reference
+---
+
 # Config and Secrets
 
 ## Why Separate Config from Code?

@@ -1,3 +1,10 @@
+---
+title: High Throughput - Tiered Storage and Designing S3
+description: Covers multi-tiered hot/warm/cold data storage for scaling order systems and a from-scratch design of an S3-like object store.
+tags:
+  - concept
+---
+
 # High Throughput
 
 ## Recap: Why These Designs Matter

@@ -1,3 +1,10 @@
+---
+title: Queue & Deque Implementations
+description: Queue and deque basics in Python and C++ STL, their applications, and a list of common interview problems built on them.
+tags:
+  - reference
+---
+
 # Queue & Deque Implementations
 
 A Queue follows First-In First-Out (FIFO), while a Deque (Double-Ended Queue) allows insertion and removal from both ends.

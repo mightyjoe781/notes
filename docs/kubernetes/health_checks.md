@@ -1,3 +1,10 @@
+---
+title: "Health Checks: Liveness, Readiness, and Startup Probes"
+description: Explains the three probe types, their configuration fields, and when to use each, plus init container behavior.
+tags:
+  - reference
+---
+
 # Health Checks
 
 Kubernetes uses probes to detect and recover from failures automatically.

@@ -1,3 +1,10 @@
+---
+title: Kicking Techniques
+description: Flutter, frog, and dolphin kicks, kickboard drills, and fixes for common kicking mistakes.
+tags:
+  - reference
+---
+
 # Kicking Techniques
 
 ## Flutter kick (freestyle & backstroke)

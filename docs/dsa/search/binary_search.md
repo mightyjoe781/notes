@@ -1,3 +1,10 @@
+---
+title: Binary Search
+description: A predicate-based framework for binary search (F*T*/T*F* patterns), Python bisect usage, and classic problems like search in rotated sorted array.
+tags:
+  - concept
+---
+
 # Binary Search
 
 Binary search is a powerful algorithm for locating an element or solving optimization problems within a search space where the data meets specific criteria. The following is a concise summary and framework for applying binary search effectively:

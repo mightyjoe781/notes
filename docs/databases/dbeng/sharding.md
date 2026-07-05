@@ -1,3 +1,10 @@
+---
+title: Database Sharding
+description: Explains sharding and consistent hashing for solving the shard-ownership problem, contrasts sharding with horizontal partitioning, and walks through a sharded Postgres example.
+tags:
+  - concept
+---
+
 # Sharding
 
 ### What is sharding ?
@@ -168,3 +175,8 @@ Cons
 
 
 Video : [Link](https://www.youtube.com/watch?v=iHNovZUZM3A)
+
+## See Also
+- [Database Partitioning](partitioning.md)
+- [Database Replication](replication.md)
+- [CAP Theorem](../../sd/topics/consistency/cap.md)

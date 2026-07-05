@@ -1,3 +1,11 @@
+---
+title: Absolute FreeBSD - Ch 9. Securing your System
+description: Threat models and FreeBSD's user/group security tooling - adduser, master.passwd, login.access, and login.conf classes.
+tags:
+  - concept
+  - draft
+---
+
 ## 9. Securing your System
 
 Securing your system means ensuring that your computer’s resources are used only by authorized people for authorized purposes. Even if you have no important data on system, you still have valuable CPU time, memory, and bandwidth.
@@ -304,4 +312,8 @@ You can provide more specific controls with login classes `/etc/login.conf`.
 
 The default `login.conf` starts with the default class, the class used by accounts without any class and gives unlimited access to system resources.
 
-Each class definition consists 
+Each class definition consists
+
+## See Also
+- [Developer VPS Box Setup](../../server/vpssetup.md)
+- [Fail2ban](../../unix/fail2ban.md) 

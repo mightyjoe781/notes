@@ -1,3 +1,10 @@
+---
+title: Expression Evaluation & Parsing
+description: Stack-based conversion and evaluation between infix, postfix, and prefix expression forms, including the Shunting Yard algorithm.
+tags:
+  - reference
+---
+
 # Expression Evaluation & Parsing
 
 ### Expression Types

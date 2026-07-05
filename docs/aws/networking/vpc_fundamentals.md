@@ -1,3 +1,10 @@
+---
+title: Amazon VPC Fundamentals
+description: Explains VPC building blocks - subnets, route tables, internet gateways, security groups vs NACLs, NAT, and dual-stack IP addressing.
+tags:
+  - concept
+---
+
 # Amazon VPC
 
 - Amazon VPC ~ Amazon Virtual Private Cloud

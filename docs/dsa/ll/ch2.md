@@ -1,3 +1,10 @@
+---
+title: Linked List Techniques
+description: Fast/slow pointer techniques for cycle detection and palindrome checks, plus recursive and manipulation problems - reverse in k-groups, clone with random pointer, merge/rotate lists.
+tags:
+  - concept
+---
+
 # Linked List Techniques
 
 ## Fast & Slow Pointer Techniques

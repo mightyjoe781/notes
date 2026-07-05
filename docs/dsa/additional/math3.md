@@ -1,3 +1,10 @@
+---
+title: Combinatorics & Probability
+description: Combinatorics fundamentals (permutations, Pascal's triangle, stars and bars, Catalan/Bell/Stirling numbers) and core probability concepts like Bayes' theorem and expectation.
+tags:
+  - reference
+---
+
 # Combinatorics & Probability
 
 ## Permutation & Combinations

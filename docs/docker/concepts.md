@@ -1,3 +1,10 @@
+---
+title: Docker concepts - VMs, architecture, and how containers work
+description: Docker vs virtual machines, the client-daemon architecture, and the Linux kernel features (namespaces, cgroups, UnionFS) containers are built on.
+tags:
+  - concept
+---
+
 # Concepts
 
 ## Docker vs Virtual Machines
@@ -85,3 +92,6 @@ This is why Docker is space-efficient - 10 containers from the same image share 
 | **Volume** | Persistent storage managed by Docker |
 | **Compose** | Tool for defining multi-container apps declaratively in YAML |
 | **Swarm** | Docker's built-in cluster orchestration |
+
+## See Also
+- [Kubernetes Overview](../kubernetes/overview.md) - the same container concepts applied across a cluster

@@ -1,3 +1,10 @@
+---
+title: Event-Driven Architecture
+description: Covers event sourcing, CQRS, and the saga pattern for distributed transactions, with decision frameworks for when each pattern applies.
+tags:
+  - concept
+---
+
 # Event-Driven Architecture
 
 Event-Driven Architecture (EDA) is a software architecture paradigm where the flow of the program is determined by events such as user actions, sensor outputs, or messages from other programs. Systems react to events as they occur, enabling real-time processing and responsive applications.

@@ -1,3 +1,10 @@
+---
+title: Drills & Progression Exercises
+description: Practice drills - catch-up, single-arm backstroke, glide-kick, body dolphin, and breathing timing.
+tags:
+  - reference
+---
+
 # Drills & Progression Exercises
 
 ## Catch-up drill (freestyle)

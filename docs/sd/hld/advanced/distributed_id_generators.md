@@ -1,3 +1,10 @@
+---
+title: Distributed ID Generators
+description: Evolves distributed unique ID generation from a naive timestamp counter through ticket servers to Snowflake-style sortable 64-bit IDs.
+tags:
+  - concept
+---
+
 # Distributed ID generator
 
 ## Foundation for ID generation

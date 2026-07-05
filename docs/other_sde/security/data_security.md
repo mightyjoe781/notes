@@ -1,3 +1,10 @@
+---
+tags:
+  - concept
+title: Data Security
+description: Covers data security practices including encryption at rest and in transit, key management, and data anonymization and masking techniques.
+---
+
 # Data Security
 
 Data security protects information throughout its lifecycle — from creation and storage to transmission and disposal — through encryption, access controls, and privacy-preserving techniques.
@@ -469,3 +476,8 @@ Replaces sensitive data with a non-sensitive token. The mapping is stored in a s
 - Develop risk mitigation strategies
 - Validate compliance
 - Monitor continuously
+
+## See Also
+- [Authorization](authorization.md)
+- [Authentication](authentication.md)
+- [Homomorphic Encryption](../../databases/dbeng/homomorphic.md)

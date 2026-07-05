@@ -1,3 +1,10 @@
+---
+title: What is Databricks SQL
+description: The Databricks SQL query lifecycle, Photon engine, SQL Warehouse types, and connecting BI tools.
+tags:
+  - concept
+---
+
 ## Databricks SQL
 
 - Execute SQL statements directly on the Data Lakehouse

@@ -1,3 +1,10 @@
+---
+title: Sockets
+description: Introduction to TCP/UDP sockets with minimal Python server/client examples and a simple chat application.
+tags:
+  - reference
+---
+
 # Sockets
 
 

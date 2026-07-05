@@ -1,3 +1,10 @@
+---
+title: Spark Joins
+description: Explains join types, how to handle duplicate column names, and how Spark performs joins internally via shuffle vs broadcast strategies.
+tags:
+  - concept
+---
+
 # Joins
 
 A *join* brings together two sets of data, the left and right, by comparing the values of one or more keys of the left and right and evaluaating the result of a *join expression* that determines whether Spark should bring together the left side of data with right side of data.

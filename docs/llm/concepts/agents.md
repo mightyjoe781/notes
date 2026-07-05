@@ -1,3 +1,10 @@
+---
+title: AI Agents - Tool Use, Planning, and Multi-Agent Patterns
+description: How LLM agents loop over tool calls, the main planning patterns (ReAct, Plan-then-Execute, Reflexion), and multi-agent orchestration patterns with their failure modes.
+tags:
+  - concept
+---
+
 # AI Agents
 
 An agent is an LLM that can take actions - calling tools, running code, browsing the web - and loop until it completes a goal. The model decides what to do next based on its current context and tool results.
@@ -153,3 +160,8 @@ A separate agent reviews the output of the main agent and provides feedback for 
 - Set conservative limits: max iterations, max tokens per tool result, timeouts
 - Give agents an "I don't know" escape hatch so they don't hallucinate tool results
 - Prefer deterministic tools (code execution, APIs) over non-deterministic ones (web search) when possible
+
+## See Also
+- [Claude Code](../tooling/claude_code.md) - a production coding agent built on these patterns
+- [GitHub Copilot](../tooling/copilot.md) - orchestrator/swarm multi-agent patterns in a second tool
+- [Prompt Engineering - Advanced](../prompting/advanced.md) - ReAct prompt structure in detail

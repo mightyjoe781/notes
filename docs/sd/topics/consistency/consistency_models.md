@@ -1,3 +1,10 @@
+---
+title: Consistency Models
+description: Covers the spectrum of distributed system consistency models - strong, eventual, weak, and session consistency - with trade-offs and examples.
+tags:
+  - concept
+---
+
 # Consistency Models
 
 Consistency models are contracts between distributed systems and applications that specify what values can be returned by read operations. They define the behavior applications can expect when multiple processes access shared data concurrently across different nodes in a distributed system.

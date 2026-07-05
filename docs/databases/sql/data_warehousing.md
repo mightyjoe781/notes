@@ -1,3 +1,10 @@
+---
+title: Data Warehouse Schema Design - Star, Snowflake, and Data Vault
+description: Compares star, snowflake, and data vault warehouse schemas and fact table types (transaction, periodic snapshot, accumulating snapshot) with tradeoffs.
+tags:
+  - concept
+---
+
 # Data Warehousing - Schema Design
 
 Data warehouses are optimized for analytical reads, not transactional writes. Schema design priorities flip: denormalization is deliberate, redundancy is accepted for query speed.
@@ -198,3 +205,8 @@ CREATE TABLE fact_order_pipeline (
 | Auditability | Limited | Limited | Full |
 | Complexity | Low | Medium | High |
 | Best for | Small/medium DWH, BI | Storage-sensitive | Enterprise, multi-source |
+
+## See Also
+- [Slowly Changing Dimensions (SCD) and MERGE](scd.md)
+- [Database Normalization](normalization.md)
+- [Databricks Platform](../../databricks/fundamentals/ch4.md)

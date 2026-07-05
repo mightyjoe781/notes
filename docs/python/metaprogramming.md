@@ -1,3 +1,10 @@
+---
+title: Class Metaprogramming
+description: Covers creating and customizing classes at runtime using type, class factories, __init_subclass__, class decorators, and metaclasses.
+tags:
+  - concept
+---
+
 # Class Metaprogramming
 
 Everyone knows that debugging is twice as hard as writing a program in the first place.        So if you’re as clever as you can be when you write it, how will you ever debug it? - Brian W. Kernighan and PJ Plauger, The Elements of Programming Style
@@ -564,3 +571,7 @@ To wrap up, let’s recall Alex Martelli’s final advice from his essay “Wate
 Those powerful tools exist primarily to support library and framework development. Applications naturally should *use* those tools, as provided by the Python standard library or external packages. But *implementing* them in application code is often premature abstraction.
 
 Good frameworks are extracted, not invented. - David Heinemeier Hansson, creator of Ruby on Rails
+
+## See Also
+- [Attribute Descriptors](descriptors.md)
+- [Inheritance: For Better or for Worse](inheritance.md)

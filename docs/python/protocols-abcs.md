@@ -1,3 +1,10 @@
+---
+title: Interfaces, Protocols, and ABCs
+description: Compares duck typing, goose typing (ABCs), and static protocols as ways to define interfaces in Python.
+tags:
+  - concept
+---
+
 # Interfaces, Protocols and ABCs
 
 *Program to an interface, not an implementation*. First principle of Object-Oriented Design.
@@ -580,4 +587,8 @@ class LoadableRandomPicker(RandomPicker, Protocol):	# Every protocol must explic
 
 - The `numbers` ABCs are fine for runtime type checking, but unsuitale for static typing
 - The numeric static protocols `SupportsComplex`, `SupportFloat`, etc. work well for static typing, but are unreliable for runtime type checking when complex numbers are involved.
+
+## See Also
+- [Special Methods for Sequences](sequence-protocol.md)
+- [Types, Methods, and Interfaces (Go)](../go/lego/ch7.md)
 

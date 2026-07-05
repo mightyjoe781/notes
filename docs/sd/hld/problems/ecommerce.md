@@ -1,3 +1,10 @@
+---
+title: Design E-commerce Product Listing
+description: HLD walkthrough for a small shop's product catalog system, covering three-tier architecture, read replicas, and caching trade-offs.
+tags:
+  - concept
+---
+
 # Design e-commerce product listing
 
 Motive : Understanding how a system is built and taking a structured approach in building one. Understanding core-infra components and how they fit.

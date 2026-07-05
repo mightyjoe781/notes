@@ -1,3 +1,10 @@
+---
+title: Designing Fraud Detection
+description: HLD for a real-time bank fraud detection system covering transaction schema, a random-forest classifier, and big-data model training pipeline.
+tags:
+  - concept
+---
+
 # Designing Fraud Detection
 
 Motive : Designing systems using Big-Data Technologies

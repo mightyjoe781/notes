@@ -1,3 +1,10 @@
+---
+title: Docker images - Dockerfiles, layers, and tagging
+description: Reference for writing Dockerfiles, understanding the layer cache, multi-stage builds, and tagging/pushing images.
+tags:
+  - reference
+---
+
 # Images
 
 An image is a **read-only, layered template** containing your application code, runtime, libraries, and config. Containers are running instances of images.

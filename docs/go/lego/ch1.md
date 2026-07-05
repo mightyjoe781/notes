@@ -1,3 +1,10 @@
+---
+title: Setting up Go Environment
+description: Covers installing Go, creating a module, building and formatting code, go vet, Makefiles, and staying up to date.
+tags:
+  - reference
+---
+
 # Setting up Go Environment
 
 Download and Install from here : https://go.dev/dl/

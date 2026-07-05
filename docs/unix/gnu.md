@@ -1,3 +1,9 @@
+---
+title: GNU Coreutils
+description: Cheatsheet for standard Unix file, text, and system commands - cp, mv, grep, sort, find, du/df, and xargs.
+tags:
+  - reference
+---
 # GNU Coreutils
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

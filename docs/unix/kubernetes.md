@@ -1,3 +1,9 @@
+---
+title: Kubernetes (kubectl)
+description: Cheatsheet for kubectl and core Kubernetes objects - pods, deployments, services, manifests, and debugging commands.
+tags:
+  - reference
+---
 # Kubernetes (kubectl)
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md) | [Detailed Guides](../kubernetes/index.md)

@@ -1,3 +1,10 @@
+---
+title: Design Stock Exchange
+description: LLD for a stock exchange order-matching engine covering order book design, the FIFO matching Strategy pattern, concurrency, and trade expiry.
+tags:
+  - concept
+---
+
 # Stock Exchange
 
 Problem source: [https://leetcode.com/discuss/post/3636431/phone-pe-machine-coding-stock-exchange-b-x05o/](https://leetcode.com/discuss/post/3636431/phone-pe-machine-coding-stock-exchange-b-x05o/)

@@ -1,3 +1,10 @@
+---
+title: Backtracking
+description: The choose-recurse-undo backtracking template applied to combination sum, word search, N-Queens, Sudoku solving, graph coloring, and expression building.
+tags:
+  - concept
+---
+
 # Backtracking
 
 ## The Backtracking Template

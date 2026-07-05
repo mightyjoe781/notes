@@ -1,3 +1,10 @@
+---
+title: Storage Management
+description: How persistent storage works - HDD/SSD internals, LBAs, the flash translation layer, file systems (FAT32, clustering), the OS page cache, and what happens during a file read.
+tags:
+  - concept
+---
+
 # Storage Management
 
 ## Persistent Storage

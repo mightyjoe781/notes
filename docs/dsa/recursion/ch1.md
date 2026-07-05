@@ -1,3 +1,10 @@
+---
+title: Simple Recursion
+description: Recursion fundamentals - base/recursive cases, call stack mechanics, a problem-type taxonomy, and time complexity analysis including fast exponentiation.
+tags:
+  - concept
+---
+
 # Recursion
 
 * A recursion program is one that calls itself with a *termination* condition

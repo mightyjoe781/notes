@@ -1,3 +1,10 @@
+---
+title: Prompt Engineering Techniques for AWS AI Practitioner
+description: Prompting fundamentals and techniques - negative prompting, inference parameters, zero-shot, few-shot, chain of thought, and RAG.
+tags:
+  - concept
+---
+
 # Prompt Engineering
 
 *Naive Prompt:* Summarize what is AWS
@@ -69,4 +76,9 @@ NOTE: Latency is *not impacted* by Top P, Top K, Temperature
 
 - Combine the model's capability with external data sources to generate more informed and contextually rich response
 - The initial prompt is them augmented with the external information.
+
+## See Also
+- [Prompt Engineering - Basics](../../llm/prompting/basics.md)
+- [Prompt Engineering - Advanced](../../llm/prompting/advanced.md)
+- [Retrieval-Augmented Generation (RAG)](../../llm/concepts/rag.md)
 

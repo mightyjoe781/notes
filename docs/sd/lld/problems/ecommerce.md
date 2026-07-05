@@ -1,3 +1,10 @@
+---
+title: Ecommerce App Design
+description: LLD for an e-commerce app covering product filtering with the Criteria/Composite pattern and order lifecycle with the State pattern.
+tags:
+  - concept
+---
+
 # Ecommerce App Design
 
 ## Requirements

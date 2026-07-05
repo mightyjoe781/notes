@@ -1,3 +1,10 @@
+---
+title: Consistent Hashing for Stable Sharding
+description: How consistent hashing minimizes data reshuffling when nodes join or leave a cluster, plus virtual nodes, rendezvous hashing, and jump consistent hashing.
+tags:
+  - concept
+---
+
 # Consistent Hashing
 *Stable sharding with minimum reshuffling*
 
@@ -86,3 +93,8 @@ Used in
 Used in :
 
 - Google Systems
+
+## See Also
+
+- [Storage Engines - Distributed Cache and CDC](../sd/hld/advanced/storage_engines.md) - consistent hashing applied to sharding a distributed cache
+- [CAP Theorem](../sd/topics/consistency/cap.md) - the consistency/availability trade-offs that sharded systems run into

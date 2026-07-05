@@ -1,3 +1,10 @@
+---
+title: Stack Operations & Applications
+description: Stack fundamentals and applications (expression evaluation, backtracking, undo mechanisms), with worked problems like balanced parentheses and min-stack.
+tags:
+  - concept
+---
+
 # Stack Operations & Application
 
 *A stack is a linear data structure that follows the Last-In First-Out (LIFO) principle.*

@@ -1,3 +1,10 @@
+---
+title: Docker Compose - multi-container YAML and CLI
+description: Reference for Compose file syntax, service options, variable substitution, multiple compose files, and the CLI for managing multi-container apps.
+tags:
+  - reference
+---
+
 # Docker Compose
 
 Compose defines and runs **multi-container applications** from a single YAML file. One command brings everything up; one tears it all down.
@@ -263,3 +270,6 @@ docker compose down --rmi all --volumes --remove-orphans
 - Avoid binding to fixed host ports - let a reverse proxy handle it
 - Don't mount source code volumes in production
 - Use multi-stage Dockerfiles - keep production images small
+
+## See Also
+- [Swarm Stacks](swarm.md#stacks-compose-on-swarm) - deploying a Compose file across a cluster instead of a single host

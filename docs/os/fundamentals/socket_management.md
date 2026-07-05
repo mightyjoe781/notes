@@ -1,3 +1,10 @@
+---
+title: Socket Management
+description: How the kernel manages sockets and connections - SYN/accept queues, send/receive buffers, socket sharding, and async I/O models (select, epoll, io_uring).
+tags:
+  - concept
+---
+
 # Socket Management
 
 ## Network Fundamentals
@@ -335,3 +342,7 @@ tcpdump -n -v -i en0 '(src 93.184.216.34 or dst 93.184.216.34) and port 80' # fi
 - [Google limiting io_uring use due to security vulnerabilities](https://www.phoronix.com/news/Google-Restricting-IO_uring) - the security tradeoffs of `io_uring`'s shared-memory design, referenced above
 - [cpu.land - Putting the "You" in CPU](https://cpu.land/) - ties sockets, syscalls, and scheduling together from the process's point of view
 - [process_management.md](process_management.md) and [memory.md](memory.md) - for the context-switch and kernel/user-space-copy costs referenced throughout this note
+
+## See Also
+- [TCP](../../networking/neteng/tcp.md)
+- [Sockets (LLD)](../../sd/lld/sockets.md)

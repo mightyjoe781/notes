@@ -1,3 +1,10 @@
+---
+title: Introduction to Microservices
+description: Covers what microservices are, the drawbacks of monoliths, and the benefits and challenges of adopting microservices.
+tags:
+  - concept
+---
+
 ## Introducing Microservices
 
 #### What are Microservices
@@ -48,3 +55,7 @@ A distributed monolith — multiple services that share the same database — is
 The course uses an e-commerce application as its reference architecture. The original demo repo (`dotnet-architecture/eShopOnContainers`) has been archived; the updated reference application is available at [dotnet/eShop](https://github.com/dotnet/eShop).
 
 E-commerce is a well-known problem domain. The main focus is on learning microservices concepts.
+
+## See Also
+- [Monolithic Architecture](../../sd/topics/paradigms/monolith.md)
+- [Microservices Architecture](../../sd/topics/paradigms/microservices.md)

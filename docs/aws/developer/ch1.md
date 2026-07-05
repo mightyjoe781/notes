@@ -1,3 +1,10 @@
+---
+title: AWS Developer Associate (DVA-C01) Exam Overview
+description: Exam logistics, content domains and their weightings, and question format for the AWS Certified Developer Associate exam.
+tags:
+  - reference
+---
+
 ## Cloud Academy Developer Associate (DVA-C01)
 
 #### About the Exam

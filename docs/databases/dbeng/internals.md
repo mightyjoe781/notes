@@ -1,3 +1,10 @@
+---
+title: Database Storage Internals - Pages, Heaps, and Row vs Column Stores
+description: Explains how tables are stored on disk via pages, heaps, and IO, and contrasts row-oriented vs column-oriented storage tradeoffs.
+tags:
+  - concept
+---
+
 # Understanding Database Internals
 
 How tables and indexes are stored on disk ? How are they queried
@@ -132,3 +139,8 @@ select name from t1 where emp_id = 666;
 ### Optional Reading
 
 Databases Pages - A deep dive (https://medium.com/p/38cdb2c79eb5)
+
+## See Also
+- [B-Tree vs B+ Tree Indexes](btrees.md)
+- [Database Indexing](indexing.md)
+- [Storage Engines](../../sd/hld/advanced/storage_engines.md)

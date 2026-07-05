@@ -1,3 +1,10 @@
+---
+title: Number Theory
+description: GCD/LCM, primes, sieve techniques, and linear Diophantine equations with modular inverse applications.
+tags:
+  - reference
+---
+
 # Number Theory
 
 ## GCD, LCM & Primes

@@ -1,3 +1,10 @@
+---
+title: Minimum Spanning Trees (Kruskal, Prim)
+description: Prim's and Kruskal's algorithms for building minimum spanning trees, with variants like maximum spanning tree, minimum spanning forest, and minimax paths.
+tags:
+  - concept
+---
+
 # Minimum Spanning Trees
 
 Given a connected, undirected, weighted graph G, select a subset $E' \subseteq G$ such that the graph G is still connected and the total weight of selected edges $E'$ is minimal.

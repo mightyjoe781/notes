@@ -1,3 +1,10 @@
+---
+title: Introduction to Trees
+description: Tree data structure fundamentals - types of trees (BST, heap, trie, Fenwick, segment) and the four traversal orders with implementations.
+tags:
+  - concept
+---
+
 # Trees
 
 * Trees are hierarchical data structures consisting of nodes connected by edges.

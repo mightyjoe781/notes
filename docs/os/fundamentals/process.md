@@ -1,3 +1,10 @@
+---
+title: Process
+description: How a process is laid out in memory - program vs process, the stack (frames, base/stack pointers, return addresses), the data section, the heap, pointers, and memory leaks.
+tags:
+  - concept
+---
+
 # Process
 
 It is important to be aware that in reality we don't really need OS, in-fact some of the low-latency application directly communicate with Kernel.

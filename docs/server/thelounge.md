@@ -1,3 +1,10 @@
+---
+title: Self-Hosting TheLounge IRC Bouncer with a Tor Proxy (Docker)
+description: Docker Compose setup for TheLounge behind nginx, plus routing IRC connections through a Tor SOCKS proxy.
+tags:
+  - reference
+---
+
 # TheLounge
 
 TheLounge is a very good looking irc client and bouncer combined. The reason I prefer TheLounge is its platform agnostic nature(browser) and built-in bouncer.
@@ -92,3 +99,7 @@ NOTE: Many IRC Networks use EFnet RBL which is moderation related data aggregati
 
 - https://github.com/PeterDaveHello/tor-socks-proxy
 - https://docs.linuxserver.io/images/docker-thelounge/#application-setup
+
+## See Also
+- [Setting up Nginx](nginx.md)
+- [Docker Compose](../docker/compose.md)

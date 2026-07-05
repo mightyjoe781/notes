@@ -1,3 +1,10 @@
+---
+title: Two Pointer
+description: Framework and worked problems for the two-pointer technique - pair sums, partitioning, Dutch national flag, and merging sorted arrays in place.
+tags:
+  - concept
+---
+
 # Two Pointer
 
 * Useful for handling sorted data or searching for pairs, triplets, or subarrays that meet specific conditions

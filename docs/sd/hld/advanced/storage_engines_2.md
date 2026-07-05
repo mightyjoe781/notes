@@ -1,3 +1,10 @@
+---
+title: Storage Systems II - Word Dictionary and Bitcask KV Store
+description: Designs an indexed flat-file word dictionary on S3 and a from-scratch append-only KV store, arriving at the Bitcask storage engine.
+tags:
+  - concept
+---
+
 # Storage Systems II
 
 ## Word Dictionary without using any DB

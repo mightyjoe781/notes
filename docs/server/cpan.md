@@ -1,3 +1,10 @@
+---
+title: Installing and Using CPAN Perl Modules
+description: Building CPAN modules from source with cpanm, handling test failures, and quick perldoc/module examples.
+tags:
+  - reference
+---
+
 ### Install CPAN modules using `cpanm`
 
 If  the  new box is going to be used for Perl development,  you should

@@ -1,3 +1,10 @@
+---
+title: Design BookMyShow
+description: LLD for a movie ticket booking system, covering seat locking strategies, class design, and the booking state flow.
+tags:
+  - concept
+---
+
 # Design BookMyShow
 
 ## Core Problem

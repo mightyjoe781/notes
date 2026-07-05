@@ -1,3 +1,10 @@
+---
+title: Big Data
+description: Introduces distributed data processing fundamentals through a word-frequency example, moving from single-machine to distributed computing.
+tags:
+  - concept
+---
+
 # Big Data
 
 >    Big data is not about data size, it’s about extracting value.

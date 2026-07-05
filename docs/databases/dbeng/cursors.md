@@ -1,3 +1,10 @@
+---
+title: Database Cursors
+description: Explains what database cursors are and the tradeoffs between server-side and client-side cursors, with psycopg2 examples.
+tags:
+  - concept
+---
+
 # Database Cursors
 
 ### What are Database Cursors ?

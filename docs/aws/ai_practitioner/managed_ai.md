@@ -1,3 +1,10 @@
+---
+title: AWS Pre-trained AI Services
+description: Catalog of AWS managed AI services (Comprehend, Translate, Transcribe, Polly, Rekognition, Lex, Personalize, Textract, Kendra, A2I) and AI hardware.
+tags:
+  - reference
+---
+
 # AWS Managed AI Services
 
 ### Why AWS AI Managed Service

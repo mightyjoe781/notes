@@ -1,4 +1,14 @@
+---
+title: Kubernetes Architecture and Core Concepts
+description: Explains the control plane and worker node components, the API object model, and core kubectl usage.
+tags:
+  - concept
+---
+
 # Overview
+
+## See Also
+- [Docker Concepts](../docker/concepts.md)
 
 ## What is Kubernetes?
 

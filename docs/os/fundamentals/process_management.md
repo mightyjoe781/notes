@@ -1,3 +1,10 @@
+---
+title: Process Management
+description: Processes vs threads, PCBs/TCBs, fork and copy-on-write, context switching and TLB flushes, scheduling algorithms, and concurrency primitives like mutexes and semaphores.
+tags:
+  - concept
+---
+
 # Process Management
 
 ## Process vs Thread

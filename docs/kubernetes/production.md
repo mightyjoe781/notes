@@ -1,4 +1,15 @@
+---
+title: Running Kubernetes in Production
+description: Covers CI/CD deployment workflow, GKE cluster setup, resource quotas, and a production readiness checklist.
+tags:
+  - reference
+---
+
 # Production
+
+## See Also
+- [Docker Dev Workflows](../docker/workflows.md)
+- [Terraform Workflow and CLI](../terraform/workflow.md)
 
 ## Deployment Workflow
 

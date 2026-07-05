@@ -1,3 +1,10 @@
+---
+title: AWS Compute Services for Data Engineering
+description: EC2 purchasing options and Graviton in big data, Lambda for data processing (triggers, Kinesis integration, anti-patterns), SAM, and AWS Batch.
+tags:
+  - reference
+---
+
 # Compute
 
 ## EC2 in Big Data

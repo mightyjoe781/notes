@@ -1,3 +1,10 @@
+---
+title: Databases and Scaling
+description: Covers relational database ACID properties and isolation levels, plus scaling techniques - replication, sharding, and non-relational database types.
+tags:
+  - concept
+---
+
 # Databases and Scaling
 
 >    Data is the new oil — but only if you can store, query, and scale it.

@@ -1,3 +1,10 @@
+---
+title: Sparse Tables & Range Queries
+description: Building sparse tables for O(1) idempotent range queries (min/max/GCD), binary lifting, and LCA via Euler tour, with a comparison to segment trees.
+tags:
+  - concept
+---
+
 # Sparse Tables & Range Queries
 
 - A **Sparse Table (ST)** is a **static data structure** used to answer **idempotent range queries** (like min, max, GCD, LCM, XOR, etc.) in **O(1)** time after **O(n log n)** preprocessing.

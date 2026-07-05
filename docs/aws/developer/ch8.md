@@ -1,3 +1,11 @@
+---
+title: Understanding CI/CD Fundamentals
+description: Covers continuous integration practices, local dev environments, version control, automated testing, and database schema migration strategies.
+tags:
+  - concept
+  - draft
+---
+
 ## CI/CD
 
 ### Continous Integration

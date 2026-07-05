@@ -1,3 +1,10 @@
+---
+title: Database Replication
+description: Compares master/backup vs multi-master replication and synchronous vs asynchronous replication, with a Postgres setup walkthrough and pros/cons.
+tags:
+  - concept
+---
+
 # Replication
 
 
@@ -81,3 +88,8 @@ docker start pmaster pstandby
     - Slow Writes (synchronous)
     - Complex to Implement (multi-master)
     - DB Protocols are very chatty and adds networking overhead
+
+## See Also
+- [Database Sharding](sharding.md)
+- [ACID Properties and Transaction Isolation](acid.md)
+- [Consistency Models](../../sd/topics/consistency/consistency_models.md)

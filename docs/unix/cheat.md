@@ -1,3 +1,9 @@
+---
+title: cheat.sh
+description: Quick reference for cheat.sh, a command-line cheat sheet tool for commands, programming languages, and tools.
+tags:
+  - reference
+---
 # cheat.sh
 
  [:octicons-arrow-left-24:{ .icon } Back](index.md)
@@ -122,4 +128,8 @@ else
     tmux neww bash -c "curl -s cht.sh/$selected~$query | less"
 fi
 ````
+
+### See Also
+
+- [tldr](tldr.md) - similar quick-lookup tool, simplified man pages instead of examples
 

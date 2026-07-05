@@ -1,3 +1,10 @@
+---
+title: Proximity Search & Geospatial Indexes - Custom Trees vs Encoded Keys
+description: Survey of how spatial indexes evolved from Quadtree/KD-Tree/R-Tree to encoded-key approaches like Geohash/S2/H3, and when to reach for each.
+tags:
+  - concept
+---
+
 # Proximity Search & Geospatial Indexes
 
 *Why "find everything near me" breaks indexes that answer "find everything between age 20 and 30" trivially - and how the industry got from brute-force scans to Geohash/S2/H3.*
@@ -105,3 +112,9 @@ Same hierarchical-integer idea, but tiles the globe in **hexagons** instead of s
 ## Further Reading / Watching
 
 - [Proximity Search & Geospatial Indexes - HelloInterview (YouTube)](https://www.youtube.com/watch?v=dQXdSxn7d1g) - the source walkthrough this note is built from; ties Quadtree → KD-Tree → BKD-Tree → R-Tree and Geohash → S2 → H3 into one coherent evolution story
+
+## See Also
+
+- [Quad Tree](quadtree.md) - the foundational custom spatial tree this survey opens with
+- [GeoHashing](geohashing.md) - the full encode/decode algorithm behind the encoded-key camp
+- [Algorithmic Design - Geo-Proximity and GeoHash](../sd/hld/advanced/algorithmic_design_2.md) - these ideas applied to a real geo-proximity architecture

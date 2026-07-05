@@ -1,3 +1,10 @@
+---
+title: Vim Quick Notes - Modes, Motions, Registers, Macros
+description: Terse reference for Vim navigation, editing, registers, macros, and buffer/window commands.
+tags:
+  - reference
+---
+
 # Vim Notes
 
 Vim = VI + Improved
@@ -118,7 +125,7 @@ To save and exit the file `:wq`
 - To reverse direction of search `?{key}`
 - `*` : searches word under cursor and use normal cycle keys `n` and `N`. or use `#` a reversed search
 - To yank all the text from start to first occurrence of x into register a: `”ay/x`
-- search and replace (substitute) : `:[range]s/old/new/[flags]` — flags: `g` : global (all matches on each line), `c` : confirm each substitution. Without a range, this works on the current line only. Use `%` as the range for the entire file: `:%s/old/new/g`. To operate on specific lines: `:1,5s/old/new/g`. `$` represents the last line; `.` represents the current line. Range can also use search patterns: `:/firstword/,/secondword/s/old/new/g`
+- search and replace (substitute) : `:[range]s/old/new/[flags]` - flags: `g` : global (all matches on each line), `c` : confirm each substitution. Without a range, this works on the current line only. Use `%` as the range for the entire file: `:%s/old/new/g`. To operate on specific lines: `:1,5s/old/new/g`. `$` represents the last line; `.` represents the current line. Range can also use search patterns: `:/firstword/,/secondword/s/old/new/g`
 - For linux user they need to change directory location it maybe difficult to write all escaping `\` characters they can use **pattern separator**. `:%s#/local/mail#/usr/local/mail`
 
 ### Text Objects

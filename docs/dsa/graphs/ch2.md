@@ -1,3 +1,10 @@
+---
+title: Graph Traversal (DFS/BFS)
+description: DFS and BFS fundamentals plus patterns built on them - multi-source BFS, cycle detection, bipartite checks, and state-space BFS over implicit graphs.
+tags:
+  - concept
+---
+
 # Graph Traversal
 
 ## DFS

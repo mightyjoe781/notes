@@ -1,3 +1,10 @@
+---
+title: Guitar Scales - Major, Minor, Pentatonic, Blues & Modes
+description: Reference of scale formulas and positions for major, minor, pentatonic, and blues scales, plus the seven modes and a scale-practice guide.
+tags:
+  - reference
+---
+
 # Scales
 
 ## Intervals
@@ -132,3 +139,8 @@ Modes are the seven rotations of the major scale, each starting on a different d
 - Diminished scale (octatonic)
 - Scale-chord relationships (which scale over which chord)
 - Three-notes-per-string scale patterns
+
+## See Also
+
+- [Music Theory Basics](theory1.md)
+- [Fretboard, CAGED & Progressions](theory5.md)

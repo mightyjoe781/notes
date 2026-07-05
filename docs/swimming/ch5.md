@@ -1,3 +1,10 @@
+---
+title: Breathing Techniques
+description: Rhythmic breathing, side breathing for freestyle, underwater exhale, and bilateral breathing patterns.
+tags:
+  - reference
+---
+
 # Breathing Techniques
 
 ## Basic breath control & timing

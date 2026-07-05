@@ -1,3 +1,10 @@
+---
+title: Designing Realtime Abuse Masker
+description: HLD walkthrough for masking abusive words in a live-stream chat using a trie-based lookup loaded in memory, avoiding an unnecessary service hop.
+tags:
+  - concept
+---
+
 # Designing Realtime Abuse Masker
 
 Motive : Not everything is a service.

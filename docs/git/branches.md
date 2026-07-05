@@ -1,3 +1,10 @@
+---
+title: Git Branches, HEAD, and Merge vs Rebase
+description: Creating and switching branches, understanding HEAD and detached HEAD, remote-tracking branches, stashing, and merge vs rebase workflows.
+tags:
+  - reference
+---
+
 # Branches
 
 A branch is a lightweight pointer to a commit. Creating one is instant and costs almost no storage. Git encourages branching heavily.

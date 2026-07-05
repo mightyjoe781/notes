@@ -1,3 +1,10 @@
+---
+title: Conflict Resolution
+description: Covers strategies for resolving concurrent write conflicts in distributed systems - last-write-wins, vector clocks, and CRDTs.
+tags:
+  - concept
+---
+
 # Conflict Resolution
 
 Conflict resolution is a critical aspect of distributed systems that arises when multiple nodes update the same piece of data concurrently. Without proper conflict resolution mechanisms, systems can end up in inconsistent states where different nodes have different versions of the same data.

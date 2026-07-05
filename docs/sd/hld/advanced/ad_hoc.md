@@ -1,3 +1,10 @@
+---
+title: Ad Hoc Systems
+description: Design walkthroughs for a distributed task scheduler, a message broker built on a relational DB, a YouTube view counter, and a flash sale system.
+tags:
+  - concept
+---
+
 # Ad Hoc Systems
 
 ## Distributed Task Scheduler

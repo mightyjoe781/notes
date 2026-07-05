@@ -1,3 +1,10 @@
+---
+title: Caching & Optimizations
+description: Covers cache levels, caching patterns (cache-aside, write-through, write-behind), eviction policies, invalidation strategies, and common caching challenges.
+tags:
+  - reference
+---
+
 # Caching & Optimizations
 
 ## What is Caching

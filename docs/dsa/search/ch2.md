@@ -1,3 +1,10 @@
+---
+title: Search the Answer
+description: Binary-search-on-the-answer pattern applied to allocation/optimization problems (Koko eating bananas, ship capacity, aggressive cows) and 2D grid/matrix search.
+tags:
+  - concept
+---
+
 # Binary Search on Answers & 2D Search
 
 ## Problems on Searching an Answer

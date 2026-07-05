@@ -1,3 +1,10 @@
+---
+title: Guitar Chords - Open, Power, Slash, Extended & Triads
+description: Reference of chord types (open, sus, power, slash, extended, diminished/augmented, borrowed) and triad formulas.
+tags:
+  - reference
+---
+
 # Chords
 
 ## Reading Chord Diagrams
@@ -96,3 +103,8 @@ Triads are three-note chords built from a root, third, and fifth.
 - Chord melody (playing melody and chords simultaneously)
 - Shell voicings
 - Quartal harmony
+
+## See Also
+
+- [Fretboard, CAGED & Progressions](theory5.md)
+- [Module 1 - First Chords](../guitar_js/justin1/mod1.md)

@@ -1,3 +1,10 @@
+---
+title: tmux Configuration - .tmux.conf, Keybindings, and Styling
+description: Cheatsheet for the .tmux.conf file, custom keybindings, visual styling, and status line variables.
+tags:
+  - reference
+---
+
 # Chapter 2 : Configuring Tmux
 
 #### Introducing the `.tmux.conf` File

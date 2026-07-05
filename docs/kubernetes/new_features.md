@@ -1,3 +1,10 @@
+---
+title: Kubernetes 1.27-1.33 New Features
+description: Explains Gateway API, native sidecars, in-place pod resize, and other notable Kubernetes features with rationale for each.
+tags:
+  - concept
+---
+
 # New Features
 
 Recent Kubernetes releases have brought significant improvements. This page covers the most impactful additions from Kubernetes 1.27 to 1.33.

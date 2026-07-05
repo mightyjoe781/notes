@@ -1,3 +1,10 @@
+---
+title: Git Overview and Topic Map
+description: Hub page linking to Git's object model, branching, remotes, history tools, worktrees, submodules, hooks, and modern features.
+tags:
+  - index
+---
+
 # Git
 
 Git is a distributed version control system that tracks changes to files over time. Every clone is a full copy of the repository, including its entire history.

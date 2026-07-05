@@ -1,3 +1,10 @@
+---
+title: Rclone Basics - Install and Configure Cloud Remotes
+description: What rclone is, why it avoids vendor lock-in, and how to install and configure a remote.
+tags:
+  - reference
+---
+
 ## RCLONE
 
 Rclone is a command-line program to manage files on cloud storage. Its feature rich and cross platform, excellent for writing scripts which stays longer than locking with a specific cloud vendors cli solution.
@@ -28,4 +35,7 @@ rclone config
 - then you will need to authenticate your rclone using token to access cloud vendor’s storage.
     - GUI System : If you have some browser, then u can use auto generate token and follow the link provided by cli
     - Headless System : In case of headless system since there is no browser what you will need to create token on some another system and add it to the headless system.
+
+## See Also
+- [Backing Up a VPS to pCloud with rclone](bkp.md)
 

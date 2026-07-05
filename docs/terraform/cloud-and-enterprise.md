@@ -1,3 +1,9 @@
+---
+title: Terraform Cloud and Enterprise - Editions, Workspaces, Organizations, Sentinel
+description: How Terraform Cloud/Enterprise differ from open source, workspace and organization structure, and Sentinel policy-as-code enforcement.
+tags:
+  - concept
+---
 # Cloud and Enterprise
 
 ## Terraform Editions

@@ -1,3 +1,9 @@
+---
+title: OpenSSL
+description: Cheatsheet for OpenSSL - generating keys, certificates and CSRs, inspecting/converting cert formats, and file encryption.
+tags:
+  - reference
+---
 # OpenSSL
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

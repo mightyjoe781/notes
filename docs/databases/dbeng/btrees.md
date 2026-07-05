@@ -1,3 +1,10 @@
+---
+title: B-Tree vs B+ Tree Indexes
+description: Explains B-Tree and B+ Tree structure, their limitations, and how B+ Tree storage costs differ between MySQL and Postgres.
+tags:
+  - concept
+---
+
 # B Tree
 
 ## Full Table Scans
@@ -67,5 +74,10 @@ Find rows (ID between (4 and 9))
 - B+ Trees secondary index values can either point directly to tuple (postgres) or to the primary key (MYSQL)
 - If the Primary key data type is expensive this can cause bloat in all secondary indexes for database such MySQL (innoDB)
 - Leaf nodes in MySQL (InnoDB) contains the full row since its an IOT/Clustered Index.
+
+## See Also
+- [Understanding Database Internals](internals.md)
+- [Database Indexing](indexing.md)
+- [Storage Engines](../../sd/hld/advanced/storage_engines.md)
 
 

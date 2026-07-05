@@ -1,3 +1,10 @@
+---
+title: Rust - Overview and Learning Resources
+description: Brief intro to Rust's memory-safety model plus links to core learning resources.
+tags:
+  - index
+---
+
 # Rust
 
 Rust is a modern systems programming language focusing on **performance**, **type safety**, and **concurrency**. 

@@ -1,3 +1,9 @@
+---
+title: Text and Data Processing (sed, awk, jq, yq)
+description: Cheatsheet for transforming text and structured data on the command line with sed, awk, jq, and yq.
+tags:
+  - reference
+---
 # Text & Data Processing
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

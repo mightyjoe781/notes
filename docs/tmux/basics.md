@@ -1,3 +1,10 @@
+---
+title: tmux Basics - Sessions, Windows, and Panes
+description: Cheatsheet for installing tmux and working with the command prefix, sessions, windows, and panes.
+tags:
+  - reference
+---
+
 # Chapter 1 : Learning the Basics
 
 #### Installation

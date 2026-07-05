@@ -1,3 +1,10 @@
+---
+title: Operating System Concepts
+description: Hub page for notes following the "Operating System Concepts" textbook by Silberschatz, Galvin, and Gagne.
+tags:
+  - index
+---
+
 # Operating System Concepts
 
 Notes from *Operating System Concepts* by Silberschatz, Galvin, and Gagne.

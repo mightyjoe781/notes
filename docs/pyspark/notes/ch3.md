@@ -1,3 +1,10 @@
+---
+title: A Tour of Spark's Toolset
+description: Surveys Spark's toolset - spark-submit, Datasets, Structured Streaming, MLlib, RDDs, SparkR, and the package ecosystem - through a retail-data walkthrough.
+tags:
+  - concept
+---
+
 # A Tour of Spark’s Toolset
 
 ## Running Production applications with `spark-submit`

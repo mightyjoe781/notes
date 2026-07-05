@@ -1,3 +1,10 @@
+---
+title: NumPy Basics - ndarray, Vectorization, and Broadcasting
+description: How NumPy's ndarray works internally and how indexing, slicing, broadcasting, ufuncs, and vectorized operations replace explicit Python loops.
+tags:
+  - concept
+---
+
 # NumPy Basics
 *Arrays and Vectorized Computations*
 
@@ -678,3 +685,6 @@ walk.min()
 # first crossing of 10 or -10
 (np.abs(walk) >= 10).argmax()
 ```
+
+## See Also
+- [Operator Overloading (the `@` matmul operator)](../python/operator-overloading.md)

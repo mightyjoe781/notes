@@ -1,3 +1,10 @@
+---
+title: Concurrency & Multi-Threading Concepts
+description: Python threading primitives - locks, semaphores, conditions, events, barriers, and thread/process pool executors - with classic synchronization problems solved.
+tags:
+  - reference
+---
+
 # Concurrency & Multi-Threading Concepts
 
 ## Python Concepts

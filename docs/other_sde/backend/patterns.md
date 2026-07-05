@@ -1,3 +1,10 @@
+---
+tags:
+  - concept
+title: Backend Communication Design Patterns
+description: Overview of backend communication design patterns including request/response, push, polling, SSE, pub/sub, multiplexing, and the sidecar pattern.
+---
+
 # Communication Design Patterns
 
 ## Request/Response
@@ -240,3 +247,8 @@ Instead of embedding protocol logic in the application:
 - Service mesh proxies: Linkerd, Istio, Envoy
 - Sidecar proxy containers
 - Must be a Layer 7 proxy
+
+## See Also
+- [Protocols](protocols.md)
+- [Backend Execution Patterns](execution_patterns.md)
+- [Authentication](../security/authentication.md)

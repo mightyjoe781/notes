@@ -1,3 +1,10 @@
+---
+title: CAP Theorem
+description: Explains the CAP theorem's consistency/availability trade-off during network partitions, with CP vs AP system examples and the PACELC extension.
+tags:
+  - concept
+---
+
 # CAP Theorem
 
 The CAP Theorem, formulated by Eric Brewer in 2000, is one of the most important concepts in distributed systems design. It forces architects to make explicit trade-offs between different system properties and helps explain why different databases and systems make different design choices.

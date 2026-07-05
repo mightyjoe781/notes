@@ -1,3 +1,10 @@
+---
+title: Pointers
+description: Explains Go pointer semantics, when to use pointers vs values, call-by-value behavior, and how the garbage collector and stack/heap allocation work.
+tags:
+  - concept
+---
+
 # Pointers
 
 ## A Quick Pointer Primer
@@ -241,4 +248,7 @@ for {
 - **Combined Use**: The best practice is to use both GOGC and GOMEMLIMIT together to balance garbage collection pace and memory limits, ensuring consistent performance. More details are available in “A Guide to the Go Garbage Collector” by Go’s development team.
 
 - https://go.dev/doc/gc-guide
+
+## See Also
+- [Memory](../../os/fundamentals/memory.md)
 

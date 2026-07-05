@@ -1,3 +1,10 @@
+---
+title: Books
+description: Recommended system design and distributed systems books grouped by topic with a suggested reading order.
+tags:
+  - reference
+---
+
 # Books
 
 *Essential reading for system design and distributed systems.*

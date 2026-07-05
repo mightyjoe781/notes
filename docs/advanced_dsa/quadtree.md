@@ -1,3 +1,10 @@
+---
+title: Quadtrees for 2D Spatial Partitioning
+description: How quadtrees recursively subdivide 2D space into quadrants for spatial indexing and collision detection, and why they give way to KD/R-Trees on disk.
+tags:
+  - concept
+---
+
 # QuadTree
 
 *Where in space should this belong?*
@@ -123,3 +130,8 @@ class QuadTree:
 - Maps (Google Maps) => Tile Indexing
 - Image Compression => Region Compression
 - Games => Object Culling
+
+## See Also
+
+- [Proximity Search & Geospatial Indexes](proximity_search.md) - how the quadtree's ideas evolve into KD-Trees, R-Trees, and encoded-key indexes
+- [GeoHashing](geohashing.md) - the encoded-key alternative that reuses a plain B-Tree instead of a custom spatial tree

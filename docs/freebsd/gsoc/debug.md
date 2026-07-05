@@ -1,3 +1,10 @@
+---
+title: GSoC Debug Notes - Per-Architecture Boot Test Issues
+description: Per-architecture (amd64, arm64, riscv, armv7, powerpc64) commands and gotchas for debugging the FreeBSD bootloader test scripts.
+tags:
+  - reference
+---
+
 # Debug Notes
 
 ## notes on script design

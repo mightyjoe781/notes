@@ -1,3 +1,10 @@
+---
+title: NoSQL Patterns
+description: Covers design patterns for key-value, document, wide-column, and graph databases, with concrete examples in Redis, DynamoDB, MongoDB, Cassandra, and Neo4j.
+tags:
+  - reference
+---
+
 # NoSQL Patterns
 
 NoSQL databases emerged to address the limitations of relational databases in handling large-scale, distributed systems with varying data structures and access patterns. Each NoSQL database type is optimized for specific use cases, offering different trade-offs between consistency, availability, partition tolerance, and performance.

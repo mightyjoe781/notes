@@ -1,3 +1,10 @@
+---
+title: Algorithmic System Design - Impression Counting and File Sync
+description: Covers cardinality estimation with HyperLogLog for impression counting and a Dropbox-style block-based remote file sync design.
+tags:
+  - concept
+---
+
 # Algorithmic Design (Part 2)
 
 ## Impression Counting

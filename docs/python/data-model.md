@@ -1,11 +1,18 @@
+---
+title: The Python Data Model
+description: Introduces the Python data model and special (dunder) methods that let user-defined objects integrate with core language syntax.
+tags:
+  - concept
+---
+
 ## Python Data Model
 
 - Python Data Model is an API that we use to make our objects play well with the most idiomatic language features
 - Its more like a description of Python as a framework which formalizes the interfaces of the building blocks of the language itself like sequences, functions, iterators, coroutines etc
 - Example : `obj[key]` this syntax is supported by a special dunder method `__getitem__`.
-- These functions are meant to be called by python interpretor. for e.g. `len(obj)` is used to get length not `obj.__len__()`.
+- These functions are meant to be called by python interpreter. for e.g. `len(obj)` is used to get length not `obj.__len__()`.
 
-NOTE: sometimes python interpretor takes shortcut when dealing with builtin types like `list`, `str`, `bytearray` using `PyVarObject` which has `ob_size` field holding number of items in collections.
+NOTE: sometimes python interpreter takes shortcut when dealing with builtin types like `list`, `str`, `bytearray` using `PyVarObject` which has `ob_size` field holding number of items in collections.
 
 - `for i in x:` invokes `iter(x)` which in turn calls `x.__iter__()` if its available
 - Users should not call these unless they are doing Metaprogramming.
@@ -72,4 +79,8 @@ Each of the top ABCs has a single special method
 - `Container` to support the `in` operator
 
 There is no need for a class to inherit from any of these ABCs, any class that implements `__len__` satisfies `Sized` interface.
+
+## See Also
+- [A Pythonic Object](pythonic-objects.md)
+- [Interfaces, Protocols, and ABCs](protocols-abcs.md)
 

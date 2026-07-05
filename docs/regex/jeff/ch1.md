@@ -1,3 +1,10 @@
+---
+title: Introduction to Regular Expressions - Metacharacters and Frame of Mind
+description: Foundational regex concepts - metacharacters, character classes, alternation, repetition, and backreferences, from Mastering Regular Expressions.
+tags:
+  - concept
+---
+
 ## Introduction to Regular Expression
 
 - You are tasked with checking all pages of a web server for double words!

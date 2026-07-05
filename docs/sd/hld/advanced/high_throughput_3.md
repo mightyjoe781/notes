@@ -1,3 +1,10 @@
+---
+title: Scaling to 1M req/s
+description: A practical walkthrough of throughput bottlenecks in order - language/framework choice, CPU, network, database, Redis, and kernel tuning.
+tags:
+  - concept
+---
+
 # Scaling to 1M req/s
 
 A practical walkthrough of the bottlenecks you hit — in order — when pushing a system to extreme throughput, and the decisions that remove each ceiling.

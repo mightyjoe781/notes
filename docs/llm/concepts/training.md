@@ -1,3 +1,10 @@
+---
+title: LLM Training & Fine-tuning - Pre-training, SFT, RLHF, LoRA
+description: How LLMs move from pre-training through supervised fine-tuning and alignment (RLHF/DPO), plus parameter-efficient fine-tuning methods like LoRA and QLoRA.
+tags:
+  - concept
+---
+
 # Training & Fine-tuning
 
 How LLMs go from random weights to useful assistants - and how to adapt them for specific tasks.

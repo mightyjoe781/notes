@@ -1,3 +1,10 @@
+---
+title: Basic String Processing
+description: String fundamentals in Python - immutability, indexing, common operations (palindrome checks, case conversion, frequency counting) and efficiency notes.
+tags:
+  - reference
+---
+
 # Basic String Processing
 
 ### Application of String Processing

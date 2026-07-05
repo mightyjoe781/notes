@@ -1,3 +1,10 @@
+---
+title: Errors
+description: Explains Go's error-as-value model, sentinel errors, custom error types, wrapping/unwrapping with errors.Is and errors.As, and panic/recover.
+tags:
+  - concept
+---
+
 # Errors
 
 ## How to Handle Errors: The Basics

@@ -1,3 +1,10 @@
+---
+title: S3 Storage Classes, Security, and Encryption
+description: Covers S3 storage classes and lifecycle rules, versioning and logging features, access control policies, and server/client-side encryption options.
+tags:
+  - reference
+---
+
 ## Storage 
 
 ### Amazon S3

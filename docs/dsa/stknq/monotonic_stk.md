@@ -1,3 +1,10 @@
+---
+title: Monotonic Stacks
+description: The monotonic stack technique for next-greater/previous-smaller element problems, with worked examples - histogram area, trapping rain water, and asteroid collision.
+tags:
+  - concept
+---
+
 # Techniques
 
 ## Monotonic Stack

@@ -1,3 +1,10 @@
+---
+title: Fretboard, CAGED System & Chord Progressions
+description: How the CAGED system and circle of fifths map the fretboard, plus common chord progressions, 12-bar blues, alternate tunings, and improvisation approach.
+tags:
+  - concept
+---
+
 # Fretboard, CAGED & Progressions
 
 ## The Fretboard
@@ -160,3 +167,8 @@ Create emotional arcs through dynamics, modulation, and rhythm changes. Think ab
 ## Resources
 
 - [SongNotes Tools](https://songnotes.net/tools) - chord diagrams, fretboard tools
+
+## See Also
+
+- [Chords](theory3.md)
+- [Scales](theory4.md)

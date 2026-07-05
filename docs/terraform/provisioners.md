@@ -1,3 +1,9 @@
+---
+title: Terraform Provisioners - local-exec, remote-exec, and Failure Handling
+description: When (and when not) to reach for provisioners, local-exec vs remote-exec, creation vs destroy timing, and failure behavior.
+tags:
+  - concept
+---
 # Provisioners
 
 ## What are Provisioners?
@@ -124,3 +130,6 @@ provisioner "local-exec" {
   on_failure = continue
 }
 ```
+
+## See Also
+- [Ansible](../unix/ansible.md) - purpose-built configuration management, preferred over provisioners for ongoing config

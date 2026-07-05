@@ -1,3 +1,10 @@
+---
+title: Python
+description: Hub page indexing notes on Python data structures, functions, classes/protocols, control flow, and metaprogramming, adapted from Fluent Python.
+tags:
+  - index
+---
+
 # Python
 
 Python is a high-level, general-purpose programming language. Its design philosophy emphasizes **code readability** with the use of significant indentation.

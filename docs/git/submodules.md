@@ -1,3 +1,10 @@
+---
+title: Submodules, Subtrees, and Working with Large Git Repos
+description: Trade-offs between submodules, subtrees, sparse checkout, and partial clone for vendoring dependencies and scaling large repositories.
+tags:
+  - concept
+---
+
 # Submodules and Large Repos
 
 Tools for managing external dependencies inside a repo and for working efficiently with large repositories.

@@ -1,3 +1,10 @@
+---
+title: Dynamic Attributes and Properties
+description: Explains computed/dynamic attributes, properties, and __new__ for on-demand attribute access in Python objects.
+tags:
+  - concept
+---
+
 # Dynamic Attributes and Properties
 
 - Data Attributes and methods are collectively called as *attributes* in python. Methods are just callable attributes.
@@ -544,3 +551,6 @@ def quantity(storage_name): # where data for each property is stored like 'weigh
 - `__getattr__(self, name)` : Called only when an attempt to retrieve the named attribute fails, after the `obj`, `Class`, and its superclasses are searched. The expressions `obj.no_such_attr`, `getattr(obj, 'no_such_attr')`, and `hasattr(obj, 'no_such_attr')` may trigger `Class.__getattr__(obj, 'no_such_attr')`, but only if an attribute by that name cannot be found in `obj` or in `Class` and its superclasses.
 - `__getattribute__(self, name)` : Always called when there is an attempt to retrieve the named attribute  directly from Python code (the interpreter may bypass this in some  cases, for example, to get the `__repr__` method). Dot notation and the `getattr` and `hasattr` built-ins trigger this method.
 - `__setattr__(self, name, value)` : Always called when there is an attempt to set the named attribute. Dot notation and the `setattr` built-in trigger this method
+
+## See Also
+- [Attribute Descriptors](descriptors.md)

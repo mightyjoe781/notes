@@ -1,3 +1,10 @@
+---
+title: AWS Storage Services for Data Engineering
+description: S3 fundamentals, storage classes, lifecycle rules, encryption, performance, plus EBS, EFS, and AWS Backup.
+tags:
+  - reference
+---
+
 # Storage
 
 ## Amazon S3

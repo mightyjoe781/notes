@@ -1,3 +1,9 @@
+---
+title: CricBuzz Scoreboard Design (Pub-Sub)
+description: LLD walkthrough evolving a live scoreboard from polling to a full Observer/Pub-Sub pattern with event filtering and multiple producers.
+tags:
+  - concept
+---
 
 # CricBuzz Scoreboard Design
 

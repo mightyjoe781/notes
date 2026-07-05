@@ -1,3 +1,10 @@
+---
+title: Real-time Systems
+description: Covers WebSocket and Server-Sent Events architectures for real-time communication, plus stream processing patterns like Lambda and Kappa architecture.
+tags:
+  - concept
+---
+
 # Real-time Systems
 
 Real-time systems enable immediate data exchange and processing, providing users with live updates and interactive experiences. These systems are critical for applications requiring instant communication, live data feeds, and collaborative features.

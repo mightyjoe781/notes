@@ -1,3 +1,10 @@
+---
+title: Kubernetes Local Setup and Cluster Options
+description: Commands and tradeoffs for running Kubernetes locally (Docker Desktop, minikube, kind) and provisioning managed or self-managed clusters.
+tags:
+  - reference
+---
+
 # Setup
 
 ## Local Development

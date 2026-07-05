@@ -1,3 +1,10 @@
+---
+title: Relational Databases - Locking, Airline Check-in, and KV Store
+description: Covers pessimistic locking modifiers (FOR UPDATE, SKIP LOCKED) through an airline seat check-in case study, plus building a KV store on a relational DB.
+tags:
+  - concept
+---
+
 # Databases
 
 ## Relational Databases

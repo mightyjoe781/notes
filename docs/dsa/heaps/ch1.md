@@ -1,3 +1,10 @@
+---
+title: Priority Queues & Heapsort
+description: Priority queue fundamentals, Python heapq and C++ priority_queue usage, heap sort, and binary heap construction/validation problems.
+tags:
+  - reference
+---
+
 # Priority Queue & HeapSort
 
 *A priority queue is a data structure of items with keys that supports two basic operations*

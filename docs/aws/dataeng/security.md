@@ -1,3 +1,10 @@
+---
+title: AWS Security, Identity, and Compliance for Data Engineering
+description: IAM fundamentals, data masking/salting/key rotation, Macie, Secrets Manager, WAF/Shield, and per-service security notes for Kinesis, S3, DynamoDB, RDS, Glue, EMR, Redshift, and Athena.
+tags:
+  - reference
+---
+
 # Security, Identify, and Compliance
 
 ## Principle of Least Privilege

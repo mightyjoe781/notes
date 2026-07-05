@@ -1,3 +1,10 @@
+---
+title: Batch Processing Systems
+description: Covers batch processing patterns, ETL/ELT pipeline design, data warehouse architecture, dimensional modeling, and MapReduce patterns.
+tags:
+  - concept
+---
+
 # Batch Processing Systems
 
 Batch processing systems handle large volumes of data by processing it in discrete chunks or batches, typically during off-peak hours or on scheduled intervals. These systems are essential for data analytics, reporting, data transformation, and large-scale computations.

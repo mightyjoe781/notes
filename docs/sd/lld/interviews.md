@@ -1,3 +1,10 @@
+---
+title: LLD Interview Guide - Machine Coding
+description: Approach for machine coding / low-level design interviews, covering where questions come from and steps to structure a solution.
+tags:
+  - concept
+---
+
 # Interview Guide
 
 Machine Coding

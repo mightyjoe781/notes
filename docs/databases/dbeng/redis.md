@@ -1,3 +1,10 @@
+---
+title: Redis Internals
+description: Explains Redis as an in-memory key-value store - durability options, RESP transport, pub/sub, and replication vs clustering - with basic CLI examples.
+tags:
+  - concept
+---
+
 # Redis
 
 Most popular database on AWS as complex cloud application deployments. Redis popularity as a database, a cache, and a message broker in modern cloud architecture provides an explanation for its position in the AWS ranking but not in wider world.
@@ -70,3 +77,7 @@ publish news "world on fire!" # (integer) 0
 ```
 
 - Test db reset by killing the container ~ default is durability :)
+
+## See Also
+- [Memcached](memcached.md)
+- [Database Replication](replication.md)

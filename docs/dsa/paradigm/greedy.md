@@ -1,3 +1,10 @@
+---
+title: Greedy Algorithms & Strategies
+description: The greedy paradigm and the exchange-argument technique for proving it works, with worked problems - coin change, jump game, candy distribution, and job sequencing.
+tags:
+  - concept
+---
+
 # Greedy Algorithms & Strategies
 
 * an algorithm that make the locally optimal choice at each step with the  hope of eventually reaching the globally optimal solution.

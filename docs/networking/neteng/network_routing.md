@@ -1,3 +1,10 @@
+---
+title: Network Routing
+description: Explains how ARP, gateways, and routing tables let devices communicate within and across networks, with a hands-on Docker networking walkthrough.
+tags:
+  - concept
+---
+
 # Network Routing
 
 ## Fundamentals
@@ -335,4 +342,8 @@ docker exec -it s2 bash
 ping 10.0.1.2 # works
 ping 10.0.0.2
 ```
+
+## See Also
+- [Docker Networking](../../docker/networking.md)
+- [Internet Protocol](ip.md)
 

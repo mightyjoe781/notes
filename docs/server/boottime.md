@@ -1,3 +1,10 @@
+---
+title: Boot-Time Startup Scripts via rc.local
+description: Rules for safely using /etc/rc.local to run background startup commands, plus a sample boot-net-programs setup.
+tags:
+  - reference
+---
+
 ### Regarding `rc.local`
 
 `/etc/rc.local` is a `bash` script that Linux executes at boot time. So it is a convenient place to put your own startup commands.
@@ -49,4 +56,7 @@ exit 0
 Important : **Do not** use `#!/bin/bash -e` above
 
 Make file executable : `chmod 755 /etc/rc.local`
+
+## See Also
+- [systemd](../unix/systemd.md)
 

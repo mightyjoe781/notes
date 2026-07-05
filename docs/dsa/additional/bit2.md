@@ -1,3 +1,10 @@
+---
+title: Bitmask DP
+description: How to model subset states as bitmasks for DP, with the subset-generation template and worked bitmask DP problems like TSP and partitioning.
+tags:
+  - concept
+---
+
 # Bitmask DP
 
 Bitmask DP is useful when the state of a problem involves subsets (e.g. selected elements, visited nodes). Since subsets of n elements can be represented using integers from 0 to 2ⁿ - 1, we can model states with bitmasks.

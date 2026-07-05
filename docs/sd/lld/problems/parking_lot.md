@@ -1,3 +1,10 @@
+---
+title: Design Parking Lot System
+description: LLD for a multi-floor parking lot covering vehicle and slot hierarchies, Strategy patterns for pricing and slot-finding, and the park/unpark flow.
+tags:
+  - concept
+---
+
 # Design Parking Lot System
 
 ## Requirements

@@ -1,3 +1,10 @@
+---
+title: SOLID Principles
+description: Python before/after examples for each SOLID principle - SRP, OCP, LSP, ISP, and DIP.
+tags:
+  - reference
+---
+
 # SOLID
 
 

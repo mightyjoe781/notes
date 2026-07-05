@@ -1,3 +1,10 @@
+---
+title: Plotting and Visualization with matplotlib, pandas, and seaborn
+description: API reference for matplotlib figures/subplots, styling, annotations, and the pandas/seaborn plotting shortcuts for line, bar, histogram, and facet plots.
+tags:
+  - reference
+---
+
 # Plotting and Visualization
 
 `matplotlib` is a desktop plotting package designed for creating plots and figures suitable for publication. The project was started by John Hunter in 2002 to enable a MATLAB-like plotting interface in Python.

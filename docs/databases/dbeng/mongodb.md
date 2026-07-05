@@ -1,3 +1,10 @@
+---
+title: MongoDB Internal Architecture
+description: Explains MongoDB's document/BSON storage model, the _id index, secondary indexes, and how the WiredTiger engine changed locking and clustered collections.
+tags:
+  - concept
+---
+
 # NoSQL Architecture
 
 ![](assets/Pasted%20image%2020250927204924.png)
@@ -58,6 +65,10 @@ References for above sections
 - [https://www.mongodb.com/docs/upcoming/core/clustered-collections/#clustered-collections](https://www.mongodb.com/docs/upcoming/core/clustered-collections/#clustered-collections)
 - [https://jira.mongodb.org/browse/SERVER-14569](https://jira.mongodb.org/browse/SERVER-14569)
 - [https://www.mongodb.com/docs/v4.4/reference/operator/meta/showDiskLoc/](https://www.mongodb.com/docs/v4.4/reference/operator/meta/showDiskLoc/)
+
+## See Also
+- [Non-Relational Databases](../../sd/hld/advanced/non_relational_database.md)
+- [Understanding Database Internals](internals.md)
 - [https://github.com/mongodb/mongo/commit/374438c9134e6e31322b05c8ab4c5967d97bf3eb](https://github.com/mongodb/mongo/commit/374438c9134e6e31322b05c8ab4c5967d97bf3eb)
 
 

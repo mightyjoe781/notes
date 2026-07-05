@@ -1,3 +1,10 @@
+---
+title: Strumming & Picking Techniques
+description: Reference of strumming patterns (syncopation, palm muting, percussive) and picking techniques (alternate, economy, sweep, hybrid, string skipping).
+tags:
+  - reference
+---
+
 # Strumming & Picking
 
 ## Strumming Patterns
@@ -71,3 +78,7 @@ Skip strings while picking to create wide intervals. Often used in shred guitar 
 - Groove-based strumming for funk and reggae
 - Muted ghost notes in advanced rhythm playing
 - Two-hand rhythm tapping
+
+## See Also
+
+- [Module 4 - Rhythm & Technique](../guitar_js/justin1/mod4.md)

@@ -1,3 +1,10 @@
+---
+title: VPC Traffic Monitoring and Troubleshooting
+description: Reference for VPC Flow Logs format and queries, Traffic Mirroring setup, and Reachability/Network Access Analyzer tools.
+tags:
+  - reference
+---
+
 # VPC traffic Monitoring, Troubleshooting and Analysis
 
 ## Traffic Monitoring

@@ -1,3 +1,11 @@
+---
+title: Docker as a Linux dev environment for OS development
+description: Worked example of using a Docker container as a cross-compiling OS-development toolchain when a native Unix/Linux machine isn't available.
+tags:
+  - reference
+  - draft
+---
+
 ## Development Environments using Docker
 
 Docker can be used as a development environment when you don’t have access to Unix/Linux machines. 
@@ -86,4 +94,7 @@ There are two types of containers:
 
 * **Long-running**: execute `docker compose up -d` to run in the background, then `docker compose exec app sh` to get a shell.
 * **Short-lived (exits quickly)**: set `tty` and `stdin_open` in Compose to keep it open, then use `docker compose exec app sh`.
+
+## See Also
+- [Dev Workflows](workflows.md) - the same build-environment pattern written up as a polished, general workflow
 

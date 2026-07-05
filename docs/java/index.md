@@ -1,3 +1,11 @@
+---
+title: Java Notes
+description: Placeholder hub for Java basics notes, currently just a link to language feature history.
+tags:
+  - index
+  - draft
+---
+
 # Java
 
 > WIP

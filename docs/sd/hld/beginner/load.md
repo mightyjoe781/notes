@@ -1,3 +1,10 @@
+---
+title: Load Balancing and Fault Tolerance
+description: Covers load balancer fundamentals, circuit breakers to prevent cascading failures, data redundancy, and leader election for auto-recovery.
+tags:
+  - concept
+---
+
 # Load Balancing and Fault Tolerance
 
 >    Everything fails eventually. Good systems don’t.

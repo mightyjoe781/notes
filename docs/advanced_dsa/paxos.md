@@ -1,3 +1,10 @@
+---
+title: Paxos - Distributed Consensus via Majority Agreement
+description: How Basic Paxos's prepare/accept phases achieve safe consensus through quorum intersection, and how Multi-Paxos extends it to a replicated log.
+tags:
+  - concept
+---
+
 # Paxos
 
 Best Explanation Video : [Link](https://www.youtube.com/watch?v=d7nAGI_NZPk)
@@ -151,3 +158,8 @@ Leslie Lamport famously said: “Paxos is simple. It’s the explanations that a
 - FLP impossibility theorem
 - Multi-Paxos
 - Compare with Raft
+
+## See Also
+
+- [Raft](raft.md) - the leader-election-first alternative built for understandability
+- [Consensus Algorithms](../sd/topics/consistency/consensus_algorithms.md) - broader survey of consensus, quorums, and leader election

@@ -1,3 +1,10 @@
+---
+title: Dictionaries and Sets
+description: Covers dict and set syntax, comprehensions, pattern matching, and the standard mapping API in Python.
+tags:
+  - concept
+---
+
 # Dictionaries and Sets
 
 - `dict` type is a fundamental part of python’s implementation.
@@ -375,4 +382,8 @@ from unicodedata import name
 | s.union(it, …)       |     ●     |           |            | Union of s and iterables it, etc.           |
 | s.\_\_xor__()        |     ●     |     ●     |     ●      | s ^ z (symmetric difference of s and z)    |
 | s.\_\_rxor__()       |     ●     |     ●     |     ●      | Reversed ^ operator                         |
+
+## See Also
+- [Python Libraries Overview](overview.md)
+- [Python Standard Library for DSA](../dsa/additional/python_stdlib.md)
 

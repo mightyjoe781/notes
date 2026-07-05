@@ -1,3 +1,10 @@
+---
+title: Points, Lines, Polygons
+description: Techniques for line/segment intersection, point-in-triangle and point-in-polygon tests, convexity checks, polygon area, and closest-pair of points.
+tags:
+  - reference
+---
+
 # Points, Lines, Polygons
 
 ## Line Representations

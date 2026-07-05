@@ -1,3 +1,10 @@
+---
+title: Asynchronous Programming
+description: Explains Python's asyncio model - event loop, coroutines, tasks, and sync primitives - and contrasts it with goroutines and threads.
+tags:
+  - concept
+---
+
 # Asynchronous Programming
 
 ## Why do we need it?

@@ -1,3 +1,10 @@
+---
+title: What is Databricks Machine Learning
+description: The Databricks ML lifecycle - common challenges, MLflow components, AutoML, Feature Store, and ML workflows.
+tags:
+  - concept
+---
+
 ## Databricks Machine Learning
 
 Databricks ML helps manage the end-to-end machine learning lifecycle — from data preparation to model deployment.

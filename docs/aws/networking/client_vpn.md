@@ -1,3 +1,10 @@
+---
+title: AWS Client VPN Reference
+description: Quick reference on AWS Client VPN components, CIDR limitations, and split-tunnel setup for internet access.
+tags:
+  - reference
+---
+
 # AWS Client VPN
 
 ![](assets/Pasted%20image%2020251028001450.png)

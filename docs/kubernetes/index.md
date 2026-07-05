@@ -1,3 +1,10 @@
+---
+title: Kubernetes Notes
+description: Hub linking to Kubernetes topics covering architecture, workloads, networking, storage, RBAC, Helm, and production practices.
+tags:
+  - index
+---
+
 # Kubernetes
 
 [Kubernetes](https://kubernetes.io/docs/concepts/overview/) (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.

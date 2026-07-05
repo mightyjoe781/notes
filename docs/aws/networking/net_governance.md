@@ -1,3 +1,10 @@
+---
+title: AWS Networking Management and Governance Tools
+description: Reference on IPAM pool hierarchy, CloudFormation/CDK, Service Catalog, AWS Config, and CloudTrail as used for managing network infrastructure.
+tags:
+  - reference
+---
+
 # AWS Networking Management & Governance
 
 ## Amazon VPC IP Address Manager (IPAM)

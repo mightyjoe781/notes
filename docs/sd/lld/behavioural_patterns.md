@@ -1,3 +1,10 @@
+---
+title: Behavioural Design Patterns
+description: Python examples of behavioural design patterns - Chain of Responsibility, Command, Observer, State, Strategy, Template Method, Visitor, and more.
+tags:
+  - reference
+---
+
 # Behavioural Patterns
 
 * Chain of Responsibility ⭐

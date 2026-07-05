@@ -1,3 +1,10 @@
+---
+title: Design SplitWise
+description: LLD for an expense-splitting app covering data model, REST API, split strategies, and greedy-heap debt settlement.
+tags:
+  - concept
+---
+
 # Design SplitWise
 
 ## Requirements

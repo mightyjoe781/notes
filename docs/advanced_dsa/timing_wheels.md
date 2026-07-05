@@ -1,3 +1,10 @@
+---
+title: Hierarchical Timing Wheels for Millions of Timers
+description: How timing wheels give O(1) insert/expire/delete for massive timer counts, and how cascading multi-level wheels extend the range beyond one wheel's span.
+tags:
+  - concept
+---
+
 # Hierarchical Timing Wheels
  *Efficient time management at scale*
 

@@ -1,3 +1,9 @@
+---
+title: Terraform Core Concepts - Providers, Resources, Data Sources, Dependencies
+description: How providers, resources, and data sources fit together, and when to use implicit vs explicit resource dependencies.
+tags:
+  - concept
+---
 # Core Concepts
 
 ## Providers

@@ -1,3 +1,10 @@
+---
+title: Performance Optimization
+description: Covers latency, throughput, and resource optimization techniques across request path, database, network, and infrastructure, plus capacity planning.
+tags:
+  - reference
+---
+
 # Performance Optimization
 
 *Techniques and strategies to minimize response time, maximize throughput, optimize resource utilization  and improve user experience in distributed systems.*

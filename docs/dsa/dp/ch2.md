@@ -1,3 +1,10 @@
+---
+title: 2D/3D DP
+description: Worked 2D and 3D DP problems on grids and sequences - unique paths, minimum path sum, stock trading with fees, longest arithmetic subsequence, target sum, and edit distance.
+tags:
+  - concept
+---
+
 # 2D/3D DP
 
 ## Grid Unique Paths

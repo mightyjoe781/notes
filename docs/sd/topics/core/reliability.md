@@ -1,3 +1,10 @@
+---
+title: Reliability
+description: Covers fault tolerance, redundancy, graceful degradation with circuit breakers, bulkhead isolation, retry mechanisms, and disaster recovery planning.
+tags:
+  - reference
+---
+
 # Reliability
 
 *Reliability* refers to the probability that a system performs its intended function without failure over a specified period under specified conditions.

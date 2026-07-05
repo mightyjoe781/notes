@@ -1,3 +1,10 @@
+---
+title: Prompt Engineering Advanced - ReAct, Structured Output, Extended Thinking
+description: Techniques for harder tasks - ReAct, self-consistency, tree of thoughts, structured output, Claude extended thinking/prefill, prompt chaining, and injection defense.
+tags:
+  - reference
+---
+
 # Prompt Engineering - Advanced
 
 Techniques for harder tasks: complex reasoning, multi-step pipelines, structured output, and model-specific features.
@@ -224,3 +231,7 @@ improved = llm(meta_prompt.format(original_prompt=user_prompt))
 ```
 
 Effective workflow: write a rough prompt, use meta-prompting to polish it, evaluate on test cases, iterate.
+
+## See Also
+- [AI Agents](../concepts/agents.md) - ReAct and planning loops used by tool-calling agents
+- [Prompt Engineering - Basics](basics.md) - foundational techniques this note builds on

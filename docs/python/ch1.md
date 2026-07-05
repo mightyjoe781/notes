@@ -1,3 +1,10 @@
+---
+title: Getting Started with Python
+description: Beginner notes on installing Python, running a first script, and using variables.
+tags:
+  - reference
+---
+
 ## Chapter 1: Getting Started
 
 Python is a cross-platform programming language, which means it runs on all major OS.

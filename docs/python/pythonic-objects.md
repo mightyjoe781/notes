@@ -1,3 +1,10 @@
+---
+title: A Pythonic Object
+description: Shows how to implement dunder methods like __repr__, __hash__, and __slots__ so custom classes behave like built-in Python types.
+tags:
+  - concept
+---
+
 # A Pythonic Object
 
 Thanks to the Python Data Model, your user-defined types can behave as  naturally as the built-in types. And this can be accomplished without  inheritance, in the spirit of *duck typing*: you just implement the methods needed for your objects to behave as expected.
@@ -380,3 +387,7 @@ class ShortVector2d(Vector2d):
 ````
 
 This way `f` typecodes work fine in representation as well.
+
+## See Also
+- [Operator Overloading](operator-overloading.md)
+- [Special Methods for Sequences](sequence-protocol.md)

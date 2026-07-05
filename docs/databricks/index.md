@@ -1,3 +1,10 @@
+---
+title: Databricks Hub
+description: Hub for Databricks Lakehouse Fundamentals chapter notes - platform overview, SQL, workspace, machine learning, and platform internals.
+tags:
+  - index
+---
+
 ## Databricks
 
 > Databricks is a fast-moving platform - features, APIs, and product names change frequently. Always refer to the [official documentation](https://docs.databricks.com) for the latest information.

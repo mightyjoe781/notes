@@ -1,3 +1,10 @@
+---
+title: Combinatorics & Permutations
+description: Recursive enumeration patterns for subsets, combinations, combination sum, and permutations, including finding the k-th permutation directly.
+tags:
+  - concept
+---
+
 # Combinatorics & Permutations
 
 * Note that all problems listed here are enumeration problems requiring the generation of all possible solution combinations. If the problems involved calculating a single value instead of actual solutions, they would become dynamic programming problems. In such cases, optimizations like memoization can reduce complexity.

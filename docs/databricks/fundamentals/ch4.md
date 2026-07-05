@@ -1,3 +1,10 @@
+---
+title: Databricks Platform In Depth - Lakehouse, Delta Lake, and Compute
+description: Deep dive into the lakehouse architecture, Delta Lake internals, Unity Catalog, compute options, Delta Live Tables, Auto Loader, Workflows, MLflow, Apps, and Asset Bundles.
+tags:
+  - concept
+---
+
 ## Databricks Platform In Depth
 
 ### The Lakehouse Platform
@@ -143,3 +150,8 @@ Infrastructure-as-code for Databricks resources.
 - `databricks bundle validate` → `databricks bundle deploy` workflow
 - Parameterised targets for dev/staging/prod environments
 - The modern replacement for `dbx` and older Databricks CLI deployment patterns
+
+## See Also
+
+- [PySpark Notes Hub](../../pyspark/index.md) - Spark internals that Photon and Databricks clusters run on
+- [Scalability](../../sd/topics/core/scalability.md)

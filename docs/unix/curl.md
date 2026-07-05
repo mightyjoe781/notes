@@ -1,3 +1,9 @@
+---
+title: curl
+description: Cheatsheet for the curl command-line HTTP client - flags, API requests, file transfer, DNS override, and debugging.
+tags:
+  - reference
+---
 # curl
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

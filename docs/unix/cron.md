@@ -1,3 +1,9 @@
+---
+title: Cron
+description: Cheatsheet for scheduling recurring commands with cron - syntax, crontab management, special strings, and environment gotchas.
+tags:
+  - reference
+---
 # Cron
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

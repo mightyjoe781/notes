@@ -1,3 +1,11 @@
+---
+title: Music Theory Basics - Alphabets, Notes & Intervals
+description: Introduction to the 12-note western system, natural notes, sharps/flats, and semitone intervals; sheet music, key signatures, and time signatures sections are still stubs.
+tags:
+  - concept
+  - draft
+---
+
 # Music Theory Basics
 
 ## A helpful message :)
@@ -56,6 +64,11 @@ G# or Ab
 ## Time Signatures
 
 
+
+## See Also
+
+- [Scales](theory4.md)
+- [Fretboard, CAGED & Progressions](theory5.md)
 
 
 

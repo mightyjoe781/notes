@@ -1,3 +1,10 @@
+---
+title: smk's VPS Setup - Hardening, DNS, and Nginx Bootstrap
+description: End-to-end steps for taking a fresh VPS from root password to a hardened, DNS-configured, nginx-ready box.
+tags:
+  - reference
+---
+
 ### VPS Setup Redacted (smk)
 
 Assuming you got root password from some vnc console in freshly installed VPS. Let’s setup.
@@ -680,4 +687,11 @@ adduser test
 
 
 ### Setting up ngircd
+
+## See Also
+- [Setting up Nginx](nginx.md)
+- [Setting up Static Site on Nginx](nginx2.md)
+- [Rclone Basics](rclone.md)
+- [SSH](../unix/ssh.md)
+- [fail2ban](../unix/fail2ban.md)
 

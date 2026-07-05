@@ -1,3 +1,10 @@
+---
+tags:
+  - index
+title: Security
+description: Hub for security notes covering authentication, authorization, and data security patterns.
+---
+
 # Security
 
 ### Authentication Patterns

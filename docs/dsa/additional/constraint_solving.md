@@ -1,3 +1,10 @@
+---
+title: SAT, SMT and Constraint Solving
+description: Overview of P vs NP, SAT/NP-completeness, and using the Z3 SMT solver in Python to solve constraint problems.
+tags:
+  - concept
+---
+
 # SAT, SMT and Constraint Solving
 
 ## Computational Complexity and Decision Problems

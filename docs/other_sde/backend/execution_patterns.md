@@ -1,3 +1,10 @@
+---
+tags:
+  - concept
+title: Backend Execution Patterns
+description: Covers process vs thread execution models, TCP connection establishment internals, socket programming patterns, and backend idempotency.
+---
+
 # Backend Execution Patterns
 
 ## Process vs Threads
@@ -122,3 +129,7 @@ In HTTP:
 - `GET` is idempotent by specification — browsers and proxies treat it as safe to retry
 - `POST` is not idempotent by default, but can be made so with an idempotency token
 - Ensure `GET` endpoints have no side effects
+
+## See Also
+- [TCP](../../networking/neteng/tcp.md)
+- [Backend Communication Design Patterns](patterns.md)

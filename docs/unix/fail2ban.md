@@ -1,3 +1,9 @@
+---
+title: Fail2ban
+description: Cheatsheet for Fail2ban - configuring jails to scan logs and ban brute-force offenders via iptables/nftables.
+tags:
+  - reference
+---
 # Fail2ban
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

@@ -1,3 +1,10 @@
+---
+title: Mergesort
+description: Mergesort implementations (top-down, bottom-up, in-place, and for linked lists) plus the classic counting-inversions-via-merge-sort problem.
+tags:
+  - concept
+---
+
 # Mergesort
 
 * Biggest advantage is guaranteed runtime : $O(N \log{N})$ (independent of input)

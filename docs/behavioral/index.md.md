@@ -1,7 +1,14 @@
+---
+title: Behavioral Interview Prep - STAR Method and Sample Stories
+description: STAR method framework, most-valued interviewer skills, and worked sample stories for behavioral interviews.
+tags:
+  - concept
+---
+
 # Behavioral Interviews
 
 * purpose : objectively measure a potential employee's past behaviors as a predictor of future results
-* format : candidates are asked to give specific examples of when they demonstrated particular behavior or skills
+* format : candidates are asked to give specific examples of when they demonstrated **particular behavior or skills**
 
 Example Questions
 
@@ -26,6 +33,10 @@ Based on LinkedIn survey from hiring managers, following are the most important 
 * Leadership
 * Growth Potential
 * Prioritization
+
+## Break-down of Behavioral Interview
+
+
 
 ## STAR Method
 

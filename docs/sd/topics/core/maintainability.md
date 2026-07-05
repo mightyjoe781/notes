@@ -1,3 +1,10 @@
+---
+title: Maintainability
+description: Covers observability fundamentals - structured logging, metrics and alerting, and distributed tracing - for building easy-to-maintain systems.
+tags:
+  - reference
+---
+
 # Maintainability
 
 *The ability of designing systems which are easy to maintain, in terms of servicing the components and maintain the code.*

@@ -1,3 +1,10 @@
+---
+title: Tokenization - BPE, Context Windows, and Token Cost
+description: What tokens are, how BPE builds a tokenizer vocabulary, and the practical cost/quality implications of tokenization for context windows and RAG chunking.
+tags:
+  - concept
+---
+
 # Tokenization
 
 Tokens are the basic unit LLMs operate on - not characters, not words, but subword pieces. Understanding tokenization prevents a surprising number of bugs and cost surprises.

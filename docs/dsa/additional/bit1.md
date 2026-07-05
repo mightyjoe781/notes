@@ -1,3 +1,10 @@
+---
+title: Bit Manipulation
+description: Reference for core bit manipulation tricks (XOR properties, bit counting, subset iteration, builtins) and common bit-manipulation interview problems.
+tags:
+  - concept
+---
+
 # Bit Manipulation
 
 Bit manipulation enables direct work with the binary representation of numbers. It optimizes performance and solves problems involving sets, parity, power-of-two checks, and other applications.

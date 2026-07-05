@@ -1,3 +1,10 @@
+---
+title: Simulation & Randomized Algorithms
+description: Patterns for simulation problems (game/event-based simulation, cellular automata) and randomized algorithms (randomized quicksort, Monte Carlo, reservoir sampling, Miller-Rabin).
+tags:
+  - concept
+---
+
 # Simulation & Randomized Algorithms
 
 ## Game Simulation Problems

@@ -1,3 +1,10 @@
+---
+title: Deployments, Rolling Updates, and DaemonSets
+description: Reference for Deployment manifests, rolling updates and rollbacks, and how Deployments compare to StatefulSets and DaemonSets.
+tags:
+  - reference
+---
+
 # Deployments
 
 ## Why Deployments?

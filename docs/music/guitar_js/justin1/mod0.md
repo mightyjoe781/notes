@@ -1,3 +1,10 @@
+---
+title: JustinGuitar Grade 1 Module 0 - Setup & Basics
+description: Beginner setup notes covering tuning, posture, finger placement, reading chord boxes, and pick technique.
+tags:
+  - reference
+---
+
 # Module 0 - Setup & Basics
 
 ## How to Tune a Guitar
@@ -37,3 +44,7 @@
 
 - Use the nail of your index finger for downstrokes, the flesh of your thumb for upstrokes.
 - Alternatively, use all four fingers brushing downward (folk/classical style).
+
+## See Also
+
+- [Strumming & Picking](../../guitar/theory2.md)

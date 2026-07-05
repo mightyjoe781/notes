@@ -1,4 +1,15 @@
+---
+title: Services and Service Discovery
+description: Covers ClusterIP, NodePort, LoadBalancer, and ExternalName service types and how pods discover services via DNS or environment variables.
+tags:
+  - reference
+---
+
 # Services
+
+## See Also
+- [Docker Networking](../docker/networking.md)
+- [AWS Elastic Load Balancer](../aws/networking/aws_elb.md)
 
 ## The Problem Services Solve
 

@@ -1,3 +1,10 @@
+---
+title: Design Rate Limiter
+description: HLD for an API rate limiter covering placement options, Redis-backed counters with expiration, and scaling via sharding.
+tags:
+  - concept
+---
+
 # Design Rate Limiter
 
 Motive: understanding that more boxes $\ne$ better system. Understanding scaling decisions.

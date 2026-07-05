@@ -1,3 +1,10 @@
+---
+title: Designing Data-Intensive Applications - Chapter Index
+description: Chapter index for Martin Kleppmann's Designing Data-Intensive Applications, covering foundations, distributed data, and derived data.
+tags:
+  - index
+---
+
 # Designing Data Intensive Applications
 
 Author : Martin Kleppmann

@@ -1,3 +1,10 @@
+---
+title: GSoC 2023 - FreeBSD Bootloader Test Harness
+description: Journey hub for a GSoC project rewriting FreeBSD's boot-loader test script to cover all supported architectures, with weekly logs.
+tags:
+  - index
+---
+
 ## GSoC
 
 This page documents the GSoC journey for the project that I will be doing with Warner Losh.
@@ -116,3 +123,6 @@ Extension for 4 weeks
 ### Important Links
 
 - Github : [Link](https://github.com/mightyjoe781/freebsd-src/tree/bootloader-smk)
+
+## See Also
+- [FreeBSD Development Environment on M1](../freebsd_m1.md)

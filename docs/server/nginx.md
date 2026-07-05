@@ -1,3 +1,10 @@
+---
+title: Restoring Nginx Config from a Tarball and Automating Cert Renewal
+description: Replace /etc/nginx with a pre-built tarball config and set up a weekly cron job for lego SSL renewal.
+tags:
+  - reference
+---
+
 ### Nginx
 
 This part  assumes  that you know the  basics of  "nginx" setup.  If this isn't the case, you can skip this step until later.
@@ -44,3 +51,8 @@ exit 0
 Make the file executable. I.e.:
 
 `chmod 755 /etc/cron.weekly/renew-letse`
+
+## See Also
+- [Nginx Static Site Setup for a New Subdomain](nginx2.md)
+- [Nginx](../unix/nginx.md)
+- [cron](../unix/cron.md)

@@ -1,3 +1,9 @@
+---
+title: tldr
+description: Quick reference for the tldr command, which provides simplified, example-based man pages.
+tags:
+  - reference
+---
 # tldr
 
  [:octicons-arrow-left-24:{ .icon } Back](index.md)
@@ -35,3 +41,8 @@ tldr --list | fzf | xargs tldr  # open fzf menu with all tldr cmds
 ````bash
 tldr --list | shuf -n1 | xargs tldr  
 ````
+
+### See Also
+
+- [cheat.sh](cheat.md) - similar instant-answer tool, also queryable via curl
+- [fzf](fzf.md) for interactively picking a command to look up

@@ -1,3 +1,10 @@
+---
+title: Reference Numbers
+description: Quick-reference tables and benchmarks for latency, throughput, storage, availability, and capacity planning in system design.
+tags:
+  - reference
+---
+
 # Reference Numbers
 
 *Quick reference tables and benchmarks for system design decisions.*

@@ -1,3 +1,10 @@
+---
+title: Cloud Computing and AWS Fundamentals
+description: Core cloud computing concepts - deployment models, characteristics, pricing, and AWS global infrastructure.
+tags:
+  - reference
+---
+
 # Introduction to AWS & Public Cloud
 
 ### Deployment Model of Cloud

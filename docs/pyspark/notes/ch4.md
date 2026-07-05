@@ -1,3 +1,10 @@
+---
+title: Structured API Overview
+description: Explains DataFrames, Datasets, schemas, and Spark's internal type system, and walks through how a query moves from logical to physical plan to execution.
+tags:
+  - concept
+---
+
 # Structured API Overview
 
 - The Structured APIs allows manipulation of all sorts of data from CSV(semi-structured) or Parquet(highly structured because schema validation happens at the write time)

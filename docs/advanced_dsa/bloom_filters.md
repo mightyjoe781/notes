@@ -1,3 +1,10 @@
+---
+title: Bloom Filters and Cuckoo Filters
+description: How Bloom filters trade space for false-positive membership testing, the false-positive-rate math, and how Cuckoo filters improve on them with deletions.
+tags:
+  - concept
+---
+
 # Bloom Filters
 
 *Membership testing with false positives*

@@ -1,3 +1,10 @@
+---
+title: Divide & Conquer
+description: The divide-and-conquer paradigm through classic examples (max-finding, Towers of Hanoi) and binary-search-on-the-answer (bisection) problems.
+tags:
+  - concept
+---
+
 # Divide & Conquer
 
 - Divide the original problem into sub-problems-(usually half)

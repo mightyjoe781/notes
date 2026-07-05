@@ -1,3 +1,10 @@
+---
+title: AWS Notes
+description: Hub page linking AWS certification study notes organized by exam category (Practitioner, Associate, Professional, Speciality).
+tags:
+  - index
+---
+
 ### AWS Notes
 
 AWS Exams can broadly be divided into 4 categories : https://aws.amazon.com/certification/

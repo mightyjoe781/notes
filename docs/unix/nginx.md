@@ -1,3 +1,9 @@
+---
+title: Nginx
+description: Cheatsheet for Nginx as a web server and reverse proxy - server blocks, load balancing, security headers, and Certbot.
+tags:
+  - reference
+---
 # Nginx
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)
@@ -206,4 +212,5 @@ sudo certbot renew --dry-run               # test auto-renewal
 
 ### See Also
 
+- [Nginx VPS setup notes](../server/nginx.md) and [static site setup](../server/nginx2.md) for real-world configs
 - Also: Caddy (auto HTTPS, simpler config), Traefik (dynamic config for containers), HAProxy (high-performance load balancing), Apache

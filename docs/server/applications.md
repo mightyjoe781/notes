@@ -1,3 +1,10 @@
+---
+title: Additional VPS Application Installs (Go, lego, TeXLive, node, QEMU)
+description: Grab-bag of install scripts for golang, Google Drive CLI, lego, node/npm/yarn, TeXLive, QEMU, and other optional VPS tools.
+tags:
+  - reference
+---
+
 ### Setting up some more Applications
 
 #### Installing `golang`

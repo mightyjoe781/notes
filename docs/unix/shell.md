@@ -1,3 +1,9 @@
+---
+title: Bash/Zsh Shell Scripting
+description: Cheatsheet for Bash/Zsh - config files, variable expansion, conditionals, loops, functions, and redirection.
+tags:
+  - reference
+---
 # Bash/Zsh
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

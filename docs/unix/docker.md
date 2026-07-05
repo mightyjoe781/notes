@@ -1,3 +1,9 @@
+---
+title: Docker
+description: Cheatsheet for Docker - images, containers, Dockerfiles, Compose, networking, and cleanup commands.
+tags:
+  - reference
+---
 # Docker
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md) | [Detailed Guides](../docker/index.md)

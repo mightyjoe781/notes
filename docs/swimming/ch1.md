@@ -1,3 +1,10 @@
+---
+title: Introduction to Swimming
+description: Why swimming matters, its benefits, common beginner fears, and basic pool etiquette.
+tags:
+  - reference
+---
+
 # Introduction to Swimming
 
 ## Why learn swimming?

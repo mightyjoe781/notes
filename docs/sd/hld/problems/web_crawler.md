@@ -1,3 +1,10 @@
+---
+title: Designing a Web Crawler
+description: HLD for a web crawler and inverted index covering capacity estimation, S3-backed page storage, deduplication, and distributed crawl coordination.
+tags:
+  - concept
+---
+
 # Designing a Web Crawler
 
 Motive : Tracking, Capacity Estimation, Extensibility, Sheer Scale, Working Backwards

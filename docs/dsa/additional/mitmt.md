@@ -1,3 +1,10 @@
+---
+title: Meet-in-the-Middle Technique
+description: How to split exponential search problems (subset sum, knapsack, XOR subsets) into two halves to cut brute-force complexity from 2^n to 2^(n/2).
+tags:
+  - concept
+---
+
 # Meet-in-the-Middle Technique
 
 - Meet in the Middle is a divide-and-conquer technique, used to reduce complexity of exponential search problems

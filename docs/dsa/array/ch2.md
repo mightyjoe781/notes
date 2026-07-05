@@ -1,3 +1,10 @@
+---
+title: Sliding Window
+description: Fixed and variable-size sliding window patterns with worked problems - longest substring variants, minimum window substring, and deque-based window min/max.
+tags:
+  - concept
+---
+
 # Sliding Window
 
 All sliding window problems share a basic concept: slide a sub-array (window) linearly from left to right over the original array of \(n\) elements.

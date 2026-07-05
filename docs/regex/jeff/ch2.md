@@ -1,3 +1,10 @@
+---
+title: Extended Regex Examples in Perl
+description: Worked Perl regex examples covering matching, substitution, lookaround, and number comma-formatting.
+tags:
+  - concept
+---
+
 ## Extended Introductory Examples
 
 Double word problem might look like this in perl

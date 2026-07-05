@@ -1,3 +1,10 @@
+---
+title: Load Balancers
+description: Covers Layer 4 vs Layer 7 load balancing, load balancing algorithms, active-active vs active-passive setups, health checks, and failover mechanisms.
+tags:
+  - reference
+---
+
 # Load Balancers
 
 **What are Load Balancers ?**

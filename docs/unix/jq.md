@@ -1,3 +1,9 @@
+---
+title: jq
+description: Cheatsheet for jq, the command-line JSON processor - selecting, filtering, restructuring, and shell integration.
+tags:
+  - reference
+---
 # jq
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

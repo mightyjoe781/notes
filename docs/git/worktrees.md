@@ -1,3 +1,10 @@
+---
+title: Git Worktrees - Multiple Working Directories from One Repo
+description: When and how to use worktrees to check out several branches at once without stashing, including bare-clone setups and naming conventions.
+tags:
+  - concept
+---
+
 # Worktrees
 
 Git Worktrees let you check out multiple branches simultaneously into separate directories, all sharing one `.git` database.

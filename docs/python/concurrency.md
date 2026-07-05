@@ -1,3 +1,10 @@
+---
+title: Concurrency Models in Python
+description: Compares threads, processes, and coroutines for concurrency in Python, including the GIL's real-world impact.
+tags:
+  - concept
+---
+
 # Concurrency Models in Python
 
 - Rob Pike (Co-inventor of the Go language) explains concurrency as dealing with lots of things at once, while parallelism is all about doing lots of things at once.
@@ -420,3 +427,8 @@ Quoting directly from Celery’s FAQ, here are some typical use cases:
 - Scheduling periodic work.
 
 Besides solving these immediate problems, task queues support horizontal scalability. Producers and consumers are decoupled: a producer doesn’t call a  consumer, it puts a request in a queue. Consumers don’t need to know  anything about the producers (but the request may include information  about the producer, if an acknowledgment is required). Crucially, you can easily add more workers to consume tasks as demand  grows. That’s why *Celery* and *RQ* are called distributed task queues.
+
+## See Also
+- [Concurrent Executors](concurrent-executors.md)
+- [Asynchronous Programming](async.md)
+- [Concurrency in Go](../go/lego/ch12.md)

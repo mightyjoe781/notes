@@ -1,3 +1,10 @@
+---
+title: SQL Joins and Set Operations
+description: Explains join types (inner, outer, semi, anti, self) and set operators (union, intersect, except) with diagrams, plus PostgreSQL vs PySpark semantics.
+tags:
+  - concept
+---
+
 # Joins and Set Operation
 
 SQL operations used to combine data are broadly categorized into
@@ -201,3 +208,7 @@ docker run -e PGADMIN_DEFAULT_EMAIL="smk@minetest.in" -e PGADMIN_DEFAULT_PASSWOR
 ```
 
 ... TODO ~ find a great example explaining all these.
+
+## See Also
+- [SQL](sql/index.md)
+- [Recursive CTEs](sql/recursive_cte.md)

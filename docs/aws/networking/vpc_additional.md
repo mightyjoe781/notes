@@ -1,3 +1,10 @@
+---
+title: VPC Additional Topics - Egress-Only IGW, ENI, BYOIP
+description: Quick reference on egress-only internet gateways, extending VPC CIDR space, Elastic Network Interfaces, and Bring Your Own IP.
+tags:
+  - reference
+---
+
 # Additional VPC Topics
 
 All these topics are important for Exam

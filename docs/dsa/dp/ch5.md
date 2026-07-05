@@ -1,3 +1,10 @@
+---
+title: Game & Minimax DP
+description: Game-theory DP problems (Stone Game, Nim, Sprague-Grundy) and interval DP problems like Burst Balloons and minimum deletions to make a palindrome.
+tags:
+  - concept
+---
+
 # Game DP
 
 ### Stone Game

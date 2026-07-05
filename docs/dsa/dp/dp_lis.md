@@ -1,3 +1,10 @@
+---
+title: DP on LIS
+description: Longest Increasing Subsequence and related DP-with-previous-state problems - largest divisible subset, longest string chain, bitonic subsequence, and number of LIS.
+tags:
+  - concept
+---
+
 # DP on LIS
 
 

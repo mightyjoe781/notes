@@ -1,3 +1,10 @@
+---
+title: Regex History and Language Integration Approaches
+description: History of regex flavors (grep, egrep, POSIX, Perl) and how languages like Java, PHP, and Python integrate regex.
+tags:
+  - concept
+---
+
 ## Overview of Regular Expression Features and Flavors
 
 when looking at regex in context of host language or tool there are 3 broad issues

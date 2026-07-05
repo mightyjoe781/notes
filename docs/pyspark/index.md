@@ -1,3 +1,10 @@
+---
+title: PySpark Notes Hub
+description: Index of chapter notes on Apache Spark and PySpark, covering structured APIs, low-level APIs, production, streaming, and ML, based on Spark - The Definitive Guide.
+tags:
+  - index
+---
+
 # Pyspark
 
 Credits: Following notes are learnings from _Spark: The Definitive Guide by Bill Chambers and Matei Zaharia_
@@ -57,3 +64,9 @@ For Running Machine Learning Workloads on Spark. There is a dedicated guide for 
 ## Books
 
 - [Learning Spark 2.0]
+
+## See Also
+
+- [Databricks Fundamentals](../databricks/index.md)
+- [Big Data](../sd/hld/beginner/big_data.md)
+- [Batch Processing Systems](../sd/topics/architecture/batch_processing.md)

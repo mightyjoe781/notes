@@ -1,3 +1,10 @@
+---
+title: Docker - hub and quick reference
+description: Entry point for the Docker notes, with a topic map and a copy-paste command cheat sheet.
+tags:
+  - index
+---
+
 # Docker
 
 Docker packages your application and its dependencies into a **container** - a lightweight, portable unit that runs identically on any machine.
@@ -63,3 +70,6 @@ docker system prune -a                        # remove everything unused
 - [Docker Hub](https://hub.docker.com/)
 - [Compose File Reference](https://docs.docker.com/compose/compose-file/)
 - [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
+
+## See Also
+- [Kubernetes](../kubernetes/index.md) - orchestration once a single host isn't enough

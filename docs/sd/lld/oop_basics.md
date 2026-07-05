@@ -1,3 +1,9 @@
+---
+title: OOP Basics
+description: Quick reference for core OOP relationships - association, aggregation, composition, inheritance, dependency, and encapsulation.
+tags:
+  - reference
+---
 
 ## OOP Basics
 

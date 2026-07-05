@@ -1,3 +1,10 @@
+---
+title: Search Engines - Recent Searches, Live Commentary, and Text Search
+description: Covers designing recent searches with Redis, Cricbuzz-style live commentary via short polling, and a text search engine built on an inverted index.
+tags:
+  - concept
+---
+
 # Search Engines
 
 ## Designing Recent Searches

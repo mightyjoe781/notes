@@ -1,3 +1,10 @@
+---
+title: Web Applications
+description: Covers three-tier architecture, the MVC pattern and its variations, and Progressive Web App design with service workers.
+tags:
+  - concept
+---
+
 # Web Applications
 
 Web applications are software programs that run on web servers and are accessed through web browsers. They have evolved from simple static pages to complex, interactive applications that rival desktop software in functionality and user experience.

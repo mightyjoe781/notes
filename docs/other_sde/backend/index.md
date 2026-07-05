@@ -1,3 +1,10 @@
+---
+tags:
+  - index
+title: Backend Engineering
+description: Hub for backend engineering notes covering communication patterns, protocols, execution models, and debugging techniques.
+---
+
 # Backend Engineering
 
 ### Topics

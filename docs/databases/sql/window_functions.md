@@ -1,3 +1,10 @@
+---
+title: Window Functions - SQL and PySpark
+description: Explains ranking, navigation, and aggregate window functions with frame semantics, common interview patterns (gaps and islands, sessionization), and Spark's shuffle/skew tradeoffs.
+tags:
+  - concept
+---
+
 # Window Functions
 
 Window functions compute a value across a set of rows related to the current row - without collapsing rows like `GROUP BY` does. Each input row keeps its own output row.
@@ -790,3 +797,8 @@ w = Window.partitionBy("user_id").orderBy("date").rangeBetween(-6, 0)
 - When the partition cardinality is very low (e.g., PARTITION BY country with 5 countries - you get 5 tasks max, parallelism is wasted).
 - When the dataset is too skewed to partition cleanly - pre-filter or pre-aggregate first.
 - For simple dedup, `dropDuplicates()` is faster than ROW_NUMBER + filter.
+
+## See Also
+- [Recursive CTEs](recursive_cte.md)
+- [Slowly Changing Dimensions (SCD) and MERGE](scd.md)
+- [Aggregations Cheatsheet](../../pyspark/notes/ch7.md)

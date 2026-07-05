@@ -1,3 +1,10 @@
+---
+title: Practical Regex Techniques - IP Addresses, Filenames, Balanced Delimiters
+description: Worked reasoning for building real-world regexes - IP matching, filename parsing, and delimited/CSV text.
+tags:
+  - concept
+---
+
 ## Practical Regex Techniques
 
 Writing good regular expression is more than skill - it’s an art. One doesn’t teach or learn this art with lists or rules, but rather, through experience.
@@ -16,7 +23,7 @@ Four numbers separated by dots such as : `1.2.3.4`, often padded with 0 and can 
 
 The simplest regex would be `[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*`, but it’s too vague and allows empty groups between dots. Let’s fix this: first, change `*` to `+` because there should be at least one digit between dots. Next, anchor the entire string as an IP address using `^` and `$`.
 
-Now the regex becomes `^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$`. Let’s simplify further using `\d` for `[0-9]`. New regex: `^\d+\.\d+\.\d+\.\d+$` — but it’s still wrong as it allows any number of digits, so let’s fix the range.
+Now the regex becomes `^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$`. Let’s simplify further using `\d` for `[0-9]`. New regex: `^\d+\.\d+\.\d+\.\d+$` - but it’s still wrong as it allows any number of digits, so let’s fix the range.
 
 New regex: `^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$`, or use `\d\d?\d?` if interval syntax is unavailable.
 

@@ -1,3 +1,9 @@
+---
+title: Taskfile and Makefile
+description: Cheatsheet for Taskfile and Makefile task runners - syntax, variables, dependencies, and a feature comparison.
+tags:
+  - reference
+---
 # Taskfile / Makefile
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

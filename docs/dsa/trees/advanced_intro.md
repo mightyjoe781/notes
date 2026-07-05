@@ -1,3 +1,10 @@
+---
+title: Selecting the Optimal Structure
+description: A decision framework for choosing among range-query data structures - sparse table, Fenwick tree, segment tree, sqrt decomposition - based on update and query needs.
+tags:
+  - concept
+---
+
 # Advanced Trees: Selecting the Optimal Structure
 
 A range-query problem usually boils down to two questions: **what kind of updates does it need** (none, point, or range), and **what is the combine function** (sum, min/max/gcd, k-th smallest, ...)? 

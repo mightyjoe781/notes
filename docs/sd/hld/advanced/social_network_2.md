@@ -1,3 +1,10 @@
+---
+title: Social Network Part 2 - Gravatar, Photo Tagging, and Notification Badges
+description: Covers Gravatar-style hash-based image serving, on-demand image optimization, photo tagging schema, and unread notification badge counting.
+tags:
+  - concept
+---
+
 # Social Network (Part 2)
 
 ## How Images Are Served - The Proxy Pattern

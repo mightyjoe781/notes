@@ -1,3 +1,10 @@
+---
+title: Segment Trees & Lazy Propagation
+description: Segment tree implementation for range min/sum queries, with and without lazy propagation, plus a sweep-line segment tree variant.
+tags:
+  - concept
+---
+
 # Segment Trees
 
 * **Segment Tree** with **lazy propagation** is used to efficiently handle range updates and range minimum queries (RMQ).

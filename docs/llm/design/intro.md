@@ -1,3 +1,10 @@
+---
+title: Introduction to LLM System Design
+description: What changes when LLMs enter a system's critical path - non-determinism, token cost, opaque failure - plus core primitives (tokens, embeddings, vector DBs) and an interview framework.
+tags:
+  - concept
+---
+
 # Introduction to LLM System Design
 
 > "An LLM is just another service — until you ignore what makes it different."
@@ -134,3 +141,8 @@ The same framework from traditional HLD applies - but stress-test these LLM-spec
 - [Building LLM Applications for Production - Chip Huyen](https://huyenchip.com/2023/04/11/llm-engineering.html) - practical overview of where LLM systems break in production; high signal
 - [HNSW Algorithm Explained](https://www.pinecone.io/learn/series/faiss/hnsw/) - Pinecone's walkthrough; intuition for why graph-based ANN is fast
 - [Patterns for Building LLM-based Systems & Products - Eugene Yan](https://eugeneyan.com/writing/llm-patterns/) - covers evals, RAG, guardrails, and caching with real examples
+
+## See Also
+- [HLD Index](../../sd/hld/index.md) - traditional HLD intuitions this note builds on
+- [Caching](../../sd/topics/core/caching.md) - general caching tradeoffs behind the semantic cache pattern
+- [RAG](../concepts/rag.md) - embeddings, chunking, and retrieval detail behind the RAG pipeline pattern

@@ -1,3 +1,10 @@
+---
+title: Hash Maps & Frequency Counting
+description: Hash map fundamentals (collision handling, hash functions) and four core interview patterns - complement lookup, group by key, frequency window, and prefix sum with hashmap.
+tags:
+  - concept
+---
+
 # Hash Maps & Frequency Counting
 
 To count element frequencies effectively, hash map (dictionary) are used by storing elements as keys and counts as values.

@@ -1,3 +1,10 @@
+---
+title: Memcached Internals
+description: Explains Memcached's memory management, slab allocation, LRU eviction, threading model, and client-side distributed caching via consistent hashing.
+tags:
+  - concept
+---
+
 # Memcached
 
 - An item consists of key and value
@@ -48,3 +55,7 @@ Writes just update *hash tables* and then updates chunk, and updates the LRU. NO
 
 
 Link ~ https://www.youtube.com/watch?v=NCePGsRZFus
+
+## See Also
+- [Redis](redis.md)
+- [Caching](../../sd/topics/core/caching.md)

@@ -1,3 +1,9 @@
+---
+title: rsync
+description: Cheatsheet for rsync - incremental file sync flags, exclude patterns, and hard-link based incremental backups.
+tags:
+  - reference
+---
 # rsync
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

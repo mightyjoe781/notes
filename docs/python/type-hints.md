@@ -1,3 +1,10 @@
+---
+title: Type Hints in Functions
+description: Introduces gradual typing, function annotations, and the built-in and generic types usable in Python type hints.
+tags:
+  - concept
+---
+
 # Type Hints in Functions
 
 Type hints are the biggest change in the history of Python since the unification of types and classes in Python 2.2, released in 2001. However, type hints do not benefit all Python users equally. That’s why they should always be optional.
@@ -405,3 +412,7 @@ Also, if we are forced to type check everything, we lose some of the expressive 
 - Type checkers lag behind Python releases, rejecting or even crashing  while analyzing code with new language features—for more than a year in  some cases.
 
 Common data constraints cannot be expressed in the type system—even simple ones.
+
+## See Also
+- [More About Type Hints](type-hints-advanced.md)
+- [Generics (Go)](../go/lego/ch8.md)

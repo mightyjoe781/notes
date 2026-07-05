@@ -1,3 +1,10 @@
+---
+title: Designing Tinder Feed
+description: HLD for a swipe-based feed covering geo-spatial proximity capture, feed generation, swipe storage, and bloom filters to avoid repeat profiles.
+tags:
+  - concept
+---
+
 # Designing Tinder Feed
 
 Motive : playing with location and keeping things efficient.

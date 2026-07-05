@@ -1,3 +1,10 @@
+---
+title: Internet Protocol
+description: Covers IPv4 addressing, subnetting, IP packet structure, ICMP, ARP, private IP ranges, and capturing traffic with tcpdump.
+tags:
+  - concept
+---
+
 # Internet Protocol
 
 ## IP Building Blocks
@@ -143,3 +150,7 @@ Open Up your wifi and check the IP Address, Subnet Mask, Router
 
 
 - https://en.wikipedia.org/wiki/Private_network
+
+## See Also
+- [Protocols](../../other_sde/backend/protocols.md)
+- [Network Routing](network_routing.md)

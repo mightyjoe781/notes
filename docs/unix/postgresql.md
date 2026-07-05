@@ -1,3 +1,9 @@
+---
+title: PostgreSQL
+description: Cheatsheet for PostgreSQL - psql meta-commands, table/CRUD/index SQL, transactions, backup, and configuration.
+tags:
+  - reference
+---
 # PostgreSQL
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)
@@ -186,4 +192,5 @@ sudo systemctl reload postgresql
 
 - [Redis](redis.md) for caching
 - [SQLite](sqlite.md) for embedded/lightweight use
+- [PostgreSQL deep dive](../databases/postgresql/index.md) and [query optimization / EXPLAIN](../databases/sql/query_optimization.md)
 - Also: MySQL/MariaDB, TimescaleDB (time-series on Postgres), pgvector (vector search)

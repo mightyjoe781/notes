@@ -1,3 +1,10 @@
+---
+title: GitHub Copilot - Custom Instructions, Agents, and Multi-Agent Patterns
+description: VS Code Copilot features - custom instructions, prompt files, custom agents, skills, MCP, hooks, and multi-agent orchestration patterns.
+tags:
+  - reference
+---
+
 # VSCode Copilot
 
 [Reference](https://code.visualstudio.com/docs/copilot/overview)
@@ -104,4 +111,8 @@ Multiple levels of agents where higher-level agents plan and delegate, lower-lev
 ### Agent-to-Agent Protocols
 
 Copilot supports handoffs — structured transitions between agents with shared context passing. This enables pipeline-style workflows where each agent's output becomes the next one's input.
+
+## See Also
+- [Claude Code](claude_code.md) - comparable feature set in a CLI-first tool
+- [AI Agents](../concepts/agents.md) - multi-agent orchestrator/swarm patterns in more depth
 

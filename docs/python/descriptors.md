@@ -1,3 +1,10 @@
+---
+title: Attribute Descriptors
+description: Explains the descriptor protocol (__get__/__set__/__delete__) used to reuse attribute access logic, as in ORMs.
+tags:
+  - concept
+---
+
 # Attribute Descriptors
 
 - Descriptors are a way of reusing the same access logic in multiple attributes. i.e. field types in ORMs, such as Django ORM and SQLAlchemy are descriptors managing flow of data from fields in database record to Python object attributes and vice-versa.
@@ -214,3 +221,7 @@ A function within a class becomes a bound method when invoked on an instance bec
 - The docstring of a descriptor class is used to document every instance of the descriptor in the managed class.
 - That is somewhat unsatisfactory. In the case of `LineItem`, it would be good to add, for example, the information that `weight` must be in kilograms. That would be trivial with properties, because  each property handles a specific managed attribute. But with  descriptors, the same `Quantity` descriptor class is used for `weight` and `price`
 - The second detail we discussed with properties, but have not addressed  with descriptors, is handling attempts to delete a managed attribute. That can be done by implementing a `__delete__` method alongside or instead of the usual `__get__` and/or `__set__` in the descriptor class.
+
+## See Also
+- [Decorators and Closures](decorators.md)
+- [Dynamic Attributes and Properties](dynamic-attributes.md)

@@ -1,3 +1,10 @@
+---
+title: Building and Hosting Microservices
+description: Covers hosting options (VMs, PaaS, containers), local development with Docker, testing strategies, and standardized service templates.
+tags:
+  - concept
+---
+
 ## Building Microservices
 
 #### Hosting Microservices
@@ -88,3 +95,7 @@ Benefits of service templates:
 - Increased developer productivity
 - Ability to run the microservice in isolation
 - Ability to run in the context of the full application — locally (e.g., Docker Compose) or connected to shared services
+
+## See Also
+- [Serverless Architecture](../../sd/topics/paradigms/serverless.md)
+- [Microservices Architecture](../../sd/topics/paradigms/microservices.md)

@@ -1,3 +1,10 @@
+---
+title: Docker storage - volumes, bind mounts, and tmpfs
+description: When to use bind mounts, named volumes, or tmpfs, and the tradeoffs between them.
+tags:
+  - concept
+---
+
 # Storage
 
 Containers are **ephemeral** - the writable layer is destroyed when the container is removed. For data that needs to outlive a container, Docker provides three persistence mechanisms.
@@ -99,3 +106,6 @@ docker run -d -v shared_data:/data --name reader myapp
 
 !!! warning
     Docker does not coordinate concurrent writes. If multiple containers write to the same volume, your application must handle locking.
+
+## See Also
+- [Kubernetes Storage](../kubernetes/storage.md) - the equivalent Volumes, PVCs, and storage classes in an orchestrated cluster

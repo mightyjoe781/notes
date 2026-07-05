@@ -1,3 +1,10 @@
+---
+title: Python for Data Analysis - Reading Notes Hub
+description: Index of chapter notes on Wes McKinney's Python for Data Analysis, covering numpy, pandas, data cleaning/wrangling, plotting, aggregation, and time series.
+tags:
+  - index
+---
+
 ## Python for Data Analysis by Wes McKinney
 
 #### Contents

@@ -1,3 +1,10 @@
+---
+title: Advanced Database Topics
+description: Covers MVCC internals and isolation levels, distributed transactions (2PC, 3PC, sagas), and database triggers and stored procedures.
+tags:
+  - concept
+---
+
 # Advanced Database Topics
 
 NOTE: This is not at all required for interviews, just for fun purposes.

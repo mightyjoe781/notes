@@ -1,3 +1,10 @@
+---
+title: Enabling TLS/SSL in PostgreSQL
+description: Docker-based steps to enable SSL/TLS on a Postgres instance with a self-signed certificate.
+tags:
+  - reference
+---
+
 # Database Security
 
 ## Enabling TLS/SSL in Postgres

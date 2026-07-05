@@ -1,3 +1,10 @@
+---
+title: Operational Transformation (OT) for Collaborative Editing
+description: How OT transforms concurrent edit operations against each other so replicas converge to the same document, and why it needs a central server unlike CRDTs.
+tags:
+  - concept
+---
+
 # Operational Transformation (OT)
 *Real-time collaborative editing*
 
@@ -123,3 +130,8 @@ OT transforms. CRDT merges.
 - “Google Docs Operational Transformation” (Jupiter paper)
 - Martin Kleppmann — CRDT vs OT comparison
 - [Early Introduction from CRDTs: The Hard Parts](https://www.youtube.com/watch?v=x7drE24geUw)
+
+## See Also
+
+- [Conflict-Free Replicated Data Types (CRDTs)](crdts.md) - the alternative approach that merges data structures instead of transforming operations
+- [Conflict Resolution](../sd/topics/consistency/conflict_resolution.md) - broader survey of conflict-resolution strategies including OT and CRDTs

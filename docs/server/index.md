@@ -1,3 +1,10 @@
+---
+title: Server Setup Notes
+description: Hub linking VPS setup, nginx, backups, and app-hosting notes for self-managed servers.
+tags:
+  - index
+---
+
 ### Server Setup
 
 

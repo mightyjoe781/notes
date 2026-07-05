@@ -1,3 +1,10 @@
+---
+title: Predeclared Types and Declaration
+description: Reference on Go's zero values, literals, built-in types, var vs := declaration, constants, and variable naming conventions.
+tags:
+  - reference
+---
+
 # Predeclared Types and Declaration
 
 ## Predeclared Types

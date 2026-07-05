@@ -1,3 +1,10 @@
+---
+title: Absolute FreeBSD - Chapter Notes
+description: Chapter-by-chapter reading notes from Absolute FreeBSD, covering install, kernel, networking, filesystems, security, and jails.
+tags:
+  - index
+---
+
 ## Absolute FreeBSD
 
 - Chapter 1. Getting More Help

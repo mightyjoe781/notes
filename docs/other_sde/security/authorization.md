@@ -1,3 +1,10 @@
+---
+tags:
+  - concept
+title: Authorization
+description: Covers authorization models including RBAC, ABAC, and OAuth 2.0 flow patterns.
+---
+
 # Authorization
 
 Authorization determines what authenticated users can access and what actions they can perform. It is the second critical security component after authentication, controlling resource access based on policies, roles, and attributes.
@@ -435,3 +442,8 @@ Defense in depth: deny by default, redundant controls, audit at every layer.
 - Client-side authorization (can be bypassed)
 - Hardcoded permissions in application code
 - Insufficient auditing and visibility into access patterns
+
+## See Also
+- [Authentication](authentication.md)
+- [Data Security](data_security.md)
+- [Microservices Security](../../microservices/notes/ch5.md)

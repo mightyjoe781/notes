@@ -1,3 +1,10 @@
+---
+title: AWS Networking Speciality Notes
+description: Hub page linking study notes for the AWS Certified Advanced Networking Speciality exam.
+tags:
+  - index
+---
+
 # AWS Networking Speciality
 
 

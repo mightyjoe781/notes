@@ -1,3 +1,10 @@
+---
+title: "Inheritance: For Better or for Worse"
+description: Covers super(), multiple inheritance, MRO, and mixin classes in Python, and when to avoid overusing inheritance.
+tags:
+  - concept
+---
+
 # Inheritance: For Better of for Worse
 
 - multiple inheritance is supported in C++, Java but not C#. After percieved abuse in early C++ codebases, Java left it out.
@@ -301,3 +308,7 @@ Most advice in the previous section is not followed by Tkinter, with the notable
 Keep in mind that Tkinter has been part of the standard library since Python 1.1 was released in 1994. Tkinter is a layer on top of the excellent Tk GUI toolkit of the Tcl language. The Tcl/Tk combo is not originally object-oriented, so the Tk API is basically a vast catalog of functions. However, the toolkit is object-oriented in its design, if not in its original Tcl implementation.
 
 To be fair, as a Tkinter user, you don’t need to know or use multiple  inheritance at all. It’s an implementation detail hidden behind the  widget classes that you will instantiate or subclass in your own code.  But you will suffer the consequences of excessive multiple inheritance  when you type `dir(tkinter.Button)` and try to find the method you need among the 214 attributes listed. And you’ll need to face the complexity if you decide to implement a new Tk widget.
+
+## See Also
+- [Interfaces, Protocols, and ABCs](protocols-abcs.md)
+- [Class Metaprogramming](metaprogramming.md)

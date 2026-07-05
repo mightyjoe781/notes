@@ -1,3 +1,10 @@
+---
+title: Basics of Linked List
+description: Linked list fundamentals - node implementation, insertion/deletion/traversal/reversal, doubly linked lists, and the Josephus problem.
+tags:
+  - concept
+---
+
 # Linked List
 
 ### Key Concepts

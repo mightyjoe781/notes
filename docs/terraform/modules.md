@@ -1,3 +1,9 @@
+---
+title: Terraform Modules - Root/Child Structure, Sources, Versioning, Locals
+description: How root and child modules relate, where module sources can point, version constraint operators, and local values.
+tags:
+  - concept
+---
 # Modules
 
 ## What are Modules?

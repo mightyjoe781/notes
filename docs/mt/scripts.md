@@ -1,3 +1,10 @@
+---
+title: Luanti Server Patches - Stamina Mod Texture Fix
+description: Cheatsheet patch for fixing hunger/health bar misalignment when swapping the built-in hunger mod for the stamina mod.
+tags:
+  - reference
+---
+
 ### Patches (Optional)
 
 #### Stamina mod Texture Fix in Multicraft (Optional)

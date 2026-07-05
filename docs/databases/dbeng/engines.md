@@ -1,3 +1,10 @@
+---
+title: Database Storage Engines Reference
+description: Quick comparison of storage/database engines - MyISAM, InnoDB, XtraDB, SQLite, Aria, Berkeley DB, LevelDB, RocksDB - and how to switch engines in MySQL.
+tags:
+  - reference
+---
+
 # Database Engines
 
 

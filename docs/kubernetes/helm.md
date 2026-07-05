@@ -1,3 +1,10 @@
+---
+title: "Helm Package Manager: Charts, Templates, and Commands"
+description: Reference for Helm chart structure, templating syntax, and the install/upgrade/rollback command workflow.
+tags:
+  - reference
+---
+
 # Helm
 
 ## What is Helm?

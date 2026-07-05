@@ -1,3 +1,10 @@
+---
+title: An Array of Sequences
+description: Covers container vs flat sequences, list comprehensions, generator expressions, and tuple unpacking in Python.
+tags:
+  - concept
+---
+
 ## An Array of Sequences
 
 There are two types of Sequences
@@ -366,3 +373,6 @@ dq.extendleft([10,20,30]) # notice how items on other end are discarded
 - `multiprocessing` : Implements its own `SimpleQueue` and bounded `Queue` but designed for interprocess communication. A specialized `multiprocessing.JoinableQueue` is provided for task management.
 - `asyncio` : Provides `Queue`, `LifoQueue`, `PriorityQueue` and `JoinableQueue` with APIs inspired by the class in `queue` and `multiprocessing` modules but adapted for asynchronous programming.
 - `heapq` : doesn’t implement a queue class, instead provides functions like `heappush` and `heappop` that let you use a mutable sequence as a heap queue or priority queue.
+
+## See Also
+- [Dictionaries and Sets](dicts-sets.md)

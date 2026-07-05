@@ -1,3 +1,10 @@
+---
+title: Engineering Blogs & Case Studies
+description: Curated list of engineering blogs, architecture case studies, papers, and conference talks from major tech companies.
+tags:
+  - reference
+---
+
 # Engineering Blogs & Case Studies
 
 ---

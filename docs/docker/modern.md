@@ -1,3 +1,10 @@
+---
+title: Modern Docker features - BuildKit, buildx, Scout, and signing
+description: Reference for Docker features added from version 23 onward - BuildKit cache mounts and secrets, multi-platform buildx, compose watch, Docker Scout, and image signing.
+tags:
+  - reference
+---
+
 # Modern Docker Features
 
 Features added from Docker 23 onwards that improve build speed, image security, and the development experience.

@@ -1,3 +1,9 @@
+---
+title: ripgrep (rg)
+description: Cheatsheet for ripgrep, the fast recursive search tool - flags, common patterns, and fzf integration.
+tags:
+  - reference
+---
 # ripgrep (rg)
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

@@ -1,4 +1,14 @@
+---
+title: Route 53 - DNS Records and Routing Policies
+description: Explains Route 53 record types, alias vs CNAME, health checks, routing policies (weighted, latency, geolocation, failover), and hybrid DNS resolver endpoints.
+tags:
+  - concept
+---
+
 # Route 53
+
+## See Also
+- [Popular Networking Protocols](../../networking/neteng/protocols.md)
 
 ## DNS Fundamentals
 

@@ -1,3 +1,10 @@
+---
+title: tmux - Terminal Multiplexer Hub and Quick Reference
+description: Hub for tmux sessions, windows, panes, and copy mode, plus chapter notes from the tmux book and a quick-reference table of key bindings.
+tags:
+  - index
+---
+
 # tmux
 
 tmux is a terminal multiplexer - it lets you run multiple terminal sessions inside a single window, detach from them, and reattach later. Sessions survive disconnects, making it essential for remote work.
@@ -110,3 +117,8 @@ Notes from [tmux 2: Productive Mouse-Free Development](https://pragprog.com/titl
 - [tmux-continuum](https://github.com/tmux-plugins/tmux-continuum) - automatic saving via tmux-resurrect
 - [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) - seamless pane navigation between vim and tmux
 - [Oh My Tmux](https://github.com/gpakosz/.tmux) - well-maintained `.tmux.conf` starter config
+
+## See Also
+
+- [tmux cheatsheet](../unix/tmux.md) - condensed one-page version of this hub
+- [Vim](../vim/index.md) - pairs with vim-tmux-navigator for seamless pane/split navigation

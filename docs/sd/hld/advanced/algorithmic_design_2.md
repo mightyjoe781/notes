@@ -1,3 +1,10 @@
+---
+title: Algorithmic System Design - Geo-Proximity and Follow Graphs
+description: Covers GeoHash-based geo-proximity search at Gojek's scale and a relational schema for follow graphs modeled after Twitter's FlockDB.
+tags:
+  - concept
+---
+
 # Algorithmic Design
 
 ## Geo-Proximity

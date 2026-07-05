@@ -1,3 +1,10 @@
+---
+title: Merkle Trees for Efficient Data Integrity and Sync
+description: How hashing data in a tree instead of as one blob lets systems verify or diff huge datasets in O(log n), with use cases in blockchains, Cassandra, and Git.
+tags:
+  - concept
+---
+
 # Merkle Trees
 
 Problem : You are given two systems, you are supposed to maintain them in sync.
@@ -148,4 +155,9 @@ def verify_proof(leaf, proof, root):
 |Build| O(n)     |
 |Verify| O(log n) |
 |Proof size| O(log n) |
-|Compare datasets| O(log n) 
+|Compare datasets| O(log n) |
+
+## See Also
+
+- [Rsync Algorithm](rsync_algo.md) - Merkle Trees prove/diff data quickly, rsync efficiently transfers the changed bytes; the two are often combined
+- [LSM Trees](lsm.md) - Merkle Trees solve verifiable reads, LSM Trees solve fast writes

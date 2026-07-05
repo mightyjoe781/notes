@@ -1,3 +1,9 @@
+---
+title: Archiving and Compression (tar, gzip, zstd)
+description: Cheatsheet for archiving with tar and compressing with gzip, bzip2, xz, and zstd, plus a speed/ratio comparison.
+tags:
+  - reference
+---
 # tar / gzip / zstd
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

@@ -1,3 +1,10 @@
+---
+title: More About Type Hints
+description: Covers overloaded signatures, TypedDict, type casting, generic classes, variance, and static protocols in Python typing.
+tags:
+  - concept
+---
+
 # More About Type Hints
 
 ## Overloaded Signatures
@@ -129,3 +136,7 @@ remain = machine.inspect() # and that remain is a tuple of integers
 ## Variance
 
 ## Implementing a Generic Static Protocol
+
+## See Also
+- [Type Hints in Functions](type-hints.md)
+- [Generics (Go)](../go/lego/ch8.md)

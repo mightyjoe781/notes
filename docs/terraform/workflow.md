@@ -1,3 +1,9 @@
+---
+title: Terraform CLI Workflow - init, plan, apply, destroy
+description: Core Terraform CLI commands in order, workspace commands, and TF_LOG debugging levels.
+tags:
+  - reference
+---
 # Workflow and CLI
 
 ## Core Commands

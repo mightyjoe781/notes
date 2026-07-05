@@ -1,3 +1,10 @@
+---
+title: VPC Sharing, Private NAT, and Edge Compute Topics
+description: Reference on VPC sharing across accounts, Private NAT Gateway for overlapping CIDRs, and edge compute options like WaveLength and Local Zones.
+tags:
+  - reference
+---
+
 # Additional Topics
 
 ## VPC Sharing

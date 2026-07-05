@@ -1,3 +1,11 @@
+---
+title: Rate Limiting Algorithms - Token Bucket, Leaking Bucket, and Fixed Window
+description: Quick comparison of rate-limiting algorithms - token bucket, leaking bucket, and fixed window counter - with their pros, cons, and tuning parameters.
+tags:
+  - reference
+  - draft
+---
+
 # Token Bucket
 *Rate Limiting & Traffic Shaping*
 
@@ -70,4 +78,8 @@ Cons:
 ### Sliding Window Log Algorithm
 
 ### Sliding Window Counter Algorithm
+
+## See Also
+
+- [Design Rate Limiter](../sd/hld/problems/rate_limiter.md) - full HLD for a rate limiter, including placement and Redis-backed sharded counters
 

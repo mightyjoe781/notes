@@ -1,3 +1,10 @@
+---
+title: Designing Twitter Trends
+description: HLD for a Twitter Trends page covering tweet ingestion via Kafka, news clustering, and scoring/ranking of trending entities.
+tags:
+  - concept
+---
+
 # Designing Twitter Trends
 
 Motive : To understand how *many* components are needed to build at scale.

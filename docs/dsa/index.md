@@ -1,3 +1,10 @@
+---
+title: DSA
+description: Hub page linking to all data structures and algorithms notes, organized by topic - arrays, trees, graphs, DP, sorting, searching, strings, and more.
+tags:
+  - index
+---
+
 # DSA
 
 ## Data Structures

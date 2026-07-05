@@ -1,3 +1,10 @@
+---
+title: Matrix Chain Multiplication (Interval DP)
+description: The interval DP pattern via Matrix Chain Multiplication, with related problems like cutting sticks, burst balloons, and palindrome partitioning.
+tags:
+  - concept
+---
+
 # Matrix Chain Multiplication
 
 Often known as Matrix Chain Ordering Problem, is an optimization problem concerning most efficient way to multiply a sequence of matrices.

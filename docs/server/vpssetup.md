@@ -1,3 +1,10 @@
+---
+title: Developer VPS Box Setup Guide (Debian 10)
+description: Flexible, reasoned walkthrough for provisioning a Debian 10 developer box - packages, hardening, and build-system background.
+tags:
+  - concept
+---
+
 ## Developer VPS Box Setup
 
 Credits : Robert Kiraly
@@ -352,4 +359,10 @@ PasswordAuthentication no
 
 # after that run service sshd restart
 ````
+
+## See Also
+- [smk's VPS Setup](vps_setup_smk.md)
+- [Podman](podman.md)
+- [systemd](../unix/systemd.md)
+- [SSH](../unix/ssh.md)
 

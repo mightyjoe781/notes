@@ -1,3 +1,10 @@
+---
+title: AWS Management and Governance Services
+description: CloudWatch metrics/logs/alarms, CloudTrail and CloudTrail Lake, AWS Config, CloudFormation, SSM Parameter Store, Managed Grafana, and Amazon DataZone.
+tags:
+  - reference
+---
+
 # Management and Governance
 
 ## Amazon CloudWatch

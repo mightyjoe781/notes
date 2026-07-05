@@ -1,3 +1,10 @@
+---
+title: Monolithic Architecture
+description: Covers single deployment units, shared database design, inter-module communication patterns, and when to evolve a monolith toward microservices.
+tags:
+  - concept
+---
+
 # Monolithic Architecture
 
 A monolithic architecture structures an application as a single deployable unit where all business functionality is contained within one codebase and runs as a single process. This traditional approach has been the foundation of software development for decades and remains relevant for many use cases.

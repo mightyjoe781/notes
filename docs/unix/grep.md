@@ -1,3 +1,9 @@
+---
+title: grep
+description: Cheatsheet for grep - flags, filtering, context lines, and regex patterns for searching plain text.
+tags:
+  - reference
+---
 # grep
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

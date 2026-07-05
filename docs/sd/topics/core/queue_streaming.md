@@ -1,3 +1,10 @@
+---
+title: Message Queues & Streaming
+description: Covers sync vs async processing, point-to-point vs pub-sub patterns, message brokers vs streams, ordering/durability guarantees, and backpressure handling.
+tags:
+  - reference
+---
+
 # Message Queues & Streaming
 
 ## Messaging Fundamentals

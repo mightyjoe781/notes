@@ -1,3 +1,10 @@
+---
+title: Core AWS Services for AI Practitioner Exam
+description: Foundational AWS services beyond AI - IAM, S3, EC2, Lambda, security/audit tooling, and networking basics.
+tags:
+  - reference
+---
+
 # AWS Services
 
 ## IAM: Users & Groups

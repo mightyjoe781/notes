@@ -1,3 +1,10 @@
+---
+title: Private Connectivity - VPC Peering, Endpoints, and PrivateLink
+description: Explains how VPC peering, Gateway/Interface endpoints, and PrivateLink work, including DNS resolution and when to use each.
+tags:
+  - concept
+---
+
 # Private Connectivity
 
 This is direct connectivity to the Private Hosts on a VPC. Why do we actually need it ?

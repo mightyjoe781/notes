@@ -1,3 +1,10 @@
+---
+title: Network Flow Algorithm (Ford-Fulkerson, Edmonds-Karp)
+description: Max-flow/min-cut fundamentals and the Edmonds-Karp algorithm, including how to model bipartite matching as a flow problem.
+tags:
+  - concept
+---
+
 # Network Flow
 
 Network flow models movement of a commodity (data, water, traffic) through a directed graph from a **source** `s` to a **sink** `t`. Each edge has a **capacity** - the max amount of flow it can carry.

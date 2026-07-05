@@ -1,3 +1,10 @@
+---
+title: Non-Relational Databases and Slack's Realtime Architecture
+description: Covers NoSQL database types and when to use them, then walks through Slack's realtime messaging architecture with edge servers and pub/sub.
+tags:
+  - concept
+---
+
 # Database (Part 2)
 
 ## Non-Relational Databases (NoSQL)

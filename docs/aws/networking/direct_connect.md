@@ -1,3 +1,10 @@
+---
+title: Direct Connect - VIFs, DX Gateway, and Resiliency
+description: Reference on Direct Connect connection types, VIF types and parameters, DX Gateway architectures, LAGs, resiliency, MTU, and billing.
+tags:
+  - reference
+---
+
 # Direct Connect (DX)
 
 Direct Connect doesn't map to any specific layer of OSI Model, rather it encompasses multiple layers.

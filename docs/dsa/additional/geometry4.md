@@ -1,3 +1,10 @@
+---
+title: Advanced Geometry Algorithms
+description: Overview of advanced computational geometry techniques - line-sweep segment intersection, half-plane intersection, convex hull trick, tangents, and polygon triangulation.
+tags:
+  - concept
+---
+
 # Advanced Geometry Algorithms
 
 ## Line-Sweep for Segment Intersection

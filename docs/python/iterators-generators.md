@@ -1,3 +1,10 @@
+---
+title: Iterators, Generators, and Classic Coroutines
+description: Explains the iterator protocol, generator functions and expressions, and classic generator-based coroutines in Python.
+tags:
+  - concept
+---
+
 # Iterators, Generators, and Classic Coroutines
 
 ## A Sequence of Words
@@ -671,3 +678,7 @@ Variance rules of thumb
 
 1. If a formal type parameter defines a type for data that comes out of the object, it can be covariant.
 2. If a formal type parameter defines a type for data that goes into the object after its initial construction, it can be contravariant.
+
+## See Also
+- [With, Match, and Else Blocks](context-managers.md)
+- [Python Standard Library for DSA](../dsa/additional/python_stdlib.md)

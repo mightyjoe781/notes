@@ -1,3 +1,10 @@
+---
+title: Low-Level Design
+description: Hub page linking notes on OOP basics, SOLID principles, design patterns, and LLD interview problems.
+tags:
+  - index
+---
+
 # Low-Level Design
 
 Following notes are sourced from multiple sources and then rewritten to sound coherent. All notes uses primarily *Python* but there maybe few usages for *Java* as well.

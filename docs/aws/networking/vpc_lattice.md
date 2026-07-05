@@ -1,3 +1,10 @@
+---
+title: VPC Lattice - Service-to-Service Networking
+description: Explains VPC Lattice components (service network, service, resource) and how service/VPC associations enable app-to-app connectivity without peering or Transit Gateway.
+tags:
+  - concept
+---
+
 # VPC Lattice
 
 ## Introduction

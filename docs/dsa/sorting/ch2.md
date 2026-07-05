@@ -1,3 +1,10 @@
+---
+title: Quicksort
+description: Quicksort implementation and characteristics, plus Quickselect for finding the k-th smallest element in average linear time.
+tags:
+  - concept
+---
+
 # Quicksort
 
 * Quicksort is the most widely used sorting algorithm.

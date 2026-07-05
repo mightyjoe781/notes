@@ -1,4 +1,14 @@
+---
+title: Amazon EKS Networking - Pod Networking and Service Exposure
+description: Explains EKS control/data plane networking, the VPC CNI plugin and IP allocation, pod security groups via trunk/branch ENIs, and Service/Ingress exposure.
+tags:
+  - concept
+---
+
 # Amazon EKS Networking
+
+## See Also
+- [Kubernetes Networking](../../kubernetes/networking.md)
 
 ## Kubernetes Architecture
 

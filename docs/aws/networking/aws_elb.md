@@ -1,4 +1,14 @@
+---
+title: AWS Elastic Load Balancer (ELB) Reference
+description: Reference on CLB/ALB/NLB/GWLB feature differences, routing algorithms, sticky sessions, SSL/SNI, connection draining, and proxy protocol.
+tags:
+  - reference
+---
+
 # AWS Elastic Load Balancer (ELB)
+
+## See Also
+- [Load Balancers](../../sd/topics/core/load_balancers.md)
 
 Ques : What is Load Balancing ?
 Ans : *Load Balancers* are servers that forward traffic to multiple servers (e.g. EC2 instances) downstream.

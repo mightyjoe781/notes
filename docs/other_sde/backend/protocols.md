@@ -1,3 +1,10 @@
+---
+tags:
+  - reference
+title: Protocols
+description: Defines the key properties that distinguish network protocols such as TCP, UDP, HTTP, and gRPC.
+---
+
 # Protocols
 
 ## What Is a Protocol

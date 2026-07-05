@@ -1,3 +1,10 @@
+---
+title: Microservices Architecture
+description: Covers service decomposition strategies, cross-service data consistency, inter-service communication, and service mesh architecture.
+tags:
+  - concept
+---
+
 # Microservices Architecture
 
 Microservices architecture decomposes applications into small, autonomous services that are organized around business capabilities. Each service is owned by a small team and can be developed, deployed, and scaled independently.

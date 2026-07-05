@@ -1,3 +1,10 @@
+---
+title: Creational Design Patterns
+description: Python examples of creational design patterns - Factory Method, Builder, Prototype, and Singleton - with when-to-use guidance.
+tags:
+  - reference
+---
+
 # Design Patterns
 
 * Design Pattern serves as typical solution to common problems in software design

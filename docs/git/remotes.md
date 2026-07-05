@@ -1,3 +1,10 @@
+---
+title: Git Remotes - Clone, Fetch, Pull, and Push
+description: Managing remotes, the difference between fetch and pull, pushing safely with force-with-lease, and syncing a fork with upstream.
+tags:
+  - reference
+---
+
 # Remotes
 
 A remote is a named reference to another Git repository, usually hosted on GitHub, GitLab, Bitbucket, or a self-hosted server.

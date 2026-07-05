@@ -1,3 +1,10 @@
+---
+title: Docker networking - drivers, port mapping, and container DNS
+description: How bridge, host, and none network drivers work, plus port publishing and DNS resolution between containers.
+tags:
+  - concept
+---
+
 # Networking
 
 Docker networking controls how containers communicate with each other and with the outside world.
@@ -117,3 +124,6 @@ docker network disconnect mynet web        # detach a running container
 docker network rm mynet                    # remove a network
 docker network prune                       # remove all unused networks
 ```
+
+## See Also
+- [Kubernetes Networking](../kubernetes/networking.md) - pod networking, DNS, and network policies at cluster scale

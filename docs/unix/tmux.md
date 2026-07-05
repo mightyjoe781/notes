@@ -1,3 +1,9 @@
+---
+title: Tmux
+description: Cheatsheet for Tmux - sessions, windows, panes, copy mode, and configuration for a persistent terminal multiplexer.
+tags:
+  - reference
+---
 # Tmux
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md) | [Detailed Guide](../tmux/index.md)

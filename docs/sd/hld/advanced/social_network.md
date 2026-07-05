@@ -1,3 +1,10 @@
+---
+title: Social Network - Instagram Architecture and Photo Upload at Scale
+description: Covers Instagram's early architecture, CDN mechanics, pre-signed URL photo uploads, and a Kafka-based hashtag counting service.
+tags:
+  - concept
+---
+
 # Social Network
 
 ## Instagram's Year 1 Architecture

@@ -1,3 +1,10 @@
+---
+title: Functions as First-Class Objects
+description: Covers treating functions as objects, higher-order functions, callable types, and keyword/positional-only parameters.
+tags:
+  - concept
+---
+
 # Functions as First-Class Objects
 
 First-class-objects is a program entity.
@@ -247,4 +254,8 @@ triple = partial(mul, 3)	# how 3 is bound as first positional argument
 triple(7)  # 21
 list(map(triple, range(1, 10)))  # [3, 6, 9, 12, 15, 18, 21, 24, 27]
 ````
+
+## See Also
+- [Decorators and Closures](decorators.md)
+- [Design Patterns with First-Class Functions](design-patterns.md)
 

@@ -1,3 +1,10 @@
+---
+title: Designing URL Shorteners
+description: HLD for a URL shortener covering short-code generation strategies, storage sizing, caching, and a sharded ticket-server ID allocator.
+tags:
+  - concept
+---
+
 # Designing URL Shorteners
 
 Motive : Understand partitioning, Sharding & Out of box solutions

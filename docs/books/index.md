@@ -1,3 +1,10 @@
+---
+title: Book Notes Library
+description: Index of book notes - Designing Data-Intensive Applications, The Pragmatic Programmer, and Python for Data Analysis.
+tags:
+  - index
+---
+
 # Library
 
 ## Books

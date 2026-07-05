@@ -1,3 +1,10 @@
+---
+title: Microservices Reading Notes
+description: Chapter index for reading notes on a microservices architecture book.
+tags:
+  - index
+---
+
 ## Microservices
 
 1. [Introduction to Microservices](ch1.md)

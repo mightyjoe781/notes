@@ -1,3 +1,10 @@
+---
+title: Types, Methods, And Interfaces
+description: Explains Go's user-defined types, methods, embedding for composition, implicit interfaces, nil interfaces, and type assertions/switches.
+tags:
+  - concept
+---
+
 # Types, Methods, And Interfaces
 
 - Go is a statically typed languages with both built-in types and user-defined types.
@@ -602,3 +609,6 @@ func (f HandlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 * It isn't strictly procedural language. At the same time lacks methods overriding, inheritance, or, well objects mans that it is also not OOP language.
 * Go has function types and closure, but its not functional language either.
 * If you had to label Go’s style, the best word to use is _practical_. It borrows concepts from many places with the overriding goal of creating a language that is simple, readable, and maintainable by large teams for many years.
+
+## See Also
+- [Interfaces, Protocols and ABCs](../../python/protocols-abcs.md)

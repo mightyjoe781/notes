@@ -1,3 +1,10 @@
+---
+title: Water Safety Fundamentals
+description: Pool safety basics - lifeguard supervision, reading depth signage, safe entry/exit, and emergency response.
+tags:
+  - reference
+---
+
 # Water Safety Fundamentals
 
 ## Importance of lifeguards and supervision

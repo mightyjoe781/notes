@@ -1,3 +1,10 @@
+---
+title: AWS AI Practitioner Notes
+description: Hub page linking study notes for the AWS Certified AI Practitioner (AIF-C01) exam.
+tags:
+  - index
+---
+
 # AI Practitioner
 
 !!! note "updates"

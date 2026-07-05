@@ -1,3 +1,10 @@
+---
+title: Database Partitioning
+description: Explains horizontal vs vertical partitioning, range/list/hash partition types, and how partitioning differs from sharding, with a Postgres walkthrough.
+tags:
+  - concept
+---
+
 # Database Partitioning
 
 ### What is Partitioning
@@ -287,3 +294,7 @@ def populate_table(config=None):
 if __name__ == "__main__":
     populate_table()
 ```
+
+## See Also
+- [Database Sharding](sharding.md)
+- [Database Indexing](indexing.md)

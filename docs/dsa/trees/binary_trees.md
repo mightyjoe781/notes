@@ -1,3 +1,10 @@
+---
+title: Binary Trees
+description: Core binary tree problems - height, balance check, diameter, maximum path sum, symmetry check, and vertical order/right side view traversals.
+tags:
+  - concept
+---
+
 # Binary Trees
 
 *In a binary tree each node has at most two children (left and right).*

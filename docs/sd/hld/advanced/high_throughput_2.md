@@ -1,3 +1,10 @@
+---
+title: High Throughput Systems - LSM Trees and Video Processing
+description: Explains the MemTable/SSTable design behind LSM trees with bloom filters and WALs, then covers a video transcoding pipeline architecture.
+tags:
+  - concept
+---
+
 # High Throughput Systems
 
 ## LSM Trees

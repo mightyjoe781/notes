@@ -1,3 +1,10 @@
+---
+title: Data Wrangling - Hierarchical Indexing, Joins, and Reshaping
+description: How hierarchical/MultiIndex indexing works, the mental model behind merge/concat/combine_first, and pivoting data between long and wide formats.
+tags:
+  - concept
+---
+
 # Data Wrangling: Join, Combine And Reshape
 
 ## Hierarchical Indexing
@@ -714,3 +721,6 @@ pd.melt(df, value_vars=["A", "B", "C"])
 8        B     6
 
 ```
+
+## See Also
+- [Joins (Spark)](../pyspark/notes/ch8.md)

@@ -1,3 +1,10 @@
+---
+title: API Design Principles
+description: Overview of REST API design best practices covering versioning, rate limiting, idempotency, pagination, and error response formats.
+tags:
+  - concept
+---
+
 # API Design Principles
 
 > _What does a great API look like, and why should we care about the APIs we build?_

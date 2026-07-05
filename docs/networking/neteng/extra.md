@@ -1,3 +1,10 @@
+---
+title: Extra Topics
+description: Grab-bag of networking notes covering SSH tunneling, TLS SNI, a proposal to replace TCP in data centers, and a real-world TCP idle-timeout incident.
+tags:
+  - reference
+---
+
 # Extra Topics
 
 ## Exposing local servers locally

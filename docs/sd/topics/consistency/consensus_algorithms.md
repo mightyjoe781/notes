@@ -1,3 +1,10 @@
+---
+title: Consensus Algorithms
+description: Covers leader election, quorum-based systems, distributed locking, and consensus algorithm implementations like Raft, Paxos, and PBFT.
+tags:
+  - concept
+---
+
 # Consensus Algorithms
 
 Consensus algorithms are fundamental building blocks of distributed systems that solve the problem of achieving agreement among distributed processes. They ensure that all nodes in a system agree on a single value, state, or decision, even when some nodes fail or network partitions occur.

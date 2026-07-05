@@ -1,3 +1,10 @@
+---
+title: Securing Microservices
+description: Covers encryption in transit and at rest, authentication via OAuth 2.0/OpenID Connect, authorization, and defense-in-depth network security.
+tags:
+  - concept
+---
+
 ## Securing Microservices
 
 Not all data is equally sensitive. For example, the Catalog Service is largely public, while the Ordering Service contains highly sensitive financial data and requires strict protection.
@@ -80,3 +87,9 @@ Additional defensive measures:
 - **Automated security testing**: Prove that APIs correctly reject unauthorized callers (e.g., with tools like OWASP ZAP)
 - **Attack detection**: Detect port scanning, SQL injection attempts; alert and respond quickly
 - **Auditing**: Maintain a complete, tamper-resistant record of who did what and when
+
+## See Also
+- [Authentication](../../other_sde/security/authentication.md)
+- [Authorization](../../other_sde/security/authorization.md)
+- [Data Security](../../other_sde/security/data_security.md)
+- [Communication & Protocols](../../sd/topics/core/network.md)

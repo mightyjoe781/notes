@@ -1,3 +1,10 @@
+---
+title: Generics
+description: Explains how Go generics work, type constraints, generic data structures and functions, and their limitations versus other languages.
+tags:
+  - concept
+---
+
 # Generics
 
 DRY(Do not repeat yourself) is common practice among programmers primarily due to easier maintainability later on.
@@ -547,3 +554,6 @@ fmt.Println(t3.Contains(Person{"Fred", 25}))
 - Allows type-safe handling of multiple types in a variable.
 - Could enhance Go’s enum capabilities (similar to Rust and Swift).
 - Requires further evaluation before adoption into Go.
+
+## See Also
+- [More About Type Hints](../../python/type-hints-advanced.md)

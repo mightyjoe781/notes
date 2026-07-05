@@ -1,3 +1,9 @@
+---
+title: Terraform Deprecations and Breaking Changes Checklist
+description: Deprecated Terraform core features and AWS provider v4/v5 breaking changes to watch for when updating old configs.
+tags:
+  - reference
+---
 # What's New - Changes and Deprecations
 
 Track breaking changes, deprecated features, and migration notes here as Terraform and its providers evolve.

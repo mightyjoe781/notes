@@ -1,3 +1,10 @@
+---
+title: Database Indexing in PostgreSQL
+description: Worked EXPLAIN ANALYZE walkthroughs covering index scans, bitmap scans, key vs non-key indexes, composite indexes, bloom filters, and how UUIDs affect B+ Tree performance.
+tags:
+  - concept
+---
+
 # Database Indexing
 
 
@@ -273,3 +280,8 @@ NOTE:
 Exercise
 
 - database hinting ~ give hints to database query planner to explicitly trigger index scans.
+
+## See Also
+- [B-Tree vs B+ Tree Indexes](btrees.md)
+- [Understanding Database Internals](internals.md)
+- [Query Optimization and EXPLAIN](../sql/query_optimization.md)

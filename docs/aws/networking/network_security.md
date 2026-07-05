@@ -1,3 +1,10 @@
+---
+title: AWS Network Security Services Reference
+description: Reference on Security Groups/NACLs, AWS WAF, Shield, Network Firewall, GWLB, ACM, and Firewall Manager and when to use each.
+tags:
+  - reference
+---
+
 # AWS Network Security Services
 
 AWS Security services can broadly be divided into 2 types

@@ -1,3 +1,9 @@
+---
+title: Git
+description: Cheatsheet for Git - core concepts, everyday workflows, undoing changes, and advanced commands like bisect and reflog.
+tags:
+  - reference
+---
 # Git
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md) | [Detailed Guide](../git/index.md)

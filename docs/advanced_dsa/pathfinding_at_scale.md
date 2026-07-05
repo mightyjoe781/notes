@@ -1,3 +1,10 @@
+---
+title: Pathfinding at Scale - From BFS to Contraction Hierarchies
+description: How shortest-path routing evolves from BFS and Dijkstra through A*, bidirectional search, and manual road hierarchies to sub-millisecond contraction hierarchies.
+tags:
+  - concept
+---
+
 # Pathfinding at Scale - From BFS to Contraction Hierarchies
 
 *How "shortest route from New York to San Francisco" goes from a brute-force impossibility (~10^200 years of compute) to a sub-millisecond Google Maps query.*
@@ -113,3 +120,8 @@ Notice that every step is still, at its core, Dijkstra - explore the frontier in
 ## Further Reading / Watching
 
 - [How Does Google Maps Calculate the Shortest Route? - Veritasium x 2swap (YouTube)](https://www.youtube.com/watch?v=kS-CGkiPetQ) - the source for this walkthrough; covers Dijkstra's origin story, A*, bidirectional search, manual road hierarchies, and customizable contraction hierarchies, with real benchmark numbers on the North American road network
+
+## See Also
+
+- [Graph Traversal (DFS/BFS)](../dsa/graphs/ch2.md) - the BFS fundamentals this note generalizes into weighted shortest paths
+- [Shortest Paths (Dijkstra, Bellman-Ford, Floyd-Warshall)](../dsa/graphs/ch4.md) - the core Dijkstra algorithm and implementation referenced throughout

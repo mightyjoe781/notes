@@ -1,3 +1,10 @@
+---
+title: FreeBSD
+description: Hub for FreeBSD install, M1 development environment, Absolute FreeBSD chapter notes, and GSoC journey notes.
+tags:
+  - index
+---
+
 ## FreeBSD
 
 ### Notes

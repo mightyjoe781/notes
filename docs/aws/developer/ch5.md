@@ -1,3 +1,10 @@
+---
+title: API Gateway, CloudFront, and Elastic Load Balancer
+description: Covers API Gateway endpoint types and authorizers, CloudFront distributions, and the three ELB types with their protocols and OSI layers.
+tags:
+  - reference
+---
+
 ## Network & Content Delivery
 
 ### What is an API ?
@@ -215,4 +222,7 @@ Its supports all TCP, SSL/TLS, HTTP and HTTPS protocols. It lets you load balanc
 EC2 classic is no longer supported for newer AWS accounts.
 
 It supports sticky sessions using application-generated cookies.
+
+## See Also
+- [Load Balancers](../../sd/topics/core/load_balancers.md)
 

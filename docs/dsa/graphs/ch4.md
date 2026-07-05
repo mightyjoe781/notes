@@ -1,3 +1,10 @@
+---
+title: Shortest Paths (Dijkstra, Bellman-Ford, Floyd-Warshall)
+description: Single-source and all-pairs shortest path algorithms - Dijkstra, Bellman-Ford, and Floyd-Warshall - with their tradeoffs and common interview problems.
+tags:
+  - concept
+---
+
 # Shortest Path
 
 **Definition:** *A **shortest path** between two vertices s and t in a weighted digraph is a directed simple path from s to t with the property that no other such path has a lower weight.*

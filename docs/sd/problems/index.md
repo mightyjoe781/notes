@@ -1,3 +1,10 @@
+---
+title: System Design Problems
+description: Index of introductory and advanced system design interview problems grouped by category.
+tags:
+  - index
+---
+
 # System Design Problems
 
 

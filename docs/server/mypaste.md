@@ -1,3 +1,10 @@
+---
+title: "Mypaste: Self-Hosted Sortable Download Links (PHP)"
+description: Deploy a PHP index.php tree that renders a sortable list of downloadable files under nginx.
+tags:
+  - reference
+---
+
 ### Mypaste : sortable download links
 
 This step is  for developers and is optional.  It  requires  a working

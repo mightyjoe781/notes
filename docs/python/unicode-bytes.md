@@ -1,3 +1,10 @@
+---
+title: Unicode Text Versus Bytes
+description: Explains Python's distinction between str and bytes, encoding/decoding pitfalls, and Unicode normalization.
+tags:
+  - concept
+---
+
 # Unicode Text Versus Bytes
 
 Python 3 introduced a sharp distinction between strings of human text and sequences of raw bytes.

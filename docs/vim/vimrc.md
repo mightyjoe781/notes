@@ -1,3 +1,10 @@
+---
+title: Vimrc Example - Annotated Full Config
+description: A full annotated .vimrc example with basic settings, keybindings, and vim-plug plugin setup.
+tags:
+  - reference
+---
+
 ## Vimrc Files
 
 My dotfiles : [Link](https://raw.githubusercontent.com/mightyjoe781/.dotfiles/master/vim/.vimrc)

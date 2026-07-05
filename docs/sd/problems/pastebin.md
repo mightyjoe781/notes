@@ -1,3 +1,11 @@
+---
+title: Designing Pastebin
+description: Draft design notes for a Pastebin-like text sharing service, covering requirements with implementation sections still to be filled in.
+tags:
+  - concept
+  - draft
+---
+
 # Designing Pastebin
 
 ## What is Pastebin ?

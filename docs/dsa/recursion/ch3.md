@@ -1,3 +1,10 @@
+---
+title: String Recursion
+description: Recursive string problems - palindrome partitioning, word search/break, rat in a maze, and generating/counting valid parenthesis combinations.
+tags:
+  - concept
+---
+
 # String Recursion
 
 ## Palindrome Partitioning

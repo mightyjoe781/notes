@@ -1,3 +1,10 @@
+---
+title: Decorators and Closures
+description: Explains how function decorators and closures work in Python, including nonlocal, memoization, and parameterized decorators.
+tags:
+  - concept
+---
+
 # Decorators and Closures
 
 Function decorators let us `mark` functions in the source code tto enhance their behaviour in some way.
@@ -450,4 +457,8 @@ def f3():
 # >>> registration_param.registry
 # [<function f2 at 0x10063c268>]
 ````
+
+## See Also
+- [Attribute Descriptors](descriptors.md)
+- [Design Patterns with First-Class Functions](design-patterns.md)
 

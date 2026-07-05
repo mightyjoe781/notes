@@ -1,3 +1,10 @@
+---
+title: Fundamentals of Operating Systems
+description: Hub page linking to notes on OS fundamentals - processes, memory, CPU, storage, sockets, and more.
+tags:
+  - index
+---
+
 # Fundamentals of Operating Systems
 
 ## Content

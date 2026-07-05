@@ -1,3 +1,10 @@
+---
+title: Foundational Topics - Online/Offline Indicator and the Six Pillars
+description: Designs an online/offline presence indicator with heartbeats and TTLs, then walks through the six pillars of system design using a blogging platform example.
+tags:
+  - concept
+---
+
 # Foundational Topics - I
 
 ## Online/Offline Indicator

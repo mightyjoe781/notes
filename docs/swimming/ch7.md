@@ -1,3 +1,10 @@
+---
+title: Arm Movements Across Strokes
+description: Arm cycles for freestyle, backstroke, breaststroke, and butterfly, timed with breathing.
+tags:
+  - reference
+---
+
 # Arm Movements
 
 ## Freestyle arm cycle (catch → pull → push → recovery)

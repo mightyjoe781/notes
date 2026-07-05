@@ -1,3 +1,10 @@
+---
+title: Concurrency Control - Locking, Deadlocks, and Pagination
+description: Explains exclusive vs shared locks, deadlocks, two-phase locking with a double-booking example, and why OFFSET pagination is problematic.
+tags:
+  - concept
+---
+
 # Concurrency Control
 
 ### Exclusive Lock vs Shared Lock
@@ -87,5 +94,8 @@ SELECT title FROM news offset 100 limit 10;
 - makes queries fast by avoiding the connection setup times
 
 Code Example : [Link](https://github.com/hnasr/javascript_playground/tree/master/postgresnode-pool) [Video](https://www.youtube.com/watch?v=GTeCtIoV2Tw)
+
+## See Also
+- [ACID Properties and Transaction Isolation](acid.md)
 
 

@@ -1,3 +1,10 @@
+---
+title: Design Stock Broker
+description: LLD for a stock broker that subscribes to exchange price feeds using the Observer pattern, tracking latest and historical prices per symbol.
+tags:
+  - concept
+---
+
 # Design Stock Broker
 
 ## Terminology Clarification

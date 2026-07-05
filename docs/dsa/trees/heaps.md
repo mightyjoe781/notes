@@ -1,3 +1,10 @@
+---
+title: Heap Implementation
+description: A from-scratch binary max-heap implementation (swim/sink, insert, remove-max) and how to flip it into a min-heap.
+tags:
+  - reference
+---
+
 # Heap
 
 > for detailed description on this topic refer to Heaps Section specifically.

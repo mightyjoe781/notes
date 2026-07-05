@@ -1,3 +1,11 @@
+---
+title: JustinGuitar Grade 1 Module 1 - First Chords (D and A)
+description: Early stub on the D and A open chords plus the One Minute Changes and Perfect Chord practice exercises.
+tags:
+  - reference
+  - draft
+---
+
 # Module 1 - First Chords
 
 ## D and A Chords
@@ -25,3 +33,7 @@ Hold each chord for 30-60 seconds, checking every string rings clearly. Adjust f
 - G major chord
 - C major chord
 - Song practice for Module 1
+
+## See Also
+
+- [Chords](../../guitar/theory3.md)

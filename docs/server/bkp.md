@@ -1,3 +1,10 @@
+---
+title: Backing Up a VPS to pCloud with rclone
+description: Filter file and sync script for backing up a VPS to pCloud using rclone, run on a cron schedule.
+tags:
+  - reference
+---
+
 ## Backup VPS using rclone
 
 Cheap VPS offers often do not include backups, so users must take backups on their devices. The best solution for users with cheap VPS plans lacking backup facilities is to purchase cloud storage and create a backup script that sends backups to the cloud vendor.
@@ -128,3 +135,8 @@ popd
 ### Borg - Snapshots
 
 * WIP
+
+## See Also
+- [Rclone Basics](rclone.md)
+- [rsync](../unix/rsync.md)
+- [cron](../unix/cron.md)

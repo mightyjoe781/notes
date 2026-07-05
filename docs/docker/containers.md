@@ -1,3 +1,10 @@
+---
+title: Containers - lifecycle, exec, logs, and cleanup
+description: Reference for running, inspecting, and cleaning up containers - lifecycle commands, restart policies, logs, and interactive shells.
+tags:
+  - reference
+---
+
 # Containers
 
 A container is a **running instance of an image**. You can run many containers from the same image simultaneously - each is isolated and has its own writable layer.

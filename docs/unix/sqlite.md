@@ -1,3 +1,9 @@
+---
+title: SQLite
+description: Cheatsheet for SQLite - shell meta-commands, SQL reference, JSON support, FTS5, backup, and performance pragmas.
+tags:
+  - reference
+---
 # SQLite
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)
@@ -171,4 +177,5 @@ EXPLAIN QUERY PLAN SELECT * FROM users WHERE email = 'alice@example.com';
 ### See Also
 
 - [PostgreSQL](postgresql.md) for multi-user server deployments
+- [SQL notes](../databases/sql/index.md) for query techniques that apply here too
 - Also: DuckDB (analytics on SQLite-style files), libSQL (SQLite fork with replication)

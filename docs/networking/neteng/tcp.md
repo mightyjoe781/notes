@@ -1,3 +1,10 @@
+---
+title: TCP
+description: Covers TCP connection establishment, flow and congestion control, NAT, connection states, sockets and kernel queues, with server examples in JS and C.
+tags:
+  - concept
+---
+
 # TCP
 
 ### TCP
@@ -432,3 +439,8 @@ tcpdump -n -v -i en0 '(src 93.184.216.34 or dst 93.184.216.34) and port 80' # fi
 # open browser and go to example.com
 
 ```
+
+## See Also
+- [Socket Management](../../os/fundamentals/socket_management.md)
+- [Sockets](../../sd/lld/sockets.md)
+- [Load Balancers](../../sd/topics/core/load_balancers.md)

@@ -1,3 +1,10 @@
+---
+title: Dev Setup - Tools, Editors, and Environment
+description: Index of preferred window managers, editors, terminals, AI tools, and productivity apps.
+tags:
+  - index
+---
+
 ## Tools Tips & Tricks
 
 ### Window Manager

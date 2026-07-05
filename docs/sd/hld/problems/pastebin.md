@@ -1,3 +1,10 @@
+---
+title: Design Pastebin (GitHub Gist)
+description: HLD for a Pastebin-like text sharing service covering S3 vs database storage trade-offs, URL generation, caching, and expiration.
+tags:
+  - concept
+---
+
 # Design Pastebin (Github Gist)
 
 Motive : Not storing derivables, cost effective design

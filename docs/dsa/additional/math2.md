@@ -1,3 +1,10 @@
+---
+title: Modular Arithmetic & Exponentiation
+description: Modular arithmetic properties, binary/matrix exponentiation, modular inverse, and number theory theorems (Fermat, Euler, CRT) used in competitive programming.
+tags:
+  - concept
+---
+
 # Modular Arithmetic & Exponentiation
 
 ## Core Concepts

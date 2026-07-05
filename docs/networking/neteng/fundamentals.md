@@ -1,3 +1,10 @@
+---
+title: Fundamentals of Networking
+description: Introduces client-server architecture, the OSI model and TCP/IP model, and how host-to-host communication works using MAC, IP, and ports.
+tags:
+  - concept
+---
+
 # Fundamentals of Networking
 
 ## Client Server Architecture
@@ -145,3 +152,6 @@ But my host has many apps!
 Resources :
 
 - Best Explanation of OSI Layer : https://www.youtube.com/watch?v=3b_TAYtzuho
+
+## See Also
+- [Protocols](../../other_sde/backend/protocols.md)

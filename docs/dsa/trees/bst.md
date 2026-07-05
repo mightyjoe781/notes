@@ -1,3 +1,10 @@
+---
+title: Binary Search Trees (BSTs)
+description: BST operations and problems - search/insert/delete, validation, LCA, k-th largest, recovering a corrupted BST, and merging two BSTs.
+tags:
+  - concept
+---
+
 # Binary Search Tree
 
 ## Introduction

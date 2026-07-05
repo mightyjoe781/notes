@@ -1,3 +1,10 @@
+---
+title: Communication & Protocols
+description: Covers TCP/UDP fundamentals, the evolution of HTTP from 1.0 to 3.0, HTTPS/TLS, and real-time communication patterns like WebSockets, SSE, and long-polling.
+tags:
+  - reference
+---
+
 # Communication & Protocols
 
 NOTE: A Complete guide to Networking is present here : [Link](../../../networking/index.md)

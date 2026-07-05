@@ -1,3 +1,10 @@
+---
+title: macOS Tips - yt-dlp Setup and Universal Clipboard Fix
+description: Commands for installing yt-dlp with cookies auth and fixing broken Universal Clipboard/Handoff.
+tags:
+  - reference
+---
+
 ### Installing yt-dlp
 
 ````bash

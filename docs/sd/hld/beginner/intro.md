@@ -1,3 +1,10 @@
+---
+title: Introduction to System Design
+description: Framework for approaching system design problems - breaking a system into components and evaluating scalability, fault tolerance, and availability.
+tags:
+  - concept
+---
+
 # Introduction to System Design
 
 >    “Systems run the world. Good design keeps them from falling apart.”

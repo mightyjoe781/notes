@@ -1,3 +1,10 @@
+---
+title: Luanti Server Setup - Build, Configure, and Run
+description: Cheatsheet for building a Luanti (Minetest) server from source, configuring multicraft.conf, and starting the server under screen.
+tags:
+  - reference
+---
+
 # Luanti Server Setup
 
 #### Dependency

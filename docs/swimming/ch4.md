@@ -1,3 +1,10 @@
+---
+title: Body Position & Balance
+description: Horizontal alignment, streamline position, buoyancy relaxation, and core engagement for a stable swimming posture.
+tags:
+  - reference
+---
+
 # Body Position & Balance
 
 ## Horizontal body alignment

@@ -1,3 +1,10 @@
+---
+title: Design Tic-Tac-Toe
+description: LLD for Tic-Tac-Toe combining the State pattern for game lifecycle with the Strategy pattern for win detection.
+tags:
+  - concept
+---
+
 # Tic-Tac-Toe
 
 Tic-Tac-Toe is a famous 2 player game played on 3x3 board. Its deterministic game (easy to draw).

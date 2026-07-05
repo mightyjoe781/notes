@@ -1,3 +1,9 @@
+---
+title: Advanced HCL - Built-in Functions, Conditionals, count, for_each, Dynamic Blocks
+description: Reference of Terraform's built-in function categories plus conditional expressions, count vs for_each, and dynamic blocks.
+tags:
+  - reference
+---
 # Advanced HCL
 
 ## Built-in Functions

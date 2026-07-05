@@ -1,3 +1,10 @@
+---
+title: Docker dev workflows - hot reload, testing, and CI/CD
+description: Practical patterns for dev vs prod Dockerfiles, hot reload, running tests in containers, dev containers, and CI/CD pipelines that build, test, and deploy images.
+tags:
+  - reference
+---
+
 # Dev Workflows
 
 Practical patterns for using Docker across development, testing, and CI/CD.
@@ -309,3 +316,7 @@ environment:
 
 !!! warning "Remember to clean up"
     Elastic Beanstalk environments, RDS instances, and ElastiCache clusters cost money even when idle. Delete them when you're done experimenting.
+
+## See Also
+- [AWS Container Services](../aws/dataeng/container.md) - ECS, ECR, and EKS launch types, IAM roles, and load balancer integration
+- [Docker as a Dev Environment](dev_env.md) - the same build-environment pattern as a narrower worked example

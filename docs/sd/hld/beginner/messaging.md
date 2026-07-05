@@ -1,3 +1,10 @@
+---
+title: Messaging and Streaming Systems
+description: Covers asynchronous processing with message brokers, delivery guarantees, Kafka-style message streams, and realtime pub/sub systems.
+tags:
+  - concept
+---
+
 # Messaging and Streaming Systems
 
 >    Move data, don’t wait for it.

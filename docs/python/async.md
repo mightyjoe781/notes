@@ -1,3 +1,10 @@
+---
+title: Asynchronous Programming
+description: Covers async/await, native coroutines, and using asyncio with httpx for concurrent network requests in Python.
+tags:
+  - concept
+---
+
 # Asynchronous Programming
 
 Three main topics to be addressed,
@@ -577,3 +584,7 @@ Here are some options for when you identify a CPU-hogging bottleneck
 - Delegate the task to an external task queue
 - Rewrite relevant code in Cython, C, Rust or some other language that compiles to machine code and interfaces with Python/C API, preferably, releasing GIL
 - Decide taht you can afford the performance hit and do nothing but record the decision to make it easier to revert to it later.
+
+## See Also
+- [Concurrency Models in Python](concurrency.md)
+- [Concurrent Executors](concurrent-executors.md)

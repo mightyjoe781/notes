@@ -1,3 +1,10 @@
+---
+tags:
+  - concept
+title: Authentication
+description: Covers authentication patterns including SSO, MFA, JWT-based token authentication, and stateless vs stateful auth.
+---
+
 # Authentication
 
 Authentication is the process of verifying the identity of users, systems, or entities attempting to access resources.
@@ -385,3 +392,8 @@ Integration patterns:
 - Tokens leaked in logs or error messages
 - Timing attacks that reveal valid usernames
 - Insufficient authorization checks after authentication
+
+## See Also
+- [Authorization](authorization.md)
+- [Backend Communication Design Patterns](../backend/patterns.md)
+- [Microservices Security](../../microservices/notes/ch5.md)

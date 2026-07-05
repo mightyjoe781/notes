@@ -1,3 +1,10 @@
+---
+title: Digraphs & DAGs (Topological Sorting)
+description: Directed graph concepts (DAGs, transitive closure) and topological sorting via DFS post-order and Kahn's algorithm, with the Alien Dictionary problem worked through.
+tags:
+  - concept
+---
+
 # Digraphs and DAGs
 
 ## Definitions

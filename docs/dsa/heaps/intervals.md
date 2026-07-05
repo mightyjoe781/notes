@@ -1,3 +1,10 @@
+---
+title: Interval Problems
+description: Interval problem patterns - merging/inserting intervals, greedy interval scheduling, meeting rooms, sweep line techniques, and calendar booking systems.
+tags:
+  - concept
+---
+
 # Interval Problems
 
 This section is specifically dedicated for problems related to intervals.

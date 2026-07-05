@@ -1,3 +1,10 @@
+---
+title: Design a Recommendation Engine
+description: HLD for a recommendation engine covering content-based filtering with cosine similarity and collaborative filtering using graph databases.
+tags:
+  - concept
+---
+
 # Design a Recommendation Engine
 
 Motive : Understand ML System, plug and play, Graph DBs in ML systems.

@@ -1,3 +1,10 @@
+---
+title: Modern Git Features (2.23-2.45+)
+description: Newer Git capabilities grouped by theme - switch/restore, push auto-setup, SSH signing, maintenance, scalar, partial clone, and rerere.
+tags:
+  - reference
+---
+
 # Modern Git
 
 Notable features added from Git 2.23 onward, grouped by theme.

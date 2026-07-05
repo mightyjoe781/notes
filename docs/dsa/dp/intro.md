@@ -1,3 +1,10 @@
+---
+title: Dynamic Programming Patterns
+description: A step-by-step framework for approaching DP problems - identifying state, writing recurrences, and picking top-down vs bottom-up - plus a reference table of DP problem types.
+tags:
+  - concept
+---
+
 # Dynamic Programming
 
 Key skill to master DP is ability to determine the problem *states* and to determine the relationship or *transitions* between current problems and their sub-problems.

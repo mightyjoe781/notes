@@ -1,3 +1,10 @@
+---
+title: Transformer Architecture - Attention, Blocks, and Scaling
+description: The core transformer mechanics behind LLMs - self-attention, multi-head attention, positional encoding, KV cache, MoE, and scaling laws.
+tags:
+  - concept
+---
+
 # Transformer Architecture
 
 The architecture behind every modern LLM. Introduced in the 2017 paper *Attention Is All You Need*.

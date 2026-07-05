@@ -1,4 +1,14 @@
+---
+title: "Pods: Manifests, Labels, Namespaces, and Resource Limits"
+description: Reference for pod specs, labels/selectors, namespaces, QoS classes, and common kubectl pod commands.
+tags:
+  - reference
+---
+
 # Pods
+
+## See Also
+- [Docker Containers](../docker/containers.md)
 
 ## What is a Pod?
 

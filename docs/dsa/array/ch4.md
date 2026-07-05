@@ -1,3 +1,10 @@
+---
+title: Subarrays & Subsequences
+description: The distinction between subarrays (contiguous) and subsequences (order-preserving), with common problem patterns and worked examples like Kadane's and maximum product subarray.
+tags:
+  - concept
+---
+
 # Subarrays & Subsequences
 
 * core concepts in problems related to array and string problems

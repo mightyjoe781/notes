@@ -1,3 +1,10 @@
+---
+title: String DP
+description: DP on strings - LCS, longest palindromic subsequence, edit distance, distinct subsequences, wildcard matching, and shortest common supersequence.
+tags:
+  - concept
+---
+
 # DP on Strings
 
 ## LCS

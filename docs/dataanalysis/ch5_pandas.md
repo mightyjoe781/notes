@@ -1,3 +1,10 @@
+---
+title: Introduction to Pandas - Series, DataFrame, and Indexing
+description: Core pandas data structures (Series, DataFrame, Index) and how indexing, alignment, reindexing, and descriptive statistics work.
+tags:
+  - concept
+---
+
 # Introduction to Pandas
 
 *Pandas* has abstractions that allow data cleaning and analysis to be fast and convenient in Python.

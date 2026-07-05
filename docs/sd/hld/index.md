@@ -1,3 +1,10 @@
+---
+title: High-Level Design
+description: Hub page linking beginner HLD basics, real-world system design problems, and advanced topics like distributed systems and storage engines.
+tags:
+  - index
+---
+
 # High-Level Design
 
 

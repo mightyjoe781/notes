@@ -1,3 +1,10 @@
+---
+title: Storage Engines - Distributed Cache and CDC
+description: Designs a distributed cache from a single node up to consistent-hashing based sharding, then covers change data capture for ETL pipelines.
+tags:
+  - concept
+---
+
 # Storage Engines
 
 ## Designing a Distributed Cache

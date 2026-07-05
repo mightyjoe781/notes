@@ -1,3 +1,10 @@
+---
+title: UML / Class Diagrams
+description: How to read UML class diagram relationships - inheritance, composition, aggregation, association, and dependency - using Mermaid examples.
+tags:
+  - reference
+---
+
 # UML / Class Diagrams
 
 - Mermaid (a markdown-flavoured diagramming syntax) is supported here via `pymdownx.superfences` custom fences -> write a fenced ` ```mermaid ` block and mkdocs-material renders it as an SVG diagram, no separate image needed.

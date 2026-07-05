@@ -1,3 +1,9 @@
+---
+title: SSH
+description: Cheatsheet for SSH - key-based auth, config aliases, server hardening, port forwarding, jump hosts, and troubleshooting.
+tags:
+  - reference
+---
 # SSH
 
 [:octicons-arrow-left-24:{ .icon } Back](index.md)

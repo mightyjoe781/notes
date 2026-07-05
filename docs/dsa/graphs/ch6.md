@@ -1,3 +1,10 @@
+---
+title: Other Graph Algorithms (SCC, Bridges, Articulation Points)
+description: Advanced graph algorithms - bridges, articulation points, strongly connected components (Tarjan's, Kosaraju's), and Eulerian circuits/paths via Hierholzer's algorithm.
+tags:
+  - concept
+---
+
 # Other Algorithms
 
 ### Graph Edge Property Check via DFS Spanning Tree

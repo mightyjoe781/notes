@@ -1,3 +1,10 @@
+---
+title: Many Ways to HTTPS
+description: Traces the evolution of HTTP from 1.0 through HTTP/3 over QUIC, and compares how HTTPS handshakes work across TLS 1.2, TLS 1.3, TFO, and 0-RTT.
+tags:
+  - concept
+---
+
 # HTTP
 *HyperText Transfer Protocol*
 
@@ -156,3 +163,7 @@ Pipelining Example
 ![](assets/Pasted%20image%2020251004194123.png)
 
 Resource : https://blog.cloudflare.com/even-faster-connection-establishment-with-quic-0-rtt-resumption/
+
+## See Also
+- [Popular Networking Protocols](protocols.md)
+- [Protocols](../../other_sde/backend/protocols.md)

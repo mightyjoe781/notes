@@ -1,3 +1,10 @@
+---
+title: Operator Overloading
+description: Shows how to overload unary, infix, and rich comparison operators for user-defined types in Python.
+tags:
+  - concept
+---
+
 # Operator Overloading
 
 Operator overloading is necessary to support infix operator notation with user-defined or extension types, such as NumPy arrays. Having operator overloading in a high-level, easy-to-use language was probably a key reason for the huge success of Python in data science, including financial and scientific applications.
@@ -246,3 +253,7 @@ We can summarize the whole idea of in-place operators by contrasting the return 
 
 - `__add__` : The result is produced by calling the constructor AddableBingoCage to build a new instance.
 - `__iadd__` : The result is produced by returning self, after it has been modified.
+
+## See Also
+- [A Pythonic Object](pythonic-objects.md)
+- [Special Methods for Sequences](sequence-protocol.md)

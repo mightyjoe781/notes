@@ -1,3 +1,10 @@
+---
+title: Design LRU Cache
+description: LLD for a thread-safe LRU cache using a doubly linked list plus hashmap for O(1) get/put, with a Python implementation.
+tags:
+  - concept
+---
+
 # Design LRU Cache
 
 ## Requirements

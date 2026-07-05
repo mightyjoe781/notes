@@ -1,3 +1,10 @@
+---
+title: AWS Site-to-Site VPN - Mechanics and Architectures
+description: Explains how Site-to-Site VPN tunnels work, including NAT-T, DPD, route propagation, tunnel modes, and common architectures like VPN CloudHub and Transit VPC.
+tags:
+  - concept
+---
+
 # AWS Site-to-Site VPN
 
 AWS Connectivity Options include following methods.

@@ -1,3 +1,10 @@
+---
+title: Grid & Palindrome DP
+description: Worked grid-based DP problems (minimum path sum, dungeon game, frog jump) and palindrome DP problems like longest palindromic subsequence.
+tags:
+  - concept
+---
+
 # Grid DP
 
 ### Minimum Path Sum

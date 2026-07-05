@@ -1,3 +1,10 @@
+---
+title: Introduction to Operating Systems
+description: Why operating systems exist - scheduling, hardware abstraction, system architecture (CPU/memory/storage/network/kernel), file systems, and user vs kernel space.
+tags:
+  - concept
+---
+
 # Introduction
 
 ## Why OS ?

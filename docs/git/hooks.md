@@ -1,3 +1,10 @@
+---
+title: Git Hooks, Config, and LFS
+description: Layered git config scopes, sharing hooks across a team, common hook lifecycle points, and setting up Git LFS for large files.
+tags:
+  - reference
+---
+
 # Hooks and Config
 
 ## Git Configuration

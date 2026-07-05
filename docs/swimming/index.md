@@ -1,3 +1,10 @@
+---
+title: Swimming Notes
+description: Hub linking a 16-chapter beginner-to-intermediate swimming guide, from water safety to advanced training.
+tags:
+  - index
+---
+
 Swimming is a vital life-saving skill that should be known by all. People who grew up in areas without access to pools or open water should try to learn it from a certified coach.
 
 I always wanted to learn swimming, at least enough to make it to shore in an emergency :) or maybe I just played too many games. This guide documents important aspects of swimming and correct techniques often neglected by beginners. This content is aimed at beginner and intermediate swimmers.

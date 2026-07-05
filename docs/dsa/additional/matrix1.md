@@ -1,3 +1,10 @@
+---
+title: Matrix Problems
+description: Matrix traversal (DFS/BFS/spiral), rotation, 2D prefix sums, binary search on sorted matrices, grid pathfinding, and matrix exponentiation for linear recurrences.
+tags:
+  - concept
+---
+
 # Matrix Problems
 
 ## Matrix Traversal

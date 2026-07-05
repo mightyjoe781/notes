@@ -1,3 +1,10 @@
+---
+title: Music - Guitar Theory & Practice Hub
+description: Hub page linking guitar theory notes and JustinGuitar course notes, plus a running list of topics not yet learned.
+tags:
+  - index
+---
+
 # Music
 
 ### Preface

@@ -1,3 +1,10 @@
+---
+title: Computational Geometry
+description: Core computational geometry primitives - orientation, area, distance, and dot/cross products - with floating-point precision tips.
+tags:
+  - reference
+---
+
 # Computational Geometry
 
 ## Orientation of 3 Points

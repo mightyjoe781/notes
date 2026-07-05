@@ -1,3 +1,10 @@
+---
+title: Routing Browser Traffic Through a Squid Proxy
+description: Configure squid on a server to act as a location-changing forward proxy, restricted to a single client IP.
+tags:
+  - reference
+---
+
 ### Routing browsing through a `squid` proxy
 
 If you wish,  you  can use your Debian server  to change your apparent country in web browsers.

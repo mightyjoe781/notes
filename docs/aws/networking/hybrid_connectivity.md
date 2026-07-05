@@ -1,4 +1,14 @@
+---
+title: Static vs Dynamic Routing and BGP Fundamentals
+description: Explains the difference between static and dynamic routing and how BGP path selection works using Weight, AS Path, Local Preference, and MED.
+tags:
+  - concept
+---
+
 # Hybrid Networking
+
+## See Also
+- [Network Routing](../../networking/neteng/network_routing.md)
 
 ## Static Routing vs Dynamic Routing
 

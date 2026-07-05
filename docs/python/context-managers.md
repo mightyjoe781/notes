@@ -1,3 +1,10 @@
+---
+title: With, Match, and Else Blocks
+description: Covers the context manager protocol, contextlib helpers, structural pattern matching, and else clauses on loops and try blocks.
+tags:
+  - concept
+---
+
 # With, match and else Block
 
 - The `with` statement sets up a temporary context and reliably tears it down, under the control of a context manager object.
@@ -125,3 +132,6 @@ The glossary then defines LBYL:
         Look before you leap. This coding style explicitly tests for pre-conditions before making calls or lookups. This style contrasts with the EAFP approach and is characterized by the presence of many if statements. In a multi-threaded environment, the LBYL approach can risk introducing a race condition between “the looking” and “the leaping.” For example, the code, if key in mapping: return mapping[key] can fail if another thread removes key from mapping after the test, but before the lookup. This issue can be solved with locks or by using the EAFP approach.
 
 Given the EAFP style, it makes even more sense to know and use else blocks well in try/except statements.
+
+## See Also
+- [Asynchronous Programming](async.md)

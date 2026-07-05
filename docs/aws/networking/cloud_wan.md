@@ -1,3 +1,10 @@
+---
+title: AWS Cloud WAN Reference
+description: Reference on Cloud WAN core network policy structure - segments, attachments, and attachment policies - compared to Transit Gateway based networking.
+tags:
+  - reference
+---
+
 # AWS Cloud WAN
 
 - A managed wide-area networking (WAN) service to build, manage, and monitor a global network across AWS and on-premises network

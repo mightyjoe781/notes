@@ -1,3 +1,10 @@
+---
+title: Sqrt Decomposition Techniques
+description: Block-based sqrt decomposition for range minimum queries and range updates, with lazy propagation per block.
+tags:
+  - concept
+---
+
 # Sqrt Decomposition
 
 * Divides the array into blocks of size roughly $\sqrt{n}$.

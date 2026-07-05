@@ -1,3 +1,10 @@
+---
+title: System Design
+description: Hub page for the system design notes, linking LLD, HLD, interview guide, API design principles, and curated resources.
+tags:
+  - index
+---
+
 # System Design
 
 *The process of defining a system’s architecture, components, and interfaces to meet functional and non-functional requirements.*

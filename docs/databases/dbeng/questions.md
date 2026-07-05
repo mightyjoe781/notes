@@ -1,3 +1,10 @@
+---
+title: Database Internals Q&A - Index Scans, Isolation, and Cost
+description: Answers to common questions on bitmap vs index scans, Postgres plan cost units, snapshot isolation, and why sequential scans get chosen over indexes.
+tags:
+  - concept
+---
+
 # Questions
 
 
@@ -27,4 +34,8 @@ If tables are small, and all the rows in single page, then postgres will read th
 
 https://www.mydbops.com/blog/deduplication-of-b-tree-indexes-in-postgresql-13
 Read up more Index Selectivity.
+
+## See Also
+- [Database Indexing](indexing.md)
+- [ACID Properties and Transaction Isolation](acid.md)
 

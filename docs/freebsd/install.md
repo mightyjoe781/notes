@@ -1,3 +1,11 @@
+---
+title: Installing FreeBSD - Post-Install Setup Outline
+description: Unfinished outline of post-install steps - pkg, ports, jails, linuxulator, poudriere.
+tags:
+  - reference
+  - draft
+---
+
 ## Installing FreeBSD
 
 

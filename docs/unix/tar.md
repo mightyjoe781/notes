@@ -1,3 +1,10 @@
+---
+title: tar, gzip, and zstd Basics
+description: Short cheatsheet for basic tar archiving and gzip/zstd compression commands.
+tags:
+  - reference
+  - draft
+---
 # tar/gzip/zstd
 
  [:octicons-arrow-left-24:{ .icon } Back](index.md)
@@ -147,3 +154,7 @@ Use `unzstd` as alias for `zstd -d`
 #### Notes
 
 * take a look at `pigz` (parallel implementation of gzip)
+
+### See Also
+
+- [Compression](compression.md) - fuller reference with flags table, tips, and tool comparison

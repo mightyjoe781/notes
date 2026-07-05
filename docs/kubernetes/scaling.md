@@ -1,3 +1,10 @@
+---
+title: "Scaling: HPA, VPA, and Cluster Autoscaler"
+description: Reference for horizontal, vertical, and cluster autoscaling in Kubernetes, including HPA behavior tuning.
+tags:
+  - reference
+---
+
 # Scaling
 
 ## Manual Scaling

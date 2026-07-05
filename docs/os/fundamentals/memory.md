@@ -1,3 +1,10 @@
+---
+title: Memory
+description: How RAM works - DRAM internals, reading and writing memory, virtual memory (paging, page tables, shared memory, swapping), and DMA.
+tags:
+  - concept
+---
+
 # Memory
 
 - RAM is the OS's "scratch pad" - we don't ultimately care about *what* is sitting in it (it's volatile, gone on power loss), but it's fast, so we trade durability for speed and rely on disk for anything that needs to survive

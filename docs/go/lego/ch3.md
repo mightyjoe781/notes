@@ -1,3 +1,10 @@
+---
+title: Composite Types
+description: Reference on Go's arrays, slices, strings/runes/bytes, maps, and structs, including their memory-sharing quirks.
+tags:
+  - reference
+---
+
 # Composite Types
 
 ## Arrays

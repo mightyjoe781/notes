@@ -1,3 +1,10 @@
+---
+title: Database Normalization (1NF, 2NF, 3NF, BCNF)
+description: Walks a messy student-courses table through 1NF, 2NF, 3NF, and BCNF, explaining the functional-dependency violation each normal form removes.
+tags:
+  - concept
+---
+
 # Database Normalization (1NF, 2NF, 3NF, BCNF)
 
 Normalization is the process of organizing columns and tables to reduce data redundancy and avoid anomalies (insert, update, delete anomalies). Each normal form builds on the previous one - you can't be in 3NF without first being in 2NF and 1NF.
@@ -125,3 +132,7 @@ Both eliminate transitive dependencies, but they differ on one edge case:
 | BCNF | Edge cases left by 3NF      | Does every determinant happen to be a superkey?                        |
 
 For interviews, 3NF is the core expectation - you'll often be given a denormalized table and asked to decompose it through 1NF -> 2NF -> 3NF. BCNF tends to show up in senior rounds, and only matters when a table has multiple overlapping candidate keys.
+
+## See Also
+- [Data Warehouse Schema Design](data_warehousing.md)
+- [Data Modelling](../../sd/topics/database/data_modelling.md)
