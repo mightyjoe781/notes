@@ -3,6 +3,12 @@
 Personal MkDocs Material knowledge base, published at https://notes.sudomoon.com/.
 Source is `docs/<topic>/`, one folder per topic, each with an `index.md` hub.
 
+This wiki holds distilled, durable reference knowledge only. Ephemeral notes
+(project logs, todos, fleeting ideas) live in the private vault at
+`~/dev/personal` and are out of scope here. Content flows one way: vault
+notes graduate into this wiki after distillation - never import them
+unedited, and never link from wiki pages into the vault.
+
 ## Topics (`docs/`)
 
 Run `ls docs/` for the current topic list - one folder per topic, each with an

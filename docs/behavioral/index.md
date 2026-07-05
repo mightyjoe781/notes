@@ -3,6 +3,7 @@ title: Behavioral Interview Prep - STAR Method and Sample Stories
 description: STAR method framework, most-valued interviewer skills, and worked sample stories for behavioral interviews.
 tags:
   - concept
+  - draft
 ---
 
 # Behavioral Interviews

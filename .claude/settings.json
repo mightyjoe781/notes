@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); session_id=$(echo \"$input\" | jq -r '.session_id // \"unknown\"'); marker=\"/tmp/claude-vault-hook-${session_id}\"; if [ -f \"$marker\" ]; then exit 0; fi; dir=\"$PWD\"; found=\"\"; while true; do if [ -L \"$dir/.vault-project\" ]; then found=\"$dir/.vault-project\"; break; fi; [ \"$dir\" = \"/\" ] && break; dir=\"$(dirname \"$dir\")\"; done; if [ -z \"$found\" ]; then exit 0; fi; touch \"$marker\"; target=\"$(readlink \"$found\")\"; reason=\"This session ran inside a project directory linked via .vault-project to the vault project at ${target}. Draft a short dated log.md entry (1-3 bullets: what happened, what was decided, what's next) and any todo.md updates based on this session. Show the user the draft and ask for confirmation before writing to ${target}/log.md or ${target}/todo.md - do not write silently. If nothing meaningful happened this session, say so and skip the draft.\"; jq -n --arg reason \"$reason\" '{decision:\"block\", reason:$reason}'",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
