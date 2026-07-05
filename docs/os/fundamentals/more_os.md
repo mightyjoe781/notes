@@ -105,7 +105,7 @@ A real-world example of this tradeoff: Linkerd's original service-mesh proxy (Li
 
 - Every process's virtual address space is split into two regions: a **user** region and a **kernel** region (in the diagram, addresses `0x00000000`-`0xC0000000` are user space, and `0xC0000000`-`0xFFFFFFFF` are kernel space)
 - The kernel portion is mapped to the **same** physical memory in every process - since the kernel itself doesn't change between processes, it's efficient to map it directly rather than maintain a separate copy of those mappings per process
-- The user portion maps to *different* physical memory per process, translated via that process's own page table (see [memory.md - Virtual Memory](memory.md#virtual-memory) and the TLB discussion in [process_management.md](process_management.md#tlb-flush))
+- The user portion maps to *different* physical memory per process, translated via that process's own page table (see [memory.md - Virtual Memory](memory.md#virtual_memory) and the TLB discussion in [process_management.md](process_management.md#tlb_flush))
 - The page table is what makes both of these mappings work - kernel addresses resolve the same way for every process, while user addresses resolve differently per process
 
 ### Modes
@@ -210,7 +210,7 @@ A container can spawn any number of processes, but - thanks to the PID namespace
 - [ByteDance Working To Make It Faster: Kexec Booting The Linux Kernel (Phoronix)](https://www.phoronix.com/news/Bytedance-Faster-Kexec-Reboot) - ByteDance's work reducing kernel `kexec` reboot time from ~500ms to ~15ms across their fleet
 - [Timeouts, retries, and backoff with jitter (AWS Builders' Library)](https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/) - a thorough, widely-cited treatment of how to set timeouts and retries correctly in distributed systems
 - [A Postgres failure caused by a Cisco router](https://medium.com/@hnasr/a-postgres-failure-caused-by-a-cisco-router-3d285f739a4e) - a real incident where a router's TCP idle-connection timeout (default 1 hour on Cisco routers) silently dropped "idle" Postgres connections, fixed via TCP keepalives (`tcp_keepalives_idle`, etc.)
-- [socket_management.md - Send and Receive Buffers](socket_management.md#send-and-receive-buffers) - covers zero-copy I/O, referenced here as the "Zero Copy" topic
+- [socket_management.md - Send and Receive Buffers](socket_management.md#send_and_receive_buffers) - covers zero-copy I/O, referenced here as the "Zero Copy" topic
 - [Docker overlay filesystem driver docs](https://docs.docker.com/storage/storagedriver/overlayfs-driver/) - details on the OverlayFS layering described above
 
 ## See Also

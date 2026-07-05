@@ -35,7 +35,7 @@ The diagram shows the typical flow: the CU/ALU work with values in **registers**
 
 ![](assets/Pasted%20image%2020260611105220.png)
 
-Putting it all together: each core has its own L1 (and often L2), all cores share an L3, and beyond L3 sits **main memory (RAM)**, connected via a shared **bus**. Each step out from the core - L1 -> L2 -> L3 -> RAM - is larger but significantly slower (see the latency numbers under [L Caches](#l-caches) below).
+Putting it all together: each core has its own L1 (and often L2), all cores share an L3, and beyond L3 sits **main memory (RAM)**, connected via a shared **bus**. Each step out from the core - L1 -> L2 -> L3 -> RAM - is larger but significantly slower (see the latency numbers under [L Caches](#l_caches) below).
 
 ### NUMA - Non-Uniform Memory Access
 
@@ -70,7 +70,7 @@ We use half-adders (XOR and AND), full-adders (2 half-adders, connected to OR).
 - There are several specialized registers, alongside general-purpose ones:
     - **PC** (Program Counter) - address of the next instruction to execute
     - **IR** (Instruction Register) - holds the instruction currently being decoded/executed
-    - **SP** (Stack Pointer) / **BP** (Base Pointer) - covered in the [stack notes](process.md#the-stack)
+    - **SP** (Stack Pointer) / **BP** (Base Pointer) - covered in the [stack notes](process.md#the_stack)
 - **General-purpose registers** - used by the ALU for arithmetic/logic and to hold intermediate values
 
 **Why register/cache width matters: optimized `memchr()`**
@@ -81,7 +81,7 @@ A good real-world illustration of why operating on more bytes at once matters: t
 
 - Memory Management Unit - sits between the core's registers and the cache/memory hierarchy
 - Responsible for translating **virtual addresses** (used by every instruction) into **physical addresses** (used by the actual RAM)
-- Caches recent translations in the **TLB** (Translation Lookaside Buffer) so most accesses don't need a full page-table walk (see [memory notes](memory.md#page-tables))
+- Caches recent translations in the **TLB** (Translation Lookaside Buffer) so most accesses don't need a full page-table walk (see [memory notes](memory.md#virtual_memory_and_fragmentation))
 - Because the TLB caches *virtual -> physical* mappings, and that mapping is per-process (each process has its own page table), the TLB entries from one process are meaningless - and potentially a security issue - for another. So the **TLB must be flushed on a context switch** to a different process's address space (modern CPUs use tagged TLBs with an address-space ID to avoid flushing in some cases)
 
 ### L Caches
@@ -142,7 +142,7 @@ RISC trades instruction *count* for instruction *simplicity* - more instructions
 
 ## Instruction Life-Cycle
 
-Every instruction the CPU executes goes through the same five stages. Let's walk through executing `sub sp, sp, #12` (shrink the stack pointer by 12, allocating space for a new stack frame - see the [stack notes](process.md#the-stack)), with the program counter (`pc`) currently pointing at address `640`.
+Every instruction the CPU executes goes through the same five stages. Let's walk through executing `sub sp, sp, #12` (shrink the stack pointer by 12, allocating space for a new stack frame - see the [stack notes](process.md#the_stack)), with the program counter (`pc`) currently pointing at address `640`.
 
 **1. Fetch** (MMU + caches)
 
@@ -186,7 +186,7 @@ Every instruction the CPU executes goes through the same five stages. Let's walk
 
 - A function call (e.g. `bl _malloc`) jumps to a completely different address, which is very likely **not** in the 64 bytes already cached
 - This causes a **cache miss** on fetch - the CPU has to stall while a new cache line is loaded from a higher cache level or RAM
-- This is one of the costs behind the "function call overhead" discussed in the [process notes](process.md#why-this-matters-function-call-overhead-at-scale) - jumping around to many small functions means more instruction-cache misses, on top of the stack-frame setup/teardown cost
+- This is one of the costs behind the "function call overhead" discussed in the [process notes](process.md#process_execution_with_stack) - jumping around to many small functions means more instruction-cache misses, on top of the stack-frame setup/teardown cost
 - **Inlining** - the compiler copies a small function's body directly into its caller instead of emitting a `call`, avoiding both the jump (and its cache-miss risk) and the stack-frame overhead entirely
 
 > Two related topics worth knowing about, even though they're not detailed here yet: **branch prediction** (the CPU guesses which way an `if`/conditional jump will go and speculatively fetches/executes down that path, to avoid stalling the pipeline while the condition is computed) and **speculative execution** more broadly. The Spectre/Meltdown vulnerabilities (2018) showed that the *side effects* of this speculative work (e.g. what ends up in the cache) can leak data even when the speculated instructions are later discarded - a good entry point if you want to dig deeper.

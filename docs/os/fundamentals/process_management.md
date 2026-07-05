@@ -46,7 +46,7 @@ tags:
 - A thread is a *lightweight* process - it runs inside an existing process rather than getting a brand-new address space
 - Threads of the same process share the code, heap, and data sections, and they share the same PCB-level resources (page table, open file descriptors, etc.)
 - What's *not* shared is the stack and the CPU context (`pc`, registers) - each thread gets its own stack, carved out of the same virtual address space as the other threads' stacks
-- Because all of a process's threads live in the same virtual memory, switching between them doesn't require changing the page table mapping - this is the key reason thread switches are cheaper than process switches (see [TLB flush](#tlb-flush) below)
+- Because all of a process's threads live in the same virtual memory, switching between them doesn't require changing the page table mapping - this is the key reason thread switches are cheaper than process switches (see [TLB flush](#tlb_flush) below)
 
 ### Thread Control Block (TCB)
 
@@ -69,7 +69,7 @@ tags:
 ### Shared Memory
 
 - Multiple processes (not just threads of the same process) can share memory too, via `mmap` with a shared mapping
-- The key idea: each process keeps its *own* virtual memory and page table, but a region of those virtual addresses is mapped to the *same* physical pages - so writes by one process are visible to the other. See [memory.md - Shared Memory](memory.md#shared-memory) for the full picture of virtual vs. physical memory in this setup
+- The key idea: each process keeps its *own* virtual memory and page table, but a region of those virtual addresses is mapped to the *same* physical pages - so writes by one process are visible to the other. See [memory.md - Shared Memory](memory.md#virtual_memory_and_fragmentation) for the full picture of virtual vs. physical memory in this setup
 - Databases use this heavily - e.g. Postgres's **shared buffers** are a region of shared memory that every Postgres backend process maps into its own address space, so they're all looking at the same cached pages without copying data between processes
 
 ### Postgres Processes
@@ -85,7 +85,7 @@ tags:
 
 - `fork()` creates a new process by duplicating the calling process
 - The child needs its *own* virtual memory - it can't simply share the parent's page table outright, since each process must be able to modify its own memory independently
-- The kernel makes this cheap via **Copy-on-Write (CoW)**: parent and child initially share the same physical pages (marked read-only), and a page is only copied when either side actually writes to it. See [memory.md - Copy-on-Write](memory.md#virtual-memory) for the full mechanism and the Redis snapshotting example
+- The kernel makes this cheap via **Copy-on-Write (CoW)**: parent and child initially share the same physical pages (marked read-only), and a page is only copied when either side actually writes to it. See [memory.md - Copy-on-Write](memory.md#virtual_memory) for the full mechanism and the Redis snapshotting example
 - This is also why `fork()`-based snapshotting (like Redis's RDB/AOF rewrite) is cheap: the child mostly just reads pages that never change from its point of view
 
 ### Python CoW bug
@@ -93,7 +93,7 @@ tags:
 - A good illustration of how CoW interacts badly with reference counting: every Python object - including singletons like `None`, `True`, and `False` - carries a refcount that's incremented and decremented as the object is used
 - After a `fork()` (e.g. in a pre-fork web server like Gunicorn), parent and child share those CoW pages - but as soon as either process touches an object's refcount, that page gets copied, even though the *value* of the object hasn't logically changed
 - Because `None`/`True`/`False` are touched constantly, this could quietly defeat CoW sharing across many forked workers, each ending up with its own private copy of pages that should have stayed shared
-- This is part of the motivation behind CPython 3.12+ making these objects "immortal" (refcount frozen, never written) - see [cpu.md - CPython's immortal None/True/False](cpu.md#cpu-architecture) for the full story
+- This is part of the motivation behind CPython 3.12+ making these objects "immortal" (refcount frozen, never written) - see [cpu.md - CPython's immortal None/True/False](cpu.md#cpu_architecture) for the full story
 
 ## Context Switching
 
@@ -183,7 +183,7 @@ Some classic algorithms:
 
 ### Multi-threaded vs Multi-Process
 
-- **Multi-process**: spin up multiple separate processes, each isolated with its own address space. Example: nginx, Postgres (see [Postgres Processes](#postgres-processes) above)
+- **Multi-process**: spin up multiple separate processes, each isolated with its own address space. Example: nginx, Postgres (see [Postgres Processes](#postgres_processes) above)
 - **Multi-threaded**: one parent process spins up multiple threads that share its memory. Example: MySQL, Node's `libuv` thread pool
 
 **Concurrency vs Parallelism**

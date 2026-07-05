@@ -167,7 +167,7 @@ Taking this further with `SO_REUSEPORT` (socket sharding, described above): each
 - A blocking call means the calling thread's program counter can't advance until the call completes - the thread is descheduled
 - `read()` blocks if there's no data yet in the receive buffer; `accept()` blocks if the accept queue is empty
 - In the diagram, a thread looping over `read()` on connections `con1`-`con10` succeeds instantly for `con1` and `con2` (data already buffered), but blocks on `con3` (nothing to read yet) - even though `con4` onward *do* have data ready and could have been served immediately
-- Blocking like this forces a context switch (see [process_management.md - Context Switching](process_management.md#context-switching)) every time a thread waits, which adds real overhead if it happens constantly across many connections
+- Blocking like this forces a context switch (see [process_management.md - Context Switching](process_management.md#context_switching)) every time a thread waits, which adds real overhead if it happens constantly across many connections
 
 ### Asynchronous I/O
 
@@ -242,7 +242,7 @@ In the diagram, `select()` is asked to monitor `con1`-`con10`. Only `con9` turns
 - The application places a "job" (e.g. a read or write request) onto the submission ring; the kernel (using a pool of worker threads for blocking operations) performs the work and writes the result onto the completion ring
 - The application can poll the completion ring (`io_uring_poll_wake`/`io_uring_poll_arm`) or be notified when results are ready, without a syscall per operation
 
-Sharing memory directly between user space and the kernel like this has also made `io_uring` a significant attack surface: it has been the source of a number of Linux kernel security vulnerabilities, to the point that Google disabled `io_uring` by default across its fleet and in ChromeOS. See [Google limiting io_uring use due to security vulnerabilities](https://www.phoronix.com/news/Google-Restricting-IO_uring) (also referenced in [introduction.md](introduction.md#user-space-vs-kernel-space)).
+Sharing memory directly between user space and the kernel like this has also made `io_uring` a significant attack surface: it has been the source of a number of Linux kernel security vulnerabilities, to the point that Google disabled `io_uring` by default across its fleet and in ChromeOS. See [Google limiting io_uring use due to security vulnerabilities](https://www.phoronix.com/news/Google-Restricting-IO_uring) (also referenced in [introduction.md](introduction.md#user_space_vs_kernel_space)).
 
 ### Cross Platform
 

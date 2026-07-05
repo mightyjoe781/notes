@@ -272,4 +272,4 @@ docker compose down --rmi all --volumes --remove-orphans
 - Use multi-stage Dockerfiles - keep production images small
 
 ## See Also
-- [Swarm Stacks](swarm.md#stacks-compose-on-swarm) - deploying a Compose file across a cluster instead of a single host
+- [Swarm Stacks](swarm.md#stacks_compose_on_swarm) - deploying a Compose file across a cluster instead of a single host

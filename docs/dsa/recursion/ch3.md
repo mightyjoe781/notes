@@ -56,7 +56,7 @@ def partition(s):
 
 [Leetcode Link](https://leetcode.com/problems/word-search/description/)
 
-* Problem based on 2D Matrix DFS, standard backtracking pattern - see [ch4 Backtracking](ch4.md#word-search) for full solution.
+* Problem based on 2D Matrix DFS, standard backtracking pattern - see [ch4 Backtracking](ch4.md#word_search) for full solution.
 
 
 ## Word Break
