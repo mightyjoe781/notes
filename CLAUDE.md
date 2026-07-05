@@ -68,6 +68,11 @@ Never a standalone backfill pass across many files.
 ## Style
 
 - Short hyphens (-) only in note content, never em dashes (—).
+- Heading anchors use underscores, not hyphens (`mkdocs.yml` sets `toc.separator: "_"`).
+  When linking to a heading (`file.md#some_heading` or `#some_heading`), use
+  underscores between words. Also note headings are only real anchors when
+  written as `#`/`##`/`###` - bolded pseudo-headings (`**Some Heading**`) don't
+  get one, so link to the nearest actual heading instead.
 
 ## Session convention
 
