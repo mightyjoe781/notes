@@ -96,6 +96,6 @@ extra:
 nav:
   - About: about.md
   - TOC: toc.md
-  - Blog(upcoming) : ...
+  - Blog: https://me.sudomoon.com/blog/
 
 copyright: Copyright &copy; smk
