@@ -7,101 +7,82 @@ tags:
 
 ## Introduction
 
+> Docs: [Lakehouse architecture](https://docs.databricks.com/aws/en/lakehouse-architecture/) · [Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/)
+
 Databricks: The Data + AI Company
 
 - Inventor and pioneer of the data lakehouse
 - Creator of highly successful open-source projects: Delta Lake, Apache Spark, and MLflow
 
-The Databricks Lakehouse **Platform**
+**Why Databricks?**
 
-- Unify all data in one place
-- Built on open source standards and formats — no vendor lock-in
-
-Why Databricks?
-
-1. Big data is difficult to manage and more than 80% of projects fail to manage it effectively
-2. All firms require a consolidated data security policy that meets regulatory standards like GDPR and HIPAA
+1. Big data is difficult to manage - more than 80% of projects fail to manage it effectively
+2. Firms need a consolidated data security policy that meets regulatory standards like GDPR and HIPAA
 3. Redundant copies of the same data for different use cases make enforcing those policies harder
 
-![image-databricks-intro](ch0.assets/image-20230125125256655.png)
+The Databricks Lakehouse **Platform** unifies all data in one place, built on open source standards and formats - no vendor lock-in.
 
-### The Lakehouse Platform
+## Warehouse vs. Lake vs. Lakehouse
 
-**Data Warehouse**
+| | Data Warehouse | Data Lake |
+|---|---|---|
+| Strengths | Purpose-built for BI and reporting; unifies disparate systems | Stores any kind of data cheaply; good starting point |
+| Downsides | Poor support for unstructured data, data science, AI, streaming; closed/proprietary formats; expensive to scale | Complex to set up; poor BI performance; can become an unreliable "data swamp" |
 
-- Strengths
-    - Purpose-built for BI and reporting
-    - Meant to unify disparate systems
-- Downsides
-    - Poor support for unstructured data, data science, AI, and streaming
-    - Closed and proprietary formats
-    - Expensive to scale
-
-**Data Lake**
-
-- Strengths
-    - Store any kind of data
-    - Inexpensive storage
-    - Good starting point
-- Downsides
-    - Complex to set up
-    - Poor BI performance
-    - Can become unreliable "data swamps"
-
-**Databricks Lakehouse Platform**: Combines the best of both paradigms.
+**Databricks Lakehouse Platform** combines the best of both:
 
 - Simple, open, multi-cloud
-- ACID transactions
-- Schema enforcement
-- Governance support
+- ACID transactions and schema enforcement
+- Governance support, open format
 - Direct access to source data for BI
-- Fully scalable
-- Open format
+- Fully scalable, real-time collection and reporting
 - Supports structured, unstructured, and semi-structured data
-- Real-time data collection and reporting
 
-### Databricks Lakehouse Components
+![Databricks Lakehouse Platform Architecture](https://www.databricks.com/sites/default/files/inline-images/marchitecture-120823.png)
 
-![image-20230125133138173](ch0.assets/image-20230125133138173.png)
+## Lakehouse Components
 
-Data lands in an organisation's open data lake. By adding Delta Lake on top, you achieve the lakehouse part of the platform.
+Data lands in an organisation's open data lake. Adding **Delta Lake** on top turns it into a lakehouse.
 
-**Delta Lake**
+| Delta Lake pillar | Delivers |
+|---|---|
+| Reliability → ACID transactions | Quality data accelerates innovation |
+| Performance → Indexing | Lower TCO with a simpler architecture |
+| Governance → Unity Catalog | Automation increases productivity |
+| Quality → Expectations | Reduces security risk |
 
-- Reliability → ACID transactions: quality data accelerates innovation
-- Performance → Indexing: lower TCO with a simpler architecture
-- Governance → Unity Catalog: automation increases productivity
-- Quality → Expectations: reduces security risk
+### Medallion architecture (data quality tiers)
 
-**Data Quality Tiers (Medallion Architecture)**
+- **Bronze** - raw ingestion and history (landing zone)
+- **Silver** - filtered, cleaned, and augmented data
+- **Gold** - aggregated, business-ready data used for reporting and ML
 
-- Bronze: raw ingestion and history (landing zone)
-- Silver: filtered, cleaned, and augmented data
-- Gold: aggregated, business-ready data used for reporting and ML
+> Docs: [Medallion architecture](https://docs.databricks.com/aws/en/lakehouse/medallion)
 
-![image-databricks-mlflow](ch0.assets/image-20230125134216348.png)
+MLflow integrates natively with the lakehouse to track experiments, manage models, and serve predictions.
 
-*MLflow integrates natively with the lakehouse to track experiments, manage models, and serve predictions.*
+## Platform Security
 
-### Databricks Platform Security
-
-Databricks connects directly to your lakehouse and supports federated access (e.g. SSO) for users. Encryption and certificate management are handled by Databricks — users don't need to manage them manually.
-
-Key security features:
+Databricks connects directly to your lakehouse and supports federated access (e.g. SSO). Encryption and certificate management are handled by Databricks - no manual setup required.
 
 - Optional customer-managed VPC/VNET
 - IP access lists
 - Code isolation
-- Private network between the data plane (managed by the cloud provider) and the control plane (managed by Databricks)
-- Secure cluster connectivity (no open inbound ports required)
+- Private network between data plane (cloud provider) and control plane (Databricks)
+- Secure cluster connectivity - no open inbound ports required
 
-### Databricks Unity Catalog
+## Unity Catalog
 
 Unity Catalog is the unified governance layer for the lakehouse.
 
-- **Unify governance across clouds**: fine-grained governance for data lakes across clouds, based on ANSI SQL open standards
-- **Unify data and AI assets**: centrally share, audit, secure, and manage all types of data through a single interface
-- **Unify existing catalogs**: works alongside existing data, storage, and catalogs — no hard migration required
-- **Three-level namespace**: `catalog.schema.table` structure organises all assets
-- **Attribute-based access control**: row-level and column-level security policies
-- **Data lineage**: automatic end-to-end lineage tracking across tables, notebooks, jobs, and dashboards
+- **Unify governance across clouds** - fine-grained governance based on ANSI SQL open standards
+- **Unify data and AI assets** - centrally share, audit, secure, and manage all asset types through a single interface
+- **Unify existing catalogs** - works alongside existing data/storage/catalogs, no hard migration
+- **Three-level namespace** - `catalog.schema.table` organises all assets
+- **Attribute-based access control** - row-level and column-level security policies
+- **Data lineage** - automatic end-to-end lineage across tables, notebooks, jobs, and dashboards
+
+## See Also
+
+- [Databricks Platform In Depth](ch4.md) - Delta Lake and Unity Catalog internals
+- [Recent Platform Updates](ch5.md) - Lakeflow, Lakebase, Agent Bricks, Genie
