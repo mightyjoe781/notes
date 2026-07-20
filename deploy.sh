@@ -9,6 +9,7 @@ if [[ -z "$VIRTUAL_ENV" ]]; then
     fi
 fi
 
+python3 scripts/render_excalidraw.py
 mkdocs build
 python3 scripts/generate_llms_txt.py
 rsync -avz --delete site/ smkroot:/var/www/notes/

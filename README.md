@@ -22,6 +22,16 @@ source .venv/bin/activate
 ./deploy.sh   # mkdocs build + rsync to remote server
 ```
 
+## Excalidraw rendering
+
+`.excalidraw.md` scenes embedded with `![[scene.excalidraw.md]]` or
+`![[scene.excalidraw.md#^frame=<id>]]` render to real SVG automatically as
+part of `serve.sh`/`deploy.sh` — no manual PNG export needed. See
+[`EXCALIDRAW_RENDERING.md`](EXCALIDRAW_RENDERING.md) for how the pipeline
+works (embed syntax, caching, the mkdocs hook) and
+[`EXCALIDRAW_RENDERING_CHANGELOG.md`](EXCALIDRAW_RENDERING_CHANGELOG.md)
+for how it got built.
+
 ## Excalidraw library
 
 `docs/excalidraw-library.excalidrawlib` is the importable library file. After updating the library in Obsidian, regenerate and commit it:

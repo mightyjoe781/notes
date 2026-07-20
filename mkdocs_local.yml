@@ -48,6 +48,8 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
   pymdownx.smartsymbols:
+hooks:
+  - scripts/excalidraw_embed_hook.py
 plugins:
   - glightbox
   - tags

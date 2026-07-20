@@ -10,3 +10,6 @@ docs/Excalidraw/*.excalidraw
 styles/Microsoft
 styles/config
 docs/.claudian
+scripts/excalidraw-render/node_modules
+scripts/excalidraw-render/dist
+scripts/__pycache__

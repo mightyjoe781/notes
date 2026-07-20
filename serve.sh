@@ -9,5 +9,7 @@ if [[ -z "$VIRTUAL_ENV" ]]; then
     fi
 fi
 
+# python3 scripts/render_excalidraw.py
+
 # mkdocs serve -f mkdocs_local.yml "$@" &> /dev/null
 mkdocs serve -f mkdocs_local.yml -q
