@@ -9,8 +9,6 @@ tags:
 
 A practical walkthrough of the bottlenecks you hit — in order — when pushing a system to extreme throughput, and the decisions that remove each ceiling.
 
-![](assets/scaling_bottleneck_order.excalidraw.png)
-
 ## Language and Framework Choice
 
 Raw throughput ceiling on a single powerful machine:
@@ -214,8 +212,7 @@ Collision probability at 1M req/s: **86,000 years** to reach 50% probability of 
 
 No single machine handles all production 1M req/s traffic. Real deployments distribute across nodes globally.
 
-![](assets/Pasted%20image%2020260603002007.png)
-
+![[sd/hld/advanced/assets/high_throughput_3.excalidraw.md#^frame=UyMrBlLZ|1000]]
 ### Load balancer overhead
 
 | Type | Overhead |
