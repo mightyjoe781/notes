@@ -13,3 +13,6 @@ docs/.claudian
 scripts/excalidraw-render/node_modules
 scripts/excalidraw-render/dist
 scripts/__pycache__
+docs/**/assets/*.excalidraw.svg
+docs/**/assets/*.excalidraw__*.svg
+docs/.excalidraw-manifest.json
