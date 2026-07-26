@@ -11,21 +11,14 @@ tags:
 
 - Main Building block of AWS
 - Infinitely Scaling Storage
-- Use Cases
-    - Backup & Storage
-    - Disaster Recovery
-    - Archive
-    - Hybrid Cloud Storage
-    - Application Hosting
-    - Media Hosting
-    - Data Lakes & Big Data Analytics
-    - Software Delivery & Static Websites
+
+![[aws/dataeng/assets/storage.excalidraw.md#^frame=yHhsGjz1|1000]]
 
 ### Buckets
 
 - S3 stores Objects (files) in Buckets (directories)
 - Buckets must have *globally unique name* (across all regions all accounts)
-- Buckets are defined at region level
+- Buckets are defined at **region level**
 - looks like global service, but its a regional service
 - Name Convention
     - No uppercase, No underscore
@@ -45,18 +38,13 @@ tags:
 - Keys are long names consisting of `/`
 - Max Object Size is 5 TB
 - If uploading more than 5GB, must use *muti-part upload*
-- Metadata
-- Tags
-- Version ID
+
+![[aws/dataeng/assets/storage.excalidraw.md#^frame=WIhD7uq5|1000]]
 
 ### AWS S3 - Security
 
-- User Based
-    - IAM Policies - which API calls should be allowed for a specific user from IAM
-- Resource Based
-    - Bucket Policies - bucket wide rules from S3 console - allows cross account
-    - Object Access Control List (ACL) - finer grain (can be disabled)
-    - Bucket Access Control List - less common (can be disabled)
+![[aws/dataeng/assets/storage.excalidraw.md#^frame=XTbzM5Kx|1000]]
+
 - Note: an IAM principal can access an S3 object if
     - The user IAM permissions ALLOW it OR the resource policy ALLOWS it
     - AND there is no explicit DENY
@@ -112,13 +100,7 @@ tags:
 
 ## S3 Storage Classes
 
-- Amazon S3 Standard - General Purpose
-- Amazon S3 Standard-Infrequent Access (IA)
-- Amazon S3 One Zone-Infrequent Access
-- Amazon S3 Glacier Instant Retrieval
-- Amazon S3 Glacier Flexible Retrieval
-- Amazon S3 Glacier Deep Archive
-- Amazon S3 Intelligent Tiering
+![[aws/dataeng/assets/storage.excalidraw.md#^frame=0ZfT6CHH|1000]]
 
 ### S3 Durability & Availability
 
@@ -222,7 +204,7 @@ tags:
 
 ### Event Notification
 
-![](assets/Pasted%20image%2020251105120004.png)
+![[aws/dataeng/assets/storage.excalidraw.md#^frame=dCyrgf6g]]
 
 - S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, S3:Replication…
 - Object name filtering possible (`*.jpg)`
@@ -234,7 +216,7 @@ tags:
 
 #### S3 Event Notification with Amazon EventBridge
 
-![](assets/Pasted%20image%2020251105120118.png)
+![[aws/dataeng/assets/storage.excalidraw.md#^frame=AOfH4TGD|1000]]
 
 - Advanced filtering options with JSON rules (metadata, object size, name...)
 - Multiple Destinations – ex Step Functions, Kinesis Streams / Firehose…
