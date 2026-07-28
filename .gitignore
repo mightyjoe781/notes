@@ -7,6 +7,7 @@ split/
 docs/tmp
 docs/Excalidraw/*.excalidraw.md
 docs/Excalidraw/*.excalidraw
+docs/Excalidraw/assets
 styles/Microsoft
 styles/config
 docs/.claudian
@@ -16,3 +17,4 @@ scripts/__pycache__
 docs/**/assets/*.excalidraw.svg
 docs/**/assets/*.excalidraw__*.svg
 docs/.excalidraw-manifest.json
+docs/.claude

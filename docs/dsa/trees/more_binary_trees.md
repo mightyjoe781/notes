@@ -324,6 +324,11 @@ Nothing else guarantees uniqueness.
 | Level-order alone     | No               | Multiple shapes possible                |
 | Inorder + Level-order | No               | Root known, but subtree split ambiguous |
 
+**Exception - full binary trees:** if every node has 0 or 2 children (never
+1), Preorder + Postorder (equivalently Preorder + Preorder-of-mirror) *does*
+uniquely reconstruct the tree - the single-child boundary ambiguity can't
+occur. See below.
+
 ### Unique Binary Tree From Inorder + Postorder
 
 
@@ -387,6 +392,45 @@ def buildTree(preorder, inorder):
         return node
 
     return solve(0, len(inorder) - 1)
+
+```
+
+### Full Binary Tree From Preorder + Mirror Preorder
+
+Given `pre[]` (preorder of a *full* binary tree) and `preMirror[]` (preorder
+of its mirror), rebuild the original tree - unambiguous only because the tree
+is full (0 or 2 children, never 1). `preorder(mirror(T))` visits `root,
+right, left `instead of` root, left, right `, so the next unconsumed value of
+`pre[]` (the left subtree's root) locates the split point in `preMirror[]`.
+
+[GfG: Construct a Full Binary Tree](https://www.geeksforgeeks.org/problems/construct-a-full-binary-tree--170648/1)
+
+```python
+
+def constructTree(pre, preMirror):
+
+    idx_map = {v: i for i, v in enumerate(preMirror)}
+    preIndex = 0
+
+    def build(l, r):
+        nonlocal preIndex
+        if l > r:
+            return None
+
+        node = Node(pre[preIndex])
+        preIndex += 1
+
+        if l == r:
+            return node
+
+        mid = idx_map[pre[preIndex]]
+
+        node.left = build(mid, r)
+        node.right = build(l + 1, mid - 1)
+
+        return node
+
+    return build(0, len(pre) - 1)
 
 ```
 
