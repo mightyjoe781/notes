@@ -34,18 +34,9 @@ for how it got built.
 
 ## Excalidraw library
 
-`docs/excalidraw-library.excalidrawlib` is the importable library file. After updating the library in Obsidian, regenerate and commit it:
-
-```bash
-python3 -c "
-import json
-d = json.load(open('docs/.obsidian/plugins/obsidian-excalidraw-plugin/data.json'))
-lib = d['library2']
-out = {'type': 'excalidrawlib', 'version': 2, 'source': lib.get('source',''), 'libraryItems': lib['libraryItems']}
-json.dump(out, open('docs/excalidraw-library.excalidrawlib', 'w'), indent=2, ensure_ascii=False)
-"
-git add docs/excalidraw-library.excalidrawlib && git commit -m "update excalidraw library"
-```
+`docs/Excalidraw/Libraries/local-library.excalidrawlib` is the importable
+library file, managed directly by the Obsidian plugin (vault storage mode) -
+just commit it after updating the library in Obsidian.
 
 ## Linting
 
