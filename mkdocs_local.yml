@@ -9,6 +9,7 @@ extra_javascript:
   - https://unpkg.com/katex@0/dist/katex.min.js
   - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
   - src/js/custom.js
+  - src/js/papers-loader.js
 extra_css:
   - https://unpkg.com/katex@0/dist/katex.min.css
   - src/css/custom.css

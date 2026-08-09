@@ -1,0 +1,47 @@
+{% extends "main.html" %}
+
+{# Used only by pages with `template: papers.html` in frontmatter
+   (docs/papers/<slug>/index.md). Every other page on the site extends
+   main.html directly and never sees this file.
+
+   Deliberately does NOT declare a static <script src="viewer.js"> tag here:
+   under navigation.instant, mkdocs-material swaps <body> content via fetch
+   on in-site link clicks and never injects a per-template <script> that
+   wasn't already in the document, so a reader arriving here from another
+   page would see the mount div with no bundle loaded. Instead,
+   src/js/papers-loader.js (site-wide, tiny, a no-op everywhere except when
+   it finds #papers-viewer) injects the real ~8MB viewer bundle dynamically
+   -- one code path that works identically on a hard load and on instant
+   navigation. #}
+
+{% block styles %}
+  {{ super() }}
+  {# Widen the content area and drop the right-hand TOC rail on papers
+     pages only (this stylesheet block only ever loads on pages using this
+     template) -- the canvas wants the room, and a per-page TOC isn't
+     meaningful for a single full-bleed drawing. #}
+  <style>
+    /* !important: Material's own TOC-visibility rule for this element uses
+       a higher-specificity attribute selector (its CSS-only toggle
+       mechanism), which otherwise wins over a plain class selector
+       regardless of source order. Safe here since this stylesheet only
+       ever loads on papers pages. */
+    .md-sidebar--secondary { display: none !important; }
+    .md-content { max-width: none; }
+    .md-grid { max-width: 90rem; }
+  </style>
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  {# page.meta.papers_scene_json is set by scripts/excalidraw_embed_hook.py
+     (on_page_markdown), which computes the correct docs-relative path to
+     this page's scene.json for BOTH supported models: a merged
+     *.excalidraw.md page (json is a sibling of the source file, but the
+     rendered page itself sits one directory level deeper once
+     use_directory_urls turns "foo.excalidraw.md" into "foo.excalidraw/"),
+     and the older co-located index.md + scene file model. The `| url`
+     filter is what makes that depth difference resolve correctly either
+     way -- do not replace this with a bare relative string. #}
+  <div id="papers-viewer" data-scene-url="{{ page.meta.papers_scene_json | url }}" style="height: calc(80vh + 16px); margin-top: 1rem; padding: 8px; box-sizing: border-box; background: #faf6e9; border: 1px solid #e0dabd; border-radius: 4px;"></div>
+{% endblock %}

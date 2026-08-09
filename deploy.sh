@@ -10,6 +10,7 @@ if [[ -z "$VIRTUAL_ENV" ]]; then
 fi
 
 python3 scripts/render_excalidraw.py
+(cd scripts/excalidraw-render && npm run build)
 mkdocs build
 python3 scripts/generate_llms_txt.py
 rsync -avz --delete site/ smkroot:/var/www/notes/

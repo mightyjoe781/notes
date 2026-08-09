@@ -18,3 +18,8 @@ docs/**/assets/*.excalidraw.svg
 docs/**/assets/*.excalidraw__*.svg
 docs/.excalidraw-manifest.json
 docs/.claude
+docs/papers/pdfs/
+docs/papers/**/*.excalidraw.svg
+docs/papers/**/*.excalidraw__*.svg
+docs/papers/**/*.excalidraw.json
+docs/assets/papers/

@@ -86,7 +86,7 @@ hide:
 
     :material-server:{ .lg .middle } [Server](server/index.md)
 
--   __Technical Books__
+-   __Books & Papers__
 
     ---
 
@@ -95,7 +95,9 @@ hide:
     :material-book:{ .lg .middle } [Domain-Driven Design]
 
     :material-book:{ .lg .middle } [Pragmatic Programmer](https://media.minetest.in/the_pragmatic_programmer_notes.pdf)
-    
+
+    :material-file-pdf-box:{ .lg .middle } [Annotated Papers](papers/index.md)
+
     [Full List](books/index.md) :octicons-arrow-right-24:{ .icon }
 
 -   __Web and Microservices__

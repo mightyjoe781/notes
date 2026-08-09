@@ -290,3 +290,10 @@ npm run build                            # bundles dist/harness.js + fonts
   auto-migrated to the `![[...]]` form. That's an intentional,
   per-note, whenever-you-get-to-it decision, not an oversight — see the
   changelog for why.
+
+## See also
+
+`PAPERS_RENDERING.md` — a second, parallel output built on top of this
+same pipeline: annotated papers under `docs/papers/` get a live
+interactive Excalidraw viewer (not a flattened SVG), reusing
+`decompress_scene`/the manifest/the cache from this file.

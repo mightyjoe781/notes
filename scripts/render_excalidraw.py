@@ -24,6 +24,11 @@ automatically. A run of this script should never make a file disappear as
 a side effect of something unrelated changing. Pass --prune-orphans if you
 actually want the stale SVGs + manifest entries cleaned up.
 
+One deliberate exception: a scene at docs/papers/<slug>/scene.excalidraw.md
+is always treated as referenced (whole-scene block only), with no embed
+needed in its sibling index.md -- the folder convention itself is the
+reference. See the docs/papers/ live viewer, PAPERS_PREFIX.
+
 This script only ever writes generated SVGs (under docs/**/assets/, next to
 the scene that produced them) and the manifest. It never touches an
 authored .md file. Turning an embed into a real image reference is a
@@ -46,8 +51,10 @@ Flags:
                     above). Without this flag orphans are only reported.
 """
 
+import base64
 import hashlib
 import json
+import mimetypes
 import os
 import re
 import subprocess
@@ -55,12 +62,20 @@ import sys
 import tempfile
 import time
 
+import pymupdf as fitz  # for rasterizing PDF-page embeds -- see resolve_embedded_files
 import yaml
 from lzstring import LZString
 
 DOCS_DIR = "docs"
 MANIFEST_PATH = os.path.join(DOCS_DIR, ".excalidraw-manifest.json")
 RENDER_SCRIPT = os.path.join("scripts", "excalidraw-render", "render.mjs")
+
+# Whole-scene blocks for any scene living under docs/papers/ additionally get
+# their raw decompressed JSON (elements/appState/files) dumped next to the
+# scene, for the live interactive Excalidraw viewer used there (see
+# overrides/papers.html) -- everywhere else only ever gets a rendered SVG.
+# This is purely additive: it never changes what happens on the SVG path.
+PAPERS_PREFIX = os.path.join(DOCS_DIR, "papers") + os.sep
 
 # Only used to resolve an embed's link target to an actual scene file (a
 # link may be a full docs-relative path or a shorter Obsidian
@@ -89,6 +104,14 @@ FRONTMATTER_RE = re.compile(r"^---\n(.*?)\n---\n", re.DOTALL)
 # syntax at mkdocs-build time; this one decides what needs rendering in the
 # first place).
 EMBED_RE = re.compile(r"!\[\[([^\]|#]+\.excalidraw)(?:\.md)?(?:#\^frame=([^\]|]+))?(?:\|(\d+))?\]\]")
+
+# Obsidian's own "## Embedded Files" section, e.g.:
+#   7bfd403bede33415fb81efd6a90dd27c42c5f989: [[../pdfs/paper.pdf#page=1]]
+# One of these exists per `image` element whose fileId isn't self-contained
+# in the compressed-json (see resolve_embedded_files for why that matters).
+EMBEDDED_FILE_RE = re.compile(r"^([0-9a-fA-F]+): \[\[([^\]]+)\]\]", re.MULTILINE)
+
+IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"}
 
 LZ = LZString()
 
@@ -207,6 +230,67 @@ def decompress_scene(path: str) -> dict | None:
     return data
 
 
+def rasterize_pdf_page(pdf_path: str, page_num: int, dpi: int = 150) -> bytes:
+    doc = fitz.open(pdf_path)
+    try:
+        pix = doc[page_num - 1].get_pixmap(dpi=dpi)
+        return pix.tobytes("png")
+    finally:
+        doc.close()
+
+
+def resolve_embedded_files(scene_path: str, scene_text: str, files: dict) -> dict:
+    """Fill in `files[file_id]` for images/PDF pages referenced only via
+    Obsidian's "## Embedded Files" section (e.g. from importing a PDF page
+    as an annotation background). Obsidian resolves that link live, using
+    its own pdf.js integration, when the scene is open there -- but never
+    writes the actual pixel data back into the compressed-json blob. Without
+    this, every such image is invisible to anything outside Obsidian: it
+    silently renders as nothing in both the static SVG export and the live
+    browser viewer (docs/papers/), since standard Excalidraw only knows how
+    to resolve `files[fileId]`, never a "[[relative/path#page=N]]" link.
+    """
+    embeds = dict(EMBEDDED_FILE_RE.findall(scene_text))
+    if not embeds:
+        return files
+
+    resolved = dict(files)
+    scene_dir = os.path.dirname(scene_path)
+    for file_id, link in embeds.items():
+        if file_id in resolved:
+            continue  # already has real data -- nothing to resolve
+
+        target, _, page_str = link.partition("#page=")
+        page_num = int(page_str) if page_str.isdigit() else None
+        embed_path = os.path.normpath(os.path.join(scene_dir, target))
+
+        if not os.path.exists(embed_path):
+            print(f"warning: {scene_path}: embedded file not found: {embed_path}", file=sys.stderr)
+            continue
+
+        try:
+            if embed_path.lower().endswith(".pdf") and page_num is not None:
+                raw = rasterize_pdf_page(embed_path, page_num)
+                mime = "image/png"
+            elif os.path.splitext(embed_path)[1].lower() in IMAGE_EXTS:
+                with open(embed_path, "rb") as f:
+                    raw = f.read()
+                mime = mimetypes.guess_type(embed_path)[0] or "image/png"
+            else:
+                continue
+        except Exception as exc:  # noqa: BLE001 - report and skip, don't crash the whole build
+            print(f"warning: {scene_path}: failed to resolve embedded file {link} ({exc}), skipping", file=sys.stderr)
+            continue
+
+        resolved[file_id] = {
+            "mimeType": mime,
+            "id": file_id,
+            "dataURL": f"data:{mime};base64,{base64.b64encode(raw).decode('ascii')}",
+            "created": int(os.path.getmtime(embed_path) * 1000),
+        }
+    return resolved
+
+
 def scene_basename(path: str) -> str:
     fname = os.path.basename(path)
     if fname.endswith(".excalidraw.md"):
@@ -256,6 +340,14 @@ def target_path(scene_path: str, block_name: str, frame_id: str | None) -> str:
         return os.path.join(scene_dir, f"{base}.excalidraw.svg")
     safe_name = re.sub(r"[^A-Za-z0-9_.-]+", "_", block_name)
     return os.path.join(scene_dir, f"{base}.excalidraw__{safe_name}.svg")
+
+
+def papers_json_path(scene_path: str) -> str:
+    # Named after the scene itself (like target_path does for the SVG),
+    # not a flat "scene.json" -- multiple papers can end up siblings under
+    # the same field-grouping folder (docs/papers/<field>/...), and a
+    # folder-only name would silently let one overwrite another's output.
+    return os.path.join(os.path.dirname(scene_path), f"{scene_basename(scene_path)}.excalidraw.json")
 
 
 def load_manifest() -> dict:
@@ -321,7 +413,10 @@ def main() -> None:
 
     # Group resolved references by scene, so each referenced scene is only
     # decompressed once even if it's embedded from several notes / several
-    # frames.
+    # frames. This is what drives the SVG output specifically -- an
+    # unreferenced scene never gets an SVG, papers scenes included (see
+    # papers_scenes below for the separate, always-on trigger for their
+    # scene.json).
     needed_frames_by_scene: dict[str, set[str | None]] = {}
     unresolved: list[str] = []
     for referencing_file, link_target, frame_id in references:
@@ -331,14 +426,28 @@ def main() -> None:
             continue
         needed_frames_by_scene.setdefault(scene_path, set()).add(frame_id)
 
+    # Papers scenes are the one deliberate exception to "reference-driven,
+    # not discovery-driven" -- but only for their scene.json, never the SVG.
+    # A scene at docs/papers/<slug>/scene.excalidraw.md IS its own reason to
+    # produce scene.json: the folder convention already unambiguously pairs
+    # it with docs/papers/<slug>/index.md (the live viewer page that fetches
+    # it), and requiring an embed in that same index.md just to keep the
+    # pipeline running is redundant and easy to accidentally strip (e.g.
+    # thinking it's an unused static thumbnail once the live viewer works).
+    # The SVG stays strictly reference-driven like every other scene: it's
+    # only ever a deliberate thumbnail, built when something actually embeds
+    # this scene (e.g. docs/papers/index.md), never automatically.
+    papers_scenes = {s for s in known_scenes if s.startswith(PAPERS_PREFIX)}
+
     current_keys: set[str] = set()
     hit_keys: set[str] = set()
     miss_jobs: list[dict] = []
+    papers_miss_jobs: list[dict] = []
     mismatches: list[str] = []
     n_blocks = 0
     missing_frames: list[str] = []
 
-    for scene_path, needed_frame_ids in sorted(needed_frames_by_scene.items()):
+    for scene_path in sorted(set(needed_frames_by_scene) | papers_scenes):
         data = decompress_scene(scene_path)
         if data is None:
             continue
@@ -347,18 +456,71 @@ def main() -> None:
         files = data.get("files") or {}
         blocks_by_frame_id = detect_blocks(elements)
 
-        for frame_id in sorted(needed_frame_ids, key=lambda f: f or ""):
+        # Resolving embedded PDF pages/images means rasterizing a PDF page
+        # per file, which is real work -- only pay for it once, and only if
+        # this scene actually has a cache miss to build (not on every run
+        # once everything's cached). Memoized per scene, not per block: all
+        # blocks of a scene share the same resolved files.
+        _resolved_files: list[dict] = []
+
+        def resolved_files() -> dict:
+            if not _resolved_files:
+                scene_text = open(scene_path, encoding="utf-8", errors="ignore").read()
+                _resolved_files.append(resolve_embedded_files(scene_path, scene_text, files))
+            return _resolved_files[0]
+
+        is_papers_scene = scene_path in papers_scenes
+        explicit_frame_ids = needed_frames_by_scene.get(scene_path, set())
+        frame_ids_to_process = set(explicit_frame_ids)
+        if is_papers_scene:
+            frame_ids_to_process.add(None)  # scene.json always needs the whole-scene block, embed or not
+
+        for frame_id in sorted(frame_ids_to_process, key=lambda f: f or ""):
             block = blocks_by_frame_id.get(frame_id)
             if block is None:
-                missing_frames.append(f"{scene_path}#^frame={frame_id}")
+                if frame_id in explicit_frame_ids:
+                    missing_frames.append(f"{scene_path}#^frame={frame_id}")
                 continue
 
             block_name, block_elements = block["name"], block["elements"]
-            n_blocks += 1
             key = f"{scene_path}::{block_name}"
+            digest = block_hash(block_elements, app_state)
+
+            want_papers = is_papers_scene and frame_id is None
+            want_svg = frame_id in explicit_frame_ids
+
+            # Independent of the SVG cache below -- runs even when the SVG
+            # is a cache hit (or not wanted at all), so must never
+            # `continue` past the SVG handling below.
+            if want_papers:
+                papers_key = f"{key}::papers-json"
+                current_keys.add(papers_key)
+                papers_path = papers_json_path(scene_path)
+                papers_entry = manifest.get(papers_key)
+                papers_cached_hash = papers_entry.get("hash") if isinstance(papers_entry, dict) else None
+                papers_cache_hit = papers_cached_hash == digest and os.path.exists(papers_path)
+                if papers_cache_hit:
+                    hit_keys.add(papers_key)
+                elif verify_cache:
+                    mismatches.append(papers_key)
+                else:
+                    papers_miss_jobs.append(
+                        {
+                            "key": papers_key,
+                            "path": papers_path,
+                            "elements": block_elements,
+                            "appState": app_state,
+                            "files": resolved_files(),
+                            "digest": digest,
+                        }
+                    )
+
+            if not want_svg:
+                continue
+
+            n_blocks += 1
             current_keys.add(key)
             out_path = target_path(scene_path, block_name, frame_id)
-            digest = block_hash(block_elements, app_state)
 
             entry = manifest.get(key)
             cached_hash = entry.get("hash") if isinstance(entry, dict) else None
@@ -378,7 +540,7 @@ def main() -> None:
                     "outputPath": os.path.abspath(out_path),
                     "elements": block_elements,
                     "appState": app_state,
-                    "files": files,
+                    "files": resolved_files(),
                     "frameId": frame_id,
                 }
             )
@@ -409,12 +571,16 @@ def main() -> None:
         elapsed = time.time() - start
         print(
             f"excalidraw (dry-run): {len(references)} embed(s), {n_blocks} block(s) referenced, "
-            f"{len(miss_jobs)} would-render, {len(hit_keys)} cached, "
-            f"{len(orphaned_keys)} orphaned, {elapsed:.1f}s"
+            f"{len(miss_jobs)} would-render, {len(papers_miss_jobs)} papers-json would-write, "
+            f"{len(hit_keys)} cached, {len(orphaned_keys)} orphaned, {elapsed:.1f}s"
         )
         if miss_jobs:
             print("would render:", file=sys.stderr)
             for job in miss_jobs:
+                print(f"  {job['key']}", file=sys.stderr)
+        if papers_miss_jobs:
+            print("would write (papers json):", file=sys.stderr)
+            for job in papers_miss_jobs:
                 print(f"  {job['key']}", file=sys.stderr)
         if orphaned_keys:
             label = "would remove (--prune-orphans)" if prune_orphans else "found, not removed"
@@ -439,6 +605,13 @@ def main() -> None:
         digest = block_hash(job["elements"], job["appState"])
         manifest[key] = {"hash": digest, "svg": rel_out, "frameId": job["frameId"]}
 
+    for job in papers_miss_jobs:
+        payload = {"elements": job["elements"], "appState": job["appState"], "files": job["files"]}
+        with open(job["path"], "w", encoding="utf-8") as f:
+            json.dump(payload, f, sort_keys=True)
+            f.write("\n")
+        manifest[job["key"]] = {"hash": job["digest"], "papersJson": os.path.relpath(job["path"])}
+
     # Orphans (previously rendered, no longer referenced by anything) are
     # never deleted automatically -- a run of this script shouldn't be able
     # to make files disappear as a side effect. Report them; deletion only
@@ -447,17 +620,17 @@ def main() -> None:
         print(f"orphaned (not removed -- rerun with --prune-orphans to clean up): {len(orphaned_keys)}", file=sys.stderr)
         for key in sorted(orphaned_keys):
             entry = manifest.get(key)
-            svg_path = entry.get("svg") if isinstance(entry, dict) else None
-            print(f"  {key}" + (f" -> {svg_path}" if svg_path else ""), file=sys.stderr)
+            out_path = entry.get("svg") or entry.get("papersJson") if isinstance(entry, dict) else None
+            print(f"  {key}" + (f" -> {out_path}" if out_path else ""), file=sys.stderr)
 
     pruned = 0
     if prune_orphans:
         for key in orphaned_keys:
             entry = manifest.pop(key, None)
-            svg_path = entry.get("svg") if isinstance(entry, dict) else None
-            if svg_path and os.path.exists(svg_path):
-                os.unlink(svg_path)
-                print(f"orphaned: removed {svg_path} ({key})", file=sys.stderr)
+            out_path = entry.get("svg") or entry.get("papersJson") if isinstance(entry, dict) else None
+            if out_path and os.path.exists(out_path):
+                os.unlink(out_path)
+                print(f"orphaned: removed {out_path} ({key})", file=sys.stderr)
             else:
                 print(f"orphaned: removed stale manifest entry ({key})", file=sys.stderr)
             pruned += 1

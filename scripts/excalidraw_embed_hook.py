@@ -46,6 +46,40 @@ DOCS_DIR = "docs"
 MANIFEST_PATH = os.path.join(DOCS_DIR, ".excalidraw-manifest.json")
 RENDER_SCRIPT = os.path.join("scripts", "render_excalidraw.py")
 
+# docs-relative (page.file.src_uri has no "docs/" prefix), unlike
+# render_excalidraw.py's PAPERS_PREFIX which is filesystem-relative.
+PAPERS_SRC_PREFIX = "papers/"
+
+# Obsidian's own fixed instructional line, always immediately before the
+# auto-generated "# Excalidraw Data" / "## Text Elements" / compressed-json
+# boilerplate in any *.excalidraw.md file. Marks where a reader's own
+# write-up (if any) ends and Obsidian's internal bookkeeping begins -- see
+# _render_papers_scene_page.
+PAPERS_SCENE_BOILERPLATE_RE = re.compile(r"^==⚠.*$", re.MULTILINE)
+
+
+def _scene_basename(src_uri: str) -> str:
+    fname = os.path.basename(src_uri)
+    if fname.endswith(".excalidraw.md"):
+        return fname[: -len(".excalidraw.md")]
+    return fname[: -len(".md")]
+
+
+def _is_merged_papers_scene(page) -> bool:
+    """A docs/papers/**/*.excalidraw.md file that IS the page itself (no
+    separate index.md) -- the merged model. Distinct from the older model
+    of a hand-authored index.md with `template: papers.html` frontmatter
+    that separately embeds a co-located scene file; both are supported, see
+    on_page_markdown."""
+    return page.file.src_uri.startswith(PAPERS_SRC_PREFIX) and page.file.src_uri.endswith(".excalidraw.md")
+
+
+def _papers_scene_json_uri(scene_src_uri: str, scene_name: str) -> str:
+    """docs-relative path to the scene.json this page's live viewer should
+    fetch, matching render_excalidraw.py's papers_json_path() naming
+    (<scene-basename>.excalidraw.json, next to the scene file)."""
+    return os.path.join(os.path.dirname(scene_src_uri), f"{scene_name}.excalidraw.json").replace(os.sep, "/")
+
 # The #^frame=<id> anchor is optional -- a bare ![[scene.excalidraw]] means
 # "the whole scene" (the "default" block render_excalidraw.py always
 # produces). The ".md" extension is optional too, same as any Obsidian
@@ -106,6 +140,27 @@ def on_pre_build(config, **kwargs):
 
 
 def on_page_markdown(markdown, page, config, files, **kwargs):
+    if _is_merged_papers_scene(page):
+        # This *.excalidraw.md file IS the page (no separate index.md) --
+        # apply the papers template and point its live viewer at this
+        # scene's own scene.json, both automatically (no frontmatter
+        # needed). Everything from Obsidian's own instructional line
+        # onward (the "# Excalidraw Data" / "## Text Elements" /
+        # compressed-json blob) is internal bookkeeping, not for readers --
+        # only what a reader wrote above that line, if anything, survives
+        # into the rendered page.
+        page.meta["template"] = "papers.html"
+        base = _scene_basename(page.file.src_uri)
+        page.meta["papers_scene_json"] = _papers_scene_json_uri(page.file.src_uri, base)
+        boilerplate = PAPERS_SCENE_BOILERPLATE_RE.search(markdown)
+        markdown = markdown[: boilerplate.start()].rstrip() if boilerplate else ""
+    elif page.meta.get("template") == "papers.html":
+        # Older model: a hand-authored index.md separately embeds a
+        # co-located scene file. `papers_scene` frontmatter names it
+        # (basename only, defaults to "scene") if it isn't scene.excalidraw.md.
+        scene_name = page.meta.get("papers_scene", "scene")
+        page.meta["papers_scene_json"] = _papers_scene_json_uri(page.file.src_uri, scene_name)
+
     if "![[" not in markdown or ".excalidraw" not in markdown:
         return markdown
 
