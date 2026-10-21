@@ -10,13 +10,12 @@ tags:
 Annotated research papers, grouped by area. Each one opens as a live,
 read-only Excalidraw canvas - pan, zoom, and follow the annotations, not a
 flattened image. The most famous papers per area are listed below; each
-area also has its own full list. Entries with no link haven't been added
-yet.
+area also has its own full list.
 
 ## Systems
 
 - [End-to-End Arguments in System Design](systems/endtoend.excalidraw.md) - Saltzer, Reed & Clark
-- The Google File System - Ghemawat, Gobioff & Leung
+- [The Google File System](./gfs-sosp2023.excalidraw.md) - Ghemawat, Gobioff & Leung
 - MapReduce: Simplified Data Processing on Large Clusters - Dean & Ghemawat
 - Resilient Distributed Datasets - Spark, Zaharia et al.
 - Hints for Computer System Design - Lampson
@@ -71,4 +70,28 @@ yet.
 - Monitors: An Operating System Structuring Concept - Hoare
 - The UNIX Time-Sharing System - Ritchie & Thompson
 
-[Full list](os/index.md) :octicons-arrow-right-24:
+[Full list](./os/index.md) :octicons-arrow-right-24:
+
+## Low-Latency Systems
+
+- What Every Programmer Should Know About Memory - Ulrich Drepper
+- The LMAX Disruptor: High Performance Alternative to Bounded Queues
+- Nonblocking Algorithms and Preemption-Safe Locking - Michael & Scott
+- Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms - Michael & Scott
+- How NOT to Measure Latency - Gil Tene
+
+## High-Performance Networking
+
+- IX: A Protected Dataplane Operating System for High Throughput and Low Latency - Belay et al.
+- mTCP: A Highly Scalable User-level TCP Stack for Multicore Systems
+- Arrakis: A Case for the Application Kernel
+- Dune: Safe User-level Access to Privileged CPU Features
+- Netmap: A Novel Framework for Fast Packet I/O
+- PacketShader: a GPU-accelerated Software Router
+
+## Trading Systems
+
+- The Microstructure of Financial Markets - O'Hara
+- A Dynamic Model of Price Formation in a Limit Order Book
+- Queue-Reactive Models of the Limit Order Book
+- The Price Impact of Order Book Events

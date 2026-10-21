@@ -21,3 +21,18 @@ Entries with no link haven't been added yet.
 - Maglev: A Fast and Reliable Software Network Load Balancer
 - Jupiter Rising: A Decade of Clos Topologies and Centralized Control in Google's Datacenter Network
 - The Design and Implementation of an Intentional Naming System
+
+## High-Performance Networking
+
+### Kernel Bypass & Dataplane
+
+- IX: A Protected Dataplane Operating System for High Throughput and Low Latency - Belay et al.
+- The IX Operating System: Combining Low Latency, High Throughput, and Efficiency in a Protected Dataplane
+- mTCP: A Highly Scalable User-level TCP Stack for Multicore Systems
+- Arrakis: A Case for the Application Kernel
+- Dune: Safe User-level Access to Privileged CPU Features
+- Netmap: A Novel Framework for Fast Packet I/O
+
+### Packet Processing
+
+- PacketShader: a GPU-accelerated Software Router
